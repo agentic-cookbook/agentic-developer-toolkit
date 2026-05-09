@@ -247,6 +247,91 @@
       .ctas .btn { width: 100%; text-align: center; justify-content: center; }
       .dev-banner { font-size: 0.7rem; padding: 0.6rem 0.75rem; }
     }
+
+    /* Agentic family OrbRow dock */
+    .page { padding-bottom: 6rem; }
+    .orb-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 0.75rem; flex-wrap: wrap; padding: 0.5rem 0;
+    }
+    .orb-row.is-docked {
+      position: fixed; bottom: 1rem; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20, 20, 26, 0.85);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      padding: 0.5rem 1rem;
+      border: 1px solid #2a2a36;
+      border-radius: 999px;
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+    }
+    .orb-row-orb {
+      position: relative; width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; text-decoration: none; cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .orb-row-orb:hover, .orb-row-orb:focus-visible {
+      transform: translateY(-3px); outline: none;
+    }
+    .orb-row-orb.is-current {
+      box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(196, 163, 90, 0.55);
+    }
+    .orb-row-orb.is-current::before {
+      content: ""; position: absolute; inset: -7px;
+      border-radius: 50%;
+      border: 1px solid rgba(196, 163, 90, 0.45);
+      animation: orb-row-pulse 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes orb-row-pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50%      { opacity: 0.9; transform: scale(1.08); }
+    }
+    .orb-row-emoji { pointer-events: none; line-height: 1; }
+    .orb-row-tooltip {
+      position: absolute; bottom: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: var(--bg-card); color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.7rem; border-radius: 6px;
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.7rem; white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 10;
+    }
+    .orb-row-tooltip::after {
+      content: ""; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--border);
+    }
+    .orb-row-orb:hover .orb-row-tooltip,
+    .orb-row-orb:focus-visible .orb-row-tooltip {
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+    .orb-row-here {
+      position: absolute; top: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.55rem; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      white-space: nowrap; pointer-events: none;
+    }
+    .orb-row.is-docked .orb-row-tooltip { bottom: auto; top: calc(100% + 12px); }
+    .orb-row.is-docked .orb-row-tooltip::after {
+      top: auto; bottom: 100%;
+      border-top-color: transparent; border-bottom-color: var(--border);
+    }
+    .orb-row.is-docked .orb-row-here { top: auto; bottom: calc(100% + 8px); }
+    @media (max-width: 640px) {
+      .orb-row { gap: 0.5rem; }
+      .orb-row-orb { width: 36px; height: 36px; font-size: 1.1rem; }
+      .orb-row-tooltip { font-size: 0.65rem; padding: 0.3rem 0.5rem; }
+      .orb-row-here { font-size: 0.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -327,5 +412,33 @@
       <p>"Give your agents a soul. Then give them a team."</p>
     </footer>
   </div>
+
+  <nav class="orb-row is-docked" aria-label="Agentic family">
+    <a class="orb-row-orb" href="https://agenticcookbook.dev" aria-label="The Agentic Cookbook" style="background: linear-gradient(135deg,#c4a35a,#e8c547);">
+      <span class="orb-row-emoji" aria-hidden="true">📖</span>
+      <span class="orb-row-tooltip" role="tooltip">The Agentic Cookbook</span>
+    </a>
+    <a class="orb-row-orb" href="https://agenticpersonaregistry.com" aria-label="The Agentic Persona Registry" style="background: linear-gradient(135deg,#5cb270,#7dd99b);">
+      <span class="orb-row-emoji" aria-hidden="true">🪪</span>
+      <span class="orb-row-tooltip" role="tooltip">The Agentic Persona Registry</span>
+    </a>
+    <a class="orb-row-orb" href="https://myagenticstorage.com" aria-label="My Agentic Storage" style="background: linear-gradient(135deg,#6b8afd,#99b2ff);">
+      <span class="orb-row-emoji" aria-hidden="true">🪣</span>
+      <span class="orb-row-tooltip" role="tooltip">My Agentic Storage</span>
+    </a>
+    <a class="orb-row-orb is-current" href="https://agenticpersonatoolkit.dev" aria-label="Agentic Persona Toolkit" aria-current="page" style="background: linear-gradient(135deg,#5cc4c4,#7de0e0);">
+      <span class="orb-row-emoji" aria-hidden="true">🧰</span>
+      <span class="orb-row-tooltip" role="tooltip">Agentic Persona Toolkit</span>
+      <span class="orb-row-here">you are here</span>
+    </a>
+    <a class="orb-row-orb" href="https://agenticdevteam.com" aria-label="Agentic Developer Team" style="background: linear-gradient(135deg,#b07dd4,#d4a5f5);">
+      <span class="orb-row-emoji" aria-hidden="true">🛠️</span>
+      <span class="orb-row-tooltip" role="tooltip">Agentic Developer Team</span>
+    </a>
+    <a class="orb-row-orb" href="https://learntruefacts.com" aria-label="Learn True Facts" style="background: linear-gradient(135deg,#d45454,#ff7b7b);">
+      <span class="orb-row-emoji" aria-hidden="true">🎭</span>
+      <span class="orb-row-tooltip" role="tooltip">Learn True Facts</span>
+    </a>
+  </nav>
 </body>
 </html>
