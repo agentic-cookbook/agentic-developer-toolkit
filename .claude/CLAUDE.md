@@ -79,3 +79,70 @@ registry + storage repos' npm-workspaces layout.
   `ChatStreamEvent` values. Do not redesign that.
 - `learntruefacts` is the test bed. New apt features must demonstrate
   themselves in `learntruefacts/sites/main` before being considered done.
+
+<!-- mytools:web BEGIN -->
+## Web Development
+
+### Available Plugins & Tools
+
+#### MCP Servers
+- **Chrome DevTools MCP** — live browser debugging, network inspection, console
+  errors, and performance traces. Use when diagnosing runtime issues in a running
+  browser session. Requires Chrome to be open.
+
+#### Skills (Auto-Invoked)
+- **frontend-design** — activates automatically for UI work. Follow its guidance
+  on design choices, typography, animations, and visual details. Do not override it.
+- **security-guidance** — activates automatically on file edits. Never bypass
+  warnings. Either fix the issue or explicitly document why the risk is acceptable.
+- **code-review** — run via `/code-review` before every commit. Treat findings
+  scored 80+ as blocking. Use `/code-review --comment` to post directly to a PR.
+
+#### LSP Servers
+- **TypeScript LSP** — provides real-time type checking as you write. If it reports
+  a type error, fix it before moving on. Do not suppress errors with `@ts-ignore`
+  unless absolutely necessary and documented.
+- **HTML LSP** — live validation for HTML structure and attributes.
+- **CSS LSP** — live validation for CSS/Tailwind class usage.
+- **ESLint LSP** — linting runs automatically on file read/write. Treat errors as
+  blocking. Warnings should be resolved unless documented.
+
+#### Testing
+- **Playwright** — use for all E2E testing and UI validation. Prefer Playwright
+  over manual testing instructions. Always verify responsive behavior at:
+  - Mobile: 375px
+  - Tablet: 768px
+  - Desktop: 1440px
+
+### Documentation
+- **Context7** — always query Context7 before writing code that uses any external
+  library. Never rely on training data for React, Next.js, Tailwind, or any
+  fast-moving dependency. Treat training-data API knowledge as potentially stale.
+
+### Tool Priority Order
+1. Context7 — resolve library APIs before writing any code
+2. TypeScript/HTML/CSS/ESLint LSPs — validate as you write
+3. Playwright — verify behavior after writing
+4. Chrome DevTools MCP — diagnose when something doesn't work at runtime
+5. /code-review — gate before every commit
+
+### Language & Framework Rules
+
+#### TypeScript
+- Strict mode is always on. No implicit `any`.
+- Never use `@ts-ignore` without a comment explaining why.
+- Prefer explicit return types on all exported functions.
+- Use `unknown` over `any` when type is genuinely uncertain.
+
+#### React
+- Functional components only. No class components.
+- Prefer named exports over default exports for components.
+- Co-locate component styles, tests, and types with the component file.
+- Never use `useEffect` to sync state — derive it instead.
+
+#### General
+- Do not guess at library APIs — use Context7.
+- Do not ship a component without Playwright coverage for its primary user flow.
+- Do not ignore ESLint errors — fix them or document the exception in `.eslintrc`.
+- Do not use `!important` in CSS.
+<!-- mytools:web END -->
