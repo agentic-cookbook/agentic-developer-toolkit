@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Persona Toolkit</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="description" content="A toolkit for creating, coordinating, and managing AI agent personas in agentic workflows. Part of the Agentic Cookbook family." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agenticpersonatoolkit.com" />
+  <meta property="og:title" content="Agentic Persona Toolkit" />
+  <meta property="og:description" content="A toolkit for creating, coordinating, and managing AI agent personas in agentic workflows." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Agentic Persona Toolkit" />
+  <meta name="twitter:description" content="A toolkit for creating, coordinating, and managing AI agent personas in agentic workflows." />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap" />
+  <style>
+    :root {
+      --bg: #0c0c0f;
+      --bg-card: #14141a;
+      --bg-card-hover: #1c1c24;
+      --border: #2a2a35;
+      --gold: #c4a35a;
+      --gold-bright: #e8c547;
+      --blue: #6b8afd;
+      --text: #e8e6e3;
+      --text-dim: #8a8a9a;
+      --text-faint: #5a5a6a;
+    }
+
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: 'Manrope', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .page { min-height: 100vh; padding: 2rem; }
+
+    .dev-banner {
+      background: linear-gradient(90deg, rgba(196,163,90,0.15), rgba(107,138,253,0.15), rgba(196,163,90,0.15));
+      border: 1px solid rgba(196,163,90,0.3);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.8rem;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { border-color: rgba(196,163,90,0.3); }
+      50%      { border-color: rgba(196,163,90,0.6); }
+    }
+
+    .hero { text-align: center; padding: 2rem 0; max-width: 720px; margin: 0 auto; }
+
+    .site-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 4rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-style: italic;
+    }
+    .family-note {
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .family-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      flex-wrap: wrap;
+    }
+    .family-links a {
+      color: var(--gold);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .family-links a:hover { opacity: 1; }
+    .title-rule {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2rem;
+    }
+
+    .glyphs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .glyph {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+    @keyframes float-a { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes float-b { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes float-c { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+    h1.tagline-h {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 auto 1rem;
+    }
+    .accent { color: var(--gold); }
+    .tagline {
+      color: var(--text-dim);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .ctas {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn:hover { border-color: rgba(196,163,90,0.4); background: var(--bg-card-hover); }
+    .btn-primary {
+      background: rgba(196,163,90,0.15);
+      border-color: rgba(196,163,90,0.3);
+      color: var(--gold);
+    }
+    .btn-primary:hover { background: rgba(196,163,90,0.25); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #1e1e28;
+      margin: 2.5rem auto 0;
+      max-width: 960px;
+      border: 1px solid #1e1e28;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .feature {
+      background: var(--bg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .feature .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .feature .title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+    .feature .desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .coming-soon {
+      display: inline-block;
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.55rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      background: rgba(107,138,253,0.1);
+      border: 1px solid rgba(107,138,253,0.25);
+      color: var(--blue);
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .strip {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 2rem 0 0;
+      font-family: 'DM Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      flex-wrap: wrap;
+    }
+    .strip a { color: var(--text-faint); text-decoration: none; transition: color 0.2s; }
+    .strip a:hover { color: var(--gold); }
+
+    footer.site-footer {
+      text-align: center;
+      padding: 2.5rem 0 1rem;
+    }
+    footer.site-footer p {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--text-faint);
+      font-style: italic;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 1rem; }
+      .site-title { font-size: 2.4rem; }
+      h1.tagline-h { font-size: 1.8rem; }
+      .tagline { font-size: 0.9rem; }
+      .glyphs { gap: 0.5rem; }
+      .glyph { width: 36px; height: 36px; font-size: 1.1rem; }
+      .features-grid { grid-template-columns: 1fr; }
+      .feature { padding: 1.5rem 1rem; }
+      .ctas { flex-direction: column; align-items: center; }
+      .ctas .btn { width: 100%; text-align: center; justify-content: center; }
+      .dev-banner { font-size: 0.7rem; padding: 0.6rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="dev-banner">🚧 Under active development — stay tuned! 🚧</div>
+
+    <section class="hero">
+      <div class="site-title">Agentic Persona Toolkit</div>
+      <div class="family-note">Part of the Agentic Cookbook family</div>
+      <div class="family-links">
+        <a href="https://agentic-cookbook.com" target="_blank" rel="noreferrer">📖 The Cookbook</a>
+        <span style="color: var(--border)">·</span>
+        <a href="https://agenticregistry.com" target="_blank" rel="noreferrer">🪪 Agent Registry</a>
+      </div>
+      <div class="title-rule"></div>
+
+      <div class="glyphs">
+        <div class="glyph" style="background: linear-gradient(135deg,#c4a35a,#e8c547); animation: float-a 3s ease-in-out infinite;">🎭</div>
+        <div class="glyph" style="background: linear-gradient(135deg,#5cb270,#7dd99b); animation: float-b 3s ease-in-out infinite 0.5s;">🧰</div>
+        <div class="glyph" style="background: linear-gradient(135deg,#6b8afd,#99b2ff); animation: float-c 3s ease-in-out infinite 1s;">🤝</div>
+        <div class="glyph" style="background: linear-gradient(135deg,#d45454,#ff7b7b); animation: float-a 3s ease-in-out infinite 1.5s;">🧠</div>
+        <div class="glyph" style="background: linear-gradient(135deg,#b07dd4,#d4a5f5); animation: float-b 3s ease-in-out infinite 0.8s;">⚡</div>
+      </div>
+
+      <h1 class="tagline-h">
+        Build agents with personality.
+        <br />
+        <span class="accent">Coordinate them with intent.</span>
+      </h1>
+      <p class="tagline">
+        A toolkit for creating, coordinating, and managing AI agent personas
+        in agentic workflows — from a single character to a coordinated team.
+      </p>
+
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://github.com/agentic-cookbook/agentic-persona-toolkit">View on GitHub</a>
+        <span class="btn" style="cursor: default; opacity: 0.6;">
+          Documentation <span class="coming-soon">coming soon</span>
+        </span>
+      </div>
+    </section>
+
+    <section class="features-grid" aria-label="Features">
+      <div class="feature">
+        <div class="icon">🎭</div>
+        <div class="title">Persona Authoring</div>
+        <div class="desc">
+          Compose agents with distinct voices, backstories, and skills — reusable across workflows.
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon">🤝</div>
+        <div class="title">
+          Coordination <span class="coming-soon">coming soon</span>
+        </div>
+        <div class="desc">
+          Orchestrate teams of personas. Hand off tasks, share context, settle on a plan.
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon">🧰</div>
+        <div class="title">
+          Toolkit &amp; Adapters <span class="coming-soon">coming soon</span>
+        </div>
+        <div class="desc">
+          Drop-in adapters for popular agent runtimes. Bring your personas anywhere.
+        </div>
+      </div>
+    </section>
+
+    <div class="strip">
+      <a href="https://github.com/agentic-cookbook/agentic-persona-toolkit">GitHub</a>
+      <span>Docs <span class="coming-soon">coming soon</span></span>
+      <span>Examples <span class="coming-soon">coming soon</span></span>
+    </div>
+
+    <footer class="site-footer">
+      <p>"Give your agents a soul. Then give them a team."</p>
+    </footer>
+  </div>
+</body>
+</html>
