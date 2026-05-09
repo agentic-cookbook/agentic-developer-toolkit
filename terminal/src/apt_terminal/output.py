@@ -1,0 +1,74 @@
+from __future__ import annotations
+
+import json
+import sys
+from collections.abc import Iterable, Sequence
+from typing import Any
+
+from rich.console import Console
+from rich.table import Table
+
+_console = Console()
+_err_console = Console(stderr=True)
+
+
+def emit_json(data: Any) -> None:
+    json.dump(data, sys.stdout, indent=2, default=str)
+    sys.stdout.write("\n")
+
+
+def emit_table(
+    rows: Sequence[dict[str, Any]], columns: Sequence[str], *, title: str | None = None
+) -> None:
+    if not rows:
+        _console.print("[dim](none)[/dim]")
+        return
+    t = Table(title=title, show_lines=False, header_style="bold")
+    for col in columns:
+        t.add_column(col)
+    for row in rows:
+        t.add_row(*[_fmt(row.get(c)) for c in columns])
+    _console.print(t)
+
+
+def emit_kv(pairs: Iterable[tuple[str, Any]]) -> None:
+    t = Table(show_header=False, box=None, padding=(0, 1))
+    t.add_column("k", style="bold")
+    t.add_column("v")
+    for k, v in pairs:
+        t.add_row(k, _fmt(v))
+    _console.print(t)
+
+
+def emit_text(s: str) -> None:
+    sys.stdout.write(s if s.endswith("\n") else s + "\n")
+
+
+def confirm(prompt: str, *, assume_yes: bool = False) -> bool:
+    if assume_yes:
+        return True
+    _err_console.print(f"{prompt} [y/N] ", end="")
+    try:
+        ans = input().strip().lower()
+    except EOFError:
+        return False
+    return ans in {"y", "yes"}
+
+
+def warn(msg: str) -> None:
+    _err_console.print(f"[yellow]warn[/yellow] {msg}")
+
+
+def die(msg: str, code: int = 1) -> None:
+    _err_console.print(f"[red]error[/red] {msg}")
+    raise SystemExit(code)
+
+
+def _fmt(v: Any) -> str:
+    if v is None:
+        return "[dim]—[/dim]"
+    if isinstance(v, bool):
+        return "true" if v else "false"
+    if isinstance(v, (dict, list)):
+        return json.dumps(v, default=str)
+    return str(v)
