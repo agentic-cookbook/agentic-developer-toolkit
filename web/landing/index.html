@@ -270,10 +270,29 @@
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.4rem; text-decoration: none; cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      transition: box-shadow 0.18s ease;
+      animation: orb-row-float-a 3.4s ease-in-out infinite;
+    }
+    .orb-row-orb:nth-child(5n+2) {
+      animation: orb-row-float-b 3.8s ease-in-out infinite;
+      animation-delay: -0.6s;
+    }
+    .orb-row-orb:nth-child(5n+3) {
+      animation: orb-row-float-c 4.2s ease-in-out infinite;
+      animation-delay: -1.2s;
+    }
+    .orb-row-orb:nth-child(5n+4) {
+      animation: orb-row-float-b 3.6s ease-in-out infinite;
+      animation-delay: -1.8s;
+    }
+    .orb-row-orb:nth-child(5n+5) {
+      animation: orb-row-float-a 4.0s ease-in-out infinite;
+      animation-delay: -2.4s;
     }
     .orb-row-orb:hover, .orb-row-orb:focus-visible {
-      transform: translateY(-3px); outline: none;
+      animation-play-state: paused;
+      outline: none;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
     }
     .orb-row-orb.is-current {
       box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(196, 163, 90, 0.55);
@@ -284,6 +303,18 @@
       border: 1px solid rgba(196, 163, 90, 0.45);
       animation: orb-row-pulse 2.4s ease-in-out infinite;
       pointer-events: none;
+    }
+    @keyframes orb-row-float-a {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+    @keyframes orb-row-float-b {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes orb-row-float-c {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
     }
     @keyframes orb-row-pulse {
       0%, 100% { opacity: 0.4; transform: scale(1); }
@@ -314,11 +345,11 @@
     }
     .orb-row-here {
       position: absolute; top: calc(100% + 8px); left: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(196, 163, 90, 0.8);
       transform: translateX(-50%);
-      font-family: 'DM Mono', ui-monospace, monospace;
-      font-size: 0.55rem; color: var(--gold);
-      text-transform: uppercase; letter-spacing: 0.12em;
-      white-space: nowrap; pointer-events: none;
+      pointer-events: none;
     }
     .orb-row.is-docked .orb-row-tooltip { bottom: auto; top: calc(100% + 12px); }
     .orb-row.is-docked .orb-row-tooltip::after {
@@ -326,11 +357,18 @@
       border-top-color: transparent; border-bottom-color: var(--border);
     }
     .orb-row.is-docked .orb-row-here { top: auto; bottom: calc(100% + 8px); }
+    @media (prefers-reduced-motion: reduce) {
+      .orb-row-orb,
+      .orb-row-orb:nth-child(5n+2),
+      .orb-row-orb:nth-child(5n+3),
+      .orb-row-orb:nth-child(5n+4),
+      .orb-row-orb:nth-child(5n+5) { animation: none; }
+      .orb-row-orb.is-current::before { animation: none; }
+    }
     @media (max-width: 640px) {
       .orb-row { gap: 0.5rem; }
       .orb-row-orb { width: 36px; height: 36px; font-size: 1.1rem; }
       .orb-row-tooltip { font-size: 0.65rem; padding: 0.3rem 0.5rem; }
-      .orb-row-here { font-size: 0.5rem; }
     }
   </style>
 </head>
@@ -429,7 +467,7 @@
     <a class="orb-row-orb is-current" href="https://agenticpersonatoolkit.dev" aria-label="Agentic Persona Toolkit" aria-current="page" style="background: linear-gradient(135deg,#5cc4c4,#7de0e0);">
       <span class="orb-row-emoji" aria-hidden="true">🧰</span>
       <span class="orb-row-tooltip" role="tooltip">Agentic Persona Toolkit</span>
-      <span class="orb-row-here">you are here</span>
+      <span class="orb-row-here" aria-hidden="true"></span>
     </a>
     <a class="orb-row-orb" href="https://agenticdevteam.com" aria-label="Agentic Developer Team" style="background: linear-gradient(135deg,#b07dd4,#d4a5f5);">
       <span class="orb-row-emoji" aria-hidden="true">🛠️</span>
