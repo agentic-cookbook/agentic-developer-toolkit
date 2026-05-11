@@ -253,24 +253,20 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 1.4rem; text-decoration: none; cursor: pointer;
       transition: box-shadow 0.18s ease;
-      animation: orb-row-float-a 3.4s ease-in-out infinite;
+      animation: orb-row-float 3s ease-in-out infinite;
     }
-    .orb-row-orb:nth-child(5n+2) {
-      animation: orb-row-float-b 3.8s ease-in-out infinite;
-      animation-delay: -0.6s;
-    }
-    .orb-row-orb:nth-child(5n+3) {
-      animation: orb-row-float-c 4.2s ease-in-out infinite;
-      animation-delay: -1.2s;
-    }
-    .orb-row-orb:nth-child(5n+4) {
-      animation: orb-row-float-b 3.6s ease-in-out infinite;
-      animation-delay: -1.8s;
-    }
-    .orb-row-orb:nth-child(5n+5) {
-      animation: orb-row-float-a 4.0s ease-in-out infinite;
-      animation-delay: -2.4s;
-    }
+    .orb-row-orb:nth-child(1)  { animation-delay: 0s; }
+    .orb-row-orb:nth-child(2)  { animation-delay: -0.25s; }
+    .orb-row-orb:nth-child(3)  { animation-delay: -0.5s; }
+    .orb-row-orb:nth-child(4)  { animation-delay: -0.75s; }
+    .orb-row-orb:nth-child(5)  { animation-delay: -1s; }
+    .orb-row-orb:nth-child(6)  { animation-delay: -1.25s; }
+    .orb-row-orb:nth-child(7)  { animation-delay: -1.5s; }
+    .orb-row-orb:nth-child(8)  { animation-delay: -1.75s; }
+    .orb-row-orb:nth-child(9)  { animation-delay: -2s; }
+    .orb-row-orb:nth-child(10) { animation-delay: -2.25s; }
+    .orb-row-orb:nth-child(11) { animation-delay: -2.5s; }
+    .orb-row-orb:nth-child(12) { animation-delay: -2.75s; }
     .orb-row-orb:hover, .orb-row-orb:focus-visible {
       animation-play-state: paused;
       outline: none;
@@ -286,17 +282,9 @@
       animation: orb-row-pulse 2.4s ease-in-out infinite;
       pointer-events: none;
     }
-    @keyframes orb-row-float-a {
+    @keyframes orb-row-float {
       0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-8px); }
-    }
-    @keyframes orb-row-float-b {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-12px); }
-    }
-    @keyframes orb-row-float-c {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-6px); }
+      50%      { transform: translateY(-10px); }
     }
     @keyframes orb-row-pulse {
       0%, 100% { opacity: 0.4; transform: scale(1); }
