@@ -339,14 +339,6 @@
       border-top-color: transparent; border-bottom-color: var(--border);
     }
     .orb-row.is-docked .orb-row-here { top: auto; bottom: calc(100% + 8px); }
-    @media (prefers-reduced-motion: reduce) {
-      .orb-row-orb,
-      .orb-row-orb:nth-child(5n+2),
-      .orb-row-orb:nth-child(5n+3),
-      .orb-row-orb:nth-child(5n+4),
-      .orb-row-orb:nth-child(5n+5) { animation: none; }
-      .orb-row-orb.is-current::before { animation: none; }
-    }
     @media (max-width: 640px) {
       .orb-row { gap: 0.5rem; }
       .orb-row-orb { width: 36px; height: 36px; font-size: 1.1rem; }
