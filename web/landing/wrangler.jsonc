@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "agenticpersonatoolkit-landing-dev",
+  "name": "agentic-persona-toolkit-dev",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-05-10",
   "compatibility_flags": [
