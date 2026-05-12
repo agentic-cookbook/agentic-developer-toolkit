@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "next dev -p 5174",
-    "build": "opennextjs-cloudflare build",
+    "build": "python3 scripts/build.py",
+    "build:next": "opennextjs-cloudflare build",
     "lint": "next lint",
     "preview": "opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare deploy",
