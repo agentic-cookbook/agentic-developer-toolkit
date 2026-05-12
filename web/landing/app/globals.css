@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+
+  /* Agentic Persona Toolkit palette */
+  --color-apt-bg: #0c0c0f;
+  --color-apt-surface: #14141a;
+  --color-apt-input: #1c1c24;
+  --color-apt-border: #2a2a35;
+  --color-apt-text: #e8e6e3;
+  --color-apt-text-muted: #8a8a9a;
+  --color-apt-text-dim: #5a5a6a;
+  --color-apt-gold: #c4a35a;
+  --color-apt-gold-bright: #d9bb74;
+  --color-apt-blue: #6b8afd;
+}
+
+html,
+body {
+  background: var(--color-apt-bg);
+  color: var(--color-apt-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.coming-soon {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  background: rgba(107, 138, 253, 0.1);
+  border: 1px solid rgba(107, 138, 253, 0.25);
+  color: var(--color-apt-blue);
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
