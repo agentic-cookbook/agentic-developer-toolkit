@@ -3,3 +3,11 @@
 .claude/settings.local.json
 .env
 .superpowers/
+
+# Node / Next.js / OpenNext / Wrangler build outputs
+node_modules/
+.next/
+.open-next/
+.wrangler/
+*.tsbuildinfo
+*.log
