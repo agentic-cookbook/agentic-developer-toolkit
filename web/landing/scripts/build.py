@@ -41,6 +41,12 @@ def main() -> int:
     run(["pnpm", "install", "--frozen-lockfile"], cwd=PACKAGING_DIR)
     run(["pnpm", "-r", "--workspace-concurrency=1", "run", "build"], cwd=PACKAGING_DIR)
     run(["npx", "opennextjs-cloudflare", "build"], cwd=LANDING_DIR)
+    # Copies prerendered SSG cache entries into the static-assets directory so
+    # the worker can serve them via the staticAssetsIncrementalCache adapter.
+    # Cloudflare's CI only runs the build, not deploy, so this step has to be
+    # part of the build pipeline rather than relying on `opennextjs-cloudflare
+    # deploy` to do it.
+    run(["npx", "opennextjs-cloudflare", "populateCache", "local"], cwd=LANDING_DIR)
     return 0
 
 
