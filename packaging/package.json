@@ -1,0 +1,34 @@
+{
+  "name": "agentic-persona-toolkit",
+  "version": "0.1.0",
+  "description": "Toolkit for wiring AI persona chats into apps using the official agentic registry and my-agentic-storage — pnpm monorepo.",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentic-cookbook/agentic-persona-toolkit.git"
+  },
+  "homepage": "https://github.com/agentic-cookbook/agentic-persona-toolkit#readme",
+  "bugs": {
+    "url": "https://github.com/agentic-cookbook/agentic-persona-toolkit/issues"
+  },
+  "scripts": {
+    "build": "pnpm -r --workspace-concurrency=1 run build",
+    "build:types": "pnpm -r --if-present --workspace-concurrency=1 run build:types",
+    "dev": "pnpm -r --parallel --if-present run dev",
+    "test": "vitest run",
+    "lint": "pnpm -r --if-present run lint",
+    "clean": "pnpm -r --if-present run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "jsdom": "^29.0.2",
+    "vitest": "^4.1.4"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}
