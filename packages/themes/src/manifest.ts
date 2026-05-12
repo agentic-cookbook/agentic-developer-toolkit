@@ -1,13 +1,15 @@
-import agenticcookbookwebCss from './styles/agenticcookbookweb.css?inline'
-import devTeamCss from './styles/dev-team.css?inline'
-import mikefullertonCss from './styles/mikefullerton.css?inline'
-import myprojectsCss from './styles/myprojects.css?inline'
-import myprojectsoverviewCss from './styles/myprojectsoverview.css?inline'
-import professionalCss from './styles/professional.css?inline'
-import techyCss from './styles/techy.css?inline'
-import terminalCss from './styles/terminal.css?inline'
-import terminalSplitCss from './styles/terminal-split.css?inline'
-import whimsicalCss from './styles/whimsical.css?inline'
+import {
+  agenticcookbookwebCss,
+  devTeamCss,
+  mikefullertonCss,
+  myprojectsCss,
+  myprojectsoverviewCss,
+  professionalCss,
+  techyCss,
+  terminalCss,
+  terminalSplitCss,
+  whimsicalCss,
+} from './theme-data'
 
 export type ThemeKey =
   | 'agenticcookbookweb'
