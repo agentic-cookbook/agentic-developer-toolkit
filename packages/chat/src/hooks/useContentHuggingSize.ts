@@ -89,7 +89,7 @@ export function useContentHuggingSize(sizing: InlineChatSizing | undefined): Hug
 function parseCssLength(value: string, viewportHeight: number): number {
   const trimmed = value.trim()
   const match = trimmed.match(/^(-?\d*\.?\d+)\s*(px|vh)?$/i)
-  if (!match) return 0
+  if (!match || match[1] === undefined) return 0
   const num = parseFloat(match[1])
   const unit = (match[2] ?? 'px').toLowerCase()
   if (unit === 'vh') return (num / 100) * viewportHeight

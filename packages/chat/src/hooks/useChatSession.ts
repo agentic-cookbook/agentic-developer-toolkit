@@ -83,10 +83,11 @@ async function consumeStream(
     const list = toolCalls ?? []
     // Update the most recent 'started' entry with this name.
     for (let i = list.length - 1; i >= 0; i--) {
-      if (list[i].name === name && list[i].status === 'started') {
+      const entry = list[i]
+      if (entry && entry.name === name && entry.status === 'started') {
         const next = [...list]
         next[i] = {
-          ...list[i],
+          ...entry,
           status: ok ? 'completed' : 'failed',
           ok,
           result,

@@ -56,9 +56,10 @@ export function ThreePaneChatView({ session, className }: ThreePaneChatViewProps
       })
       if (newTopics.length !== topics.length) {
         setTopics(newTopics)
-        if (newTopics.length > 0) {
+        const last = newTopics[newTopics.length - 1]
+        if (last) {
           setActiveTopicIndex(newTopics.length - 1)
-          selectMessage(newTopics[newTopics.length - 1].messageIndex)
+          selectMessage(last.messageIndex)
         }
       }
     },
@@ -116,8 +117,11 @@ export function ThreePaneChatView({ session, className }: ThreePaneChatViewProps
         const start = cur < 0 ? (dir > 0 ? -1 : visibleTopicIndexes.length) : cur
         const next = Math.max(0, Math.min(visibleTopicIndexes.length - 1, start + dir))
         const target = visibleTopicIndexes[next]
+        if (target === undefined) return
+        const topic = topics[target]
+        if (!topic) return
         setActiveTopicIndex(target)
-        selectMessage(topics[target].messageIndex)
+        selectMessage(topic.messageIndex)
         return
       }
       const active = document.activeElement

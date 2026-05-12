@@ -82,7 +82,7 @@ export function ColorModeProvider({
   }, [mode, storageKey])
 
   const cycle = useCallback(() => {
-    setMode((m) => CYCLE[(CYCLE.indexOf(m) + 1) % CYCLE.length])
+    setMode((m) => CYCLE[(CYCLE.indexOf(m) + 1) % CYCLE.length] ?? m)
   }, [])
 
   useEffect(() => {
