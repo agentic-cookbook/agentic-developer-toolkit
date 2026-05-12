@@ -64,10 +64,47 @@ until the user picks one.** This is the brainstorming HARD-GATE.
   tool.
 - Future platforms (Swift / Windows / Android) live in M6.
 
+## Workspace root: `packaging/`
+
+The pnpm workspace root lives in `packaging/` — that's where
+`package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`,
+`tsconfig.base.json`, `vitest.config.ts`, `vitest.setup.ts`, and
+`copy-css.mjs` live. Library packages live at `packages/<name>/` at
+the repo root (siblings of `packaging/`, NOT inside it). The repo
+root has no `package.json` and no loose build configs — only
+`install.sh` and `README`. Each library declares its own build-time
+devDeps (`tsup`, `typescript`, `esbuild-plugin-preserve-directives`,
+`@types/react`, `@types/react-dom`); pnpm symlinks those into
+`packages/<lib>/node_modules/` so `tsup.config.ts` and `tsc` resolve
+them locally without walking up to the workspace root.
+
+**All workspace commands run from `packaging/`**: `pnpm install`,
+`pnpm build`, `pnpm test`, `pnpm lint`, `pnpm --filter <pkg> ...`.
+There is no turbo — scripts use `pnpm -r run <task>` directly.
+
+`packages/themes` has a `build:data` codegen step
+(`scripts/build-theme-data.mjs`) that reads `src/styles/*.css` and
+emits `src/theme-data.ts` with string-literal exports. This replaces
+Vite's `?inline` CSS imports so the package builds under esbuild via
+tsup. `src/theme-data.ts` is gitignored — `install.sh` regenerates it.
+
+## Library packages
+
+| Package | Source dir |
+|---|---|
+| `@agentic-persona-toolkit/chat` | `packages/chat/src/` (modes/, components/, hooks/, backends/, css/) |
+| `@agentic-persona-toolkit/themes` | `packages/themes/src/` (manifest, ThemeStyle, colorMode, styles/) |
+
+Library packages may only depend on other `packages/*` — never on
+ad-hoc paths outside `packages/`.
+
 ## Build
 
-Not set up yet — depends on the architecture decision. Will mirror the
-registry + storage repos' npm-workspaces layout.
+```bash
+./install.sh             # one-time, runs pnpm install + theme codegen
+cd packaging && pnpm build
+cd packaging && pnpm test
+```
 
 ## Conventions
 
