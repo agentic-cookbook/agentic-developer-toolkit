@@ -1,0 +1,38 @@
+/*
+ * Viewport Base Styles
+ *
+ * Page-shell primitives for iOS-correct viewport + keyboard handling.
+ * Import once at the app root, before any other layout CSS.
+ */
+
+:root {
+  --kb-inset: 0px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Lock the page to the visible viewport on every browser. The
+ * ViewportShell sits inside body and owns its own internal flex layout. */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.viewport-shell {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.vp-spacer {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.vp-composer {
+  padding-bottom: calc(var(--kb-inset) + var(--safe-bottom));
+  transition: padding-bottom 180ms ease-out;
+}

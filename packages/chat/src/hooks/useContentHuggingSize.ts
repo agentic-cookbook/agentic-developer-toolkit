@@ -64,6 +64,13 @@ export function useContentHuggingSize(sizing: InlineChatSizing | undefined): Hug
     window.addEventListener('resize', recompute)
     window.addEventListener('scroll', recompute, { passive: true })
 
+    // visualViewport reflects the iOS soft-keyboard height; window.resize
+    // does not. Without these listeners, content-hugging maxHeight is stale
+    // while the keyboard is open.
+    const vv = window.visualViewport
+    vv?.addEventListener('resize', recompute)
+    vv?.addEventListener('scroll', recompute)
+
     recompute()
 
     return () => {
@@ -71,6 +78,8 @@ export function useContentHuggingSize(sizing: InlineChatSizing | undefined): Hug
       anchorRo?.disconnect()
       window.removeEventListener('resize', recompute)
       window.removeEventListener('scroll', recompute)
+      vv?.removeEventListener('resize', recompute)
+      vv?.removeEventListener('scroll', recompute)
       el.classList.remove(HUGGING_CLASS)
       parent?.classList.remove(HUGGING_CLASS)
     }

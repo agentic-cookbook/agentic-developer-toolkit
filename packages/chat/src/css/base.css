@@ -233,3 +233,14 @@
 }
 
 .persona-chat.pc-transparent .pc-input-area { background: transparent; }
+
+/* iOS Safari auto-zooms any focused form control with computed
+ * font-size < 16px. Force 16px on coarse pointers regardless of theme.
+ * `:root .persona-chat .pc-input` has higher specificity (0,2,1) than
+ * typical theme selectors (`.persona-chat .pc-input`, 0,2,0), so theme
+ * rules can't accidentally override it. */
+@media (pointer: coarse) {
+  :root .persona-chat .pc-input {
+    font-size: 16px;
+  }
+}
