@@ -1,0 +1,120 @@
+name: PersonaToolkit
+options:
+  bundleIdPrefix: com.mikefullerton.PersonaToolkit
+  createIntermediateGroups: true
+  deploymentTarget:
+    macOS: "14.0"
+    iOS: "17.0"
+    watchOS: "10.0"
+    tvOS: "17.0"
+    visionOS: "1.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    GENERATE_INFOPLIST_FILE: YES
+    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "0.1.0"
+    CODE_SIGN_STYLE: Automatic
+    PRODUCT_NAME: "Persona Toolkit"
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+targets:
+  PersonaToolkit-macOS:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.PersonaToolkit.macos
+        CODE_SIGN_IDENTITY: "-"
+        ENABLE_HARDENED_RUNTIME: YES
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.developer-tools
+
+  PersonaToolkit-iOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.PersonaToolkit.ios
+        TARGETED_DEVICE_FAMILY: "1,2"
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+
+  PersonaToolkit-watchOS:
+    type: application
+    platform: watchOS
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.PersonaToolkit.watchos
+        INFOPLIST_KEY_WKApplication: YES
+        INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
+
+  PersonaToolkit-tvOS:
+    type: application
+    platform: tvOS
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.PersonaToolkit.tvos
+
+  PersonaToolkit-visionOS:
+    type: application
+    platform: visionOS
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.PersonaToolkit.visionos
+        TARGETED_DEVICE_FAMILY: "7"
+
+schemes:
+  PersonaToolkit-macOS:
+    build:
+      targets:
+        PersonaToolkit-macOS: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+  PersonaToolkit-iOS:
+    build:
+      targets:
+        PersonaToolkit-iOS: all
+    run:
+      config: Debug
+  PersonaToolkit-watchOS:
+    build:
+      targets:
+        PersonaToolkit-watchOS: all
+    run:
+      config: Debug
+  PersonaToolkit-tvOS:
+    build:
+      targets:
+        PersonaToolkit-tvOS: all
+    run:
+      config: Debug
+  PersonaToolkit-visionOS:
+    build:
+      targets:
+        PersonaToolkit-visionOS: all
+    run:
+      config: Debug
