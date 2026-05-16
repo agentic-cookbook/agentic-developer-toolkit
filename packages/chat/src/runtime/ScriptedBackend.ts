@@ -70,21 +70,36 @@ export class ScriptedBackend implements Backend {
   get inboundEvents(): AsyncIterable<InboundEvent> {
     const queue = this.queue
     const waiters = this.waiters
-    const isClosed = (): boolean => this.closed
+    const isBackendClosed = (): boolean => this.closed
     return {
       [Symbol.asyncIterator](): AsyncIterator<InboundEvent> {
+        let done = false
+        let parkedResolver: ((result: IteratorResult<InboundEvent>) => void) | null = null
         return {
           next(): Promise<IteratorResult<InboundEvent>> {
+            if (done) return Promise.resolve({ value: undefined, done: true })
             const buffered = queue.shift()
             if (buffered !== undefined) {
               return Promise.resolve({ value: buffered, done: false })
             }
-            if (isClosed()) {
+            if (isBackendClosed()) {
+              done = true
               return Promise.resolve({ value: undefined, done: true })
             }
             return new Promise<IteratorResult<InboundEvent>>((resolve) => {
+              parkedResolver = resolve
               waiters.push(resolve)
             })
+          },
+          return(): Promise<IteratorResult<InboundEvent>> {
+            done = true
+            if (parkedResolver) {
+              const idx = waiters.indexOf(parkedResolver)
+              if (idx >= 0) waiters.splice(idx, 1)
+              parkedResolver({ value: undefined, done: true })
+              parkedResolver = null
+            }
+            return Promise.resolve({ value: undefined, done: true })
           },
         }
       },

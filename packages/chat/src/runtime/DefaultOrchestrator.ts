@@ -116,13 +116,31 @@ export class DefaultOrchestrator implements Orchestrator {
   }
 
   async respondToWidget(response: WidgetResponse): Promise<void> {
-    const before = this.pendingWidgets.length
-    this.pendingWidgets = this.pendingWidgets.filter((w) => w.id !== response.widgetID)
-    this.widgetMessageMap.delete(response.widgetID)
-    if (this.pendingWidgets.length !== before) {
+    const widgetsBefore = this.pendingWidgets
+    const mappedMessageID = this.widgetMessageMap.get(response.widgetID)
+    const filtered = this.pendingWidgets.filter((w) => w.id !== response.widgetID)
+    const removed = filtered.length !== widgetsBefore.length
+    if (removed) {
+      this.pendingWidgets = filtered
+      this.widgetMessageMap.delete(response.widgetID)
       this.notify({ kind: 'pendingWidgetsChanged' })
     }
-    await this.backend.submitWidgetResponse(response)
+    try {
+      await this.backend.submitWidgetResponse(response)
+    } catch (error) {
+      if (removed) {
+        this.pendingWidgets = widgetsBefore
+        if (mappedMessageID !== undefined) {
+          this.widgetMessageMap.set(response.widgetID, mappedMessageID)
+        }
+        this.notify({ kind: 'pendingWidgetsChanged' })
+      }
+      this.notify({
+        kind: 'error',
+        message: error instanceof Error ? error.message : String(error),
+      })
+      throw error
+    }
   }
 
   async respondToPermission(promptID: string, decision: PermissionDecision): Promise<void> {
@@ -220,7 +238,7 @@ export class DefaultOrchestrator implements Orchestrator {
         } else {
           this.activeDrafts = [...this.activeDrafts, next]
         }
-        this.notify({ kind: 'messagesChanged' })
+        this.notify({ kind: 'activeDraftsChanged' })
         return
       }
 
@@ -293,13 +311,23 @@ export class DefaultOrchestrator implements Orchestrator {
   private clearDraftFor(participantID: string): void {
     if (!this.activeDrafts.some((d) => d.participantID === participantID)) return
     this.activeDrafts = this.activeDrafts.filter((d) => d.participantID !== participantID)
-    this.notify({ kind: 'messagesChanged' })
+    this.notify({ kind: 'activeDraftsChanged' })
   }
 
   private upsertReadMarker(participantID: string, upToMessageID: string, at: Date): void {
+    const existing = this.readMarkers.find((r) => r.participantID === participantID)
+    if (existing && this.wouldRegressCursor(existing, upToMessageID, at)) return
     const others = this.readMarkers.filter((r) => r.participantID !== participantID)
     this.readMarkers = [...others, { participantID, upToMessageID, at }]
-    this.notify({ kind: 'messagesChanged' })
+    this.notify({ kind: 'readMarkersChanged' })
+  }
+
+  private wouldRegressCursor(existing: ReadReceipt, newUpToID: string, newAt: Date): boolean {
+    const idOf = (m: Message): string => m.id ?? m.localID
+    const newIdx = this.messages.findIndex((m) => idOf(m) === newUpToID)
+    const oldIdx = this.messages.findIndex((m) => idOf(m) === existing.upToMessageID)
+    if (newIdx >= 0 && oldIdx >= 0) return newIdx < oldIdx
+    return newAt.getTime() < existing.at.getTime()
   }
 
   private notify(update: ChatUpdate): void {
