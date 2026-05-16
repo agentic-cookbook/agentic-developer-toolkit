@@ -30,3 +30,10 @@ export type {
 // Hooks (for advanced usage)
 export { useChatSession } from './hooks/useChatSession'
 export type { ChatSession } from './hooks/useChatSession'
+
+// Cross-platform chat contract (mirrors apple/PersonaToolkit/Sources/).
+export type * from './contract'
+
+// Reference TS implementations of the cross-platform contract.
+export { DefaultOrchestrator, ScriptedBackend, InMemoryPermissionStore } from './runtime'
+export type { SentRecord } from './runtime'

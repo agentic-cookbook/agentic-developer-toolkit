@@ -1,0 +1,11 @@
+export type ObservingPoint =
+  | 'didComposeMessage'
+  | 'messageSent'
+  | 'messageReceived'
+  | 'messageRead'
+  | 'didExecuteCommand'
+  | 'willEmitUpdate'
+  | 'didEmitUpdate'
+  | 'participantJoined'
+  | 'participantDeparted'
+  | 'permissionResolved'
