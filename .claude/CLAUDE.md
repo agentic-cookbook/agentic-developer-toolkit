@@ -64,46 +64,62 @@ until the user picks one.** This is the brainstorming HARD-GATE.
   tool.
 - Future platforms (Swift / Windows / Android) live in M6.
 
-## Workspace root: `packaging/`
+## Repo layout: per-platform top-level dirs
 
-The pnpm workspace root lives in `packaging/` — that's where
+Each platform owns a folder under `packages/` and that folder is the
+ROOT of its native build system — its conventional manifest lives
+there. See `AGENTS.md` at the repo root for the layout map.
+
+| Platform | Folder | Manifest |
+|---|---|---|
+| Web (TS) | `packages/web/` | `package.json` (pnpm workspace) |
+| Apple | `packages/apple/` | `Package.swift` + `project.yml` |
+| Terminal (Python) | `packages/terminal/` | `pyproject.toml` |
+| Android | `packages/android/` | (TBD, placeholder) |
+| Windows | `packages/windows/` | (TBD, placeholder) |
+| Demo site | `websites/landing/` | `package.json` |
+
+## Web workspace: `packages/web/`
+
+The pnpm workspace root lives at `packages/web/` — that's where
 `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`,
 `tsconfig.base.json`, `vitest.config.ts`, `vitest.setup.ts`, and
-`copy-css.mjs` live. Library packages live at `packages/<name>/` at
-the repo root (siblings of `packaging/`, NOT inside it). The repo
-root has no `package.json` and no loose build configs — only
-`install.sh` and `README`. Each library declares its own build-time
-devDeps (`tsup`, `typescript`, `esbuild-plugin-preserve-directives`,
-`@types/react`, `@types/react-dom`); pnpm symlinks those into
-`packages/<lib>/node_modules/` so `tsup.config.ts` and `tsc` resolve
-them locally without walking up to the workspace root.
+`copy-css.mjs` live. Library packages live at
+`packages/web/packages/<name>/`. The repo root has no `package.json`
+and no loose build configs — only `install.sh`, `README.md`, and
+`AGENTS.md`. Each library declares its own build-time devDeps
+(`tsup`, `typescript`, `esbuild-plugin-preserve-directives`,
+`@types/react`, `@types/react-dom`); pnpm symlinks those into each
+library's `node_modules/` so `tsup.config.ts` and `tsc` resolve them
+locally without walking up to the workspace root.
 
-**All workspace commands run from `packaging/`**: `pnpm install`,
+**All web workspace commands run from `packages/web/`**: `pnpm install`,
 `pnpm build`, `pnpm test`, `pnpm lint`, `pnpm --filter <pkg> ...`.
 There is no turbo — scripts use `pnpm -r run <task>` directly.
 
-`packages/themes` has a `build:data` codegen step
+`packages/web/packages/themes` has a `build:data` codegen step
 (`scripts/build-theme-data.mjs`) that reads `src/styles/*.css` and
 emits `src/theme-data.ts` with string-literal exports. This replaces
 Vite's `?inline` CSS imports so the package builds under esbuild via
 tsup. `src/theme-data.ts` is gitignored — `install.sh` regenerates it.
 
-## Library packages
+## Web library packages
 
 | Package | Source dir |
 |---|---|
-| `@agentic-persona-toolkit/chat` | `packages/chat/src/` (modes/, components/, hooks/, backends/, css/) |
-| `@agentic-persona-toolkit/themes` | `packages/themes/src/` (manifest, ThemeStyle, colorMode, styles/) |
+| `@agentic-persona-toolkit/chat` | `packages/web/packages/chat/src/` (modes/, components/, hooks/, backends/, css/) |
+| `@agentic-persona-toolkit/themes` | `packages/web/packages/themes/src/` (manifest, ThemeStyle, colorMode, styles/) |
+| `@agentic-persona-toolkit/viewport` | `packages/web/packages/viewport/src/` (ViewportShell, ViewportSpacer, ViewportComposer, useKeyboardInset) |
 
-Library packages may only depend on other `packages/*` — never on
-ad-hoc paths outside `packages/`.
+Library packages may only depend on other `packages/web/packages/*`
+— never on ad-hoc paths outside the web workspace.
 
 ## Build
 
 ```bash
-./install.sh             # one-time, runs pnpm install + theme codegen
-cd packaging && pnpm build
-cd packaging && pnpm test
+./install.sh                        # one-time, runs pnpm install + theme codegen
+cd packages/web && pnpm build
+cd packages/web && pnpm test
 ```
 
 ## Conventions

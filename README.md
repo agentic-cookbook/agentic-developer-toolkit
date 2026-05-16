@@ -1,31 +1,69 @@
 # agentic-persona-toolkit
 
-A toolkit for wiring AI persona chats into apps using the [official agentic
-registry](https://github.com/agentic-cookbook/agenticregistry) (persona
-definitions + LLM provider integrations) and [my-agentic-storage](https://github.com/agentic-cookbook/my-agentic-storage)
-(chat history + state). The **coordinator package** is the glue that splices both
-services into the shape a chat UI expects, so each consumer site does not have to
-re-implement orchestration.
+A toolkit that ships reusable per-platform SDKs for wiring AI persona chats
+into apps using the [official agentic registry](https://github.com/agentic-cookbook/agenticregistry)
+(persona definitions + LLM provider integrations) and
+[my-agentic-storage](https://github.com/agentic-cookbook/my-agentic-storage)
+(chat history + state). The toolkit's coordinator code is the glue that
+splices both services into the shape a chat UI expects, so each consumer
+app does not have to re-implement orchestration.
 
-This repo supersedes `agentic-persona-coordinator` (apc). The coordinator role
-moves here alongside a broader set of tools (web chat package today; CLI/Python
-tools, persona-authoring skills, and other-platform coordinators in later
-milestones).
-
-## Planning
-
-Status, milestones, the open architectural decision, and design notes live in
-[`docs/planning/planning.md`](docs/planning/planning.md).
+Supersedes the deprecated `agentic-persona-coordinator`.
 
 ## Layout
 
-```
-docs/
-  planning/    # M1 plan, milestones, open decisions
-  project/     # high-level project description
-.claude/
-  CLAUDE.md    # agent context for this repo
+Each platform folder under `packages/` is the **root of its native build
+system** — open it and you'll find the conventional manifest for that
+platform.
+
+| Platform | Folder | Manifest | Status |
+|---|---|---|---|
+| Web (TS) | `packages/web/` | `package.json` (pnpm workspace) | active |
+| Apple | `packages/apple/` | `Package.swift` + `project.yml` | active |
+| Terminal (Python) | `packages/terminal/` | `pyproject.toml` | active |
+| Android | `packages/android/` | (TBD) | placeholder |
+| Windows | `packages/windows/` | (TBD) | placeholder |
+| Demo site | `websites/landing/` | `package.json` | active |
+
+The web platform is a pnpm monorepo with libraries under
+`packages/web/packages/`:
+
+- `@agentic-persona-toolkit/chat` — React chat components (`InlineChat`,
+  `ThreePaneChat`, `MobileChat`, `PersonaChat`) with pluggable backends.
+- `@agentic-persona-toolkit/themes` — Theme manifest, `ThemeStyle`, and
+  `ColorModeProvider`.
+- `@agentic-persona-toolkit/viewport` — iOS-correct viewport / keyboard
+  primitives.
+
+## Build
+
+One-shot bootstrap (installs the web workspace and runs theme codegen):
+
+```bash
+./install.sh
 ```
 
-More directories will arrive once the architecture is decided and implementation
-starts.
+Per-platform commands:
+
+```bash
+# Web
+cd packages/web && pnpm build
+cd packages/web && pnpm test
+
+# Terminal (Python)
+cd packages/terminal && pip install -e . && pytest
+
+# Apple
+cd packages/apple && open Package.swift
+
+# Demo site
+cd websites/landing && python3 scripts/build.py
+```
+
+## Planning
+
+Milestones, the open architectural decision, and design notes live in
+[`docs/planning/planning.md`](docs/planning/planning.md).
+
+Agent-oriented orientation: [`AGENTS.md`](AGENTS.md).
+Repo conventions and build rules: [`.claude/CLAUDE.md`](.claude/CLAUDE.md).
