@@ -8,6 +8,4 @@ public protocol Message: Sendable {
     var timestamp: Date? { get }
     var attachments: [any Attachment] { get }
     var deliveryStatus: MessageDeliveryStatus { get }
-    var readBy: [any ReadReceipt] { get }
-    var isStreaming: Bool { get }
 }
