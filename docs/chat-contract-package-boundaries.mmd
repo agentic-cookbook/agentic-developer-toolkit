@@ -1,0 +1,31 @@
+flowchart LR
+    APP["App / consumer code<br/>(UI + glue)"]:::outside
+
+    subgraph TK["agentic-persona-toolkit"]
+        direction TB
+        ORCH["Orchestrator<br/>(the only front door)"]:::orch
+
+        subgraph INT["toolkit internals (orchestrator-only)"]
+            direction TB
+            CHAT["chat package<br/>ChatViewModel - Participant<br/>Message - Command - Hooks<br/>TurnTaker (protocol)"]:::chat
+            PERSONA["persona package<br/>Persona - PersonaParticipant<br/>built-in TurnTaker impl"]:::persona
+            SESSION["session package<br/>Session - SessionKind"]:::session
+            HOOKS["hooks / commands /<br/>permissions"]:::extras
+        end
+
+        ORCH ==> CHAT
+        ORCH ==> PERSONA
+        ORCH ==> SESSION
+        ORCH ==> HOOKS
+    end
+
+    APP ==>|"only edge<br/>the app sees"| ORCH
+
+    APP -. "X never imports<br/>toolkit internals" .-> INT
+
+    classDef outside fill:#e8f5e9,stroke:#388e3c
+    classDef orch fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    classDef chat fill:#e3f2fd,stroke:#1976d2
+    classDef persona fill:#f3e5f5,stroke:#7b1fa2
+    classDef session fill:#fce4ec,stroke:#c2185b
+    classDef extras fill:#f1f8e9,stroke:#689f38

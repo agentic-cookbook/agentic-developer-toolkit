@@ -1,0 +1,141 @@
+classDiagram
+    direction TB
+
+    class Participant {
+        <<protocol>>
+        +id
+        +displayName
+        +kinds
+        +conversationState
+    }
+    class Message {
+        <<protocol>>
+        +senderID
+        +text
+        +attachments
+        +toolCalls
+    }
+    class Conversation {
+        <<protocol>>
+        +participants
+        +title
+    }
+    class Attachment {
+        <<protocol>>
+        +mediaType
+        +source
+        +presentation
+    }
+    class InlineDocument {
+        <<protocol>>
+    }
+    class InteractiveWidget {
+        <<protocol>>
+    }
+    class Command {
+        <<protocol>>
+        +name
+        +allowedInvokers
+        +permission
+    }
+    class Tool {
+        <<protocol>>
+        +builtInIdentifier
+    }
+    class Skill {
+        <<protocol>>
+        +skillIdentifier
+    }
+    class Permission {
+        <<protocol>>
+    }
+    class ObservingHook {
+        <<protocol>>
+    }
+    class GatingHook {
+        <<protocol>>
+    }
+    class ChatStateObserver {
+        <<protocol>>
+    }
+    class ChatConfig {
+        <<protocol>>
+        +skills
+        +observingHooks
+        +gatingHooks
+    }
+    class ChatViewModel {
+        <<protocol>>
+        +messages
+        +participants
+        +isStreaming
+        +submitMessage()
+        +cancelCurrentTurn()
+        +listCommands()
+        +respondToWidget()
+    }
+
+    Attachment <|-- InlineDocument
+    InlineDocument <|-- InteractiveWidget
+    Command <|-- Tool
+    Command <|-- Skill
+    Conversation o-- Participant
+    Conversation o-- Message
+    Message o-- Attachment
+    ChatViewModel ..> Conversation
+    ChatViewModel ..> ChatStateObserver
+
+    class Persona {
+        <<protocol>>
+        +info
+        +llmConfig_LEAK
+        +integrations
+    }
+    class PersonaInfo {
+        <<protocol>>
+    }
+    class LLMConfig {
+        <<protocol>>
+        names_LLM_explicitly
+        +model
+        +temperature
+    }
+    class PersonaIntegration {
+        <<protocol>>
+    }
+    class PersonaParticipant {
+        <<protocol>>
+        +persona
+    }
+    Participant <|-- PersonaParticipant
+    PersonaParticipant o-- Persona
+    Persona o-- PersonaInfo
+    Persona o-- LLMConfig
+    Persona o-- PersonaIntegration
+
+    class Session {
+        <<protocol>>
+        +id
+        +kind
+        +state
+        +metadata
+    }
+
+    class Orchestrator {
+        <<protocol>>
+        +sessions
+        +currentSession
+        +personas_LEAK
+        +permissionStore
+        +startSession()
+        +switchSession()
+        +endSession()
+    }
+    class PermissionStore {
+        <<protocol>>
+    }
+
+    ChatViewModel <|-- Orchestrator
+    Orchestrator o-- Session
+    Orchestrator o-- Persona : LEAK
+    Orchestrator o-- PermissionStore

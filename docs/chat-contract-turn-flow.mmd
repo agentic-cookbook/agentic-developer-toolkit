@@ -1,0 +1,57 @@
+flowchart TD
+    Start([User types message in UI]):::app --> CallIn
+
+    CallIn["App/UI calls Orchestrator.submitMessage(text)<br/>(Orchestrator is typed as ChatViewModel)"]:::app
+
+    CallIn --> O1
+
+    subgraph ORCHESTRATOR["Orchestrator (single front door, owns the whole turn)"]
+        direction TB
+        O1["append user Message to current conversation"]:::orch
+        O1 --> O2["pick responding Participant<br/>(mention / default / round-robin)"]:::orch
+        O2 --> O3{"does this participant<br/>have a TurnTaker?"}:::orch
+        O3 -- "no (passive participant)" --> Pause([wait for next input]):::app
+        O3 -- "yes" --> O4["run GatingHooks(.willTakeTurn)"]:::orch
+        O4 --> O5{"allowed?"}:::orch
+        O5 -- blocked --> NotifyErr["notify observers: error"]:::orch
+        O5 -- proceed --> O6["call participant.turnTaker.takeTurn(<br/>session, conversation, commands)"]:::orch
+
+        O6 --> O7["consume ChatEvent stream"]:::orch
+        O7 --> O8{"event kind?"}:::orch
+        O8 -- ".token / .attachment" --> O9["notify ChatStateObservers"]:::orch
+        O8 -- ".toolCallStarted" --> OA["dispatch Command<br/>via internal registry"]:::orch
+        OA --> OB{"permission required?"}:::orch
+        OB -- yes --> OC["notify observers: permissionRequested<br/>pause until UI responds"]:::orch
+        OB -- no --> OD["execute command"]:::orch
+        OC --> OD
+        OD --> OE["emit .toolCallCompleted"]:::orch
+        OE --> O9
+        O9 --> OF["run ObservingHooks(.didEmitEvent)"]:::orch
+        OF --> O7
+        O8 -- ".done" --> OG["append assistant Message"]:::orch
+        OG --> OH["run ObservingHooks(.turnFinished)"]:::orch
+
+        subgraph INTERNALS["Orchestrator-only collaborators (not visible to the app)"]
+            direction LR
+            TT["TurnTaker<br/>(could be persona+LLM,<br/>scripted bot, remote relay)"]:::internal
+            HOOKS["Hooks<br/>(observing + gating)"]:::internal
+            REG["Command registry<br/>(Tools + Skills)"]:::internal
+            PERMS["Permission store"]:::internal
+        end
+    end
+
+    O6 -. "calls" .-> TT
+    O4 -. "calls" .-> HOOKS
+    OF -. "calls" .-> HOOKS
+    OA -. "looks up" .-> REG
+    OB -. "checks" .-> PERMS
+
+    NotifyErr --> NotifyOut
+    OH --> NotifyOut
+
+    NotifyOut["Orchestrator notifies app via ChatStateObserver<br/>App/UI re-reads snapshot accessors"]:::app
+    NotifyOut --> EndOK([UI shows final transcript]):::app
+
+    classDef app fill:#e8f5e9,stroke:#388e3c,color:#000
+    classDef orch fill:#fff3e0,stroke:#f57c00,color:#000
+    classDef internal fill:#fafafa,stroke:#9e9e9e,color:#000
