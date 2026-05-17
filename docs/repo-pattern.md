@@ -30,7 +30,6 @@ platform's native build system (its conventional manifest lives there).
 ├── README.md
 ├── AGENTS.md
 ├── install.sh                       # bootstrap the workspace (for toolkit devs)
-├── install-for-submodule-use.sh     # `npm install` shortcut for consumers
 ├── docs/
 ├── packages/
 │   ├── web/                         # pnpm workspace root (package.json, lockfile)
@@ -92,7 +91,8 @@ walkthrough. In short:
    `"@org/pkg": "file:./vendor/<name>/packages/<platform>/packages/pkg"`
 3. List the same names under the consuming app's transpile list
    (e.g., Next.js `transpilePackages`).
-4. Run `./vendor/<name>/install-for-submodule-use.sh` (it's just `npm install`).
+4. From the consumer app dir, run your project's install command
+   (`npm install` / `pnpm install` / `yarn`).
 
 Live edits in `vendor/<name>/packages/<platform>/packages/<pkg>/src/` flow
 through to the consumer's dev server via HMR.
@@ -104,15 +104,14 @@ Once the packages are published, external consumers just
 so they don't need `transpilePackages` or any submodule setup. The first-party
 submodule flow continues to work in parallel — same source, different shipping.
 
-## The two install scripts at the repo root
+## The install script at the repo root
 
-| Script | Audience | What it does |
-|---|---|---|
-| `install.sh` | Toolkit developers | Bootstraps the workspace (`cd packages/web && pnpm install`); prints pointers to test / build commands. |
-| `install-for-submodule-use.sh` | Consumers | One-line `npm install` wrapper. Exists so consumers can run `./vendor/<name>/install-for-submodule-use.sh` without remembering the command. |
-
-Both live at the repo root because the consumer invokes the second one through
-the submodule path.
+`install.sh` bootstraps the workspace for toolkit developers
+(`cd packages/web && pnpm install`) and prints pointers to test / build
+commands. Consumers don't run it — they run their own project's install
+command (`npm install` / `pnpm install` / `yarn`) from the consumer app dir
+after pulling a new submodule SHA. Their package manager picks up the `file:`
+refs and re-links them.
 
 ## Deployment
 
@@ -147,16 +146,16 @@ consume the packages exactly the way external consumers will.
 ## Starting a new toolkit repo (checklist)
 
 - [ ] Repo root has only `README.md`, `AGENTS.md`, `install.sh`,
-      `install-for-submodule-use.sh`, `.gitignore`, `docs/`, `packages/`,
-      and optionally `websites/`. No language manifest at the root.
+      `.gitignore`, `docs/`, `packages/`, and optionally `websites/`.
+      No language manifest at the root.
 - [ ] `packages/<platform>/` for each platform you ship; each is a workspace
       root in its native package manager.
 - [ ] Library manifests point at source by default with a publish-time override.
 - [ ] In-repo demo / QA app under `websites/<app>/` consumes the libraries via
       the same submodule pattern external consumers will use.
-- [ ] `install.sh` bootstraps the workspace for developers.
-- [ ] `install-for-submodule-use.sh` (or platform equivalent) at the repo root
-      for consumer convenience.
+- [ ] `install.sh` bootstraps the workspace for developers. Consumers run
+      their own package manager's install command; no consumer-side wrapper
+      script is needed.
 - [ ] `docs/consuming-as-submodule.md` documents the consumer flow.
 - [ ] `docs/repo-pattern.md` (this file) documents the design so the next
       sibling repo can copy it.

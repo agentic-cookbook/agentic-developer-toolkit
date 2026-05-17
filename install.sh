@@ -14,8 +14,9 @@ Workspace ready.
 
 Consumers (landing, demo, submodule users) read packages from
 source — no build step needed. See docs/consuming-as-submodule.md
-for the one-time consumer wiring; install-for-submodule-use.sh
-is a memorable shortcut for `npm install` from the consumer dir.
+for the one-time consumer wiring; after that, run your project's
+usual install command (`npm install`, `pnpm install`, `yarn`)
+from the consumer's package.json dir.
 
 Run tests with:
     cd packages/web && pnpm test

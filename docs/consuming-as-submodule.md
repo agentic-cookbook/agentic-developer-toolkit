@@ -38,13 +38,11 @@ const nextConfig: NextConfig = {
 };
 ```
 
-Then install. The submodule ships an `install-for-submodule-use.sh`
-helper that just runs `npm install` — a memorable shortcut so you don't
-have to remember the command. From the directory containing your
-consumer's `package.json`:
+Then install, from the directory that contains the consumer's
+`package.json`, using your project's package manager:
 
 ```bash
-./vendor/apt/install-for-submodule-use.sh   # equivalent to: npm install
+npm install      # or: pnpm install / yarn
 ```
 
 This creates one symlink per package in the consumer's `node_modules/`,
@@ -62,8 +60,8 @@ each pointing at the package directory inside the submodule.
   `git submodule update --remote vendor/apt`. Source updates flow through;
   no reinstall needed unless the toolkit added a new runtime/peer dep.
 - **Add a new toolkit package.** Add a `file:` line in `package.json`,
-  add the name to `transpilePackages`, then re-run
-  `./vendor/apt/install-for-submodule-use.sh` to symlink it.
+  add the name to `transpilePackages`, then re-run your install command
+  (`npm install` / `pnpm install` / `yarn`) to symlink it.
 
 ## Deploying
 
