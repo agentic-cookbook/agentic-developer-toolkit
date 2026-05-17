@@ -8,9 +8,6 @@ command -v pnpm >/dev/null || { echo "error: pnpm is required"; exit 1; }
 echo "==> Installing workspace deps in packages/web/"
 pnpm install
 
-echo "==> Generating themes/theme-data.ts"
-pnpm --filter @agentic-persona-toolkit/themes run build:data
-
 cat <<'EOF'
 
 Workspace ready. Build with:
