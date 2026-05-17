@@ -60,6 +60,15 @@ cd packages/apple && open Package.swift
 cd websites/landing && python3 scripts/build.py
 ```
 
+## Design
+
+How this repo is laid out, how it's consumed, and the recipe for building
+sibling toolkit repos the same way:
+[`docs/repo-pattern.md`](docs/repo-pattern.md).
+
+Consumer setup walkthrough (git submodule path):
+[`docs/consuming-as-submodule.md`](docs/consuming-as-submodule.md).
+
 ## Planning
 
 Milestones, the open architectural decision, and design notes live in
