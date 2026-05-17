@@ -10,9 +10,15 @@ pnpm install
 
 cat <<'EOF'
 
-Workspace ready. Build with:
-    cd packages/web && pnpm build
+Workspace ready.
+
+Consumers (landing, demo, submodule users) read packages from
+source — no build step needed. Just `npm install && npm run dev`
+in the consumer.
 
 Run tests with:
     cd packages/web && pnpm test
+
+Build dist/ artifacts (only needed for npm publish) with:
+    cd packages/web && pnpm build
 EOF
