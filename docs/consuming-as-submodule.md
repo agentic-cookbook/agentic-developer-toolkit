@@ -12,23 +12,10 @@ Add the submodule wherever you want it to live:
 git submodule add git@github.com:agentic-cookbook/agentic-persona-toolkit.git vendor/apt
 ```
 
-Then run the toolkit's install helper from the consumer's repo root, passing
-the directory that contains the consumer's `package.json` (use `.` for a
-single-app repo, or e.g. `sites/main` for a monorepo):
-
-```bash
-./vendor/apt/install-for-submodule-use.sh sites/main
-```
-
-The script discovers every toolkit package, adds the right `file:` refs to
-the consumer's `package.json`, updates `transpilePackages` in
-`next.config.{ts,mjs,js,cjs}`, and runs the consumer's package manager
-(pnpm / yarn / npm — auto-detected from lockfile) to symlink them.
-
-If you'd rather wire it up by hand, the script does this:
+In the consumer's `package.json` (e.g. `sites/main/package.json`), add a
+`file:` ref per package you want to use:
 
 ```json
-// consumer's package.json
 {
   "dependencies": {
     "@agentic-persona-toolkit/chat":     "file:./vendor/apt/packages/web/packages/chat",
@@ -38,8 +25,10 @@ If you'd rather wire it up by hand, the script does this:
 }
 ```
 
+In the consumer's `next.config.ts`, list the same package names under
+`transpilePackages` so Next compiles their TS/TSX:
+
 ```ts
-// consumer's next.config.ts
 const nextConfig: NextConfig = {
   transpilePackages: [
     "@agentic-persona-toolkit/chat",
@@ -49,8 +38,17 @@ const nextConfig: NextConfig = {
 };
 ```
 
-Either path creates one symlink per package in the consumer's
-`node_modules/`, each pointing at the package directory inside the submodule.
+Then install. The submodule ships an `install-for-submodule-use.sh`
+helper that just runs `npm install` — a memorable shortcut so you don't
+have to remember the command. From the directory containing your
+consumer's `package.json`:
+
+```bash
+./vendor/apt/install-for-submodule-use.sh   # equivalent to: npm install
+```
+
+This creates one symlink per package in the consumer's `node_modules/`,
+each pointing at the package directory inside the submodule.
 
 ## Day-to-day workflow
 
@@ -63,10 +61,9 @@ Either path creates one symlink per package in the consumer's
 - **Bump in other repos.** In any other consumer:
   `git submodule update --remote vendor/apt`. Source updates flow through;
   no reinstall needed unless the toolkit added a new runtime/peer dep.
-- **Add a new toolkit package.** After bumping the submodule, re-run
-  `./vendor/apt/install-for-submodule-use.sh <consumer-dir>` — it's
-  idempotent and picks up any new packages found under the toolkit's
-  `packages/web/packages/`.
+- **Add a new toolkit package.** Add a `file:` line in `package.json`,
+  add the name to `transpilePackages`, then re-run
+  `./vendor/apt/install-for-submodule-use.sh` to symlink it.
 
 ## Deploying
 
