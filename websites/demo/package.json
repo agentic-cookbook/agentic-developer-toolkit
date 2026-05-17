@@ -13,7 +13,8 @@
     "react-dom": "^19.2.0",
     "next": "^15.1.0",
     "@agentic-persona-toolkit/chat": "file:../../packages/web/packages/chat",
-    "@agentic-persona-toolkit/themes": "file:../../packages/web/packages/themes"
+    "@agentic-persona-toolkit/themes": "file:../../packages/web/packages/themes",
+    "@agentic-persona-toolkit/viewport": "file:../../packages/web/packages/viewport"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
