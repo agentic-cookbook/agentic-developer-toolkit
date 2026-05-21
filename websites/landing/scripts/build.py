@@ -27,20 +27,22 @@ def run(cmd: list[str], cwd: Path) -> None:
     subprocess.run(cmd, cwd=cwd, check=True)
 
 
-def ensure_pnpm() -> str:
-    if shutil.which("pnpm"):
-        return "pnpm"
-    if shutil.which("corepack"):
-        run(["corepack", "enable"], cwd=REPO_ROOT)
-        if shutil.which("pnpm"):
-            return "pnpm"
-    print("error: pnpm not found and corepack could not provide it", file=sys.stderr)
-    sys.exit(1)
+def pnpm_major() -> int | None:
+    pnpm = shutil.which("pnpm")
+    if not pnpm:
+        return None
+    result = subprocess.run([pnpm, "--version"], capture_output=True, text=True)
+    try:
+        return int(result.stdout.strip().split(".")[0])
+    except (ValueError, IndexError):
+        return None
 
 
 def main() -> int:
-    pnpm = ensure_pnpm()
-    run([pnpm, "install", "--frozen-lockfile"], cwd=WEB_WORKSPACE)
+    if (pnpm_major() or 0) >= 9:
+        run(["pnpm", "install", "--frozen-lockfile"], cwd=WEB_WORKSPACE)
+    else:
+        run(["npx", "--yes", "pnpm@9.15.9", "install", "--frozen-lockfile"], cwd=WEB_WORKSPACE)
     run(["npm", "run", "build:next"], cwd=LANDING_DIR)
     return 0
 
