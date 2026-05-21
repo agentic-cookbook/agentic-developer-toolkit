@@ -12,6 +12,7 @@ file's physical location, not from the consumer's `node_modules`.
 """
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -39,10 +40,15 @@ def pnpm_major() -> int | None:
 
 
 def main() -> int:
-    if (pnpm_major() or 0) >= 9:
-        run(["pnpm", "install", "--frozen-lockfile"], cwd=WEB_WORKSPACE)
-    else:
-        run(["npx", "--yes", "pnpm@9.15.9", "install", "--frozen-lockfile"], cwd=WEB_WORKSPACE)
+    # Unset NODE_ENV so pnpm installs devDependencies (needed for @types/react etc.)
+    env = {k: v for k, v in os.environ.items() if k != "NODE_ENV"}
+    cmd = (
+        ["pnpm", "install", "--frozen-lockfile"]
+        if (pnpm_major() or 0) >= 9
+        else ["npx", "--yes", "pnpm@9.15.9", "install", "--frozen-lockfile"]
+    )
+    print(f"==> {' '.join(cmd)}  (cwd={WEB_WORKSPACE})", flush=True)
+    subprocess.run(cmd, cwd=WEB_WORKSPACE, check=True, env=env)
     run(["npm", "run", "build:next"], cwd=LANDING_DIR)
     return 0
 
