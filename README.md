@@ -1,4 +1,4 @@
-# agentic-persona-toolkit
+# agentic-developer-toolkit
 
 A toolkit that ships reusable per-platform SDKs for wiring AI persona chats
 into apps using the [official agentic registry](https://github.com/agentic-cookbook/agenticregistry)
@@ -28,11 +28,11 @@ platform.
 The web platform is a pnpm monorepo with libraries under
 `packages/web/packages/`:
 
-- `@agentic-persona-toolkit/chat` — React chat components (`InlineChat`,
+- `@agentic-developer-toolkit/chat` — React chat components (`InlineChat`,
   `ThreePaneChat`, `MobileChat`, `PersonaChat`) with pluggable backends.
-- `@agentic-persona-toolkit/themes` — Theme manifest, `ThemeStyle`, and
+- `@agentic-developer-toolkit/themes` — Theme manifest, `ThemeStyle`, and
   `ColorModeProvider`.
-- `@agentic-persona-toolkit/viewport` — iOS-correct viewport / keyboard
+- `@agentic-developer-toolkit/viewport` — iOS-correct viewport / keyboard
   primitives.
 
 ## Build

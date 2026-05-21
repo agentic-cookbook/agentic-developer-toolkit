@@ -6,14 +6,14 @@ import {
   InlineChatView,
   MockBackend,
   useChatSession,
-} from '@agentic-persona-toolkit/chat'
-import '@agentic-persona-toolkit/chat/css/base.css'
-import '@agentic-persona-toolkit/chat/css/modes/inline.css'
+} from '@agentic-developer-toolkit/chat'
+import '@agentic-developer-toolkit/chat/css/base.css'
+import '@agentic-developer-toolkit/chat/css/modes/inline.css'
 import {
   themes,
   themeIds,
   type ThemeKey,
-} from '@agentic-persona-toolkit/themes'
+} from '@agentic-developer-toolkit/themes'
 
 const STORAGE_THEME = 'apt-demo:theme'
 const DEFAULT_THEME: ThemeKey = 'agenticcookbookweb'

@@ -7,7 +7,7 @@ import {
   ThemeStyle,
   themeIds,
   type ThemeKey,
-} from '@agentic-persona-toolkit/themes'
+} from '@agentic-developer-toolkit/themes'
 import { ThemePicker } from './ThemePicker'
 import { examples } from './manifest'
 

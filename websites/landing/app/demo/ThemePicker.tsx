@@ -1,6 +1,6 @@
 'use client'
 
-import { themeIds, themes, type ThemeKey } from '@agentic-persona-toolkit/themes'
+import { themeIds, themes, type ThemeKey } from '@agentic-developer-toolkit/themes'
 
 export interface ThemePickerProps {
   value: ThemeKey

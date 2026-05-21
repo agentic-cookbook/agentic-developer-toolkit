@@ -1,3 +1,3 @@
-# agentic-persona-toolkit
+# agentic-developer-toolkit
 
 A toolkit for creating and managing AI agent personas in agentic workflows.

@@ -9,7 +9,7 @@ required — Next.js transpiles the package source on demand.
 Add the submodule wherever you want it to live:
 
 ```bash
-git submodule add git@github.com:agentic-cookbook/agentic-persona-toolkit.git vendor/apt
+git submodule add git@github.com:agentic-cookbook/agentic-developer-toolkit.git vendor/adt
 ```
 
 In the consumer's `package.json` (e.g. `sites/main/package.json`), add a
@@ -18,9 +18,9 @@ In the consumer's `package.json` (e.g. `sites/main/package.json`), add a
 ```json
 {
   "dependencies": {
-    "@agentic-persona-toolkit/chat":     "file:./vendor/apt/packages/web/packages/chat",
-    "@agentic-persona-toolkit/themes":   "file:./vendor/apt/packages/web/packages/themes",
-    "@agentic-persona-toolkit/viewport": "file:./vendor/apt/packages/web/packages/viewport"
+    "@agentic-developer-toolkit/chat":     "file:./vendor/adt/packages/web/packages/chat",
+    "@agentic-developer-toolkit/themes":   "file:./vendor/adt/packages/web/packages/themes",
+    "@agentic-developer-toolkit/viewport": "file:./vendor/adt/packages/web/packages/viewport"
   }
 }
 ```
@@ -31,9 +31,9 @@ In the consumer's `next.config.ts`, list the same package names under
 ```ts
 const nextConfig: NextConfig = {
   transpilePackages: [
-    "@agentic-persona-toolkit/chat",
-    "@agentic-persona-toolkit/themes",
-    "@agentic-persona-toolkit/viewport",
+    "@agentic-developer-toolkit/chat",
+    "@agentic-developer-toolkit/themes",
+    "@agentic-developer-toolkit/viewport",
   ],
 };
 ```
@@ -51,13 +51,13 @@ each pointing at the package directory inside the submodule.
 ## Day-to-day workflow
 
 - **Edit toolkit source live.** Branch the submodule
-  (`cd vendor/apt && git checkout -b feature`), edit any `.tsx` / `.ts` /
+  (`cd vendor/adt && git checkout -b feature`), edit any `.tsx` / `.ts` /
   `.css` inside `packages/web/packages/<name>/src/`, save. The consumer's
   `next dev` picks it up through HMR immediately. No reinstall, no build.
 - **Commit in two places.** Commit your toolkit changes inside the submodule,
   push. Then commit the updated submodule pointer in the consumer repo.
 - **Bump in other repos.** In any other consumer:
-  `git submodule update --remote vendor/apt`. Source updates flow through;
+  `git submodule update --remote vendor/adt`. Source updates flow through;
   no reinstall needed unless the toolkit added a new runtime/peer dep.
 - **Add a new toolkit package.** Add a `file:` line in `package.json`,
   add the name to `transpilePackages`, then re-run your install command
@@ -78,7 +78,7 @@ The build container then runs the consumer's normal install + build (e.g.
 ## Future: npm-installed consumers
 
 External consumers (outside this org) won't use the submodule — they'll
-`npm install @agentic-persona-toolkit/chat` once the packages are published.
+`npm install @agentic-developer-toolkit/chat` once the packages are published.
 Each package's `publishConfig` rewrites `main`/`types`/`exports` to point at
 `./dist/...` at publish time, so external consumers get a prebuilt tarball
 and don't need `transpilePackages`. Until publish, `publishConfig` sits
@@ -88,5 +88,5 @@ To publish, from inside the toolkit repo:
 
 ```bash
 cd packages/web && pnpm build         # populates dist/
-pnpm --filter @agentic-persona-toolkit/chat publish
+pnpm --filter @agentic-developer-toolkit/chat publish
 ```

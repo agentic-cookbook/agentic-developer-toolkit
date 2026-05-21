@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build entry point for `websites/landing/`.
 
-The landing site consumes `@agentic-persona-toolkit/*` packages from source via
+The landing site consumes `@agentic-developer-toolkit/*` packages from source via
 their `file:` references and Next.js's `transpilePackages`. Next compiles the
 symlinked TS/TSX during `next build`, so no toolkit dist step is needed.
 

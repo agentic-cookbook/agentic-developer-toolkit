@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
-const SITE_URL = 'https://agenticpersonatoolkit.dev'
-const TITLE = 'Agentic Persona Toolkit — build agents with personality, coordinate them with intent'
+const SITE_URL = 'https://agenticdevelopertoolkit.com'
+const TITLE = 'The Agentic Developer Toolkit — build agents with personality, coordinate them with intent'
 const DESCRIPTION =
   'A toolkit for creating, coordinating, and managing AI agent personas in agentic workflows — from a single character to a coordinated team.'
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: SITE_URL,
-    siteName: 'Agentic Persona Toolkit',
+    siteName: 'The Agentic Developer Toolkit',
     title: TITLE,
     description: DESCRIPTION,
   },

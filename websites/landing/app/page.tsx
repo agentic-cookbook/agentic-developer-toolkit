@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-const GITHUB_URL = 'https://github.com/agentic-cookbook/agentic-persona-toolkit'
+const GITHUB_URL = 'https://github.com/agentic-cookbook/agentic-developer-toolkit'
 
 const CAPABILITIES: { label: string; blurb: string; entities: string; comingSoon?: boolean }[] = [
   {
@@ -123,7 +123,7 @@ export default function Page() {
               Agentic <span className="italic text-[var(--color-apt-gold)]">Persona Toolkit</span>
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-apt-text-dim)] hidden sm:inline">
-              agenticpersonatoolkit.dev
+              agenticdevelopertoolkit.com
             </span>
           </div>
           <CtaButton />
@@ -228,7 +228,7 @@ export default function Page() {
       <footer className="border-t border-[var(--color-apt-border)] px-6 py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-apt-text-dim)]">
-            agenticpersonatoolkit.dev · part of the agentic cookbook family
+            agenticdevelopertoolkit.com · part of the agentic cookbook family
           </p>
           <CtaButton variant="ghost" />
         </div>

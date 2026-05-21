@@ -10,12 +10,12 @@ import {
   MockBackend,
   useChatSession,
   type InlineChatSizing,
-} from '@agentic-persona-toolkit/chat'
-import '@agentic-persona-toolkit/chat/css/base.css'
-import '@agentic-persona-toolkit/chat/css/modes/inline.css'
-import '@agentic-persona-toolkit/chat/css/modes/three-pane.css'
-import '@agentic-persona-toolkit/chat/css/modes/mobile.css'
-import '@agentic-persona-toolkit/chat/css/components/content-overlay.css'
+} from '@agentic-developer-toolkit/chat'
+import '@agentic-developer-toolkit/chat/css/base.css'
+import '@agentic-developer-toolkit/chat/css/modes/inline.css'
+import '@agentic-developer-toolkit/chat/css/modes/three-pane.css'
+import '@agentic-developer-toolkit/chat/css/modes/mobile.css'
+import '@agentic-developer-toolkit/chat/css/components/content-overlay.css'
 
 type Mode = 'inline' | 'three-pane' | 'mobile'
 type SizingKind = 'fixed' | 'hug-css' | 'hug-viewport' | 'hug-element'

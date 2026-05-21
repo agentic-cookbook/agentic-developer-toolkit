@@ -1,5 +1,5 @@
 {
-  "name": "agentic-persona-toolkit-landing",
+  "name": "agentic-developer-toolkit-landing",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -14,8 +14,8 @@
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.18",
     "next": "^15.1.0",
-    "@agentic-persona-toolkit/chat": "file:../../packages/web/packages/chat",
-    "@agentic-persona-toolkit/themes": "file:../../packages/web/packages/themes"
+    "@agentic-developer-toolkit/chat": "file:../../packages/web/packages/chat",
+    "@agentic-developer-toolkit/themes": "file:../../packages/web/packages/themes"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
