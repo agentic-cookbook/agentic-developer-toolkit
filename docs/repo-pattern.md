@@ -152,7 +152,7 @@ consume the packages exactly the way external consumers will.
 - [ ] Library manifests point at source by default with a publish-time override.
 - [ ] In-repo demo / QA app under `websites/landing/` (the `/demo` route)
       consumes the libraries via the same submodule pattern external consumers
-      will use. Run locally with `python3 websites/landing/run.py`.
+      will use. Run locally with `websites/run.sh`.
 - [ ] `install.sh` bootstraps the workspace for developers. Consumers run
       their own package manager's install command; no consumer-side wrapper
       script is needed.
