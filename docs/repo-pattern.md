@@ -43,8 +43,7 @@ platform's native build system (its conventional manifest lives there).
 │   ├── android/                     # (TBD)
 │   └── windows/                     # (TBD)
 └── websites/
-    ├── landing/                     # public marketing / demo site
-    └── demo/                        # in-repo consumer for QA
+    └── landing/                     # public marketing + /demo route (QA + deployed)
 ```
 
 Libraries may only depend on other `packages/<platform>/packages/*` — never on
@@ -151,8 +150,9 @@ consume the packages exactly the way external consumers will.
 - [ ] `packages/<platform>/` for each platform you ship; each is a workspace
       root in its native package manager.
 - [ ] Library manifests point at source by default with a publish-time override.
-- [ ] In-repo demo / QA app under `websites/<app>/` consumes the libraries via
-      the same submodule pattern external consumers will use.
+- [ ] In-repo demo / QA app under `websites/landing/` (the `/demo` route)
+      consumes the libraries via the same submodule pattern external consumers
+      will use. Run locally with `python3 websites/landing/run.py`.
 - [ ] `install.sh` bootstraps the workspace for developers. Consumers run
       their own package manager's install command; no consumer-side wrapper
       script is needed.
