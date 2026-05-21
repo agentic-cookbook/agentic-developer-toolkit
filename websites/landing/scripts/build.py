@@ -28,7 +28,6 @@ def run(cmd: list[str], cwd: Path) -> None:
 
 
 def ensure_pnpm() -> str:
-    """Return a pnpm command runner, enabling corepack if pnpm is missing."""
     if shutil.which("pnpm"):
         return "pnpm"
     if shutil.which("corepack"):
@@ -41,16 +40,8 @@ def ensure_pnpm() -> str:
 
 def main() -> int:
     pnpm = ensure_pnpm()
-    # Install the toolkit workspace so peer/dev deps resolve from inside each
-    # symlinked package during Next's typecheck.
     run([pnpm, "install", "--frozen-lockfile"], cwd=WEB_WORKSPACE)
-    run(["npx", "opennextjs-cloudflare", "build"], cwd=LANDING_DIR)
-    # Copies prerendered SSG cache entries into the static-assets directory so
-    # the worker can serve them via the staticAssetsIncrementalCache adapter.
-    # Cloudflare's CI only runs the build, not deploy, so this step has to be
-    # part of the build pipeline rather than relying on `opennextjs-cloudflare
-    # deploy` to do it.
-    run(["npx", "opennextjs-cloudflare", "populateCache", "local"], cwd=LANDING_DIR)
+    run(["npm", "run", "build:next"], cwd=LANDING_DIR)
     return 0
 
 
