@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Build entry point for `websites/landing/`.
 
-The landing site consumes `@agentic-developer-toolkit/*` packages from source via
-their `file:` references and Next.js's `transpilePackages`. Next compiles the
-symlinked TS/TSX during `next build`, so no toolkit dist step is needed.
+The landing site consumes `@agentic-developer-toolkit/*` packages via their
+`file:` references. Those packages ship prebuilt `dist/` (compiled JS with
+`"use client"` preserved) — the same Model A contract as `agentictoolkit` —
+so the consumer needs no `transpilePackages`, but `dist/` is gitignored and
+must be built before `next build`.
 
-We still have to install the toolkit workspace under `packages/web/` so the
-toolkit packages' peer/dev deps (`react`, `@types/react`, etc.) are resolvable
-from inside each package's directory — TypeScript walks up from each source
-file's physical location, not from the consumer's `node_modules`.
+This installs the toolkit's pnpm workspace under `packages/web/`, builds every
+package's `dist/`, then runs `next build`. It mirrors the build wrapper in the
+`agenticdeveloperhub` app so both toolkit consumers build the same way.
 """
 from __future__ import annotations
 
@@ -23,32 +24,31 @@ REPO_ROOT = LANDING_DIR.parent.parent
 WEB_WORKSPACE = REPO_ROOT / "packages" / "web"
 
 
-def run(cmd: list[str], cwd: Path) -> None:
+def pnpm(args: list[str]) -> list[str]:
+    """Prefer a system pnpm >= 9; otherwise fall back to a pinned npx pnpm."""
+    found = shutil.which("pnpm")
+    if found:
+        result = subprocess.run([found, "--version"], capture_output=True, text=True)
+        try:
+            if int(result.stdout.strip().split(".")[0]) >= 9:
+                return [found, *args]
+        except (ValueError, IndexError):
+            pass
+    return ["npx", "--yes", "pnpm@9.15.9", *args]
+
+
+def run(cmd: list[str], cwd: Path, env: dict[str, str] | None = None) -> None:
     print(f"==> {' '.join(cmd)}  (cwd={cwd})", flush=True)
-    subprocess.run(cmd, cwd=cwd, check=True)
-
-
-def pnpm_major() -> int | None:
-    pnpm = shutil.which("pnpm")
-    if not pnpm:
-        return None
-    result = subprocess.run([pnpm, "--version"], capture_output=True, text=True)
-    try:
-        return int(result.stdout.strip().split(".")[0])
-    except (ValueError, IndexError):
-        return None
+    subprocess.run(cmd, cwd=cwd, check=True, env=env)
 
 
 def main() -> int:
-    # Unset NODE_ENV so pnpm installs devDependencies (needed for @types/react etc.)
+    # Unset NODE_ENV so pnpm installs devDependencies (tsup, typescript,
+    # @types/react) needed to build the toolkit dist — production builds set
+    # NODE_ENV=production, which would otherwise skip them.
     env = {k: v for k, v in os.environ.items() if k != "NODE_ENV"}
-    cmd = (
-        ["pnpm", "install", "--frozen-lockfile"]
-        if (pnpm_major() or 0) >= 9
-        else ["npx", "--yes", "pnpm@9.15.9", "install", "--frozen-lockfile"]
-    )
-    print(f"==> {' '.join(cmd)}  (cwd={WEB_WORKSPACE})", flush=True)
-    subprocess.run(cmd, cwd=WEB_WORKSPACE, check=True, env=env)
+    run(pnpm(["install", "--frozen-lockfile"]), cwd=WEB_WORKSPACE, env=env)
+    run(pnpm(["build"]), cwd=WEB_WORKSPACE, env=env)
     run(["npm", "run", "build:next"], cwd=LANDING_DIR)
     return 0
 
