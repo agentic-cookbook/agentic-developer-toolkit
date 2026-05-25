@@ -7,4 +7,7 @@
    <FileRef
       location = "group:SampleApp/PersonaToolkit.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:AgenticDeveloperHubClient/AgenticDeveloperHubClient.xcodeproj">
+   </FileRef>
 </Workspace>

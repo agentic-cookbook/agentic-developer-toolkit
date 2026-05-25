@@ -1,0 +1,10 @@
+# XcodeGen output — regenerated from project.yml
+*.xcodeproj/
+
+# swift-openapi-generator checkout fetched on demand by scripts/generate.py
+.tooling/
+
+# Build artifacts
+.build/
+DerivedData/
+.swiftpm/

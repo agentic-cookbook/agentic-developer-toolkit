@@ -1,0 +1,10 @@
+# swift-openapi-generator configuration.
+# Emits a typed client + types (no server stubs) for the entire
+# api.agenticdeveloperhub.com surface described in openapi.json.
+#
+# Regenerate with: python3 scripts/generate.py
+generate:
+  - types
+  - client
+accessModifier: public
+namingStrategy: idiomatic

@@ -1,0 +1,82 @@
+name: AgenticDeveloperHubClient
+options:
+  bundleIdPrefix: com.mikefullerton.AgenticDeveloperHubClient
+  developmentLanguage: en
+  createIntermediateGroups: true
+  deploymentTarget:
+    macOS: "14.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    SDKROOT: macosx
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEFINES_MODULE: YES
+    SKIP_INSTALL: YES
+    GENERATE_INFOPLIST_FILE: YES
+    DEAD_CODE_STRIPPING: YES
+    ENABLE_TESTABILITY: YES
+    CODE_SIGNING_ALLOWED: NO
+    CODE_SIGNING_REQUIRED: NO
+    CODE_SIGN_IDENTITY: ""
+    PRODUCT_NAME: $(TARGET_NAME)
+
+packages:
+  swift-openapi-runtime:
+    url: https://github.com/apple/swift-openapi-runtime
+    minVersion: "1.12.0"
+    maxVersion: "2.0.0"
+  swift-openapi-urlsession:
+    url: https://github.com/apple/swift-openapi-urlsession
+    minVersion: "1.3.0"
+    maxVersion: "2.0.0"
+
+targets:
+  AgenticDeveloperHubClient:
+    type: framework
+    platform: macOS
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.AgenticDeveloperHubClient
+    dependencies:
+      - package: swift-openapi-runtime
+        product: OpenAPIRuntime
+      - package: swift-openapi-urlsession
+        product: OpenAPIURLSession
+
+  AgenticDeveloperHubClientTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests/AgenticDeveloperHubClientTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.AgenticDeveloperHubClient.tests
+    dependencies:
+      - target: AgenticDeveloperHubClient
+        embed: true
+        codeSign: true
+
+schemes:
+  AgenticDeveloperHubClient:
+    build:
+      targets:
+        AgenticDeveloperHubClient: all
+        AgenticDeveloperHubClientTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - AgenticDeveloperHubClientTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
