@@ -2,7 +2,9 @@ import SwiftUI
 
 @main
 struct PersonaToolkitApp: App {
+    #if os(macOS)
     @Environment(\.openWindow) var openWindow
+    #endif
 
     var body: some Scene {
         WindowGroup {
@@ -20,8 +22,10 @@ struct PersonaToolkitApp: App {
         }
         #endif
 
+        #if os(macOS)
         WindowGroup(id: "api-viewer") {
             OpenAPIViewerWindow()
         }
+        #endif
     }
 }

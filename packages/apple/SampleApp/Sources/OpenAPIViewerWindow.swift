@@ -1,3 +1,4 @@
+#if os(macOS)
 import SwiftUI
 
 struct OpenAPIViewerWindow: View {
@@ -50,9 +51,26 @@ struct OpenAPIViewerWindow: View {
                         return spec
                     }
 
+                    function showError(message) {
+                        const el = document.getElementById('swagger-ui')
+                        el.replaceChildren()
+                        const wrap = document.createElement('div')
+                        wrap.style.cssText = 'padding:24px;font-family:-apple-system,sans-serif;color:#c00'
+                        const h = document.createElement('h2')
+                        h.textContent = 'Could not load OpenAPI spec'
+                        const p = document.createElement('p')
+                        p.textContent = message
+                        wrap.appendChild(h)
+                        wrap.appendChild(p)
+                        el.appendChild(wrap)
+                    }
+
                     window.onload = function() {
                         fetch("https://api.agenticdeveloperhub.com/openapi.json")
-                            .then(r => r.json())
+                            .then(r => {
+                                if (!r.ok) throw new Error("HTTP " + r.status + " " + r.statusText)
+                                return r.json()
+                            })
                             .then(spec => {
                                 window.ui = SwaggerUIBundle({
                                     spec: regroupByPath(spec),
@@ -67,6 +85,7 @@ struct OpenAPIViewerWindow: View {
                                     docExpansion: "none"
                                 })
                             })
+                            .catch(err => showError(String(err)))
                     }
                 </script>
             </body>
@@ -86,3 +105,4 @@ struct OpenAPIViewerWindow: View {
 #Preview {
     OpenAPIViewerWindow()
 }
+#endif

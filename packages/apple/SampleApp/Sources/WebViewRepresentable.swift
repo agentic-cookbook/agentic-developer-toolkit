@@ -1,3 +1,4 @@
+#if os(macOS)
 import SwiftUI
 import WebKit
 
@@ -18,3 +19,4 @@ struct WebViewRepresentable: NSViewRepresentable {
 
     func updateNSView(_ nsView: WKWebView, context: Context) {}
 }
+#endif
