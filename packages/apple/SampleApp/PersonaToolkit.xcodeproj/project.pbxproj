@@ -1,0 +1,662 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		051A3730BF20597286FB18AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10E7C0FA2D297C5F8F6A09D /* Assets.xcassets */; };
+		38E210E6B6072F686995A69E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748F4E66DFAFC8E650E7294 /* ContentView.swift */; };
+		39D939C8A96BAFC319F88C9E /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43B2C773CC66CB8EA5B1DE /* PersonaToolkitApp.swift */; };
+		39F64A936CDC4A33C01E3C46 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43B2C773CC66CB8EA5B1DE /* PersonaToolkitApp.swift */; };
+		519E14F770ADFA91D48DCA69 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43B2C773CC66CB8EA5B1DE /* PersonaToolkitApp.swift */; };
+		5DCECAEDAC1201CAB0C99633 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10E7C0FA2D297C5F8F6A09D /* Assets.xcassets */; };
+		61CF44B6825527542B84C7A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748F4E66DFAFC8E650E7294 /* ContentView.swift */; };
+		86DED95BDE815D8B2B21CA5B /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43B2C773CC66CB8EA5B1DE /* PersonaToolkitApp.swift */; };
+		87A68DFF263034D2828E41C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748F4E66DFAFC8E650E7294 /* ContentView.swift */; };
+		91DC9FB39372140E82236D5E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748F4E66DFAFC8E650E7294 /* ContentView.swift */; };
+		A0F45BCB848814E30778D2B6 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43B2C773CC66CB8EA5B1DE /* PersonaToolkitApp.swift */; };
+		BF8F3F793DFEF9974C5904E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10E7C0FA2D297C5F8F6A09D /* Assets.xcassets */; };
+		D07012212425BA8E1B00A4E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10E7C0FA2D297C5F8F6A09D /* Assets.xcassets */; };
+		D073EF9320F7605DC6BC459F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748F4E66DFAFC8E650E7294 /* ContentView.swift */; };
+		EB837833C246975B4B4DF469 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10E7C0FA2D297C5F8F6A09D /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2128EC58850A1C5F87E472D3 /* PersonaToolkit-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PersonaToolkit-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3748F4E66DFAFC8E650E7294 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		54A898A4B166180697749480 /* PersonaToolkit-watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PersonaToolkit-watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		577E9131C9E0226038DEEEEC /* PersonaToolkit-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "PersonaToolkit-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B43B2C773CC66CB8EA5B1DE /* PersonaToolkitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaToolkitApp.swift; sourceTree = "<group>"; };
+		A270A58B76CF103AA220A118 /* PersonaToolkit-visionOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "PersonaToolkit-visionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10E7C0FA2D297C5F8F6A09D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E2232379509B5FC1A351DDA3 /* PersonaToolkit-tvOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "PersonaToolkit-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		323528F7F223B4A660CCB425 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3748F4E66DFAFC8E650E7294 /* ContentView.swift */,
+				8B43B2C773CC66CB8EA5B1DE /* PersonaToolkitApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		7C1E26BD282B33A65A6D49BD = {
+			isa = PBXGroup;
+			children = (
+				FB252E616D7D8D520B9E2B81 /* Resources */,
+				323528F7F223B4A660CCB425 /* Sources */,
+				8C36775C2CE31CC3486BDCFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8C36775C2CE31CC3486BDCFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				577E9131C9E0226038DEEEEC /* PersonaToolkit-iOS.app */,
+				2128EC58850A1C5F87E472D3 /* PersonaToolkit-macOS.app */,
+				E2232379509B5FC1A351DDA3 /* PersonaToolkit-tvOS.app */,
+				A270A58B76CF103AA220A118 /* PersonaToolkit-visionOS.app */,
+				54A898A4B166180697749480 /* PersonaToolkit-watchOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB252E616D7D8D520B9E2B81 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10E7C0FA2D297C5F8F6A09D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		045C9AD9239BB066F6F22C93 /* PersonaToolkit-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EE63FA247FA3F13B9E7294E /* Build configuration list for PBXNativeTarget "PersonaToolkit-tvOS" */;
+			buildPhases = (
+				C865A5B821F6C0B0350DFD1A /* Sources */,
+				2BD5AC5B5348D82A904D3828 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PersonaToolkit-tvOS";
+			packageProductDependencies = (
+			);
+			productName = "PersonaToolkit-tvOS";
+			productReference = E2232379509B5FC1A351DDA3 /* PersonaToolkit-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		08FF15C05FC615D83054E547 /* PersonaToolkit-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFFA79CE0365790AF1A892DB /* Build configuration list for PBXNativeTarget "PersonaToolkit-macOS" */;
+			buildPhases = (
+				0EC986506915C837189059E7 /* Sources */,
+				11112EC762223EAAA4054993 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PersonaToolkit-macOS";
+			packageProductDependencies = (
+			);
+			productName = "PersonaToolkit-macOS";
+			productReference = 2128EC58850A1C5F87E472D3 /* PersonaToolkit-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		47F44DDB04F4B88FFA15455C /* PersonaToolkit-visionOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4C7E3C6E93987693115D489 /* Build configuration list for PBXNativeTarget "PersonaToolkit-visionOS" */;
+			buildPhases = (
+				93DB07E2D8AC2A4DBED3BB52 /* Sources */,
+				C65CE61ADE93611026361E08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PersonaToolkit-visionOS";
+			packageProductDependencies = (
+			);
+			productName = "PersonaToolkit-visionOS";
+			productReference = A270A58B76CF103AA220A118 /* PersonaToolkit-visionOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D465D29E144A622FBECD080E /* PersonaToolkit-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F9E38C38AAD18183EBDFA12 /* Build configuration list for PBXNativeTarget "PersonaToolkit-watchOS" */;
+			buildPhases = (
+				C58DFB6737DA8652CC8B6725 /* Sources */,
+				2FD74C92347F9C5D8C654CCC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PersonaToolkit-watchOS";
+			packageProductDependencies = (
+			);
+			productName = "PersonaToolkit-watchOS";
+			productReference = 54A898A4B166180697749480 /* PersonaToolkit-watchOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FBB87B11EB389A746673E21F /* PersonaToolkit-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A87DFB3F73448C8C17F087E /* Build configuration list for PBXNativeTarget "PersonaToolkit-iOS" */;
+			buildPhases = (
+				79876BBD0BA3372F47D9D95F /* Sources */,
+				5B1FDF50D9F5408255FD6636 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PersonaToolkit-iOS";
+			packageProductDependencies = (
+			);
+			productName = "PersonaToolkit-iOS";
+			productReference = 577E9131C9E0226038DEEEEC /* PersonaToolkit-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		603BECE51C44C5726A39CC88 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					045C9AD9239BB066F6F22C93 = {
+						ProvisioningStyle = Automatic;
+					};
+					08FF15C05FC615D83054E547 = {
+						ProvisioningStyle = Automatic;
+					};
+					47F44DDB04F4B88FFA15455C = {
+						ProvisioningStyle = Automatic;
+					};
+					D465D29E144A622FBECD080E = {
+						ProvisioningStyle = Automatic;
+					};
+					FBB87B11EB389A746673E21F = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A71D8DC89FDAB034E303F316 /* Build configuration list for PBXProject "PersonaToolkit" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7C1E26BD282B33A65A6D49BD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8C36775C2CE31CC3486BDCFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FBB87B11EB389A746673E21F /* PersonaToolkit-iOS */,
+				08FF15C05FC615D83054E547 /* PersonaToolkit-macOS */,
+				045C9AD9239BB066F6F22C93 /* PersonaToolkit-tvOS */,
+				47F44DDB04F4B88FFA15455C /* PersonaToolkit-visionOS */,
+				D465D29E144A622FBECD080E /* PersonaToolkit-watchOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		11112EC762223EAAA4054993 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF8F3F793DFEF9974C5904E2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD5AC5B5348D82A904D3828 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07012212425BA8E1B00A4E3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2FD74C92347F9C5D8C654CCC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB837833C246975B4B4DF469 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B1FDF50D9F5408255FD6636 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DCECAEDAC1201CAB0C99633 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C65CE61ADE93611026361E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				051A3730BF20597286FB18AA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0EC986506915C837189059E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61CF44B6825527542B84C7A8 /* ContentView.swift in Sources */,
+				86DED95BDE815D8B2B21CA5B /* PersonaToolkitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79876BBD0BA3372F47D9D95F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D073EF9320F7605DC6BC459F /* ContentView.swift in Sources */,
+				39D939C8A96BAFC319F88C9E /* PersonaToolkitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93DB07E2D8AC2A4DBED3BB52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38E210E6B6072F686995A69E /* ContentView.swift in Sources */,
+				A0F45BCB848814E30778D2B6 /* PersonaToolkitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C58DFB6737DA8652CC8B6725 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91DC9FB39372140E82236D5E /* ContentView.swift in Sources */,
+				39F64A936CDC4A33C01E3C46 /* PersonaToolkitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C865A5B821F6C0B0350DFD1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87A68DFF263034D2828E41C0 /* ContentView.swift in Sources */,
+				519E14F770ADFA91D48DCA69 /* PersonaToolkitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		02F1A74C73992A7E8629A579 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		13086031782A821EAD6A5439 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Persona Toolkit";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Debug;
+		};
+		332DADCD721A84D95CA8B8F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.tvos;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+		3E81ECA9E8101D9167BD05D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		451A4FDB0BB8706FDA873FA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.watchos;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		6760711EBCC7D72FF1845EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.macos;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6A22BDE07942E16908B22DE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "Persona Toolkit";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Release;
+		};
+		721D45A8E668E438BF686361 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.visionos;
+				SDKROOT = xros;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Release;
+		};
+		A67FB1F5C5C29066F968C061 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.watchos;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		C3CD19B4326729030CECA722 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.visionos;
+				SDKROOT = xros;
+				TARGETED_DEVICE_FAMILY = 7;
+			};
+			name = Debug;
+		};
+		D34415591990DF82797CF94B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.macos;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EAEB770C1CEDF83A95E93308 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.PersonaToolkit.tvos;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F9E38C38AAD18183EBDFA12 /* Build configuration list for PBXNativeTarget "PersonaToolkit-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				451A4FDB0BB8706FDA873FA2 /* Debug */,
+				A67FB1F5C5C29066F968C061 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2A87DFB3F73448C8C17F087E /* Build configuration list for PBXNativeTarget "PersonaToolkit-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E81ECA9E8101D9167BD05D4 /* Debug */,
+				02F1A74C73992A7E8629A579 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7EE63FA247FA3F13B9E7294E /* Build configuration list for PBXNativeTarget "PersonaToolkit-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAEB770C1CEDF83A95E93308 /* Debug */,
+				332DADCD721A84D95CA8B8F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A71D8DC89FDAB034E303F316 /* Build configuration list for PBXProject "PersonaToolkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13086031782A821EAD6A5439 /* Debug */,
+				6A22BDE07942E16908B22DE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AFFA79CE0365790AF1A892DB /* Build configuration list for PBXNativeTarget "PersonaToolkit-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6760711EBCC7D72FF1845EF8 /* Debug */,
+				D34415591990DF82797CF94B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D4C7E3C6E93987693115D489 /* Build configuration list for PBXNativeTarget "PersonaToolkit-visionOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3CD19B4326729030CECA722 /* Debug */,
+				721D45A8E668E438BF686361 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 603BECE51C44C5726A39CC88 /* Project object */;
+}
