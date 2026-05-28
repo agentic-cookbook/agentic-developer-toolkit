@@ -28,17 +28,45 @@ struct OpenAPIViewerWindow: View {
                         integrity="sha384-49fpFaVrAWI/qdgl9Vv5E/4NXxRUiJX5vGuLws1NUpTWGtEqzWEx8gHTw2UTehFK"
                         crossorigin="anonymous"></script>
                 <script>
+                    const HTTP_METHODS = ['get','post','put','patch','delete','head','options','trace']
+
+                    function tagForPath(path) {
+                        const segments = path.split('/').filter(s => s.length > 0)
+                        if (segments.length === 0) return 'default'
+                        if (segments[0] === 'api' && segments.length > 1) return segments[1]
+                        return segments[0]
+                    }
+
+                    function regroupByPath(spec) {
+                        const tagSet = new Set()
+                        for (const [path, item] of Object.entries(spec.paths || {})) {
+                            const tag = tagForPath(path)
+                            tagSet.add(tag)
+                            for (const method of HTTP_METHODS) {
+                                if (item[method]) item[method].tags = [tag]
+                            }
+                        }
+                        spec.tags = [...tagSet].sort().map(name => ({ name }))
+                        return spec
+                    }
+
                     window.onload = function() {
-                        const ui = SwaggerUIBundle({
-                            url: "https://api.agenticdeveloperhub.com/openapi.json",
-                            dom_id: '#swagger-ui',
-                            presets: [
-                                SwaggerUIBundle.presets.apis,
-                                SwaggerUIStandalonePreset
-                            ],
-                            layout: "StandaloneLayout"
-                        })
-                        window.ui = ui
+                        fetch("https://api.agenticdeveloperhub.com/openapi.json")
+                            .then(r => r.json())
+                            .then(spec => {
+                                window.ui = SwaggerUIBundle({
+                                    spec: regroupByPath(spec),
+                                    dom_id: '#swagger-ui',
+                                    presets: [
+                                        SwaggerUIBundle.presets.apis,
+                                        SwaggerUIStandalonePreset
+                                    ],
+                                    layout: "StandaloneLayout",
+                                    tagsSorter: "alpha",
+                                    operationsSorter: "alpha",
+                                    docExpansion: "none"
+                                })
+                            })
                     }
                 </script>
             </body>
