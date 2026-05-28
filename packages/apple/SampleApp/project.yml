@@ -1,4 +1,4 @@
-name: PersonaToolkit
+name: PersonaToolkitSampleApp
 options:
   bundleIdPrefix: com.mikefullerton.PersonaToolkit
   createIntermediateGroups: true
@@ -21,7 +21,7 @@ settings:
     ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
 
 targets:
-  PersonaToolkit-macOS:
+  PersonaToolkitSampleApp-macOS:
     type: application
     platform: macOS
     sources:
@@ -34,7 +34,7 @@ targets:
         ENABLE_HARDENED_RUNTIME: YES
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.developer-tools
 
-  PersonaToolkit-iOS:
+  PersonaToolkitSampleApp-iOS:
     type: application
     platform: iOS
     sources:
@@ -48,7 +48,7 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
 
-  PersonaToolkit-watchOS:
+  PersonaToolkitSampleApp-watchOS:
     type: application
     platform: watchOS
     sources:
@@ -60,7 +60,7 @@ targets:
         INFOPLIST_KEY_WKApplication: YES
         INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
 
-  PersonaToolkit-tvOS:
+  PersonaToolkitSampleApp-tvOS:
     type: application
     platform: tvOS
     sources:
@@ -70,7 +70,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.PersonaToolkit.tvos
 
-  PersonaToolkit-visionOS:
+  PersonaToolkitSampleApp-visionOS:
     type: application
     platform: visionOS
     sources:
@@ -82,10 +82,10 @@ targets:
         TARGETED_DEVICE_FAMILY: "7"
 
 schemes:
-  PersonaToolkit-macOS:
+  PersonaToolkitSampleApp-macOS:
     build:
       targets:
-        PersonaToolkit-macOS: all
+        PersonaToolkitSampleApp-macOS: all
     run:
       config: Debug
     profile:
@@ -94,27 +94,27 @@ schemes:
       config: Debug
     archive:
       config: Release
-  PersonaToolkit-iOS:
+  PersonaToolkitSampleApp-iOS:
     build:
       targets:
-        PersonaToolkit-iOS: all
+        PersonaToolkitSampleApp-iOS: all
     run:
       config: Debug
-  PersonaToolkit-watchOS:
+  PersonaToolkitSampleApp-watchOS:
     build:
       targets:
-        PersonaToolkit-watchOS: all
+        PersonaToolkitSampleApp-watchOS: all
     run:
       config: Debug
-  PersonaToolkit-tvOS:
+  PersonaToolkitSampleApp-tvOS:
     build:
       targets:
-        PersonaToolkit-tvOS: all
+        PersonaToolkitSampleApp-tvOS: all
     run:
       config: Debug
-  PersonaToolkit-visionOS:
+  PersonaToolkitSampleApp-visionOS:
     build:
       targets:
-        PersonaToolkit-visionOS: all
+        PersonaToolkitSampleApp-visionOS: all
     run:
       config: Debug

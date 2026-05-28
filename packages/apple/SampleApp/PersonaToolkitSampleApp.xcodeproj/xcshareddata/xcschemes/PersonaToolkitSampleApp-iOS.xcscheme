@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1430"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      runPostActionsOnFailure = "NO">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08FF15C05FC615D83054E547"
-               BuildableName = "Persona Toolkit.app"
-               BlueprintName = "PersonaToolkit-macOS"
-               ReferencedContainer = "container:PersonaToolkit.xcodeproj">
+               BlueprintIdentifier = "4427D140B4B2378F9481D420"
+               BuildableName = "PersonaToolkitSampleApp-iOS.app"
+               BlueprintName = "PersonaToolkitSampleApp-iOS"
+               ReferencedContainer = "container:PersonaToolkitSampleApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,14 +27,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "NO">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08FF15C05FC615D83054E547"
-            BuildableName = "Persona Toolkit.app"
-            BlueprintName = "PersonaToolkit-macOS"
-            ReferencedContainer = "container:PersonaToolkit.xcodeproj">
+            BlueprintIdentifier = "4427D140B4B2378F9481D420"
+            BuildableName = "PersonaToolkitSampleApp-iOS.app"
+            BlueprintName = "PersonaToolkitSampleApp-iOS"
+            ReferencedContainer = "container:PersonaToolkitSampleApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -53,12 +55,14 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08FF15C05FC615D83054E547"
-            BuildableName = "Persona Toolkit.app"
-            BlueprintName = "PersonaToolkit-macOS"
-            ReferencedContainer = "container:PersonaToolkit.xcodeproj">
+            BlueprintIdentifier = "4427D140B4B2378F9481D420"
+            BuildableName = "PersonaToolkitSampleApp-iOS.app"
+            BlueprintName = "PersonaToolkitSampleApp-iOS"
+            ReferencedContainer = "container:PersonaToolkitSampleApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -70,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08FF15C05FC615D83054E547"
-            BuildableName = "Persona Toolkit.app"
-            BlueprintName = "PersonaToolkit-macOS"
-            ReferencedContainer = "container:PersonaToolkit.xcodeproj">
+            BlueprintIdentifier = "4427D140B4B2378F9481D420"
+            BuildableName = "PersonaToolkitSampleApp-iOS.app"
+            BlueprintName = "PersonaToolkitSampleApp-iOS"
+            ReferencedContainer = "container:PersonaToolkitSampleApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
