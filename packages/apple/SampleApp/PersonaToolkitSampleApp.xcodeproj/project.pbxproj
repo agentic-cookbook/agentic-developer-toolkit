@@ -7,24 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07022500F5DB425E889EF388 /* OpenAPIViewerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0715F5E2AE19615693F9D717 /* OpenAPIViewerWindow.swift */; };
 		0E428250A85A20C088F150B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B257823831D5ADB6FD7E7 /* ContentView.swift */; };
+		29760EED02C6AE5082274F60 /* WebViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444C17D441FFBAC9C01EE1F /* WebViewRepresentable.swift */; };
 		3C67F4AC78EB845EC6E780AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44DFCCC1083D59F0C494589D /* Assets.xcassets */; };
 		4010A3ECA594A92F1C9EEFA8 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAB3546A222853502567FF1 /* PersonaToolkitApp.swift */; };
 		4185C619B779C9ADFD227DF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B257823831D5ADB6FD7E7 /* ContentView.swift */; };
+		41FE47D75899BDF255D25F38 /* WebViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444C17D441FFBAC9C01EE1F /* WebViewRepresentable.swift */; };
+		5B5A2864A676044CE153E7D6 /* WebViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444C17D441FFBAC9C01EE1F /* WebViewRepresentable.swift */; };
 		649658FD73B4CD21916FE647 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B257823831D5ADB6FD7E7 /* ContentView.swift */; };
 		672C36A6F60F96C360FA07E6 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAB3546A222853502567FF1 /* PersonaToolkitApp.swift */; };
 		6BB2D303982D6CC20A00D199 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B257823831D5ADB6FD7E7 /* ContentView.swift */; };
 		6CDDC5799B2FF57FF0F1E4E5 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAB3546A222853502567FF1 /* PersonaToolkitApp.swift */; };
 		6E4D84DB9C75970132DB7F63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44DFCCC1083D59F0C494589D /* Assets.xcassets */; };
+		74EFC16F3AF6BD5FE75C3FF6 /* OpenAPIViewerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0715F5E2AE19615693F9D717 /* OpenAPIViewerWindow.swift */; };
 		81BB25F01E1A26DFE440EBE7 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAB3546A222853502567FF1 /* PersonaToolkitApp.swift */; };
 		84714AB99C2190876D7AE94F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0B257823831D5ADB6FD7E7 /* ContentView.swift */; };
+		97A761CB5BCA241D54BD977E /* WebViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444C17D441FFBAC9C01EE1F /* WebViewRepresentable.swift */; };
+		9F47F2195366E20D297BA849 /* WebViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444C17D441FFBAC9C01EE1F /* WebViewRepresentable.swift */; };
+		A1CE31AAE59B0F05D06B0809 /* OpenAPIViewerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0715F5E2AE19615693F9D717 /* OpenAPIViewerWindow.swift */; };
 		B0AF5EB62AFDC02F86E7ED76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44DFCCC1083D59F0C494589D /* Assets.xcassets */; };
+		B5260319FE02EAC3E3853CFB /* OpenAPIViewerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0715F5E2AE19615693F9D717 /* OpenAPIViewerWindow.swift */; };
 		B9010721F2D25041B0517F01 /* PersonaToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAB3546A222853502567FF1 /* PersonaToolkitApp.swift */; };
+		C517BFDA09682DB87B84A8EB /* OpenAPIViewerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0715F5E2AE19615693F9D717 /* OpenAPIViewerWindow.swift */; };
 		FB96016FE494EB2F275B077A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44DFCCC1083D59F0C494589D /* Assets.xcassets */; };
 		FC009D2563AD917E7F4DE8DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44DFCCC1083D59F0C494589D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0715F5E2AE19615693F9D717 /* OpenAPIViewerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAPIViewerWindow.swift; sourceTree = "<group>"; };
+		1444C17D441FFBAC9C01EE1F /* WebViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewRepresentable.swift; sourceTree = "<group>"; };
 		29C2704A1119489633EA1996 /* PersonaToolkitSampleApp-visionOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "PersonaToolkitSampleApp-visionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8D138CAAC39386C2FF5473 /* PersonaToolkitSampleApp-tvOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "PersonaToolkitSampleApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EAB3546A222853502567FF1 /* PersonaToolkitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaToolkitApp.swift; sourceTree = "<group>"; };
@@ -40,7 +52,9 @@
 			isa = PBXGroup;
 			children = (
 				FB0B257823831D5ADB6FD7E7 /* ContentView.swift */,
+				0715F5E2AE19615693F9D717 /* OpenAPIViewerWindow.swift */,
 				3EAB3546A222853502567FF1 /* PersonaToolkitApp.swift */,
+				1444C17D441FFBAC9C01EE1F /* WebViewRepresentable.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -265,7 +279,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BB2D303982D6CC20A00D199 /* ContentView.swift in Sources */,
+				07022500F5DB425E889EF388 /* OpenAPIViewerWindow.swift in Sources */,
 				4010A3ECA594A92F1C9EEFA8 /* PersonaToolkitApp.swift in Sources */,
+				5B5A2864A676044CE153E7D6 /* WebViewRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +290,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4185C619B779C9ADFD227DF7 /* ContentView.swift in Sources */,
+				74EFC16F3AF6BD5FE75C3FF6 /* OpenAPIViewerWindow.swift in Sources */,
 				B9010721F2D25041B0517F01 /* PersonaToolkitApp.swift in Sources */,
+				29760EED02C6AE5082274F60 /* WebViewRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +301,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84714AB99C2190876D7AE94F /* ContentView.swift in Sources */,
+				A1CE31AAE59B0F05D06B0809 /* OpenAPIViewerWindow.swift in Sources */,
 				672C36A6F60F96C360FA07E6 /* PersonaToolkitApp.swift in Sources */,
+				9F47F2195366E20D297BA849 /* WebViewRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +312,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				649658FD73B4CD21916FE647 /* ContentView.swift in Sources */,
+				B5260319FE02EAC3E3853CFB /* OpenAPIViewerWindow.swift in Sources */,
 				81BB25F01E1A26DFE440EBE7 /* PersonaToolkitApp.swift in Sources */,
+				41FE47D75899BDF255D25F38 /* WebViewRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +323,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E428250A85A20C088F150B1 /* ContentView.swift in Sources */,
+				C517BFDA09682DB87B84A8EB /* OpenAPIViewerWindow.swift in Sources */,
 				6CDDC5799B2FF57FF0F1E4E5 /* PersonaToolkitApp.swift in Sources */,
+				97A761CB5BCA241D54BD977E /* WebViewRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
