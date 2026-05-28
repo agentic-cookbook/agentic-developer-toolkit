@@ -13,17 +13,17 @@ struct PersonaToolkitApp: App {
         #if os(macOS)
         .windowResizability(.contentSize)
         .commands {
-            CommandMenu("View") {
+            CommandGroup(after: .windowList) {
                 Button("Open API Documentation") {
                     openWindow(id: "api-viewer")
                 }
-                .keyboardShortcut("d", modifiers: [.command, .option])
+                .keyboardShortcut("a", modifiers: [.command, .option])
             }
         }
         #endif
 
         #if os(macOS)
-        WindowGroup(id: "api-viewer") {
+        Window("OpenAPI Viewer", id: "api-viewer") {
             OpenAPIViewerWindow()
         }
         #endif

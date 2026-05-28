@@ -66,7 +66,9 @@ struct OpenAPIViewerWindow: View {
                     }
 
                     window.onload = function() {
-                        fetch("https://api.agenticdeveloperhub.com/openapi.json")
+                        fetch("https://api.agenticdeveloperhub.com/openapi.json", {
+                            signal: AbortSignal.timeout(10000)
+                        })
                             .then(r => {
                                 if (!r.ok) throw new Error("HTTP " + r.status + " " + r.statusText)
                                 return r.json()
