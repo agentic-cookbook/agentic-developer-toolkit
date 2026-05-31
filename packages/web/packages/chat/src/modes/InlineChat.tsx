@@ -35,9 +35,20 @@ export interface InlineChatViewProps {
   className?: string
   sizing?: InlineChatSizing
   placeholder?: string
+  /** "Thinking" words for the in-flight indicator (falls back to dots). */
+  thinkingLabels?: string[]
+  /** Frames for the in-flight rotating glyph. */
+  thinkingFrames?: string[]
 }
 
-export function InlineChatView({ session, className, sizing, placeholder }: InlineChatViewProps) {
+export function InlineChatView({
+  session,
+  className,
+  sizing,
+  placeholder,
+  thinkingLabels,
+  thinkingFrames,
+}: InlineChatViewProps) {
   const { messages, isTyping, sendMessage } = session
   const { ref, style } = useContentHuggingSize(sizing)
   return (
@@ -45,6 +56,8 @@ export function InlineChatView({ session, className, sizing, placeholder }: Inli
       <Transcript
         messages={messages}
         isTyping={isTyping}
+        thinkingLabels={thinkingLabels}
+        thinkingFrames={thinkingFrames}
         renderPopover={(msg) =>
           msg.popover ? <InlinePopover data={msg.popover} /> : null
         }
@@ -62,6 +75,8 @@ export interface InlineChatProps {
   className?: string
   sizing?: InlineChatSizing
   placeholder?: string
+  thinkingLabels?: string[]
+  thinkingFrames?: string[]
 }
 
 export function InlineChat(props: InlineChatProps) {
@@ -72,6 +87,8 @@ export function InlineChat(props: InlineChatProps) {
       className={props.className}
       sizing={props.sizing}
       placeholder={props.placeholder}
+      thinkingLabels={props.thinkingLabels}
+      thinkingFrames={props.thinkingFrames}
     />
   )
 }

@@ -63,6 +63,25 @@
   padding: 4px 0;
 }
 
+/* In-flight "thinking" indicator: [rotating glyph] [word]… — inherits the
+ * persona text color, so it matches whatever theme is active. */
+.pc-thinking {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45em;
+  padding: 4px 0;
+  font-family: var(--pc-font, ui-monospace, monospace);
+  opacity: 0.9;
+}
+.pc-thinking-glyph {
+  display: inline-block;
+  width: 1ch; /* fixed so the rotating glyph never shifts the word */
+  text-align: center;
+}
+.pc-thinking-ellipsis {
+  letter-spacing: 0.12em;
+}
+
 .pc-input-area {
   display: flex;
   gap: 10px;

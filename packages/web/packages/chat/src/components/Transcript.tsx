@@ -13,6 +13,10 @@ interface TranscriptProps {
   showDetailArrows?: boolean
   onDetailArrowClick?: (index: number) => void
   className?: string
+  /** "Thinking" words for the in-flight indicator (falls back to dots). */
+  thinkingLabels?: string[]
+  /** Frames for the in-flight rotating glyph. */
+  thinkingFrames?: string[]
 }
 
 export function Transcript({
@@ -24,6 +28,8 @@ export function Transcript({
   showDetailArrows = false,
   onDetailArrowClick,
   className,
+  thinkingLabels,
+  thinkingFrames,
 }: TranscriptProps) {
   const ref = useRef<HTMLDivElement>(null)
   useScrollToBottom(ref, [messages.length, isTyping])
@@ -45,7 +51,7 @@ export function Transcript({
           {renderPopover && msg.popover && renderPopover(msg)}
         </div>
       ))}
-      {isTyping && <TypingIndicator />}
+      {isTyping && <TypingIndicator labels={thinkingLabels} frames={thinkingFrames} />}
     </div>
   )
 }
