@@ -33,13 +33,14 @@
   --color-error: #ff5555;
   --color-info: var(--ost-green-bright);
 
-  /* Chat color tokens */
-  --pc-surface: #050805;
+  /* Chat color tokens — surface is ~80% opaque so the rain shows faintly
+   * through (text stays fully opaque: this is rgba, not element opacity). */
+  --pc-surface: rgba(5, 8, 5, 0.8);
   --pc-persona-name: var(--ost-green);
   --pc-persona-text: var(--ost-green);
   --pc-user-name: var(--ost-green-bright);
   --pc-user-text: var(--ost-green-bright);
-  --pc-input-bg: #050805;
+  --pc-input-bg: transparent;
   --pc-input-border: var(--ost-border);
   --pc-input-focus: var(--ost-green);
   --pc-time-color: rgba(0, 255, 65, 0.4);
