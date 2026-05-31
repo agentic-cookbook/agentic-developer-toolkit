@@ -1,11 +1,13 @@
 /* Old School Terminal — a variation on green-matrix.
  * Same phosphor green-on-black, but stripped to a raw console: no chat
- * border, no glow, no input-area divider, no send-button box, and no "// "
- * comment prefix on persona lines (that prefix is a green-matrix flourish).
- * Single mode (always dark). JetBrains Mono.
+ * border, no input-area divider, no send-button box, and no "// " comment
+ * prefix on persona lines (that prefix is a green-matrix flourish). Keeps a
+ * soft green phosphor glow around the chat (no hard frame). Uses VT323 — a
+ * recreation of the DEC VT320 terminal ROM font — for an authentic CRT feel.
+ * Single mode (always dark).
  */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 /* === Tokens === */
 
@@ -54,10 +56,10 @@
   --scp-shiki-theme: 'github-dark';
 
   /* Shared (non-color) tokens */
-  --font-display: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --font-sans: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --pc-font: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'VT323', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-mono: 'VT323', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-sans: 'VT323', ui-monospace, 'SF Mono', Menlo, monospace;
+  --pc-font: 'VT323', ui-monospace, 'SF Mono', Menlo, monospace;
   --pc-gutter: 12px;
   --pc-radius: 0;
 }
@@ -68,8 +70,9 @@ body {
   background-color: var(--color-surface);
   color: var(--color-text-primary);
   font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.55;
+  /* VT323 renders small per px — bump up a notch vs the JetBrains Mono themes. */
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 ::selection { background: var(--ost-green); color: #000; }
@@ -87,17 +90,19 @@ body {
   --tw-prose-hr: var(--color-border);
 }
 
-/* === Chat surface — borderless, no glow === */
+/* === Chat surface — borderless, but with a soft green phosphor glow === */
 
 .persona-chat {
   font-family: var(--pc-font);
   background: var(--pc-surface);
   color: var(--ost-green);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.5;
   border: none;
   border-radius: 0;
-  box-shadow: none;
+  box-shadow:
+    0 0 60px -20px rgba(0, 255, 65, 0.45),
+    inset 0 0 40px -10px rgba(0, 255, 65, 0.06);
 }
 
 .persona-chat .pc-message.pc-persona .pc-bubble { color: var(--pc-persona-text); }
@@ -122,7 +127,7 @@ body {
   border: none;
   color: var(--ost-green);
   font-family: var(--pc-font);
-  font-size: 14px;
+  font-size: 16px;
   caret-color: var(--ost-green);
 }
 
