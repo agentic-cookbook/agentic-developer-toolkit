@@ -6,6 +6,7 @@ import { useContentHuggingSize } from '../hooks/useContentHuggingSize'
 import { Transcript } from '../components/Transcript'
 import { ChatInput } from '../components/ChatInput'
 import { InlinePopover } from '../components/InlinePopover'
+import { TypingIndicator } from '../components/TypingIndicator'
 
 /**
  * How the inline chat box determines its outer height.
@@ -62,13 +63,18 @@ export function InlineChatView({
       <Transcript
         messages={messages}
         isTyping={isTyping}
-        thinkingLabels={thinkingLabels}
-        thinkingFrames={thinkingFrames}
-        thinkingDoneGlyph={thinkingDoneGlyph}
-        thinkingColorful={thinkingColorful}
+        suppressTypingIndicator
         renderPopover={(msg) =>
           msg.popover ? <InlinePopover data={msg.popover} /> : null
         }
+      />
+      {/* Status sits right above the input (not in the scrolling transcript). */}
+      <TypingIndicator
+        isTyping={isTyping}
+        labels={thinkingLabels}
+        frames={thinkingFrames}
+        doneGlyph={thinkingDoneGlyph}
+        colorful={thinkingColorful}
       />
       <ChatInput onSend={sendMessage} placeholder={placeholder} />
     </div>

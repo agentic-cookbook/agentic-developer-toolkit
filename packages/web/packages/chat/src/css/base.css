@@ -50,12 +50,14 @@
   display: inline;
 }
 
+/* Timestamp sits on its own line below the message, aligned to the sender's
+ * side (persona = left, user = right). */
 .pc-time {
-  float: right;
-  margin-left: 10px;
-  position: relative;
-  top: 2px;
+  display: block;
+  margin-top: 4px;
 }
+.pc-message.pc-persona .pc-time { text-align: left; }
+.pc-message.pc-user .pc-time { text-align: right; }
 
 .pc-dots {
   display: flex;
@@ -72,6 +74,7 @@
   padding: 4px 0;
   font-family: var(--pc-font, ui-monospace, monospace);
   opacity: 0.9;
+  white-space: nowrap; /* keep the glyph + word on one line (e.g. on iPhone) */
   /* Eases the random color changes (and the settle to grey) instead of hard cuts. */
   transition: color 0.5s ease;
 }
@@ -93,6 +96,14 @@
 .pc-thinking--done {
   color: var(--pc-thinking-done-color, #8a8a8a);
   opacity: 0.75;
+}
+
+/* Status pinned just above the input (rendered outside the transcript scroll):
+ * full chat width, aligned to the gutter, snug to the input. */
+.persona-chat > .pc-typing {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 0 var(--pc-gutter) 6px;
 }
 
 .pc-input-area {

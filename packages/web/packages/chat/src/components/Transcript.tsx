@@ -21,6 +21,8 @@ interface TranscriptProps {
   thinkingDoneGlyph?: string
   /** Flash random non-green colors while thinking. */
   thinkingColorful?: boolean
+  /** Don't render the in-transcript indicator (a host renders it elsewhere). */
+  suppressTypingIndicator?: boolean
 }
 
 export function Transcript({
@@ -36,6 +38,7 @@ export function Transcript({
   thinkingFrames,
   thinkingDoneGlyph,
   thinkingColorful,
+  suppressTypingIndicator,
 }: TranscriptProps) {
   const ref = useRef<HTMLDivElement>(null)
   useScrollToBottom(ref, [messages.length, isTyping])
@@ -57,13 +60,15 @@ export function Transcript({
           {renderPopover && msg.popover && renderPopover(msg)}
         </div>
       ))}
-      <TypingIndicator
-        isTyping={isTyping}
-        labels={thinkingLabels}
-        frames={thinkingFrames}
-        doneGlyph={thinkingDoneGlyph}
-        colorful={thinkingColorful}
-      />
+      {!suppressTypingIndicator && (
+        <TypingIndicator
+          isTyping={isTyping}
+          labels={thinkingLabels}
+          frames={thinkingFrames}
+          doneGlyph={thinkingDoneGlyph}
+          colorful={thinkingColorful}
+        />
+      )}
     </div>
   )
 }
