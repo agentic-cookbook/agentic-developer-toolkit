@@ -33,9 +33,9 @@
   --color-error: #ff5555;
   --color-info: var(--ost-green-bright);
 
-  /* Chat color tokens — surface is ~80% opaque so the rain shows faintly
+  /* Chat color tokens — translucent surface so the rain reads faintly
    * through (text stays fully opaque: this is rgba, not element opacity). */
-  --pc-surface: rgba(5, 8, 5, 0.8);
+  --pc-surface: rgba(5, 8, 5, 0.6);
   --pc-persona-name: var(--ost-green);
   --pc-persona-text: var(--ost-green);
   --pc-user-name: var(--ost-green-bright);
