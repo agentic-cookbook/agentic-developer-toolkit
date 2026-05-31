@@ -16,8 +16,11 @@
   --ost-green-soft: rgba(0, 255, 65, 0.5);
   --ost-border: rgba(0, 255, 65, 0.35);
 
-  /* Site color tokens */
-  --color-surface: #000000;
+  /* Site color tokens — surface is transparent so this theme floats over
+   * whatever is behind it (e.g. olylo's matrix rain). When ThemeStyle scopes
+   * the theme, `body`→`:scope` would otherwise paint the scope wrapper opaque
+   * and block the translucent chat surface below. */
+  --color-surface: transparent;
   --color-surface-raised: #050805;
   --color-surface-hover: #0a0f0a;
   --color-border: var(--ost-border);
@@ -33,9 +36,11 @@
   --color-error: #ff5555;
   --color-info: var(--ost-green-bright);
 
-  /* Chat color tokens — translucent surface so the rain reads faintly
-   * through (text stays fully opaque: this is rgba, not element opacity). */
-  --pc-surface: rgba(5, 8, 5, 0.3);
+  /* Chat color tokens — surface ~20% transparent so the rain shows faintly
+   * through (text stays fully opaque: this is rgba, not element opacity).
+   * Only works because --color-surface above is transparent — otherwise the
+   * scope wrapper paints opaque black behind this. */
+  --pc-surface: rgba(5, 8, 5, 0.8);
   --pc-persona-name: var(--ost-green);
   --pc-persona-text: var(--ost-green);
   --pc-user-name: var(--ost-green-bright);
