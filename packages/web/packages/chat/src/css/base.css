@@ -54,7 +54,8 @@
  * side (persona = left, user = right). */
 .pc-time {
   display: block;
-  margin-top: 4px;
+  margin-top: 0;
+  line-height: 1.1; /* collapse the tall line-box so it sits right under the text */
 }
 .pc-message.pc-persona .pc-time { text-align: left; }
 .pc-message.pc-user .pc-time { text-align: right; }
@@ -71,7 +72,8 @@
   display: inline-flex;
   align-items: baseline;
   gap: 0.45em;
-  padding: 4px 0;
+  padding: 0;
+  line-height: 1.2;
   font-family: var(--pc-font, ui-monospace, monospace);
   opacity: 0.9;
   white-space: nowrap; /* keep the glyph + word on one line (e.g. on iPhone) */
@@ -103,13 +105,13 @@
 .persona-chat > .pc-typing {
   flex: 0 0 auto;
   width: 100%;
-  padding: 0 var(--pc-gutter) 6px;
+  padding: 0 var(--pc-gutter) 2px;
 }
 
 .pc-input-area {
   display: flex;
   gap: 10px;
-  padding: 14px 16px;
+  padding: 6px 16px 10px;
 }
 
 .pc-input {
