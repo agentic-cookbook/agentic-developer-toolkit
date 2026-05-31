@@ -1,0 +1,150 @@
+/* Green Matrix — converged site + chat theme.
+ * Phosphor green-on-black terminal aesthetic (the olylo look).
+ * Single mode (always dark). JetBrains Mono.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* === Tokens === */
+
+:root {
+  /* Phosphor palette */
+  --gm-green: #00ff41;
+  --gm-green-bright: #aaffaa;
+  --gm-green-soft: rgba(0, 255, 65, 0.5);
+  --gm-border: rgba(0, 255, 65, 0.35);
+
+  /* Site color tokens */
+  --color-surface: #000000;
+  --color-surface-raised: #050805;
+  --color-surface-hover: #0a0f0a;
+  --color-border: var(--gm-border);
+  --color-border-subtle: rgba(0, 255, 65, 0.18);
+
+  --color-text-primary: var(--gm-green);
+  --color-text-secondary: var(--gm-green-soft);
+  --color-text-dim: rgba(0, 255, 65, 0.4);
+
+  --color-accent: var(--gm-green);
+  --color-accent-dim: rgba(0, 255, 65, 0.08);
+  --color-success: var(--gm-green);
+  --color-error: #ff5555;
+  --color-info: var(--gm-green-bright);
+
+  /* Chat color tokens */
+  --pc-surface: #050805;
+  --pc-persona-name: var(--gm-green);
+  --pc-persona-text: var(--gm-green);
+  --pc-user-name: var(--gm-green-bright);
+  --pc-user-text: var(--gm-green-bright);
+  --pc-input-bg: #050805;
+  --pc-input-border: var(--gm-border);
+  --pc-input-focus: var(--gm-green);
+  --pc-time-color: rgba(0, 255, 65, 0.4);
+
+  /* Code highlighting (Shiki) */
+  --scp-shiki-theme: 'github-dark';
+
+  /* Shared (non-color) tokens */
+  --font-display: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-sans: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --pc-font: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --pc-gutter: 12px;
+  --pc-radius: 2px;
+}
+
+/* === Site surface === */
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+::selection { background: var(--gm-green); color: #000; }
+
+.prose {
+  --tw-prose-body: var(--color-text-primary);
+  --tw-prose-headings: var(--color-accent);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--gm-green-bright);
+  --tw-prose-code: var(--color-accent);
+  --tw-prose-pre-bg: var(--color-surface-raised);
+  --tw-prose-pre-code: var(--color-text-primary);
+  --tw-prose-quotes: var(--color-text-secondary);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-hr: var(--color-border);
+}
+
+/* === Chat surface === */
+
+.persona-chat {
+  font-family: var(--pc-font);
+  background: var(--pc-surface);
+  color: var(--gm-green);
+  font-size: 14px;
+  line-height: 1.55;
+  border: 1px solid var(--gm-border);
+  border-radius: var(--pc-radius);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 65, 0.08),
+    0 0 60px -20px rgba(0, 255, 65, 0.45),
+    inset 0 0 40px -10px rgba(0, 255, 65, 0.06);
+}
+
+.persona-chat .pc-message.pc-persona .pc-bubble { color: var(--pc-persona-text); }
+.persona-chat .pc-message.pc-user .pc-bubble { color: var(--pc-user-text); }
+
+.persona-chat .pc-persona .pc-sender { color: var(--pc-persona-name); }
+.persona-chat .pc-user .pc-sender { color: var(--pc-user-name); }
+
+.persona-chat .pc-time {
+  color: var(--pc-time-color);
+  font-size: 11px;
+}
+
+.persona-chat .pc-input-area {
+  border-top: 1px solid var(--pc-input-border);
+  background: var(--pc-input-bg);
+}
+
+.persona-chat .pc-input {
+  background: transparent;
+  border: none;
+  color: var(--gm-green);
+  font-family: var(--pc-font);
+  font-size: 14px;
+  caret-color: var(--gm-green);
+}
+
+.persona-chat .pc-input::placeholder { color: var(--gm-border); }
+
+.persona-chat .pc-send-btn {
+  background: transparent;
+  border: 1px solid var(--pc-input-border);
+  color: var(--gm-green);
+  padding: 6px 10px;
+  border-radius: var(--pc-radius);
+}
+.persona-chat .pc-send-btn:not(:disabled):hover { background: rgba(0, 255, 65, 0.08); }
+.persona-chat .pc-send-btn:disabled { opacity: 0.3; }
+
+/* Typing indicator — blinking phosphor dots */
+.persona-chat .pc-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gm-green);
+  opacity: 0.6;
+  animation: gm-dot-blink 1.2s infinite ease-in-out;
+}
+.persona-chat .pc-dots span:nth-child(2) { animation-delay: 0.15s; }
+.persona-chat .pc-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes gm-dot-blink {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 0.9; }
+}

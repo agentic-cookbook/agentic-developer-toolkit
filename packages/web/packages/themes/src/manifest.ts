@@ -1,6 +1,7 @@
 import {
   agenticcookbookwebCss,
   devTeamCss,
+  greenMatrixCss,
   mikefullertonCss,
   myprojectsCss,
   myprojectsoverviewCss,
@@ -14,6 +15,7 @@ import {
 export type ThemeKey =
   | 'agenticcookbookweb'
   | 'dev-team'
+  | 'green-matrix'
   | 'mikefullerton'
   | 'myprojects'
   | 'myprojectsoverview'
@@ -32,6 +34,7 @@ export interface ThemeEntry {
 export const themes: Record<ThemeKey, ThemeEntry> = {
   agenticcookbookweb: { id: 'agenticcookbookweb', label: 'Agentic Cookbook', css: agenticcookbookwebCss },
   'dev-team': { id: 'dev-team', label: 'Dev Team', css: devTeamCss },
+  'green-matrix': { id: 'green-matrix', label: 'Green Matrix', css: greenMatrixCss },
   mikefullerton: { id: 'mikefullerton', label: 'Mike Fullerton', css: mikefullertonCss },
   myprojects: { id: 'myprojects', label: 'My Projects', css: myprojectsCss },
   myprojectsoverview: { id: 'myprojectsoverview', label: 'Projects Overview', css: myprojectsoverviewCss },
