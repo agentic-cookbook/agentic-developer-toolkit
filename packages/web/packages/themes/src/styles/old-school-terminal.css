@@ -128,12 +128,19 @@ body {
 
 .persona-chat .pc-input::placeholder { color: var(--ost-border); }
 
-/* Borderless send button — no box */
+/* Borderless send button — a terminal return glyph instead of the paper plane */
 .persona-chat .pc-send-btn {
   background: transparent;
   border: none;
   color: var(--ost-green);
   padding: 6px 10px;
+}
+.persona-chat .pc-send-btn svg { display: none; }
+.persona-chat .pc-send-btn::before {
+  content: "\21B5"; /* ↵ return */
+  font-family: var(--pc-font);
+  font-size: 20px;
+  line-height: 1;
 }
 .persona-chat .pc-send-btn:not(:disabled):hover { background: rgba(0, 255, 65, 0.08); }
 .persona-chat .pc-send-btn:disabled { opacity: 0.3; }

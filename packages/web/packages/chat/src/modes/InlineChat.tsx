@@ -34,9 +34,10 @@ export interface InlineChatViewProps {
   session: ChatSession
   className?: string
   sizing?: InlineChatSizing
+  placeholder?: string
 }
 
-export function InlineChatView({ session, className, sizing }: InlineChatViewProps) {
+export function InlineChatView({ session, className, sizing, placeholder }: InlineChatViewProps) {
   const { messages, isTyping, sendMessage } = session
   const { ref, style } = useContentHuggingSize(sizing)
   return (
@@ -48,7 +49,7 @@ export function InlineChatView({ session, className, sizing }: InlineChatViewPro
           msg.popover ? <InlinePopover data={msg.popover} /> : null
         }
       />
-      <ChatInput onSend={sendMessage} />
+      <ChatInput onSend={sendMessage} placeholder={placeholder} />
     </div>
   )
 }
@@ -60,9 +61,17 @@ export interface InlineChatProps {
   welcomeMessage?: string
   className?: string
   sizing?: InlineChatSizing
+  placeholder?: string
 }
 
 export function InlineChat(props: InlineChatProps) {
   const session = useChatSession(props)
-  return <InlineChatView session={session} className={props.className} sizing={props.sizing} />
+  return (
+    <InlineChatView
+      session={session}
+      className={props.className}
+      sizing={props.sizing}
+      placeholder={props.placeholder}
+    />
+  )
 }
