@@ -58,7 +58,7 @@ export function TypingIndicator({
       frames={frames ?? DEFAULT_FRAMES}
       doneGlyph={doneGlyph ?? DEFAULT_DONE_GLYPH}
       colorful={colorful ?? false}
-      frameMs={frameMs ?? 90}
+      frameMs={frameMs ?? 260}
       labelMs={labelMs ?? 1800}
     />
   )

@@ -76,8 +76,11 @@
   transition: color 0.5s ease;
 }
 .pc-thinking-glyph {
-  display: inline-block;
-  width: 1ch; /* fixed so the rotating glyph never shifts the word */
+  /* Fixed-width box that doesn't grow with the glyph (min-width:0 defeats the
+   * flex auto-min), so a wider frame fattens symmetrically from the center
+   * instead of shoving the word sideways. */
+  flex: 0 0 1.6ch;
+  min-width: 0;
   text-align: center;
 }
 .pc-thinking-ellipsis {
