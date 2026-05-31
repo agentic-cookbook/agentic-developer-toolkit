@@ -5,6 +5,7 @@ import {
   mikefullertonCss,
   myprojectsCss,
   myprojectsoverviewCss,
+  oldSchoolTerminalCss,
   professionalCss,
   techyCss,
   terminalCss,
@@ -19,6 +20,7 @@ export type ThemeKey =
   | 'mikefullerton'
   | 'myprojects'
   | 'myprojectsoverview'
+  | 'old-school-terminal'
   | 'professional'
   | 'techy'
   | 'terminal'
@@ -38,6 +40,7 @@ export const themes: Record<ThemeKey, ThemeEntry> = {
   mikefullerton: { id: 'mikefullerton', label: 'Mike Fullerton', css: mikefullertonCss },
   myprojects: { id: 'myprojects', label: 'My Projects', css: myprojectsCss },
   myprojectsoverview: { id: 'myprojectsoverview', label: 'Projects Overview', css: myprojectsoverviewCss },
+  'old-school-terminal': { id: 'old-school-terminal', label: 'Old School Terminal', css: oldSchoolTerminalCss },
   professional: { id: 'professional', label: 'Professional', css: professionalCss },
   techy: { id: 'techy', label: 'Techy', css: techyCss },
   terminal: { id: 'terminal', label: 'Terminal', css: terminalCss },
