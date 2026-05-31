@@ -1,15 +1,19 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // A classic terminal spinner — rotates smoothly in a monospace font.
 const DEFAULT_FRAMES = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+// Settled glyph for the completed (grey) state, à la Claude's "✱ Churned for…".
+const DONE_GLYPH = '✱'
 
 export interface TypingIndicatorProps {
+  /** Whether a reply is currently in flight. */
+  isTyping: boolean
   /**
-   * "Thinking" words to cycle through while a reply is in flight
-   * (e.g. ["zeeping", "zorping"]). When omitted, falls back to the classic
-   * three-dot indicator — so existing consumers are unaffected.
+   * "Thinking" words to cycle through while in flight (e.g. ["zeeping",
+   * "zorping"]). When omitted, falls back to the classic three-dot indicator
+   * and nothing persists — so existing consumers are unaffected.
    */
   labels?: string[]
   /** Frames for the rotating glyph. Defaults to a braille spinner. */
@@ -20,9 +24,10 @@ export interface TypingIndicatorProps {
   labelMs?: number
 }
 
-export function TypingIndicator({ labels, frames, frameMs, labelMs }: TypingIndicatorProps = {}) {
+export function TypingIndicator({ isTyping, labels, frames, frameMs, labelMs }: TypingIndicatorProps) {
+  // Classic three-dot fallback when no words are configured (no persisted state).
   if (!labels || labels.length === 0) {
-    return (
+    return isTyping ? (
       <div className="pc-message pc-persona pc-typing">
         <div className="pc-bubble">
           <div className="pc-dots">
@@ -32,10 +37,11 @@ export function TypingIndicator({ labels, frames, frameMs, labelMs }: TypingIndi
           </div>
         </div>
       </div>
-    )
+    ) : null
   }
   return (
-    <ThinkingIndicator
+    <ThinkingStatus
+      active={isTyping}
       labels={labels}
       frames={frames ?? DEFAULT_FRAMES}
       frameMs={frameMs ?? 90}
@@ -44,43 +50,91 @@ export function TypingIndicator({ labels, frames, frameMs, labelMs }: TypingIndi
   )
 }
 
-interface ThinkingProps {
+function randomLabel(labels: string[]): string {
+  return labels[Math.floor(Math.random() * labels.length)] ?? labels[0] ?? ''
+}
+
+/** zorping → zorped, zeeping → zeeped (present participle → past tense). */
+function pastTense(word: string): string {
+  return word.endsWith('ing') ? `${word.slice(0, -3)}ed` : `${word}ed`
+}
+
+interface ThinkingStatusProps {
+  active: boolean
   labels: string[]
   frames: string[]
   frameMs: number
   labelMs: number
 }
 
-function randomLabel(labels: string[]): string {
-  return labels[Math.floor(Math.random() * labels.length)] ?? labels[0] ?? ''
-}
+type Phase = 'idle' | 'thinking' | 'done'
 
 /**
- * `[rotating glyph] [silly word]…` — a Claude-style thinking indicator. Only
- * mounts while a reply is in flight, so its timers live just for that window.
+ * While `active`, shows `[rotating glyph] [silly word]…`. When it stops, freezes
+ * into a grey `✱ [past-tense word] for Ns` that persists until the next think,
+ * mirroring Claude's completed-thinking line.
  */
-function ThinkingIndicator({ labels, frames, frameMs, labelMs }: ThinkingProps) {
+function ThinkingStatus({ active, labels, frames, frameMs, labelMs }: ThinkingStatusProps) {
+  const [phase, setPhase] = useState<Phase>(active ? 'thinking' : 'idle')
   const [frame, setFrame] = useState(0)
-  const [label, setLabel] = useState(() => randomLabel(labels))
+  const [word, setWord] = useState(() => randomLabel(labels))
+  const [done, setDone] = useState<{ word: string; secs: number } | null>(null)
 
-  useEffect(() => {
-    const id = setInterval(() => setFrame((i) => (i + 1) % frames.length), frameMs)
-    return () => clearInterval(id)
-  }, [frames.length, frameMs])
+  // Always-current refs so the active→idle transition reads the latest values
+  // without re-subscribing the effect on every tick.
+  const wordRef = useRef(word)
+  wordRef.current = word
+  const startRef = useRef(0)
 
+  // Phase transitions driven by `active` (the chat's isTyping).
   useEffect(() => {
-    const id = setInterval(() => setLabel(randomLabel(labels)), labelMs)
-    return () => clearInterval(id)
-  }, [labels, labelMs])
+    if (active) {
+      setWord(randomLabel(labels))
+      startRef.current = Date.now()
+      setPhase('thinking')
+    } else {
+      setPhase((p) => {
+        if (p !== 'thinking') return p
+        const secs = Math.max(1, Math.round((Date.now() - startRef.current) / 1000))
+        setDone({ word: pastTense(wordRef.current), secs })
+        return 'done'
+      })
+    }
+  }, [active, labels])
+
+  // Spinner + word cycling — only while thinking.
+  useEffect(() => {
+    if (phase !== 'thinking') return
+    const f = setInterval(() => setFrame((i) => (i + 1) % frames.length), frameMs)
+    const l = setInterval(() => setWord(randomLabel(labels)), labelMs)
+    return () => {
+      clearInterval(f)
+      clearInterval(l)
+    }
+  }, [phase, frames.length, frameMs, labels, labelMs])
+
+  if (phase === 'idle') return null
+
+  if (phase === 'done' && done) {
+    return (
+      <div className="pc-message pc-persona pc-typing">
+        <div className="pc-bubble">
+          <span className="pc-thinking pc-thinking--done">
+            <span className="pc-thinking-glyph" aria-hidden="true">{DONE_GLYPH}</span>
+            <span className="pc-thinking-label">{done.word}</span>
+            <span className="pc-thinking-for">{` for ${done.secs}s`}</span>
+          </span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="pc-message pc-persona pc-typing">
       <div className="pc-bubble">
         <span className="pc-thinking" aria-live="polite">
-          <span className="pc-thinking-glyph" aria-hidden="true">
-            {frames[frame]}
-          </span>
-          <span className="pc-thinking-label">{label}</span>
+          <span className="pc-thinking-glyph" aria-hidden="true">{frames[frame]}</span>
+          <span className="pc-thinking-label">{word}</span>
           <span className="pc-thinking-ellipsis" aria-hidden="true">…</span>
         </span>
       </div>

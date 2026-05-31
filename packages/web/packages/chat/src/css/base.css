@@ -82,6 +82,14 @@
   letter-spacing: 0.12em;
 }
 
+/* Completed state — a grey "✱ zorped for Ns" that persists after the spinner,
+ * like Claude's finished-thinking line. Grey by default; a theme can override
+ * via --pc-thinking-done-color. */
+.pc-thinking--done {
+  color: var(--pc-thinking-done-color, #8a8a8a);
+  opacity: 0.75;
+}
+
 .pc-input-area {
   display: flex;
   gap: 10px;

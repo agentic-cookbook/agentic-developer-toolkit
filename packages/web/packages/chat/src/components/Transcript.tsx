@@ -51,7 +51,11 @@ export function Transcript({
           {renderPopover && msg.popover && renderPopover(msg)}
         </div>
       ))}
-      {isTyping && <TypingIndicator labels={thinkingLabels} frames={thinkingFrames} />}
+      <TypingIndicator
+        isTyping={isTyping}
+        labels={thinkingLabels}
+        frames={thinkingFrames}
+      />
     </div>
   )
 }
