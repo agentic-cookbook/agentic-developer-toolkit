@@ -39,6 +39,10 @@ export interface InlineChatViewProps {
   thinkingLabels?: string[]
   /** Frames for the in-flight rotating glyph. */
   thinkingFrames?: string[]
+  /** Settled glyph for the grey done line. */
+  thinkingDoneGlyph?: string
+  /** Flash random non-green colors while thinking. */
+  thinkingColorful?: boolean
 }
 
 export function InlineChatView({
@@ -48,6 +52,8 @@ export function InlineChatView({
   placeholder,
   thinkingLabels,
   thinkingFrames,
+  thinkingDoneGlyph,
+  thinkingColorful,
 }: InlineChatViewProps) {
   const { messages, isTyping, sendMessage } = session
   const { ref, style } = useContentHuggingSize(sizing)
@@ -58,6 +64,8 @@ export function InlineChatView({
         isTyping={isTyping}
         thinkingLabels={thinkingLabels}
         thinkingFrames={thinkingFrames}
+        thinkingDoneGlyph={thinkingDoneGlyph}
+        thinkingColorful={thinkingColorful}
         renderPopover={(msg) =>
           msg.popover ? <InlinePopover data={msg.popover} /> : null
         }
@@ -77,6 +85,8 @@ export interface InlineChatProps {
   placeholder?: string
   thinkingLabels?: string[]
   thinkingFrames?: string[]
+  thinkingDoneGlyph?: string
+  thinkingColorful?: boolean
 }
 
 export function InlineChat(props: InlineChatProps) {
@@ -89,6 +99,8 @@ export function InlineChat(props: InlineChatProps) {
       placeholder={props.placeholder}
       thinkingLabels={props.thinkingLabels}
       thinkingFrames={props.thinkingFrames}
+      thinkingDoneGlyph={props.thinkingDoneGlyph}
+      thinkingColorful={props.thinkingColorful}
     />
   )
 }

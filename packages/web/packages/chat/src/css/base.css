@@ -72,6 +72,8 @@
   padding: 4px 0;
   font-family: var(--pc-font, ui-monospace, monospace);
   opacity: 0.9;
+  /* Eases the random color changes (and the settle to grey) instead of hard cuts. */
+  transition: color 0.5s ease;
 }
 .pc-thinking-glyph {
   display: inline-block;

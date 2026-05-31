@@ -17,6 +17,10 @@ interface TranscriptProps {
   thinkingLabels?: string[]
   /** Frames for the in-flight rotating glyph. */
   thinkingFrames?: string[]
+  /** Settled glyph for the grey done line. */
+  thinkingDoneGlyph?: string
+  /** Flash random non-green colors while thinking. */
+  thinkingColorful?: boolean
 }
 
 export function Transcript({
@@ -30,6 +34,8 @@ export function Transcript({
   className,
   thinkingLabels,
   thinkingFrames,
+  thinkingDoneGlyph,
+  thinkingColorful,
 }: TranscriptProps) {
   const ref = useRef<HTMLDivElement>(null)
   useScrollToBottom(ref, [messages.length, isTyping])
@@ -55,6 +61,8 @@ export function Transcript({
         isTyping={isTyping}
         labels={thinkingLabels}
         frames={thinkingFrames}
+        doneGlyph={thinkingDoneGlyph}
+        colorful={thinkingColorful}
       />
     </div>
   )
