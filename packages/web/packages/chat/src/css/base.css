@@ -27,6 +27,25 @@
   scroll-behavior: smooth;
 }
 
+/* Viewport-anchored fade: the bottom of the scroll area (newest messages) stays
+ * fully opaque; content drops off sharply toward the top, ending fully
+ * transparent. Percentage stops size the gradient to the element box, so the
+ * fade scales as the content-hugging transcript grows. Because the mask is fixed
+ * to the scroll viewport (not the content), scrolling up brings any older line
+ * back down into the opaque zone — unlike per-message opacity, which would keep
+ * old lines dim everywhere.
+ *
+ * mask-size:100% + no-repeat pins the gradient to the visible box (defends
+ * against UAs that would otherwise tile/scroll the mask with content). */
+.pc-transcript--fade {
+  -webkit-mask-image: linear-gradient(to top, #000 70%, rgba(0, 0, 0, 0.35) 88%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 70%, rgba(0, 0, 0, 0.35) 88%, transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
 .pc-message {
   display: flex;
   width: 100%;
@@ -50,12 +69,15 @@
   display: inline;
 }
 
+/* Timestamp sits on its own line below the message, aligned to the sender's
+ * side (persona = left, user = right). */
 .pc-time {
-  float: right;
-  margin-left: 10px;
-  position: relative;
-  top: 2px;
+  display: block;
+  margin-top: 0;
+  line-height: 1.1; /* collapse the tall line-box so it sits right under the text */
 }
+.pc-message.pc-persona .pc-time { text-align: left; }
+.pc-message.pc-user .pc-time { text-align: right; }
 
 .pc-dots {
   display: flex;
@@ -63,10 +85,53 @@
   padding: 4px 0;
 }
 
+/* In-flight "thinking" indicator: [rotating glyph] [word]… — inherits the
+ * persona text color, so it matches whatever theme is active. */
+.pc-thinking {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45em;
+  padding: 0;
+  line-height: 1.2;
+  font-family: var(--pc-font, ui-monospace, monospace);
+  opacity: 0.9;
+  white-space: nowrap; /* keep the glyph + word on one line (e.g. on iPhone) */
+  /* Eases the random color changes (and the settle to grey) instead of hard cuts. */
+  transition: color 0.5s ease;
+}
+.pc-thinking-glyph {
+  /* Fixed-width box that doesn't grow with the glyph (min-width:0 defeats the
+   * flex auto-min), so a wider frame fattens symmetrically from the center
+   * instead of shoving the word sideways. */
+  flex: 0 0 1.6ch;
+  min-width: 0;
+  text-align: center;
+}
+.pc-thinking-ellipsis {
+  letter-spacing: 0.12em;
+}
+
+/* Completed state — a grey "✱ zorped for Ns" that persists after the spinner,
+ * like Claude's finished-thinking line. Grey by default; a theme can override
+ * via --pc-thinking-done-color. */
+.pc-thinking--done {
+  color: var(--pc-thinking-done-color, #8a8a8a);
+  opacity: 0.75;
+}
+
+/* Status pinned just above the input (rendered outside the transcript scroll):
+ * full chat width, aligned to the gutter, snug to the input. */
+.persona-chat > .pc-typing {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 0 var(--pc-gutter) 2px;
+}
+
 .pc-input-area {
   display: flex;
+  align-items: center;
   gap: 10px;
-  padding: 14px 16px;
+  padding: 2px 16px 8px;
 }
 
 .pc-input {

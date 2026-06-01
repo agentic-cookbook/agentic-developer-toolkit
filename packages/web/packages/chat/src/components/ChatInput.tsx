@@ -1,4 +1,4 @@
-import { useRef, type RefObject } from 'react'
+import { useRef, useState, type RefObject } from 'react'
 import { SendIcon } from './SendIcon'
 
 interface ChatInputProps {
@@ -16,6 +16,9 @@ export function ChatInput({
 }: ChatInputProps) {
   const internalRef = useRef<HTMLInputElement>(null)
   const ref = externalRef || internalRef
+  // Track whether the box has non-whitespace text so the send button (and
+  // thus the Enter affordance) can be disabled while it's empty.
+  const [hasText, setHasText] = useState(false)
 
   const handleSend = () => {
     const input = ref.current
@@ -23,6 +26,7 @@ export function ChatInput({
     const text = input.value.trim()
     if (!text) return
     input.value = ''
+    setHasText(false)
     onSend(text)
   }
 
@@ -37,6 +41,7 @@ export function ChatInput({
         autoComplete="off"
         autoFocus={autoFocus}
         enterKeyHint="send"
+        onChange={(e) => setHasText(e.currentTarget.value.trim().length > 0)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault()
@@ -47,6 +52,7 @@ export function ChatInput({
       <button
         className="pc-send-btn"
         aria-label="Send"
+        disabled={!hasText}
         onClick={handleSend}
       >
         <SendIcon />

@@ -6,6 +6,7 @@ import { useContentHuggingSize } from '../hooks/useContentHuggingSize'
 import { Transcript } from '../components/Transcript'
 import { ChatInput } from '../components/ChatInput'
 import { InlinePopover } from '../components/InlinePopover'
+import { TypingIndicator } from '../components/TypingIndicator'
 
 /**
  * How the inline chat box determines its outer height.
@@ -34,9 +35,30 @@ export interface InlineChatViewProps {
   session: ChatSession
   className?: string
   sizing?: InlineChatSizing
+  placeholder?: string
+  /** "Thinking" words for the in-flight indicator (falls back to dots). */
+  thinkingLabels?: string[]
+  /** Frames for the in-flight rotating glyph. */
+  thinkingFrames?: string[]
+  /** Settled glyph for the grey done line. */
+  thinkingDoneGlyph?: string
+  /** Flash random non-green colors while thinking. */
+  thinkingColorful?: boolean
+  /** Fade older messages — each line dimmer than the one below it. */
+  fadeOlder?: boolean
 }
 
-export function InlineChatView({ session, className, sizing }: InlineChatViewProps) {
+export function InlineChatView({
+  session,
+  className,
+  sizing,
+  placeholder,
+  thinkingLabels,
+  thinkingFrames,
+  thinkingDoneGlyph,
+  thinkingColorful,
+  fadeOlder,
+}: InlineChatViewProps) {
   const { messages, isTyping, sendMessage } = session
   const { ref, style } = useContentHuggingSize(sizing)
   return (
@@ -44,11 +66,21 @@ export function InlineChatView({ session, className, sizing }: InlineChatViewPro
       <Transcript
         messages={messages}
         isTyping={isTyping}
+        suppressTypingIndicator
+        fadeOlder={fadeOlder}
         renderPopover={(msg) =>
           msg.popover ? <InlinePopover data={msg.popover} /> : null
         }
       />
-      <ChatInput onSend={sendMessage} />
+      {/* Status sits right above the input (not in the scrolling transcript). */}
+      <TypingIndicator
+        isTyping={isTyping}
+        labels={thinkingLabels}
+        frames={thinkingFrames}
+        doneGlyph={thinkingDoneGlyph}
+        colorful={thinkingColorful}
+      />
+      <ChatInput onSend={sendMessage} placeholder={placeholder} />
     </div>
   )
 }
@@ -60,9 +92,27 @@ export interface InlineChatProps {
   welcomeMessage?: string
   className?: string
   sizing?: InlineChatSizing
+  placeholder?: string
+  thinkingLabels?: string[]
+  thinkingFrames?: string[]
+  thinkingDoneGlyph?: string
+  thinkingColorful?: boolean
+  fadeOlder?: boolean
 }
 
 export function InlineChat(props: InlineChatProps) {
   const session = useChatSession(props)
-  return <InlineChatView session={session} className={props.className} sizing={props.sizing} />
+  return (
+    <InlineChatView
+      session={session}
+      className={props.className}
+      sizing={props.sizing}
+      placeholder={props.placeholder}
+      thinkingLabels={props.thinkingLabels}
+      thinkingFrames={props.thinkingFrames}
+      thinkingDoneGlyph={props.thinkingDoneGlyph}
+      thinkingColorful={props.thinkingColorful}
+      fadeOlder={props.fadeOlder}
+    />
+  )
 }

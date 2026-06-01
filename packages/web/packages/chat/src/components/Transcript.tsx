@@ -13,6 +13,21 @@ interface TranscriptProps {
   showDetailArrows?: boolean
   onDetailArrowClick?: (index: number) => void
   className?: string
+  /** "Thinking" words for the in-flight indicator (falls back to dots). */
+  thinkingLabels?: string[]
+  /** Frames for the in-flight rotating glyph. */
+  thinkingFrames?: string[]
+  /** Settled glyph for the grey done line. */
+  thinkingDoneGlyph?: string
+  /** Flash random non-green colors while thinking. */
+  thinkingColorful?: boolean
+  /** Don't render the in-transcript indicator (a host renders it elsewhere). */
+  suppressTypingIndicator?: boolean
+  /** Fade older messages toward the top via a viewport-anchored gradient mask:
+   * the bottom (newest) stays fully opaque, older lines grow transparent as they
+   * rise — but scrolling up brings any line back into the readable zone. Off by
+   * default. */
+  fadeOlder?: boolean
 }
 
 export function Transcript({
@@ -24,12 +39,26 @@ export function Transcript({
   showDetailArrows = false,
   onDetailArrowClick,
   className,
+  thinkingLabels,
+  thinkingFrames,
+  thinkingDoneGlyph,
+  thinkingColorful,
+  suppressTypingIndicator,
+  fadeOlder = false,
 }: TranscriptProps) {
   const ref = useRef<HTMLDivElement>(null)
   useScrollToBottom(ref, [messages.length, isTyping])
 
+  const cls = [
+    'pc-transcript',
+    fadeOlder ? 'pc-transcript--fade' : '',
+    className || '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <div ref={ref} className={`pc-transcript ${className || ''}`}>
+    <div ref={ref} className={cls}>
       {messages.map((msg, i) => (
         <div key={msg.id}>
           <MessageBubble
@@ -45,7 +74,15 @@ export function Transcript({
           {renderPopover && msg.popover && renderPopover(msg)}
         </div>
       ))}
-      {isTyping && <TypingIndicator />}
+      {!suppressTypingIndicator && (
+        <TypingIndicator
+          isTyping={isTyping}
+          labels={thinkingLabels}
+          frames={thinkingFrames}
+          doneGlyph={thinkingDoneGlyph}
+          colorful={thinkingColorful}
+        />
+      )}
     </div>
   )
 }

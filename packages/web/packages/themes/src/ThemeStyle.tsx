@@ -27,6 +27,10 @@ export interface ThemeStyleProps {
 }
 
 export function ThemeStyle({ theme, scope }: ThemeStyleProps) {
+  // Depend on the resolved CSS string, not just [theme, scope], so that
+  // editing a theme's CSS (HMR swaps themes[theme].css) re-injects the live
+  // <style> instead of leaving a stale one until the next theme switch.
+  const css = scope ? buildScopedCss(themes[theme].css, scope) : themes[theme].css
   useLayoutEffect(() => {
     const id = scope ? SCOPED_ID : GLOBAL_ID
     let el = document.getElementById(id) as HTMLStyleElement | null
@@ -35,8 +39,8 @@ export function ThemeStyle({ theme, scope }: ThemeStyleProps) {
       el.id = id
       document.head.appendChild(el)
     }
-    el.textContent = scope ? buildScopedCss(themes[theme].css, scope) : themes[theme].css
-  }, [theme, scope])
+    el.textContent = css
+  }, [css, scope])
 
   return null
 }
