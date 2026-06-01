@@ -29,8 +29,8 @@ interface TranscriptProps {
 }
 
 // Opacity for a message `distance` lines above the newest (0 = newest).
-const FADE_STEP = 0.13
-const FADE_MIN = 0.18
+const FADE_STEP = 0.22
+const FADE_MIN = 0.15
 function fadeOpacity(distance: number): number {
   return Math.max(FADE_MIN, 1 - distance * FADE_STEP)
 }
