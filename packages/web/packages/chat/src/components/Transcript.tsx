@@ -23,6 +23,16 @@ interface TranscriptProps {
   thinkingColorful?: boolean
   /** Don't render the in-transcript indicator (a host renders it elsewhere). */
   suppressTypingIndicator?: boolean
+  /** Fade older messages: each line dimmer than the one below it, the newest at
+   * full opacity. Off by default. */
+  fadeOlder?: boolean
+}
+
+// Opacity for a message `distance` lines above the newest (0 = newest).
+const FADE_STEP = 0.13
+const FADE_MIN = 0.18
+function fadeOpacity(distance: number): number {
+  return Math.max(FADE_MIN, 1 - distance * FADE_STEP)
 }
 
 export function Transcript({
@@ -39,14 +49,20 @@ export function Transcript({
   thinkingDoneGlyph,
   thinkingColorful,
   suppressTypingIndicator,
+  fadeOlder = false,
 }: TranscriptProps) {
   const ref = useRef<HTMLDivElement>(null)
   useScrollToBottom(ref, [messages.length, isTyping])
 
+  const lastIndex = messages.length - 1
+
   return (
     <div ref={ref} className={`pc-transcript ${className || ''}`}>
       {messages.map((msg, i) => (
-        <div key={msg.id}>
+        <div
+          key={msg.id}
+          style={fadeOlder ? { opacity: fadeOpacity(lastIndex - i) } : undefined}
+        >
           <MessageBubble
             message={msg}
             index={i}

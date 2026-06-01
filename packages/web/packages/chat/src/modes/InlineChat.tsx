@@ -44,6 +44,8 @@ export interface InlineChatViewProps {
   thinkingDoneGlyph?: string
   /** Flash random non-green colors while thinking. */
   thinkingColorful?: boolean
+  /** Fade older messages — each line dimmer than the one below it. */
+  fadeOlder?: boolean
 }
 
 export function InlineChatView({
@@ -55,6 +57,7 @@ export function InlineChatView({
   thinkingFrames,
   thinkingDoneGlyph,
   thinkingColorful,
+  fadeOlder,
 }: InlineChatViewProps) {
   const { messages, isTyping, sendMessage } = session
   const { ref, style } = useContentHuggingSize(sizing)
@@ -64,6 +67,7 @@ export function InlineChatView({
         messages={messages}
         isTyping={isTyping}
         suppressTypingIndicator
+        fadeOlder={fadeOlder}
         renderPopover={(msg) =>
           msg.popover ? <InlinePopover data={msg.popover} /> : null
         }
@@ -93,6 +97,7 @@ export interface InlineChatProps {
   thinkingFrames?: string[]
   thinkingDoneGlyph?: string
   thinkingColorful?: boolean
+  fadeOlder?: boolean
 }
 
 export function InlineChat(props: InlineChatProps) {
@@ -107,6 +112,7 @@ export function InlineChat(props: InlineChatProps) {
       thinkingFrames={props.thinkingFrames}
       thinkingDoneGlyph={props.thinkingDoneGlyph}
       thinkingColorful={props.thinkingColorful}
+      fadeOlder={props.fadeOlder}
     />
   )
 }
