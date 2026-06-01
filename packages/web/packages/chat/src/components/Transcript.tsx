@@ -23,16 +23,11 @@ interface TranscriptProps {
   thinkingColorful?: boolean
   /** Don't render the in-transcript indicator (a host renders it elsewhere). */
   suppressTypingIndicator?: boolean
-  /** Fade older messages: each line dimmer than the one below it, the newest at
-   * full opacity. Off by default. */
+  /** Fade older messages toward the top via a viewport-anchored gradient mask:
+   * the bottom (newest) stays fully opaque, older lines grow transparent as they
+   * rise — but scrolling up brings any line back into the readable zone. Off by
+   * default. */
   fadeOlder?: boolean
-}
-
-// Opacity for a message `distance` lines above the newest (0 = newest).
-const FADE_STEP = 0.22
-const FADE_MIN = 0.15
-function fadeOpacity(distance: number): number {
-  return Math.max(FADE_MIN, 1 - distance * FADE_STEP)
 }
 
 export function Transcript({
@@ -54,15 +49,18 @@ export function Transcript({
   const ref = useRef<HTMLDivElement>(null)
   useScrollToBottom(ref, [messages.length, isTyping])
 
-  const lastIndex = messages.length - 1
+  const cls = [
+    'pc-transcript',
+    fadeOlder ? 'pc-transcript--fade' : '',
+    className || '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return (
-    <div ref={ref} className={`pc-transcript ${className || ''}`}>
+    <div ref={ref} className={cls}>
       {messages.map((msg, i) => (
-        <div
-          key={msg.id}
-          style={fadeOlder ? { opacity: fadeOpacity(lastIndex - i) } : undefined}
-        >
+        <div key={msg.id}>
           <MessageBubble
             message={msg}
             index={i}

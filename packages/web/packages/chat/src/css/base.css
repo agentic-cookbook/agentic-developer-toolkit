@@ -27,6 +27,15 @@
   scroll-behavior: smooth;
 }
 
+/* Viewport-anchored fade: the bottom of the scroll area (newest messages) stays
+ * fully opaque; content fades out toward the top. Because the mask is fixed to
+ * the viewport, scrolling up brings any older line back into the opaque zone —
+ * unlike a per-message opacity, which would keep old lines dim everywhere. */
+.pc-transcript--fade {
+  -webkit-mask-image: linear-gradient(to top, #000 62%, rgba(0, 0, 0, 0.12) 100%);
+  mask-image: linear-gradient(to top, #000 62%, rgba(0, 0, 0, 0.12) 100%);
+}
+
 .pc-message {
   display: flex;
   width: 100%;
