@@ -159,18 +159,24 @@ function ThinkingStatus({
     }
   }, [active, labels, colorful])
 
-  // Spinner, word, and (optional) color cycling — only while thinking.
+  // Spinner cycles while thinking AND while an utterance is showing (so his
+  // "speech" glyph animates too); word/color cycle only during an actual think.
   useEffect(() => {
-    if (phase !== 'thinking') return
+    const spinning = phase === 'thinking' || !!utterance
+    if (!spinning) return
     const f = setInterval(() => setFrame((i) => (i + 1) % frames.length), frameMs)
-    const l = setInterval(() => setWord(randomLabel(labels)), labelMs)
-    const c = colorful ? setInterval(() => setColor(randomNonGreen()), 1000) : undefined
+    const l =
+      phase === 'thinking' ? setInterval(() => setWord(randomLabel(labels)), labelMs) : undefined
+    const c =
+      phase === 'thinking' && colorful
+        ? setInterval(() => setColor(randomNonGreen()), 1000)
+        : undefined
     return () => {
       clearInterval(f)
-      clearInterval(l)
+      if (l) clearInterval(l)
       if (c) clearInterval(c)
     }
-  }, [phase, frames.length, frameMs, labels, labelMs, colorful])
+  }, [phase, frames.length, frameMs, labels, labelMs, colorful, utterance])
 
   // An utterance he just blurted overrides every phase (idle/thinking/done) for
   // its brief lifetime — shown lit, like he's speaking.
@@ -179,7 +185,7 @@ function ThinkingStatus({
       <div className="pc-message pc-persona pc-typing">
         <div className="pc-bubble">
           <span className="pc-thinking" aria-live="polite">
-            <span className="pc-thinking-glyph" aria-hidden="true">{doneGlyph}</span>
+            <span className="pc-thinking-glyph" aria-hidden="true">{frames[frame]}</span>
             <span className="pc-thinking-label">{utterance}</span>
           </span>
         </div>
