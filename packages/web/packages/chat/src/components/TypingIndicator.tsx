@@ -32,6 +32,12 @@ export interface TypingIndicatorProps {
    * thinking state on the first reply and never returns.
    */
   idlePhrase?: string
+  /**
+   * A transient utterance the persona just "said" (e.g. "yes!", "zzz"). When set,
+   * it overrides whatever the status would otherwise show, in any phase. The
+   * caller clears it after a beat.
+   */
+  utterance?: string | null
 }
 
 export function TypingIndicator({
@@ -43,6 +49,7 @@ export function TypingIndicator({
   frameMs,
   labelMs,
   idlePhrase,
+  utterance,
 }: TypingIndicatorProps) {
   // Classic three-dot fallback when no words are configured (no persisted state).
   if (!labels || labels.length === 0) {
@@ -62,6 +69,7 @@ export function TypingIndicator({
     <ThinkingStatus
       active={isTyping}
       idlePhrase={idlePhrase}
+      utterance={utterance}
       labels={labels}
       frames={frames ?? DEFAULT_FRAMES}
       doneGlyph={doneGlyph ?? DEFAULT_DONE_GLYPH}
@@ -94,6 +102,7 @@ function randomNonGreen(): string {
 interface ThinkingStatusProps {
   active: boolean
   idlePhrase?: string
+  utterance?: string | null
   labels: string[]
   frames: string[]
   doneGlyph: string
@@ -113,6 +122,7 @@ type Phase = 'idle' | 'thinking' | 'done'
 function ThinkingStatus({
   active,
   idlePhrase,
+  utterance,
   labels,
   frames,
   doneGlyph,
@@ -161,6 +171,21 @@ function ThinkingStatus({
       if (c) clearInterval(c)
     }
   }, [phase, frames.length, frameMs, labels, labelMs, colorful])
+
+  // An utterance he just blurted overrides every phase (idle/thinking/done) for
+  // its brief lifetime — shown lit, like he's speaking.
+  if (utterance) {
+    return (
+      <div className="pc-message pc-persona pc-typing">
+        <div className="pc-bubble">
+          <span className="pc-thinking" aria-live="polite">
+            <span className="pc-thinking-glyph" aria-hidden="true">{doneGlyph}</span>
+            <span className="pc-thinking-label">{utterance}</span>
+          </span>
+        </div>
+      </div>
+    )
+  }
 
   // Before the first reply, an idle status rendered in the settled/completed
   // (grey) style — it's a quiet "waiting", not an active think.

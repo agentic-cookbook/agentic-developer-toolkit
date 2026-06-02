@@ -51,6 +51,8 @@ export interface InlineChatViewProps {
   statusWhileStreaming?: boolean
   /** Idle status line shown before the first reply (e.g. "waiting to zeeble"). */
   idlePhrase?: string
+  /** A transient utterance to flash in the status (overrides any phase). */
+  statusUtterance?: string | null
   /** Fade older messages — each line dimmer than the one below it. */
   fadeOlder?: boolean
 }
@@ -66,6 +68,7 @@ export function InlineChatView({
   thinkingColorful,
   statusWhileStreaming,
   idlePhrase,
+  statusUtterance,
   fadeOlder,
 }: InlineChatViewProps) {
   const { messages, isTyping, sendMessage } = session
@@ -87,6 +90,7 @@ export function InlineChatView({
       <TypingIndicator
         isTyping={isTyping || streaming}
         idlePhrase={idlePhrase}
+        utterance={statusUtterance}
         labels={thinkingLabels}
         frames={thinkingFrames}
         doneGlyph={thinkingDoneGlyph}
@@ -111,6 +115,7 @@ export interface InlineChatProps {
   thinkingColorful?: boolean
   statusWhileStreaming?: boolean
   idlePhrase?: string
+  statusUtterance?: string | null
   fadeOlder?: boolean
 }
 
@@ -128,6 +133,7 @@ export function InlineChat(props: InlineChatProps) {
       thinkingColorful={props.thinkingColorful}
       statusWhileStreaming={props.statusWhileStreaming}
       idlePhrase={props.idlePhrase}
+      statusUtterance={props.statusUtterance}
       fadeOlder={props.fadeOlder}
     />
   )
