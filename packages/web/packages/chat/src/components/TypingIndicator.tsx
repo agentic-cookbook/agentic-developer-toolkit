@@ -26,6 +26,12 @@ export interface TypingIndicatorProps {
   frameMs?: number
   /** How often to switch to a new random word (ms). */
   labelMs?: number
+  /**
+   * When set and nothing has been in flight yet, show this as an idle status
+   * line with the animating glyph (e.g. "waiting to zeeble"). It yields to the
+   * thinking state on the first reply and never returns.
+   */
+  idlePhrase?: string
 }
 
 export function TypingIndicator({
@@ -36,6 +42,7 @@ export function TypingIndicator({
   colorful,
   frameMs,
   labelMs,
+  idlePhrase,
 }: TypingIndicatorProps) {
   // Classic three-dot fallback when no words are configured (no persisted state).
   if (!labels || labels.length === 0) {
@@ -54,6 +61,7 @@ export function TypingIndicator({
   return (
     <ThinkingStatus
       active={isTyping}
+      idlePhrase={idlePhrase}
       labels={labels}
       frames={frames ?? DEFAULT_FRAMES}
       doneGlyph={doneGlyph ?? DEFAULT_DONE_GLYPH}
@@ -85,6 +93,7 @@ function randomNonGreen(): string {
 
 interface ThinkingStatusProps {
   active: boolean
+  idlePhrase?: string
   labels: string[]
   frames: string[]
   doneGlyph: string
@@ -103,6 +112,7 @@ type Phase = 'idle' | 'thinking' | 'done'
  */
 function ThinkingStatus({
   active,
+  idlePhrase,
   labels,
   frames,
   doneGlyph,
@@ -152,7 +162,22 @@ function ThinkingStatus({
     }
   }, [phase, frames.length, frameMs, labels, labelMs, colorful])
 
-  if (phase === 'idle') return null
+  // Before the first reply, an idle status rendered in the settled/completed
+  // (grey) style — it's a quiet "waiting", not an active think.
+  if (phase === 'idle') {
+    if (!idlePhrase) return null
+    return (
+      <div className="pc-message pc-persona pc-typing">
+        <div className="pc-bubble">
+          <span className="pc-thinking pc-thinking--done">
+            <span className="pc-thinking-glyph" aria-hidden="true">{doneGlyph}</span>
+            <span className="pc-thinking-label">{idlePhrase}</span>
+            <span className="pc-thinking-ellipsis" aria-hidden="true">…</span>
+          </span>
+        </div>
+      </div>
+    )
+  }
 
   if (phase === 'done' && done) {
     return (
