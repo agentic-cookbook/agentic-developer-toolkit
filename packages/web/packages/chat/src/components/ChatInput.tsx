@@ -6,6 +6,8 @@ interface ChatInputProps {
   placeholder?: string
   autoFocus?: boolean
   inputRef?: RefObject<HTMLInputElement | null>
+  /** When true, the box is shown but can't be typed in or sent from. */
+  disabled?: boolean
 }
 
 export function ChatInput({
@@ -13,6 +15,7 @@ export function ChatInput({
   placeholder = 'Type a message...',
   autoFocus = false,
   inputRef: externalRef,
+  disabled = false,
 }: ChatInputProps) {
   const internalRef = useRef<HTMLInputElement>(null)
   const ref = externalRef || internalRef
@@ -40,6 +43,7 @@ export function ChatInput({
         placeholder={placeholder}
         autoComplete="off"
         autoFocus={autoFocus}
+        disabled={disabled}
         enterKeyHint="send"
         onChange={(e) => setHasText(e.currentTarget.value.trim().length > 0)}
         onKeyDown={(e) => {
@@ -52,7 +56,7 @@ export function ChatInput({
       <button
         className="pc-send-btn"
         aria-label="Send"
-        disabled={!hasText}
+        disabled={disabled || !hasText}
         onClick={handleSend}
       >
         <SendIcon />

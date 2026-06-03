@@ -26,6 +26,18 @@ export interface TypingIndicatorProps {
   frameMs?: number
   /** How often to switch to a new random word (ms). */
   labelMs?: number
+  /**
+   * When set and nothing has been in flight yet, show this as an idle status
+   * line with the animating glyph (e.g. "waiting to zeeble"). It yields to the
+   * thinking state on the first reply and never returns.
+   */
+  idlePhrase?: string
+  /**
+   * A transient utterance the persona just "said" (e.g. "yes!", "zzz"). When set,
+   * it overrides whatever the status would otherwise show, in any phase. The
+   * caller clears it after a beat.
+   */
+  utterance?: string | null
 }
 
 export function TypingIndicator({
@@ -36,6 +48,8 @@ export function TypingIndicator({
   colorful,
   frameMs,
   labelMs,
+  idlePhrase,
+  utterance,
 }: TypingIndicatorProps) {
   // Classic three-dot fallback when no words are configured (no persisted state).
   if (!labels || labels.length === 0) {
@@ -54,6 +68,8 @@ export function TypingIndicator({
   return (
     <ThinkingStatus
       active={isTyping}
+      idlePhrase={idlePhrase}
+      utterance={utterance}
       labels={labels}
       frames={frames ?? DEFAULT_FRAMES}
       doneGlyph={doneGlyph ?? DEFAULT_DONE_GLYPH}
@@ -85,6 +101,8 @@ function randomNonGreen(): string {
 
 interface ThinkingStatusProps {
   active: boolean
+  idlePhrase?: string
+  utterance?: string | null
   labels: string[]
   frames: string[]
   doneGlyph: string
@@ -103,6 +121,8 @@ type Phase = 'idle' | 'thinking' | 'done'
  */
 function ThinkingStatus({
   active,
+  idlePhrase,
+  utterance,
   labels,
   frames,
   doneGlyph,
@@ -139,20 +159,63 @@ function ThinkingStatus({
     }
   }, [active, labels, colorful])
 
-  // Spinner, word, and (optional) color cycling — only while thinking.
+  // Spinner cycles while thinking AND while an utterance is showing (so his
+  // "speech" glyph animates too); the word cycles only during an actual think.
+  // Colors cycle in BOTH phases — the status text flashes the same non-green
+  // hues whether thinking or uttering (e.g. the summoning status).
   useEffect(() => {
-    if (phase !== 'thinking') return
+    const spinning = phase === 'thinking' || !!utterance
+    if (!spinning) return
     const f = setInterval(() => setFrame((i) => (i + 1) % frames.length), frameMs)
-    const l = setInterval(() => setWord(randomLabel(labels)), labelMs)
-    const c = colorful ? setInterval(() => setColor(randomNonGreen()), 1000) : undefined
+    const l =
+      phase === 'thinking' ? setInterval(() => setWord(randomLabel(labels)), labelMs) : undefined
+    let c: ReturnType<typeof setInterval> | undefined
+    if (colorful) {
+      setColor(randomNonGreen())
+      c = setInterval(() => setColor(randomNonGreen()), 1000)
+    }
     return () => {
       clearInterval(f)
-      clearInterval(l)
+      if (l) clearInterval(l)
       if (c) clearInterval(c)
     }
-  }, [phase, frames.length, frameMs, labels, labelMs, colorful])
+  }, [phase, frames.length, frameMs, labels, labelMs, colorful, utterance])
 
-  if (phase === 'idle') return null
+  // An utterance he just blurted overrides every phase (idle/thinking/done) for
+  // its brief lifetime — shown lit, like he's speaking.
+  if (utterance) {
+    return (
+      <div className="pc-message pc-persona pc-typing">
+        <div className="pc-bubble">
+          <span
+            className="pc-thinking"
+            style={colorful && color ? { color } : undefined}
+            aria-live="polite"
+          >
+            <span className="pc-thinking-glyph" aria-hidden="true">{frames[frame]}</span>
+            <span className="pc-thinking-label">{utterance}</span>
+          </span>
+        </div>
+      </div>
+    )
+  }
+
+  // Before the first reply, an idle status rendered in the settled/completed
+  // (grey) style — it's a quiet "waiting", not an active think.
+  if (phase === 'idle') {
+    if (!idlePhrase) return null
+    return (
+      <div className="pc-message pc-persona pc-typing">
+        <div className="pc-bubble">
+          <span className="pc-thinking pc-thinking--done">
+            <span className="pc-thinking-glyph" aria-hidden="true">{doneGlyph}</span>
+            <span className="pc-thinking-label">{idlePhrase}</span>
+            <span className="pc-thinking-ellipsis" aria-hidden="true">…</span>
+          </span>
+        </div>
+      </div>
+    )
+  }
 
   if (phase === 'done' && done) {
     return (

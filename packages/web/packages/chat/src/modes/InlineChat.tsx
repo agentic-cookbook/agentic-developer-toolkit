@@ -44,6 +44,17 @@ export interface InlineChatViewProps {
   thinkingDoneGlyph?: string
   /** Flash random non-green colors while thinking. */
   thinkingColorful?: boolean
+  /**
+   * Keep the status indicator animating while a reply is streaming in (the words
+   * "coming out"), not only while awaiting the first token.
+   */
+  statusWhileStreaming?: boolean
+  /** Idle status line shown before the first reply (e.g. "waiting to zeeble"). */
+  idlePhrase?: string
+  /** A transient utterance to flash in the status (overrides any phase). */
+  statusUtterance?: string | null
+  /** Show the input but disable typing/sending (e.g. during an intro sequence). */
+  inputDisabled?: boolean
   /** Fade older messages — each line dimmer than the one below it. */
   fadeOlder?: boolean
 }
@@ -57,9 +68,15 @@ export function InlineChatView({
   thinkingFrames,
   thinkingDoneGlyph,
   thinkingColorful,
+  statusWhileStreaming,
+  idlePhrase,
+  statusUtterance,
+  inputDisabled,
   fadeOlder,
 }: InlineChatViewProps) {
   const { messages, isTyping, sendMessage } = session
+  // While he's "talking" (a reply streaming in), keep the status alive too.
+  const streaming = !!statusWhileStreaming && messages.some((m) => m.isStreaming)
   const { ref, style } = useContentHuggingSize(sizing)
   return (
     <div ref={ref} className={`persona-chat ${className || ''}`} style={style}>
@@ -74,13 +91,15 @@ export function InlineChatView({
       />
       {/* Status sits right above the input (not in the scrolling transcript). */}
       <TypingIndicator
-        isTyping={isTyping}
+        isTyping={isTyping || streaming}
+        idlePhrase={idlePhrase}
+        utterance={statusUtterance}
         labels={thinkingLabels}
         frames={thinkingFrames}
         doneGlyph={thinkingDoneGlyph}
         colorful={thinkingColorful}
       />
-      <ChatInput onSend={sendMessage} placeholder={placeholder} />
+      <ChatInput onSend={sendMessage} placeholder={placeholder} disabled={inputDisabled} />
     </div>
   )
 }
@@ -97,6 +116,10 @@ export interface InlineChatProps {
   thinkingFrames?: string[]
   thinkingDoneGlyph?: string
   thinkingColorful?: boolean
+  statusWhileStreaming?: boolean
+  idlePhrase?: string
+  statusUtterance?: string | null
+  inputDisabled?: boolean
   fadeOlder?: boolean
 }
 
@@ -112,6 +135,10 @@ export function InlineChat(props: InlineChatProps) {
       thinkingFrames={props.thinkingFrames}
       thinkingDoneGlyph={props.thinkingDoneGlyph}
       thinkingColorful={props.thinkingColorful}
+      statusWhileStreaming={props.statusWhileStreaming}
+      idlePhrase={props.idlePhrase}
+      statusUtterance={props.statusUtterance}
+      inputDisabled={props.inputDisabled}
       fadeOlder={props.fadeOlder}
     />
   )
