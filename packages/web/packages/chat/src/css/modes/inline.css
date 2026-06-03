@@ -38,3 +38,57 @@
 .persona-chat.pc-hugging {
   height: auto;
 }
+
+/*
+ * Inactive `minimal` sizing — collapse / expand.
+ *
+ * When the inline chat's `inactive` behavior is `minimal` and the chat is idle
+ * (`.pc-collapsed`), the transcript collapses so the bottom-anchored, content-
+ * hugging box hugs just the input bar. Engaging removes `.pc-collapsed` and the
+ * transcript returns. With `.pc-anim` (transition `animated`) the transcript's
+ * height animates — and because the box is bottom-anchored, that reads as a
+ * grow-up on engage / grow-down on collapse. Mirrors the popover collapse in
+ * base.css.
+ *
+ * `visibility: hidden` (not just opacity) removes the collapsed transcript from
+ * the tab order and a11y tree without touching the Transcript component.
+ */
+.persona-chat.pc-collapsed .pc-transcript {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Idle, the chat is just the composer — tighten it so it reads as an entry bar. */
+.persona-chat.pc-collapsed .pc-input-area {
+  padding: 8px 10px;
+}
+
+/*
+ * Animate the collapse / expand. The transition lives here so it applies in
+ * BOTH states (the collapse needs it too). The open-state max-height cap lives
+ * on the `:not(.pc-collapsed)` rule below — kept off this selector so it can't
+ * override the collapsed `max-height: 0` (equal specificity would otherwise let
+ * it win on source order, leaving the transcript laid out but invisible).
+ *
+ * max-height can't transition to `none`, so the open state animates toward a
+ * concrete cap; the box's own height / content-hugging cap governs real size.
+ */
+.persona-chat.pc-anim .pc-transcript {
+  transition:
+    max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 0.3s;
+}
+
+.persona-chat.pc-anim:not(.pc-collapsed) .pc-transcript {
+  max-height: 100vh;
+  transition:
+    max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s;
+}

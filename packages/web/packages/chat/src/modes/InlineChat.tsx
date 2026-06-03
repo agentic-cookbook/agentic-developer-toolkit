@@ -2,14 +2,14 @@ import type { RefObject } from 'react'
 import type { ChatBackend } from '../backends/types'
 import type { ChatParticipant } from '../types'
 import { useChatSession, type ChatSession } from '../hooks/useChatSession'
-import { useContentHuggingSize } from '../hooks/useContentHuggingSize'
+import { useChatSizing } from '../hooks/useChatSizing'
 import { Transcript } from '../components/Transcript'
 import { ChatInput } from '../components/ChatInput'
 import { InlinePopover } from '../components/InlinePopover'
 import { TypingIndicator } from '../components/TypingIndicator'
 
 /**
- * How the inline chat box determines its outer height.
+ * How the inline chat box determines its height while engaged ("active").
  *
  * - `fixed`: respect whatever height the surrounding CSS gives the wrapper
  *   (today's behavior — `.pc-inline` is 50vh capped at 600px).
@@ -17,7 +17,7 @@ import { TypingIndicator } from '../components/TypingIndicator'
  *   is bottom-anchored, growth extends the top edge upward and the input bar
  *   stays put. `maxHeight` caps growth; past the cap the transcript scrolls.
  */
-export type InlineChatSizing =
+export type ChatSizingBehavior =
   | { mode: 'fixed' }
   | {
       mode: 'content-hugging'
@@ -30,6 +30,37 @@ export type InlineChatSizing =
             gapPx?: number
           }
     }
+
+/**
+ * How the box sizes itself while NOT engaged ("inactive"). Defaults to the
+ * active behavior. Adds `minimal`: collapse to just the input bar pinned to
+ * the bottom, expanding back to the active size on engage.
+ */
+export type InactiveSizingBehavior = ChatSizingBehavior | { mode: 'minimal' }
+
+/** How the box moves between its inactive and active sizes. */
+export type SizingTransition = 'none' | 'animated'
+
+/**
+ * Sizing configuration for the inline chat — two states and the transition
+ * between them:
+ *
+ * - `active`: size while engaged (focused / interacting).
+ * - `inactive`: size while idle. Defaults to `active`. Set to
+ *   `{ mode: 'minimal' }` to collapse to the input bar when idle.
+ * - `transition`: `none` (instant) or `animated` (grow-up / grow-down).
+ *   Defaults to `animated`. Only observable when `inactive` differs from
+ *   `active`.
+ *
+ * Engagement tracking (expand on focus, collapse on click-away / Escape) is
+ * enabled only when `inactive` is provided; otherwise the box is static and
+ * behaves exactly as it did before this option existed.
+ */
+export interface InlineChatSizing {
+  active: ChatSizingBehavior
+  inactive?: InactiveSizingBehavior
+  transition?: SizingTransition
+}
 
 export interface InlineChatViewProps {
   session: ChatSession
@@ -77,9 +108,10 @@ export function InlineChatView({
   const { messages, isTyping, sendMessage } = session
   // While he's "talking" (a reply streaming in), keep the status alive too.
   const streaming = !!statusWhileStreaming && messages.some((m) => m.isStreaming)
-  const { ref, style } = useContentHuggingSize(sizing)
+  const { ref, style, className: sizingClass } = useChatSizing(sizing)
+  const rootClass = ['persona-chat', sizingClass, className].filter(Boolean).join(' ')
   return (
-    <div ref={ref} className={`persona-chat ${className || ''}`} style={style}>
+    <div ref={ref} className={rootClass} style={style}>
       <Transcript
         messages={messages}
         isTyping={isTyping}

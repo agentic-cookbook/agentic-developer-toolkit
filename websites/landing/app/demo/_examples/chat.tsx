@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { ExamplePanel } from '../ExamplePanel'
+import { ThemeMenu } from '../ThemeMenu'
 import {
   InlineChatView,
   ThreePaneChatView,
@@ -10,6 +11,8 @@ import {
   MockBackend,
   useChatSession,
   type InlineChatSizing,
+  type ChatSizingBehavior,
+  type SizingTransition,
 } from '@agentic-developer-toolkit/chat'
 import '@agentic-developer-toolkit/chat/css/base.css'
 import '@agentic-developer-toolkit/chat/css/modes/inline.css'
@@ -19,6 +22,7 @@ import '@agentic-developer-toolkit/chat/css/components/content-overlay.css'
 
 type Mode = 'inline' | 'three-pane' | 'mobile'
 type SizingKind = 'fixed' | 'hug-css' | 'hug-viewport' | 'hug-element'
+type InactiveKind = 'same' | 'minimal'
 type Horizontal = 'left' | 'center' | 'right'
 type Vertical = 'top' | 'center' | 'bottom'
 type Padding = { top: number; right: number; bottom: number; left: number }
@@ -63,6 +67,8 @@ const numberInputStyle: React.CSSProperties = {
 export default function ChatExample() {
   const [mode, setMode] = useState<Mode>('inline')
   const [sizingKind, setSizingKind] = useState<SizingKind>('fixed')
+  const [inactiveKind, setInactiveKind] = useState<InactiveKind>('same')
+  const [transitionKind, setTransitionKind] = useState<SizingTransition>('animated')
   const [transparent, setTransparent] = useState(false)
   const [overlayOpen, setOverlayOpen] = useState(false)
   const [horizontal, setHorizontal] = useState<Horizontal>('center')
@@ -72,14 +78,20 @@ export default function ChatExample() {
 
   const headerRef = useRef<HTMLElement | null>(null)
 
-  const sizing: InlineChatSizing | undefined =
+  const activeBehavior: ChatSizingBehavior =
     sizingKind === 'fixed'
-      ? undefined
+      ? { mode: 'fixed' }
       : sizingKind === 'hug-css'
         ? { mode: 'content-hugging', maxHeight: { kind: 'css', value: '400px' } }
         : sizingKind === 'hug-viewport'
           ? { mode: 'content-hugging', maxHeight: { kind: 'viewport-offset', topOffsetPx: 80 } }
           : { mode: 'content-hugging', maxHeight: { kind: 'element-offset', ref: headerRef, gapPx: 16 } }
+
+  const sizing: InlineChatSizing = {
+    active: activeBehavior,
+    inactive: inactiveKind === 'minimal' ? { mode: 'minimal' } : undefined,
+    transition: transitionKind,
+  }
 
   const session = useChatSession({
     backend,
@@ -99,7 +111,10 @@ export default function ChatExample() {
   const tx = horizontal === 'center' ? '-50%' : '0'
   const ty = vertical === 'center' ? '-50%' : '0'
   const transformRule = tx === '0' && ty === '0' ? 'transform: none;' : `transform: translate(${tx}, ${ty});`
-  const sizeRule = `min-width: ${size.minW}px; max-width: ${size.maxW}px; min-height: ${size.minH}px; max-height: ${size.maxH}px;`
+  // The `minimal` idle state must be free to hug just the input bar, so drop
+  // the demo's min-height floor while it's selected for the inline chat.
+  const effectiveMinH = mode === 'inline' && inactiveKind === 'minimal' ? 0 : size.minH
+  const sizeRule = `min-width: ${size.minW}px; max-width: ${size.maxW}px; min-height: ${effectiveMinH}px; max-height: ${size.maxH}px;`
   const layoutOverrides = `
     .pc-inline,
     .pc-three-pane-frame { position: absolute !important; ${hRule} ${vRule} ${transformRule} ${sizeRule} }
@@ -134,6 +149,11 @@ export default function ChatExample() {
           borderRight: '1px solid var(--color-border)',
         }}
       >
+        <section>
+          <h3 style={sectionHeaderStyle}>Theme</h3>
+          <ThemeMenu />
+        </section>
+
         <section>
           <label style={optionRowStyle}>
             <input
@@ -190,6 +210,30 @@ export default function ChatExample() {
           <label style={optionRowStyle}>
             <input type="radio" name="sizing" checked={sizingKind === 'hug-element'} onChange={() => setSizingKind('hug-element')} />
             hug + element(header)
+          </label>
+        </section>
+
+        <section>
+          <h3 style={sectionHeaderStyle}>Inactive (idle)</h3>
+          <label style={optionRowStyle}>
+            <input type="radio" name="inactive" checked={inactiveKind === 'same'} onChange={() => setInactiveKind('same')} />
+            same as active
+          </label>
+          <label style={optionRowStyle}>
+            <input type="radio" name="inactive" checked={inactiveKind === 'minimal'} onChange={() => setInactiveKind('minimal')} />
+            minimal (input only)
+          </label>
+        </section>
+
+        <section>
+          <h3 style={sectionHeaderStyle}>Transition</h3>
+          <label style={optionRowStyle}>
+            <input type="radio" name="transition" checked={transitionKind === 'none'} onChange={() => setTransitionKind('none')} />
+            none (instant)
+          </label>
+          <label style={optionRowStyle}>
+            <input type="radio" name="transition" checked={transitionKind === 'animated'} onChange={() => setTransitionKind('animated')} />
+            animated (grow up/down)
           </label>
         </section>
 
@@ -272,7 +316,7 @@ export default function ChatExample() {
           }}
         >
           Sizing demo — anchor for the &quot;hug + element(header)&quot; mode. Pick a theme from the
-          rail on the left to restyle every example at once.
+          Theme menu at the top of the options to restyle the chat.
         </header>
 
         <div

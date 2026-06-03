@@ -1,6 +1,11 @@
 // Components
 export { InlineChat, InlineChatView } from './modes/InlineChat'
-export type { InlineChatSizing } from './modes/InlineChat'
+export type {
+  InlineChatSizing,
+  ChatSizingBehavior,
+  InactiveSizingBehavior,
+  SizingTransition,
+} from './modes/InlineChat'
 export { ThreePaneChat, ThreePaneChatView } from './modes/ThreePaneChat'
 export { MobileChat, MobileChatView } from './modes/MobileChat'
 export { PersonaChat } from './modes/PersonaChat'

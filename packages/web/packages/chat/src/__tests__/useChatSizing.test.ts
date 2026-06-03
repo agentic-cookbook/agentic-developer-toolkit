@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { render, act } from '@testing-library/react'
 import { createRef, createElement } from 'react'
 import type { CSSProperties } from 'react'
-import { useContentHuggingSize } from '../hooks/useContentHuggingSize'
+import { useChatSizing } from '../hooks/useChatSizing'
 import type { InlineChatSizing } from '../modes/InlineChat'
 
 // jsdom doesn't lay anything out, so getBoundingClientRect returns zeros.
@@ -31,20 +31,26 @@ afterEach(() => {
 
 interface ProbeApi {
   style: CSSProperties
+  className: string
+  collapsed: boolean
+  engaged: boolean
   el: HTMLDivElement | null
 }
 
 /**
  * Renders a component using the hook with a controlled chat-element rect.
- * Returns the latest rendered style (after the layoutEffect fires) and the
- * resolved ref element. Tests assert against `api.style.maxHeight`.
+ * Returns the latest hook output (after the layoutEffect fires) and the
+ * resolved ref element. Tests assert against `api.style.maxHeight` etc.
  */
 function renderProbe(sizing: InlineChatSizing | undefined, chatRect: Partial<DOMRect>): ProbeApi {
-  const api: ProbeApi = { style: {}, el: null }
+  const api: ProbeApi = { style: {}, className: '', collapsed: false, engaged: false, el: null }
 
   function Probe() {
-    const { ref, style } = useContentHuggingSize(sizing)
+    const { ref, style, className, collapsed, engaged } = useChatSizing(sizing)
     api.style = style
+    api.className = className
+    api.collapsed = collapsed
+    api.engaged = engaged
     return createElement('div', {
       ref: (el: HTMLDivElement | null) => {
         ref.current = el
@@ -58,21 +64,21 @@ function renderProbe(sizing: InlineChatSizing | undefined, chatRect: Partial<DOM
   return api
 }
 
-describe('useContentHuggingSize', () => {
-  it('returns empty style when sizing is undefined', () => {
+describe('useChatSizing — content-hugging math', () => {
+  it('returns empty style when sizing is undefined (defaults to fixed)', () => {
     const api = renderProbe(undefined, { bottom: 700 })
     expect(api.style).toEqual({})
   })
 
-  it('returns empty style when sizing.mode is fixed', () => {
-    const api = renderProbe({ mode: 'fixed' }, { bottom: 700 })
+  it('returns empty style when the active behavior is fixed', () => {
+    const api = renderProbe({ active: { mode: 'fixed' } }, { bottom: 700 })
     expect(api.style).toEqual({})
     expect(api.el?.classList.contains('pc-hugging')).toBe(false)
   })
 
   it('resolves css length: px', () => {
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'css', value: '400px' } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'css', value: '400px' } } },
       { bottom: 700 },
     )
     expect(api.style.maxHeight).toBe('400px')
@@ -80,7 +86,7 @@ describe('useContentHuggingSize', () => {
 
   it('resolves css length: vh', () => {
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'css', value: '60vh' } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'css', value: '60vh' } } },
       { bottom: 700 },
     )
     // 60% of innerHeight=800 = 480
@@ -89,7 +95,7 @@ describe('useContentHuggingSize', () => {
 
   it('resolves viewport-offset: chatBottom - topOffsetPx', () => {
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'viewport-offset', topOffsetPx: 80 } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'viewport-offset', topOffsetPx: 80 } } },
       { bottom: 780 },
     )
     expect(api.style.maxHeight).toBe('700px')
@@ -104,7 +110,7 @@ describe('useContentHuggingSize', () => {
     ref.current = anchor
 
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'element-offset', ref, gapPx: 40 } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'element-offset', ref, gapPx: 40 } } },
       { bottom: 780 },
     )
     // 780 - (120 + 40) = 620
@@ -120,7 +126,7 @@ describe('useContentHuggingSize', () => {
     ref.current = anchor
 
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'element-offset', ref } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'element-offset', ref } } },
       { bottom: 780 },
     )
     expect(api.style.maxHeight).toBe('680px')
@@ -129,7 +135,7 @@ describe('useContentHuggingSize', () => {
   it('element-offset: null anchor falls back to chatBottom', () => {
     const ref = createRef<HTMLElement>() // .current stays null
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'element-offset', ref, gapPx: 0 } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'element-offset', ref, gapPx: 0 } } },
       { bottom: 500 },
     )
     expect(api.style.maxHeight).toBe('500px')
@@ -137,7 +143,7 @@ describe('useContentHuggingSize', () => {
 
   it('clamps negative results to 0', () => {
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'viewport-offset', topOffsetPx: 1000 } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'viewport-offset', topOffsetPx: 1000 } } },
       { bottom: 200 },
     )
     // 200 - 1000 = -800 → clamped to 0
@@ -145,16 +151,15 @@ describe('useContentHuggingSize', () => {
   })
 
   it('adds and removes the hugging class on the chat element and its parent', () => {
-    const api: ProbeApi = { style: {}, el: null }
+    const api: ProbeApi = { style: {}, className: '', collapsed: false, engaged: false, el: null }
     const refs: { parent: HTMLDivElement | null; chat: HTMLDivElement | null } = {
       parent: null,
       chat: null,
     }
 
     function Probe() {
-      const { ref, style } = useContentHuggingSize({
-        mode: 'content-hugging',
-        maxHeight: { kind: 'css', value: '300px' },
+      const { ref, style } = useChatSizing({
+        active: { mode: 'content-hugging', maxHeight: { kind: 'css', value: '300px' } },
       })
       api.style = style
       return createElement(
@@ -186,7 +191,7 @@ describe('useContentHuggingSize', () => {
 
   it('recomputes on window resize', () => {
     const api = renderProbe(
-      { mode: 'content-hugging', maxHeight: { kind: 'css', value: '50vh' } },
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'css', value: '50vh' } } },
       { bottom: 700 },
     )
     expect(api.style.maxHeight).toBe('400px') // 50% of 800
@@ -196,5 +201,78 @@ describe('useContentHuggingSize', () => {
       window.dispatchEvent(new Event('resize'))
     })
     expect(api.style.maxHeight).toBe('500px') // 50% of 1000
+  })
+})
+
+describe('useChatSizing — engagement & minimal', () => {
+  it('is static when no inactive behavior is set (no engagement classes)', () => {
+    const api = renderProbe(
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'css', value: '300px' } } },
+      { bottom: 700 },
+    )
+    expect(api.collapsed).toBe(false)
+    expect(api.className).not.toContain('pc-anim')
+    expect(api.className).not.toContain('pc-collapsed')
+  })
+
+  it('starts collapsed with minimal inactive and animated transition', () => {
+    const api = renderProbe(
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'css', value: '300px' } }, inactive: { mode: 'minimal' } },
+      { bottom: 700 },
+    )
+    expect(api.collapsed).toBe(true)
+    expect(api.className).toContain('pc-collapsed')
+    expect(api.className).toContain('pc-anim') // animated is the default
+    // collapsed (minimal) carries no maxHeight cap — the transcript collapses via CSS
+    expect(api.style).toEqual({})
+  })
+
+  it('omits pc-anim when transition is none', () => {
+    const api = renderProbe(
+      { active: { mode: 'fixed' }, inactive: { mode: 'minimal' }, transition: 'none' },
+      { bottom: 700 },
+    )
+    expect(api.className).toContain('pc-collapsed')
+    expect(api.className).not.toContain('pc-anim')
+  })
+
+  it('expands on focusin and collapses again on Escape', () => {
+    const api = renderProbe(
+      { active: { mode: 'content-hugging', maxHeight: { kind: 'css', value: '300px' } }, inactive: { mode: 'minimal' } },
+      { bottom: 700 },
+    )
+    expect(api.collapsed).toBe(true)
+
+    act(() => {
+      api.el?.dispatchEvent(new Event('focusin', { bubbles: true }))
+    })
+    expect(api.engaged).toBe(true)
+    expect(api.collapsed).toBe(false)
+    expect(api.className).not.toContain('pc-collapsed')
+    // active behavior is content-hugging → its cap is applied while engaged
+    expect(api.style.maxHeight).toBe('300px')
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+    })
+    expect(api.engaged).toBe(false)
+    expect(api.collapsed).toBe(true)
+  })
+
+  it('collapses when a pointerdown lands outside the chat', () => {
+    const api = renderProbe(
+      { active: { mode: 'fixed' }, inactive: { mode: 'minimal' } },
+      { bottom: 700 },
+    )
+
+    act(() => {
+      api.el?.dispatchEvent(new Event('focusin', { bubbles: true }))
+    })
+    expect(api.collapsed).toBe(false)
+
+    act(() => {
+      document.body.dispatchEvent(new MouseEvent('pointerdown', { bubbles: true }))
+    })
+    expect(api.collapsed).toBe(true)
   })
 })

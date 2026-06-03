@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { ExamplePanel } from '../ExamplePanel'
 import {
   InlineChatView,
@@ -9,41 +9,9 @@ import {
 } from '@agentic-developer-toolkit/chat'
 import '@agentic-developer-toolkit/chat/css/base.css'
 import '@agentic-developer-toolkit/chat/css/modes/inline.css'
-import {
-  themes,
-  themeIds,
-  type ThemeKey,
-} from '@agentic-developer-toolkit/themes'
-
-const STORAGE_THEME = 'apt-demo:theme'
-const DEFAULT_THEME: ThemeKey = 'agenticcookbookweb'
-
-function readStoredTheme(): ThemeKey {
-  try {
-    const v = window.localStorage.getItem(STORAGE_THEME)
-    if (v && (themeIds as readonly string[]).includes(v)) return v as ThemeKey
-  } catch {
-    // ignore
-  }
-  return DEFAULT_THEME
-}
-
-function subscribeTheme(callback: () => void): () => void {
-  window.addEventListener('apt-demo:theme', callback)
-  window.addEventListener('storage', callback)
-  return () => {
-    window.removeEventListener('apt-demo:theme', callback)
-    window.removeEventListener('storage', callback)
-  }
-}
-
-function useActiveTheme(): ThemeKey {
-  return useSyncExternalStore(
-    subscribeTheme,
-    readStoredTheme,
-    () => DEFAULT_THEME,
-  )
-}
+import { themes, type ThemeKey } from '@agentic-developer-toolkit/themes'
+import { useDemoTheme } from '../theme-store'
+import { ThemeMenu } from '../ThemeMenu'
 
 const SITE_TOKENS = [
   '--color-surface',
@@ -117,7 +85,7 @@ function ChatSample() {
   }, [])
   return (
     <div className="apt-chat-sample">
-      <InlineChatView session={session} sizing={{ mode: 'fixed' }} />
+      <InlineChatView session={session} sizing={{ active: { mode: 'fixed' } }} />
     </div>
   )
 }
@@ -339,7 +307,7 @@ const TOPICS: Topic[] = [
           <p className="apt-theme-css-note">
             Source CSS for the active theme variant:{' '}
             <strong>{themes[activeTheme].label}</strong>. Switch the variant from
-            the rail&rsquo;s Themes section to see this update.
+            the Theme menu to see this update.
           </p>
           <CodeBlock code={css} />
         </div>
@@ -605,7 +573,7 @@ const TOPICS: Topic[] = [
 ]
 
 export default function ThemeExample() {
-  const activeTheme = useActiveTheme()
+  const [activeTheme] = useDemoTheme()
   const [topicId, setTopicId] = useState<string>(TOPICS[0].id)
   const topic = useMemo(
     () => TOPICS.find((t) => t.id === topicId) ?? TOPICS[0],
@@ -616,6 +584,10 @@ export default function ThemeExample() {
     <ExamplePanel>
       <div className="apt-theme-split">
         <aside className="apt-theme-topics" aria-label="Theme topics">
+          <div style={{ marginBottom: '1rem' }}>
+            <h2 className="apt-theme-topics-heading">Theme</h2>
+            <ThemeMenu />
+          </div>
           <h2 className="apt-theme-topics-heading">Topics</h2>
           <ul className="apt-theme-topics-list">
             {TOPICS.map((t) => {

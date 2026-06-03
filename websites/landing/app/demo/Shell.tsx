@@ -1,58 +1,18 @@
 'use client'
 
-import { useCallback, useSyncExternalStore, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { useRouter, useSelectedLayoutSegment } from 'next/navigation'
 import {
   ColorModeProvider,
   ThemeStyle,
-  themeIds,
   type ThemeKey,
 } from '@agentic-developer-toolkit/themes'
-import { ThemePicker } from './ThemePicker'
 import { examples } from './manifest'
-
-const STORAGE_THEME = 'apt-demo:theme'
-
-function safeRead(key: string): string | null {
-  if (typeof window === 'undefined') return null
-  try {
-    return window.localStorage.getItem(key)
-  } catch {
-    return null
-  }
-}
-
-function safeWrite(key: string, value: string): void {
-  if (typeof window === 'undefined') return
-  try {
-    window.localStorage.setItem(key, value)
-  } catch {
-    // best-effort
-  }
-}
+import { useDemoTheme } from './theme-store'
 
 const RAIL_WIDTH = 200
 const SHELL_THEME: ThemeKey = 'myprojects'
 const EXAMPLE_SCOPE = '.apt-example-content'
-const DEFAULT_THEME: ThemeKey = 'agenticcookbookweb'
-
-function readStoredTheme(): ThemeKey {
-  const stored = safeRead(STORAGE_THEME)
-  if (stored && (themeIds as readonly string[]).includes(stored)) {
-    return stored as ThemeKey
-  }
-  return DEFAULT_THEME
-}
-
-function subscribeTheme(callback: () => void): () => void {
-  if (typeof window === 'undefined') return () => {}
-  window.addEventListener('apt-demo:theme', callback)
-  window.addEventListener('storage', callback)
-  return () => {
-    window.removeEventListener('apt-demo:theme', callback)
-    window.removeEventListener('storage', callback)
-  }
-}
 
 const sectionHeaderStyle: React.CSSProperties = {
   fontSize: '0.7rem',
@@ -69,18 +29,9 @@ export function Shell({ children }: { children: ReactNode }) {
   const segment = useSelectedLayoutSegment()
   const activeId = segment ?? examples[0]?.id ?? ''
 
-  const theme = useSyncExternalStore(
-    subscribeTheme,
-    readStoredTheme,
-    () => DEFAULT_THEME,
-  )
-
-  const setTheme = useCallback((next: ThemeKey) => {
-    safeWrite(STORAGE_THEME, next)
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('apt-demo:theme', { detail: next }))
-    }
-  }, [])
+  // Theme selection now lives in each example's options (a popup); the Shell
+  // only reads the active theme to apply it to the example content.
+  const [theme] = useDemoTheme()
 
   const active = examples.find((e) => e.id === activeId) ?? examples[0]
 
@@ -147,30 +98,6 @@ export function Shell({ children }: { children: ReactNode }) {
                 )
               })}
             </div>
-          </section>
-
-          <section
-            style={{
-              flex: '0 0 auto',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '0.75rem',
-              borderTop: '1px solid var(--color-border, rgba(0,0,0,0.1))',
-              background: 'var(--color-surface-raised, #fff)',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0 0.5rem',
-                margin: '0 0 0.5rem',
-              }}
-            >
-              <h2 style={{ ...sectionHeaderStyle, padding: 0, margin: 0 }}>Themes</h2>
-            </div>
-            <ThemePicker value={theme} onChange={setTheme} />
           </section>
         </nav>
 

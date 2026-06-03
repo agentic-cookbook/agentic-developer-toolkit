@@ -9,12 +9,33 @@ const ROOT_NOT_DARK_RE = /(^|,\s*):root:not\(\.dark\)/gm
 const ROOT_RE = /(^|,\s*):root(?=[\s,{:])/gm
 const BODY_RE = /(^|,\s*)body(?=[\s,{:.])/gm
 
-function buildScopedCss(css: string, scope: string): string {
+/** A scoped selector that never matches — used to drop the unwanted variant. */
+const NEVER = ':scope.pc-colormode-off'
+
+export type ThemeColorMode = 'system' | 'light' | 'dark'
+
+function buildScopedCss(
+  css: string,
+  scope: string,
+  colorMode: ThemeColorMode,
+): string {
   const imports = (css.match(IMPORT_RE) || []).join('\n')
+  // `system` (default) follows the document's `html.dark` class. When forced,
+  // resolve the chosen variant's `:root` selectors to `:scope` (always apply)
+  // and the other variant's to a never-matching selector (drop it), so the
+  // theme renders in that mode regardless of `html.dark`.
+  const darkSel =
+    colorMode === 'dark' ? ':scope'
+      : colorMode === 'light' ? NEVER
+        : 'html.dark :scope'
+  const lightSel =
+    colorMode === 'light' ? ':scope'
+      : colorMode === 'dark' ? NEVER
+        : 'html:not(.dark) :scope'
   const body = css
     .replace(IMPORT_RE, '')
-    .replace(ROOT_DARK_RE, '$1html.dark :scope')
-    .replace(ROOT_NOT_DARK_RE, '$1html:not(.dark) :scope')
+    .replace(ROOT_DARK_RE, `$1${darkSel}`)
+    .replace(ROOT_NOT_DARK_RE, `$1${lightSel}`)
     .replace(ROOT_RE, '$1:scope')
     .replace(BODY_RE, '$1:scope')
   return `${imports}\n@scope (${scope}) {\n${body}\n}`
@@ -23,10 +44,18 @@ function buildScopedCss(css: string, scope: string): string {
 export interface ThemeStyleProps {
   theme: ThemeKey
   scope?: string
+  /**
+   * Force the theme's color variant regardless of the document's `html.dark`
+   * class. `system` (default) follows `html.dark` — the prior behavior. Only
+   * affects scoped usage (when `scope` is set).
+   */
+  colorMode?: ThemeColorMode
 }
 
-export function ThemeStyle({ theme, scope }: ThemeStyleProps) {
-  const css = scope ? buildScopedCss(themes[theme].css, scope) : themes[theme].css
+export function ThemeStyle({ theme, scope, colorMode = 'system' }: ThemeStyleProps) {
+  const css = scope
+    ? buildScopedCss(themes[theme].css, scope, colorMode)
+    : themes[theme].css
   const id = scope ? SCOPED_ID : GLOBAL_ID
   // Render the <style> inline (so it's in the SSR HTML and applied on the very
   // first paint — no flash of default-sized, unstyled chat before a client

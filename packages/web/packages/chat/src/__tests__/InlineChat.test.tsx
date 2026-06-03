@@ -91,8 +91,10 @@ describe('InlineChat', () => {
         backend={createBackend()}
         persona={{ name: 'Bot' }}
         sizing={{
-          mode: 'content-hugging',
-          maxHeight: { kind: 'css', value: '300px' },
+          active: {
+            mode: 'content-hugging',
+            maxHeight: { kind: 'css', value: '300px' },
+          },
         }}
       />,
     )
@@ -101,5 +103,23 @@ describe('InlineChat', () => {
     expect(chat?.classList.contains('pc-hugging')).toBe(true)
     // The hook resolves the css value and applies it as inline maxHeight.
     expect(chat?.style.maxHeight).toBe('300px')
+  })
+
+  it('collapses to the input bar when idle and expands on focus (minimal inactive)', () => {
+    const { container } = render(
+      <InlineChat
+        backend={createBackend()}
+        persona={{ name: 'Bot' }}
+        sizing={{ active: { mode: 'fixed' }, inactive: { mode: 'minimal' } }}
+      />,
+    )
+    const chat = container.querySelector('.persona-chat') as HTMLElement
+    // Idle: collapsed to the input bar, animated by default.
+    expect(chat.classList.contains('pc-collapsed')).toBe(true)
+    expect(chat.classList.contains('pc-anim')).toBe(true)
+
+    // Engaging (focusing the input) expands.
+    fireEvent.focusIn(screen.getByPlaceholderText('Type a message...'))
+    expect(chat.classList.contains('pc-collapsed')).toBe(false)
   })
 })

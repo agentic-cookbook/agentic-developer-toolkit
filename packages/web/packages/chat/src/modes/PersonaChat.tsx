@@ -11,7 +11,12 @@ export interface PersonaChatProps {
   user?: ChatParticipant
   welcomeMessage?: string
   className?: string
-  /** Inline mode only: how the chat box sizes itself. */
+  /**
+   * Inline mode only: how the chat box sizes itself. Configures the `active`
+   * (engaged) and `inactive` (idle) sizing behaviors and the `transition`
+   * between them — e.g. `inactive: { mode: 'minimal' }` collapses to the input
+   * bar when idle and expands on engage. See {@link InlineChatSizing}.
+   */
   sizing?: InlineChatSizing
   /** Mobile mode only: whether the overlay is open */
   open?: boolean
