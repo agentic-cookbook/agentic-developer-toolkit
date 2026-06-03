@@ -128,10 +128,28 @@ body {
   color: var(--ost-green);
   font-family: var(--pc-font);
   font-size: 16px;
-  caret-color: var(--ost-green);
+  /* Hide the native thin I-beam — OlyloChat draws an old-school blinking block
+   * over the insertion point instead (a native caret can't be reshaped in CSS). */
+  caret-color: transparent;
 }
 
 .persona-chat .pc-input::placeholder { color: var(--ost-border); }
+
+/* Old-school block cursor. OlyloChat positions this overlay (left/top/height set
+ * inline) at the input's caret since an <input> exposes no caret-shape styling;
+ * this rule supplies the phosphor look + blink. Scoped to .pc-theme-scope by
+ * ThemeStyle, matching where OlyloChat renders the span. */
+.pc-input-caret {
+  position: fixed;
+  width: 0.6em; /* ~one VT323 cell */
+  background: var(--ost-green);
+  box-shadow: 0 0 6px var(--ost-green-soft); /* phosphor bloom */
+  pointer-events: none;
+  z-index: 2;
+  animation: ost-caret-blink 1.06s steps(1) infinite;
+}
+
+@keyframes ost-caret-blink { 50% { opacity: 0; } } /* hard on/off, CRT-style */
 
 /* Borderless send button — a terminal return glyph instead of the paper plane */
 .persona-chat .pc-send-btn {
