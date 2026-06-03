@@ -19,6 +19,11 @@ export interface ChatSession {
   messages: ChatMessage[]
   isTyping: boolean
   sendMessage: (text: string) => void
+  /**
+   * Make the persona "speak" a line unprompted, typed in letter-by-letter.
+   * Resolves once the whole line has landed. Useful for scripted intros.
+   */
+  say: (text: string) => Promise<void>
   selectedIndex: number
   selectMessage: (index: number) => void
 }
@@ -227,6 +232,43 @@ export function useChatSession(options: UseChatSessionOptions): ChatSession {
     [user, processQueue],
   )
 
+  // The persona speaks a line unprompted, typed in letter-by-letter (a scripted
+  // message, not a reply). Resolves when the whole line has landed.
+  const say = useCallback(
+    (text: string): Promise<void> => {
+      const id = crypto.randomUUID()
+      setMessages((prev) => [
+        ...prev,
+        {
+          id,
+          sender: persona,
+          text: '',
+          timestamp: new Date(),
+          isPersona: true,
+          isStreaming: true,
+        },
+      ])
+      return new Promise<void>((resolve) => {
+        let i = 0
+        const step = () => {
+          i += 1
+          const slice = text.slice(0, i)
+          setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, text: slice } : m)))
+          if (i >= text.length) {
+            setMessages((prev) =>
+              prev.map((m) => (m.id === id ? { ...m, isStreaming: false } : m)),
+            )
+            resolve()
+            return
+          }
+          window.setTimeout(step, 26 + Math.random() * 28)
+        }
+        window.setTimeout(step, 0)
+      })
+    },
+    [persona],
+  )
+
   const selectMessage = useCallback(
     (index: number) => {
       if (index >= -1 && index < messages.length) {
@@ -243,7 +285,7 @@ export function useChatSession(options: UseChatSessionOptions): ChatSession {
   }, [backend])
 
   return useMemo(
-    () => ({ messages, isTyping, sendMessage, selectedIndex, selectMessage }),
-    [messages, isTyping, sendMessage, selectedIndex, selectMessage],
+    () => ({ messages, isTyping, sendMessage, say, selectedIndex, selectMessage }),
+    [messages, isTyping, sendMessage, say, selectedIndex, selectMessage],
   )
 }
