@@ -141,7 +141,7 @@ body {
  * ThemeStyle, matching where OlyloChat renders the span. */
 .pc-input-caret {
   position: fixed;
-  width: 0.6em; /* ~one VT323 cell */
+  width: 0.3em; /* ~half a VT323 cell */
   background: var(--ost-green);
   box-shadow: 0 0 6px var(--ost-green-soft); /* phosphor bloom */
   pointer-events: none;
