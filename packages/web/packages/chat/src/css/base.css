@@ -27,6 +27,12 @@
   scroll-behavior: smooth;
 }
 
+/* No messages yet → reserve no space, so a content-hugging box collapses to just
+ * its input (and status, when present) until the first line lands. */
+.pc-transcript:empty {
+  padding: 0;
+}
+
 /* Viewport-anchored fade: the bottom of the scroll area (newest messages) stays
  * fully opaque; content drops off sharply toward the top, ending fully
  * transparent. Percentage stops size the gradient to the element box, so the
