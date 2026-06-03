@@ -27,10 +27,10 @@
   scroll-behavior: smooth;
 }
 
-/* No messages yet → reserve no space, so a content-hugging box collapses to just
- * its input (and status, when present) until the first line lands. */
+/* No messages yet → collapse to just the input (and status, when present), but
+ * keep a little top breathing room so the first row isn't flush to the box edge. */
 .pc-transcript:empty {
-  padding: 0;
+  padding: 8px 0 0;
 }
 
 /* Viewport-anchored fade: the bottom of the scroll area (newest messages) stays
