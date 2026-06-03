@@ -128,9 +128,10 @@ body {
   color: var(--ost-green);
   font-family: var(--pc-font);
   font-size: 16px;
-  /* Hide the native thin I-beam — OlyloChat draws an old-school blinking block
-   * over the insertion point instead (a native caret can't be reshaped in CSS). */
-  caret-color: transparent;
+  /* The native thin I-beam is hidden by OlyloChat in JS (input.style.caretColor),
+   * not here — so if the client never hydrates, the input degrades to the native
+   * caret rather than no caret at all. OlyloChat then draws the blinking block
+   * over the insertion point (a native caret can't be reshaped in CSS). */
 }
 
 .persona-chat .pc-input::placeholder { color: var(--ost-border); }
