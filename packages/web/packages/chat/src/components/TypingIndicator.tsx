@@ -160,17 +160,20 @@ function ThinkingStatus({
   }, [active, labels, colorful])
 
   // Spinner cycles while thinking AND while an utterance is showing (so his
-  // "speech" glyph animates too); word/color cycle only during an actual think.
+  // "speech" glyph animates too); the word cycles only during an actual think.
+  // Colors cycle in BOTH phases — the status text flashes the same non-green
+  // hues whether thinking or uttering (e.g. the summoning status).
   useEffect(() => {
     const spinning = phase === 'thinking' || !!utterance
     if (!spinning) return
     const f = setInterval(() => setFrame((i) => (i + 1) % frames.length), frameMs)
     const l =
       phase === 'thinking' ? setInterval(() => setWord(randomLabel(labels)), labelMs) : undefined
-    const c =
-      phase === 'thinking' && colorful
-        ? setInterval(() => setColor(randomNonGreen()), 1000)
-        : undefined
+    let c: ReturnType<typeof setInterval> | undefined
+    if (colorful) {
+      setColor(randomNonGreen())
+      c = setInterval(() => setColor(randomNonGreen()), 1000)
+    }
     return () => {
       clearInterval(f)
       if (l) clearInterval(l)
@@ -184,7 +187,11 @@ function ThinkingStatus({
     return (
       <div className="pc-message pc-persona pc-typing">
         <div className="pc-bubble">
-          <span className="pc-thinking" aria-live="polite">
+          <span
+            className="pc-thinking"
+            style={colorful && color ? { color } : undefined}
+            aria-live="polite"
+          >
             <span className="pc-thinking-glyph" aria-hidden="true">{frames[frame]}</span>
             <span className="pc-thinking-label">{utterance}</span>
           </span>

@@ -1,4 +1,3 @@
-import { useLayoutEffect } from 'react'
 import { themes, type ThemeKey } from './manifest'
 
 const GLOBAL_ID = 'agentic-toolkit-theme'
@@ -27,20 +26,13 @@ export interface ThemeStyleProps {
 }
 
 export function ThemeStyle({ theme, scope }: ThemeStyleProps) {
-  // Depend on the resolved CSS string, not just [theme, scope], so that
-  // editing a theme's CSS (HMR swaps themes[theme].css) re-injects the live
-  // <style> instead of leaving a stale one until the next theme switch.
   const css = scope ? buildScopedCss(themes[theme].css, scope) : themes[theme].css
-  useLayoutEffect(() => {
-    const id = scope ? SCOPED_ID : GLOBAL_ID
-    let el = document.getElementById(id) as HTMLStyleElement | null
-    if (!el) {
-      el = document.createElement('style')
-      el.id = id
-      document.head.appendChild(el)
-    }
-    el.textContent = css
-  }, [css, scope])
-
-  return null
+  const id = scope ? SCOPED_ID : GLOBAL_ID
+  // Render the <style> inline (so it's in the SSR HTML and applied on the very
+  // first paint — no flash of default-sized, unstyled chat before a client
+  // effect runs). The content is the resolved theme CSS, so re-rendering on a
+  // theme/CSS change (incl. HMR) swaps it live. dangerouslySetInnerHTML is the
+  // standard way to emit a <style> body without React escaping CSS punctuation
+  // (e.g. `>`); the source is our own static theme manifest, not user input.
+  return <style id={id} dangerouslySetInnerHTML={{ __html: css }} />
 }
