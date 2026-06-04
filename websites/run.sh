@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run the demo site locally on http://localhost:6000/chat
+# Run the demo site locally on http://localhost:6006/chat
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/demo" && pwd)"
