@@ -28,18 +28,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.coming-soon {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  padding: 0.1rem 0.4rem;
-  border-radius: 3px;
-  background: rgba(107, 138, 253, 0.1);
-  border: 1px solid rgba(107, 138, 253, 0.25);
-  color: var(--color-apt-blue);
-  margin-left: 0.4rem;
-  vertical-align: middle;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}

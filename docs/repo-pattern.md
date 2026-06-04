@@ -43,7 +43,7 @@ platform's native build system (its conventional manifest lives there).
 │   ├── android/                     # (TBD)
 │   └── windows/                     # (TBD)
 └── websites/
-    └── landing/                     # public marketing + /demo route (QA + deployed)
+    └── demo/                        # local demo / QA app (served at app root)
 ```
 
 Libraries may only depend on other `packages/<platform>/packages/*` — never on
@@ -150,9 +150,9 @@ consume the packages exactly the way external consumers will.
 - [ ] `packages/<platform>/` for each platform you ship; each is a workspace
       root in its native package manager.
 - [ ] Library manifests point at source by default with a publish-time override.
-- [ ] In-repo demo / QA app under `websites/landing/` (the `/demo` route)
-      consumes the libraries via the same submodule pattern external consumers
-      will use. Run locally with `websites/run.sh`.
+- [ ] In-repo demo / QA app under `websites/demo/` consumes the libraries
+      via the same submodule pattern external consumers will use. Run
+      locally with `websites/run.sh`.
 - [ ] `install.sh` bootstraps the workspace for developers. Consumers run
       their own package manager's install command; no consumer-side wrapper
       script is needed.

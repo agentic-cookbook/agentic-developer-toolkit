@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Run the landing site locally on http://localhost:5174/demo/chat
+# Run the demo site locally on http://localhost:5174/chat
 set -euo pipefail
 
-root="$(cd "$(dirname "$0")/landing" && pwd)"
+root="$(cd "$(dirname "$0")/demo" && pwd)"
 
 if [ ! -d "$root/node_modules" ]; then
-  echo "Installing landing dependencies..."
+  echo "Installing demo dependencies..."
   npm install --prefix "$root"
 fi
 

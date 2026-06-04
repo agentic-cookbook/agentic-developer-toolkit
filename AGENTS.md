@@ -19,7 +19,7 @@ system** — its conventional manifest file lives there.
 | Terminal (Python) | `packages/terminal/` | `pyproject.toml` | active |
 | Android | `packages/android/` | (TBD) | placeholder |
 | Windows | `packages/windows/` | (TBD) | placeholder |
-| Demo site | `websites/landing/` | `package.json` | active |
+| Demo site | `websites/demo/` | `package.json` | active |
 
 The web platform is a pnpm workspace; its libraries live under
 `packages/web/packages/`:
@@ -42,7 +42,8 @@ The web platform is a pnpm workspace; its libraries live under
 - Web build / test: `cd packages/web && pnpm build` / `pnpm test`
 - Terminal: `cd packages/terminal && pip install -e .` then `pytest`
 - Apple: `cd packages/apple && open Package.swift`
-- Demo site: `cd websites/landing && python3 scripts/build.py`
+- Demo site: `cd websites/demo && python3 scripts/build.py` (or
+  `websites/run.sh` for local dev)
 
 ## Conventions you should know
 

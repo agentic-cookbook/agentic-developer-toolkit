@@ -7,7 +7,7 @@ import {
   ThemeStyle,
   type ThemeKey,
 } from '@agentic-developer-toolkit/themes'
-import { examples } from './manifest'
+import { examples } from './examples'
 import { useDemoTheme } from './theme-store'
 
 const RAIL_WIDTH = 200
@@ -80,7 +80,7 @@ export function Shell({ children }: { children: ReactNode }) {
                 return (
                   <button
                     key={e.id}
-                    onClick={() => router.push(`/demo/${e.id}/`)}
+                    onClick={() => router.push(`/${e.id}/`)}
                     style={{
                       textAlign: 'left',
                       padding: '0.45rem 0.6rem',

@@ -23,7 +23,7 @@ platform.
 | Terminal (Python) | `packages/terminal/` | `pyproject.toml` | active |
 | Android | `packages/android/` | (TBD) | placeholder |
 | Windows | `packages/windows/` | (TBD) | placeholder |
-| Demo site | `websites/landing/` | `package.json` | active |
+| Demo site | `websites/demo/` | `package.json` | active |
 
 The web platform is a pnpm monorepo with libraries under
 `packages/web/packages/`:
@@ -56,8 +56,8 @@ cd packages/terminal && pip install -e . && pytest
 # Apple
 cd packages/apple && open Package.swift
 
-# Demo site
-cd websites/landing && python3 scripts/build.py
+# Demo site (local dev)
+cd websites && ./run.sh
 ```
 
 ## Design

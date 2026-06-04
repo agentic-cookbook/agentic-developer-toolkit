@@ -77,7 +77,7 @@ there. See `AGENTS.md` at the repo root for the layout map.
 | Terminal (Python) | `packages/terminal/` | `pyproject.toml` |
 | Android | `packages/android/` | (TBD, placeholder) |
 | Windows | `packages/windows/` | (TBD, placeholder) |
-| Demo site | `websites/landing/` | `package.json` |
+| Demo site | `websites/demo/` | `package.json` |
 
 ## Web workspace: `packages/web/`
 

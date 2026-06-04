@@ -12,7 +12,7 @@ cat <<'EOF'
 
 Workspace ready.
 
-Consumers (landing, demo, submodule users) read packages from
+Consumers (the demo, submodule users) read packages from
 source — no build step needed. See docs/consuming-as-submodule.md
 for the one-time consumer wiring; after that, run your project's
 usual install command (`npm install`, `pnpm install`, `yarn`)

@@ -1,28 +1,15 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import './demo.css'
+import { Shell } from './Shell'
 
-const SITE_URL = 'https://agenticdevelopertoolkit.com'
-const TITLE = 'The Agentic Developer Toolkit — build agents with personality, coordinate them with intent'
+const TITLE = 'Agentic Developer Toolkit — Demo'
 const DESCRIPTION =
-  'A toolkit for creating, coordinating, and managing AI agent personas in agentic workflows — from a single character to a coordinated team.'
+  'Local demo for the @agentic-developer-toolkit chat and theme packages.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: '/' },
-  openGraph: {
-    type: 'website',
-    url: SITE_URL,
-    siteName: 'The Agentic Developer Toolkit',
-    title: TITLE,
-    description: DESCRIPTION,
-  },
-  twitter: {
-    card: 'summary',
-    title: TITLE,
-    description: DESCRIPTION,
-  },
   icons: { icon: '/favicon.svg' },
 }
 
@@ -41,7 +28,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Shell>{children}</Shell>
+      </body>
     </html>
   )
 }

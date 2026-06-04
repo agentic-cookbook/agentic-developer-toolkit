@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Build entry point for `websites/landing/`.
+"""Build entry point for `websites/demo/`.
 
-The landing site consumes `@agentic-developer-toolkit/*` packages via their
+The demo site consumes `@agentic-developer-toolkit/*` packages via their
 `file:` references. Those packages ship prebuilt `dist/` (compiled JS with
 `"use client"` preserved) — the same Model A contract as `agentictoolkit` —
 so the consumer needs no `transpilePackages`, but `dist/` is gitignored and
@@ -19,8 +19,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-LANDING_DIR = Path(__file__).resolve().parent.parent
-REPO_ROOT = LANDING_DIR.parent.parent
+SITE_DIR = Path(__file__).resolve().parent.parent
+REPO_ROOT = SITE_DIR.parent.parent
 WEB_WORKSPACE = REPO_ROOT / "packages" / "web"
 
 
@@ -49,7 +49,7 @@ def main() -> int:
     env = {k: v for k, v in os.environ.items() if k != "NODE_ENV"}
     run(pnpm(["install", "--frozen-lockfile"]), cwd=WEB_WORKSPACE, env=env)
     run(pnpm(["build"]), cwd=WEB_WORKSPACE, env=env)
-    run(["npm", "run", "build:next"], cwd=LANDING_DIR)
+    run(["npm", "run", "build:next"], cwd=SITE_DIR)
     return 0
 
 
