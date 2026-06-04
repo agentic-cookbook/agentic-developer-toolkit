@@ -34,7 +34,13 @@ export function ChatInput({
   }
 
   return (
-    <div className="pc-input-area">
+    <div className="pc-input-area" data-form-type="other">
+      {/* A chat composer is never a credential field. Opt password managers out
+          so they don't inject autofill attributes (data-dashlane-rid, etc.) that
+          mutate the DOM before hydration and trip React's hydration mismatch:
+          Dashlane reads data-form-type="other" (its SAWF "ignore" value, set on
+          both this field and its container); 1Password/LastPass/Bitwarden read
+          their own ignore attrs. autoComplete="off" alone is not enough. */}
       <input
         ref={ref}
         className="pc-input"
@@ -42,6 +48,10 @@ export function ChatInput({
         inputMode="text"
         placeholder={placeholder}
         autoComplete="off"
+        data-form-type="other"
+        data-1p-ignore="true"
+        data-lpignore="true"
+        data-bwignore="true"
         autoFocus={autoFocus}
         disabled={disabled}
         enterKeyHint="send"
