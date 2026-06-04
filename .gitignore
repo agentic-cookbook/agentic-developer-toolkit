@@ -17,7 +17,7 @@ websites/**/.next
 # .next/
 # .open-next/
 # .wrangler/
-# *.tsbuildinfo
+*.tsbuildinfo
 *.log
 
 # pnpm workspace + package builds
