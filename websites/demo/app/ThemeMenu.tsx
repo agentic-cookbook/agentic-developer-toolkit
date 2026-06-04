@@ -23,7 +23,7 @@ export function ThemeMenu({ className }: { className?: string }) {
       <SelectTrigger size="sm" className={className} aria-label="Theme">
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent position="popper" className="max-h-none">
         {themeIds.map((id) => (
           <SelectItem key={id} value={id}>
             {themes[id].label}
