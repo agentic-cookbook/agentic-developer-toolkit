@@ -2,7 +2,6 @@
 
 import { useRef, useState } from 'react'
 import { ExamplePanel } from '../ExamplePanel'
-import { ThemeMenu } from '../ThemeMenu'
 import {
   InlineChatView,
   ThreePaneChatView,
@@ -19,6 +18,11 @@ import '@agentic-developer-toolkit/chat/css/modes/inline.css'
 import '@agentic-developer-toolkit/chat/css/modes/three-pane.css'
 import '@agentic-developer-toolkit/chat/css/modes/mobile.css'
 import '@agentic-developer-toolkit/chat/css/components/content-overlay.css'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Separator } from '@/components/ui/separator'
 
 type Mode = 'inline' | 'three-pane' | 'mobile'
 type SizingKind = 'fixed' | 'hug-css' | 'hug-viewport' | 'hug-element'
@@ -37,32 +41,18 @@ const backend = new MockBackend()
 const persona = { name: 'Claire', avatar: 'C' }
 const welcome = "Hello! I'm Claire, your research assistant. How can I help you today?"
 
-const sectionHeaderStyle: React.CSSProperties = {
-  fontSize: '0.7rem',
-  textTransform: 'uppercase',
-  letterSpacing: '0.08em',
-  margin: '0 0 0.5rem',
-  color: 'var(--color-text-secondary, rgba(0,0,0,0.55))',
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <p className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+        {title}
+      </p>
+      {children}
+    </div>
+  )
 }
 
-const optionRowStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.5rem',
-  fontSize: '0.85rem',
-  padding: '4px 4px',
-  cursor: 'pointer',
-}
-
-const numberInputStyle: React.CSSProperties = {
-  width: 64,
-  padding: '2px 6px',
-  background: 'transparent',
-  border: '1px solid var(--color-border, rgba(0,0,0,0.2))',
-  borderRadius: 3,
-  color: 'inherit',
-  fontSize: '0.85rem',
-}
+const optionRow = 'flex items-center gap-2 text-sm font-normal'
 
 export default function ChatExample() {
   const [mode, setMode] = useState<Mode>('inline')
@@ -132,163 +122,165 @@ export default function ChatExample() {
       `}</style>
 
       <nav
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width: SIDEBAR_WIDTH,
-          padding: '1.25rem 1rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.25rem',
-          background: 'var(--color-surface-raised)',
-          color: 'var(--color-text-primary)',
-          overflowY: 'auto',
-          zIndex: 200,
-          borderRight: '1px solid var(--color-border)',
-        }}
+        style={{ width: SIDEBAR_WIDTH }}
+        className="absolute inset-y-0 left-0 z-[200] flex flex-col gap-4 overflow-y-auto border-r border-border bg-card p-4 text-card-foreground"
       >
-        <section>
-          <h3 style={sectionHeaderStyle}>Theme</h3>
-          <ThemeMenu />
-        </section>
+        <Label className={optionRow}>
+          <Checkbox
+            checked={transparent}
+            onCheckedChange={(c) => setTransparent(c === true)}
+          />
+          transparent chat
+        </Label>
 
-        <section>
-          <label style={optionRowStyle}>
-            <input
-              type="checkbox"
-              checked={transparent}
-              onChange={(e) => setTransparent(e.target.checked)}
-            />
-            transparent chat
-          </label>
-        </section>
+        <Separator />
 
-        <section>
-          <h3 style={sectionHeaderStyle}>Mode</h3>
-          <label style={optionRowStyle}>
-            <input
-              type="checkbox"
+        <Section title="Mode">
+          <Label className={optionRow}>
+            <Checkbox
               checked={mode === 'three-pane'}
-              onChange={(e) => setMode(e.target.checked ? 'three-pane' : 'inline')}
+              onCheckedChange={(c) => setMode(c === true ? 'three-pane' : 'inline')}
             />
             three pane
-          </label>
-          <label style={optionRowStyle}>
-            <input
-              type="checkbox"
+          </Label>
+          <Label className={optionRow}>
+            <Checkbox
               checked={mode === 'mobile'}
-              onChange={(e) => setMode(e.target.checked ? 'mobile' : 'inline')}
+              onCheckedChange={(c) => setMode(c === true ? 'mobile' : 'inline')}
             />
             mobile overlay
-          </label>
-          <label style={optionRowStyle}>
-            <input
-              type="checkbox"
+          </Label>
+          <Label className={optionRow}>
+            <Checkbox
               checked={overlayOpen}
-              onChange={(e) => setOverlayOpen(e.target.checked)}
+              onCheckedChange={(c) => setOverlayOpen(c === true)}
             />
             content overlay
-          </label>
-        </section>
+          </Label>
+        </Section>
 
-        <section>
-          <h3 style={sectionHeaderStyle}>Sizing behavior</h3>
-          <label style={optionRowStyle}>
-            <input type="radio" name="sizing" checked={sizingKind === 'fixed'} onChange={() => setSizingKind('fixed')} />
-            fixed
-          </label>
-          <label style={optionRowStyle}>
-            <input type="radio" name="sizing" checked={sizingKind === 'hug-css'} onChange={() => setSizingKind('hug-css')} />
-            hug + 400px
-          </label>
-          <label style={optionRowStyle}>
-            <input type="radio" name="sizing" checked={sizingKind === 'hug-viewport'} onChange={() => setSizingKind('hug-viewport')} />
-            hug + viewport(80)
-          </label>
-          <label style={optionRowStyle}>
-            <input type="radio" name="sizing" checked={sizingKind === 'hug-element'} onChange={() => setSizingKind('hug-element')} />
-            hug + element(header)
-          </label>
-        </section>
+        <Separator />
 
-        <section>
-          <h3 style={sectionHeaderStyle}>Inactive (idle)</h3>
-          <label style={optionRowStyle}>
-            <input type="radio" name="inactive" checked={inactiveKind === 'same'} onChange={() => setInactiveKind('same')} />
-            same as active
-          </label>
-          <label style={optionRowStyle}>
-            <input type="radio" name="inactive" checked={inactiveKind === 'minimal'} onChange={() => setInactiveKind('minimal')} />
-            minimal (input only)
-          </label>
-        </section>
+        <Section title="Sizing behavior">
+          <RadioGroup
+            value={sizingKind}
+            onValueChange={(v) => setSizingKind(v as SizingKind)}
+            className="gap-2"
+          >
+            <Label className={optionRow}>
+              <RadioGroupItem value="fixed" /> fixed
+            </Label>
+            <Label className={optionRow}>
+              <RadioGroupItem value="hug-css" /> hug + 400px
+            </Label>
+            <Label className={optionRow}>
+              <RadioGroupItem value="hug-viewport" /> hug + viewport(80)
+            </Label>
+            <Label className={optionRow}>
+              <RadioGroupItem value="hug-element" /> hug + element(header)
+            </Label>
+          </RadioGroup>
+        </Section>
 
-        <section>
-          <h3 style={sectionHeaderStyle}>Transition</h3>
-          <label style={optionRowStyle}>
-            <input type="radio" name="transition" checked={transitionKind === 'none'} onChange={() => setTransitionKind('none')} />
-            none (instant)
-          </label>
-          <label style={optionRowStyle}>
-            <input type="radio" name="transition" checked={transitionKind === 'animated'} onChange={() => setTransitionKind('animated')} />
-            animated (grow up/down)
-          </label>
-        </section>
+        <Separator />
 
-        <section>
-          <h3 style={sectionHeaderStyle}>Layout</h3>
-          <div style={{ fontSize: '0.7rem', opacity: 0.65, margin: '0.25rem 0 0.15rem' }}>horizontal</div>
-          {(['left', 'center', 'right'] as Horizontal[]).map((h) => (
-            <label key={h} style={optionRowStyle}>
-              <input type="radio" name="horizontal" checked={horizontal === h} onChange={() => setHorizontal(h)} />
-              {h}
-            </label>
-          ))}
-          <div style={{ fontSize: '0.7rem', opacity: 0.65, margin: '0.5rem 0 0.15rem' }}>vertical</div>
-          {(['top', 'center', 'bottom'] as Vertical[]).map((v) => (
-            <label key={v} style={optionRowStyle}>
-              <input type="radio" name="vertical" checked={vertical === v} onChange={() => setVertical(v)} />
-              {v}
-            </label>
-          ))}
-        </section>
+        <Section title="Inactive (idle)">
+          <RadioGroup
+            value={inactiveKind}
+            onValueChange={(v) => setInactiveKind(v as InactiveKind)}
+            className="gap-2"
+          >
+            <Label className={optionRow}>
+              <RadioGroupItem value="same" /> same as active
+            </Label>
+            <Label className={optionRow}>
+              <RadioGroupItem value="minimal" /> minimal (input only)
+            </Label>
+          </RadioGroup>
+        </Section>
 
-        <section>
-          <h3 style={sectionHeaderStyle}>Size</h3>
+        <Separator />
+
+        <Section title="Transition">
+          <RadioGroup
+            value={transitionKind}
+            onValueChange={(v) => setTransitionKind(v as SizingTransition)}
+            className="gap-2"
+          >
+            <Label className={optionRow}>
+              <RadioGroupItem value="none" /> none (instant)
+            </Label>
+            <Label className={optionRow}>
+              <RadioGroupItem value="animated" /> animated (grow up/down)
+            </Label>
+          </RadioGroup>
+        </Section>
+
+        <Separator />
+
+        <Section title="Layout">
+          <span className="text-xs text-muted-foreground">horizontal</span>
+          <RadioGroup
+            value={horizontal}
+            onValueChange={(v) => setHorizontal(v as Horizontal)}
+            className="gap-2"
+          >
+            {(['left', 'center', 'right'] as Horizontal[]).map((h) => (
+              <Label key={h} className={optionRow}>
+                <RadioGroupItem value={h} /> {h}
+              </Label>
+            ))}
+          </RadioGroup>
+          <span className="mt-1 text-xs text-muted-foreground">vertical</span>
+          <RadioGroup
+            value={vertical}
+            onValueChange={(v) => setVertical(v as Vertical)}
+            className="gap-2"
+          >
+            {(['top', 'center', 'bottom'] as Vertical[]).map((v) => (
+              <Label key={v} className={optionRow}>
+                <RadioGroupItem value={v} /> {v}
+              </Label>
+            ))}
+          </RadioGroup>
+        </Section>
+
+        <Separator />
+
+        <Section title="Size">
           {([
             ['minW', 'min width'],
             ['maxW', 'max width'],
             ['minH', 'min height'],
             ['maxH', 'max height'],
           ] as const).map(([key, label]) => (
-            <label key={key} style={{ ...optionRowStyle, justifyContent: 'space-between' }}>
+            <div key={key} className="flex items-center justify-between gap-2 text-sm">
               <span>{label}</span>
-              <input
+              <Input
                 type="number"
                 value={size[key]}
                 onChange={(e) => setSize({ ...size, [key]: Number(e.target.value) || 0 })}
-                style={numberInputStyle}
+                className="h-7 w-20"
               />
-            </label>
+            </div>
           ))}
-        </section>
+        </Section>
 
-        <section>
-          <h3 style={sectionHeaderStyle}>Padding</h3>
+        <Separator />
+
+        <Section title="Padding">
           {(['top', 'right', 'bottom', 'left'] as (keyof Padding)[]).map((side) => (
-            <label key={side} style={{ ...optionRowStyle, justifyContent: 'space-between' }}>
+            <div key={side} className="flex items-center justify-between gap-2 text-sm">
               <span>{side}</span>
-              <input
+              <Input
                 type="number"
                 value={padding[side]}
                 onChange={(e) => setPadding({ ...padding, [side]: Number(e.target.value) || 0 })}
-                style={numberInputStyle}
+                className="h-7 w-20"
               />
-            </label>
+            </div>
           ))}
-        </section>
+        </Section>
       </nav>
 
       <main
@@ -316,7 +308,7 @@ export default function ChatExample() {
           }}
         >
           Sizing demo — anchor for the &quot;hug + element(header)&quot; mode. Pick a theme from the
-          Theme menu at the top of the options to restyle the chat.
+          Theme menu in the header to restyle the chat.
         </header>
 
         <div

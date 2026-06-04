@@ -11,7 +11,9 @@ import '@agentic-developer-toolkit/chat/css/base.css'
 import '@agentic-developer-toolkit/chat/css/modes/inline.css'
 import { themes, type ThemeKey } from '@agentic-developer-toolkit/themes'
 import { useDemoTheme } from '../theme-store'
-import { ThemeMenu } from '../ThemeMenu'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const SITE_TOKENS = [
   '--color-surface',
@@ -97,26 +99,34 @@ interface Example {
 }
 
 function CodeBlock({ code }: { code: string }) {
-  return <pre className="apt-code-block"><code>{code}</code></pre>
+  return (
+    <pre className="max-h-[480px] overflow-auto rounded-md border border-border bg-muted p-4 font-mono text-xs leading-relaxed whitespace-pre text-foreground">
+      <code>{code}</code>
+    </pre>
+  )
 }
 
 function ExampleCard({ example }: { example: Example }) {
   return (
-    <article className="apt-theme-card">
-      <h3 className="apt-theme-card-label">{example.label}</h3>
-      <div className="apt-theme-card-grid">
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+          {example.label}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="grid gap-4 lg:grid-cols-2">
         <div className="apt-theme-card-demo">{example.demo}</div>
-        <div className="apt-theme-card-css">
+        <div className="min-w-0">
           <CodeBlock code={example.css} />
         </div>
-      </div>
-    </article>
+      </CardContent>
+    </Card>
   )
 }
 
 function ExampleList({ examples }: { examples: Example[] }) {
   return (
-    <div className="apt-theme-card-stack">
+    <div className="flex flex-col gap-6">
       {examples.map((ex) => (
         <ExampleCard key={ex.label} example={ex} />
       ))}
@@ -307,7 +317,7 @@ const TOPICS: Topic[] = [
           <p className="apt-theme-css-note">
             Source CSS for the active theme variant:{' '}
             <strong>{themes[activeTheme].label}</strong>. Switch the variant from
-            the Theme menu to see this update.
+            the Theme menu in the header to see this update.
           </p>
           <CodeBlock code={css} />
         </div>
@@ -581,39 +591,40 @@ export default function ThemeExample() {
   )
 
   return (
-    <ExamplePanel>
-      <div className="apt-theme-split">
-        <aside className="apt-theme-topics" aria-label="Theme topics">
-          <div style={{ marginBottom: '1rem' }}>
-            <h2 className="apt-theme-topics-heading">Theme</h2>
-            <ThemeMenu />
-          </div>
-          <h2 className="apt-theme-topics-heading">Topics</h2>
-          <ul className="apt-theme-topics-list">
-            {TOPICS.map((t) => {
-              const selected = t.id === topic.id
-              return (
-                <li key={t.id}>
-                  <button
-                    type="button"
-                    className="apt-theme-topic-btn"
-                    aria-pressed={selected}
-                    onClick={() => setTopicId(t.id)}
-                  >
-                    {t.label}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
+    <ExamplePanel style={{ padding: 0 }}>
+      <div className="flex h-full min-h-0 bg-background text-foreground">
+        <aside className="flex w-56 shrink-0 flex-col border-r border-border bg-card" aria-label="Theme topics">
+          <p className="px-4 pt-4 pb-2 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+            Topics
+          </p>
+          <ScrollArea className="min-h-0 flex-1">
+            <div className="flex flex-col gap-1 px-2 pb-3">
+              {TOPICS.map((t) => (
+                <Button
+                  key={t.id}
+                  variant={t.id === topic.id ? 'secondary' : 'ghost'}
+                  size="sm"
+                  className="justify-start font-normal"
+                  aria-pressed={t.id === topic.id}
+                  onClick={() => setTopicId(t.id)}
+                >
+                  {t.label}
+                </Button>
+              ))}
+            </div>
+          </ScrollArea>
         </aside>
 
-        <section className="apt-theme-detail">
-          <header className="apt-theme-detail-header">
-            <h1>{topic.label}</h1>
-            {topic.description && <p>{topic.description}</p>}
+        <section className="flex min-w-0 flex-1 flex-col overflow-hidden bg-background">
+          <header className="shrink-0 border-b border-border px-8 pt-6 pb-3">
+            <h1 className="font-serif text-2xl">{topic.label}</h1>
+            {topic.description && (
+              <p className="mt-1 max-w-[60ch] text-sm text-muted-foreground">
+                {topic.description}
+              </p>
+            )}
           </header>
-          <div className="apt-theme-detail-body">
+          <div className="min-h-0 flex-1 overflow-y-auto px-8 py-6">
             {topic.render({ activeTheme })}
           </div>
         </section>

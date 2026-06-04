@@ -9,145 +9,64 @@ import {
 } from '@agentic-developer-toolkit/themes'
 import { examples } from './examples'
 import { useDemoTheme } from './theme-store'
+import { ThemeMenu } from './ThemeMenu'
+import { Button } from '@/components/ui/button'
 
-const RAIL_WIDTH = 200
+// The Shell chrome stays on a fixed toolkit theme; the picker only drives the
+// scoped stage below. shadcn tokens (--background, …) render the chrome, so it
+// is unaffected by the selected theme's --color-* tokens.
 const SHELL_THEME: ThemeKey = 'myprojects'
 const EXAMPLE_SCOPE = '.apt-example-content'
-
-const sectionHeaderStyle: React.CSSProperties = {
-  fontSize: '0.7rem',
-  fontWeight: 600,
-  textTransform: 'uppercase',
-  letterSpacing: '0.08em',
-  margin: '0 0 0.5rem',
-  padding: '0 0.5rem',
-  color: 'var(--color-text-secondary, rgba(0,0,0,0.55))',
-}
 
 export function Shell({ children }: { children: ReactNode }) {
   const router = useRouter()
   const segment = useSelectedLayoutSegment()
-  const activeId = segment ?? examples[0]?.id ?? ''
-
-  // Theme selection now lives in each example's options (a popup); the Shell
-  // only reads the active theme to apply it to the example content.
   const [theme] = useDemoTheme()
 
+  const activeId = segment ?? examples[0]?.id ?? ''
   const active = examples.find((e) => e.id === activeId) ?? examples[0]
 
   return (
     <ColorModeProvider>
-      <div
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          fontFamily: 'var(--font-sans, Inter, sans-serif)',
-          color: 'var(--color-text-primary, #1a1a24)',
-          background: 'var(--color-surface, #f4f4f8)',
-        }}
-      >
-        <ThemeStyle theme={SHELL_THEME} />
-        <ThemeStyle theme={theme} scope={EXAMPLE_SCOPE} />
+      <ThemeStyle theme={SHELL_THEME} />
+      <ThemeStyle theme={theme} scope={EXAMPLE_SCOPE} />
 
-        <nav
-          style={{
-            width: RAIL_WIDTH,
-            flex: `0 0 ${RAIL_WIDTH}px`,
-            height: '100vh',
-            position: 'sticky',
-            top: 0,
-            borderRight: '1px solid var(--color-border, rgba(0,0,0,0.1))',
-            background: 'var(--color-surface-raised, #fff)',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <section
-            style={{
-              flex: '1 1 0',
-              minHeight: 0,
-              overflowY: 'auto',
-              padding: '1.25rem 0.75rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.75rem',
-            }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-              <h2 style={sectionHeaderStyle}>Examples</h2>
-              {examples.map((e) => {
-                const selected = e.id === active?.id
-                return (
-                  <button
-                    key={e.id}
-                    onClick={() => router.push(`/${e.id}/`)}
-                    style={{
-                      textAlign: 'left',
-                      padding: '0.45rem 0.6rem',
-                      borderRadius: 4,
-                      border: '1px solid transparent',
-                      background: selected ? 'var(--color-accent-dim, rgba(0,0,0,0.06))' : 'transparent',
-                      fontFamily: 'inherit',
-                      fontSize: '0.85rem',
-                      color: 'inherit',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {e.label}
-                  </button>
-                )
-              })}
-            </div>
-          </section>
+      <div className="flex h-screen w-full overflow-hidden bg-background text-foreground">
+        <nav className="flex h-screen w-52 shrink-0 flex-col gap-1 border-r border-sidebar-border bg-sidebar p-3">
+          <div className="px-2 pt-1 pb-4">
+            <p className="font-serif text-lg leading-none">
+              Agentic <span className="text-primary italic">Toolkit</span>
+            </p>
+            <p className="mt-1 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+              Component Demos
+            </p>
+          </div>
+          <p className="px-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+            Examples
+          </p>
+          {examples.map((e) => (
+            <Button
+              key={e.id}
+              variant={e.id === active?.id ? 'secondary' : 'ghost'}
+              size="sm"
+              className="justify-start font-normal"
+              onClick={() => router.push(`/${e.id}/`)}
+            >
+              {e.label}
+            </Button>
+          ))}
         </nav>
 
-        <main
-          style={{
-            flex: 1,
-            minWidth: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-            background: 'var(--color-surface, #f4f4f8)',
-          }}
-        >
-          {active ? (
-            <header
-              style={{
-                flex: '0 0 auto',
-                padding: '1rem 1.5rem',
-                borderBottom: '1px solid var(--color-border, rgba(0,0,0,0.1))',
-                background: 'var(--color-surface-raised, #fff)',
-              }}
-            >
-              <h1
-                style={{
-                  margin: 0,
-                  fontFamily: 'inherit',
-                  fontSize: '1.25rem',
-                  fontWeight: 600,
-                  textAlign: 'left',
-                  color: 'var(--color-text-primary, #1a1a24)',
-                }}
-              >
-                {active.label}
-              </h1>
-            </header>
-          ) : null}
-          <div
-            className="apt-example-content"
-            style={{
-              flex: '1 1 0',
-              minHeight: 0,
-              overflow: 'auto',
-              textAlign: 'left',
-              background: 'var(--color-surface, #f4f4f8)',
-              color: 'var(--color-text-primary, #1a1a24)',
-            }}
-          >
-            {children}
-          </div>
-        </main>
+        <div className="flex min-w-0 flex-1 flex-col">
+          <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border bg-card/30 px-5">
+            <h1 className="font-serif text-xl">{active?.label}</h1>
+            <div className="flex items-center gap-2">
+              <span className="hidden text-xs text-muted-foreground sm:inline">Theme</span>
+              <ThemeMenu className="w-44" />
+            </div>
+          </header>
+          <main className="min-h-0 flex-1 overflow-hidden">{children}</main>
+        </div>
       </div>
     </ColorModeProvider>
   )

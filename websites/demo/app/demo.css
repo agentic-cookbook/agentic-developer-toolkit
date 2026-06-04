@@ -1,94 +1,4 @@
-/* Demo route styles — theme-example layout */
-
-/* === Theme example layout === */
-
-.apt-theme-split {
-  height: 100%;
-  min-height: 0;
-  display: flex;
-  font-family: var(--font-sans);
-  background: var(--color-surface);
-  color: var(--color-text-primary);
-}
-
-.apt-theme-topics {
-  flex: 0 0 220px;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.25rem 0.75rem;
-  border-right: 1px solid var(--color-border);
-  background: var(--color-surface-raised);
-  overflow-y: auto;
-}
-.apt-theme-topics-heading {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-secondary);
-  margin: 0 0 0.25rem;
-  padding: 0 0.5rem;
-}
-.apt-theme-topics-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.apt-theme-topic-btn {
-  width: 100%;
-  text-align: left;
-  font-family: inherit;
-  font-size: 0.85rem;
-  padding: 0.45rem 0.6rem;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-}
-.apt-theme-topic-btn:hover {
-  background: var(--color-surface-hover);
-}
-.apt-theme-topic-btn[aria-pressed='true'] {
-  background: var(--color-accent-dim);
-  border-color: var(--color-border-subtle);
-}
-
-.apt-theme-detail {
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.apt-theme-detail-header {
-  flex: 0 0 auto;
-  padding: 1.5rem 2rem 0.75rem;
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-.apt-theme-detail-header h1 {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  margin: 0 0 0.25rem;
-}
-.apt-theme-detail-header p {
-  color: var(--color-text-secondary);
-  font-size: 0.9rem;
-  max-width: 60ch;
-  margin: 0;
-}
-.apt-theme-detail-body {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  padding: 1.5rem 2rem 3rem;
-}
+/* Demo route styles — themed sample content (presentation chrome is shadcn) */
 
 .apt-theme-css {
   display: flex;
@@ -100,62 +10,18 @@
   font-size: 0.9rem;
   color: var(--color-text-secondary);
 }
-.apt-code-block {
-  margin: 0;
-  padding: 1rem 1.25rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  line-height: 1.45;
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 6px;
-  background: var(--color-surface-raised);
-  color: var(--color-text-primary);
-  overflow: auto;
-  max-height: 480px;
-  white-space: pre;
-}
-
-.apt-theme-card-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-.apt-theme-card {
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
-  padding: 1rem 1.25rem 1.25rem;
-  background: var(--color-surface-raised);
-}
-.apt-theme-card-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-secondary);
-  margin: 0 0 0.75rem;
-}
-.apt-theme-card-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start;
-}
-@media (max-width: 1100px) {
-  .apt-theme-card-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
 .apt-theme-card-demo {
   min-width: 0;
   padding: 1rem;
   border: 1px solid var(--color-border-subtle);
   border-radius: 6px;
   background: var(--color-surface);
+  /* The cell is a themed stage inside fixed shadcn chrome; set the themed text
+     color so bare text nodes stay readable on light themes (the shadcn Card's
+     fixed foreground would otherwise be light-on-light). */
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
 }
-.apt-theme-card-css {
-  min-width: 0;
-}
-
 /* === Color palette === */
 
 .apt-subhead {
