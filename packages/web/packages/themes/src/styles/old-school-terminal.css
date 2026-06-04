@@ -134,12 +134,12 @@ body {
    * over the insertion point (a native caret can't be reshaped in CSS). */
 }
 
+/* The placeholder stays visible at the prompt even when focused. The input is
+ * always-focused (OlyloChat's focus keeper), so hiding it on :focus — as this
+ * theme used to — meant it never showed at all. The block cursor parks at the
+ * empty prompt and blinks over the placeholder's first glyph; the blink keeps
+ * that glyph legible. */
 .persona-chat .pc-input::placeholder { color: var(--ost-border); }
-
-/* Hide the placeholder once focused — the block cursor parks at the prompt on an
- * empty focused input, and would otherwise blink over the placeholder's first
- * glyph. (Unfocused, the placeholder shows and the block is hidden.) */
-.persona-chat .pc-input:focus::placeholder { color: transparent; }
 
 /* Old-school block cursor. OlyloChat positions this overlay (left/top/width/
  * height all set inline, in px, from the input's own font-size) at the caret,
