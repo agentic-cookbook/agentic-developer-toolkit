@@ -1,4 +1,5 @@
 import {
+  adhCss,
   agenticcookbookwebCss,
   devTeamCss,
   greenMatrixCss,
@@ -15,6 +16,7 @@ import {
 } from './theme-data'
 
 export type ThemeKey =
+  | 'adh'
   | 'agenticcookbookweb'
   | 'dev-team'
   | 'green-matrix'
@@ -36,6 +38,7 @@ export interface ThemeEntry {
 }
 
 export const themes: Record<ThemeKey, ThemeEntry> = {
+  adh: { id: 'adh', label: 'Agentic Developer Hub', css: adhCss },
   agenticcookbookweb: { id: 'agenticcookbookweb', label: 'Agentic Cookbook', css: agenticcookbookwebCss },
   'dev-team': { id: 'dev-team', label: 'Dev Team', css: devTeamCss },
   'green-matrix': { id: 'green-matrix', label: 'Green Matrix', css: greenMatrixCss },
