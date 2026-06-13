@@ -52,9 +52,8 @@ struct ADHClientWiringTests {
 
         let output = try await adh.api.getHealth()
 
-        // Decoded the 200 body the mock returned.
-        let body = try output.ok.body.json
-        #expect(body.additionalProperties["status"] == "ok")
+        // Decoded the 200 (the spec documents no response body for /health).
+        _ = try output.ok
 
         // The generated client produced the right request and handed it to our transport.
         let recorded = try #require(mock.recorded.last)

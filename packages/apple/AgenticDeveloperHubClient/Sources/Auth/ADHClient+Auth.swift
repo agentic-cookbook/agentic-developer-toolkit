@@ -1,5 +1,11 @@
 import OpenAPIRuntime
 
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
 /// Thin convenience wrappers over the generated auth operations. They are just
 /// ergonomics — the same calls are available on ``ADHClient/api`` directly — but
 /// they save callers from spelling out the long generated request/response type
@@ -8,34 +14,37 @@ extension ADHClient {
 
     /// The backend's auth payload returned by ``login(email:password:)``
     /// (contains `token`, `refreshToken`, and `user`).
-    public typealias AuthResponse = Components.Schemas.Company_temporal_backend_routes_AuthResponse
+    public typealias AuthResponse = Components.Schemas.AuthResult
 
     /// A freshly minted API token returned by ``createAPIToken(name:expiresAt:)``.
-    /// Its `token` field is the only time the raw secret is exposed.
-    public typealias CreatedAPIToken = Components.Schemas.Company_temporal_backend_routes_CreatedApiTokenResponse
+    /// The spec models it as an `allOf` of the stored token metadata (`value1`)
+    /// and the one-time secret, so the raw token is at `value2.token` — the only
+    /// time it is ever exposed.
+    public typealias CreatedAPIToken = Components.Schemas.ApiTokenCreated
 
-    /// Email / password login (`POST /api/auth/login`). On success the returned
+    /// Email / password login (`POST /auth/login`). On success the returned
     /// JWT is persisted through the credential store, so every subsequent call
     /// on this client is authenticated.
     @discardableResult
     public func login(email: String, password: String) async throws -> AuthResponse {
-        let output = try await api.postApiAuthLogin(body: .json(.init(email: email, password: password)))
+        let output = try await api.postAuthLogin(body: .json(.init(email: email, password: password)))
         let auth = try output.ok.body.json
         credentials.save(Credentials(token: auth.token, kind: .jwt))
         return auth
     }
 
-    /// Create a long-lived API token (`POST /api/auth/tokens`). Requires the
+    /// Create a long-lived API token (`POST /auth/tokens`). Requires the
     /// client to already be authenticated (the middleware forwards the current
     /// credential).
     ///
-    /// The raw token is returned for the caller to store wherever it belongs
-    /// (e.g. handed to the daemon or a CI secret). It is deliberately **not**
-    /// persisted here — minting a token must not silently replace the active
-    /// session credential. Call ``adopt(_:)`` to switch this client to it.
+    /// The raw token (`value2.token` on the result) is returned for the caller to
+    /// store wherever it belongs (e.g. handed to the daemon or a CI secret). It is
+    /// deliberately **not** persisted here — minting a token must not silently
+    /// replace the active session credential. Call ``adopt(_:)`` to switch this
+    /// client to it.
     @discardableResult
-    public func createAPIToken(name: String, expiresAt: String? = nil) async throws -> CreatedAPIToken {
-        let output = try await api.postApiAuthTokens(body: .json(.init(expiresAt: expiresAt, name: name)))
+    public func createAPIToken(name: String, expiresAt: Date? = nil) async throws -> CreatedAPIToken {
+        let output = try await api.postAuthTokens(body: .json(.init(name: name, expiresAt: expiresAt)))
         return try output.created.body.json
     }
 

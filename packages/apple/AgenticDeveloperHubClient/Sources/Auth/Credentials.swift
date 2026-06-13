@@ -4,8 +4,8 @@ import Foundation
 ///
 /// The backend accepts two token shapes on the same `Authorization: Bearer`
 /// channel (security scheme `BearerAuth`): short-lived JWTs from
-/// `POST /api/auth/login`, and long-lived API tokens from
-/// `POST /api/auth/tokens`. ``kind`` is informational — both are sent
+/// `POST /auth/login`, and long-lived API tokens from
+/// `POST /auth/tokens`. ``kind`` is informational — both are sent
 /// identically as `Authorization: Bearer <token>`.
 public struct Credentials: Sendable, Equatable, Codable {
 

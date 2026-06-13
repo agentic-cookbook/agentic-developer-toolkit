@@ -1,9 +1,9 @@
 # AgenticDeveloperHubClient
 
-A Swift client for the **entire** `api.agenticdeveloperhub.com` REST API, callable
+A Swift client for the **entire** `api.agenticdeveloperstorage.com` REST API, callable
 through either of two interchangeable transports chosen at runtime:
 
-1. **Direct** — HTTPS straight to `https://api.agenticdeveloperhub.com`.
+1. **Direct** — HTTPS straight to `https://api.agenticdeveloperstorage.com`.
 2. **Daemon** — HTTP to the local `adhd` daemon (a transparent caching
    reverse-proxy) at `http://127.0.0.1:22850`.
 
@@ -111,9 +111,10 @@ daemon must implement and what `MockDaemonServer` reproduces in tests:
 
 - Listens on a **fixed loopback port `22850`** (`DaemonContract.port`).
 - Answers `GET /health` with `200` and a `HealthStatus` JSON body when healthy.
-- Accepts every `/api/...` request **verbatim** — same method, headers (including
-  `Authorization: Bearer`), body, and response semantics as the backend — so the
-  generated client is identical whether it points at the backend or the daemon.
+- Accepts every request other than its own `/health` **verbatim** — same method,
+  headers (including `Authorization: Bearer`), body, and response semantics as the
+  backend — so the generated client is identical whether it points at the backend
+  or the daemon.
 - The daemon does **not** own auth; the client forwards the bearer on both paths.
 
 ## Testing

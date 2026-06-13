@@ -40,10 +40,10 @@ struct DirectTransportTests {
         )
 
         let output = try await adh.api.getHealth()
-        #expect(try output.ok.body.json.additionalProperties["status"] == "ok")
+        _ = try output.ok  // decoded the live 200 (the spec documents no body)
 
         let request = try #require(StubURLProtocol.capturedRequests.last)
-        #expect(request.url?.absoluteString == "https://api.agenticdeveloperhub.com/health")
+        #expect(request.url?.absoluteString == "https://api.agenticdeveloperstorage.com/health")
         #expect(request.httpMethod == "GET")
         #expect(request.value(forHTTPHeaderField: "Authorization") == "Bearer tok-direct")
     }

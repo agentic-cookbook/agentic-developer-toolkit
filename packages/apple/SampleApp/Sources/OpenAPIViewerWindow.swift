@@ -66,7 +66,7 @@ struct OpenAPIViewerWindow: View {
                     }
 
                     window.onload = function() {
-                        fetch("https://api.agenticdeveloperhub.com/openapi.json", {
+                        fetch("https://apidocs.agenticdeveloperstorage.com/openapi.json", {
                             signal: AbortSignal.timeout(10000)
                         })
                             .then(r => {
@@ -98,7 +98,7 @@ struct OpenAPIViewerWindow: View {
     var body: some View {
         WebViewRepresentable(
             htmlString: swaggerUIHTML,
-            baseURL: URL(string: "https://api.agenticdeveloperhub.com/")
+            baseURL: URL(string: "https://apidocs.agenticdeveloperstorage.com/")
         )
         .frame(minWidth: 800, minHeight: 600)
     }

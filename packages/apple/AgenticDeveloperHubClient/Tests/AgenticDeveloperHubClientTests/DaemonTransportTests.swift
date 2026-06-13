@@ -27,7 +27,7 @@ struct DaemonTransportTests {
         let adh = ADHClient(transport: .daemon(port: Int(port)), credentials: creds)
 
         let output = try await adh.api.getHealth()
-        #expect(try output.ok.body.json.additionalProperties["status"] == "ok")
+        _ = try output.ok  // decoded the daemon's 200
         #expect(adh.transportKind == .daemon)
     }
 

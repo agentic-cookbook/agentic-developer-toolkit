@@ -16,16 +16,16 @@ import Foundation
 @Suite("Auth convenience wrappers")
 struct AuthWrappersTests {
 
-    private static let loginJSON = #"{"refreshToken":"r","token":"jwt-xyz","user":{"attributes":[],"authMethods":[],"avatarUrl":"","capabilities":[],"email":"a@b.c","id":"u1","name":"A"}}"#
+    private static let loginJSON = #"{"refreshToken":"r","token":"jwt-xyz","user":{"avatarUrl":"","capabilities":[],"email":"a@b.c","id":"u1","name":"A"}}"#
     private static let tokenJSON = #"{"createdAt":"2026-01-01","id":"t1","name":"ci","prefix":"adh_","token":"tok-secret"}"#
 
     private func makeClient(store: any CredentialStore) -> ADHClient {
         let mock = MockClientTransport { request in
             let path = request.path ?? ""
             let (status, json): (HTTPResponse.Status, String)
-            if path.hasSuffix("/api/auth/login") {
+            if path.hasSuffix("/auth/login") {
                 (status, json) = (.ok, Self.loginJSON)
-            } else if path.hasSuffix("/api/auth/tokens") {
+            } else if path.hasSuffix("/auth/tokens") {
                 (status, json) = (.created, Self.tokenJSON)
             } else {
                 (status, json) = (.ok, #"{"status":"ok"}"#)
@@ -55,7 +55,7 @@ struct AuthWrappersTests {
 
         let created = try await adh.createAPIToken(name: "ci")
 
-        #expect(created.token == "tok-secret")
+        #expect(created.value2.token == "tok-secret")
         #expect(store.currentCredentials()?.token == "jwt-existing")
     }
 

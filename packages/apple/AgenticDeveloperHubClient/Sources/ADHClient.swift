@@ -12,7 +12,7 @@ import Foundation
 /// ``APITransport`` (Direct or Daemon) to the typed surface and attaches the
 /// ``AuthenticationMiddleware`` so every request carries the bearer token. The
 /// generated client is exposed directly as ``api`` — consumers call the full,
-/// typed API through it (e.g. `client.api.postApiAuthLogin(...)`).
+/// typed API through it (e.g. `client.api.postAuthLogin(...)`).
 ///
 /// The transport is the only point of variation: Direct and Daemon produce an
 /// identical `Client`, differing only by the `(serverURL, transport)` pair the

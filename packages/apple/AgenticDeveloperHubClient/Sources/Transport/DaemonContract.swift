@@ -9,17 +9,17 @@ import Foundation
 ///
 /// The daemon is a **transparent caching reverse-proxy**: it serves cached
 /// entities from its own local store and forwards everything else to the
-/// backend. It accepts every `/api/...` request verbatim — same method, headers
-/// (including `Authorization: Bearer`), body, and response semantics as the
-/// backend — so the generated `Client` is byte-identical whether it points at
-/// the backend or the daemon.
+/// backend. It accepts every request other than its own `/health` verbatim —
+/// same method, headers (including `Authorization: Bearer`), body, and response
+/// semantics as the backend — so the generated `Client` is byte-identical
+/// whether it points at the backend or the daemon.
 ///
 /// The real daemon does not exist yet; this type defines what it must implement
 /// and what `MockDaemonServer` reproduces in tests.
 public enum DaemonContract {
 
     /// Production backend base URL — the `Direct` transport target.
-    public static let backendURL = URL(string: "https://api.agenticdeveloperhub.com")!
+    public static let backendURL = URL(string: "https://api.agenticdeveloperstorage.com")!
 
     /// Fixed loopback port the daemon listens on (Stenographer model — a fixed
     /// port in the dynamic range rather than a discovered one). This is the
