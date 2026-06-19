@@ -11,7 +11,7 @@ from apt_terminal.generated.api.public import (
     get_public_personas_slug,
     get_public_users_slug,
 )
-from apt_terminal.output import emit_json, emit_table
+from apt_terminal.output import render
 
 JsonOpt = Annotated[bool, typer.Option("--json", help="Raw JSON output")]
 
@@ -28,7 +28,7 @@ def _run(op: Any, slug: str, session: Session, json_out: bool) -> None:
         payload = raw.json()
     except ValueError:
         payload = None
-    emit_json(payload) if json_out else emit_table([payload] if isinstance(payload, dict) else [])
+    render(payload, json_out)
 
 
 def build_public_app(session_getter: Callable[[], Session]) -> typer.Typer:

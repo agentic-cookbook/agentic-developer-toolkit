@@ -42,3 +42,31 @@ def test_whoami_command(tmp_path):
     res = runner.invoke(app, ["whoami"])
     assert res.exit_code == 0, res.output
     assert "u@x" in res.output
+
+
+@respx.mock
+def test_logout_command(tmp_path):
+    sess = _session(tmp_path)
+    sess.profile.access_token = "a"
+    sess.profile.refresh_token = "r"
+    app = auth_commands.build_auth_app(lambda: sess)
+    respx.post(f"{BASE}/auth/revoke").mock(return_value=httpx.Response(200))
+    res = runner.invoke(app, ["logout"])
+    assert res.exit_code == 0, res.output
+    assert sess.profile.access_token is None
+    assert sess.profile.refresh_token is None
+
+
+@respx.mock
+def test_refresh_command(tmp_path):
+    sess = _session(tmp_path)
+    sess.profile.access_token = "old"
+    sess.profile.refresh_token = "r"
+    app = auth_commands.build_auth_app(lambda: sess)
+    respx.post(f"{BASE}/auth/refresh").mock(
+        return_value=httpx.Response(200, json={"accessToken": "new"},
+            headers={"set-cookie": "refresh_token=r2; HttpOnly"})
+    )
+    res = runner.invoke(app, ["refresh"])
+    assert res.exit_code == 0, res.output
+    assert sess.profile.access_token == "new"

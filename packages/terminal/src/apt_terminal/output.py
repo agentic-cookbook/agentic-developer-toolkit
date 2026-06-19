@@ -50,6 +50,26 @@ def emit_kv(pairs: Iterable[tuple[str, Any]]) -> None:
     _console.print(t)
 
 
+def render(data: Any, json_out: bool) -> None:
+    """Authoritative renderer: dispatch data to the appropriate emitter."""
+    if data is None:
+        return
+    if json_out:
+        emit_json(data)
+        return
+    if isinstance(data, list):
+        if data and all(isinstance(item, dict) for item in data):
+            emit_table(data)
+        else:
+            for item in data:
+                emit_text(item if isinstance(item, str) else json.dumps(item, default=str))
+        return
+    if isinstance(data, dict):
+        emit_table([data])
+        return
+    emit_text(str(data))
+
+
 def emit_text(s: str) -> None:
     sys.stdout.write(s if s.endswith("\n") else s + "\n")
 

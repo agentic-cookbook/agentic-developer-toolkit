@@ -9,7 +9,7 @@ import typer
 
 from apt_terminal.auth import Session
 from apt_terminal.errors import AptError
-from apt_terminal.output import emit_json, emit_table, emit_text
+from apt_terminal.output import render
 from apt_terminal.resources import Action, Resource
 
 SetOpt = Annotated[list[str] | None, typer.Option("--set", help="FIELD=VALUE (repeatable)")]
@@ -43,22 +43,7 @@ def build_body(model: type, pairs: list[str]) -> object:
 
 
 def _render(data: Any, json_out: bool) -> None:
-    if data is None:
-        return
-    if json_out:
-        emit_json(data)
-        return
-    if isinstance(data, list):
-        if data and all(isinstance(item, dict) for item in data):
-            emit_table(data)
-        else:
-            for item in data:
-                emit_text(item if isinstance(item, str) else json.dumps(item, default=str))
-        return
-    if isinstance(data, dict):
-        emit_table([data])
-        return
-    emit_text(str(data))
+    render(data, json_out)
 
 
 def _error_message(content: bytes, status: int) -> str:
