@@ -1,0 +1,169 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import cast
+
+
+
+
+
+
+T = TypeVar("T", bound="PutEcosystemEcosystemsIdResponse200")
+
+
+
+@_attrs_define
+class PutEcosystemEcosystemsIdResponse200:
+    """ 
+        Attributes:
+            id (str):
+            owner_id (str):
+            slug (str):
+            name (str):
+            description (str):
+            region (str):
+            dedicated_db_connection_id (None | str):
+            primary_domain (str):
+            created_at (str):
+            updated_at (str):
+            is_deleted (bool):
+            type_ (str):
+            namespace_id (None | str):
+     """
+
+    id: str
+    owner_id: str
+    slug: str
+    name: str
+    description: str
+    region: str
+    dedicated_db_connection_id: None | str
+    primary_domain: str
+    created_at: str
+    updated_at: str
+    is_deleted: bool
+    type_: str
+    namespace_id: None | str
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        id = self.id
+
+        owner_id = self.owner_id
+
+        slug = self.slug
+
+        name = self.name
+
+        description = self.description
+
+        region = self.region
+
+        dedicated_db_connection_id: None | str
+        dedicated_db_connection_id = self.dedicated_db_connection_id
+
+        primary_domain = self.primary_domain
+
+        created_at = self.created_at
+
+        updated_at = self.updated_at
+
+        is_deleted = self.is_deleted
+
+        type_ = self.type_
+
+        namespace_id: None | str
+        namespace_id = self.namespace_id
+
+
+        field_dict: dict[str, Any] = {}
+
+        field_dict.update({
+            "id": id,
+            "ownerId": owner_id,
+            "slug": slug,
+            "name": name,
+            "description": description,
+            "region": region,
+            "dedicatedDbConnectionId": dedicated_db_connection_id,
+            "primaryDomain": primary_domain,
+            "createdAt": created_at,
+            "updatedAt": updated_at,
+            "isDeleted": is_deleted,
+            "type": type_,
+            "namespaceId": namespace_id,
+        })
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        id = d.pop("id")
+
+        owner_id = d.pop("ownerId")
+
+        slug = d.pop("slug")
+
+        name = d.pop("name")
+
+        description = d.pop("description")
+
+        region = d.pop("region")
+
+        def _parse_dedicated_db_connection_id(data: object) -> None | str:
+            if data is None:
+                return data
+            return cast(None | str, data)
+
+        dedicated_db_connection_id = _parse_dedicated_db_connection_id(d.pop("dedicatedDbConnectionId"))
+
+
+        primary_domain = d.pop("primaryDomain")
+
+        created_at = d.pop("createdAt")
+
+        updated_at = d.pop("updatedAt")
+
+        is_deleted = d.pop("isDeleted")
+
+        type_ = d.pop("type")
+
+        def _parse_namespace_id(data: object) -> None | str:
+            if data is None:
+                return data
+            return cast(None | str, data)
+
+        namespace_id = _parse_namespace_id(d.pop("namespaceId"))
+
+
+        put_ecosystem_ecosystems_id_response_200 = cls(
+            id=id,
+            owner_id=owner_id,
+            slug=slug,
+            name=name,
+            description=description,
+            region=region,
+            dedicated_db_connection_id=dedicated_db_connection_id,
+            primary_domain=primary_domain,
+            created_at=created_at,
+            updated_at=updated_at,
+            is_deleted=is_deleted,
+            type_=type_,
+            namespace_id=namespace_id,
+        )
+
+        return put_ecosystem_ecosystems_id_response_200
+

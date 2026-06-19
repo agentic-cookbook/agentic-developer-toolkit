@@ -1,0 +1,169 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import cast
+
+
+
+
+
+
+T = TypeVar("T", bound="GetPersonalJobsIdResponse200")
+
+
+
+@_attrs_define
+class GetPersonalJobsIdResponse200:
+    """ 
+        Attributes:
+            id (str):
+            customer_id (str):
+            deleted_at (None | str):
+            owner_id (str):
+            company (str):
+            role (str):
+            start_date (str):
+            end_date (None | str):
+            location (str):
+            description (str):
+            is_current (bool):
+            created_at (str):
+            updated_at (str):
+     """
+
+    id: str
+    customer_id: str
+    deleted_at: None | str
+    owner_id: str
+    company: str
+    role: str
+    start_date: str
+    end_date: None | str
+    location: str
+    description: str
+    is_current: bool
+    created_at: str
+    updated_at: str
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        id = self.id
+
+        customer_id = self.customer_id
+
+        deleted_at: None | str
+        deleted_at = self.deleted_at
+
+        owner_id = self.owner_id
+
+        company = self.company
+
+        role = self.role
+
+        start_date = self.start_date
+
+        end_date: None | str
+        end_date = self.end_date
+
+        location = self.location
+
+        description = self.description
+
+        is_current = self.is_current
+
+        created_at = self.created_at
+
+        updated_at = self.updated_at
+
+
+        field_dict: dict[str, Any] = {}
+
+        field_dict.update({
+            "id": id,
+            "customerId": customer_id,
+            "deletedAt": deleted_at,
+            "ownerId": owner_id,
+            "company": company,
+            "role": role,
+            "startDate": start_date,
+            "endDate": end_date,
+            "location": location,
+            "description": description,
+            "isCurrent": is_current,
+            "createdAt": created_at,
+            "updatedAt": updated_at,
+        })
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        id = d.pop("id")
+
+        customer_id = d.pop("customerId")
+
+        def _parse_deleted_at(data: object) -> None | str:
+            if data is None:
+                return data
+            return cast(None | str, data)
+
+        deleted_at = _parse_deleted_at(d.pop("deletedAt"))
+
+
+        owner_id = d.pop("ownerId")
+
+        company = d.pop("company")
+
+        role = d.pop("role")
+
+        start_date = d.pop("startDate")
+
+        def _parse_end_date(data: object) -> None | str:
+            if data is None:
+                return data
+            return cast(None | str, data)
+
+        end_date = _parse_end_date(d.pop("endDate"))
+
+
+        location = d.pop("location")
+
+        description = d.pop("description")
+
+        is_current = d.pop("isCurrent")
+
+        created_at = d.pop("createdAt")
+
+        updated_at = d.pop("updatedAt")
+
+        get_personal_jobs_id_response_200 = cls(
+            id=id,
+            customer_id=customer_id,
+            deleted_at=deleted_at,
+            owner_id=owner_id,
+            company=company,
+            role=role,
+            start_date=start_date,
+            end_date=end_date,
+            location=location,
+            description=description,
+            is_current=is_current,
+            created_at=created_at,
+            updated_at=updated_at,
+        )
+
+        return get_personal_jobs_id_response_200
+

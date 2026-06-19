@@ -1,0 +1,109 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
+T = TypeVar("T", bound="PutContentKeywordsIdBody")
+
+
+
+@_attrs_define
+class PutContentKeywordsIdBody:
+    """ 
+        Attributes:
+            deleted_at (None | str | Unset):
+            owner_id (str | Unset):
+            label (str | Unset):
+            color (str | Unset):
+            description (str | Unset):
+     """
+
+    deleted_at: None | str | Unset = UNSET
+    owner_id: str | Unset = UNSET
+    label: str | Unset = UNSET
+    color: str | Unset = UNSET
+    description: str | Unset = UNSET
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        deleted_at: None | str | Unset
+        if isinstance(self.deleted_at, Unset):
+            deleted_at = UNSET
+        else:
+            deleted_at = self.deleted_at
+
+        owner_id = self.owner_id
+
+        label = self.label
+
+        color = self.color
+
+        description = self.description
+
+
+        field_dict: dict[str, Any] = {}
+
+        field_dict.update({
+        })
+        if deleted_at is not UNSET:
+            field_dict["deletedAt"] = deleted_at
+        if owner_id is not UNSET:
+            field_dict["ownerId"] = owner_id
+        if label is not UNSET:
+            field_dict["label"] = label
+        if color is not UNSET:
+            field_dict["color"] = color
+        if description is not UNSET:
+            field_dict["description"] = description
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        def _parse_deleted_at(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
+
+
+        owner_id = d.pop("ownerId", UNSET)
+
+        label = d.pop("label", UNSET)
+
+        color = d.pop("color", UNSET)
+
+        description = d.pop("description", UNSET)
+
+        put_content_keywords_id_body = cls(
+            deleted_at=deleted_at,
+            owner_id=owner_id,
+            label=label,
+            color=color,
+            description=description,
+        )
+
+        return put_content_keywords_id_body
+

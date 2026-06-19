@@ -1,0 +1,115 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..models.post_persona_memory_recall_body_memory_type import PostPersonaMemoryRecallBodyMemoryType
+from ..types import UNSET, Unset
+
+
+
+
+
+
+T = TypeVar("T", bound="PostPersonaMemoryRecallBody")
+
+
+
+@_attrs_define
+class PostPersonaMemoryRecallBody:
+    """ 
+        Attributes:
+            persona_id (str):
+            query (str):
+            limit (int | Unset):
+            memory_type (PostPersonaMemoryRecallBodyMemoryType | Unset):
+     """
+
+    persona_id: str
+    query: str
+    limit: int | Unset = UNSET
+    memory_type: PostPersonaMemoryRecallBodyMemoryType | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        persona_id = self.persona_id
+
+        query = self.query
+
+        limit = self.limit
+
+        memory_type: str | Unset = UNSET
+        if not isinstance(self.memory_type, Unset):
+            memory_type = self.memory_type.value
+
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "personaId": persona_id,
+            "query": query,
+        })
+        if limit is not UNSET:
+            field_dict["limit"] = limit
+        if memory_type is not UNSET:
+            field_dict["memoryType"] = memory_type
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        persona_id = d.pop("personaId")
+
+        query = d.pop("query")
+
+        limit = d.pop("limit", UNSET)
+
+        _memory_type = d.pop("memoryType", UNSET)
+        memory_type: PostPersonaMemoryRecallBodyMemoryType | Unset
+        if isinstance(_memory_type,  Unset):
+            memory_type = UNSET
+        else:
+            memory_type = PostPersonaMemoryRecallBodyMemoryType(_memory_type)
+
+
+
+
+        post_persona_memory_recall_body = cls(
+            persona_id=persona_id,
+            query=query,
+            limit=limit,
+            memory_type=memory_type,
+        )
+
+
+        post_persona_memory_recall_body.additional_properties = d
+        return post_persona_memory_recall_body
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties
