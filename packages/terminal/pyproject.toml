@@ -48,6 +48,10 @@ strict = true
 files = ["src/apt_terminal"]
 
 [[tool.mypy.overrides]]
+module = "apt_terminal.generated.*"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
 module = "tests.*"
 disallow_untyped_defs = false
 

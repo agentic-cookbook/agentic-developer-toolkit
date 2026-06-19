@@ -127,15 +127,19 @@ def build_resource_app(res: Resource, session_getter: Callable[[], Session]) -> 
             execute(ops.get, session=session_getter(), path_args=(id,), json_out=json_)
 
     if ops.create is not None and res.create_body is not None:
+        _create_body: type = res.create_body
+
         @app.command("create")
         def create(set_: SetOpt = None, json_: JsonOpt = False) -> None:
-            body = build_body(res.create_body, set_ or [])
+            body = build_body(_create_body, set_ or [])
             execute(ops.create, session=session_getter(), body=body, json_out=json_)
 
     if ops.update is not None and res.update_body is not None:
+        _update_body: type = res.update_body
+
         @app.command("update")
         def update(id: str, set_: SetOpt = None, json_: JsonOpt = False) -> None:
-            body = build_body(res.update_body, set_ or [])
+            body = build_body(_update_body, set_ or [])
             execute(ops.update, session=session_getter(), path_args=(id,), body=body, json_out=json_)
 
     if ops.delete is not None:

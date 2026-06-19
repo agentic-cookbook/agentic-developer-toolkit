@@ -4,7 +4,8 @@ import httpx
 import respx
 from typer.testing import CliRunner
 
-from apt_terminal import auth_commands, config as c
+from apt_terminal import auth_commands
+from apt_terminal import config as c
 from apt_terminal.auth import Session
 
 BASE = "https://api.test"

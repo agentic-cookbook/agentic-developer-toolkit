@@ -3,7 +3,6 @@ from __future__ import annotations
 import httpx
 import pytest
 import respx
-import typer
 from typer.testing import CliRunner
 
 from apt_terminal import config as c

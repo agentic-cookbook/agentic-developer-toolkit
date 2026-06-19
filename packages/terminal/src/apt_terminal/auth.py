@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import contextlib
+from typing import Any
+
 import httpx
 
 from apt_terminal import config as config_mod
@@ -64,7 +67,7 @@ class Session:
 
     def logout(self) -> None:
         if self.profile.refresh_token:
-            try:
+            with contextlib.suppress(httpx.HTTPError):
                 httpx.post(
                     f"{self.profile.base_url}/auth/revoke",
                     headers={
@@ -73,18 +76,17 @@ class Session:
                     },
                     content="{}",
                 )
-            except httpx.HTTPError:
-                pass
         self.profile.access_token = None
         self.profile.refresh_token = None
         config_mod.save(self.config)
 
-    def whoami(self) -> dict:
+    def whoami(self) -> dict[str, Any]:
         client = self.client_factory()
         resp = client.get_httpx_client().get("/auth/me")
         if resp.status_code != 200:
             raise AuthError("not logged in or session expired")
-        return resp.json()
+        result: dict[str, Any] = resp.json()
+        return result
 
     def client_factory(self) -> AuthenticatedClient:
         if not self.profile.access_token:

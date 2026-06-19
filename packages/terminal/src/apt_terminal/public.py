@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from collections.abc import Callable
 from typing import Annotated, Any
 
@@ -24,7 +23,7 @@ def _run(op: Any, slug: str, session: Session, json_out: bool) -> None:
     kwargs = op._get_kwargs(slug)
     raw = client.get_httpx_client().request(**kwargs)
     if raw.status_code >= 400:
-        raise AptError(f"HTTP {raw.status_code}", exit_code=1)
+        raise AptError(f"HTTP {raw.status_code}")
     try:
         payload = raw.json()
     except ValueError:

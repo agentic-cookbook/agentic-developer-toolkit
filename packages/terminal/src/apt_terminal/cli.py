@@ -4,8 +4,8 @@ from typing import Annotated
 
 import typer
 
-from apt_terminal import __version__
-from apt_terminal import auth_commands, config as config_mod, crud, public
+from apt_terminal import __version__, auth_commands, crud, public
+from apt_terminal import config as config_mod
 from apt_terminal.auth import Session
 from apt_terminal.errors import AptError
 from apt_terminal.output import die, emit_kv, emit_text

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from types import ModuleType
 
 # Generated operation modules (auth domain)
@@ -9,7 +9,6 @@ from apt_terminal.generated.api.auth import (
     get_auth_tokens,
     post_auth_tokens,
 )
-from apt_terminal.generated.models.post_auth_tokens_body import PostAuthTokensBody
 
 # Generated operation modules (persona domain)
 from apt_terminal.generated.api.persona import (
@@ -32,6 +31,7 @@ from apt_terminal.generated.api.persona import (
 from apt_terminal.generated.models.patch_persona_services_id_body import (
     PatchPersonaServicesIdBody,
 )
+from apt_terminal.generated.models.post_auth_tokens_body import PostAuthTokensBody
 from apt_terminal.generated.models.post_persona_personas_body import (
     PostPersonaPersonasBody,
 )
