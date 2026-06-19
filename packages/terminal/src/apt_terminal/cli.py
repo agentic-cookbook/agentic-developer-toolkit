@@ -5,23 +5,43 @@ from typing import Annotated
 import typer
 
 from apt_terminal import __version__
-from apt_terminal import config as config_mod
+from apt_terminal import auth_commands, config as config_mod, crud, public
+from apt_terminal.auth import Session
 from apt_terminal.errors import AptError
 from apt_terminal.output import die, emit_kv, emit_text
-from apt_terminal.registry.commands import app as registry_app
-from apt_terminal.storage.commands import app as storage_app
+from apt_terminal.resources import ALL_DOMAINS, AUTH_TOKENS
 
 app = typer.Typer(
     name="apt",
-    help="CLI for agenticregistry + my-agentic-storage",
+    help="CLI for the Agentic Developer backend",
     no_args_is_help=True,
     add_completion=False,
 )
 
-app.add_typer(storage_app, name="storage")
-app.add_typer(registry_app, name="registry")
+_STATE: dict[str, object] = {}
 
 
+def get_session() -> Session:
+    cfg: config_mod.Config = _STATE["config"]  # type: ignore[assignment]
+    profile: config_mod.Profile = _STATE["profile"]  # type: ignore[assignment]
+    return Session(profile=profile, config=cfg)
+
+
+# auth group (hand-written login/etc. + the tokens resource)
+auth_app = auth_commands.build_auth_app(get_session)
+for res in AUTH_TOKENS:
+    auth_app.add_typer(crud.build_resource_app(res, get_session), name=res.name)
+app.add_typer(auth_app, name="auth")
+
+# resource domains
+for domain, resources in ALL_DOMAINS.items():
+    domain_app = typer.Typer(name=domain, help=f"{domain} resources", no_args_is_help=True)
+    for res in resources:
+        domain_app.add_typer(crud.build_resource_app(res, get_session), name=res.name)
+    app.add_typer(domain_app, name=domain)
+
+# public + config
+app.add_typer(public.build_public_app(get_session), name="public")
 config_app = typer.Typer(help="Inspect and edit local config", no_args_is_help=True)
 app.add_typer(config_app, name="config")
 
@@ -34,76 +54,32 @@ def _version_callback(value: bool) -> None:
 
 @app.callback()
 def main(
-    ctx: typer.Context,
-    profile: Annotated[
-        str | None,
-        typer.Option("--profile", "-p", help="Config profile to use"),
-    ] = None,
-    quiet: Annotated[
-        bool, typer.Option("--quiet", "-q", help="Suppress non-essential output")
-    ] = False,
-    verbose: Annotated[bool, typer.Option("--verbose", "-V", help="Verbose output")] = False,
+    profile: Annotated[str | None, typer.Option("--profile", "-p", help="Config profile")] = None,
     version: Annotated[
         bool | None,
-        typer.Option(
-            "--version", callback=_version_callback, is_eager=True, help="Print version and exit"
-        ),
+        typer.Option("--version", callback=_version_callback, is_eager=True, help="Print version"),
     ] = None,
 ) -> None:
     cfg = config_mod.load()
-    name = profile or cfg.default_profile
-    p = cfg.profile(name)
+    p = cfg.profile(profile or cfg.default_profile)
     config_mod.apply_env_overrides(p)
-    ctx.ensure_object(dict)
-    ctx.obj["config"] = cfg
-    ctx.obj["profile"] = p
-    ctx.obj["quiet"] = quiet
-    ctx.obj["verbose"] = verbose
+    _STATE["config"] = cfg
+    _STATE["profile"] = p
 
 
 @config_app.command("show")
-def config_show(ctx: typer.Context) -> None:
-    """Print the active profile (keys redacted)."""
-    p = ctx.obj["profile"]
-    emit_kv(
-        [
-            ("profile", p.name),
-            ("storage.url", p.storage.url),
-            ("storage.key", _redact(p.storage.key)),
-            ("registry.backend.url", p.registry_backend.url),
-            ("registry.backend.key", _redact(p.registry_backend.key)),
-            ("registry.public.url", p.registry_public.url),
-            ("pinned_bucket", p.pinned_bucket),
-        ]
-    )
+def config_show() -> None:
+    p: config_mod.Profile = _STATE["profile"]  # type: ignore[assignment]
+    emit_kv([
+        ("profile", p.name),
+        ("base_url", p.base_url),
+        ("logged_in", "yes" if p.access_token else "no"),
+    ])
 
 
 @config_app.command("path")
 def config_path_cmd() -> None:
-    """Print the config file path."""
     emit_text(str(config_mod.config_path()))
-
-
-@config_app.command("edit")
-def config_edit() -> None:
-    """Open the config file in $EDITOR."""
-    import os
-    import subprocess
-
-    path = config_mod.config_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    if not path.exists():
-        path.touch(mode=0o600)
-    editor = os.environ.get("EDITOR", "vi")
-    subprocess.call([editor, str(path)])
-
-
-def _redact(key: str | None) -> str | None:
-    if not key:
-        return None
-    if len(key) <= 8:
-        return "***"
-    return f"{key[:4]}…{key[-4:]}"
 
 
 def _run() -> None:

@@ -3,6 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from types import ModuleType
 
+# Generated operation modules (auth domain)
+from apt_terminal.generated.api.auth import (
+    delete_auth_tokens_id,
+    get_auth_tokens,
+    post_auth_tokens,
+)
+from apt_terminal.generated.models.post_auth_tokens_body import PostAuthTokensBody
+
 # Generated operation modules (persona domain)
 from apt_terminal.generated.api.persona import (
     delete_persona_personas_id,
@@ -102,6 +110,19 @@ PERSONA: tuple[Resource, ...] = (
         domain="persona",
         name="templates",
         ops=Ops(list_=get_persona_service_templates),
+    ),
+)
+
+AUTH_TOKENS: tuple[Resource, ...] = (
+    Resource(
+        domain="auth",
+        name="tokens",
+        ops=Ops(
+            list_=get_auth_tokens,
+            create=post_auth_tokens,
+            delete=delete_auth_tokens_id,
+        ),
+        create_body=PostAuthTokensBody,
     ),
 )
 
