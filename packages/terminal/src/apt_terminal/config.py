@@ -10,28 +10,15 @@ import tomli_w
 
 from apt_terminal.errors import ConfigError
 
-DEFAULT_STORAGE_URL = "https://api.myagenticstorage.com"
-DEFAULT_REGISTRY_BACKEND_URL = "https://backend.agenticpersonaregistry.com"
-DEFAULT_REGISTRY_PUBLIC_URL = "https://api.agenticpersonaregistry.com"
-
-
-@dataclass
-class ServiceConfig:
-    url: str
-    key: str | None = None
+DEFAULT_BASE_URL = "https://api.agenticdeveloperstorage.com"
 
 
 @dataclass
 class Profile:
     name: str
-    storage: ServiceConfig = field(default_factory=lambda: ServiceConfig(url=DEFAULT_STORAGE_URL))
-    registry_backend: ServiceConfig = field(
-        default_factory=lambda: ServiceConfig(url=DEFAULT_REGISTRY_BACKEND_URL)
-    )
-    registry_public: ServiceConfig = field(
-        default_factory=lambda: ServiceConfig(url=DEFAULT_REGISTRY_PUBLIC_URL)
-    )
-    pinned_bucket: str | None = None
+    base_url: str = DEFAULT_BASE_URL
+    access_token: str | None = None
+    refresh_token: str | None = None
 
 
 @dataclass
@@ -70,12 +57,9 @@ def load(path: Path | None = None) -> Config:
     for name, body in (raw.get("profiles") or {}).items():
         cfg.profiles[name] = Profile(
             name=name,
-            storage=_load_service(body.get("storage"), DEFAULT_STORAGE_URL),
-            registry_backend=_load_service(
-                body.get("registry_backend"), DEFAULT_REGISTRY_BACKEND_URL
-            ),
-            registry_public=_load_service(body.get("registry_public"), DEFAULT_REGISTRY_PUBLIC_URL),
-            pinned_bucket=body.get("pinned_bucket"),
+            base_url=str(body.get("base_url") or DEFAULT_BASE_URL),
+            access_token=body.get("access_token"),
+            refresh_token=body.get("refresh_token"),
         )
     return cfg
 
@@ -86,49 +70,24 @@ def save(cfg: Config) -> None:
         "default_profile": cfg.default_profile,
         "profiles": {name: _dump_profile(p) for name, p in cfg.profiles.items()},
     }
-    data = tomli_w.dumps(out).encode("utf-8")
-    cfg.path.write_bytes(data)
+    cfg.path.write_bytes(tomli_w.dumps(out).encode("utf-8"))
     with contextlib.suppress(OSError):
         cfg.path.chmod(0o600)
 
 
 def apply_env_overrides(profile: Profile) -> Profile:
     env = os.environ
-    if v := env.get("APT_STORAGE_URL"):
-        profile.storage.url = v
-    if v := env.get("APT_STORAGE_KEY"):
-        profile.storage.key = v
-    if v := env.get("APT_REGISTRY_URL"):
-        profile.registry_backend.url = v
-    if v := env.get("APT_REGISTRY_PUBLIC_URL"):
-        profile.registry_public.url = v
-    if v := env.get("APT_REGISTRY_KEY"):
-        profile.registry_backend.key = v
+    if v := env.get("APT_BASE_URL"):
+        profile.base_url = v
+    if v := env.get("APT_TOKEN"):
+        profile.access_token = v
     return profile
 
 
-def _load_service(body: object, default_url: str) -> ServiceConfig:
-    if not isinstance(body, dict):
-        return ServiceConfig(url=default_url)
-    return ServiceConfig(
-        url=str(body.get("url") or default_url),
-        key=body.get("key"),
-    )
-
-
 def _dump_profile(p: Profile) -> dict[str, object]:
-    out: dict[str, object] = {
-        "storage": _dump_service(p.storage),
-        "registry_backend": _dump_service(p.registry_backend),
-        "registry_public": _dump_service(p.registry_public),
-    }
-    if p.pinned_bucket:
-        out["pinned_bucket"] = p.pinned_bucket
-    return out
-
-
-def _dump_service(s: ServiceConfig) -> dict[str, object]:
-    out: dict[str, object] = {"url": s.url}
-    if s.key:
-        out["key"] = s.key
+    out: dict[str, object] = {"base_url": p.base_url}
+    if p.access_token:
+        out["access_token"] = p.access_token
+    if p.refresh_token:
+        out["refresh_token"] = p.refresh_token
     return out
