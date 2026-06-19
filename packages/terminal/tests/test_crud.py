@@ -79,8 +79,9 @@ def test_create_posts_body(tmp_path):
     ])
     assert res.exit_code == 0, res.output
     assert route.called
+    import json as _json
     sent = route.calls.last.request
-    assert b'"providerKind": "openai"' in sent.content
+    assert _json.loads(sent.content)["providerKind"] == "openai"
 
 
 @respx.mock

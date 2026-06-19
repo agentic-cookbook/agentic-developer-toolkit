@@ -76,20 +76,15 @@ def execute(
     """Call op via raw httpx, retry once on 401, then render or raise."""
 
     def call(client: Any) -> Any:
-        body_kwargs: dict[str, Any] = {}
-        if body is not None:
-            body_kwargs["body"] = body
-        http_kwargs = op._get_kwargs(*path_args, **body_kwargs)
-        # Re-serialize any JSON body with spaces so callers and tests see
-        # the standard `"key": "value"` format rather than compact httpx output.
-        if "json" in http_kwargs:
-            payload = http_kwargs.pop("json")
-            serialized = json.dumps(payload, indent=None, separators=(", ", ": "))
-            headers = dict(http_kwargs.get("headers") or {})
-            headers.setdefault("Content-Type", "application/json")
-            http_kwargs["content"] = serialized.encode()
-            http_kwargs["headers"] = headers
-        return client.get_httpx_client().request(**http_kwargs)
+        # Build the request from the generated op's own kwargs (keeps routes +
+        # body serialization in one place), but issue it with raw httpx and
+        # render the server's raw JSON below. We deliberately do NOT use the
+        # generated sync_detailed(): its strict attrs from_dict() raises on any
+        # field drift between the spec and the live server (which we know
+        # exists, e.g. auth token vs accessToken), and a display tool should
+        # show whatever the server actually returned.
+        kwargs = op._get_kwargs(*path_args, **({"body": body} if body is not None else {}))
+        return client.get_httpx_client().request(**kwargs)
 
     client = session.client_factory()
     resp = call(client)
