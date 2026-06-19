@@ -1,0 +1,153 @@
+from __future__ import annotations
+
+import json
+from collections.abc import Callable
+from typing import Annotated, Any
+
+import attrs
+import typer
+
+from apt_terminal.auth import Session
+from apt_terminal.errors import AptError
+from apt_terminal.output import emit_json, emit_table
+from apt_terminal.resources import Action, Resource
+
+SetOpt = Annotated[list[str] | None, typer.Option("--set", help="FIELD=VALUE (repeatable)")]
+JsonOpt = Annotated[bool, typer.Option("--json", help="Raw JSON output")]
+
+
+def parse_set(pairs: list[str]) -> dict[str, object]:
+    out: dict[str, object] = {}
+    for pair in pairs:
+        if "=" not in pair:
+            raise AptError(f"--set expects FIELD=VALUE, got {pair!r}")
+        key, _, raw = pair.partition("=")
+        try:
+            out[key.strip()] = json.loads(raw)
+        except json.JSONDecodeError:
+            out[key.strip()] = raw
+    return out
+
+
+def build_body(model: type, pairs: list[str]) -> object:
+    known = {f.name for f in attrs.fields(model)}
+    kwargs = parse_set(pairs)
+    unknown = set(kwargs) - known
+    if unknown:
+        allowed = ", ".join(sorted(known - {"additional_properties"}))
+        raise AptError(f"unknown field(s): {', '.join(sorted(unknown))}. allowed: {allowed}")
+    try:
+        return model(**kwargs)
+    except TypeError as exc:
+        raise AptError(f"invalid fields for {model.__name__}: {exc}") from exc
+
+
+def _render(data: Any, json_out: bool) -> None:
+    if data is None:
+        return
+    if isinstance(data, list):
+        rows = [item if isinstance(item, dict) else vars(item) for item in data]
+        emit_json(rows) if json_out else emit_table(rows)
+        return
+    row = data if isinstance(data, dict) else vars(data)
+    emit_json(row) if json_out else emit_table([row])
+
+
+def _error_message(content: bytes, status: int) -> str:
+    try:
+        body = json.loads(content.decode() or "{}")
+    except (ValueError, AttributeError):
+        return f"HTTP {status}"
+    if isinstance(body, dict):
+        if isinstance(body.get("error"), dict):
+            return str(body["error"].get("message") or f"HTTP {status}")
+        return str(body.get("title") or body.get("message") or f"HTTP {status}")
+    return f"HTTP {status}"
+
+
+def execute(
+    op: Any,
+    *,
+    session: Session,
+    path_args: tuple[Any, ...] = (),
+    body: object | None = None,
+    json_out: bool = False,
+) -> None:
+    """Call op via raw httpx, retry once on 401, then render or raise."""
+
+    def call(client: Any) -> Any:
+        body_kwargs: dict[str, Any] = {}
+        if body is not None:
+            body_kwargs["body"] = body
+        http_kwargs = op._get_kwargs(*path_args, **body_kwargs)
+        # Re-serialize any JSON body with spaces so callers and tests see
+        # the standard `"key": "value"` format rather than compact httpx output.
+        if "json" in http_kwargs:
+            payload = http_kwargs.pop("json")
+            serialized = json.dumps(payload, indent=None, separators=(", ", ": "))
+            headers = dict(http_kwargs.get("headers") or {})
+            headers.setdefault("Content-Type", "application/json")
+            http_kwargs["content"] = serialized.encode()
+            http_kwargs["headers"] = headers
+        return client.get_httpx_client().request(**http_kwargs)
+
+    client = session.client_factory()
+    resp = call(client)
+
+    if resp.status_code == 401 and session.refresh():
+        client = session.client_factory()
+        resp = call(client)
+
+    if resp.status_code >= 400:
+        raise AptError(_error_message(resp.content, resp.status_code))
+
+    try:
+        data = resp.json()
+    except ValueError:
+        data = None
+    _render(data, json_out)
+
+
+def build_resource_app(res: Resource, session_getter: Callable[[], Session]) -> typer.Typer:
+    app = typer.Typer(name=res.name, help=f"{res.domain} {res.name}", no_args_is_help=True)
+    ops = res.ops
+
+    if ops.list_ is not None:
+        @app.command("list")
+        def list_(json_: JsonOpt = False) -> None:
+            execute(ops.list_, session=session_getter(), json_out=json_)
+        app.command("ls", hidden=True)(list_)
+
+    if ops.get is not None:
+        @app.command("get")
+        def get(id: str, json_: JsonOpt = False) -> None:
+            execute(ops.get, session=session_getter(), path_args=(id,), json_out=json_)
+
+    if ops.create is not None and res.create_body is not None:
+        @app.command("create")
+        def create(set_: SetOpt = None, json_: JsonOpt = False) -> None:
+            body = build_body(res.create_body, set_ or [])
+            execute(ops.create, session=session_getter(), body=body, json_out=json_)
+
+    if ops.update is not None and res.update_body is not None:
+        @app.command("update")
+        def update(id: str, set_: SetOpt = None, json_: JsonOpt = False) -> None:
+            body = build_body(res.update_body, set_ or [])
+            execute(ops.update, session=session_getter(), path_args=(id,), body=body, json_out=json_)
+
+    if ops.delete is not None:
+        @app.command("delete")
+        def delete(id: str, json_: JsonOpt = False) -> None:
+            execute(ops.delete, session=session_getter(), path_args=(id,), json_out=json_)
+        app.command("rm", hidden=True)(delete)
+
+    for action in res.actions:
+        _register_action(app, action, session_getter)
+
+    return app
+
+
+def _register_action(app: typer.Typer, action: Action, session_getter: Callable[[], Session]) -> None:
+    @app.command(action.name, help=action.help)
+    def _action(id: str, json_: JsonOpt = False) -> None:
+        execute(action.op, session=session_getter(), path_args=(id,), json_out=json_)

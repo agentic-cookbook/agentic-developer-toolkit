@@ -18,11 +18,21 @@ def emit_json(data: Any) -> None:
 
 
 def emit_table(
-    rows: Sequence[dict[str, Any]], columns: Sequence[str], *, title: str | None = None
+    rows: Sequence[dict[str, Any]],
+    columns: Sequence[str] | None = None,
+    *,
+    title: str | None = None,
 ) -> None:
     if not rows:
         _console.print("[dim](none)[/dim]")
         return
+    if columns is None:
+        seen: list[str] = []
+        for row in rows:
+            for key in row:
+                if key not in seen:
+                    seen.append(key)
+        columns = seen
     t = Table(title=title, show_lines=False, header_style="bold")
     for col in columns:
         t.add_column(col)
