@@ -37,6 +37,9 @@ packages = ["src/apt_terminal"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+# The generated openapi-python-client code is machine-emitted and not
+# lint-clean; exclude it (mirrors the mypy override below).
+extend-exclude = ["src/apt_terminal/generated"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
