@@ -104,6 +104,18 @@ def test_401_triggers_refresh_then_retry(tmp_path):
 
 
 @respx.mock
+def test_models_action_renders_string_list(tmp_path):
+    services = next(res for res in r.PERSONA if res.name == "services")
+    app = crud.build_resource_app(services, lambda: _session(tmp_path))
+    respx.get(f"{BASE}/persona/services/svc1/models").mock(
+        return_value=httpx.Response(200, json=["gpt-4o", "gpt-4o-mini"])
+    )
+    res = runner.invoke(app, ["models", "svc1"])
+    assert res.exit_code == 0, res.output
+    assert "gpt-4o" in res.output
+
+
+@respx.mock
 def test_error_status_exits_nonzero(tmp_path):
     services = next(res for res in r.PERSONA if res.name == "services")
     app = crud.build_resource_app(services, lambda: _session(tmp_path))
