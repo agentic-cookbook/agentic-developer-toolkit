@@ -65,29 +65,23 @@ def load(path: Path | None = None) -> Config:
 
 
 def save(cfg: Config) -> None:
-    cfg.path.parent.mkdir(parents=True, exist_ok=True)
     out: dict[str, object] = {
         "default_profile": cfg.default_profile,
         "profiles": {name: _dump_profile(p) for name, p in cfg.profiles.items()},
     }
-    cfg.path.write_bytes(tomli_w.dumps(out).encode("utf-8"))
+    data = tomli_w.dumps(out).encode("utf-8")
+    cfg.path.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(cfg.path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "wb") as f:
+        f.write(data)
     with contextlib.suppress(OSError):
-        cfg.path.chmod(0o600)
-
-
-def apply_env_overrides(profile: Profile) -> Profile:
-    env = os.environ
-    if v := env.get("APT_BASE_URL"):
-        profile.base_url = v
-    if v := env.get("APT_TOKEN"):
-        profile.access_token = v
-    return profile
+        cfg.path.chmod(0o600)  # tighten an existing looser file too
 
 
 def _dump_profile(p: Profile) -> dict[str, object]:
     out: dict[str, object] = {"base_url": p.base_url}
-    if p.access_token:
+    if p.access_token is not None:
         out["access_token"] = p.access_token
-    if p.refresh_token:
+    if p.refresh_token is not None:
         out["refresh_token"] = p.refresh_token
     return out

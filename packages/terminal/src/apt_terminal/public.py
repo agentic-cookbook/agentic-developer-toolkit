@@ -5,8 +5,8 @@ from typing import Annotated, Any
 
 import typer
 
+from apt_terminal import errors
 from apt_terminal.auth import Session
-from apt_terminal.errors import AptError
 from apt_terminal.generated.api.public import (
     get_public_personas_slug,
     get_public_users_slug,
@@ -23,7 +23,7 @@ def _run(op: Any, slug: str, session: Session, json_out: bool) -> None:
     kwargs = op._get_kwargs(slug)
     raw = client.get_httpx_client().request(**kwargs)
     if raw.status_code >= 400:
-        raise AptError(f"HTTP {raw.status_code}")
+        raise errors.error_for_status(raw.status_code, errors.message_from_bytes(raw.content, f"HTTP {raw.status_code}"))
     try:
         payload = raw.json()
     except ValueError:

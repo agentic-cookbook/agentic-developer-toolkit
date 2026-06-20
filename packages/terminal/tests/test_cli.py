@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import httpx
+import pytest
 import respx
 from typer.testing import CliRunner
 
@@ -38,3 +39,12 @@ def test_persona_services_list_end_to_end(monkeypatch, tmp_path):
     res = runner.invoke(cli.app, ["persona", "services", "list", "--json"])
     assert res.exit_code == 0, res.output
     assert '"id": "1"' in res.output
+
+
+def test_run_handles_network_error(monkeypatch, capsys):
+    def boom() -> None:
+        raise httpx.ConnectError("down")
+    monkeypatch.setattr(cli, "app", boom)
+    with pytest.raises(SystemExit) as e:
+        cli._run()
+    assert e.value.code == 1

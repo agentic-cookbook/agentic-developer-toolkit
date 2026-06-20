@@ -123,3 +123,44 @@ def test_error_status_exits_nonzero(tmp_path):
     )
     res = runner.invoke(app, ["list"])
     assert res.exit_code != 0
+
+
+@respx.mock
+def test_404_raises_not_found_exit_code(tmp_path):
+    """A 404 response raises NotFoundError (exit_code=4), confirmed via raised exception."""
+    from apt_terminal.errors import NotFoundError as NFE
+    services = next(res for res in r.PERSONA if res.name == "services")
+    sess = _session(tmp_path)
+    respx.get(f"{BASE}/persona/services").mock(
+        return_value=httpx.Response(404, json={"title": "not found"})
+    )
+    with pytest.raises(NFE) as exc_info:
+        crud.execute(services.ops.list_, session=sess)
+    assert exc_info.value.exit_code == 4
+
+
+@respx.mock
+def test_401_no_refresh_raises_auth_error(tmp_path):
+    """A 401 with no refresh token raises AuthError (exit_code=3)."""
+    from apt_terminal.errors import AuthError as AE
+    services = next(res for res in r.PERSONA if res.name == "services")
+    sess = _session(tmp_path)
+    # no refresh_token set, so refresh() returns False
+    respx.get(f"{BASE}/persona/services").mock(
+        return_value=httpx.Response(401, json={"title": "unauthorized"})
+    )
+    with pytest.raises(AE) as exc_info:
+        crud.execute(services.ops.list_, session=sess)
+    assert exc_info.value.exit_code == 3
+
+
+@respx.mock
+def test_empty_list_renders_none(tmp_path):
+    services = next(res for res in r.PERSONA if res.name == "services")
+    app = crud.build_resource_app(services, lambda: _session(tmp_path))
+    respx.get(f"{BASE}/persona/services").mock(
+        return_value=httpx.Response(200, json=[])
+    )
+    res = runner.invoke(app, ["list"])
+    assert res.exit_code == 0, res.output
+    assert "(none)" in res.output

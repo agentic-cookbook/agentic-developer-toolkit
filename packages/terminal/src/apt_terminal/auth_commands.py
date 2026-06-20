@@ -32,6 +32,6 @@ def build_auth_app(session_getter: Callable[[], Session]) -> typer.Typer:
     @app.command("refresh")
     def refresh() -> None:
         ok = session_getter().refresh()
-        emit_text("Refreshed." if ok else "No valid session to refresh.")
+        emit_text("Refreshed." if ok else "Could not refresh — run 'apt auth login'.")
 
     return app

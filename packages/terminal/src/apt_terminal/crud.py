@@ -7,6 +7,7 @@ from typing import Annotated, Any
 import attrs
 import typer
 
+from apt_terminal import errors
 from apt_terminal.auth import Session
 from apt_terminal.errors import AptError
 from apt_terminal.output import render
@@ -30,7 +31,10 @@ def parse_set(pairs: list[str]) -> dict[str, object]:
 
 
 def build_body(model: type, pairs: list[str]) -> object:
-    known = {f.name for f in attrs.fields(model)}
+    try:
+        known = {f.name for f in attrs.fields(model)}
+    except Exception as exc:  # not an attrs class, etc.
+        raise AptError(f"{model.__name__} is not a valid request body: {exc}") from exc
     kwargs = parse_set(pairs)
     unknown = set(kwargs) - known
     if unknown:
@@ -39,23 +43,11 @@ def build_body(model: type, pairs: list[str]) -> object:
     try:
         return model(**kwargs)
     except TypeError as exc:
-        raise AptError(f"invalid fields for {model.__name__}: {exc}") from exc
-
-
-def _render(data: Any, json_out: bool) -> None:
-    render(data, json_out)
-
-
-def _error_message(content: bytes, status: int) -> str:
-    try:
-        body = json.loads(content.decode() or "{}")
-    except (ValueError, AttributeError):
-        return f"HTTP {status}"
-    if isinstance(body, dict):
-        if isinstance(body.get("error"), dict):
-            return str(body["error"].get("message") or f"HTTP {status}")
-        return str(body.get("title") or body.get("message") or f"HTTP {status}")
-    return f"HTTP {status}"
+        raise AptError(
+            f"invalid fields for {model.__name__}: {exc}. "
+            f"Note: --set values are JSON-parsed (true/false/null/numbers become typed); "
+            f"quote a literal, e.g. --set name='\"true\"'."
+        ) from exc
 
 
 def execute(
@@ -87,13 +79,13 @@ def execute(
         resp = call(client)
 
     if resp.status_code >= 400:
-        raise AptError(_error_message(resp.content, resp.status_code))
+        raise errors.error_for_status(resp.status_code, errors.message_from_bytes(resp.content, f"HTTP {resp.status_code}"))
 
     try:
         data = resp.json()
     except ValueError:
         data = None
-    _render(data, json_out)
+    render(data, json_out)
 
 
 def build_resource_app(res: Resource, session_getter: Callable[[], Session]) -> typer.Typer:

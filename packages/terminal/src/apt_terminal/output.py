@@ -58,7 +58,7 @@ def render(data: Any, json_out: bool) -> None:
         emit_json(data)
         return
     if isinstance(data, list):
-        if data and all(isinstance(item, dict) for item in data):
+        if all(isinstance(item, dict) for item in data):
             emit_table(data)
         else:
             for item in data:

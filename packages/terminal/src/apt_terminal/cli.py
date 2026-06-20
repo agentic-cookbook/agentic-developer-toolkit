@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Annotated
 
+import httpx
 import typer
 
 from apt_terminal import __version__, auth_commands, crud, public
@@ -62,7 +63,6 @@ def main(
 ) -> None:
     cfg = config_mod.load()
     p = cfg.profile(profile or cfg.default_profile)
-    config_mod.apply_env_overrides(p)
     _STATE["config"] = cfg
     _STATE["profile"] = p
 
@@ -87,6 +87,8 @@ def _run() -> None:
         app()
     except AptError as exc:
         die(str(exc), code=exc.exit_code)
+    except httpx.HTTPError as exc:
+        die(f"network error: {exc}", code=1)
 
 
 if __name__ == "__main__":

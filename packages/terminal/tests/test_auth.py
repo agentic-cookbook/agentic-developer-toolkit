@@ -85,3 +85,12 @@ def test_client_factory_builds_authed(tmp_path):
     client = s.client_factory()
     assert client.token == "acc"
     assert client._base_url == BASE
+
+
+def test_env_token_override_not_persisted(tmp_path, monkeypatch):
+    s = _session(tmp_path)  # base_url=BASE, no tokens
+    monkeypatch.setenv("APT_TOKEN", "envtok")
+    client = s.client_factory()
+    assert client.token == "envtok"
+    assert s.profile.access_token is None          # not written into the profile
+    assert not (tmp_path / "config.toml").exists()  # nothing saved

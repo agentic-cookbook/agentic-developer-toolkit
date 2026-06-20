@@ -38,16 +38,6 @@ def test_save_sets_0600(tmp_path):
     assert (path.stat().st_mode & 0o777) == 0o600
 
 
-def test_env_overrides(monkeypatch, tmp_path):
-    cfg = c.Config(path=tmp_path / "config.toml")
-    p = cfg.profile()
-    monkeypatch.setenv("APT_BASE_URL", "https://env.test")
-    monkeypatch.setenv("APT_TOKEN", "env-token")
-    c.apply_env_overrides(p)
-    assert p.base_url == "https://env.test"
-    assert p.access_token == "env-token"
-
-
 def test_config_path_env_override(monkeypatch):
     monkeypatch.setenv("APT_CONFIG", "/tmp/custom/apt.toml")
     assert c.config_path() == Path("/tmp/custom/apt.toml")
