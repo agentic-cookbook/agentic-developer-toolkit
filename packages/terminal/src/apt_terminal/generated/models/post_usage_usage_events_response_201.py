@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,7 +24,7 @@ class PostUsageUsageEventsResponse201:
             id (int):
             scope (str):
             principal_id (str):
-            owner_id (None | str):
+            owner_id (Union[None, str]):
             route (str):
             method (str):
             status (int):
@@ -38,7 +36,7 @@ class PostUsageUsageEventsResponse201:
     id: int
     scope: str
     principal_id: str
-    owner_id: None | str
+    owner_id: Union[None, str]
     route: str
     method: str
     status: int
@@ -57,7 +55,7 @@ class PostUsageUsageEventsResponse201:
 
         principal_id = self.principal_id
 
-        owner_id: None | str
+        owner_id: Union[None, str]
         owner_id = self.owner_id
 
         route = self.route
@@ -101,10 +99,10 @@ class PostUsageUsageEventsResponse201:
 
         principal_id = d.pop("principalId")
 
-        def _parse_owner_id(data: object) -> None | str:
+        def _parse_owner_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         owner_id = _parse_owner_id(d.pop("ownerId"))
 

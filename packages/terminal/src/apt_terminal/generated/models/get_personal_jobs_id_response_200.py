@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,12 +23,12 @@ class GetPersonalJobsIdResponse200:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             company (str):
             role (str):
             start_date (str):
-            end_date (None | str):
+            end_date (Union[None, str]):
             location (str):
             description (str):
             is_current (bool):
@@ -40,12 +38,12 @@ class GetPersonalJobsIdResponse200:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     company: str
     role: str
     start_date: str
-    end_date: None | str
+    end_date: Union[None, str]
     location: str
     description: str
     is_current: bool
@@ -61,7 +59,7 @@ class GetPersonalJobsIdResponse200:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -72,7 +70,7 @@ class GetPersonalJobsIdResponse200:
 
         start_date = self.start_date
 
-        end_date: None | str
+        end_date: Union[None, str]
         end_date = self.end_date
 
         location = self.location
@@ -115,10 +113,10 @@ class GetPersonalJobsIdResponse200:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -131,10 +129,10 @@ class GetPersonalJobsIdResponse200:
 
         start_date = d.pop("startDate")
 
-        def _parse_end_date(data: object) -> None | str:
+        def _parse_end_date(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         end_date = _parse_end_date(d.pop("endDate"))
 

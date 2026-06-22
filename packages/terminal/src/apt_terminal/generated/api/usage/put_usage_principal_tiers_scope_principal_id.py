@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_usage_principal_tiers_scope_principal_id_body import PutUsagePrincipalTiersScopePrincipalIdBody
 from ...models.put_usage_principal_tiers_scope_principal_id_response_200 import PutUsagePrincipalTiersScopePrincipalIdResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -20,7 +18,7 @@ def _get_kwargs(
     scope: str,
     principal_id: str,
     *,
-    body: PutUsagePrincipalTiersScopePrincipalIdBody | Unset = UNSET,
+    body: PutUsagePrincipalTiersScopePrincipalIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -32,12 +30,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/usage/principal-tiers/{scope}/{principal_id}".format(scope=quote(str(scope), safe=""),principal_id=quote(str(principal_id), safe=""),),
+        "url": "/usage/principal-tiers/{scope}/{principal_id}".format(scope=scope,principal_id=principal_id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -46,7 +43,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutUsagePrincipalTiersScopePrincipalIdResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]:
     if response.status_code == 200:
         response_200 = PutUsagePrincipalTiersScopePrincipalIdResponse200.from_dict(response.json())
 
@@ -81,7 +78,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutUsagePrincipalTiersScopePrincipalIdResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,22 +92,22 @@ def sync_detailed(
     principal_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsagePrincipalTiersScopePrincipalIdBody | Unset = UNSET,
+    body: PutUsagePrincipalTiersScopePrincipalIdBody,
 
-) -> Response[Error | PutUsagePrincipalTiersScopePrincipalIdResponse200]:
+) -> Response[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Update principal_tiers
 
     Args:
         scope (str):
         principal_id (str):
-        body (PutUsagePrincipalTiersScopePrincipalIdBody | Unset):
+        body (PutUsagePrincipalTiersScopePrincipalIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutUsagePrincipalTiersScopePrincipalIdResponse200]
+        Response[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]
      """
 
 
@@ -132,22 +129,22 @@ def sync(
     principal_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsagePrincipalTiersScopePrincipalIdBody | Unset = UNSET,
+    body: PutUsagePrincipalTiersScopePrincipalIdBody,
 
-) -> Error | PutUsagePrincipalTiersScopePrincipalIdResponse200 | None:
+) -> Optional[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Update principal_tiers
 
     Args:
         scope (str):
         principal_id (str):
-        body (PutUsagePrincipalTiersScopePrincipalIdBody | Unset):
+        body (PutUsagePrincipalTiersScopePrincipalIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutUsagePrincipalTiersScopePrincipalIdResponse200
+        Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]
      """
 
 
@@ -164,22 +161,22 @@ async def asyncio_detailed(
     principal_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsagePrincipalTiersScopePrincipalIdBody | Unset = UNSET,
+    body: PutUsagePrincipalTiersScopePrincipalIdBody,
 
-) -> Response[Error | PutUsagePrincipalTiersScopePrincipalIdResponse200]:
+) -> Response[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Update principal_tiers
 
     Args:
         scope (str):
         principal_id (str):
-        body (PutUsagePrincipalTiersScopePrincipalIdBody | Unset):
+        body (PutUsagePrincipalTiersScopePrincipalIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutUsagePrincipalTiersScopePrincipalIdResponse200]
+        Response[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]
      """
 
 
@@ -201,22 +198,22 @@ async def asyncio(
     principal_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsagePrincipalTiersScopePrincipalIdBody | Unset = UNSET,
+    body: PutUsagePrincipalTiersScopePrincipalIdBody,
 
-) -> Error | PutUsagePrincipalTiersScopePrincipalIdResponse200 | None:
+) -> Optional[Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Update principal_tiers
 
     Args:
         scope (str):
         principal_id (str):
-        body (PutUsagePrincipalTiersScopePrincipalIdBody | Unset):
+        body (PutUsagePrincipalTiersScopePrincipalIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutUsagePrincipalTiersScopePrincipalIdResponse200
+        Union[Error, PutUsagePrincipalTiersScopePrincipalIdResponse200]
      """
 
 

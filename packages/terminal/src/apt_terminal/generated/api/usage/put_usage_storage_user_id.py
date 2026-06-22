@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_usage_storage_user_id_body import PutUsageStorageUserIdBody
 from ...models.usage_storage_quota_row import UsageStorageQuotaRow
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     user_id: str,
     *,
-    body: PutUsageStorageUserIdBody | Unset = UNSET,
+    body: PutUsageStorageUserIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/usage/storage/{user_id}".format(user_id=quote(str(user_id), safe=""),),
+        "url": "/usage/storage/{user_id}".format(user_id=user_id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | UsageStorageQuotaRow | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, UsageStorageQuotaRow]]:
     if response.status_code == 200:
         response_200 = UsageStorageQuotaRow.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | UsageStorageQuotaRow]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, UsageStorageQuotaRow]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     user_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageStorageUserIdBody | Unset = UNSET,
+    body: PutUsageStorageUserIdBody,
 
-) -> Response[Error | UsageStorageQuotaRow]:
+) -> Response[Union[Error, UsageStorageQuotaRow]]:
     """ Set a user's storage quota override (admin)
 
     Args:
         user_id (str):
-        body (PutUsageStorageUserIdBody | Unset):
+        body (PutUsageStorageUserIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | UsageStorageQuotaRow]
+        Response[Union[Error, UsageStorageQuotaRow]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     user_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageStorageUserIdBody | Unset = UNSET,
+    body: PutUsageStorageUserIdBody,
 
-) -> Error | UsageStorageQuotaRow | None:
+) -> Optional[Union[Error, UsageStorageQuotaRow]]:
     """ Set a user's storage quota override (admin)
 
     Args:
         user_id (str):
-        body (PutUsageStorageUserIdBody | Unset):
+        body (PutUsageStorageUserIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | UsageStorageQuotaRow
+        Union[Error, UsageStorageQuotaRow]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     user_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageStorageUserIdBody | Unset = UNSET,
+    body: PutUsageStorageUserIdBody,
 
-) -> Response[Error | UsageStorageQuotaRow]:
+) -> Response[Union[Error, UsageStorageQuotaRow]]:
     """ Set a user's storage quota override (admin)
 
     Args:
         user_id (str):
-        body (PutUsageStorageUserIdBody | Unset):
+        body (PutUsageStorageUserIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | UsageStorageQuotaRow]
+        Response[Union[Error, UsageStorageQuotaRow]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     user_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageStorageUserIdBody | Unset = UNSET,
+    body: PutUsageStorageUserIdBody,
 
-) -> Error | UsageStorageQuotaRow | None:
+) -> Optional[Union[Error, UsageStorageQuotaRow]]:
     """ Set a user's storage quota override (admin)
 
     Args:
         user_id (str):
-        body (PutUsageStorageUserIdBody | Unset):
+        body (PutUsageStorageUserIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | UsageStorageQuotaRow
+        Union[Error, UsageStorageQuotaRow]
      """
 
 

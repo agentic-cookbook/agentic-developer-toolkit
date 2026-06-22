@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,7 +23,7 @@ class PutCommunityDiscussionMessagesIdResponse200:
         Attributes:
             id (str):
             ecosystem_id (str):
-            conversation_id (None | str):
+            conversation_id (Union[None, str]):
             sender_id (str):
             recipient_id (str):
             body (str):
@@ -35,7 +33,7 @@ class PutCommunityDiscussionMessagesIdResponse200:
 
     id: str
     ecosystem_id: str
-    conversation_id: None | str
+    conversation_id: Union[None, str]
     sender_id: str
     recipient_id: str
     body: str
@@ -51,7 +49,7 @@ class PutCommunityDiscussionMessagesIdResponse200:
 
         ecosystem_id = self.ecosystem_id
 
-        conversation_id: None | str
+        conversation_id: Union[None, str]
         conversation_id = self.conversation_id
 
         sender_id = self.sender_id
@@ -89,10 +87,10 @@ class PutCommunityDiscussionMessagesIdResponse200:
 
         ecosystem_id = d.pop("ecosystemId")
 
-        def _parse_conversation_id(data: object) -> None | str:
+        def _parse_conversation_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         conversation_id = _parse_conversation_id(d.pop("conversationId"))
 

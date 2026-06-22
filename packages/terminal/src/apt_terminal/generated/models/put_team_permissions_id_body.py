@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,16 +22,16 @@ T = TypeVar("T", bound="PutTeamPermissionsIdBody")
 class PutTeamPermissionsIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            team_id (str | Unset):
-            permission (str | Unset):
-            granted_at (str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            team_id (Union[Unset, str]):
+            permission (Union[Unset, str]):
+            granted_at (Union[Unset, str]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    team_id: str | Unset = UNSET
-    permission: str | Unset = UNSET
-    granted_at: str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    team_id: Union[Unset, str] = UNSET
+    permission: Union[Unset, str] = UNSET
+    granted_at: Union[Unset, str] = UNSET
 
 
 

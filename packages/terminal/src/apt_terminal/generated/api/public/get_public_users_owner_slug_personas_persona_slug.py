@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -27,7 +26,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/public/users/{owner_slug}/personas/{persona_slug}".format(owner_slug=quote(str(owner_slug), safe=""),persona_slug=quote(str(persona_slug), safe=""),),
+        "url": "/public/users/{owner_slug}/personas/{persona_slug}".format(owner_slug=owner_slug,persona_slug=persona_slug,),
     }
 
 
@@ -35,7 +34,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PublicPersona | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PublicPersona]]:
     if response.status_code == 200:
         response_200 = PublicPersona.from_dict(response.json())
 
@@ -56,7 +55,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PublicPersona]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PublicPersona]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,9 +68,9 @@ def sync_detailed(
     owner_slug: str,
     persona_slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[Error | PublicPersona]:
+) -> Response[Union[Error, PublicPersona]]:
     """ Get a public persona scoped to its owner
 
     Args:
@@ -83,7 +82,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PublicPersona]
+        Response[Union[Error, PublicPersona]]
      """
 
 
@@ -103,9 +102,9 @@ def sync(
     owner_slug: str,
     persona_slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Error | PublicPersona | None:
+) -> Optional[Union[Error, PublicPersona]]:
     """ Get a public persona scoped to its owner
 
     Args:
@@ -117,7 +116,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PublicPersona
+        Union[Error, PublicPersona]
      """
 
 
@@ -132,9 +131,9 @@ async def asyncio_detailed(
     owner_slug: str,
     persona_slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[Error | PublicPersona]:
+) -> Response[Union[Error, PublicPersona]]:
     """ Get a public persona scoped to its owner
 
     Args:
@@ -146,7 +145,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PublicPersona]
+        Response[Union[Error, PublicPersona]]
      """
 
 
@@ -166,9 +165,9 @@ async def asyncio(
     owner_slug: str,
     persona_slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Error | PublicPersona | None:
+) -> Optional[Union[Error, PublicPersona]]:
     """ Get a public persona scoped to its owner
 
     Args:
@@ -180,7 +179,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PublicPersona
+        Union[Error, PublicPersona]
      """
 
 

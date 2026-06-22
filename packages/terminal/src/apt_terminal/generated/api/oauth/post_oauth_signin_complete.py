@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.auth_result import AuthResult
 from ...models.error import Error
 from ...models.post_oauth_signin_complete_body import PostOauthSigninCompleteBody
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostOauthSigninCompleteBody | Unset = UNSET,
+    body: PostOauthSigninCompleteBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/oauth/signin/complete",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AuthResult | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[AuthResult, Error]]:
     if response.status_code == 200:
         response_200 = AuthResult.from_dict(response.json())
 
@@ -72,7 +69,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[AuthResult | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[AuthResult, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,21 +80,21 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninCompleteBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninCompleteBody,
 
-) -> Response[AuthResult | Error]:
+) -> Response[Union[AuthResult, Error]]:
     """ Complete an OAuth sign-in (SPA flow) → token + refreshToken + user
 
     Args:
-        body (PostOauthSigninCompleteBody | Unset):
+        body (PostOauthSigninCompleteBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AuthResult | Error]
+        Response[Union[AuthResult, Error]]
      """
 
 
@@ -114,21 +111,21 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninCompleteBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninCompleteBody,
 
-) -> AuthResult | Error | None:
+) -> Optional[Union[AuthResult, Error]]:
     """ Complete an OAuth sign-in (SPA flow) → token + refreshToken + user
 
     Args:
-        body (PostOauthSigninCompleteBody | Unset):
+        body (PostOauthSigninCompleteBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AuthResult | Error
+        Union[AuthResult, Error]
      """
 
 
@@ -140,21 +137,21 @@ body=body,
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninCompleteBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninCompleteBody,
 
-) -> Response[AuthResult | Error]:
+) -> Response[Union[AuthResult, Error]]:
     """ Complete an OAuth sign-in (SPA flow) → token + refreshToken + user
 
     Args:
-        body (PostOauthSigninCompleteBody | Unset):
+        body (PostOauthSigninCompleteBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AuthResult | Error]
+        Response[Union[AuthResult, Error]]
      """
 
 
@@ -171,21 +168,21 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninCompleteBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninCompleteBody,
 
-) -> AuthResult | Error | None:
+) -> Optional[Union[AuthResult, Error]]:
     """ Complete an OAuth sign-in (SPA flow) → token + refreshToken + user
 
     Args:
-        body (PostOauthSigninCompleteBody | Unset):
+        body (PostOauthSigninCompleteBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AuthResult | Error
+        Union[AuthResult, Error]
      """
 
 

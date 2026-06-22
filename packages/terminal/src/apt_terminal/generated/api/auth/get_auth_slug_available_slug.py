@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/auth/slug-available/{slug}".format(slug=quote(str(slug), safe=""),),
+        "url": "/auth/slug-available/{slug}".format(slug=slug,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetAuthSlugAvailableSlugResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetAuthSlugAvailableSlugResponse200]]:
     if response.status_code == 200:
         response_200 = GetAuthSlugAvailableSlugResponse200.from_dict(response.json())
 
@@ -55,7 +54,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetAuthSlugAvailableSlugResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetAuthSlugAvailableSlugResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,7 +68,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetAuthSlugAvailableSlugResponse200]:
+) -> Response[Union[Error, GetAuthSlugAvailableSlugResponse200]]:
     """ Check whether a login slug is available to the caller
 
     Args:
@@ -80,7 +79,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetAuthSlugAvailableSlugResponse200]
+        Response[Union[Error, GetAuthSlugAvailableSlugResponse200]]
      """
 
 
@@ -100,7 +99,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetAuthSlugAvailableSlugResponse200 | None:
+) -> Optional[Union[Error, GetAuthSlugAvailableSlugResponse200]]:
     """ Check whether a login slug is available to the caller
 
     Args:
@@ -111,7 +110,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetAuthSlugAvailableSlugResponse200
+        Union[Error, GetAuthSlugAvailableSlugResponse200]
      """
 
 
@@ -126,7 +125,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetAuthSlugAvailableSlugResponse200]:
+) -> Response[Union[Error, GetAuthSlugAvailableSlugResponse200]]:
     """ Check whether a login slug is available to the caller
 
     Args:
@@ -137,7 +136,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetAuthSlugAvailableSlugResponse200]
+        Response[Union[Error, GetAuthSlugAvailableSlugResponse200]]
      """
 
 
@@ -157,7 +156,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetAuthSlugAvailableSlugResponse200 | None:
+) -> Optional[Union[Error, GetAuthSlugAvailableSlugResponse200]]:
     """ Check whether a login slug is available to the caller
 
     Args:
@@ -168,7 +167,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetAuthSlugAvailableSlugResponse200
+        Union[Error, GetAuthSlugAvailableSlugResponse200]
      """
 
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,23 +23,23 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             connection_id (str):
             external_id (str):
             account_id (str):
-            account_name (None | str):
-            institution_name (None | str):
+            account_name (Union[None, str]):
+            institution_name (Union[None, str]):
             amount (str):
             currency (str):
             name (str):
-            merchant_name (None | str):
-            category (None | str):
-            category_detailed (None | str):
+            merchant_name (Union[None, str]):
+            category (Union[None, str]):
+            category_detailed (Union[None, str]):
             transaction_date (str):
-            authorized_date (None | str):
+            authorized_date (Union[None, str]):
             pending (bool):
-            logo_url (None | str):
+            logo_url (Union[None, str]):
             is_deleted (bool):
             sync_version (int):
             created_at (str):
@@ -50,23 +48,23 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     connection_id: str
     external_id: str
     account_id: str
-    account_name: None | str
-    institution_name: None | str
+    account_name: Union[None, str]
+    institution_name: Union[None, str]
     amount: str
     currency: str
     name: str
-    merchant_name: None | str
-    category: None | str
-    category_detailed: None | str
+    merchant_name: Union[None, str]
+    category: Union[None, str]
+    category_detailed: Union[None, str]
     transaction_date: str
-    authorized_date: None | str
+    authorized_date: Union[None, str]
     pending: bool
-    logo_url: None | str
+    logo_url: Union[None, str]
     is_deleted: bool
     sync_version: int
     created_at: str
@@ -81,7 +79,7 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -92,10 +90,10 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
 
         account_id = self.account_id
 
-        account_name: None | str
+        account_name: Union[None, str]
         account_name = self.account_name
 
-        institution_name: None | str
+        institution_name: Union[None, str]
         institution_name = self.institution_name
 
         amount = self.amount
@@ -104,23 +102,23 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
 
         name = self.name
 
-        merchant_name: None | str
+        merchant_name: Union[None, str]
         merchant_name = self.merchant_name
 
-        category: None | str
+        category: Union[None, str]
         category = self.category
 
-        category_detailed: None | str
+        category_detailed: Union[None, str]
         category_detailed = self.category_detailed
 
         transaction_date = self.transaction_date
 
-        authorized_date: None | str
+        authorized_date: Union[None, str]
         authorized_date = self.authorized_date
 
         pending = self.pending
 
-        logo_url: None | str
+        logo_url: Union[None, str]
         logo_url = self.logo_url
 
         is_deleted = self.is_deleted
@@ -171,10 +169,10 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -187,18 +185,18 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
 
         account_id = d.pop("accountId")
 
-        def _parse_account_name(data: object) -> None | str:
+        def _parse_account_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         account_name = _parse_account_name(d.pop("accountName"))
 
 
-        def _parse_institution_name(data: object) -> None | str:
+        def _parse_institution_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         institution_name = _parse_institution_name(d.pop("institutionName"))
 
@@ -209,46 +207,46 @@ class PostIntegrationIntegrationFinancialTransactionsResponse201:
 
         name = d.pop("name")
 
-        def _parse_merchant_name(data: object) -> None | str:
+        def _parse_merchant_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         merchant_name = _parse_merchant_name(d.pop("merchantName"))
 
 
-        def _parse_category(data: object) -> None | str:
+        def _parse_category(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         category = _parse_category(d.pop("category"))
 
 
-        def _parse_category_detailed(data: object) -> None | str:
+        def _parse_category_detailed(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         category_detailed = _parse_category_detailed(d.pop("categoryDetailed"))
 
 
         transaction_date = d.pop("transactionDate")
 
-        def _parse_authorized_date(data: object) -> None | str:
+        def _parse_authorized_date(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         authorized_date = _parse_authorized_date(d.pop("authorizedDate"))
 
 
         pending = d.pop("pending")
 
-        def _parse_logo_url(data: object) -> None | str:
+        def _parse_logo_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         logo_url = _parse_logo_url(d.pop("logoUrl"))
 

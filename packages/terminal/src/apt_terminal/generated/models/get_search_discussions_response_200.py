@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,8 +9,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
   from ..models.search_discussion_thread_result import SearchDiscussionThreadResult
+  from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
 
 
 
@@ -26,16 +24,16 @@ T = TypeVar("T", bound="GetSearchDiscussionsResponse200")
 class GetSearchDiscussionsResponse200:
     """ 
         Attributes:
-            threads (list[SearchDiscussionThreadResult]):
-            replies (list[SearchDiscussionReplyResult]):
+            threads (list['SearchDiscussionThreadResult']):
+            replies (list['SearchDiscussionReplyResult']):
             page (int):
             page_size (int):
             threads_has_more (bool):
             replies_has_more (bool):
      """
 
-    threads: list[SearchDiscussionThreadResult]
-    replies: list[SearchDiscussionReplyResult]
+    threads: list['SearchDiscussionThreadResult']
+    replies: list['SearchDiscussionReplyResult']
     page: int
     page_size: int
     threads_has_more: bool
@@ -47,8 +45,8 @@ class GetSearchDiscussionsResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
         from ..models.search_discussion_thread_result import SearchDiscussionThreadResult
+        from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
         threads = []
         for threads_item_data in self.threads:
             threads_item = threads_item_data.to_dict()
@@ -89,8 +87,8 @@ class GetSearchDiscussionsResponse200:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
         from ..models.search_discussion_thread_result import SearchDiscussionThreadResult
+        from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
         d = dict(src_dict)
         threads = []
         _threads = d.pop("threads")

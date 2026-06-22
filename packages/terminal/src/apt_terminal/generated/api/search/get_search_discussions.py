@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -13,15 +12,16 @@ from ...models.get_search_discussions_response_200 import GetSearchDiscussionsRe
 from ...models.get_search_discussions_type import GetSearchDiscussionsType
 from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
     q: str,
-    type_: GetSearchDiscussionsType | Unset = UNSET,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 20,
+    type_: Union[Unset, GetSearchDiscussionsType] = UNSET,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 20,
 
 ) -> dict[str, Any]:
     
@@ -32,7 +32,7 @@ def _get_kwargs(
 
     params["q"] = q
 
-    json_type_: str | Unset = UNSET
+    json_type_: Union[Unset, str] = UNSET
     if not isinstance(type_, Unset):
         json_type_ = type_.value
 
@@ -57,7 +57,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetSearchDiscussionsResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetSearchDiscussionsResponse200]]:
     if response.status_code == 200:
         response_200 = GetSearchDiscussionsResponse200.from_dict(response.json())
 
@@ -85,7 +85,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetSearchDiscussionsResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetSearchDiscussionsResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -98,25 +98,25 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     q: str,
-    type_: GetSearchDiscussionsType | Unset = UNSET,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 20,
+    type_: Union[Unset, GetSearchDiscussionsType] = UNSET,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 20,
 
-) -> Response[Error | GetSearchDiscussionsResponse200]:
+) -> Response[Union[Error, GetSearchDiscussionsResponse200]]:
     """ Full-text search discussions (threads and/or replies)
 
     Args:
         q (str):
-        type_ (GetSearchDiscussionsType | Unset):
-        page (int | Unset):
-        page_size (int | Unset):  Default: 20.
+        type_ (Union[Unset, GetSearchDiscussionsType]):
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSearchDiscussionsResponse200]
+        Response[Union[Error, GetSearchDiscussionsResponse200]]
      """
 
 
@@ -138,25 +138,25 @@ def sync(
     *,
     client: AuthenticatedClient,
     q: str,
-    type_: GetSearchDiscussionsType | Unset = UNSET,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 20,
+    type_: Union[Unset, GetSearchDiscussionsType] = UNSET,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 20,
 
-) -> Error | GetSearchDiscussionsResponse200 | None:
+) -> Optional[Union[Error, GetSearchDiscussionsResponse200]]:
     """ Full-text search discussions (threads and/or replies)
 
     Args:
         q (str):
-        type_ (GetSearchDiscussionsType | Unset):
-        page (int | Unset):
-        page_size (int | Unset):  Default: 20.
+        type_ (Union[Unset, GetSearchDiscussionsType]):
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSearchDiscussionsResponse200
+        Union[Error, GetSearchDiscussionsResponse200]
      """
 
 
@@ -173,25 +173,25 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     q: str,
-    type_: GetSearchDiscussionsType | Unset = UNSET,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 20,
+    type_: Union[Unset, GetSearchDiscussionsType] = UNSET,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 20,
 
-) -> Response[Error | GetSearchDiscussionsResponse200]:
+) -> Response[Union[Error, GetSearchDiscussionsResponse200]]:
     """ Full-text search discussions (threads and/or replies)
 
     Args:
         q (str):
-        type_ (GetSearchDiscussionsType | Unset):
-        page (int | Unset):
-        page_size (int | Unset):  Default: 20.
+        type_ (Union[Unset, GetSearchDiscussionsType]):
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSearchDiscussionsResponse200]
+        Response[Union[Error, GetSearchDiscussionsResponse200]]
      """
 
 
@@ -213,25 +213,25 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     q: str,
-    type_: GetSearchDiscussionsType | Unset = UNSET,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 20,
+    type_: Union[Unset, GetSearchDiscussionsType] = UNSET,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 20,
 
-) -> Error | GetSearchDiscussionsResponse200 | None:
+) -> Optional[Union[Error, GetSearchDiscussionsResponse200]]:
     """ Full-text search discussions (threads and/or replies)
 
     Args:
         q (str):
-        type_ (GetSearchDiscussionsType | Unset):
-        page (int | Unset):
-        page_size (int | Unset):  Default: 20.
+        type_ (Union[Unset, GetSearchDiscussionsType]):
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSearchDiscussionsResponse200
+        Union[Error, GetSearchDiscussionsResponse200]
      """
 
 

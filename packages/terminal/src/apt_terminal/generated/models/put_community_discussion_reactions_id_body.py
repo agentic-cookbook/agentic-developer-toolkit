@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,16 +22,16 @@ T = TypeVar("T", bound="PutCommunityDiscussionReactionsIdBody")
 class PutCommunityDiscussionReactionsIdBody:
     """ 
         Attributes:
-            target_type (str | Unset):
-            target_id (str | Unset):
-            ecosystem_id (str | Unset):
-            emoji (str | Unset):
+            target_type (Union[Unset, str]):
+            target_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
+            emoji (Union[Unset, str]):
      """
 
-    target_type: str | Unset = UNSET
-    target_id: str | Unset = UNSET
-    ecosystem_id: str | Unset = UNSET
-    emoji: str | Unset = UNSET
+    target_type: Union[Unset, str] = UNSET
+    target_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    emoji: Union[Unset, str] = UNSET
 
 
 

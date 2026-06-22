@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,12 +24,12 @@ class PostRegistryNamespacesIdEcosystemsBody:
         Attributes:
             slug (str):
             name (str):
-            rdid (str | Unset): Override; defaults to <namespace-prefix>.<slug>
+            rdid (Union[Unset, str]): Override; defaults to <namespace-prefix>.<slug>
      """
 
     slug: str
     name: str
-    rdid: str | Unset = UNSET
+    rdid: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.post_persona_memory_blocks_body_content_type_1 import PostPersonaMemoryBlocksBodyContentType1
@@ -27,17 +27,17 @@ class PostPersonaMemoryBlocksBody:
     """ 
         Attributes:
             name (str):
-            content (bool | float | list[Any] | None | PostPersonaMemoryBlocksBodyContentType1 | str):
-            owner_id (str | Unset):
-            deleted_at (None | str | Unset):
-            size_limit (int | None | Unset):
+            content (Union['PostPersonaMemoryBlocksBodyContentType1', None, bool, float, list[Any], str]):
+            owner_id (Union[Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            size_limit (Union[None, Unset, int]):
      """
 
     name: str
-    content: bool | float | list[Any] | None | PostPersonaMemoryBlocksBodyContentType1 | str
-    owner_id: str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    size_limit: int | None | Unset = UNSET
+    content: Union['PostPersonaMemoryBlocksBodyContentType1', None, bool, float, list[Any], str]
+    owner_id: Union[Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    size_limit: Union[None, Unset, int] = UNSET
 
 
 
@@ -47,7 +47,7 @@ class PostPersonaMemoryBlocksBody:
         from ..models.post_persona_memory_blocks_body_content_type_1 import PostPersonaMemoryBlocksBodyContentType1
         name = self.name
 
-        content: bool | dict[str, Any] | float | list[Any] | None | str
+        content: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.content, PostPersonaMemoryBlocksBodyContentType1):
             content = self.content.to_dict()
         elif isinstance(self.content, list):
@@ -59,13 +59,13 @@ class PostPersonaMemoryBlocksBody:
 
         owner_id = self.owner_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
             deleted_at = self.deleted_at
 
-        size_limit: int | None | Unset
+        size_limit: Union[None, Unset, int]
         if isinstance(self.size_limit, Unset):
             size_limit = UNSET
         else:
@@ -95,7 +95,7 @@ class PostPersonaMemoryBlocksBody:
         d = dict(src_dict)
         name = d.pop("name")
 
-        def _parse_content(data: object) -> bool | float | list[Any] | None | PostPersonaMemoryBlocksBodyContentType1 | str:
+        def _parse_content(data: object) -> Union['PostPersonaMemoryBlocksBodyContentType1', None, bool, float, list[Any], str]:
             if data is None:
                 return data
             try:
@@ -106,7 +106,7 @@ class PostPersonaMemoryBlocksBody:
 
 
                 return content_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -114,31 +114,31 @@ class PostPersonaMemoryBlocksBody:
                 content_type_2 = cast(list[Any], data)
 
                 return content_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PostPersonaMemoryBlocksBodyContentType1 | str, data)
+            return cast(Union['PostPersonaMemoryBlocksBodyContentType1', None, bool, float, list[Any], str], data)
 
         content = _parse_content(d.pop("content"))
 
 
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        def _parse_size_limit(data: object) -> int | None | Unset:
+        def _parse_size_limit(data: object) -> Union[None, Unset, int]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(int | None | Unset, data)
+            return cast(Union[None, Unset, int], data)
 
         size_limit = _parse_size_limit(d.pop("sizeLimit", UNSET))
 

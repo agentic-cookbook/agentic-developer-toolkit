@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -12,19 +11,20 @@ from ...models.error import Error
 from ...models.feed_page import FeedPage
 from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
-    entity_type: str | Unset = UNSET,
-    action: str | Unset = UNSET,
-    source: str | Unset = UNSET,
-    since: str | Unset = UNSET,
-    until: str | Unset = UNSET,
-    unread: str | Unset = UNSET,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    entity_type: Union[Unset, str] = UNSET,
+    action: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
+    since: Union[Unset, str] = UNSET,
+    until: Union[Unset, str] = UNSET,
+    unread: Union[Unset, str] = UNSET,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -64,7 +64,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | FeedPage | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, FeedPage]]:
     if response.status_code == 200:
         response_200 = FeedPage.from_dict(response.json())
 
@@ -92,7 +92,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | FeedPage]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, FeedPage]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -104,34 +104,34 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    entity_type: str | Unset = UNSET,
-    action: str | Unset = UNSET,
-    source: str | Unset = UNSET,
-    since: str | Unset = UNSET,
-    until: str | Unset = UNSET,
-    unread: str | Unset = UNSET,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    entity_type: Union[Unset, str] = UNSET,
+    action: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
+    since: Union[Unset, str] = UNSET,
+    until: Union[Unset, str] = UNSET,
+    unread: Union[Unset, str] = UNSET,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> Response[Error | FeedPage]:
+) -> Response[Union[Error, FeedPage]]:
     """ List the caller's activity feed (filterable, paginated)
 
     Args:
-        entity_type (str | Unset):
-        action (str | Unset):
-        source (str | Unset):
-        since (str | Unset):
-        until (str | Unset):
-        unread (str | Unset):
-        page (str | Unset):
-        page_size (str | Unset):
+        entity_type (Union[Unset, str]):
+        action (Union[Unset, str]):
+        source (Union[Unset, str]):
+        since (Union[Unset, str]):
+        until (Union[Unset, str]):
+        unread (Union[Unset, str]):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | FeedPage]
+        Response[Union[Error, FeedPage]]
      """
 
 
@@ -156,34 +156,34 @@ page_size=page_size,
 def sync(
     *,
     client: AuthenticatedClient,
-    entity_type: str | Unset = UNSET,
-    action: str | Unset = UNSET,
-    source: str | Unset = UNSET,
-    since: str | Unset = UNSET,
-    until: str | Unset = UNSET,
-    unread: str | Unset = UNSET,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    entity_type: Union[Unset, str] = UNSET,
+    action: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
+    since: Union[Unset, str] = UNSET,
+    until: Union[Unset, str] = UNSET,
+    unread: Union[Unset, str] = UNSET,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> Error | FeedPage | None:
+) -> Optional[Union[Error, FeedPage]]:
     """ List the caller's activity feed (filterable, paginated)
 
     Args:
-        entity_type (str | Unset):
-        action (str | Unset):
-        source (str | Unset):
-        since (str | Unset):
-        until (str | Unset):
-        unread (str | Unset):
-        page (str | Unset):
-        page_size (str | Unset):
+        entity_type (Union[Unset, str]):
+        action (Union[Unset, str]):
+        source (Union[Unset, str]):
+        since (Union[Unset, str]):
+        until (Union[Unset, str]):
+        unread (Union[Unset, str]):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | FeedPage
+        Union[Error, FeedPage]
      """
 
 
@@ -203,34 +203,34 @@ page_size=page_size,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    entity_type: str | Unset = UNSET,
-    action: str | Unset = UNSET,
-    source: str | Unset = UNSET,
-    since: str | Unset = UNSET,
-    until: str | Unset = UNSET,
-    unread: str | Unset = UNSET,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    entity_type: Union[Unset, str] = UNSET,
+    action: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
+    since: Union[Unset, str] = UNSET,
+    until: Union[Unset, str] = UNSET,
+    unread: Union[Unset, str] = UNSET,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> Response[Error | FeedPage]:
+) -> Response[Union[Error, FeedPage]]:
     """ List the caller's activity feed (filterable, paginated)
 
     Args:
-        entity_type (str | Unset):
-        action (str | Unset):
-        source (str | Unset):
-        since (str | Unset):
-        until (str | Unset):
-        unread (str | Unset):
-        page (str | Unset):
-        page_size (str | Unset):
+        entity_type (Union[Unset, str]):
+        action (Union[Unset, str]):
+        source (Union[Unset, str]):
+        since (Union[Unset, str]):
+        until (Union[Unset, str]):
+        unread (Union[Unset, str]):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | FeedPage]
+        Response[Union[Error, FeedPage]]
      """
 
 
@@ -255,34 +255,34 @@ page_size=page_size,
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    entity_type: str | Unset = UNSET,
-    action: str | Unset = UNSET,
-    source: str | Unset = UNSET,
-    since: str | Unset = UNSET,
-    until: str | Unset = UNSET,
-    unread: str | Unset = UNSET,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    entity_type: Union[Unset, str] = UNSET,
+    action: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
+    since: Union[Unset, str] = UNSET,
+    until: Union[Unset, str] = UNSET,
+    unread: Union[Unset, str] = UNSET,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> Error | FeedPage | None:
+) -> Optional[Union[Error, FeedPage]]:
     """ List the caller's activity feed (filterable, paginated)
 
     Args:
-        entity_type (str | Unset):
-        action (str | Unset):
-        source (str | Unset):
-        since (str | Unset):
-        until (str | Unset):
-        unread (str | Unset):
-        page (str | Unset):
-        page_size (str | Unset):
+        entity_type (Union[Unset, str]):
+        action (Union[Unset, str]):
+        source (Union[Unset, str]):
+        since (Union[Unset, str]):
+        until (Union[Unset, str]):
+        unread (Union[Unset, str]):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | FeedPage
+        Union[Error, FeedPage]
      """
 
 

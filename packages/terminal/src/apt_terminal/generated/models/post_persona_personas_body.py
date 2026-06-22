@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -28,30 +27,30 @@ class PostPersonaPersonasBody:
             name (str):
             model (str):
             model_prompt (str):
-            owner_id (str | Unset):
-            description (None | str | Unset):
-            visibility (str | Unset):
-            service_id (None | str | Unset):
-            app_id (None | str | Unset):
-            voice (None | str | Unset):
-            character (None | str | Unset):
-            examples (None | str | Unset):
-            id (str | Unset):
+            owner_id (Union[Unset, str]):
+            description (Union[None, Unset, str]):
+            visibility (Union[Unset, str]):
+            service_id (Union[None, Unset, str]):
+            app_id (Union[None, Unset, str]):
+            voice (Union[None, Unset, str]):
+            character (Union[None, Unset, str]):
+            examples (Union[None, Unset, str]):
+            id (Union[Unset, str]):
      """
 
     slug: str
     name: str
     model: str
     model_prompt: str
-    owner_id: str | Unset = UNSET
-    description: None | str | Unset = UNSET
-    visibility: str | Unset = UNSET
-    service_id: None | str | Unset = UNSET
-    app_id: None | str | Unset = UNSET
-    voice: None | str | Unset = UNSET
-    character: None | str | Unset = UNSET
-    examples: None | str | Unset = UNSET
-    id: str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    description: Union[None, Unset, str] = UNSET
+    visibility: Union[Unset, str] = UNSET
+    service_id: Union[None, Unset, str] = UNSET
+    app_id: Union[None, Unset, str] = UNSET
+    voice: Union[None, Unset, str] = UNSET
+    character: Union[None, Unset, str] = UNSET
+    examples: Union[None, Unset, str] = UNSET
+    id: Union[Unset, str] = UNSET
 
 
 
@@ -68,7 +67,7 @@ class PostPersonaPersonasBody:
 
         owner_id = self.owner_id
 
-        description: None | str | Unset
+        description: Union[None, Unset, str]
         if isinstance(self.description, Unset):
             description = UNSET
         else:
@@ -76,31 +75,31 @@ class PostPersonaPersonasBody:
 
         visibility = self.visibility
 
-        service_id: None | str | Unset
+        service_id: Union[None, Unset, str]
         if isinstance(self.service_id, Unset):
             service_id = UNSET
         else:
             service_id = self.service_id
 
-        app_id: None | str | Unset
+        app_id: Union[None, Unset, str]
         if isinstance(self.app_id, Unset):
             app_id = UNSET
         else:
             app_id = self.app_id
 
-        voice: None | str | Unset
+        voice: Union[None, Unset, str]
         if isinstance(self.voice, Unset):
             voice = UNSET
         else:
             voice = self.voice
 
-        character: None | str | Unset
+        character: Union[None, Unset, str]
         if isinstance(self.character, Unset):
             character = UNSET
         else:
             character = self.character
 
-        examples: None | str | Unset
+        examples: Union[None, Unset, str]
         if isinstance(self.examples, Unset):
             examples = UNSET
         else:
@@ -153,64 +152,64 @@ class PostPersonaPersonasBody:
 
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_description(data: object) -> None | str | Unset:
+        def _parse_description(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         description = _parse_description(d.pop("description", UNSET))
 
 
         visibility = d.pop("visibility", UNSET)
 
-        def _parse_service_id(data: object) -> None | str | Unset:
+        def _parse_service_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         service_id = _parse_service_id(d.pop("serviceId", UNSET))
 
 
-        def _parse_app_id(data: object) -> None | str | Unset:
+        def _parse_app_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         app_id = _parse_app_id(d.pop("appId", UNSET))
 
 
-        def _parse_voice(data: object) -> None | str | Unset:
+        def _parse_voice(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         voice = _parse_voice(d.pop("voice", UNSET))
 
 
-        def _parse_character(data: object) -> None | str | Unset:
+        def _parse_character(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         character = _parse_character(d.pop("character", UNSET))
 
 
-        def _parse_examples(data: object) -> None | str | Unset:
+        def _parse_examples(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         examples = _parse_examples(d.pop("examples", UNSET))
 

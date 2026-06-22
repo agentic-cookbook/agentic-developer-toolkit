@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,24 +22,24 @@ T = TypeVar("T", bound="PutCommunityDiscussionCategoriesIdBody")
 class PutCommunityDiscussionCategoriesIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            name (str | Unset):
-            slug (str | Unset):
-            description (str | Unset):
-            display_order (int | Unset):
-            color (str | Unset):
-            is_public (bool | Unset):
-            is_archived (bool | Unset):
+            ecosystem_id (Union[Unset, str]):
+            name (Union[Unset, str]):
+            slug (Union[Unset, str]):
+            description (Union[Unset, str]):
+            display_order (Union[Unset, int]):
+            color (Union[Unset, str]):
+            is_public (Union[Unset, bool]):
+            is_archived (Union[Unset, bool]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    name: str | Unset = UNSET
-    slug: str | Unset = UNSET
-    description: str | Unset = UNSET
-    display_order: int | Unset = UNSET
-    color: str | Unset = UNSET
-    is_public: bool | Unset = UNSET
-    is_archived: bool | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
+    slug: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
+    display_order: Union[Unset, int] = UNSET
+    color: Union[Unset, str] = UNSET
+    is_public: Union[Unset, bool] = UNSET
+    is_archived: Union[Unset, bool] = UNSET
 
 
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,7 +23,7 @@ class PutContentFeedbackIdResponse200:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             user_email (str):
             category (str):
@@ -43,7 +41,7 @@ class PutContentFeedbackIdResponse200:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     user_email: str
     category: str
@@ -67,7 +65,7 @@ class PutContentFeedbackIdResponse200:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -129,10 +127,10 @@ class PutContentFeedbackIdResponse200:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -27,7 +25,7 @@ class GetMonitoringSitesResponse200Item:
             site_group_id (str):
             name (str):
             slug (str):
-            description (None | str):
+            description (Union[None, str]):
             display_order (int):
             created_at (str):
             updated_at (str):
@@ -37,7 +35,7 @@ class GetMonitoringSitesResponse200Item:
     site_group_id: str
     name: str
     slug: str
-    description: None | str
+    description: Union[None, str]
     display_order: int
     created_at: str
     updated_at: str
@@ -55,7 +53,7 @@ class GetMonitoringSitesResponse200Item:
 
         slug = self.slug
 
-        description: None | str
+        description: Union[None, str]
         description = self.description
 
         display_order = self.display_order
@@ -93,10 +91,10 @@ class GetMonitoringSitesResponse200Item:
 
         slug = d.pop("slug")
 
-        def _parse_description(data: object) -> None | str:
+        def _parse_description(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         description = _parse_description(d.pop("description"))
 

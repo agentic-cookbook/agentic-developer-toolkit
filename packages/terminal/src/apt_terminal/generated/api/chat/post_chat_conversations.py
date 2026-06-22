@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.chat_conversation import ChatConversation
 from ...models.chat_conversation_create import ChatConversationCreate
 from ...models.error import Error
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: ChatConversationCreate | Unset = UNSET,
+    body: ChatConversationCreate,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/chat/conversations",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ChatConversation | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[ChatConversation, Error]]:
     if response.status_code == 201:
         response_201 = ChatConversation.from_dict(response.json())
 
@@ -72,7 +69,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ChatConversation | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[ChatConversation, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,20 +81,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: ChatConversationCreate | Unset = UNSET,
+    body: ChatConversationCreate,
 
-) -> Response[ChatConversation | Error]:
+) -> Response[Union[ChatConversation, Error]]:
     """ Create a chat conversation
 
     Args:
-        body (ChatConversationCreate | Unset):
+        body (ChatConversationCreate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ChatConversation | Error]
+        Response[Union[ChatConversation, Error]]
      """
 
 
@@ -115,20 +112,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: ChatConversationCreate | Unset = UNSET,
+    body: ChatConversationCreate,
 
-) -> ChatConversation | Error | None:
+) -> Optional[Union[ChatConversation, Error]]:
     """ Create a chat conversation
 
     Args:
-        body (ChatConversationCreate | Unset):
+        body (ChatConversationCreate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ChatConversation | Error
+        Union[ChatConversation, Error]
      """
 
 
@@ -141,20 +138,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: ChatConversationCreate | Unset = UNSET,
+    body: ChatConversationCreate,
 
-) -> Response[ChatConversation | Error]:
+) -> Response[Union[ChatConversation, Error]]:
     """ Create a chat conversation
 
     Args:
-        body (ChatConversationCreate | Unset):
+        body (ChatConversationCreate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ChatConversation | Error]
+        Response[Union[ChatConversation, Error]]
      """
 
 
@@ -172,20 +169,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: ChatConversationCreate | Unset = UNSET,
+    body: ChatConversationCreate,
 
-) -> ChatConversation | Error | None:
+) -> Optional[Union[ChatConversation, Error]]:
     """ Create a chat conversation
 
     Args:
-        body (ChatConversationCreate | Unset):
+        body (ChatConversationCreate):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ChatConversation | Error
+        Union[ChatConversation, Error]
      """
 
 

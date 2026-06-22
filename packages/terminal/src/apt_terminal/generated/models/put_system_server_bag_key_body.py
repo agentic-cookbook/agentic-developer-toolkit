@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.put_system_server_bag_key_body_value_type_1 import PutSystemServerBagKeyBodyValueType1
@@ -26,14 +26,14 @@ T = TypeVar("T", bound="PutSystemServerBagKeyBody")
 class PutSystemServerBagKeyBody:
     """ 
         Attributes:
-            key (str | Unset):
-            value (bool | float | list[Any] | None | PutSystemServerBagKeyBodyValueType1 | str | Unset):
-            description (str | Unset):
+            key (Union[Unset, str]):
+            value (Union['PutSystemServerBagKeyBodyValueType1', None, Unset, bool, float, list[Any], str]):
+            description (Union[Unset, str]):
      """
 
-    key: str | Unset = UNSET
-    value: bool | float | list[Any] | None | PutSystemServerBagKeyBodyValueType1 | str | Unset = UNSET
-    description: str | Unset = UNSET
+    key: Union[Unset, str] = UNSET
+    value: Union['PutSystemServerBagKeyBodyValueType1', None, Unset, bool, float, list[Any], str] = UNSET
+    description: Union[Unset, str] = UNSET
 
 
 
@@ -43,7 +43,7 @@ class PutSystemServerBagKeyBody:
         from ..models.put_system_server_bag_key_body_value_type_1 import PutSystemServerBagKeyBodyValueType1
         key = self.key
 
-        value: bool | dict[str, Any] | float | list[Any] | None | str | Unset
+        value: Union[None, Unset, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.value, Unset):
             value = UNSET
         elif isinstance(self.value, PutSystemServerBagKeyBodyValueType1):
@@ -79,7 +79,7 @@ class PutSystemServerBagKeyBody:
         d = dict(src_dict)
         key = d.pop("key", UNSET)
 
-        def _parse_value(data: object) -> bool | float | list[Any] | None | PutSystemServerBagKeyBodyValueType1 | str | Unset:
+        def _parse_value(data: object) -> Union['PutSystemServerBagKeyBodyValueType1', None, Unset, bool, float, list[Any], str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -92,7 +92,7 @@ class PutSystemServerBagKeyBody:
 
 
                 return value_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -100,9 +100,9 @@ class PutSystemServerBagKeyBody:
                 value_type_2 = cast(list[Any], data)
 
                 return value_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PutSystemServerBagKeyBodyValueType1 | str | Unset, data)
+            return cast(Union['PutSystemServerBagKeyBodyValueType1', None, Unset, bool, float, list[Any], str], data)
 
         value = _parse_value(d.pop("value", UNSET))
 

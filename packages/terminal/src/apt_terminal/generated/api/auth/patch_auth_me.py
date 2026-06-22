@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.patch_auth_me_body import PatchAuthMeBody
 from ...models.user import User
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PatchAuthMeBody | Unset = UNSET,
+    body: PatchAuthMeBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/auth/me",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | User | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, User]]:
     if response.status_code == 200:
         response_200 = User.from_dict(response.json())
 
@@ -86,7 +83,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | User]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, User]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -98,20 +95,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMeBody | Unset = UNSET,
+    body: PatchAuthMeBody,
 
-) -> Response[Error | User]:
+) -> Response[Union[Error, User]]:
     """ Update the caller's own profile (display name and/or login slug)
 
     Args:
-        body (PatchAuthMeBody | Unset): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | User]
+        Response[Union[Error, User]]
      """
 
 
@@ -129,20 +126,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMeBody | Unset = UNSET,
+    body: PatchAuthMeBody,
 
-) -> Error | User | None:
+) -> Optional[Union[Error, User]]:
     """ Update the caller's own profile (display name and/or login slug)
 
     Args:
-        body (PatchAuthMeBody | Unset): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | User
+        Union[Error, User]
      """
 
 
@@ -155,20 +152,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMeBody | Unset = UNSET,
+    body: PatchAuthMeBody,
 
-) -> Response[Error | User]:
+) -> Response[Union[Error, User]]:
     """ Update the caller's own profile (display name and/or login slug)
 
     Args:
-        body (PatchAuthMeBody | Unset): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | User]
+        Response[Union[Error, User]]
      """
 
 
@@ -186,20 +183,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMeBody | Unset = UNSET,
+    body: PatchAuthMeBody,
 
-) -> Error | User | None:
+) -> Optional[Union[Error, User]]:
     """ Update the caller's own profile (display name and/or login slug)
 
     Args:
-        body (PatchAuthMeBody | Unset): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | User
+        Union[Error, User]
      """
 
 

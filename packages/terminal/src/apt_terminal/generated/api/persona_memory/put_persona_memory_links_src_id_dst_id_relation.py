@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_persona_memory_links_src_id_dst_id_relation_body import PutPersonaMemoryLinksSrcIdDstIdRelationBody
 from ...models.put_persona_memory_links_src_id_dst_id_relation_response_200 import PutPersonaMemoryLinksSrcIdDstIdRelationResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -21,7 +19,7 @@ def _get_kwargs(
     dst_id: str,
     relation: str,
     *,
-    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset = UNSET,
+    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,12 +31,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/persona-memory/links/{src_id}/{dst_id}/{relation}".format(src_id=quote(str(src_id), safe=""),dst_id=quote(str(dst_id), safe=""),relation=quote(str(relation), safe=""),),
+        "url": "/persona-memory/links/{src_id}/{dst_id}/{relation}".format(src_id=src_id,dst_id=dst_id,relation=relation,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -47,7 +44,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     if response.status_code == 200:
         response_200 = PutPersonaMemoryLinksSrcIdDstIdRelationResponse200.from_dict(response.json())
 
@@ -82,7 +79,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -97,23 +94,23 @@ def sync_detailed(
     relation: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset = UNSET,
+    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody,
 
-) -> Response[Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]:
+) -> Response[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Update links
 
     Args:
         src_id (str):
         dst_id (str):
         relation (str):
-        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset):
+        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]
+        Response[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]
      """
 
 
@@ -137,23 +134,23 @@ def sync(
     relation: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset = UNSET,
+    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody,
 
-) -> Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200 | None:
+) -> Optional[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Update links
 
     Args:
         src_id (str):
         dst_id (str):
         relation (str):
-        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset):
+        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200
+        Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]
      """
 
 
@@ -172,23 +169,23 @@ async def asyncio_detailed(
     relation: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset = UNSET,
+    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody,
 
-) -> Response[Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]:
+) -> Response[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Update links
 
     Args:
         src_id (str):
         dst_id (str):
         relation (str):
-        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset):
+        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]
+        Response[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]
      """
 
 
@@ -212,23 +209,23 @@ async def asyncio(
     relation: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset = UNSET,
+    body: PutPersonaMemoryLinksSrcIdDstIdRelationBody,
 
-) -> Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200 | None:
+) -> Optional[Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Update links
 
     Args:
         src_id (str):
         dst_id (str):
         relation (str):
-        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody | Unset):
+        body (PutPersonaMemoryLinksSrcIdDstIdRelationBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutPersonaMemoryLinksSrcIdDstIdRelationResponse200
+        Union[Error, PutPersonaMemoryLinksSrcIdDstIdRelationResponse200]
      """
 
 

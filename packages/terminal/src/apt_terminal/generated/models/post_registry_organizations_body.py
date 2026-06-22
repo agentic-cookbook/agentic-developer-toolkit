@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -26,13 +25,13 @@ class PostRegistryOrganizationsBody:
             slug (str):
             name (str):
             namespace (str): The reverse-domain prefix the org's namespace will own
-            default_ecosystem_slug (str | Unset):  Default: 'default'.
+            default_ecosystem_slug (Union[Unset, str]):  Default: 'default'.
      """
 
     slug: str
     name: str
     namespace: str
-    default_ecosystem_slug: str | Unset = 'default'
+    default_ecosystem_slug: Union[Unset, str] = 'default'
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

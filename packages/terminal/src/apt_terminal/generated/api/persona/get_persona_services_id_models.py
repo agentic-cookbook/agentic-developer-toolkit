@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,6 +10,7 @@ from ... import errors
 from ...models.error import Error
 from ...models.persona_service_model_type_1 import PersonaServiceModelType1
 from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,7 +26,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/persona/services/{id}/models".format(id=quote(str(id), safe=""),),
+        "url": "/persona/services/{id}/models".format(id=id,),
     }
 
 
@@ -34,12 +34,12 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | list[PersonaServiceModelType1 | str] | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, list[Union['PersonaServiceModelType1', str]]]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
         for response_200_item_data in (_response_200):
-            def _parse_response_200_item(data: object) -> PersonaServiceModelType1 | str:
+            def _parse_response_200_item(data: object) -> Union['PersonaServiceModelType1', str]:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
@@ -48,9 +48,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 
                     return componentsschemas_persona_service_model_type_1
-                except (TypeError, ValueError, AttributeError, KeyError):
+                except: # noqa: E722
                     pass
-                return cast(PersonaServiceModelType1 | str, data)
+                return cast(Union['PersonaServiceModelType1', str], data)
 
             response_200_item = _parse_response_200_item(response_200_item_data)
 
@@ -92,7 +92,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | list[PersonaServiceModelType1 | str]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, list[Union['PersonaServiceModelType1', str]]]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -106,7 +106,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | list[PersonaServiceModelType1 | str]]:
+) -> Response[Union[Error, list[Union['PersonaServiceModelType1', str]]]]:
     """ Live provider model catalog — fetched fresh, not persisted
 
     Args:
@@ -117,7 +117,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[PersonaServiceModelType1 | str]]
+        Response[Union[Error, list[Union['PersonaServiceModelType1', str]]]]
      """
 
 
@@ -137,7 +137,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | list[PersonaServiceModelType1 | str] | None:
+) -> Optional[Union[Error, list[Union['PersonaServiceModelType1', str]]]]:
     """ Live provider model catalog — fetched fresh, not persisted
 
     Args:
@@ -148,7 +148,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[PersonaServiceModelType1 | str]
+        Union[Error, list[Union['PersonaServiceModelType1', str]]]
      """
 
 
@@ -163,7 +163,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | list[PersonaServiceModelType1 | str]]:
+) -> Response[Union[Error, list[Union['PersonaServiceModelType1', str]]]]:
     """ Live provider model catalog — fetched fresh, not persisted
 
     Args:
@@ -174,7 +174,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[PersonaServiceModelType1 | str]]
+        Response[Union[Error, list[Union['PersonaServiceModelType1', str]]]]
      """
 
 
@@ -194,7 +194,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | list[PersonaServiceModelType1 | str] | None:
+) -> Optional[Union[Error, list[Union['PersonaServiceModelType1', str]]]]:
     """ Live provider model catalog — fetched fresh, not persisted
 
     Args:
@@ -205,7 +205,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[PersonaServiceModelType1 | str]
+        Union[Error, list[Union['PersonaServiceModelType1', str]]]
      """
 
 

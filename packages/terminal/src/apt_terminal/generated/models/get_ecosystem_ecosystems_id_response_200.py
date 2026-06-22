@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -29,13 +27,13 @@ class GetEcosystemEcosystemsIdResponse200:
             name (str):
             description (str):
             region (str):
-            dedicated_db_connection_id (None | str):
+            dedicated_db_connection_id (Union[None, str]):
             primary_domain (str):
             created_at (str):
             updated_at (str):
             is_deleted (bool):
             type_ (str):
-            namespace_id (None | str):
+            namespace_id (Union[None, str]):
      """
 
     id: str
@@ -44,13 +42,13 @@ class GetEcosystemEcosystemsIdResponse200:
     name: str
     description: str
     region: str
-    dedicated_db_connection_id: None | str
+    dedicated_db_connection_id: Union[None, str]
     primary_domain: str
     created_at: str
     updated_at: str
     is_deleted: bool
     type_: str
-    namespace_id: None | str
+    namespace_id: Union[None, str]
 
 
 
@@ -69,7 +67,7 @@ class GetEcosystemEcosystemsIdResponse200:
 
         region = self.region
 
-        dedicated_db_connection_id: None | str
+        dedicated_db_connection_id: Union[None, str]
         dedicated_db_connection_id = self.dedicated_db_connection_id
 
         primary_domain = self.primary_domain
@@ -82,7 +80,7 @@ class GetEcosystemEcosystemsIdResponse200:
 
         type_ = self.type_
 
-        namespace_id: None | str
+        namespace_id: Union[None, str]
         namespace_id = self.namespace_id
 
 
@@ -123,10 +121,10 @@ class GetEcosystemEcosystemsIdResponse200:
 
         region = d.pop("region")
 
-        def _parse_dedicated_db_connection_id(data: object) -> None | str:
+        def _parse_dedicated_db_connection_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         dedicated_db_connection_id = _parse_dedicated_db_connection_id(d.pop("dedicatedDbConnectionId"))
 
@@ -141,10 +139,10 @@ class GetEcosystemEcosystemsIdResponse200:
 
         type_ = d.pop("type")
 
-        def _parse_namespace_id(data: object) -> None | str:
+        def _parse_namespace_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         namespace_id = _parse_namespace_id(d.pop("namespaceId"))
 

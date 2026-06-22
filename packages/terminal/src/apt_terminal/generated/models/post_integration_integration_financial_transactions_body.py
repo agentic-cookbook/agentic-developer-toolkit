@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -30,18 +29,18 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
             amount (str):
             name (str):
             transaction_date (str):
-            deleted_at (None | str | Unset):
-            owner_id (str | Unset):
-            account_name (None | str | Unset):
-            institution_name (None | str | Unset):
-            currency (str | Unset):
-            merchant_name (None | str | Unset):
-            category (None | str | Unset):
-            category_detailed (None | str | Unset):
-            authorized_date (None | str | Unset):
-            pending (bool | Unset):
-            logo_url (None | str | Unset):
-            is_deleted (bool | Unset):
+            deleted_at (Union[None, Unset, str]):
+            owner_id (Union[Unset, str]):
+            account_name (Union[None, Unset, str]):
+            institution_name (Union[None, Unset, str]):
+            currency (Union[Unset, str]):
+            merchant_name (Union[None, Unset, str]):
+            category (Union[None, Unset, str]):
+            category_detailed (Union[None, Unset, str]):
+            authorized_date (Union[None, Unset, str]):
+            pending (Union[Unset, bool]):
+            logo_url (Union[None, Unset, str]):
+            is_deleted (Union[Unset, bool]):
      """
 
     connection_id: str
@@ -50,18 +49,18 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
     amount: str
     name: str
     transaction_date: str
-    deleted_at: None | str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    account_name: None | str | Unset = UNSET
-    institution_name: None | str | Unset = UNSET
-    currency: str | Unset = UNSET
-    merchant_name: None | str | Unset = UNSET
-    category: None | str | Unset = UNSET
-    category_detailed: None | str | Unset = UNSET
-    authorized_date: None | str | Unset = UNSET
-    pending: bool | Unset = UNSET
-    logo_url: None | str | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    account_name: Union[None, Unset, str] = UNSET
+    institution_name: Union[None, Unset, str] = UNSET
+    currency: Union[Unset, str] = UNSET
+    merchant_name: Union[None, Unset, str] = UNSET
+    category: Union[None, Unset, str] = UNSET
+    category_detailed: Union[None, Unset, str] = UNSET
+    authorized_date: Union[None, Unset, str] = UNSET
+    pending: Union[Unset, bool] = UNSET
+    logo_url: Union[None, Unset, str] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
 
 
 
@@ -80,7 +79,7 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
 
         transaction_date = self.transaction_date
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -88,13 +87,13 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
 
         owner_id = self.owner_id
 
-        account_name: None | str | Unset
+        account_name: Union[None, Unset, str]
         if isinstance(self.account_name, Unset):
             account_name = UNSET
         else:
             account_name = self.account_name
 
-        institution_name: None | str | Unset
+        institution_name: Union[None, Unset, str]
         if isinstance(self.institution_name, Unset):
             institution_name = UNSET
         else:
@@ -102,25 +101,25 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
 
         currency = self.currency
 
-        merchant_name: None | str | Unset
+        merchant_name: Union[None, Unset, str]
         if isinstance(self.merchant_name, Unset):
             merchant_name = UNSET
         else:
             merchant_name = self.merchant_name
 
-        category: None | str | Unset
+        category: Union[None, Unset, str]
         if isinstance(self.category, Unset):
             category = UNSET
         else:
             category = self.category
 
-        category_detailed: None | str | Unset
+        category_detailed: Union[None, Unset, str]
         if isinstance(self.category_detailed, Unset):
             category_detailed = UNSET
         else:
             category_detailed = self.category_detailed
 
-        authorized_date: None | str | Unset
+        authorized_date: Union[None, Unset, str]
         if isinstance(self.authorized_date, Unset):
             authorized_date = UNSET
         else:
@@ -128,7 +127,7 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
 
         pending = self.pending
 
-        logo_url: None | str | Unset
+        logo_url: Union[None, Unset, str]
         if isinstance(self.logo_url, Unset):
             logo_url = UNSET
         else:
@@ -191,88 +190,88 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
 
         transaction_date = d.pop("transactionDate")
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_account_name(data: object) -> None | str | Unset:
+        def _parse_account_name(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         account_name = _parse_account_name(d.pop("accountName", UNSET))
 
 
-        def _parse_institution_name(data: object) -> None | str | Unset:
+        def _parse_institution_name(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         institution_name = _parse_institution_name(d.pop("institutionName", UNSET))
 
 
         currency = d.pop("currency", UNSET)
 
-        def _parse_merchant_name(data: object) -> None | str | Unset:
+        def _parse_merchant_name(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         merchant_name = _parse_merchant_name(d.pop("merchantName", UNSET))
 
 
-        def _parse_category(data: object) -> None | str | Unset:
+        def _parse_category(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         category = _parse_category(d.pop("category", UNSET))
 
 
-        def _parse_category_detailed(data: object) -> None | str | Unset:
+        def _parse_category_detailed(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         category_detailed = _parse_category_detailed(d.pop("categoryDetailed", UNSET))
 
 
-        def _parse_authorized_date(data: object) -> None | str | Unset:
+        def _parse_authorized_date(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         authorized_date = _parse_authorized_date(d.pop("authorizedDate", UNSET))
 
 
         pending = d.pop("pending", UNSET)
 
-        def _parse_logo_url(data: object) -> None | str | Unset:
+        def _parse_logo_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         logo_url = _parse_logo_url(d.pop("logoUrl", UNSET))
 

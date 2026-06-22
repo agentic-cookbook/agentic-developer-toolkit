@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,9 +24,9 @@ class GetContentListsResponse200Item:
             id (str):
             owner_id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             name (str):
-            description (None | str):
+            description (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
@@ -36,9 +34,9 @@ class GetContentListsResponse200Item:
     id: str
     owner_id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     name: str
-    description: None | str
+    description: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -53,12 +51,12 @@ class GetContentListsResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         name = self.name
 
-        description: None | str
+        description: Union[None, str]
         description = self.description
 
         created_at = self.created_at
@@ -92,20 +90,20 @@ class GetContentListsResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
         name = d.pop("name")
 
-        def _parse_description(data: object) -> None | str:
+        def _parse_description(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         description = _parse_description(d.pop("description"))
 

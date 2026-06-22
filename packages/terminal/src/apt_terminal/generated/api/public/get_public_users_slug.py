@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/public/users/{slug}".format(slug=quote(str(slug), safe=""),),
+        "url": "/public/users/{slug}".format(slug=slug,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PublicUserProfile | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PublicUserProfile]]:
     if response.status_code == 200:
         response_200 = PublicUserProfile.from_dict(response.json())
 
@@ -55,7 +54,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PublicUserProfile]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PublicUserProfile]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -67,9 +66,9 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[Error | PublicUserProfile]:
+) -> Response[Union[Error, PublicUserProfile]]:
     """ Get a public user profile and its public personas
 
     Args:
@@ -80,7 +79,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PublicUserProfile]
+        Response[Union[Error, PublicUserProfile]]
      """
 
 
@@ -98,9 +97,9 @@ def sync_detailed(
 def sync(
     slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Error | PublicUserProfile | None:
+) -> Optional[Union[Error, PublicUserProfile]]:
     """ Get a public user profile and its public personas
 
     Args:
@@ -111,7 +110,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PublicUserProfile
+        Union[Error, PublicUserProfile]
      """
 
 
@@ -124,9 +123,9 @@ client=client,
 async def asyncio_detailed(
     slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[Error | PublicUserProfile]:
+) -> Response[Union[Error, PublicUserProfile]]:
     """ Get a public user profile and its public personas
 
     Args:
@@ -137,7 +136,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PublicUserProfile]
+        Response[Union[Error, PublicUserProfile]]
      """
 
 
@@ -155,9 +154,9 @@ async def asyncio_detailed(
 async def asyncio(
     slug: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Error | PublicUserProfile | None:
+) -> Optional[Union[Error, PublicUserProfile]]:
     """ Get a public user profile and its public personas
 
     Args:
@@ -168,7 +167,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PublicUserProfile
+        Union[Error, PublicUserProfile]
      """
 
 

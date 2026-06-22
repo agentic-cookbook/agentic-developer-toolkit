@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.post_oauth_signin_login_body import PostOauthSigninLoginBody
 from ...models.post_oauth_signin_login_response_200 import PostOauthSigninLoginResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostOauthSigninLoginBody | Unset = UNSET,
+    body: PostOauthSigninLoginBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/oauth/signin/login",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PostOauthSigninLoginResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostOauthSigninLoginResponse200]]:
     if response.status_code == 200:
         response_200 = PostOauthSigninLoginResponse200.from_dict(response.json())
 
@@ -79,7 +76,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PostOauthSigninLoginResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostOauthSigninLoginResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -90,21 +87,21 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninLoginBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninLoginBody,
 
-) -> Response[Error | PostOauthSigninLoginResponse200]:
+) -> Response[Union[Error, PostOauthSigninLoginResponse200]]:
     """ Central credential login → sets the SSO session, returns the brand redirect URL
 
     Args:
-        body (PostOauthSigninLoginBody | Unset):
+        body (PostOauthSigninLoginBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostOauthSigninLoginResponse200]
+        Response[Union[Error, PostOauthSigninLoginResponse200]]
      """
 
 
@@ -121,21 +118,21 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninLoginBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninLoginBody,
 
-) -> Error | PostOauthSigninLoginResponse200 | None:
+) -> Optional[Union[Error, PostOauthSigninLoginResponse200]]:
     """ Central credential login → sets the SSO session, returns the brand redirect URL
 
     Args:
-        body (PostOauthSigninLoginBody | Unset):
+        body (PostOauthSigninLoginBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostOauthSigninLoginResponse200
+        Union[Error, PostOauthSigninLoginResponse200]
      """
 
 
@@ -147,21 +144,21 @@ body=body,
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninLoginBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninLoginBody,
 
-) -> Response[Error | PostOauthSigninLoginResponse200]:
+) -> Response[Union[Error, PostOauthSigninLoginResponse200]]:
     """ Central credential login → sets the SSO session, returns the brand redirect URL
 
     Args:
-        body (PostOauthSigninLoginBody | Unset):
+        body (PostOauthSigninLoginBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostOauthSigninLoginResponse200]
+        Response[Union[Error, PostOauthSigninLoginResponse200]]
      """
 
 
@@ -178,21 +175,21 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: AuthenticatedClient | Client,
-    body: PostOauthSigninLoginBody | Unset = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    body: PostOauthSigninLoginBody,
 
-) -> Error | PostOauthSigninLoginResponse200 | None:
+) -> Optional[Union[Error, PostOauthSigninLoginResponse200]]:
     """ Central credential login → sets the SSO session, returns the brand redirect URL
 
     Args:
-        body (PostOauthSigninLoginBody | Unset):
+        body (PostOauthSigninLoginBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostOauthSigninLoginResponse200
+        Union[Error, PostOauthSigninLoginResponse200]
      """
 
 

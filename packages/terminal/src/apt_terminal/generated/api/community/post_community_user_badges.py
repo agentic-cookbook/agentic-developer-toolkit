@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.post_community_user_badges_body import PostCommunityUserBadgesBody
 from ...models.post_community_user_badges_response_201 import PostCommunityUserBadgesResponse201
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostCommunityUserBadgesBody | Unset = UNSET,
+    body: PostCommunityUserBadgesBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/community/user-badges",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PostCommunityUserBadgesResponse201 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostCommunityUserBadgesResponse201]]:
     if response.status_code == 201:
         response_201 = PostCommunityUserBadgesResponse201.from_dict(response.json())
 
@@ -72,7 +69,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PostCommunityUserBadgesResponse201]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostCommunityUserBadgesResponse201]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,20 +81,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostCommunityUserBadgesBody | Unset = UNSET,
+    body: PostCommunityUserBadgesBody,
 
-) -> Response[Error | PostCommunityUserBadgesResponse201]:
+) -> Response[Union[Error, PostCommunityUserBadgesResponse201]]:
     """ Create user_badges
 
     Args:
-        body (PostCommunityUserBadgesBody | Unset):
+        body (PostCommunityUserBadgesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostCommunityUserBadgesResponse201]
+        Response[Union[Error, PostCommunityUserBadgesResponse201]]
      """
 
 
@@ -115,20 +112,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostCommunityUserBadgesBody | Unset = UNSET,
+    body: PostCommunityUserBadgesBody,
 
-) -> Error | PostCommunityUserBadgesResponse201 | None:
+) -> Optional[Union[Error, PostCommunityUserBadgesResponse201]]:
     """ Create user_badges
 
     Args:
-        body (PostCommunityUserBadgesBody | Unset):
+        body (PostCommunityUserBadgesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostCommunityUserBadgesResponse201
+        Union[Error, PostCommunityUserBadgesResponse201]
      """
 
 
@@ -141,20 +138,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostCommunityUserBadgesBody | Unset = UNSET,
+    body: PostCommunityUserBadgesBody,
 
-) -> Response[Error | PostCommunityUserBadgesResponse201]:
+) -> Response[Union[Error, PostCommunityUserBadgesResponse201]]:
     """ Create user_badges
 
     Args:
-        body (PostCommunityUserBadgesBody | Unset):
+        body (PostCommunityUserBadgesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostCommunityUserBadgesResponse201]
+        Response[Union[Error, PostCommunityUserBadgesResponse201]]
      """
 
 
@@ -172,20 +169,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostCommunityUserBadgesBody | Unset = UNSET,
+    body: PostCommunityUserBadgesBody,
 
-) -> Error | PostCommunityUserBadgesResponse201 | None:
+) -> Optional[Union[Error, PostCommunityUserBadgesResponse201]]:
     """ Create user_badges
 
     Args:
-        body (PostCommunityUserBadgesBody | Unset):
+        body (PostCommunityUserBadgesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostCommunityUserBadgesResponse201
+        Union[Error, PostCommunityUserBadgesResponse201]
      """
 
 

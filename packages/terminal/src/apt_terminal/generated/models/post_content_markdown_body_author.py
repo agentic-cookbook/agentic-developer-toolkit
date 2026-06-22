@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,14 +24,14 @@ class PostContentMarkdownBodyAuthor:
     types are caller-asserted (unverified).
 
         Attributes:
-            type_ (str | Unset): Lower-cased. e.g. 'customer', 'user', 'persona', 'agent', 'system'.
-            id (str | Unset): Id within that type's namespace (ignored for customer/user — pinned to the caller).
-            name (str | Unset): Display label; ignored for customer/user (taken from the principal).
+            type_ (Union[Unset, str]): Lower-cased. e.g. 'customer', 'user', 'persona', 'agent', 'system'.
+            id (Union[Unset, str]): Id within that type's namespace (ignored for customer/user — pinned to the caller).
+            name (Union[Unset, str]): Display label; ignored for customer/user (taken from the principal).
      """
 
-    type_: str | Unset = UNSET
-    id: str | Unset = UNSET
-    name: str | Unset = UNSET
+    type_: Union[Unset, str] = UNSET
+    id: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

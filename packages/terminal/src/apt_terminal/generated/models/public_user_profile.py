@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.public_persona_summary import PublicPersonaSummary
@@ -26,17 +25,17 @@ class PublicUserProfile:
     """ 
         Attributes:
             slug (str):
-            display_name (None | str):
-            avatar_url (None | str):
+            display_name (Union[None, str]):
+            avatar_url (Union[None, str]):
             created_at (str):
-            personas (list[PublicPersonaSummary]):
+            personas (list['PublicPersonaSummary']):
      """
 
     slug: str
-    display_name: None | str
-    avatar_url: None | str
+    display_name: Union[None, str]
+    avatar_url: Union[None, str]
     created_at: str
-    personas: list[PublicPersonaSummary]
+    personas: list['PublicPersonaSummary']
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -47,10 +46,10 @@ class PublicUserProfile:
         from ..models.public_persona_summary import PublicPersonaSummary
         slug = self.slug
 
-        display_name: None | str
+        display_name: Union[None, str]
         display_name = self.display_name
 
-        avatar_url: None | str
+        avatar_url: Union[None, str]
         avatar_url = self.avatar_url
 
         created_at = self.created_at
@@ -83,18 +82,18 @@ class PublicUserProfile:
         d = dict(src_dict)
         slug = d.pop("slug")
 
-        def _parse_display_name(data: object) -> None | str:
+        def _parse_display_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         display_name = _parse_display_name(d.pop("displayName"))
 
 
-        def _parse_avatar_url(data: object) -> None | str:
+        def _parse_avatar_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         avatar_url = _parse_avatar_url(d.pop("avatarUrl"))
 

@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/community/users/{user_id}/badges".format(user_id=quote(str(user_id), safe=""),),
+        "url": "/community/users/{user_id}/badges".format(user_id=user_id,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | list[CommunityUserBadge] | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, list['CommunityUserBadge']]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -60,7 +59,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | list[CommunityUserBadge]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, list['CommunityUserBadge']]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -74,7 +73,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | list[CommunityUserBadge]]:
+) -> Response[Union[Error, list['CommunityUserBadge']]]:
     """ A user’s earned badges (newest first)
 
     Args:
@@ -85,7 +84,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[CommunityUserBadge]]
+        Response[Union[Error, list['CommunityUserBadge']]]
      """
 
 
@@ -105,7 +104,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | list[CommunityUserBadge] | None:
+) -> Optional[Union[Error, list['CommunityUserBadge']]]:
     """ A user’s earned badges (newest first)
 
     Args:
@@ -116,7 +115,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[CommunityUserBadge]
+        Union[Error, list['CommunityUserBadge']]
      """
 
 
@@ -131,7 +130,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | list[CommunityUserBadge]]:
+) -> Response[Union[Error, list['CommunityUserBadge']]]:
     """ A user’s earned badges (newest first)
 
     Args:
@@ -142,7 +141,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[CommunityUserBadge]]
+        Response[Union[Error, list['CommunityUserBadge']]]
      """
 
 
@@ -162,7 +161,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | list[CommunityUserBadge] | None:
+) -> Optional[Union[Error, list['CommunityUserBadge']]]:
     """ A user’s earned badges (newest first)
 
     Args:
@@ -173,7 +172,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[CommunityUserBadge]
+        Union[Error, list['CommunityUserBadge']]
      """
 
 

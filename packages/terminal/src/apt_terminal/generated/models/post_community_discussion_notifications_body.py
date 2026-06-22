@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -27,17 +26,17 @@ class PostCommunityDiscussionNotificationsBody:
             type_ (str):
             thread_id (str):
             actor_id (str):
-            ecosystem_id (str | Unset):
-            reply_id (None | str | Unset):
-            is_read (bool | Unset):
+            ecosystem_id (Union[Unset, str]):
+            reply_id (Union[None, Unset, str]):
+            is_read (Union[Unset, bool]):
      """
 
     type_: str
     thread_id: str
     actor_id: str
-    ecosystem_id: str | Unset = UNSET
-    reply_id: None | str | Unset = UNSET
-    is_read: bool | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    reply_id: Union[None, Unset, str] = UNSET
+    is_read: Union[Unset, bool] = UNSET
 
 
 
@@ -52,7 +51,7 @@ class PostCommunityDiscussionNotificationsBody:
 
         ecosystem_id = self.ecosystem_id
 
-        reply_id: None | str | Unset
+        reply_id: Union[None, Unset, str]
         if isinstance(self.reply_id, Unset):
             reply_id = UNSET
         else:
@@ -90,12 +89,12 @@ class PostCommunityDiscussionNotificationsBody:
 
         ecosystem_id = d.pop("ecosystemId", UNSET)
 
-        def _parse_reply_id(data: object) -> None | str | Unset:
+        def _parse_reply_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         reply_id = _parse_reply_id(d.pop("replyId", UNSET))
 

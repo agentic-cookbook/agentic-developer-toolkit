@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from uuid import UUID
 
 
@@ -27,7 +25,7 @@ class ChatConversation:
             id (UUID):
             title (str):
             model (str):
-            persona_slug (None | str):
+            persona_slug (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
@@ -35,7 +33,7 @@ class ChatConversation:
     id: UUID
     title: str
     model: str
-    persona_slug: None | str
+    persona_slug: Union[None, str]
     created_at: str
     updated_at: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -51,7 +49,7 @@ class ChatConversation:
 
         model = self.model
 
-        persona_slug: None | str
+        persona_slug: Union[None, str]
         persona_slug = self.persona_slug
 
         created_at = self.created_at
@@ -86,10 +84,10 @@ class ChatConversation:
 
         model = d.pop("model")
 
-        def _parse_persona_slug(data: object) -> None | str:
+        def _parse_persona_slug(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         persona_slug = _parse_persona_slug(d.pop("personaSlug"))
 

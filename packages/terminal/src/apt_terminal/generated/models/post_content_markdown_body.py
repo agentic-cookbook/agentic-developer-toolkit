@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.post_content_markdown_body_author import PostContentMarkdownBodyAuthor
@@ -27,14 +26,14 @@ class PostContentMarkdownBody:
     """ 
         Attributes:
             content (str): Full raw markdown (stored byte-exact).
-            title (str | Unset): Optional; derived from frontmatter/H1 if omitted.
-            author (PostContentMarkdownBodyAuthor | Unset): Author of this revision; omit to attribute to the calling
+            title (Union[Unset, str]): Optional; derived from frontmatter/H1 if omitted.
+            author (Union[Unset, PostContentMarkdownBodyAuthor]): Author of this revision; omit to attribute to the calling
                 customer. customer/user are pinned to the caller; other types are caller-asserted (unverified).
      """
 
     content: str
-    title: str | Unset = UNSET
-    author: PostContentMarkdownBodyAuthor | Unset = UNSET
+    title: Union[Unset, str] = UNSET
+    author: Union[Unset, 'PostContentMarkdownBodyAuthor'] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -47,7 +46,7 @@ class PostContentMarkdownBody:
 
         title = self.title
 
-        author: dict[str, Any] | Unset = UNSET
+        author: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
@@ -75,7 +74,7 @@ class PostContentMarkdownBody:
         title = d.pop("title", UNSET)
 
         _author = d.pop("author", UNSET)
-        author: PostContentMarkdownBodyAuthor | Unset
+        author: Union[Unset, PostContentMarkdownBodyAuthor]
         if isinstance(_author,  Unset):
             author = UNSET
         else:

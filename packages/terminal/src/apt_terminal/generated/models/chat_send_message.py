@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -24,11 +23,11 @@ class ChatSendMessage:
     """ 
         Attributes:
             message (str):
-            client_message_id (str | Unset): Idempotency key for the user message
+            client_message_id (Union[Unset, str]): Idempotency key for the user message
      """
 
     message: str
-    client_message_id: str | Unset = UNSET
+    client_message_id: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

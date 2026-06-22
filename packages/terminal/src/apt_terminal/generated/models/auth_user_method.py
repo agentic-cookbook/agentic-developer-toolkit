@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,7 +24,7 @@ class AuthUserMethod:
             id (str):
             user_id (str):
             provider (str):
-            provider_id (None | str):
+            provider_id (Union[None, str]):
             has_credential (bool):
             created_at (str):
             updated_at (str):
@@ -35,7 +33,7 @@ class AuthUserMethod:
     id: str
     user_id: str
     provider: str
-    provider_id: None | str
+    provider_id: Union[None, str]
     has_credential: bool
     created_at: str
     updated_at: str
@@ -52,7 +50,7 @@ class AuthUserMethod:
 
         provider = self.provider
 
-        provider_id: None | str
+        provider_id: Union[None, str]
         provider_id = self.provider_id
 
         has_credential = self.has_credential
@@ -87,10 +85,10 @@ class AuthUserMethod:
 
         provider = d.pop("provider")
 
-        def _parse_provider_id(data: object) -> None | str:
+        def _parse_provider_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         provider_id = _parse_provider_id(d.pop("providerId"))
 

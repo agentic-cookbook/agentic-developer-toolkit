@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.put_content_events_id_body_payload_type_1 import PutContentEventsIdBodyPayloadType1
@@ -26,16 +26,16 @@ T = TypeVar("T", bound="PutContentEventsIdBody")
 class PutContentEventsIdBody:
     """ 
         Attributes:
-            owner_id (str | Unset):
-            deleted_at (None | str | Unset):
-            type_ (str | Unset):
-            payload (bool | float | list[Any] | None | PutContentEventsIdBodyPayloadType1 | str | Unset):
+            owner_id (Union[Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            type_ (Union[Unset, str]):
+            payload (Union['PutContentEventsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str]):
      """
 
-    owner_id: str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    type_: str | Unset = UNSET
-    payload: bool | float | list[Any] | None | PutContentEventsIdBodyPayloadType1 | str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
+    payload: Union['PutContentEventsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str] = UNSET
 
 
 
@@ -45,7 +45,7 @@ class PutContentEventsIdBody:
         from ..models.put_content_events_id_body_payload_type_1 import PutContentEventsIdBodyPayloadType1
         owner_id = self.owner_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -53,7 +53,7 @@ class PutContentEventsIdBody:
 
         type_ = self.type_
 
-        payload: bool | dict[str, Any] | float | list[Any] | None | str | Unset
+        payload: Union[None, Unset, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.payload, Unset):
             payload = UNSET
         elif isinstance(self.payload, PutContentEventsIdBodyPayloadType1):
@@ -89,19 +89,19 @@ class PutContentEventsIdBody:
         d = dict(src_dict)
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
         type_ = d.pop("type", UNSET)
 
-        def _parse_payload(data: object) -> bool | float | list[Any] | None | PutContentEventsIdBodyPayloadType1 | str | Unset:
+        def _parse_payload(data: object) -> Union['PutContentEventsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -114,7 +114,7 @@ class PutContentEventsIdBody:
 
 
                 return payload_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -122,9 +122,9 @@ class PutContentEventsIdBody:
                 payload_type_2 = cast(list[Any], data)
 
                 return payload_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PutContentEventsIdBodyPayloadType1 | str | Unset, data)
+            return cast(Union['PutContentEventsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str], data)
 
         payload = _parse_payload(d.pop("payload", UNSET))
 

@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/auth/user-methods/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/auth/user-methods/{id}".format(id=id,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AuthUserMethod | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[AuthUserMethod, Error]]:
     if response.status_code == 200:
         response_200 = AuthUserMethod.from_dict(response.json())
 
@@ -69,7 +68,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[AuthUserMethod | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[AuthUserMethod, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,7 +82,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[AuthUserMethod | Error]:
+) -> Response[Union[AuthUserMethod, Error]]:
     """ Get a user auth method (admin)
 
     Args:
@@ -94,7 +93,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AuthUserMethod | Error]
+        Response[Union[AuthUserMethod, Error]]
      """
 
 
@@ -114,7 +113,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> AuthUserMethod | Error | None:
+) -> Optional[Union[AuthUserMethod, Error]]:
     """ Get a user auth method (admin)
 
     Args:
@@ -125,7 +124,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AuthUserMethod | Error
+        Union[AuthUserMethod, Error]
      """
 
 
@@ -140,7 +139,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[AuthUserMethod | Error]:
+) -> Response[Union[AuthUserMethod, Error]]:
     """ Get a user auth method (admin)
 
     Args:
@@ -151,7 +150,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AuthUserMethod | Error]
+        Response[Union[AuthUserMethod, Error]]
      """
 
 
@@ -171,7 +170,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> AuthUserMethod | Error | None:
+) -> Optional[Union[AuthUserMethod, Error]]:
     """ Get a user auth method (admin)
 
     Args:
@@ -182,7 +181,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AuthUserMethod | Error
+        Union[AuthUserMethod, Error]
      """
 
 

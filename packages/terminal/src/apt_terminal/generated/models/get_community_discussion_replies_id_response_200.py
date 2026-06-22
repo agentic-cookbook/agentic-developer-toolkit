@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,7 +24,7 @@ class GetCommunityDiscussionRepliesIdResponse200:
             id (str):
             ecosystem_id (str):
             thread_id (str):
-            parent_reply_id (None | str):
+            parent_reply_id (Union[None, str]):
             author_id (str):
             body (str):
             is_deleted (bool):
@@ -37,7 +35,7 @@ class GetCommunityDiscussionRepliesIdResponse200:
     id: str
     ecosystem_id: str
     thread_id: str
-    parent_reply_id: None | str
+    parent_reply_id: Union[None, str]
     author_id: str
     body: str
     is_deleted: bool
@@ -55,7 +53,7 @@ class GetCommunityDiscussionRepliesIdResponse200:
 
         thread_id = self.thread_id
 
-        parent_reply_id: None | str
+        parent_reply_id: Union[None, str]
         parent_reply_id = self.parent_reply_id
 
         author_id = self.author_id
@@ -96,10 +94,10 @@ class GetCommunityDiscussionRepliesIdResponse200:
 
         thread_id = d.pop("threadId")
 
-        def _parse_parent_reply_id(data: object) -> None | str:
+        def _parse_parent_reply_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         parent_reply_id = _parse_parent_reply_id(d.pop("parentReplyId"))
 

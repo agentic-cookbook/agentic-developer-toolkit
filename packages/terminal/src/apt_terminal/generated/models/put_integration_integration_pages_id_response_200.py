@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,18 +23,18 @@ class PutIntegrationIntegrationPagesIdResponse200:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             connection_id (str):
             external_id (str):
             title (str):
             object_type (str):
-            url (None | str):
-            icon (None | str):
-            parent_type (None | str):
-            parent_id (None | str):
+            url (Union[None, str]):
+            icon (Union[None, str]):
+            parent_type (Union[None, str]):
+            parent_id (Union[None, str]):
             is_archived (bool):
-            last_edited_at (None | str):
+            last_edited_at (Union[None, str]):
             is_deleted (bool):
             sync_version (int):
             created_at (str):
@@ -45,18 +43,18 @@ class PutIntegrationIntegrationPagesIdResponse200:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     connection_id: str
     external_id: str
     title: str
     object_type: str
-    url: None | str
-    icon: None | str
-    parent_type: None | str
-    parent_id: None | str
+    url: Union[None, str]
+    icon: Union[None, str]
+    parent_type: Union[None, str]
+    parent_id: Union[None, str]
     is_archived: bool
-    last_edited_at: None | str
+    last_edited_at: Union[None, str]
     is_deleted: bool
     sync_version: int
     created_at: str
@@ -71,7 +69,7 @@ class PutIntegrationIntegrationPagesIdResponse200:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -84,21 +82,21 @@ class PutIntegrationIntegrationPagesIdResponse200:
 
         object_type = self.object_type
 
-        url: None | str
+        url: Union[None, str]
         url = self.url
 
-        icon: None | str
+        icon: Union[None, str]
         icon = self.icon
 
-        parent_type: None | str
+        parent_type: Union[None, str]
         parent_type = self.parent_type
 
-        parent_id: None | str
+        parent_id: Union[None, str]
         parent_id = self.parent_id
 
         is_archived = self.is_archived
 
-        last_edited_at: None | str
+        last_edited_at: Union[None, str]
         last_edited_at = self.last_edited_at
 
         is_deleted = self.is_deleted
@@ -144,10 +142,10 @@ class PutIntegrationIntegrationPagesIdResponse200:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -162,44 +160,44 @@ class PutIntegrationIntegrationPagesIdResponse200:
 
         object_type = d.pop("objectType")
 
-        def _parse_url(data: object) -> None | str:
+        def _parse_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         url = _parse_url(d.pop("url"))
 
 
-        def _parse_icon(data: object) -> None | str:
+        def _parse_icon(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         icon = _parse_icon(d.pop("icon"))
 
 
-        def _parse_parent_type(data: object) -> None | str:
+        def _parse_parent_type(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         parent_type = _parse_parent_type(d.pop("parentType"))
 
 
-        def _parse_parent_id(data: object) -> None | str:
+        def _parse_parent_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         parent_id = _parse_parent_id(d.pop("parentId"))
 
 
         is_archived = d.pop("isArchived")
 
-        def _parse_last_edited_at(data: object) -> None | str:
+        def _parse_last_edited_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         last_edited_at = _parse_last_edited_at(d.pop("lastEditedAt"))
 

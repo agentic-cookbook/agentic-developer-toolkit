@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,13 +24,13 @@ class RegistryIdentifier:
             rdid (str): Reverse-domain identifier (e.g. com.acme.app)
             entity_type (str): e.g. 'namespace', 'ecosystem', 'organization'
             entity_id (str): The UUID the rdid resolves to
-            created_by (None | str): Minter; null for system mappings
+            created_by (Union[None, str]): Minter; null for system mappings
      """
 
     rdid: str
     entity_type: str
     entity_id: str
-    created_by: None | str
+    created_by: Union[None, str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -46,7 +44,7 @@ class RegistryIdentifier:
 
         entity_id = self.entity_id
 
-        created_by: None | str
+        created_by: Union[None, str]
         created_by = self.created_by
 
 
@@ -72,10 +70,10 @@ class RegistryIdentifier:
 
         entity_id = d.pop("entityId")
 
-        def _parse_created_by(data: object) -> None | str:
+        def _parse_created_by(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         created_by = _parse_created_by(d.pop("createdBy"))
 

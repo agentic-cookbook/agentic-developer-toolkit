@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,11 +23,11 @@ T = TypeVar("T", bound="GetContentMarkdownExportResponse200")
 class GetContentMarkdownExportResponse200:
     """ 
         Attributes:
-            items (list[MarkdownDocument]):
+            items (list['MarkdownDocument']):
             truncated (bool): True if more documents remain (the export stopped at its approximate byte budget).
      """
 
-    items: list[MarkdownDocument]
+    items: list['MarkdownDocument']
     truncated: bool
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 

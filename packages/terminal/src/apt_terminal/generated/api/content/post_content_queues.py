@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.post_content_queues_body import PostContentQueuesBody
 from ...models.post_content_queues_response_201 import PostContentQueuesResponse201
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostContentQueuesBody | Unset = UNSET,
+    body: PostContentQueuesBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/content/queues",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PostContentQueuesResponse201 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostContentQueuesResponse201]]:
     if response.status_code == 201:
         response_201 = PostContentQueuesResponse201.from_dict(response.json())
 
@@ -72,7 +69,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PostContentQueuesResponse201]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostContentQueuesResponse201]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,20 +81,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostContentQueuesBody | Unset = UNSET,
+    body: PostContentQueuesBody,
 
-) -> Response[Error | PostContentQueuesResponse201]:
+) -> Response[Union[Error, PostContentQueuesResponse201]]:
     """ Create queues
 
     Args:
-        body (PostContentQueuesBody | Unset):
+        body (PostContentQueuesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostContentQueuesResponse201]
+        Response[Union[Error, PostContentQueuesResponse201]]
      """
 
 
@@ -115,20 +112,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostContentQueuesBody | Unset = UNSET,
+    body: PostContentQueuesBody,
 
-) -> Error | PostContentQueuesResponse201 | None:
+) -> Optional[Union[Error, PostContentQueuesResponse201]]:
     """ Create queues
 
     Args:
-        body (PostContentQueuesBody | Unset):
+        body (PostContentQueuesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostContentQueuesResponse201
+        Union[Error, PostContentQueuesResponse201]
      """
 
 
@@ -141,20 +138,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostContentQueuesBody | Unset = UNSET,
+    body: PostContentQueuesBody,
 
-) -> Response[Error | PostContentQueuesResponse201]:
+) -> Response[Union[Error, PostContentQueuesResponse201]]:
     """ Create queues
 
     Args:
-        body (PostContentQueuesBody | Unset):
+        body (PostContentQueuesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostContentQueuesResponse201]
+        Response[Union[Error, PostContentQueuesResponse201]]
      """
 
 
@@ -172,20 +169,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostContentQueuesBody | Unset = UNSET,
+    body: PostContentQueuesBody,
 
-) -> Error | PostContentQueuesResponse201 | None:
+) -> Optional[Union[Error, PostContentQueuesResponse201]]:
     """ Create queues
 
     Args:
-        body (PostContentQueuesBody | Unset):
+        body (PostContentQueuesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostContentQueuesResponse201
+        Union[Error, PostContentQueuesResponse201]
      """
 
 

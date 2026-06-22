@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/community/discussion-notifications/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/community/discussion-notifications/{id}".format(id=id,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetCommunityDiscussionNotificationsIdResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]:
     if response.status_code == 200:
         response_200 = GetCommunityDiscussionNotificationsIdResponse200.from_dict(response.json())
 
@@ -62,7 +61,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetCommunityDiscussionNotificationsIdResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +75,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetCommunityDiscussionNotificationsIdResponse200]:
+) -> Response[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]:
     """ Get discussion_notifications by id
 
     Args:
@@ -87,7 +86,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetCommunityDiscussionNotificationsIdResponse200]
+        Response[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]
      """
 
 
@@ -107,7 +106,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetCommunityDiscussionNotificationsIdResponse200 | None:
+) -> Optional[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]:
     """ Get discussion_notifications by id
 
     Args:
@@ -118,7 +117,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetCommunityDiscussionNotificationsIdResponse200
+        Union[Error, GetCommunityDiscussionNotificationsIdResponse200]
      """
 
 
@@ -133,7 +132,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetCommunityDiscussionNotificationsIdResponse200]:
+) -> Response[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]:
     """ Get discussion_notifications by id
 
     Args:
@@ -144,7 +143,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetCommunityDiscussionNotificationsIdResponse200]
+        Response[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]
      """
 
 
@@ -164,7 +163,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetCommunityDiscussionNotificationsIdResponse200 | None:
+) -> Optional[Union[Error, GetCommunityDiscussionNotificationsIdResponse200]]:
     """ Get discussion_notifications by id
 
     Args:
@@ -175,7 +174,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetCommunityDiscussionNotificationsIdResponse200
+        Union[Error, GetCommunityDiscussionNotificationsIdResponse200]
      """
 
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,26 +23,26 @@ class PutCustomerCustomersIdResponse200:
         Attributes:
             id (str):
             ecosystem_id (str):
-            external_id (None | str):
-            email (None | str):
-            display_name (None | str):
-            slug (None | str):
+            external_id (Union[None, str]):
+            email (Union[None, str]):
+            display_name (Union[None, str]):
+            slug (Union[None, str]):
             avatar_url (str):
             token_version (int):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
 
     id: str
     ecosystem_id: str
-    external_id: None | str
-    email: None | str
-    display_name: None | str
-    slug: None | str
+    external_id: Union[None, str]
+    email: Union[None, str]
+    display_name: Union[None, str]
+    slug: Union[None, str]
     avatar_url: str
     token_version: int
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -57,23 +55,23 @@ class PutCustomerCustomersIdResponse200:
 
         ecosystem_id = self.ecosystem_id
 
-        external_id: None | str
+        external_id: Union[None, str]
         external_id = self.external_id
 
-        email: None | str
+        email: Union[None, str]
         email = self.email
 
-        display_name: None | str
+        display_name: Union[None, str]
         display_name = self.display_name
 
-        slug: None | str
+        slug: Union[None, str]
         slug = self.slug
 
         avatar_url = self.avatar_url
 
         token_version = self.token_version
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         created_at = self.created_at
@@ -108,34 +106,34 @@ class PutCustomerCustomersIdResponse200:
 
         ecosystem_id = d.pop("ecosystemId")
 
-        def _parse_external_id(data: object) -> None | str:
+        def _parse_external_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_id = _parse_external_id(d.pop("externalId"))
 
 
-        def _parse_email(data: object) -> None | str:
+        def _parse_email(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         email = _parse_email(d.pop("email"))
 
 
-        def _parse_display_name(data: object) -> None | str:
+        def _parse_display_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         display_name = _parse_display_name(d.pop("displayName"))
 
 
-        def _parse_slug(data: object) -> None | str:
+        def _parse_slug(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         slug = _parse_slug(d.pop("slug"))
 
@@ -144,10 +142,10 @@ class PutCustomerCustomersIdResponse200:
 
         token_version = d.pop("tokenVersion")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 

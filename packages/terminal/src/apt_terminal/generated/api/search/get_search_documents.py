@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -12,13 +11,14 @@ from ...models.error import Error
 from ...models.get_search_documents_response_200 import GetSearchDocumentsResponse200
 from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
     q: str,
-    limit: int | Unset = 20,
+    limit: Union[Unset, int] = 20,
 
 ) -> dict[str, Any]:
     
@@ -46,7 +46,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetSearchDocumentsResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetSearchDocumentsResponse200]]:
     if response.status_code == 200:
         response_200 = GetSearchDocumentsResponse200.from_dict(response.json())
 
@@ -74,7 +74,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetSearchDocumentsResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetSearchDocumentsResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -87,21 +87,21 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     q: str,
-    limit: int | Unset = 20,
+    limit: Union[Unset, int] = 20,
 
-) -> Response[Error | GetSearchDocumentsResponse200]:
+) -> Response[Union[Error, GetSearchDocumentsResponse200]]:
     """ Full-text search the caller's document blocks
 
     Args:
         q (str):
-        limit (int | Unset):  Default: 20.
+        limit (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSearchDocumentsResponse200]
+        Response[Union[Error, GetSearchDocumentsResponse200]]
      """
 
 
@@ -121,21 +121,21 @@ def sync(
     *,
     client: AuthenticatedClient,
     q: str,
-    limit: int | Unset = 20,
+    limit: Union[Unset, int] = 20,
 
-) -> Error | GetSearchDocumentsResponse200 | None:
+) -> Optional[Union[Error, GetSearchDocumentsResponse200]]:
     """ Full-text search the caller's document blocks
 
     Args:
         q (str):
-        limit (int | Unset):  Default: 20.
+        limit (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSearchDocumentsResponse200
+        Union[Error, GetSearchDocumentsResponse200]
      """
 
 
@@ -150,21 +150,21 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     q: str,
-    limit: int | Unset = 20,
+    limit: Union[Unset, int] = 20,
 
-) -> Response[Error | GetSearchDocumentsResponse200]:
+) -> Response[Union[Error, GetSearchDocumentsResponse200]]:
     """ Full-text search the caller's document blocks
 
     Args:
         q (str):
-        limit (int | Unset):  Default: 20.
+        limit (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetSearchDocumentsResponse200]
+        Response[Union[Error, GetSearchDocumentsResponse200]]
      """
 
 
@@ -184,21 +184,21 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     q: str,
-    limit: int | Unset = 20,
+    limit: Union[Unset, int] = 20,
 
-) -> Error | GetSearchDocumentsResponse200 | None:
+) -> Optional[Union[Error, GetSearchDocumentsResponse200]]:
     """ Full-text search the caller's document blocks
 
     Args:
         q (str):
-        limit (int | Unset):  Default: 20.
+        limit (Union[Unset, int]):  Default: 20.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetSearchDocumentsResponse200
+        Union[Error, GetSearchDocumentsResponse200]
      """
 
 

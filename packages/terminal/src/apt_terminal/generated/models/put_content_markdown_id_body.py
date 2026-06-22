@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.put_content_markdown_id_body_author import PutContentMarkdownIdBodyAuthor
@@ -28,15 +27,15 @@ class PutContentMarkdownIdBody:
     the doc unchanged.
 
         Attributes:
-            content (str | Unset): New raw markdown; a real change bumps current_version.
-            title (str | Unset):
-            author (PutContentMarkdownIdBodyAuthor | Unset): Author of this revision; omit to attribute to the calling
+            content (Union[Unset, str]): New raw markdown; a real change bumps current_version.
+            title (Union[Unset, str]):
+            author (Union[Unset, PutContentMarkdownIdBodyAuthor]): Author of this revision; omit to attribute to the calling
                 customer. customer/user are pinned to the caller; other types are caller-asserted (unverified).
      """
 
-    content: str | Unset = UNSET
-    title: str | Unset = UNSET
-    author: PutContentMarkdownIdBodyAuthor | Unset = UNSET
+    content: Union[Unset, str] = UNSET
+    title: Union[Unset, str] = UNSET
+    author: Union[Unset, 'PutContentMarkdownIdBodyAuthor'] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -49,7 +48,7 @@ class PutContentMarkdownIdBody:
 
         title = self.title
 
-        author: dict[str, Any] | Unset = UNSET
+        author: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
 
@@ -78,7 +77,7 @@ class PutContentMarkdownIdBody:
         title = d.pop("title", UNSET)
 
         _author = d.pop("author", UNSET)
-        author: PutContentMarkdownIdBodyAuthor | Unset
+        author: Union[Unset, PutContentMarkdownIdBodyAuthor]
         if isinstance(_author,  Unset):
             author = UNSET
         else:

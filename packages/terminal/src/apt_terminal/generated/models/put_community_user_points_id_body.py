@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,18 +22,18 @@ T = TypeVar("T", bound="PutCommunityUserPointsIdBody")
 class PutCommunityUserPointsIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            amount (int | Unset):
-            reason (str | Unset):
-            source_type (str | Unset):
-            source_id (str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            amount (Union[Unset, int]):
+            reason (Union[Unset, str]):
+            source_type (Union[Unset, str]):
+            source_id (Union[Unset, str]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    amount: int | Unset = UNSET
-    reason: str | Unset = UNSET
-    source_type: str | Unset = UNSET
-    source_id: str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    amount: Union[Unset, int] = UNSET
+    reason: Union[Unset, str] = UNSET
+    source_type: Union[Unset, str] = UNSET
+    source_id: Union[Unset, str] = UNSET
 
 
 

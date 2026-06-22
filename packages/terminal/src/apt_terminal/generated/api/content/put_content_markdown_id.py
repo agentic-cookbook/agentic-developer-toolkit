@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.markdown_document import MarkdownDocument
 from ...models.put_content_markdown_id_body import PutContentMarkdownIdBody
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     id: str,
     *,
-    body: PutContentMarkdownIdBody | Unset = UNSET,
+    body: PutContentMarkdownIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/content/markdown/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/content/markdown/{id}".format(id=id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | MarkdownDocument | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, MarkdownDocument]]:
     if response.status_code == 200:
         response_200 = MarkdownDocument.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | MarkdownDocument]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, MarkdownDocument]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,22 +90,22 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutContentMarkdownIdBody | Unset = UNSET,
+    body: PutContentMarkdownIdBody,
 
-) -> Response[Error | MarkdownDocument]:
+) -> Response[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody | Unset): At least one of content/title. Any real change
-            appends a full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
+            full-state version (author attaches to it); a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | MarkdownDocument]
+        Response[Union[Error, MarkdownDocument]]
      """
 
 
@@ -128,22 +125,22 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutContentMarkdownIdBody | Unset = UNSET,
+    body: PutContentMarkdownIdBody,
 
-) -> Error | MarkdownDocument | None:
+) -> Optional[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody | Unset): At least one of content/title. Any real change
-            appends a full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
+            full-state version (author attaches to it); a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | MarkdownDocument
+        Union[Error, MarkdownDocument]
      """
 
 
@@ -158,22 +155,22 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutContentMarkdownIdBody | Unset = UNSET,
+    body: PutContentMarkdownIdBody,
 
-) -> Response[Error | MarkdownDocument]:
+) -> Response[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody | Unset): At least one of content/title. Any real change
-            appends a full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
+            full-state version (author attaches to it); a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | MarkdownDocument]
+        Response[Union[Error, MarkdownDocument]]
      """
 
 
@@ -193,22 +190,22 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutContentMarkdownIdBody | Unset = UNSET,
+    body: PutContentMarkdownIdBody,
 
-) -> Error | MarkdownDocument | None:
+) -> Optional[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody | Unset): At least one of content/title. Any real change
-            appends a full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
+            full-state version (author attaches to it); a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | MarkdownDocument
+        Union[Error, MarkdownDocument]
      """
 
 

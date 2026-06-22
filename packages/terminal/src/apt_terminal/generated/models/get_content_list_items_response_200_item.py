@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.get_content_list_items_response_200_item_value_type_1 import GetContentListItemsResponse200ItemValueType1
@@ -28,10 +27,10 @@ class GetContentListItemsResponse200Item:
             id (str):
             owner_id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             list_id (str):
             position (int):
-            value (bool | float | GetContentListItemsResponse200ItemValueType1 | list[Any] | None | str):
+            value (Union['GetContentListItemsResponse200ItemValueType1', None, bool, float, list[Any], str]):
             created_at (str):
             updated_at (str):
      """
@@ -39,10 +38,10 @@ class GetContentListItemsResponse200Item:
     id: str
     owner_id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     list_id: str
     position: int
-    value: bool | float | GetContentListItemsResponse200ItemValueType1 | list[Any] | None | str
+    value: Union['GetContentListItemsResponse200ItemValueType1', None, bool, float, list[Any], str]
     created_at: str
     updated_at: str
 
@@ -58,14 +57,14 @@ class GetContentListItemsResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         list_id = self.list_id
 
         position = self.position
 
-        value: bool | dict[str, Any] | float | list[Any] | None | str
+        value: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.value, GetContentListItemsResponse200ItemValueType1):
             value = self.value.to_dict()
         elif isinstance(self.value, list):
@@ -108,10 +107,10 @@ class GetContentListItemsResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -120,7 +119,7 @@ class GetContentListItemsResponse200Item:
 
         position = d.pop("position")
 
-        def _parse_value(data: object) -> bool | float | GetContentListItemsResponse200ItemValueType1 | list[Any] | None | str:
+        def _parse_value(data: object) -> Union['GetContentListItemsResponse200ItemValueType1', None, bool, float, list[Any], str]:
             if data is None:
                 return data
             try:
@@ -131,7 +130,7 @@ class GetContentListItemsResponse200Item:
 
 
                 return value_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -139,9 +138,9 @@ class GetContentListItemsResponse200Item:
                 value_type_2 = cast(list[Any], data)
 
                 return value_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | GetContentListItemsResponse200ItemValueType1 | list[Any] | None | str, data)
+            return cast(Union['GetContentListItemsResponse200ItemValueType1', None, bool, float, list[Any], str], data)
 
         value = _parse_value(d.pop("value"))
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,25 +23,25 @@ T = TypeVar("T", bound="PutPersonalPrivacyGrantsIdBody")
 class PutPersonalPrivacyGrantsIdBody:
     """ 
         Attributes:
-            deleted_at (None | str | Unset):
-            owner_id (str | Unset):
-            target_table (str | Unset):
-            target_id (str | Unset):
-            audience_mask (int | Unset):
+            deleted_at (Union[None, Unset, str]):
+            owner_id (Union[Unset, str]):
+            target_table (Union[Unset, str]):
+            target_id (Union[Unset, str]):
+            audience_mask (Union[Unset, int]):
      """
 
-    deleted_at: None | str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    target_table: str | Unset = UNSET
-    target_id: str | Unset = UNSET
-    audience_mask: int | Unset = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    target_table: Union[Unset, str] = UNSET
+    target_id: Union[Unset, str] = UNSET
+    audience_mask: Union[Unset, int] = UNSET
 
 
 
 
 
     def to_dict(self) -> dict[str, Any]:
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -79,12 +78,12 @@ class PutPersonalPrivacyGrantsIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 

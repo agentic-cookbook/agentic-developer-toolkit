@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -27,15 +26,15 @@ class PostPersonaServiceTemplatesBody:
             provider_kind (str):
             name (str):
             base_url (str):
-            documentation_url (None | str | Unset):
-            status_url (None | str | Unset):
+            documentation_url (Union[None, Unset, str]):
+            status_url (Union[None, Unset, str]):
      """
 
     provider_kind: str
     name: str
     base_url: str
-    documentation_url: None | str | Unset = UNSET
-    status_url: None | str | Unset = UNSET
+    documentation_url: Union[None, Unset, str] = UNSET
+    status_url: Union[None, Unset, str] = UNSET
 
 
 
@@ -48,13 +47,13 @@ class PostPersonaServiceTemplatesBody:
 
         base_url = self.base_url
 
-        documentation_url: None | str | Unset
+        documentation_url: Union[None, Unset, str]
         if isinstance(self.documentation_url, Unset):
             documentation_url = UNSET
         else:
             documentation_url = self.documentation_url
 
-        status_url: None | str | Unset
+        status_url: Union[None, Unset, str]
         if isinstance(self.status_url, Unset):
             status_url = UNSET
         else:
@@ -86,22 +85,22 @@ class PostPersonaServiceTemplatesBody:
 
         base_url = d.pop("baseUrl")
 
-        def _parse_documentation_url(data: object) -> None | str | Unset:
+        def _parse_documentation_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         documentation_url = _parse_documentation_url(d.pop("documentationUrl", UNSET))
 
 
-        def _parse_status_url(data: object) -> None | str | Unset:
+        def _parse_status_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         status_url = _parse_status_url(d.pop("statusUrl", UNSET))
 

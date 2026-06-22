@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -47,7 +46,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Any, Error]]:
     if response.status_code == 302:
         response_302 = cast(Any, None)
         return response_302
@@ -65,7 +64,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Any, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,12 +75,12 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
     client_id: str,
     provider_id: str,
     return_: str,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Begin the server redirect flow → 302 to the provider
 
     Args:
@@ -94,7 +93,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -113,12 +112,12 @@ return_=return_,
 
 def sync(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
     client_id: str,
     provider_id: str,
     return_: str,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Begin the server redirect flow → 302 to the provider
 
     Args:
@@ -131,7 +130,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 
@@ -145,12 +144,12 @@ return_=return_,
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
     client_id: str,
     provider_id: str,
     return_: str,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Begin the server redirect flow → 302 to the provider
 
     Args:
@@ -163,7 +162,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -182,12 +181,12 @@ return_=return_,
 
 async def asyncio(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
     client_id: str,
     provider_id: str,
     return_: str,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Begin the server redirect flow → 302 to the provider
 
     Args:
@@ -200,7 +199,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 

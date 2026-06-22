@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,34 +23,34 @@ T = TypeVar("T", bound="PutChatChatsIdBody")
 class PutChatChatsIdBody:
     """ 
         Attributes:
-            owner_user_id (str | Unset):
-            owner_id (str | Unset):
-            type_ (str | Unset):
-            name (str | Unset):
-            description (str | Unset):
-            header_image (str | Unset):
-            header_background_image (str | Unset):
-            background_image (str | Unset):
-            state (str | Unset):
-            security (str | Unset):
-            model (str | Unset):
-            persona_slug (None | str | Unset):
-            deleted_at (None | str | Unset):
+            owner_user_id (Union[Unset, str]):
+            owner_id (Union[Unset, str]):
+            type_ (Union[Unset, str]):
+            name (Union[Unset, str]):
+            description (Union[Unset, str]):
+            header_image (Union[Unset, str]):
+            header_background_image (Union[Unset, str]):
+            background_image (Union[Unset, str]):
+            state (Union[Unset, str]):
+            security (Union[Unset, str]):
+            model (Union[Unset, str]):
+            persona_slug (Union[None, Unset, str]):
+            deleted_at (Union[None, Unset, str]):
      """
 
-    owner_user_id: str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    type_: str | Unset = UNSET
-    name: str | Unset = UNSET
-    description: str | Unset = UNSET
-    header_image: str | Unset = UNSET
-    header_background_image: str | Unset = UNSET
-    background_image: str | Unset = UNSET
-    state: str | Unset = UNSET
-    security: str | Unset = UNSET
-    model: str | Unset = UNSET
-    persona_slug: None | str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
+    owner_user_id: Union[Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
+    header_image: Union[Unset, str] = UNSET
+    header_background_image: Union[Unset, str] = UNSET
+    background_image: Union[Unset, str] = UNSET
+    state: Union[Unset, str] = UNSET
+    security: Union[Unset, str] = UNSET
+    model: Union[Unset, str] = UNSET
+    persona_slug: Union[None, Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
 
 
 
@@ -80,13 +79,13 @@ class PutChatChatsIdBody:
 
         model = self.model
 
-        persona_slug: None | str | Unset
+        persona_slug: Union[None, Unset, str]
         if isinstance(self.persona_slug, Unset):
             persona_slug = UNSET
         else:
             persona_slug = self.persona_slug
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -153,22 +152,22 @@ class PutChatChatsIdBody:
 
         model = d.pop("model", UNSET)
 
-        def _parse_persona_slug(data: object) -> None | str | Unset:
+        def _parse_persona_slug(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         persona_slug = _parse_persona_slug(d.pop("personaSlug", UNSET))
 
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 

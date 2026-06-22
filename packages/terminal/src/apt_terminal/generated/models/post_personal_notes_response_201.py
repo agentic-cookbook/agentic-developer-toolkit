@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,10 +23,10 @@ class PostPersonalNotesResponse201:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
-            subject_table (None | str):
-            subject_id (None | str):
+            subject_table (Union[None, str]):
+            subject_id (Union[None, str]):
             title (str):
             body (str):
             occurred_at (str):
@@ -38,10 +36,10 @@ class PostPersonalNotesResponse201:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
-    subject_table: None | str
-    subject_id: None | str
+    subject_table: Union[None, str]
+    subject_id: Union[None, str]
     title: str
     body: str
     occurred_at: str
@@ -57,15 +55,15 @@ class PostPersonalNotesResponse201:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
 
-        subject_table: None | str
+        subject_table: Union[None, str]
         subject_table = self.subject_table
 
-        subject_id: None | str
+        subject_id: Union[None, str]
         subject_id = self.subject_id
 
         title = self.title
@@ -106,28 +104,28 @@ class PostPersonalNotesResponse201:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
         owner_id = d.pop("ownerId")
 
-        def _parse_subject_table(data: object) -> None | str:
+        def _parse_subject_table(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         subject_table = _parse_subject_table(d.pop("subjectTable"))
 
 
-        def _parse_subject_id(data: object) -> None | str:
+        def _parse_subject_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         subject_id = _parse_subject_id(d.pop("subjectId"))
 

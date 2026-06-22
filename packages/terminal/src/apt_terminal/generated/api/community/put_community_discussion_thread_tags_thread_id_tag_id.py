@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_community_discussion_thread_tags_thread_id_tag_id_body import PutCommunityDiscussionThreadTagsThreadIdTagIdBody
 from ...models.put_community_discussion_thread_tags_thread_id_tag_id_response_200 import PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -20,7 +18,7 @@ def _get_kwargs(
     thread_id: str,
     tag_id: str,
     *,
-    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset = UNSET,
+    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -32,12 +30,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/community/discussion-thread-tags/{thread_id}/{tag_id}".format(thread_id=quote(str(thread_id), safe=""),tag_id=quote(str(tag_id), safe=""),),
+        "url": "/community/discussion-thread-tags/{thread_id}/{tag_id}".format(thread_id=thread_id,tag_id=tag_id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -46,7 +43,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]:
     if response.status_code == 200:
         response_200 = PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200.from_dict(response.json())
 
@@ -81,7 +78,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,22 +92,22 @@ def sync_detailed(
     tag_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset = UNSET,
+    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody,
 
-) -> Response[Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]:
+) -> Response[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]:
     """ Update discussion_thread_tags
 
     Args:
         thread_id (str):
         tag_id (str):
-        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset):
+        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]
+        Response[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]
      """
 
 
@@ -132,22 +129,22 @@ def sync(
     tag_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset = UNSET,
+    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody,
 
-) -> Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200 | None:
+) -> Optional[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]:
     """ Update discussion_thread_tags
 
     Args:
         thread_id (str):
         tag_id (str):
-        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset):
+        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200
+        Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]
      """
 
 
@@ -164,22 +161,22 @@ async def asyncio_detailed(
     tag_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset = UNSET,
+    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody,
 
-) -> Response[Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]:
+) -> Response[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]:
     """ Update discussion_thread_tags
 
     Args:
         thread_id (str):
         tag_id (str):
-        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset):
+        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]
+        Response[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]
      """
 
 
@@ -201,22 +198,22 @@ async def asyncio(
     tag_id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset = UNSET,
+    body: PutCommunityDiscussionThreadTagsThreadIdTagIdBody,
 
-) -> Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200 | None:
+) -> Optional[Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]]:
     """ Update discussion_thread_tags
 
     Args:
         thread_id (str):
         tag_id (str):
-        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody | Unset):
+        body (PutCommunityDiscussionThreadTagsThreadIdTagIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200
+        Union[Error, PutCommunityDiscussionThreadTagsThreadIdTagIdResponse200]
      """
 
 

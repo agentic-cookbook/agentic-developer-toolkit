@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.markdown_document_frontmatter_type_0 import MarkdownDocumentFrontmatterType0
@@ -37,9 +37,9 @@ class MarkdownDocument:
             created_at (str):
             updated_at (str):
             is_deleted (bool):
-            deleted_at (None | str | Unset):
-            frontmatter (MarkdownDocumentFrontmatterType0 | None | Unset):
-            latest_version_id (None | str | Unset):
+            deleted_at (Union[None, Unset, str]):
+            frontmatter (Union['MarkdownDocumentFrontmatterType0', None, Unset]):
+            latest_version_id (Union[None, Unset, str]):
      """
 
     id: str
@@ -53,9 +53,9 @@ class MarkdownDocument:
     created_at: str
     updated_at: str
     is_deleted: bool
-    deleted_at: None | str | Unset = UNSET
-    frontmatter: MarkdownDocumentFrontmatterType0 | None | Unset = UNSET
-    latest_version_id: None | str | Unset = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    frontmatter: Union['MarkdownDocumentFrontmatterType0', None, Unset] = UNSET
+    latest_version_id: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -86,13 +86,13 @@ class MarkdownDocument:
 
         is_deleted = self.is_deleted
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
             deleted_at = self.deleted_at
 
-        frontmatter: dict[str, Any] | None | Unset
+        frontmatter: Union[None, Unset, dict[str, Any]]
         if isinstance(self.frontmatter, Unset):
             frontmatter = UNSET
         elif isinstance(self.frontmatter, MarkdownDocumentFrontmatterType0):
@@ -100,7 +100,7 @@ class MarkdownDocument:
         else:
             frontmatter = self.frontmatter
 
-        latest_version_id: None | str | Unset
+        latest_version_id: Union[None, Unset, str]
         if isinstance(self.latest_version_id, Unset):
             latest_version_id = UNSET
         else:
@@ -159,17 +159,17 @@ class MarkdownDocument:
 
         is_deleted = d.pop("isDeleted")
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        def _parse_frontmatter(data: object) -> MarkdownDocumentFrontmatterType0 | None | Unset:
+        def _parse_frontmatter(data: object) -> Union['MarkdownDocumentFrontmatterType0', None, Unset]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -182,19 +182,19 @@ class MarkdownDocument:
 
 
                 return frontmatter_type_0
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(MarkdownDocumentFrontmatterType0 | None | Unset, data)
+            return cast(Union['MarkdownDocumentFrontmatterType0', None, Unset], data)
 
         frontmatter = _parse_frontmatter(d.pop("frontmatter", UNSET))
 
 
-        def _parse_latest_version_id(data: object) -> None | str | Unset:
+        def _parse_latest_version_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         latest_version_id = _parse_latest_version_id(d.pop("latestVersionId", UNSET))
 

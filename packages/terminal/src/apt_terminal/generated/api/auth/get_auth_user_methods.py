@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -12,12 +11,13 @@ from ...models.auth_user_method import AuthUserMethod
 from ...models.error import Error
 from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
-    user_id: str | Unset = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -43,7 +43,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | list[AuthUserMethod] | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, list['AuthUserMethod']]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -76,7 +76,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | list[AuthUserMethod]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, list['AuthUserMethod']]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,20 +88,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: str | Unset = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 
-) -> Response[Error | list[AuthUserMethod]]:
+) -> Response[Union[Error, list['AuthUserMethod']]]:
     """ List user auth methods (admin)
 
     Args:
-        user_id (str | Unset):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[AuthUserMethod]]
+        Response[Union[Error, list['AuthUserMethod']]]
      """
 
 
@@ -119,20 +119,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    user_id: str | Unset = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 
-) -> Error | list[AuthUserMethod] | None:
+) -> Optional[Union[Error, list['AuthUserMethod']]]:
     """ List user auth methods (admin)
 
     Args:
-        user_id (str | Unset):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[AuthUserMethod]
+        Union[Error, list['AuthUserMethod']]
      """
 
 
@@ -145,20 +145,20 @@ user_id=user_id,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    user_id: str | Unset = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 
-) -> Response[Error | list[AuthUserMethod]]:
+) -> Response[Union[Error, list['AuthUserMethod']]]:
     """ List user auth methods (admin)
 
     Args:
-        user_id (str | Unset):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[AuthUserMethod]]
+        Response[Union[Error, list['AuthUserMethod']]]
      """
 
 
@@ -176,20 +176,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    user_id: str | Unset = UNSET,
+    user_id: Union[Unset, str] = UNSET,
 
-) -> Error | list[AuthUserMethod] | None:
+) -> Optional[Union[Error, list['AuthUserMethod']]]:
     """ List user auth methods (admin)
 
     Args:
-        user_id (str | Unset):
+        user_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[AuthUserMethod]
+        Union[Error, list['AuthUserMethod']]
      """
 
 

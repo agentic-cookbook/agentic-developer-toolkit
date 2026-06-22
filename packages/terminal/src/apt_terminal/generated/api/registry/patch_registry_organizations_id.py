@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.patch_registry_organizations_id_body import PatchRegistryOrganizationsIdBody
 from ...models.registry_organization import RegistryOrganization
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     id: str,
     *,
-    body: PatchRegistryOrganizationsIdBody | Unset = UNSET,
+    body: PatchRegistryOrganizationsIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/registry/organizations/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/registry/organizations/{id}".format(id=id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | RegistryOrganization | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, RegistryOrganization]]:
     if response.status_code == 200:
         response_200 = RegistryOrganization.from_dict(response.json())
 
@@ -94,7 +91,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | RegistryOrganization]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, RegistryOrganization]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -107,21 +104,21 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryOrganizationsIdBody | Unset = UNSET,
+    body: PatchRegistryOrganizationsIdBody,
 
-) -> Response[Error | RegistryOrganization]:
+) -> Response[Union[Error, RegistryOrganization]]:
     """ Update an organization handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryOrganization]
+        Response[Union[Error, RegistryOrganization]]
      """
 
 
@@ -141,21 +138,21 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryOrganizationsIdBody | Unset = UNSET,
+    body: PatchRegistryOrganizationsIdBody,
 
-) -> Error | RegistryOrganization | None:
+) -> Optional[Union[Error, RegistryOrganization]]:
     """ Update an organization handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryOrganization
+        Union[Error, RegistryOrganization]
      """
 
 
@@ -170,21 +167,21 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryOrganizationsIdBody | Unset = UNSET,
+    body: PatchRegistryOrganizationsIdBody,
 
-) -> Response[Error | RegistryOrganization]:
+) -> Response[Union[Error, RegistryOrganization]]:
     """ Update an organization handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryOrganization]
+        Response[Union[Error, RegistryOrganization]]
      """
 
 
@@ -204,21 +201,21 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryOrganizationsIdBody | Unset = UNSET,
+    body: PatchRegistryOrganizationsIdBody,
 
-) -> Error | RegistryOrganization | None:
+) -> Optional[Union[Error, RegistryOrganization]]:
     """ Update an organization handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryOrganization
+        Union[Error, RegistryOrganization]
      """
 
 

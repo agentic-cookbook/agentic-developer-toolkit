@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,6 +9,8 @@ from ..types import UNSET, Unset
 from ..models.get_oauth_provider_templates_response_200_templates_additional_property_auth_type import GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyAuthType
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.get_oauth_provider_templates_response_200_templates_additional_property_identity_mapping import GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyIdentityMapping
@@ -30,21 +30,21 @@ class GetOauthProviderTemplatesResponse200TemplatesAdditionalProperty:
             slug (str):
             name (str):
             auth_type (GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyAuthType):
-            authorize_url (None | str | Unset):
-            token_url (None | str | Unset):
-            userinfo_url (None | str | Unset):
-            default_scopes (list[str] | Unset):
-            identity_mapping (GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyIdentityMapping | Unset):
+            authorize_url (Union[None, Unset, str]):
+            token_url (Union[None, Unset, str]):
+            userinfo_url (Union[None, Unset, str]):
+            default_scopes (Union[Unset, list[str]]):
+            identity_mapping (Union[Unset, GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyIdentityMapping]):
      """
 
     slug: str
     name: str
     auth_type: GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyAuthType
-    authorize_url: None | str | Unset = UNSET
-    token_url: None | str | Unset = UNSET
-    userinfo_url: None | str | Unset = UNSET
-    default_scopes: list[str] | Unset = UNSET
-    identity_mapping: GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyIdentityMapping | Unset = UNSET
+    authorize_url: Union[None, Unset, str] = UNSET
+    token_url: Union[None, Unset, str] = UNSET
+    userinfo_url: Union[None, Unset, str] = UNSET
+    default_scopes: Union[Unset, list[str]] = UNSET
+    identity_mapping: Union[Unset, 'GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyIdentityMapping'] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -59,31 +59,31 @@ class GetOauthProviderTemplatesResponse200TemplatesAdditionalProperty:
 
         auth_type = self.auth_type.value
 
-        authorize_url: None | str | Unset
+        authorize_url: Union[None, Unset, str]
         if isinstance(self.authorize_url, Unset):
             authorize_url = UNSET
         else:
             authorize_url = self.authorize_url
 
-        token_url: None | str | Unset
+        token_url: Union[None, Unset, str]
         if isinstance(self.token_url, Unset):
             token_url = UNSET
         else:
             token_url = self.token_url
 
-        userinfo_url: None | str | Unset
+        userinfo_url: Union[None, Unset, str]
         if isinstance(self.userinfo_url, Unset):
             userinfo_url = UNSET
         else:
             userinfo_url = self.userinfo_url
 
-        default_scopes: list[str] | Unset = UNSET
+        default_scopes: Union[Unset, list[str]] = UNSET
         if not isinstance(self.default_scopes, Unset):
             default_scopes = self.default_scopes
 
 
 
-        identity_mapping: dict[str, Any] | Unset = UNSET
+        identity_mapping: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.identity_mapping, Unset):
             identity_mapping = self.identity_mapping.to_dict()
 
@@ -123,32 +123,32 @@ class GetOauthProviderTemplatesResponse200TemplatesAdditionalProperty:
 
 
 
-        def _parse_authorize_url(data: object) -> None | str | Unset:
+        def _parse_authorize_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         authorize_url = _parse_authorize_url(d.pop("authorizeUrl", UNSET))
 
 
-        def _parse_token_url(data: object) -> None | str | Unset:
+        def _parse_token_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         token_url = _parse_token_url(d.pop("tokenUrl", UNSET))
 
 
-        def _parse_userinfo_url(data: object) -> None | str | Unset:
+        def _parse_userinfo_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         userinfo_url = _parse_userinfo_url(d.pop("userinfoUrl", UNSET))
 
@@ -157,7 +157,7 @@ class GetOauthProviderTemplatesResponse200TemplatesAdditionalProperty:
 
 
         _identity_mapping = d.pop("identityMapping", UNSET)
-        identity_mapping: GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyIdentityMapping | Unset
+        identity_mapping: Union[Unset, GetOauthProviderTemplatesResponse200TemplatesAdditionalPropertyIdentityMapping]
         if isinstance(_identity_mapping,  Unset):
             identity_mapping = UNSET
         else:

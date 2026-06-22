@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.customer_resolve_result import CustomerResolveResult
 from ...models.error import Error
 from ...models.post_customer_resolve_body import PostCustomerResolveBody
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostCustomerResolveBody | Unset = UNSET,
+    body: PostCustomerResolveBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/customer/resolve",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CustomerResolveResult | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[CustomerResolveResult, Error]]:
     if response.status_code == 200:
         response_200 = CustomerResolveResult.from_dict(response.json())
 
@@ -79,7 +76,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CustomerResolveResult | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[CustomerResolveResult, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -91,20 +88,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostCustomerResolveBody | Unset = UNSET,
+    body: PostCustomerResolveBody,
 
-) -> Response[CustomerResolveResult | Error]:
+) -> Response[Union[CustomerResolveResult, Error]]:
     """ Map one of the caller's external user ids onto a stable ADH customerId (BYO bridge)
 
     Args:
-        body (PostCustomerResolveBody | Unset):
+        body (PostCustomerResolveBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CustomerResolveResult | Error]
+        Response[Union[CustomerResolveResult, Error]]
      """
 
 
@@ -122,20 +119,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostCustomerResolveBody | Unset = UNSET,
+    body: PostCustomerResolveBody,
 
-) -> CustomerResolveResult | Error | None:
+) -> Optional[Union[CustomerResolveResult, Error]]:
     """ Map one of the caller's external user ids onto a stable ADH customerId (BYO bridge)
 
     Args:
-        body (PostCustomerResolveBody | Unset):
+        body (PostCustomerResolveBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        CustomerResolveResult | Error
+        Union[CustomerResolveResult, Error]
      """
 
 
@@ -148,20 +145,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostCustomerResolveBody | Unset = UNSET,
+    body: PostCustomerResolveBody,
 
-) -> Response[CustomerResolveResult | Error]:
+) -> Response[Union[CustomerResolveResult, Error]]:
     """ Map one of the caller's external user ids onto a stable ADH customerId (BYO bridge)
 
     Args:
-        body (PostCustomerResolveBody | Unset):
+        body (PostCustomerResolveBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CustomerResolveResult | Error]
+        Response[Union[CustomerResolveResult, Error]]
      """
 
 
@@ -179,20 +176,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostCustomerResolveBody | Unset = UNSET,
+    body: PostCustomerResolveBody,
 
-) -> CustomerResolveResult | Error | None:
+) -> Optional[Union[CustomerResolveResult, Error]]:
     """ Map one of the caller's external user ids onto a stable ADH customerId (BYO bridge)
 
     Args:
-        body (PostCustomerResolveBody | Unset):
+        body (PostCustomerResolveBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        CustomerResolveResult | Error
+        Union[CustomerResolveResult, Error]
      """
 
 

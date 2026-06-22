@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.patch_registry_namespaces_id_body import PatchRegistryNamespacesIdBody
 from ...models.registry_namespace_update import RegistryNamespaceUpdate
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     id: str,
     *,
-    body: PatchRegistryNamespacesIdBody | Unset = UNSET,
+    body: PatchRegistryNamespacesIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/registry/namespaces/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/registry/namespaces/{id}".format(id=id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | RegistryNamespaceUpdate | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, RegistryNamespaceUpdate]]:
     if response.status_code == 200:
         response_200 = RegistryNamespaceUpdate.from_dict(response.json())
 
@@ -87,7 +84,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | RegistryNamespaceUpdate]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, RegistryNamespaceUpdate]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -100,21 +97,21 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryNamespacesIdBody | Unset = UNSET,
+    body: PatchRegistryNamespacesIdBody,
 
-) -> Response[Error | RegistryNamespaceUpdate]:
+) -> Response[Union[Error, RegistryNamespaceUpdate]]:
     """ Update a namespace handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryNamespacesIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryNamespacesIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryNamespaceUpdate]
+        Response[Union[Error, RegistryNamespaceUpdate]]
      """
 
 
@@ -134,21 +131,21 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryNamespacesIdBody | Unset = UNSET,
+    body: PatchRegistryNamespacesIdBody,
 
-) -> Error | RegistryNamespaceUpdate | None:
+) -> Optional[Union[Error, RegistryNamespaceUpdate]]:
     """ Update a namespace handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryNamespacesIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryNamespacesIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryNamespaceUpdate
+        Union[Error, RegistryNamespaceUpdate]
      """
 
 
@@ -163,21 +160,21 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryNamespacesIdBody | Unset = UNSET,
+    body: PatchRegistryNamespacesIdBody,
 
-) -> Response[Error | RegistryNamespaceUpdate]:
+) -> Response[Union[Error, RegistryNamespaceUpdate]]:
     """ Update a namespace handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryNamespacesIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryNamespacesIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryNamespaceUpdate]
+        Response[Union[Error, RegistryNamespaceUpdate]]
      """
 
 
@@ -197,21 +194,21 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryNamespacesIdBody | Unset = UNSET,
+    body: PatchRegistryNamespacesIdBody,
 
-) -> Error | RegistryNamespaceUpdate | None:
+) -> Optional[Union[Error, RegistryNamespaceUpdate]]:
     """ Update a namespace handle/label (site-admin)
 
     Args:
         id (str):
-        body (PatchRegistryNamespacesIdBody | Unset): At least one of name or slug is required.
+        body (PatchRegistryNamespacesIdBody): At least one of name or slug is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryNamespaceUpdate
+        Union[Error, RegistryNamespaceUpdate]
      """
 
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,22 +24,22 @@ class GetPersonaMemoryFactsResponse200Item:
             id (str):
             owner_id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             persona_id (str):
             scope (str):
-            memory_id (None | str):
-            subject_table (None | str):
-            subject_id (None | str):
+            memory_id (Union[None, str]):
+            subject_table (Union[None, str]):
+            subject_id (Union[None, str]):
             predicate (str):
-            object_table (None | str):
-            object_id (None | str):
-            object_value (None | str):
+            object_table (Union[None, str]):
+            object_id (Union[None, str]):
+            object_value (Union[None, str]):
             source (str):
             confidence (int):
-            valid_from (None | str):
-            valid_to (None | str):
+            valid_from (Union[None, str]):
+            valid_to (Union[None, str]):
             status (str):
-            supersedes_id (None | str):
+            supersedes_id (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
@@ -49,22 +47,22 @@ class GetPersonaMemoryFactsResponse200Item:
     id: str
     owner_id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     persona_id: str
     scope: str
-    memory_id: None | str
-    subject_table: None | str
-    subject_id: None | str
+    memory_id: Union[None, str]
+    subject_table: Union[None, str]
+    subject_id: Union[None, str]
     predicate: str
-    object_table: None | str
-    object_id: None | str
-    object_value: None | str
+    object_table: Union[None, str]
+    object_id: Union[None, str]
+    object_value: Union[None, str]
     source: str
     confidence: int
-    valid_from: None | str
-    valid_to: None | str
+    valid_from: Union[None, str]
+    valid_to: Union[None, str]
     status: str
-    supersedes_id: None | str
+    supersedes_id: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -79,46 +77,46 @@ class GetPersonaMemoryFactsResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         persona_id = self.persona_id
 
         scope = self.scope
 
-        memory_id: None | str
+        memory_id: Union[None, str]
         memory_id = self.memory_id
 
-        subject_table: None | str
+        subject_table: Union[None, str]
         subject_table = self.subject_table
 
-        subject_id: None | str
+        subject_id: Union[None, str]
         subject_id = self.subject_id
 
         predicate = self.predicate
 
-        object_table: None | str
+        object_table: Union[None, str]
         object_table = self.object_table
 
-        object_id: None | str
+        object_id: Union[None, str]
         object_id = self.object_id
 
-        object_value: None | str
+        object_value: Union[None, str]
         object_value = self.object_value
 
         source = self.source
 
         confidence = self.confidence
 
-        valid_from: None | str
+        valid_from: Union[None, str]
         valid_from = self.valid_from
 
-        valid_to: None | str
+        valid_to: Union[None, str]
         valid_to = self.valid_to
 
         status = self.status
 
-        supersedes_id: None | str
+        supersedes_id: Union[None, str]
         supersedes_id = self.supersedes_id
 
         created_at = self.created_at
@@ -165,10 +163,10 @@ class GetPersonaMemoryFactsResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -177,52 +175,52 @@ class GetPersonaMemoryFactsResponse200Item:
 
         scope = d.pop("scope")
 
-        def _parse_memory_id(data: object) -> None | str:
+        def _parse_memory_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         memory_id = _parse_memory_id(d.pop("memoryId"))
 
 
-        def _parse_subject_table(data: object) -> None | str:
+        def _parse_subject_table(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         subject_table = _parse_subject_table(d.pop("subjectTable"))
 
 
-        def _parse_subject_id(data: object) -> None | str:
+        def _parse_subject_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         subject_id = _parse_subject_id(d.pop("subjectId"))
 
 
         predicate = d.pop("predicate")
 
-        def _parse_object_table(data: object) -> None | str:
+        def _parse_object_table(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         object_table = _parse_object_table(d.pop("objectTable"))
 
 
-        def _parse_object_id(data: object) -> None | str:
+        def _parse_object_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         object_id = _parse_object_id(d.pop("objectId"))
 
 
-        def _parse_object_value(data: object) -> None | str:
+        def _parse_object_value(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         object_value = _parse_object_value(d.pop("objectValue"))
 
@@ -231,28 +229,28 @@ class GetPersonaMemoryFactsResponse200Item:
 
         confidence = d.pop("confidence")
 
-        def _parse_valid_from(data: object) -> None | str:
+        def _parse_valid_from(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         valid_from = _parse_valid_from(d.pop("validFrom"))
 
 
-        def _parse_valid_to(data: object) -> None | str:
+        def _parse_valid_to(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         valid_to = _parse_valid_to(d.pop("validTo"))
 
 
         status = d.pop("status")
 
-        def _parse_supersedes_id(data: object) -> None | str:
+        def _parse_supersedes_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         supersedes_id = _parse_supersedes_id(d.pop("supersedesId"))
 

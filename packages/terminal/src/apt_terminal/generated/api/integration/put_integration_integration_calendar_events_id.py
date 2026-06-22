@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_integration_integration_calendar_events_id_body import PutIntegrationIntegrationCalendarEventsIdBody
 from ...models.put_integration_integration_calendar_events_id_response_200 import PutIntegrationIntegrationCalendarEventsIdResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     id: str,
     *,
-    body: PutIntegrationIntegrationCalendarEventsIdBody | Unset = UNSET,
+    body: PutIntegrationIntegrationCalendarEventsIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/integration/integration-calendar-events/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/integration/integration-calendar-events/{id}".format(id=id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutIntegrationIntegrationCalendarEventsIdResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]:
     if response.status_code == 200:
         response_200 = PutIntegrationIntegrationCalendarEventsIdResponse200.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutIntegrationIntegrationCalendarEventsIdResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutIntegrationIntegrationCalendarEventsIdBody | Unset = UNSET,
+    body: PutIntegrationIntegrationCalendarEventsIdBody,
 
-) -> Response[Error | PutIntegrationIntegrationCalendarEventsIdResponse200]:
+) -> Response[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]:
     """ Update integration_calendar_events
 
     Args:
         id (str):
-        body (PutIntegrationIntegrationCalendarEventsIdBody | Unset):
+        body (PutIntegrationIntegrationCalendarEventsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutIntegrationIntegrationCalendarEventsIdResponse200]
+        Response[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutIntegrationIntegrationCalendarEventsIdBody | Unset = UNSET,
+    body: PutIntegrationIntegrationCalendarEventsIdBody,
 
-) -> Error | PutIntegrationIntegrationCalendarEventsIdResponse200 | None:
+) -> Optional[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]:
     """ Update integration_calendar_events
 
     Args:
         id (str):
-        body (PutIntegrationIntegrationCalendarEventsIdBody | Unset):
+        body (PutIntegrationIntegrationCalendarEventsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutIntegrationIntegrationCalendarEventsIdResponse200
+        Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutIntegrationIntegrationCalendarEventsIdBody | Unset = UNSET,
+    body: PutIntegrationIntegrationCalendarEventsIdBody,
 
-) -> Response[Error | PutIntegrationIntegrationCalendarEventsIdResponse200]:
+) -> Response[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]:
     """ Update integration_calendar_events
 
     Args:
         id (str):
-        body (PutIntegrationIntegrationCalendarEventsIdBody | Unset):
+        body (PutIntegrationIntegrationCalendarEventsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutIntegrationIntegrationCalendarEventsIdResponse200]
+        Response[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutIntegrationIntegrationCalendarEventsIdBody | Unset = UNSET,
+    body: PutIntegrationIntegrationCalendarEventsIdBody,
 
-) -> Error | PutIntegrationIntegrationCalendarEventsIdResponse200 | None:
+) -> Optional[Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]]:
     """ Update integration_calendar_events
 
     Args:
         id (str):
-        body (PutIntegrationIntegrationCalendarEventsIdBody | Unset):
+        body (PutIntegrationIntegrationCalendarEventsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutIntegrationIntegrationCalendarEventsIdResponse200
+        Union[Error, PutIntegrationIntegrationCalendarEventsIdResponse200]
      """
 
 

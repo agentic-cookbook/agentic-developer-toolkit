@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,20 +22,20 @@ T = TypeVar("T", bound="PutCommunityBadgeDefinitionsIdBody")
 class PutCommunityBadgeDefinitionsIdBody:
     """ 
         Attributes:
-            name (str | Unset):
-            description (str | Unset):
-            icon (str | Unset):
-            criteria_type (str | Unset):
-            criteria_threshold (int | Unset):
-            point_value (int | Unset):
+            name (Union[Unset, str]):
+            description (Union[Unset, str]):
+            icon (Union[Unset, str]):
+            criteria_type (Union[Unset, str]):
+            criteria_threshold (Union[Unset, int]):
+            point_value (Union[Unset, int]):
      """
 
-    name: str | Unset = UNSET
-    description: str | Unset = UNSET
-    icon: str | Unset = UNSET
-    criteria_type: str | Unset = UNSET
-    criteria_threshold: int | Unset = UNSET
-    point_value: int | Unset = UNSET
+    name: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
+    icon: Union[Unset, str] = UNSET
+    criteria_type: Union[Unset, str] = UNSET
+    criteria_threshold: Union[Unset, int] = UNSET
+    point_value: Union[Unset, int] = UNSET
 
 
 

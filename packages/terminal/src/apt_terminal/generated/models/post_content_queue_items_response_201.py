@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.post_content_queue_items_response_201_payload_type_1 import PostContentQueueItemsResponse201PayloadType1
@@ -28,27 +27,27 @@ class PostContentQueueItemsResponse201:
             id (str):
             owner_id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             queue_id (str):
-            payload (bool | float | list[Any] | None | PostContentQueueItemsResponse201PayloadType1 | str):
+            payload (Union['PostContentQueueItemsResponse201PayloadType1', None, bool, float, list[Any], str]):
             status (str):
             enqueued_at (str):
-            dequeued_at (None | str):
-            acked_at (None | str):
-            nacked_at (None | str):
+            dequeued_at (Union[None, str]):
+            acked_at (Union[None, str]):
+            nacked_at (Union[None, str]):
      """
 
     id: str
     owner_id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     queue_id: str
-    payload: bool | float | list[Any] | None | PostContentQueueItemsResponse201PayloadType1 | str
+    payload: Union['PostContentQueueItemsResponse201PayloadType1', None, bool, float, list[Any], str]
     status: str
     enqueued_at: str
-    dequeued_at: None | str
-    acked_at: None | str
-    nacked_at: None | str
+    dequeued_at: Union[None, str]
+    acked_at: Union[None, str]
+    nacked_at: Union[None, str]
 
 
 
@@ -62,12 +61,12 @@ class PostContentQueueItemsResponse201:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         queue_id = self.queue_id
 
-        payload: bool | dict[str, Any] | float | list[Any] | None | str
+        payload: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.payload, PostContentQueueItemsResponse201PayloadType1):
             payload = self.payload.to_dict()
         elif isinstance(self.payload, list):
@@ -81,13 +80,13 @@ class PostContentQueueItemsResponse201:
 
         enqueued_at = self.enqueued_at
 
-        dequeued_at: None | str
+        dequeued_at: Union[None, str]
         dequeued_at = self.dequeued_at
 
-        acked_at: None | str
+        acked_at: Union[None, str]
         acked_at = self.acked_at
 
-        nacked_at: None | str
+        nacked_at: Union[None, str]
         nacked_at = self.nacked_at
 
 
@@ -121,17 +120,17 @@ class PostContentQueueItemsResponse201:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
         queue_id = d.pop("queueId")
 
-        def _parse_payload(data: object) -> bool | float | list[Any] | None | PostContentQueueItemsResponse201PayloadType1 | str:
+        def _parse_payload(data: object) -> Union['PostContentQueueItemsResponse201PayloadType1', None, bool, float, list[Any], str]:
             if data is None:
                 return data
             try:
@@ -142,7 +141,7 @@ class PostContentQueueItemsResponse201:
 
 
                 return payload_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -150,9 +149,9 @@ class PostContentQueueItemsResponse201:
                 payload_type_2 = cast(list[Any], data)
 
                 return payload_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PostContentQueueItemsResponse201PayloadType1 | str, data)
+            return cast(Union['PostContentQueueItemsResponse201PayloadType1', None, bool, float, list[Any], str], data)
 
         payload = _parse_payload(d.pop("payload"))
 
@@ -161,26 +160,26 @@ class PostContentQueueItemsResponse201:
 
         enqueued_at = d.pop("enqueuedAt")
 
-        def _parse_dequeued_at(data: object) -> None | str:
+        def _parse_dequeued_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         dequeued_at = _parse_dequeued_at(d.pop("dequeuedAt"))
 
 
-        def _parse_acked_at(data: object) -> None | str:
+        def _parse_acked_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         acked_at = _parse_acked_at(d.pop("ackedAt"))
 
 
-        def _parse_nacked_at(data: object) -> None | str:
+        def _parse_nacked_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         nacked_at = _parse_nacked_at(d.pop("nackedAt"))
 

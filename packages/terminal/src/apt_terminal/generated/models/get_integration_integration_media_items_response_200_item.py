@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,21 +23,21 @@ class GetIntegrationIntegrationMediaItemsResponse200Item:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             connection_id (str):
             external_id (str):
             source_provider (str):
             media_type (str):
             title (str):
-            artist (None | str):
-            album (None | str):
-            image_url (None | str):
-            external_url (None | str):
-            duration_ms (int | None):
-            popularity (int | None):
+            artist (Union[None, str]):
+            album (Union[None, str]):
+            image_url (Union[None, str]):
+            external_url (Union[None, str]):
+            duration_ms (Union[None, int]):
+            popularity (Union[None, int]):
             is_saved (bool):
-            last_played_at (None | str):
+            last_played_at (Union[None, str]):
             is_deleted (bool):
             sync_version (int):
             created_at (str):
@@ -48,21 +46,21 @@ class GetIntegrationIntegrationMediaItemsResponse200Item:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     connection_id: str
     external_id: str
     source_provider: str
     media_type: str
     title: str
-    artist: None | str
-    album: None | str
-    image_url: None | str
-    external_url: None | str
-    duration_ms: int | None
-    popularity: int | None
+    artist: Union[None, str]
+    album: Union[None, str]
+    image_url: Union[None, str]
+    external_url: Union[None, str]
+    duration_ms: Union[None, int]
+    popularity: Union[None, int]
     is_saved: bool
-    last_played_at: None | str
+    last_played_at: Union[None, str]
     is_deleted: bool
     sync_version: int
     created_at: str
@@ -77,7 +75,7 @@ class GetIntegrationIntegrationMediaItemsResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -92,27 +90,27 @@ class GetIntegrationIntegrationMediaItemsResponse200Item:
 
         title = self.title
 
-        artist: None | str
+        artist: Union[None, str]
         artist = self.artist
 
-        album: None | str
+        album: Union[None, str]
         album = self.album
 
-        image_url: None | str
+        image_url: Union[None, str]
         image_url = self.image_url
 
-        external_url: None | str
+        external_url: Union[None, str]
         external_url = self.external_url
 
-        duration_ms: int | None
+        duration_ms: Union[None, int]
         duration_ms = self.duration_ms
 
-        popularity: int | None
+        popularity: Union[None, int]
         popularity = self.popularity
 
         is_saved = self.is_saved
 
-        last_played_at: None | str
+        last_played_at: Union[None, str]
         last_played_at = self.last_played_at
 
         is_deleted = self.is_deleted
@@ -161,10 +159,10 @@ class GetIntegrationIntegrationMediaItemsResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -181,60 +179,60 @@ class GetIntegrationIntegrationMediaItemsResponse200Item:
 
         title = d.pop("title")
 
-        def _parse_artist(data: object) -> None | str:
+        def _parse_artist(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         artist = _parse_artist(d.pop("artist"))
 
 
-        def _parse_album(data: object) -> None | str:
+        def _parse_album(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         album = _parse_album(d.pop("album"))
 
 
-        def _parse_image_url(data: object) -> None | str:
+        def _parse_image_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         image_url = _parse_image_url(d.pop("imageUrl"))
 
 
-        def _parse_external_url(data: object) -> None | str:
+        def _parse_external_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_url = _parse_external_url(d.pop("externalUrl"))
 
 
-        def _parse_duration_ms(data: object) -> int | None:
+        def _parse_duration_ms(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         duration_ms = _parse_duration_ms(d.pop("durationMs"))
 
 
-        def _parse_popularity(data: object) -> int | None:
+        def _parse_popularity(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         popularity = _parse_popularity(d.pop("popularity"))
 
 
         is_saved = d.pop("isSaved")
 
-        def _parse_last_played_at(data: object) -> None | str:
+        def _parse_last_played_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         last_played_at = _parse_last_played_at(d.pop("lastPlayedAt"))
 

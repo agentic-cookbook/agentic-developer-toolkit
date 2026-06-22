@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,18 +23,18 @@ T = TypeVar("T", bound="PutCommunityDiscussionPollsIdBody")
 class PutCommunityDiscussionPollsIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            thread_id (str | Unset):
-            question (str | Unset):
-            allow_multiple (bool | Unset):
-            expires_at (None | str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            thread_id (Union[Unset, str]):
+            question (Union[Unset, str]):
+            allow_multiple (Union[Unset, bool]):
+            expires_at (Union[None, Unset, str]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    thread_id: str | Unset = UNSET
-    question: str | Unset = UNSET
-    allow_multiple: bool | Unset = UNSET
-    expires_at: None | str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    thread_id: Union[Unset, str] = UNSET
+    question: Union[Unset, str] = UNSET
+    allow_multiple: Union[Unset, bool] = UNSET
+    expires_at: Union[None, Unset, str] = UNSET
 
 
 
@@ -50,7 +49,7 @@ class PutCommunityDiscussionPollsIdBody:
 
         allow_multiple = self.allow_multiple
 
-        expires_at: None | str | Unset
+        expires_at: Union[None, Unset, str]
         if isinstance(self.expires_at, Unset):
             expires_at = UNSET
         else:
@@ -87,12 +86,12 @@ class PutCommunityDiscussionPollsIdBody:
 
         allow_multiple = d.pop("allowMultiple", UNSET)
 
-        def _parse_expires_at(data: object) -> None | str | Unset:
+        def _parse_expires_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         expires_at = _parse_expires_at(d.pop("expiresAt", UNSET))
 

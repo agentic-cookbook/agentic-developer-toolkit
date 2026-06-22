@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -33,7 +32,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | FeedUnreadCount | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, FeedUnreadCount]]:
     if response.status_code == 200:
         response_200 = FeedUnreadCount.from_dict(response.json())
 
@@ -54,7 +53,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | FeedUnreadCount]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, FeedUnreadCount]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -67,7 +66,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | FeedUnreadCount]:
+) -> Response[Union[Error, FeedUnreadCount]]:
     """ Count the caller’s unread feed entries
 
     Raises:
@@ -75,7 +74,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | FeedUnreadCount]
+        Response[Union[Error, FeedUnreadCount]]
      """
 
 
@@ -93,7 +92,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | FeedUnreadCount | None:
+) -> Optional[Union[Error, FeedUnreadCount]]:
     """ Count the caller’s unread feed entries
 
     Raises:
@@ -101,7 +100,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | FeedUnreadCount
+        Union[Error, FeedUnreadCount]
      """
 
 
@@ -114,7 +113,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | FeedUnreadCount]:
+) -> Response[Union[Error, FeedUnreadCount]]:
     """ Count the caller’s unread feed entries
 
     Raises:
@@ -122,7 +121,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | FeedUnreadCount]
+        Response[Union[Error, FeedUnreadCount]]
      """
 
 
@@ -140,7 +139,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | FeedUnreadCount | None:
+) -> Optional[Union[Error, FeedUnreadCount]]:
     """ Count the caller’s unread feed entries
 
     Raises:
@@ -148,7 +147,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | FeedUnreadCount
+        Union[Error, FeedUnreadCount]
      """
 
 

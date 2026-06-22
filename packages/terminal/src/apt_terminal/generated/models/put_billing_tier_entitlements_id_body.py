@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,16 +22,16 @@ T = TypeVar("T", bound="PutBillingTierEntitlementsIdBody")
 class PutBillingTierEntitlementsIdBody:
     """ 
         Attributes:
-            tier_id (str | Unset):
-            entitlement_key (str | Unset):
-            value_type (str | Unset):
-            value (str | Unset):
+            tier_id (Union[Unset, str]):
+            entitlement_key (Union[Unset, str]):
+            value_type (Union[Unset, str]):
+            value (Union[Unset, str]):
      """
 
-    tier_id: str | Unset = UNSET
-    entitlement_key: str | Unset = UNSET
-    value_type: str | Unset = UNSET
-    value: str | Unset = UNSET
+    tier_id: Union[Unset, str] = UNSET
+    entitlement_key: Union[Unset, str] = UNSET
+    value_type: Union[Unset, str] = UNSET
+    value: Union[Unset, str] = UNSET
 
 
 

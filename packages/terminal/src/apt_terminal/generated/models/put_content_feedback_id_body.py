@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,39 +23,39 @@ T = TypeVar("T", bound="PutContentFeedbackIdBody")
 class PutContentFeedbackIdBody:
     """ 
         Attributes:
-            deleted_at (None | str | Unset):
-            owner_id (str | Unset):
-            user_email (str | Unset):
-            category (str | Unset):
-            subject (str | Unset):
-            body (str | Unset):
-            platform (str | Unset):
-            app_version (str | Unset):
-            os_version (str | Unset):
-            device_info (str | Unset):
-            status (str | Unset):
-            admin_notes (str | Unset):
+            deleted_at (Union[None, Unset, str]):
+            owner_id (Union[Unset, str]):
+            user_email (Union[Unset, str]):
+            category (Union[Unset, str]):
+            subject (Union[Unset, str]):
+            body (Union[Unset, str]):
+            platform (Union[Unset, str]):
+            app_version (Union[Unset, str]):
+            os_version (Union[Unset, str]):
+            device_info (Union[Unset, str]):
+            status (Union[Unset, str]):
+            admin_notes (Union[Unset, str]):
      """
 
-    deleted_at: None | str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    user_email: str | Unset = UNSET
-    category: str | Unset = UNSET
-    subject: str | Unset = UNSET
-    body: str | Unset = UNSET
-    platform: str | Unset = UNSET
-    app_version: str | Unset = UNSET
-    os_version: str | Unset = UNSET
-    device_info: str | Unset = UNSET
-    status: str | Unset = UNSET
-    admin_notes: str | Unset = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    user_email: Union[Unset, str] = UNSET
+    category: Union[Unset, str] = UNSET
+    subject: Union[Unset, str] = UNSET
+    body: Union[Unset, str] = UNSET
+    platform: Union[Unset, str] = UNSET
+    app_version: Union[Unset, str] = UNSET
+    os_version: Union[Unset, str] = UNSET
+    device_info: Union[Unset, str] = UNSET
+    status: Union[Unset, str] = UNSET
+    admin_notes: Union[Unset, str] = UNSET
 
 
 
 
 
     def to_dict(self) -> dict[str, Any]:
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -121,12 +120,12 @@ class PutContentFeedbackIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 

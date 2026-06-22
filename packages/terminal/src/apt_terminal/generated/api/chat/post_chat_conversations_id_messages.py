@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -15,15 +14,15 @@ from ...models.chat_token_event import ChatTokenEvent
 from ...models.chat_tool_call_completed_event import ChatToolCallCompletedEvent
 from ...models.chat_tool_call_started_event import ChatToolCallStartedEvent
 from ...models.error import Error
-from ...types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
 
 
 
 def _get_kwargs(
     id: str,
     *,
-    body: ChatSendMessage | Unset = UNSET,
+    body: ChatSendMessage,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -35,12 +34,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/chat/conversations/{id}/messages".format(id=quote(str(id), safe=""),),
+        "url": "/chat/conversations/{id}/messages".format(id=id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -49,9 +47,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]:
     if response.status_code == 200:
-        def _parse_response_200(data: object) -> ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent:
+        def _parse_response_200(data: object) -> Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
@@ -60,7 +58,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 
                 return componentsschemas_chat_stream_event_chat_token_event
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, dict):
@@ -70,7 +68,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 
                 return componentsschemas_chat_stream_event_chat_tool_call_started_event
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, dict):
@@ -80,7 +78,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 
                 return componentsschemas_chat_stream_event_chat_tool_call_completed_event
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, dict):
@@ -90,7 +88,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 
                 return componentsschemas_chat_stream_event_chat_done_event
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             if not isinstance(data, dict):
                 raise TypeError()
@@ -124,7 +122,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -137,9 +135,9 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: ChatSendMessage | Unset = UNSET,
+    body: ChatSendMessage,
 
-) -> Response[ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error]:
+) -> Response[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]:
     """ Send a message and stream the assistant turn (SSE)
 
      Sends a user message and streams the assistant response as Server-Sent Events (`text/event-stream`).
@@ -150,14 +148,14 @@ def sync_detailed(
 
     Args:
         id (str):
-        body (ChatSendMessage | Unset):
+        body (ChatSendMessage):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error]
+        Response[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]
      """
 
 
@@ -177,9 +175,9 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: ChatSendMessage | Unset = UNSET,
+    body: ChatSendMessage,
 
-) -> ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error | None:
+) -> Optional[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]:
     """ Send a message and stream the assistant turn (SSE)
 
      Sends a user message and streams the assistant response as Server-Sent Events (`text/event-stream`).
@@ -190,14 +188,14 @@ def sync(
 
     Args:
         id (str):
-        body (ChatSendMessage | Unset):
+        body (ChatSendMessage):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error
+        Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]
      """
 
 
@@ -212,9 +210,9 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: ChatSendMessage | Unset = UNSET,
+    body: ChatSendMessage,
 
-) -> Response[ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error]:
+) -> Response[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]:
     """ Send a message and stream the assistant turn (SSE)
 
      Sends a user message and streams the assistant response as Server-Sent Events (`text/event-stream`).
@@ -225,14 +223,14 @@ async def asyncio_detailed(
 
     Args:
         id (str):
-        body (ChatSendMessage | Unset):
+        body (ChatSendMessage):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error]
+        Response[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]
      """
 
 
@@ -252,9 +250,9 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: ChatSendMessage | Unset = UNSET,
+    body: ChatSendMessage,
 
-) -> ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error | None:
+) -> Optional[Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]]:
     """ Send a message and stream the assistant turn (SSE)
 
      Sends a user message and streams the assistant response as Server-Sent Events (`text/event-stream`).
@@ -265,14 +263,14 @@ async def asyncio(
 
     Args:
         id (str):
-        body (ChatSendMessage | Unset):
+        body (ChatSendMessage):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ChatDoneEvent | ChatErrorEvent | ChatTokenEvent | ChatToolCallCompletedEvent | ChatToolCallStartedEvent | Error
+        Union[Error, Union['ChatDoneEvent', 'ChatErrorEvent', 'ChatTokenEvent', 'ChatToolCallCompletedEvent', 'ChatToolCallStartedEvent']]
      """
 
 

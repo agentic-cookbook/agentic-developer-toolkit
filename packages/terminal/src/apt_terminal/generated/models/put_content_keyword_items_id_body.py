@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,20 +23,20 @@ T = TypeVar("T", bound="PutContentKeywordItemsIdBody")
 class PutContentKeywordItemsIdBody:
     """ 
         Attributes:
-            owner_id (str | Unset):
-            deleted_at (None | str | Unset):
-            keyword_id (str | Unset):
-            target_kind (str | Unset):
-            target_id (str | Unset):
-            sort_order (int | Unset):
+            owner_id (Union[Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            keyword_id (Union[Unset, str]):
+            target_kind (Union[Unset, str]):
+            target_id (Union[Unset, str]):
+            sort_order (Union[Unset, int]):
      """
 
-    owner_id: str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    keyword_id: str | Unset = UNSET
-    target_kind: str | Unset = UNSET
-    target_id: str | Unset = UNSET
-    sort_order: int | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    keyword_id: Union[Unset, str] = UNSET
+    target_kind: Union[Unset, str] = UNSET
+    target_id: Union[Unset, str] = UNSET
+    sort_order: Union[Unset, int] = UNSET
 
 
 
@@ -46,7 +45,7 @@ class PutContentKeywordItemsIdBody:
     def to_dict(self) -> dict[str, Any]:
         owner_id = self.owner_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -87,12 +86,12 @@ class PutContentKeywordItemsIdBody:
         d = dict(src_dict)
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 

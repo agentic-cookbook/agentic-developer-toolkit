@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..models.post_persona_memory_recall_body_memory_type import PostPersonaMemoryRecallBodyMemoryType
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -26,14 +25,14 @@ class PostPersonaMemoryRecallBody:
         Attributes:
             persona_id (str):
             query (str):
-            limit (int | Unset):
-            memory_type (PostPersonaMemoryRecallBodyMemoryType | Unset):
+            limit (Union[Unset, int]):
+            memory_type (Union[Unset, PostPersonaMemoryRecallBodyMemoryType]):
      """
 
     persona_id: str
     query: str
-    limit: int | Unset = UNSET
-    memory_type: PostPersonaMemoryRecallBodyMemoryType | Unset = UNSET
+    limit: Union[Unset, int] = UNSET
+    memory_type: Union[Unset, PostPersonaMemoryRecallBodyMemoryType] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -47,7 +46,7 @@ class PostPersonaMemoryRecallBody:
 
         limit = self.limit
 
-        memory_type: str | Unset = UNSET
+        memory_type: Union[Unset, str] = UNSET
         if not isinstance(self.memory_type, Unset):
             memory_type = self.memory_type.value
 
@@ -78,7 +77,7 @@ class PostPersonaMemoryRecallBody:
         limit = d.pop("limit", UNSET)
 
         _memory_type = d.pop("memoryType", UNSET)
-        memory_type: PostPersonaMemoryRecallBodyMemoryType | Unset
+        memory_type: Union[Unset, PostPersonaMemoryRecallBodyMemoryType]
         if isinstance(_memory_type,  Unset):
             memory_type = UNSET
         else:

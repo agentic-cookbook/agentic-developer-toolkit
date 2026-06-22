@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -29,11 +28,11 @@ class PostChatChatParticipantsBody:
             type_ (str):
             joined_at (str):
             state_changed_at (str):
-            owner_id (str | Unset):
-            role (str | Unset):
-            state (str | Unset):
-            contact_id (None | str | Unset):
-            last_read_message_id (None | str | Unset):
+            owner_id (Union[Unset, str]):
+            role (Union[Unset, str]):
+            state (Union[Unset, str]):
+            contact_id (Union[None, Unset, str]):
+            last_read_message_id (Union[None, Unset, str]):
      """
 
     chat_id: str
@@ -41,11 +40,11 @@ class PostChatChatParticipantsBody:
     type_: str
     joined_at: str
     state_changed_at: str
-    owner_id: str | Unset = UNSET
-    role: str | Unset = UNSET
-    state: str | Unset = UNSET
-    contact_id: None | str | Unset = UNSET
-    last_read_message_id: None | str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    role: Union[Unset, str] = UNSET
+    state: Union[Unset, str] = UNSET
+    contact_id: Union[None, Unset, str] = UNSET
+    last_read_message_id: Union[None, Unset, str] = UNSET
 
 
 
@@ -68,13 +67,13 @@ class PostChatChatParticipantsBody:
 
         state = self.state
 
-        contact_id: None | str | Unset
+        contact_id: Union[None, Unset, str]
         if isinstance(self.contact_id, Unset):
             contact_id = UNSET
         else:
             contact_id = self.contact_id
 
-        last_read_message_id: None | str | Unset
+        last_read_message_id: Union[None, Unset, str]
         if isinstance(self.last_read_message_id, Unset):
             last_read_message_id = UNSET
         else:
@@ -124,22 +123,22 @@ class PostChatChatParticipantsBody:
 
         state = d.pop("state", UNSET)
 
-        def _parse_contact_id(data: object) -> None | str | Unset:
+        def _parse_contact_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         contact_id = _parse_contact_id(d.pop("contactId", UNSET))
 
 
-        def _parse_last_read_message_id(data: object) -> None | str | Unset:
+        def _parse_last_read_message_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         last_read_message_id = _parse_last_read_message_id(d.pop("lastReadMessageId", UNSET))
 

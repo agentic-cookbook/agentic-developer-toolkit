@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -32,7 +31,7 @@ class PostUsageUsageEventsBody:
             request_bytes (int):
             response_bytes (int):
             occurred_at (str):
-            owner_id (None | str | Unset):
+            owner_id (Union[None, Unset, str]):
      """
 
     scope: str
@@ -43,7 +42,7 @@ class PostUsageUsageEventsBody:
     request_bytes: int
     response_bytes: int
     occurred_at: str
-    owner_id: None | str | Unset = UNSET
+    owner_id: Union[None, Unset, str] = UNSET
 
 
 
@@ -66,7 +65,7 @@ class PostUsageUsageEventsBody:
 
         occurred_at = self.occurred_at
 
-        owner_id: None | str | Unset
+        owner_id: Union[None, Unset, str]
         if isinstance(self.owner_id, Unset):
             owner_id = UNSET
         else:
@@ -111,12 +110,12 @@ class PostUsageUsageEventsBody:
 
         occurred_at = d.pop("occurredAt")
 
-        def _parse_owner_id(data: object) -> None | str | Unset:
+        def _parse_owner_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         owner_id = _parse_owner_id(d.pop("ownerId", UNSET))
 

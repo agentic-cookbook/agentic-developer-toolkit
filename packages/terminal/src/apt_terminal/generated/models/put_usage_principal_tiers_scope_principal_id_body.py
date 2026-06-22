@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,14 +22,14 @@ T = TypeVar("T", bound="PutUsagePrincipalTiersScopePrincipalIdBody")
 class PutUsagePrincipalTiersScopePrincipalIdBody:
     """ 
         Attributes:
-            scope (str | Unset):
-            principal_id (str | Unset):
-            tier_id (str | Unset):
+            scope (Union[Unset, str]):
+            principal_id (Union[Unset, str]):
+            tier_id (Union[Unset, str]):
      """
 
-    scope: str | Unset = UNSET
-    principal_id: str | Unset = UNSET
-    tier_id: str | Unset = UNSET
+    scope: Union[Unset, str] = UNSET
+    principal_id: Union[Unset, str] = UNSET
+    tier_id: Union[Unset, str] = UNSET
 
 
 

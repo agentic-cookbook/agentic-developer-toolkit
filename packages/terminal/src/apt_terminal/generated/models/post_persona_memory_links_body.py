@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,14 +24,14 @@ class PostPersonaMemoryLinksBody:
         Attributes:
             src_id (str):
             dst_id (str):
-            owner_id (str | Unset):
-            relation (str | Unset):
+            owner_id (Union[Unset, str]):
+            relation (Union[Unset, str]):
      """
 
     src_id: str
     dst_id: str
-    owner_id: str | Unset = UNSET
-    relation: str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    relation: Union[Unset, str] = UNSET
 
 
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -24,9 +22,9 @@ class GetSystemAuditEventsResponse200Item:
     """ 
         Attributes:
             id (str):
-            ecosystem_id (None | str):
-            developer_id (None | str):
-            actor_user_id (None | str):
+            ecosystem_id (Union[None, str]):
+            developer_id (Union[None, str]):
+            actor_user_id (Union[None, str]):
             event_type (str):
             payload (str):
             ip_address (str):
@@ -35,9 +33,9 @@ class GetSystemAuditEventsResponse200Item:
      """
 
     id: str
-    ecosystem_id: None | str
-    developer_id: None | str
-    actor_user_id: None | str
+    ecosystem_id: Union[None, str]
+    developer_id: Union[None, str]
+    actor_user_id: Union[None, str]
     event_type: str
     payload: str
     ip_address: str
@@ -51,13 +49,13 @@ class GetSystemAuditEventsResponse200Item:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        ecosystem_id: None | str
+        ecosystem_id: Union[None, str]
         ecosystem_id = self.ecosystem_id
 
-        developer_id: None | str
+        developer_id: Union[None, str]
         developer_id = self.developer_id
 
-        actor_user_id: None | str
+        actor_user_id: Union[None, str]
         actor_user_id = self.actor_user_id
 
         event_type = self.event_type
@@ -94,26 +92,26 @@ class GetSystemAuditEventsResponse200Item:
         d = dict(src_dict)
         id = d.pop("id")
 
-        def _parse_ecosystem_id(data: object) -> None | str:
+        def _parse_ecosystem_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         ecosystem_id = _parse_ecosystem_id(d.pop("ecosystemId"))
 
 
-        def _parse_developer_id(data: object) -> None | str:
+        def _parse_developer_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         developer_id = _parse_developer_id(d.pop("developerId"))
 
 
-        def _parse_actor_user_id(data: object) -> None | str:
+        def _parse_actor_user_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         actor_user_id = _parse_actor_user_id(d.pop("actorUserId"))
 

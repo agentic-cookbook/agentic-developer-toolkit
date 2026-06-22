@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,18 +23,18 @@ T = TypeVar("T", bound="PutBillingSubscriptionTiersIdBody")
 class PutBillingSubscriptionTiersIdBody:
     """ 
         Attributes:
-            key (str | Unset):
-            name (str | Unset):
-            description (None | str | Unset):
-            display_order (int | Unset):
-            is_active (bool | Unset):
+            key (Union[Unset, str]):
+            name (Union[Unset, str]):
+            description (Union[None, Unset, str]):
+            display_order (Union[Unset, int]):
+            is_active (Union[Unset, bool]):
      """
 
-    key: str | Unset = UNSET
-    name: str | Unset = UNSET
-    description: None | str | Unset = UNSET
-    display_order: int | Unset = UNSET
-    is_active: bool | Unset = UNSET
+    key: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
+    description: Union[None, Unset, str] = UNSET
+    display_order: Union[Unset, int] = UNSET
+    is_active: Union[Unset, bool] = UNSET
 
 
 
@@ -46,7 +45,7 @@ class PutBillingSubscriptionTiersIdBody:
 
         name = self.name
 
-        description: None | str | Unset
+        description: Union[None, Unset, str]
         if isinstance(self.description, Unset):
             description = UNSET
         else:
@@ -83,12 +82,12 @@ class PutBillingSubscriptionTiersIdBody:
 
         name = d.pop("name", UNSET)
 
-        def _parse_description(data: object) -> None | str | Unset:
+        def _parse_description(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         description = _parse_description(d.pop("description", UNSET))
 

@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_ecosystem_application_data_types_application_id_data_type_body import PutEcosystemApplicationDataTypesApplicationIdDataTypeBody
 from ...models.put_ecosystem_application_data_types_application_id_data_type_response_200 import PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -20,7 +18,7 @@ def _get_kwargs(
     application_id: str,
     data_type: str,
     *,
-    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset = UNSET,
+    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -32,12 +30,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/ecosystem/application-data-types/{application_id}/{data_type}".format(application_id=quote(str(application_id), safe=""),data_type=quote(str(data_type), safe=""),),
+        "url": "/ecosystem/application-data-types/{application_id}/{data_type}".format(application_id=application_id,data_type=data_type,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -46,7 +43,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]:
     if response.status_code == 200:
         response_200 = PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200.from_dict(response.json())
 
@@ -81,7 +78,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,22 +92,22 @@ def sync_detailed(
     data_type: str,
     *,
     client: AuthenticatedClient,
-    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset = UNSET,
+    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody,
 
-) -> Response[Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]:
+) -> Response[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]:
     """ Update application_data_types
 
     Args:
         application_id (str):
         data_type (str):
-        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset):
+        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]
+        Response[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]
      """
 
 
@@ -132,22 +129,22 @@ def sync(
     data_type: str,
     *,
     client: AuthenticatedClient,
-    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset = UNSET,
+    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody,
 
-) -> Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200 | None:
+) -> Optional[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]:
     """ Update application_data_types
 
     Args:
         application_id (str):
         data_type (str):
-        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset):
+        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200
+        Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]
      """
 
 
@@ -164,22 +161,22 @@ async def asyncio_detailed(
     data_type: str,
     *,
     client: AuthenticatedClient,
-    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset = UNSET,
+    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody,
 
-) -> Response[Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]:
+) -> Response[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]:
     """ Update application_data_types
 
     Args:
         application_id (str):
         data_type (str):
-        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset):
+        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]
+        Response[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]
      """
 
 
@@ -201,22 +198,22 @@ async def asyncio(
     data_type: str,
     *,
     client: AuthenticatedClient,
-    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset = UNSET,
+    body: PutEcosystemApplicationDataTypesApplicationIdDataTypeBody,
 
-) -> Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200 | None:
+) -> Optional[Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]]:
     """ Update application_data_types
 
     Args:
         application_id (str):
         data_type (str):
-        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody | Unset):
+        body (PutEcosystemApplicationDataTypesApplicationIdDataTypeBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200
+        Union[Error, PutEcosystemApplicationDataTypesApplicationIdDataTypeResponse200]
      """
 
 

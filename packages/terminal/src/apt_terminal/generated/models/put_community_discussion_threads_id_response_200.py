@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -33,7 +31,7 @@ class PutCommunityDiscussionThreadsIdResponse200:
             is_locked (bool):
             is_deleted (bool):
             reply_count (int):
-            answered_reply_id (None | str):
+            answered_reply_id (Union[None, str]):
             last_activity_at (str):
             created_at (str):
             updated_at (str):
@@ -49,7 +47,7 @@ class PutCommunityDiscussionThreadsIdResponse200:
     is_locked: bool
     is_deleted: bool
     reply_count: int
-    answered_reply_id: None | str
+    answered_reply_id: Union[None, str]
     last_activity_at: str
     created_at: str
     updated_at: str
@@ -79,7 +77,7 @@ class PutCommunityDiscussionThreadsIdResponse200:
 
         reply_count = self.reply_count
 
-        answered_reply_id: None | str
+        answered_reply_id: Union[None, str]
         answered_reply_id = self.answered_reply_id
 
         last_activity_at = self.last_activity_at
@@ -135,10 +133,10 @@ class PutCommunityDiscussionThreadsIdResponse200:
 
         reply_count = d.pop("replyCount")
 
-        def _parse_answered_reply_id(data: object) -> None | str:
+        def _parse_answered_reply_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         answered_reply_id = _parse_answered_reply_id(d.pop("answeredReplyId"))
 

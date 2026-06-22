@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.system_service import SystemService
 from ...models.system_service_upsert import SystemServiceUpsert
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     slug: str,
     *,
-    body: SystemServiceUpsert | Unset = UNSET,
+    body: SystemServiceUpsert,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/system/services/{slug}".format(slug=quote(str(slug), safe=""),),
+        "url": "/system/services/{slug}".format(slug=slug,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | SystemService | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, SystemService]]:
     if response.status_code == 200:
         response_200 = SystemService.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | SystemService]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, SystemService]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: SystemServiceUpsert | Unset = UNSET,
+    body: SystemServiceUpsert,
 
-) -> Response[Error | SystemService]:
+) -> Response[Union[Error, SystemService]]:
     """ Create or replace an external-service configuration (admin)
 
     Args:
         slug (str):
-        body (SystemServiceUpsert | Unset):
+        body (SystemServiceUpsert):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | SystemService]
+        Response[Union[Error, SystemService]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: SystemServiceUpsert | Unset = UNSET,
+    body: SystemServiceUpsert,
 
-) -> Error | SystemService | None:
+) -> Optional[Union[Error, SystemService]]:
     """ Create or replace an external-service configuration (admin)
 
     Args:
         slug (str):
-        body (SystemServiceUpsert | Unset):
+        body (SystemServiceUpsert):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | SystemService
+        Union[Error, SystemService]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: SystemServiceUpsert | Unset = UNSET,
+    body: SystemServiceUpsert,
 
-) -> Response[Error | SystemService]:
+) -> Response[Union[Error, SystemService]]:
     """ Create or replace an external-service configuration (admin)
 
     Args:
         slug (str):
-        body (SystemServiceUpsert | Unset):
+        body (SystemServiceUpsert):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | SystemService]
+        Response[Union[Error, SystemService]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: SystemServiceUpsert | Unset = UNSET,
+    body: SystemServiceUpsert,
 
-) -> Error | SystemService | None:
+) -> Optional[Union[Error, SystemService]]:
     """ Create or replace an external-service configuration (admin)
 
     Args:
         slug (str):
-        body (SystemServiceUpsert | Unset):
+        body (SystemServiceUpsert):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | SystemService
+        Union[Error, SystemService]
      """
 
 

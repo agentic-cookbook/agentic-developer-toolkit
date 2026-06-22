@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -27,7 +26,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/usage/principal-tiers/{scope}/{principal_id}".format(scope=quote(str(scope), safe=""),principal_id=quote(str(principal_id), safe=""),),
+        "url": "/usage/principal-tiers/{scope}/{principal_id}".format(scope=scope,principal_id=principal_id,),
     }
 
 
@@ -35,7 +34,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetUsagePrincipalTiersScopePrincipalIdResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]:
     if response.status_code == 200:
         response_200 = GetUsagePrincipalTiersScopePrincipalIdResponse200.from_dict(response.json())
 
@@ -63,7 +62,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetUsagePrincipalTiersScopePrincipalIdResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -78,7 +77,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetUsagePrincipalTiersScopePrincipalIdResponse200]:
+) -> Response[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Get principal_tiers by id
 
     Args:
@@ -90,7 +89,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetUsagePrincipalTiersScopePrincipalIdResponse200]
+        Response[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]
      """
 
 
@@ -112,7 +111,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetUsagePrincipalTiersScopePrincipalIdResponse200 | None:
+) -> Optional[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Get principal_tiers by id
 
     Args:
@@ -124,7 +123,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetUsagePrincipalTiersScopePrincipalIdResponse200
+        Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]
      """
 
 
@@ -141,7 +140,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetUsagePrincipalTiersScopePrincipalIdResponse200]:
+) -> Response[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Get principal_tiers by id
 
     Args:
@@ -153,7 +152,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetUsagePrincipalTiersScopePrincipalIdResponse200]
+        Response[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]
      """
 
 
@@ -175,7 +174,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetUsagePrincipalTiersScopePrincipalIdResponse200 | None:
+) -> Optional[Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]]:
     """ Get principal_tiers by id
 
     Args:
@@ -187,7 +186,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetUsagePrincipalTiersScopePrincipalIdResponse200
+        Union[Error, GetUsagePrincipalTiersScopePrincipalIdResponse200]
      """
 
 

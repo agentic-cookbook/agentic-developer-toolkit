@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.put_content_list_items_id_body_value_type_1 import PutContentListItemsIdBodyValueType1
@@ -26,18 +26,18 @@ T = TypeVar("T", bound="PutContentListItemsIdBody")
 class PutContentListItemsIdBody:
     """ 
         Attributes:
-            owner_id (str | Unset):
-            deleted_at (None | str | Unset):
-            list_id (str | Unset):
-            position (int | Unset):
-            value (bool | float | list[Any] | None | PutContentListItemsIdBodyValueType1 | str | Unset):
+            owner_id (Union[Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            list_id (Union[Unset, str]):
+            position (Union[Unset, int]):
+            value (Union['PutContentListItemsIdBodyValueType1', None, Unset, bool, float, list[Any], str]):
      """
 
-    owner_id: str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    list_id: str | Unset = UNSET
-    position: int | Unset = UNSET
-    value: bool | float | list[Any] | None | PutContentListItemsIdBodyValueType1 | str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    list_id: Union[Unset, str] = UNSET
+    position: Union[Unset, int] = UNSET
+    value: Union['PutContentListItemsIdBodyValueType1', None, Unset, bool, float, list[Any], str] = UNSET
 
 
 
@@ -47,7 +47,7 @@ class PutContentListItemsIdBody:
         from ..models.put_content_list_items_id_body_value_type_1 import PutContentListItemsIdBodyValueType1
         owner_id = self.owner_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -57,7 +57,7 @@ class PutContentListItemsIdBody:
 
         position = self.position
 
-        value: bool | dict[str, Any] | float | list[Any] | None | str | Unset
+        value: Union[None, Unset, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.value, Unset):
             value = UNSET
         elif isinstance(self.value, PutContentListItemsIdBodyValueType1):
@@ -95,12 +95,12 @@ class PutContentListItemsIdBody:
         d = dict(src_dict)
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
@@ -109,7 +109,7 @@ class PutContentListItemsIdBody:
 
         position = d.pop("position", UNSET)
 
-        def _parse_value(data: object) -> bool | float | list[Any] | None | PutContentListItemsIdBodyValueType1 | str | Unset:
+        def _parse_value(data: object) -> Union['PutContentListItemsIdBodyValueType1', None, Unset, bool, float, list[Any], str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -122,7 +122,7 @@ class PutContentListItemsIdBody:
 
 
                 return value_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -130,9 +130,9 @@ class PutContentListItemsIdBody:
                 value_type_2 = cast(list[Any], data)
 
                 return value_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PutContentListItemsIdBodyValueType1 | str | Unset, data)
+            return cast(Union['PutContentListItemsIdBodyValueType1', None, Unset, bool, float, list[Any], str], data)
 
         value = _parse_value(d.pop("value", UNSET))
 

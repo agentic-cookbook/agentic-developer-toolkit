@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,21 +23,21 @@ class PostProjectTasksResponse201:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             connection_id (str):
             external_id (str):
             source_provider (str):
             title (str):
-            description (None | str):
+            description (Union[None, str]):
             is_completed (bool):
             priority (int):
-            due_date (None | str):
-            due_datetime (None | str):
-            external_project_id (None | str):
-            external_project_name (None | str):
-            labels (None | str):
-            url (None | str):
+            due_date (Union[None, str]):
+            due_datetime (Union[None, str]):
+            external_project_id (Union[None, str]):
+            external_project_name (Union[None, str]):
+            labels (Union[None, str]):
+            url (Union[None, str]):
             is_deleted (bool):
             sync_version (int):
             created_at (str):
@@ -48,21 +46,21 @@ class PostProjectTasksResponse201:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     connection_id: str
     external_id: str
     source_provider: str
     title: str
-    description: None | str
+    description: Union[None, str]
     is_completed: bool
     priority: int
-    due_date: None | str
-    due_datetime: None | str
-    external_project_id: None | str
-    external_project_name: None | str
-    labels: None | str
-    url: None | str
+    due_date: Union[None, str]
+    due_datetime: Union[None, str]
+    external_project_id: Union[None, str]
+    external_project_name: Union[None, str]
+    labels: Union[None, str]
+    url: Union[None, str]
     is_deleted: bool
     sync_version: int
     created_at: str
@@ -77,7 +75,7 @@ class PostProjectTasksResponse201:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -90,29 +88,29 @@ class PostProjectTasksResponse201:
 
         title = self.title
 
-        description: None | str
+        description: Union[None, str]
         description = self.description
 
         is_completed = self.is_completed
 
         priority = self.priority
 
-        due_date: None | str
+        due_date: Union[None, str]
         due_date = self.due_date
 
-        due_datetime: None | str
+        due_datetime: Union[None, str]
         due_datetime = self.due_datetime
 
-        external_project_id: None | str
+        external_project_id: Union[None, str]
         external_project_id = self.external_project_id
 
-        external_project_name: None | str
+        external_project_name: Union[None, str]
         external_project_name = self.external_project_name
 
-        labels: None | str
+        labels: Union[None, str]
         labels = self.labels
 
-        url: None | str
+        url: Union[None, str]
         url = self.url
 
         is_deleted = self.is_deleted
@@ -161,10 +159,10 @@ class PostProjectTasksResponse201:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -179,10 +177,10 @@ class PostProjectTasksResponse201:
 
         title = d.pop("title")
 
-        def _parse_description(data: object) -> None | str:
+        def _parse_description(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         description = _parse_description(d.pop("description"))
 
@@ -191,50 +189,50 @@ class PostProjectTasksResponse201:
 
         priority = d.pop("priority")
 
-        def _parse_due_date(data: object) -> None | str:
+        def _parse_due_date(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         due_date = _parse_due_date(d.pop("dueDate"))
 
 
-        def _parse_due_datetime(data: object) -> None | str:
+        def _parse_due_datetime(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         due_datetime = _parse_due_datetime(d.pop("dueDatetime"))
 
 
-        def _parse_external_project_id(data: object) -> None | str:
+        def _parse_external_project_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_project_id = _parse_external_project_id(d.pop("externalProjectId"))
 
 
-        def _parse_external_project_name(data: object) -> None | str:
+        def _parse_external_project_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_project_name = _parse_external_project_name(d.pop("externalProjectName"))
 
 
-        def _parse_labels(data: object) -> None | str:
+        def _parse_labels(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         labels = _parse_labels(d.pop("labels"))
 
 
-        def _parse_url(data: object) -> None | str:
+        def _parse_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         url = _parse_url(d.pop("url"))
 

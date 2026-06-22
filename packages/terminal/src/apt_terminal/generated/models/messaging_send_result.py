@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..models.messaging_send_result_status import MessagingSendResultStatus
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,13 +24,13 @@ class MessagingSendResult:
     """ 
         Attributes:
             status (MessagingSendResultStatus):
-            provider_id (str | Unset): Provider message id (on success)
-            error (str | Unset): Failure reason (on failure)
+            provider_id (Union[Unset, str]): Provider message id (on success)
+            error (Union[Unset, str]): Failure reason (on failure)
      """
 
     status: MessagingSendResultStatus
-    provider_id: str | Unset = UNSET
-    error: str | Unset = UNSET
+    provider_id: Union[Unset, str] = UNSET
+    error: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

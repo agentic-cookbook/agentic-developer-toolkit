@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,18 +24,18 @@ class GetMonitoringHealthChecksResponse200Item:
             id (str):
             endpoint_id (str):
             status (str):
-            response_time_ms (int | None):
-            status_code (int | None):
-            error_message (None | str):
+            response_time_ms (Union[None, int]):
+            status_code (Union[None, int]):
+            error_message (Union[None, str]):
             checked_at (str):
      """
 
     id: str
     endpoint_id: str
     status: str
-    response_time_ms: int | None
-    status_code: int | None
-    error_message: None | str
+    response_time_ms: Union[None, int]
+    status_code: Union[None, int]
+    error_message: Union[None, str]
     checked_at: str
 
 
@@ -51,13 +49,13 @@ class GetMonitoringHealthChecksResponse200Item:
 
         status = self.status
 
-        response_time_ms: int | None
+        response_time_ms: Union[None, int]
         response_time_ms = self.response_time_ms
 
-        status_code: int | None
+        status_code: Union[None, int]
         status_code = self.status_code
 
-        error_message: None | str
+        error_message: Union[None, str]
         error_message = self.error_message
 
         checked_at = self.checked_at
@@ -88,26 +86,26 @@ class GetMonitoringHealthChecksResponse200Item:
 
         status = d.pop("status")
 
-        def _parse_response_time_ms(data: object) -> int | None:
+        def _parse_response_time_ms(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         response_time_ms = _parse_response_time_ms(d.pop("responseTimeMs"))
 
 
-        def _parse_status_code(data: object) -> int | None:
+        def _parse_status_code(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         status_code = _parse_status_code(d.pop("statusCode"))
 
 
-        def _parse_error_message(data: object) -> None | str:
+        def _parse_error_message(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         error_message = _parse_error_message(d.pop("errorMessage"))
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,13 +23,13 @@ class PostContentCategoriesResponse201:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             name (str):
             description (str):
             color (str):
             icon (str):
-            parent_id (None | str):
+            parent_id (Union[None, str]):
             sort_order (int):
             created_at (str):
             updated_at (str):
@@ -39,13 +37,13 @@ class PostContentCategoriesResponse201:
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     name: str
     description: str
     color: str
     icon: str
-    parent_id: None | str
+    parent_id: Union[None, str]
     sort_order: int
     created_at: str
     updated_at: str
@@ -59,7 +57,7 @@ class PostContentCategoriesResponse201:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -72,7 +70,7 @@ class PostContentCategoriesResponse201:
 
         icon = self.icon
 
-        parent_id: None | str
+        parent_id: Union[None, str]
         parent_id = self.parent_id
 
         sort_order = self.sort_order
@@ -110,10 +108,10 @@ class PostContentCategoriesResponse201:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -128,10 +126,10 @@ class PostContentCategoriesResponse201:
 
         icon = d.pop("icon")
 
-        def _parse_parent_id(data: object) -> None | str:
+        def _parse_parent_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         parent_id = _parse_parent_id(d.pop("parentId"))
 

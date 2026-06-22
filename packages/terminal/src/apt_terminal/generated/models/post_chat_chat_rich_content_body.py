@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,16 +24,16 @@ class PostChatChatRichContentBody:
         Attributes:
             message_id (str):
             kind (str):
-            owner_id (str | Unset):
-            display_order (int | Unset):
-            payload (str | Unset):
+            owner_id (Union[Unset, str]):
+            display_order (Union[Unset, int]):
+            payload (Union[Unset, str]):
      """
 
     message_id: str
     kind: str
-    owner_id: str | Unset = UNSET
-    display_order: int | Unset = UNSET
-    payload: str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    display_order: Union[Unset, int] = UNSET
+    payload: Union[Unset, str] = UNSET
 
 
 

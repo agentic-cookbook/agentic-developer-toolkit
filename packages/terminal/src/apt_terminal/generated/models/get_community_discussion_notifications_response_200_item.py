@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -28,7 +26,7 @@ class GetCommunityDiscussionNotificationsResponse200Item:
             ecosystem_id (str):
             type_ (str):
             thread_id (str):
-            reply_id (None | str):
+            reply_id (Union[None, str]):
             actor_id (str):
             is_read (bool):
             created_at (str):
@@ -39,7 +37,7 @@ class GetCommunityDiscussionNotificationsResponse200Item:
     ecosystem_id: str
     type_: str
     thread_id: str
-    reply_id: None | str
+    reply_id: Union[None, str]
     actor_id: str
     is_read: bool
     created_at: str
@@ -59,7 +57,7 @@ class GetCommunityDiscussionNotificationsResponse200Item:
 
         thread_id = self.thread_id
 
-        reply_id: None | str
+        reply_id: Union[None, str]
         reply_id = self.reply_id
 
         actor_id = self.actor_id
@@ -100,10 +98,10 @@ class GetCommunityDiscussionNotificationsResponse200Item:
 
         thread_id = d.pop("threadId")
 
-        def _parse_reply_id(data: object) -> None | str:
+        def _parse_reply_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         reply_id = _parse_reply_id(d.pop("replyId"))
 

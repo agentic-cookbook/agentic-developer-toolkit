@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -33,7 +32,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PostNotificationsReadAllResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostNotificationsReadAllResponse200]]:
     if response.status_code == 200:
         response_200 = PostNotificationsReadAllResponse200.from_dict(response.json())
 
@@ -54,7 +53,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PostNotificationsReadAllResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostNotificationsReadAllResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -67,7 +66,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | PostNotificationsReadAllResponse200]:
+) -> Response[Union[Error, PostNotificationsReadAllResponse200]]:
     """ Mark all of the caller's notifications as read
 
     Raises:
@@ -75,7 +74,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostNotificationsReadAllResponse200]
+        Response[Union[Error, PostNotificationsReadAllResponse200]]
      """
 
 
@@ -93,7 +92,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | PostNotificationsReadAllResponse200 | None:
+) -> Optional[Union[Error, PostNotificationsReadAllResponse200]]:
     """ Mark all of the caller's notifications as read
 
     Raises:
@@ -101,7 +100,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostNotificationsReadAllResponse200
+        Union[Error, PostNotificationsReadAllResponse200]
      """
 
 
@@ -114,7 +113,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | PostNotificationsReadAllResponse200]:
+) -> Response[Union[Error, PostNotificationsReadAllResponse200]]:
     """ Mark all of the caller's notifications as read
 
     Raises:
@@ -122,7 +121,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostNotificationsReadAllResponse200]
+        Response[Union[Error, PostNotificationsReadAllResponse200]]
      """
 
 
@@ -140,7 +139,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | PostNotificationsReadAllResponse200 | None:
+) -> Optional[Union[Error, PostNotificationsReadAllResponse200]]:
     """ Mark all of the caller's notifications as read
 
     Raises:
@@ -148,7 +147,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostNotificationsReadAllResponse200
+        Union[Error, PostNotificationsReadAllResponse200]
      """
 
 

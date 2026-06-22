@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -28,7 +26,7 @@ class PutMonitoringEndpointsIdResponse200:
             kind (str):
             url (str):
             expected_status (int):
-            expected_body_contains (None | str):
+            expected_body_contains (Union[None, str]):
             timeout_ms (int):
             degraded_threshold_ms (int):
             check_interval_seconds (int):
@@ -42,7 +40,7 @@ class PutMonitoringEndpointsIdResponse200:
     kind: str
     url: str
     expected_status: int
-    expected_body_contains: None | str
+    expected_body_contains: Union[None, str]
     timeout_ms: int
     degraded_threshold_ms: int
     check_interval_seconds: int
@@ -65,7 +63,7 @@ class PutMonitoringEndpointsIdResponse200:
 
         expected_status = self.expected_status
 
-        expected_body_contains: None | str
+        expected_body_contains: Union[None, str]
         expected_body_contains = self.expected_body_contains
 
         timeout_ms = self.timeout_ms
@@ -115,10 +113,10 @@ class PutMonitoringEndpointsIdResponse200:
 
         expected_status = d.pop("expectedStatus")
 
-        def _parse_expected_body_contains(data: object) -> None | str:
+        def _parse_expected_body_contains(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         expected_body_contains = _parse_expected_body_contains(d.pop("expectedBodyContains"))
 

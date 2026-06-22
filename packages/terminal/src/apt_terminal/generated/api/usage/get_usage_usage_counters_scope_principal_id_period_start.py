@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -28,7 +27,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/usage/usage-counters/{scope}/{principal_id}/{period_start}".format(scope=quote(str(scope), safe=""),principal_id=quote(str(principal_id), safe=""),period_start=quote(str(period_start), safe=""),),
+        "url": "/usage/usage-counters/{scope}/{principal_id}/{period_start}".format(scope=scope,principal_id=principal_id,period_start=period_start,),
     }
 
 
@@ -36,7 +35,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     if response.status_code == 200:
         response_200 = GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200.from_dict(response.json())
 
@@ -64,7 +63,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -80,7 +79,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]:
+) -> Response[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Get usage_counters by id
 
     Args:
@@ -93,7 +92,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
+        Response[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]
      """
 
 
@@ -117,7 +116,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200 | None:
+) -> Optional[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Get usage_counters by id
 
     Args:
@@ -130,7 +129,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200
+        Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
      """
 
 
@@ -149,7 +148,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]:
+) -> Response[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Get usage_counters by id
 
     Args:
@@ -162,7 +161,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
+        Response[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]
      """
 
 
@@ -186,7 +185,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200 | None:
+) -> Optional[Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Get usage_counters by id
 
     Args:
@@ -199,7 +198,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200
+        Union[Error, GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
      """
 
 

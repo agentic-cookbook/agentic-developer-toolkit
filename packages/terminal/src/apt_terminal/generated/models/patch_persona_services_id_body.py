@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,14 +22,14 @@ T = TypeVar("T", bound="PatchPersonaServicesIdBody")
 class PatchPersonaServicesIdBody:
     """ 
         Attributes:
-            name (str | Unset):
-            base_url (str | Unset):
-            api_key (str | Unset): Plaintext provider key; stored, never returned
+            name (Union[Unset, str]):
+            base_url (Union[Unset, str]):
+            api_key (Union[Unset, str]): Plaintext provider key; stored, never returned
      """
 
-    name: str | Unset = UNSET
-    base_url: str | Unset = UNSET
-    api_key: str | Unset = UNSET
+    name: Union[Unset, str] = UNSET
+    base_url: Union[Unset, str] = UNSET
+    api_key: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

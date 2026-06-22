@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.put_ecosystem_ecosystem_capabilities_ecosystem_id_capability_body_config_type_0_type_1 import PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1
@@ -26,15 +26,15 @@ T = TypeVar("T", bound="PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBo
 class PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            capability (str | Unset):
-            config (bool | float | list[Any] | None |
-                PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1 | str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            capability (Union[Unset, str]):
+            config (Union['PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1', None, Unset, bool,
+                float, list[Any], str]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    capability: str | Unset = UNSET
-    config: bool | float | list[Any] | None | PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1 | str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    capability: Union[Unset, str] = UNSET
+    config: Union['PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1', None, Unset, bool, float, list[Any], str] = UNSET
 
 
 
@@ -46,7 +46,7 @@ class PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBody:
 
         capability = self.capability
 
-        config: bool | dict[str, Any] | float | list[Any] | None | str | Unset
+        config: Union[None, Unset, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.config, Unset):
             config = UNSET
         elif isinstance(self.config, PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1):
@@ -82,7 +82,7 @@ class PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBody:
 
         capability = d.pop("capability", UNSET)
 
-        def _parse_config(data: object) -> bool | float | list[Any] | None | PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1 | str | Unset:
+        def _parse_config(data: object) -> Union['PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1', None, Unset, bool, float, list[Any], str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -95,7 +95,7 @@ class PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBody:
 
 
                 return config_type_0_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -103,9 +103,9 @@ class PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBody:
                 config_type_0_type_2 = cast(list[Any], data)
 
                 return config_type_0_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1 | str | Unset, data)
+            return cast(Union['PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1', None, Unset, bool, float, list[Any], str], data)
 
         config = _parse_config(d.pop("config", UNSET))
 

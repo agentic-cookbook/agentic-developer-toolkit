@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,12 +23,12 @@ T = TypeVar("T", bound="GetSearchDocumentsResponse200")
 class GetSearchDocumentsResponse200:
     """ 
         Attributes:
-            results (list[SearchDocumentResult]):
+            results (list['SearchDocumentResult']):
             limit (int):
             has_more (bool):
      """
 
-    results: list[SearchDocumentResult]
+    results: list['SearchDocumentResult']
     limit: int
     has_more: bool
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)

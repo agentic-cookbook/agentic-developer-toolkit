@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_themes_key_body import PutThemesKeyBody
 from ...models.theme import Theme
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     key: str,
     *,
-    body: PutThemesKeyBody | Unset = UNSET,
+    body: PutThemesKeyBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/themes/{key}".format(key=quote(str(key), safe=""),),
+        "url": "/themes/{key}".format(key=key,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | Theme | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, Theme]]:
     if response.status_code == 200:
         response_200 = Theme.from_dict(response.json())
 
@@ -87,7 +84,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | Theme]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, Theme]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -100,21 +97,21 @@ def sync_detailed(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutThemesKeyBody | Unset = UNSET,
+    body: PutThemesKeyBody,
 
-) -> Response[Error | Theme]:
+) -> Response[Union[Error, Theme]]:
     """ Update a live theme (staging/testing only)
 
     Args:
         key (str):
-        body (PutThemesKeyBody | Unset):
+        body (PutThemesKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | Theme]
+        Response[Union[Error, Theme]]
      """
 
 
@@ -134,21 +131,21 @@ def sync(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutThemesKeyBody | Unset = UNSET,
+    body: PutThemesKeyBody,
 
-) -> Error | Theme | None:
+) -> Optional[Union[Error, Theme]]:
     """ Update a live theme (staging/testing only)
 
     Args:
         key (str):
-        body (PutThemesKeyBody | Unset):
+        body (PutThemesKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | Theme
+        Union[Error, Theme]
      """
 
 
@@ -163,21 +160,21 @@ async def asyncio_detailed(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutThemesKeyBody | Unset = UNSET,
+    body: PutThemesKeyBody,
 
-) -> Response[Error | Theme]:
+) -> Response[Union[Error, Theme]]:
     """ Update a live theme (staging/testing only)
 
     Args:
         key (str):
-        body (PutThemesKeyBody | Unset):
+        body (PutThemesKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | Theme]
+        Response[Union[Error, Theme]]
      """
 
 
@@ -197,21 +194,21 @@ async def asyncio(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutThemesKeyBody | Unset = UNSET,
+    body: PutThemesKeyBody,
 
-) -> Error | Theme | None:
+) -> Optional[Union[Error, Theme]]:
     """ Update a live theme (staging/testing only)
 
     Args:
         key (str):
-        body (PutThemesKeyBody | Unset):
+        body (PutThemesKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | Theme
+        Union[Error, Theme]
      """
 
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,16 +22,16 @@ T = TypeVar("T", bound="PutCommunityDiscussionPollOptionsIdBody")
 class PutCommunityDiscussionPollOptionsIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            poll_id (str | Unset):
-            text (str | Unset):
-            display_order (int | Unset):
+            ecosystem_id (Union[Unset, str]):
+            poll_id (Union[Unset, str]):
+            text (Union[Unset, str]):
+            display_order (Union[Unset, int]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    poll_id: str | Unset = UNSET
-    text: str | Unset = UNSET
-    display_order: int | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    poll_id: Union[Unset, str] = UNSET
+    text: Union[Unset, str] = UNSET
+    display_order: Union[Unset, int] = UNSET
 
 
 

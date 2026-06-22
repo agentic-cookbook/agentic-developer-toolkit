@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -28,7 +26,7 @@ class GetCommunityDiscussionPollsResponse200Item:
             thread_id (str):
             question (str):
             allow_multiple (bool):
-            expires_at (None | str):
+            expires_at (Union[None, str]):
             created_at (str):
      """
 
@@ -37,7 +35,7 @@ class GetCommunityDiscussionPollsResponse200Item:
     thread_id: str
     question: str
     allow_multiple: bool
-    expires_at: None | str
+    expires_at: Union[None, str]
     created_at: str
 
 
@@ -55,7 +53,7 @@ class GetCommunityDiscussionPollsResponse200Item:
 
         allow_multiple = self.allow_multiple
 
-        expires_at: None | str
+        expires_at: Union[None, str]
         expires_at = self.expires_at
 
         created_at = self.created_at
@@ -90,10 +88,10 @@ class GetCommunityDiscussionPollsResponse200Item:
 
         allow_multiple = d.pop("allowMultiple")
 
-        def _parse_expires_at(data: object) -> None | str:
+        def _parse_expires_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         expires_at = _parse_expires_at(d.pop("expiresAt"))
 

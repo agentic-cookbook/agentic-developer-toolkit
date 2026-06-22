@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,18 +22,18 @@ T = TypeVar("T", bound="PutUsageUsageCountersScopePrincipalIdPeriodStartBody")
 class PutUsageUsageCountersScopePrincipalIdPeriodStartBody:
     """ 
         Attributes:
-            scope (str | Unset):
-            principal_id (str | Unset):
-            period_start (str | Unset):
-            requests (int | Unset):
-            bytes_ (int | Unset):
+            scope (Union[Unset, str]):
+            principal_id (Union[Unset, str]):
+            period_start (Union[Unset, str]):
+            requests (Union[Unset, int]):
+            bytes_ (Union[Unset, int]):
      """
 
-    scope: str | Unset = UNSET
-    principal_id: str | Unset = UNSET
-    period_start: str | Unset = UNSET
-    requests: int | Unset = UNSET
-    bytes_: int | Unset = UNSET
+    scope: Union[Unset, str] = UNSET
+    principal_id: Union[Unset, str] = UNSET
+    period_start: Union[Unset, str] = UNSET
+    requests: Union[Unset, int] = UNSET
+    bytes_: Union[Unset, int] = UNSET
 
 
 

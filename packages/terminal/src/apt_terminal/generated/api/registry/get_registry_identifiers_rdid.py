@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/registry/identifiers/{rdid}".format(rdid=quote(str(rdid), safe=""),),
+        "url": "/registry/identifiers/{rdid}".format(rdid=rdid,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | RegistryIdentifier | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, RegistryIdentifier]]:
     if response.status_code == 200:
         response_200 = RegistryIdentifier.from_dict(response.json())
 
@@ -62,7 +61,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | RegistryIdentifier]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, RegistryIdentifier]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +75,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | RegistryIdentifier]:
+) -> Response[Union[Error, RegistryIdentifier]]:
     """ Resolve an rdid -> entity
 
     Args:
@@ -87,7 +86,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryIdentifier]
+        Response[Union[Error, RegistryIdentifier]]
      """
 
 
@@ -107,7 +106,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | RegistryIdentifier | None:
+) -> Optional[Union[Error, RegistryIdentifier]]:
     """ Resolve an rdid -> entity
 
     Args:
@@ -118,7 +117,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryIdentifier
+        Union[Error, RegistryIdentifier]
      """
 
 
@@ -133,7 +132,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | RegistryIdentifier]:
+) -> Response[Union[Error, RegistryIdentifier]]:
     """ Resolve an rdid -> entity
 
     Args:
@@ -144,7 +143,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryIdentifier]
+        Response[Union[Error, RegistryIdentifier]]
      """
 
 
@@ -164,7 +163,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | RegistryIdentifier | None:
+) -> Optional[Union[Error, RegistryIdentifier]]:
     """ Resolve an rdid -> entity
 
     Args:
@@ -175,7 +174,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryIdentifier
+        Union[Error, RegistryIdentifier]
      """
 
 

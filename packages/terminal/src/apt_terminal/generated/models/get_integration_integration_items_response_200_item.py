@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,52 +23,52 @@ class GetIntegrationIntegrationItemsResponse200Item:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             connection_id (str):
             external_id (str):
             item_type (str):
             title (str):
-            body (None | str):
+            body (Union[None, str]):
             state (str):
             repo_full_name (str):
-            repo_url (None | str):
-            item_url (None | str):
-            number (int | None):
-            labels (None | str):
-            assignees (None | str):
+            repo_url (Union[None, str]):
+            item_url (Union[None, str]):
+            number (Union[None, int]):
+            labels (Union[None, str]):
+            assignees (Union[None, str]):
             is_read (bool):
-            notification_reason (None | str):
+            notification_reason (Union[None, str]):
             is_deleted (bool):
             sync_version (int):
-            external_created_at (None | str):
-            external_updated_at (None | str):
+            external_created_at (Union[None, str]):
+            external_updated_at (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     connection_id: str
     external_id: str
     item_type: str
     title: str
-    body: None | str
+    body: Union[None, str]
     state: str
     repo_full_name: str
-    repo_url: None | str
-    item_url: None | str
-    number: int | None
-    labels: None | str
-    assignees: None | str
+    repo_url: Union[None, str]
+    item_url: Union[None, str]
+    number: Union[None, int]
+    labels: Union[None, str]
+    assignees: Union[None, str]
     is_read: bool
-    notification_reason: None | str
+    notification_reason: Union[None, str]
     is_deleted: bool
     sync_version: int
-    external_created_at: None | str
-    external_updated_at: None | str
+    external_created_at: Union[None, str]
+    external_updated_at: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -83,7 +81,7 @@ class GetIntegrationIntegrationItemsResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -96,41 +94,41 @@ class GetIntegrationIntegrationItemsResponse200Item:
 
         title = self.title
 
-        body: None | str
+        body: Union[None, str]
         body = self.body
 
         state = self.state
 
         repo_full_name = self.repo_full_name
 
-        repo_url: None | str
+        repo_url: Union[None, str]
         repo_url = self.repo_url
 
-        item_url: None | str
+        item_url: Union[None, str]
         item_url = self.item_url
 
-        number: int | None
+        number: Union[None, int]
         number = self.number
 
-        labels: None | str
+        labels: Union[None, str]
         labels = self.labels
 
-        assignees: None | str
+        assignees: Union[None, str]
         assignees = self.assignees
 
         is_read = self.is_read
 
-        notification_reason: None | str
+        notification_reason: Union[None, str]
         notification_reason = self.notification_reason
 
         is_deleted = self.is_deleted
 
         sync_version = self.sync_version
 
-        external_created_at: None | str
+        external_created_at: Union[None, str]
         external_created_at = self.external_created_at
 
-        external_updated_at: None | str
+        external_updated_at: Union[None, str]
         external_updated_at = self.external_updated_at
 
         created_at = self.created_at
@@ -178,10 +176,10 @@ class GetIntegrationIntegrationItemsResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -196,10 +194,10 @@ class GetIntegrationIntegrationItemsResponse200Item:
 
         title = d.pop("title")
 
-        def _parse_body(data: object) -> None | str:
+        def _parse_body(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         body = _parse_body(d.pop("body"))
 
@@ -208,52 +206,52 @@ class GetIntegrationIntegrationItemsResponse200Item:
 
         repo_full_name = d.pop("repoFullName")
 
-        def _parse_repo_url(data: object) -> None | str:
+        def _parse_repo_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         repo_url = _parse_repo_url(d.pop("repoUrl"))
 
 
-        def _parse_item_url(data: object) -> None | str:
+        def _parse_item_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         item_url = _parse_item_url(d.pop("itemUrl"))
 
 
-        def _parse_number(data: object) -> int | None:
+        def _parse_number(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         number = _parse_number(d.pop("number"))
 
 
-        def _parse_labels(data: object) -> None | str:
+        def _parse_labels(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         labels = _parse_labels(d.pop("labels"))
 
 
-        def _parse_assignees(data: object) -> None | str:
+        def _parse_assignees(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         assignees = _parse_assignees(d.pop("assignees"))
 
 
         is_read = d.pop("isRead")
 
-        def _parse_notification_reason(data: object) -> None | str:
+        def _parse_notification_reason(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         notification_reason = _parse_notification_reason(d.pop("notificationReason"))
 
@@ -262,18 +260,18 @@ class GetIntegrationIntegrationItemsResponse200Item:
 
         sync_version = d.pop("syncVersion")
 
-        def _parse_external_created_at(data: object) -> None | str:
+        def _parse_external_created_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_created_at = _parse_external_created_at(d.pop("externalCreatedAt"))
 
 
-        def _parse_external_updated_at(data: object) -> None | str:
+        def _parse_external_updated_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_updated_at = _parse_external_updated_at(d.pop("externalUpdatedAt"))
 

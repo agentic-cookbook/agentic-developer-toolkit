@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..models.get_auth_slug_available_slug_response_200_reason import GetAuthSlugAvailableSlugResponse200Reason
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,11 +24,11 @@ class GetAuthSlugAvailableSlugResponse200:
     """ 
         Attributes:
             available (bool):
-            reason (GetAuthSlugAvailableSlugResponse200Reason | Unset):
+            reason (Union[Unset, GetAuthSlugAvailableSlugResponse200Reason]):
      """
 
     available: bool
-    reason: GetAuthSlugAvailableSlugResponse200Reason | Unset = UNSET
+    reason: Union[Unset, GetAuthSlugAvailableSlugResponse200Reason] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -39,7 +38,7 @@ class GetAuthSlugAvailableSlugResponse200:
     def to_dict(self) -> dict[str, Any]:
         available = self.available
 
-        reason: str | Unset = UNSET
+        reason: Union[Unset, str] = UNSET
         if not isinstance(self.reason, Unset):
             reason = self.reason.value
 
@@ -63,7 +62,7 @@ class GetAuthSlugAvailableSlugResponse200:
         available = d.pop("available")
 
         _reason = d.pop("reason", UNSET)
-        reason: GetAuthSlugAvailableSlugResponse200Reason | Unset
+        reason: Union[Unset, GetAuthSlugAvailableSlugResponse200Reason]
         if isinstance(_reason,  Unset):
             reason = UNSET
         else:

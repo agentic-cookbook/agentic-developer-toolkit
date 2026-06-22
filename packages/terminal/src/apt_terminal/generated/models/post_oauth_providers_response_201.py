@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,6 +9,8 @@ from ..types import UNSET, Unset
 from ..models.post_oauth_providers_response_201_auth_type import PostOauthProvidersResponse201AuthType
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.post_oauth_providers_response_201_identity_mapping import PostOauthProvidersResponse201IdentityMapping
@@ -34,9 +34,9 @@ class PostOauthProvidersResponse201:
             client_id (str):
             scopes (list[str]):
             identity_mapping (PostOauthProvidersResponse201IdentityMapping):
-            authorize_url (None | str | Unset):
-            token_url (None | str | Unset):
-            userinfo_url (None | str | Unset):
+            authorize_url (Union[None, Unset, str]):
+            token_url (Union[None, Unset, str]):
+            userinfo_url (Union[None, Unset, str]):
      """
 
     id: str
@@ -45,10 +45,10 @@ class PostOauthProvidersResponse201:
     auth_type: PostOauthProvidersResponse201AuthType
     client_id: str
     scopes: list[str]
-    identity_mapping: PostOauthProvidersResponse201IdentityMapping
-    authorize_url: None | str | Unset = UNSET
-    token_url: None | str | Unset = UNSET
-    userinfo_url: None | str | Unset = UNSET
+    identity_mapping: 'PostOauthProvidersResponse201IdentityMapping'
+    authorize_url: Union[None, Unset, str] = UNSET
+    token_url: Union[None, Unset, str] = UNSET
+    userinfo_url: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -73,19 +73,19 @@ class PostOauthProvidersResponse201:
 
         identity_mapping = self.identity_mapping.to_dict()
 
-        authorize_url: None | str | Unset
+        authorize_url: Union[None, Unset, str]
         if isinstance(self.authorize_url, Unset):
             authorize_url = UNSET
         else:
             authorize_url = self.authorize_url
 
-        token_url: None | str | Unset
+        token_url: Union[None, Unset, str]
         if isinstance(self.token_url, Unset):
             token_url = UNSET
         else:
             token_url = self.token_url
 
-        userinfo_url: None | str | Unset
+        userinfo_url: Union[None, Unset, str]
         if isinstance(self.userinfo_url, Unset):
             userinfo_url = UNSET
         else:
@@ -139,32 +139,32 @@ class PostOauthProvidersResponse201:
 
 
 
-        def _parse_authorize_url(data: object) -> None | str | Unset:
+        def _parse_authorize_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         authorize_url = _parse_authorize_url(d.pop("authorizeUrl", UNSET))
 
 
-        def _parse_token_url(data: object) -> None | str | Unset:
+        def _parse_token_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         token_url = _parse_token_url(d.pop("tokenUrl", UNSET))
 
 
-        def _parse_userinfo_url(data: object) -> None | str | Unset:
+        def _parse_userinfo_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         userinfo_url = _parse_userinfo_url(d.pop("userinfoUrl", UNSET))
 

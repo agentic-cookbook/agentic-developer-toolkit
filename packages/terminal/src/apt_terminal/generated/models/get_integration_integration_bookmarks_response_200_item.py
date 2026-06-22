@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,46 +23,46 @@ class GetIntegrationIntegrationBookmarksResponse200Item:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             connection_id (str):
             external_id (str):
             source_provider (str):
             title (str):
             url (str):
-            excerpt (None | str):
-            note (None | str):
-            tags (None | str):
-            image_url (None | str):
-            collection_id (None | str):
-            collection_name (None | str):
+            excerpt (Union[None, str]):
+            note (Union[None, str]):
+            tags (Union[None, str]):
+            image_url (Union[None, str]):
+            collection_id (Union[None, str]):
+            collection_name (Union[None, str]):
             is_favorite (bool):
             is_deleted (bool):
             sync_version (int):
-            external_created_at (None | str):
+            external_created_at (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     connection_id: str
     external_id: str
     source_provider: str
     title: str
     url: str
-    excerpt: None | str
-    note: None | str
-    tags: None | str
-    image_url: None | str
-    collection_id: None | str
-    collection_name: None | str
+    excerpt: Union[None, str]
+    note: Union[None, str]
+    tags: Union[None, str]
+    image_url: Union[None, str]
+    collection_id: Union[None, str]
+    collection_name: Union[None, str]
     is_favorite: bool
     is_deleted: bool
     sync_version: int
-    external_created_at: None | str
+    external_created_at: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -77,7 +75,7 @@ class GetIntegrationIntegrationBookmarksResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -92,22 +90,22 @@ class GetIntegrationIntegrationBookmarksResponse200Item:
 
         url = self.url
 
-        excerpt: None | str
+        excerpt: Union[None, str]
         excerpt = self.excerpt
 
-        note: None | str
+        note: Union[None, str]
         note = self.note
 
-        tags: None | str
+        tags: Union[None, str]
         tags = self.tags
 
-        image_url: None | str
+        image_url: Union[None, str]
         image_url = self.image_url
 
-        collection_id: None | str
+        collection_id: Union[None, str]
         collection_id = self.collection_id
 
-        collection_name: None | str
+        collection_name: Union[None, str]
         collection_name = self.collection_name
 
         is_favorite = self.is_favorite
@@ -116,7 +114,7 @@ class GetIntegrationIntegrationBookmarksResponse200Item:
 
         sync_version = self.sync_version
 
-        external_created_at: None | str
+        external_created_at: Union[None, str]
         external_created_at = self.external_created_at
 
         created_at = self.created_at
@@ -161,10 +159,10 @@ class GetIntegrationIntegrationBookmarksResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -181,50 +179,50 @@ class GetIntegrationIntegrationBookmarksResponse200Item:
 
         url = d.pop("url")
 
-        def _parse_excerpt(data: object) -> None | str:
+        def _parse_excerpt(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         excerpt = _parse_excerpt(d.pop("excerpt"))
 
 
-        def _parse_note(data: object) -> None | str:
+        def _parse_note(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         note = _parse_note(d.pop("note"))
 
 
-        def _parse_tags(data: object) -> None | str:
+        def _parse_tags(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         tags = _parse_tags(d.pop("tags"))
 
 
-        def _parse_image_url(data: object) -> None | str:
+        def _parse_image_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         image_url = _parse_image_url(d.pop("imageUrl"))
 
 
-        def _parse_collection_id(data: object) -> None | str:
+        def _parse_collection_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         collection_id = _parse_collection_id(d.pop("collectionId"))
 
 
-        def _parse_collection_name(data: object) -> None | str:
+        def _parse_collection_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         collection_name = _parse_collection_name(d.pop("collectionName"))
 
@@ -235,10 +233,10 @@ class GetIntegrationIntegrationBookmarksResponse200Item:
 
         sync_version = d.pop("syncVersion")
 
-        def _parse_external_created_at(data: object) -> None | str:
+        def _parse_external_created_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_created_at = _parse_external_created_at(d.pop("externalCreatedAt"))
 

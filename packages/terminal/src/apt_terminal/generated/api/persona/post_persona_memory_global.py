@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.persona_memory import PersonaMemory
 from ...models.post_persona_memory_global_body import PostPersonaMemoryGlobalBody
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostPersonaMemoryGlobalBody | Unset = UNSET,
+    body: PostPersonaMemoryGlobalBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/persona-memory/global",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PersonaMemory | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PersonaMemory]]:
     if response.status_code == 201:
         response_201 = PersonaMemory.from_dict(response.json())
 
@@ -93,7 +90,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PersonaMemory]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PersonaMemory]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -105,20 +102,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaMemoryGlobalBody | Unset = UNSET,
+    body: PostPersonaMemoryGlobalBody,
 
-) -> Response[Error | PersonaMemory]:
+) -> Response[Union[Error, PersonaMemory]]:
     """ Create a global (persona-scope) memory
 
     Args:
-        body (PostPersonaMemoryGlobalBody | Unset):
+        body (PostPersonaMemoryGlobalBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PersonaMemory]
+        Response[Union[Error, PersonaMemory]]
      """
 
 
@@ -136,20 +133,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaMemoryGlobalBody | Unset = UNSET,
+    body: PostPersonaMemoryGlobalBody,
 
-) -> Error | PersonaMemory | None:
+) -> Optional[Union[Error, PersonaMemory]]:
     """ Create a global (persona-scope) memory
 
     Args:
-        body (PostPersonaMemoryGlobalBody | Unset):
+        body (PostPersonaMemoryGlobalBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PersonaMemory
+        Union[Error, PersonaMemory]
      """
 
 
@@ -162,20 +159,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaMemoryGlobalBody | Unset = UNSET,
+    body: PostPersonaMemoryGlobalBody,
 
-) -> Response[Error | PersonaMemory]:
+) -> Response[Union[Error, PersonaMemory]]:
     """ Create a global (persona-scope) memory
 
     Args:
-        body (PostPersonaMemoryGlobalBody | Unset):
+        body (PostPersonaMemoryGlobalBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PersonaMemory]
+        Response[Union[Error, PersonaMemory]]
      """
 
 
@@ -193,20 +190,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaMemoryGlobalBody | Unset = UNSET,
+    body: PostPersonaMemoryGlobalBody,
 
-) -> Error | PersonaMemory | None:
+) -> Optional[Union[Error, PersonaMemory]]:
     """ Create a global (persona-scope) memory
 
     Args:
-        body (PostPersonaMemoryGlobalBody | Unset):
+        body (PostPersonaMemoryGlobalBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PersonaMemory
+        Union[Error, PersonaMemory]
      """
 
 

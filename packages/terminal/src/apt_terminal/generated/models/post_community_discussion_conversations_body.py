@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -27,17 +26,17 @@ class PostCommunityDiscussionConversationsBody:
             participant_1_id (str):
             participant_2_id (str):
             last_message_at (str):
-            ecosystem_id (str | Unset):
-            participant_1_archived_at (None | str | Unset):
-            participant_2_archived_at (None | str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            participant_1_archived_at (Union[None, Unset, str]):
+            participant_2_archived_at (Union[None, Unset, str]):
      """
 
     participant_1_id: str
     participant_2_id: str
     last_message_at: str
-    ecosystem_id: str | Unset = UNSET
-    participant_1_archived_at: None | str | Unset = UNSET
-    participant_2_archived_at: None | str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    participant_1_archived_at: Union[None, Unset, str] = UNSET
+    participant_2_archived_at: Union[None, Unset, str] = UNSET
 
 
 
@@ -52,13 +51,13 @@ class PostCommunityDiscussionConversationsBody:
 
         ecosystem_id = self.ecosystem_id
 
-        participant_1_archived_at: None | str | Unset
+        participant_1_archived_at: Union[None, Unset, str]
         if isinstance(self.participant_1_archived_at, Unset):
             participant_1_archived_at = UNSET
         else:
             participant_1_archived_at = self.participant_1_archived_at
 
-        participant_2_archived_at: None | str | Unset
+        participant_2_archived_at: Union[None, Unset, str]
         if isinstance(self.participant_2_archived_at, Unset):
             participant_2_archived_at = UNSET
         else:
@@ -94,22 +93,22 @@ class PostCommunityDiscussionConversationsBody:
 
         ecosystem_id = d.pop("ecosystemId", UNSET)
 
-        def _parse_participant_1_archived_at(data: object) -> None | str | Unset:
+        def _parse_participant_1_archived_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         participant_1_archived_at = _parse_participant_1_archived_at(d.pop("participant1ArchivedAt", UNSET))
 
 
-        def _parse_participant_2_archived_at(data: object) -> None | str | Unset:
+        def _parse_participant_2_archived_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         participant_2_archived_at = _parse_participant_2_archived_at(d.pop("participant2ArchivedAt", UNSET))
 

@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.patch_oauth_clients_slug_body import PatchOauthClientsSlugBody
 from ...models.patch_oauth_clients_slug_response_200 import PatchOauthClientsSlugResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     slug: str,
     *,
-    body: PatchOauthClientsSlugBody | Unset = UNSET,
+    body: PatchOauthClientsSlugBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/oauth/clients/{slug}".format(slug=quote(str(slug), safe=""),),
+        "url": "/oauth/clients/{slug}".format(slug=slug,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PatchOauthClientsSlugResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PatchOauthClientsSlugResponse200]]:
     if response.status_code == 200:
         response_200 = PatchOauthClientsSlugResponse200.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PatchOauthClientsSlugResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PatchOauthClientsSlugResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: PatchOauthClientsSlugBody | Unset = UNSET,
+    body: PatchOauthClientsSlugBody,
 
-) -> Response[Error | PatchOauthClientsSlugResponse200]:
+) -> Response[Union[Error, PatchOauthClientsSlugResponse200]]:
     """ Update a client (admin)
 
     Args:
         slug (str):
-        body (PatchOauthClientsSlugBody | Unset):
+        body (PatchOauthClientsSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PatchOauthClientsSlugResponse200]
+        Response[Union[Error, PatchOauthClientsSlugResponse200]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: PatchOauthClientsSlugBody | Unset = UNSET,
+    body: PatchOauthClientsSlugBody,
 
-) -> Error | PatchOauthClientsSlugResponse200 | None:
+) -> Optional[Union[Error, PatchOauthClientsSlugResponse200]]:
     """ Update a client (admin)
 
     Args:
         slug (str):
-        body (PatchOauthClientsSlugBody | Unset):
+        body (PatchOauthClientsSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PatchOauthClientsSlugResponse200
+        Union[Error, PatchOauthClientsSlugResponse200]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: PatchOauthClientsSlugBody | Unset = UNSET,
+    body: PatchOauthClientsSlugBody,
 
-) -> Response[Error | PatchOauthClientsSlugResponse200]:
+) -> Response[Union[Error, PatchOauthClientsSlugResponse200]]:
     """ Update a client (admin)
 
     Args:
         slug (str):
-        body (PatchOauthClientsSlugBody | Unset):
+        body (PatchOauthClientsSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PatchOauthClientsSlugResponse200]
+        Response[Union[Error, PatchOauthClientsSlugResponse200]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     slug: str,
     *,
     client: AuthenticatedClient,
-    body: PatchOauthClientsSlugBody | Unset = UNSET,
+    body: PatchOauthClientsSlugBody,
 
-) -> Error | PatchOauthClientsSlugResponse200 | None:
+) -> Optional[Union[Error, PatchOauthClientsSlugResponse200]]:
     """ Update a client (admin)
 
     Args:
         slug (str):
-        body (PatchOauthClientsSlugBody | Unset):
+        body (PatchOauthClientsSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PatchOauthClientsSlugResponse200
+        Union[Error, PatchOauthClientsSlugResponse200]
      """
 
 

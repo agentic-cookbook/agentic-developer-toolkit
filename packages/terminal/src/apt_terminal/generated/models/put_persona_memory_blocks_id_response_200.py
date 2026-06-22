@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.put_persona_memory_blocks_id_response_200_content_type_1 import PutPersonaMemoryBlocksIdResponse200ContentType1
@@ -28,10 +27,10 @@ class PutPersonaMemoryBlocksIdResponse200:
             id (str):
             owner_id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             name (str):
-            content (bool | float | list[Any] | None | PutPersonaMemoryBlocksIdResponse200ContentType1 | str):
-            size_limit (int | None):
+            content (Union['PutPersonaMemoryBlocksIdResponse200ContentType1', None, bool, float, list[Any], str]):
+            size_limit (Union[None, int]):
             created_at (str):
             updated_at (str):
      """
@@ -39,10 +38,10 @@ class PutPersonaMemoryBlocksIdResponse200:
     id: str
     owner_id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     name: str
-    content: bool | float | list[Any] | None | PutPersonaMemoryBlocksIdResponse200ContentType1 | str
-    size_limit: int | None
+    content: Union['PutPersonaMemoryBlocksIdResponse200ContentType1', None, bool, float, list[Any], str]
+    size_limit: Union[None, int]
     created_at: str
     updated_at: str
 
@@ -58,12 +57,12 @@ class PutPersonaMemoryBlocksIdResponse200:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         name = self.name
 
-        content: bool | dict[str, Any] | float | list[Any] | None | str
+        content: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.content, PutPersonaMemoryBlocksIdResponse200ContentType1):
             content = self.content.to_dict()
         elif isinstance(self.content, list):
@@ -73,7 +72,7 @@ class PutPersonaMemoryBlocksIdResponse200:
         else:
             content = self.content
 
-        size_limit: int | None
+        size_limit: Union[None, int]
         size_limit = self.size_limit
 
         created_at = self.created_at
@@ -109,17 +108,17 @@ class PutPersonaMemoryBlocksIdResponse200:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
         name = d.pop("name")
 
-        def _parse_content(data: object) -> bool | float | list[Any] | None | PutPersonaMemoryBlocksIdResponse200ContentType1 | str:
+        def _parse_content(data: object) -> Union['PutPersonaMemoryBlocksIdResponse200ContentType1', None, bool, float, list[Any], str]:
             if data is None:
                 return data
             try:
@@ -130,7 +129,7 @@ class PutPersonaMemoryBlocksIdResponse200:
 
 
                 return content_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -138,17 +137,17 @@ class PutPersonaMemoryBlocksIdResponse200:
                 content_type_2 = cast(list[Any], data)
 
                 return content_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PutPersonaMemoryBlocksIdResponse200ContentType1 | str, data)
+            return cast(Union['PutPersonaMemoryBlocksIdResponse200ContentType1', None, bool, float, list[Any], str], data)
 
         content = _parse_content(d.pop("content"))
 
 
-        def _parse_size_limit(data: object) -> int | None:
+        def _parse_size_limit(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         size_limit = _parse_size_limit(d.pop("sizeLimit"))
 

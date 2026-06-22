@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
@@ -24,26 +23,26 @@ T = TypeVar("T", bound="GetOauthProvidersSlugResponse200IdentityMapping")
 class GetOauthProvidersSlugResponse200IdentityMapping:
     """ 
         Attributes:
-            subject_field (str | Unset):
-            email_field (str | Unset):
-            name_field (str | Unset):
-            avatar_field (str | Unset):
-            verification_url (str | Unset):
-            jwks_url (str | Unset):
-            require_email_verified (bool | Unset):
-            allowed_audiences (list[str] | Unset):
-            secondary_email_url (str | Unset):
+            subject_field (Union[Unset, str]):
+            email_field (Union[Unset, str]):
+            name_field (Union[Unset, str]):
+            avatar_field (Union[Unset, str]):
+            verification_url (Union[Unset, str]):
+            jwks_url (Union[Unset, str]):
+            require_email_verified (Union[Unset, bool]):
+            allowed_audiences (Union[Unset, list[str]]):
+            secondary_email_url (Union[Unset, str]):
      """
 
-    subject_field: str | Unset = UNSET
-    email_field: str | Unset = UNSET
-    name_field: str | Unset = UNSET
-    avatar_field: str | Unset = UNSET
-    verification_url: str | Unset = UNSET
-    jwks_url: str | Unset = UNSET
-    require_email_verified: bool | Unset = UNSET
-    allowed_audiences: list[str] | Unset = UNSET
-    secondary_email_url: str | Unset = UNSET
+    subject_field: Union[Unset, str] = UNSET
+    email_field: Union[Unset, str] = UNSET
+    name_field: Union[Unset, str] = UNSET
+    avatar_field: Union[Unset, str] = UNSET
+    verification_url: Union[Unset, str] = UNSET
+    jwks_url: Union[Unset, str] = UNSET
+    require_email_verified: Union[Unset, bool] = UNSET
+    allowed_audiences: Union[Unset, list[str]] = UNSET
+    secondary_email_url: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -65,7 +64,7 @@ class GetOauthProvidersSlugResponse200IdentityMapping:
 
         require_email_verified = self.require_email_verified
 
-        allowed_audiences: list[str] | Unset = UNSET
+        allowed_audiences: Union[Unset, list[str]] = UNSET
         if not isinstance(self.allowed_audiences, Unset):
             allowed_audiences = self.allowed_audiences
 

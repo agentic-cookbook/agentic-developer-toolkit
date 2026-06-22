@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.persona_service import PersonaService
 from ...models.post_persona_services_body import PostPersonaServicesBody
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostPersonaServicesBody | Unset = UNSET,
+    body: PostPersonaServicesBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/persona/services",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PersonaService | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PersonaService]]:
     if response.status_code == 201:
         response_201 = PersonaService.from_dict(response.json())
 
@@ -72,7 +69,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PersonaService]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PersonaService]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,20 +81,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaServicesBody | Unset = UNSET,
+    body: PostPersonaServicesBody,
 
-) -> Response[Error | PersonaService]:
+) -> Response[Union[Error, PersonaService]]:
     """ Create an LLM provider connection
 
     Args:
-        body (PostPersonaServicesBody | Unset):
+        body (PostPersonaServicesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PersonaService]
+        Response[Union[Error, PersonaService]]
      """
 
 
@@ -115,20 +112,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaServicesBody | Unset = UNSET,
+    body: PostPersonaServicesBody,
 
-) -> Error | PersonaService | None:
+) -> Optional[Union[Error, PersonaService]]:
     """ Create an LLM provider connection
 
     Args:
-        body (PostPersonaServicesBody | Unset):
+        body (PostPersonaServicesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PersonaService
+        Union[Error, PersonaService]
      """
 
 
@@ -141,20 +138,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaServicesBody | Unset = UNSET,
+    body: PostPersonaServicesBody,
 
-) -> Response[Error | PersonaService]:
+) -> Response[Union[Error, PersonaService]]:
     """ Create an LLM provider connection
 
     Args:
-        body (PostPersonaServicesBody | Unset):
+        body (PostPersonaServicesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PersonaService]
+        Response[Union[Error, PersonaService]]
      """
 
 
@@ -172,20 +169,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostPersonaServicesBody | Unset = UNSET,
+    body: PostPersonaServicesBody,
 
-) -> Error | PersonaService | None:
+) -> Optional[Union[Error, PersonaService]]:
     """ Create an LLM provider connection
 
     Args:
-        body (PostPersonaServicesBody | Unset):
+        body (PostPersonaServicesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PersonaService
+        Union[Error, PersonaService]
      """
 
 

@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_persona_models_id_body import PutPersonaModelsIdBody
 from ...models.put_persona_models_id_response_200 import PutPersonaModelsIdResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     id: str,
     *,
-    body: PutPersonaModelsIdBody | Unset = UNSET,
+    body: PutPersonaModelsIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/persona/models/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/persona/models/{id}".format(id=id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutPersonaModelsIdResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutPersonaModelsIdResponse200]]:
     if response.status_code == 200:
         response_200 = PutPersonaModelsIdResponse200.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutPersonaModelsIdResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutPersonaModelsIdResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaModelsIdBody | Unset = UNSET,
+    body: PutPersonaModelsIdBody,
 
-) -> Response[Error | PutPersonaModelsIdResponse200]:
+) -> Response[Union[Error, PutPersonaModelsIdResponse200]]:
     """ Update models
 
     Args:
         id (str):
-        body (PutPersonaModelsIdBody | Unset):
+        body (PutPersonaModelsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutPersonaModelsIdResponse200]
+        Response[Union[Error, PutPersonaModelsIdResponse200]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaModelsIdBody | Unset = UNSET,
+    body: PutPersonaModelsIdBody,
 
-) -> Error | PutPersonaModelsIdResponse200 | None:
+) -> Optional[Union[Error, PutPersonaModelsIdResponse200]]:
     """ Update models
 
     Args:
         id (str):
-        body (PutPersonaModelsIdBody | Unset):
+        body (PutPersonaModelsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutPersonaModelsIdResponse200
+        Union[Error, PutPersonaModelsIdResponse200]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaModelsIdBody | Unset = UNSET,
+    body: PutPersonaModelsIdBody,
 
-) -> Response[Error | PutPersonaModelsIdResponse200]:
+) -> Response[Union[Error, PutPersonaModelsIdResponse200]]:
     """ Update models
 
     Args:
         id (str):
-        body (PutPersonaModelsIdBody | Unset):
+        body (PutPersonaModelsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutPersonaModelsIdResponse200]
+        Response[Union[Error, PutPersonaModelsIdResponse200]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutPersonaModelsIdBody | Unset = UNSET,
+    body: PutPersonaModelsIdBody,
 
-) -> Error | PutPersonaModelsIdResponse200 | None:
+) -> Optional[Union[Error, PutPersonaModelsIdResponse200]]:
     """ Update models
 
     Args:
         id (str):
-        body (PutPersonaModelsIdBody | Unset):
+        body (PutPersonaModelsIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutPersonaModelsIdResponse200
+        Union[Error, PutPersonaModelsIdResponse200]
      """
 
 

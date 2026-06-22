@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 
 
@@ -26,26 +25,26 @@ class GetPersonaMemoryMemoriesIdResponse200:
             id (str):
             owner_id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             persona_id (str):
             scope (str):
             slug (str):
             memory_type (str):
             description (str):
             body (str):
-            subject_table (None | str):
-            subject_id (None | str):
+            subject_table (Union[None, str]):
+            subject_id (Union[None, str]):
             status (str):
-            supersedes_id (None | str):
+            supersedes_id (Union[None, str]):
             source (str):
             confidence (int):
             tags (list[str]):
-            valid_from (None | str):
-            valid_to (None | str):
+            valid_from (Union[None, str]):
+            valid_to (Union[None, str]):
             recall_count (int):
-            last_recalled_at (None | str):
-            embedding (list[float] | None):
-            embedding_model (None | str):
+            last_recalled_at (Union[None, str]):
+            embedding (Union[None, list[float]]):
+            embedding_model (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
@@ -53,26 +52,26 @@ class GetPersonaMemoryMemoriesIdResponse200:
     id: str
     owner_id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     persona_id: str
     scope: str
     slug: str
     memory_type: str
     description: str
     body: str
-    subject_table: None | str
-    subject_id: None | str
+    subject_table: Union[None, str]
+    subject_id: Union[None, str]
     status: str
-    supersedes_id: None | str
+    supersedes_id: Union[None, str]
     source: str
     confidence: int
     tags: list[str]
-    valid_from: None | str
-    valid_to: None | str
+    valid_from: Union[None, str]
+    valid_to: Union[None, str]
     recall_count: int
-    last_recalled_at: None | str
-    embedding: list[float] | None
-    embedding_model: None | str
+    last_recalled_at: Union[None, str]
+    embedding: Union[None, list[float]]
+    embedding_model: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -87,7 +86,7 @@ class GetPersonaMemoryMemoriesIdResponse200:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         persona_id = self.persona_id
@@ -102,15 +101,15 @@ class GetPersonaMemoryMemoriesIdResponse200:
 
         body = self.body
 
-        subject_table: None | str
+        subject_table: Union[None, str]
         subject_table = self.subject_table
 
-        subject_id: None | str
+        subject_id: Union[None, str]
         subject_id = self.subject_id
 
         status = self.status
 
-        supersedes_id: None | str
+        supersedes_id: Union[None, str]
         supersedes_id = self.supersedes_id
 
         source = self.source
@@ -121,18 +120,18 @@ class GetPersonaMemoryMemoriesIdResponse200:
 
 
 
-        valid_from: None | str
+        valid_from: Union[None, str]
         valid_from = self.valid_from
 
-        valid_to: None | str
+        valid_to: Union[None, str]
         valid_to = self.valid_to
 
         recall_count = self.recall_count
 
-        last_recalled_at: None | str
+        last_recalled_at: Union[None, str]
         last_recalled_at = self.last_recalled_at
 
-        embedding: list[float] | None
+        embedding: Union[None, list[float]]
         if isinstance(self.embedding, list):
             embedding = self.embedding
 
@@ -140,7 +139,7 @@ class GetPersonaMemoryMemoriesIdResponse200:
         else:
             embedding = self.embedding
 
-        embedding_model: None | str
+        embedding_model: Union[None, str]
         embedding_model = self.embedding_model
 
         created_at = self.created_at
@@ -191,10 +190,10 @@ class GetPersonaMemoryMemoriesIdResponse200:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -211,28 +210,28 @@ class GetPersonaMemoryMemoriesIdResponse200:
 
         body = d.pop("body")
 
-        def _parse_subject_table(data: object) -> None | str:
+        def _parse_subject_table(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         subject_table = _parse_subject_table(d.pop("subjectTable"))
 
 
-        def _parse_subject_id(data: object) -> None | str:
+        def _parse_subject_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         subject_id = _parse_subject_id(d.pop("subjectId"))
 
 
         status = d.pop("status")
 
-        def _parse_supersedes_id(data: object) -> None | str:
+        def _parse_supersedes_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         supersedes_id = _parse_supersedes_id(d.pop("supersedesId"))
 
@@ -244,33 +243,33 @@ class GetPersonaMemoryMemoriesIdResponse200:
         tags = cast(list[str], d.pop("tags"))
 
 
-        def _parse_valid_from(data: object) -> None | str:
+        def _parse_valid_from(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         valid_from = _parse_valid_from(d.pop("validFrom"))
 
 
-        def _parse_valid_to(data: object) -> None | str:
+        def _parse_valid_to(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         valid_to = _parse_valid_to(d.pop("validTo"))
 
 
         recall_count = d.pop("recallCount")
 
-        def _parse_last_recalled_at(data: object) -> None | str:
+        def _parse_last_recalled_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         last_recalled_at = _parse_last_recalled_at(d.pop("lastRecalledAt"))
 
 
-        def _parse_embedding(data: object) -> list[float] | None:
+        def _parse_embedding(data: object) -> Union[None, list[float]]:
             if data is None:
                 return data
             try:
@@ -279,17 +278,17 @@ class GetPersonaMemoryMemoriesIdResponse200:
                 embedding_type_0 = cast(list[float], data)
 
                 return embedding_type_0
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(list[float] | None, data)
+            return cast(Union[None, list[float]], data)
 
         embedding = _parse_embedding(d.pop("embedding"))
 
 
-        def _parse_embedding_model(data: object) -> None | str:
+        def _parse_embedding_model(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         embedding_model = _parse_embedding_model(d.pop("embeddingModel"))
 

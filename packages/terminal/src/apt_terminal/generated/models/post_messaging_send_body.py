@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,6 +9,7 @@ from ..types import UNSET, Unset
 from ..models.post_messaging_send_body_channel import PostMessagingSendBodyChannel
 from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.post_messaging_send_body_template_vars import PostMessagingSendBodyTemplateVars
@@ -30,20 +29,21 @@ class PostMessagingSendBody:
         Attributes:
             user_id (str): Target user id
             channel (PostMessagingSendBodyChannel):
-            subject (str | Unset): Email subject (freeform)
-            body (str | Unset): Freeform message body
-            template_id (str | Unset): Template id (alternative to body)
-            template_vars (PostMessagingSendBodyTemplateVars | Unset): Substitution values for the template placeholders
-            recipient (str | Unset): Override recipient; required for SMS, optional for email
+            subject (Union[Unset, str]): Email subject (freeform)
+            body (Union[Unset, str]): Freeform message body
+            template_id (Union[Unset, str]): Template id (alternative to body)
+            template_vars (Union[Unset, PostMessagingSendBodyTemplateVars]): Substitution values for the template
+                placeholders
+            recipient (Union[Unset, str]): Override recipient; required for SMS, optional for email
      """
 
     user_id: str
     channel: PostMessagingSendBodyChannel
-    subject: str | Unset = UNSET
-    body: str | Unset = UNSET
-    template_id: str | Unset = UNSET
-    template_vars: PostMessagingSendBodyTemplateVars | Unset = UNSET
-    recipient: str | Unset = UNSET
+    subject: Union[Unset, str] = UNSET
+    body: Union[Unset, str] = UNSET
+    template_id: Union[Unset, str] = UNSET
+    template_vars: Union[Unset, 'PostMessagingSendBodyTemplateVars'] = UNSET
+    recipient: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -62,7 +62,7 @@ class PostMessagingSendBody:
 
         template_id = self.template_id
 
-        template_vars: dict[str, Any] | Unset = UNSET
+        template_vars: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.template_vars, Unset):
             template_vars = self.template_vars.to_dict()
 
@@ -108,7 +108,7 @@ class PostMessagingSendBody:
         template_id = d.pop("templateId", UNSET)
 
         _template_vars = d.pop("templateVars", UNSET)
-        template_vars: PostMessagingSendBodyTemplateVars | Unset
+        template_vars: Union[Unset, PostMessagingSendBodyTemplateVars]
         if isinstance(_template_vars,  Unset):
             template_vars = UNSET
         else:

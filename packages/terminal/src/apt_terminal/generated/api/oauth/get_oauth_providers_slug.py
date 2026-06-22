@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/oauth/providers/{slug}".format(slug=quote(str(slug), safe=""),),
+        "url": "/oauth/providers/{slug}".format(slug=slug,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetOauthProvidersSlugResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetOauthProvidersSlugResponse200]]:
     if response.status_code == 200:
         response_200 = GetOauthProvidersSlugResponse200.from_dict(response.json())
 
@@ -62,7 +61,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetOauthProvidersSlugResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetOauthProvidersSlugResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +75,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetOauthProvidersSlugResponse200]:
+) -> Response[Union[Error, GetOauthProvidersSlugResponse200]]:
     """ Get a provider (admin)
 
     Args:
@@ -87,7 +86,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetOauthProvidersSlugResponse200]
+        Response[Union[Error, GetOauthProvidersSlugResponse200]]
      """
 
 
@@ -107,7 +106,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetOauthProvidersSlugResponse200 | None:
+) -> Optional[Union[Error, GetOauthProvidersSlugResponse200]]:
     """ Get a provider (admin)
 
     Args:
@@ -118,7 +117,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetOauthProvidersSlugResponse200
+        Union[Error, GetOauthProvidersSlugResponse200]
      """
 
 
@@ -133,7 +132,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetOauthProvidersSlugResponse200]:
+) -> Response[Union[Error, GetOauthProvidersSlugResponse200]]:
     """ Get a provider (admin)
 
     Args:
@@ -144,7 +143,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetOauthProvidersSlugResponse200]
+        Response[Union[Error, GetOauthProvidersSlugResponse200]]
      """
 
 
@@ -164,7 +163,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetOauthProvidersSlugResponse200 | None:
+) -> Optional[Union[Error, GetOauthProvidersSlugResponse200]]:
     """ Get a provider (admin)
 
     Args:
@@ -175,7 +174,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetOauthProvidersSlugResponse200
+        Union[Error, GetOauthProvidersSlugResponse200]
      """
 
 

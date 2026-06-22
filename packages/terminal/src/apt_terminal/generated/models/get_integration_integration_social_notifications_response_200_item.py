@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,42 +23,42 @@ class GetIntegrationIntegrationSocialNotificationsResponse200Item:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             connection_id (str):
             external_id (str):
             source_provider (str):
             notification_type (str):
-            title (None | str):
-            body (None | str):
-            author_handle (None | str):
-            author_display_name (None | str):
-            item_url (None | str):
+            title (Union[None, str]):
+            body (Union[None, str]):
+            author_handle (Union[None, str]):
+            author_display_name (Union[None, str]):
+            item_url (Union[None, str]):
             is_read (bool):
             is_deleted (bool):
             sync_version (int):
-            external_created_at (None | str):
+            external_created_at (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     connection_id: str
     external_id: str
     source_provider: str
     notification_type: str
-    title: None | str
-    body: None | str
-    author_handle: None | str
-    author_display_name: None | str
-    item_url: None | str
+    title: Union[None, str]
+    body: Union[None, str]
+    author_handle: Union[None, str]
+    author_display_name: Union[None, str]
+    item_url: Union[None, str]
     is_read: bool
     is_deleted: bool
     sync_version: int
-    external_created_at: None | str
+    external_created_at: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -73,7 +71,7 @@ class GetIntegrationIntegrationSocialNotificationsResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -86,19 +84,19 @@ class GetIntegrationIntegrationSocialNotificationsResponse200Item:
 
         notification_type = self.notification_type
 
-        title: None | str
+        title: Union[None, str]
         title = self.title
 
-        body: None | str
+        body: Union[None, str]
         body = self.body
 
-        author_handle: None | str
+        author_handle: Union[None, str]
         author_handle = self.author_handle
 
-        author_display_name: None | str
+        author_display_name: Union[None, str]
         author_display_name = self.author_display_name
 
-        item_url: None | str
+        item_url: Union[None, str]
         item_url = self.item_url
 
         is_read = self.is_read
@@ -107,7 +105,7 @@ class GetIntegrationIntegrationSocialNotificationsResponse200Item:
 
         sync_version = self.sync_version
 
-        external_created_at: None | str
+        external_created_at: Union[None, str]
         external_created_at = self.external_created_at
 
         created_at = self.created_at
@@ -150,10 +148,10 @@ class GetIntegrationIntegrationSocialNotificationsResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -168,42 +166,42 @@ class GetIntegrationIntegrationSocialNotificationsResponse200Item:
 
         notification_type = d.pop("notificationType")
 
-        def _parse_title(data: object) -> None | str:
+        def _parse_title(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         title = _parse_title(d.pop("title"))
 
 
-        def _parse_body(data: object) -> None | str:
+        def _parse_body(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         body = _parse_body(d.pop("body"))
 
 
-        def _parse_author_handle(data: object) -> None | str:
+        def _parse_author_handle(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         author_handle = _parse_author_handle(d.pop("authorHandle"))
 
 
-        def _parse_author_display_name(data: object) -> None | str:
+        def _parse_author_display_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         author_display_name = _parse_author_display_name(d.pop("authorDisplayName"))
 
 
-        def _parse_item_url(data: object) -> None | str:
+        def _parse_item_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         item_url = _parse_item_url(d.pop("itemUrl"))
 
@@ -214,10 +212,10 @@ class GetIntegrationIntegrationSocialNotificationsResponse200Item:
 
         sync_version = d.pop("syncVersion")
 
-        def _parse_external_created_at(data: object) -> None | str:
+        def _parse_external_created_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         external_created_at = _parse_external_created_at(d.pop("externalCreatedAt"))
 

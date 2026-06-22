@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,9 +23,9 @@ class GetDocumentOperationsIdResponse200:
         Attributes:
             id (str):
             document_id (str):
-            block_id (None | str):
+            block_id (Union[None, str]):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             client_id (str):
             client_seq (int):
@@ -35,15 +33,15 @@ class GetDocumentOperationsIdResponse200:
             op_payload (str):
             created_at (str):
             sync_version (int):
-            undo_group_id (None | str):
-            inverse_of_op_id (None | str):
+            undo_group_id (Union[None, str]):
+            inverse_of_op_id (Union[None, str]):
      """
 
     id: str
     document_id: str
-    block_id: None | str
+    block_id: Union[None, str]
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     client_id: str
     client_seq: int
@@ -51,8 +49,8 @@ class GetDocumentOperationsIdResponse200:
     op_payload: str
     created_at: str
     sync_version: int
-    undo_group_id: None | str
-    inverse_of_op_id: None | str
+    undo_group_id: Union[None, str]
+    inverse_of_op_id: Union[None, str]
 
 
 
@@ -63,12 +61,12 @@ class GetDocumentOperationsIdResponse200:
 
         document_id = self.document_id
 
-        block_id: None | str
+        block_id: Union[None, str]
         block_id = self.block_id
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -85,10 +83,10 @@ class GetDocumentOperationsIdResponse200:
 
         sync_version = self.sync_version
 
-        undo_group_id: None | str
+        undo_group_id: Union[None, str]
         undo_group_id = self.undo_group_id
 
-        inverse_of_op_id: None | str
+        inverse_of_op_id: Union[None, str]
         inverse_of_op_id = self.inverse_of_op_id
 
 
@@ -122,20 +120,20 @@ class GetDocumentOperationsIdResponse200:
 
         document_id = d.pop("documentId")
 
-        def _parse_block_id(data: object) -> None | str:
+        def _parse_block_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         block_id = _parse_block_id(d.pop("blockId"))
 
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -154,18 +152,18 @@ class GetDocumentOperationsIdResponse200:
 
         sync_version = d.pop("syncVersion")
 
-        def _parse_undo_group_id(data: object) -> None | str:
+        def _parse_undo_group_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         undo_group_id = _parse_undo_group_id(d.pop("undoGroupId"))
 
 
-        def _parse_inverse_of_op_id(data: object) -> None | str:
+        def _parse_inverse_of_op_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         inverse_of_op_id = _parse_inverse_of_op_id(d.pop("inverseOfOpId"))
 

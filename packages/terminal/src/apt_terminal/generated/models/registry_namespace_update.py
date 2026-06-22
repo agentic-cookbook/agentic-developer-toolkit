@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -24,13 +22,13 @@ class RegistryNamespaceUpdate:
     """ 
         Attributes:
             id (str):
-            slug (None | str):
-            name (None | str):
+            slug (Union[None, str]):
+            name (Union[None, str]):
      """
 
     id: str
-    slug: None | str
-    name: None | str
+    slug: Union[None, str]
+    name: Union[None, str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -40,10 +38,10 @@ class RegistryNamespaceUpdate:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        slug: None | str
+        slug: Union[None, str]
         slug = self.slug
 
-        name: None | str
+        name: Union[None, str]
         name = self.name
 
 
@@ -64,18 +62,18 @@ class RegistryNamespaceUpdate:
         d = dict(src_dict)
         id = d.pop("id")
 
-        def _parse_slug(data: object) -> None | str:
+        def _parse_slug(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         slug = _parse_slug(d.pop("slug"))
 
 
-        def _parse_name(data: object) -> None | str:
+        def _parse_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         name = _parse_name(d.pop("name"))
 

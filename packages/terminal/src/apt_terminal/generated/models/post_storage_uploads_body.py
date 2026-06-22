@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -26,18 +25,18 @@ class PostStorageUploadsBody:
         Attributes:
             filename (str):
             content_type (str):
-            owner_type (str | Unset): Polymorphic owner kind (defaults to 'standalone').
-            owner_id (None | str | Unset):
-            size_bytes (int | Unset): Declared size; enforced against the storage quota at init.
-            content_hash (str | Unset): When it matches an existing ready object, the upload is deduplicated.
+            owner_type (Union[Unset, str]): Polymorphic owner kind (defaults to 'standalone').
+            owner_id (Union[None, Unset, str]):
+            size_bytes (Union[Unset, int]): Declared size; enforced against the storage quota at init.
+            content_hash (Union[Unset, str]): When it matches an existing ready object, the upload is deduplicated.
      """
 
     filename: str
     content_type: str
-    owner_type: str | Unset = UNSET
-    owner_id: None | str | Unset = UNSET
-    size_bytes: int | Unset = UNSET
-    content_hash: str | Unset = UNSET
+    owner_type: Union[Unset, str] = UNSET
+    owner_id: Union[None, Unset, str] = UNSET
+    size_bytes: Union[Unset, int] = UNSET
+    content_hash: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -51,7 +50,7 @@ class PostStorageUploadsBody:
 
         owner_type = self.owner_type
 
-        owner_id: None | str | Unset
+        owner_id: Union[None, Unset, str]
         if isinstance(self.owner_id, Unset):
             owner_id = UNSET
         else:
@@ -90,12 +89,12 @@ class PostStorageUploadsBody:
 
         owner_type = d.pop("ownerType", UNSET)
 
-        def _parse_owner_id(data: object) -> None | str | Unset:
+        def _parse_owner_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         owner_id = _parse_owner_id(d.pop("ownerId", UNSET))
 

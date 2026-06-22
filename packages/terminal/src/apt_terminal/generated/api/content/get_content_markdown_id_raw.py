@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -25,7 +24,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/content/markdown/{id}/raw".format(id=quote(str(id), safe=""),),
+        "url": "/content/markdown/{id}/raw".format(id=id,),
     }
 
 
@@ -33,7 +32,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Error | str | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Any, Error, str]]:
     if response.status_code == 200:
         response_200 = response.text
         return response_200
@@ -62,7 +61,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Error | str]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Any, Error, str]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +75,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Any | Error | str]:
+) -> Response[Union[Any, Error, str]]:
     """ Get the raw markdown bytes (text/markdown), with an ETag
 
      Returns the content verbatim. Send If-None-Match with the ETag for a 304.
@@ -89,7 +88,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error | str]
+        Response[Union[Any, Error, str]]
      """
 
 
@@ -109,7 +108,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Any | Error | str | None:
+) -> Optional[Union[Any, Error, str]]:
     """ Get the raw markdown bytes (text/markdown), with an ETag
 
      Returns the content verbatim. Send If-None-Match with the ETag for a 304.
@@ -122,7 +121,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error | str
+        Union[Any, Error, str]
      """
 
 
@@ -137,7 +136,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Any | Error | str]:
+) -> Response[Union[Any, Error, str]]:
     """ Get the raw markdown bytes (text/markdown), with an ETag
 
      Returns the content verbatim. Send If-None-Match with the ETag for a 304.
@@ -150,7 +149,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error | str]
+        Response[Union[Any, Error, str]]
      """
 
 
@@ -170,7 +169,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Any | Error | str | None:
+) -> Optional[Union[Any, Error, str]]:
     """ Get the raw markdown bytes (text/markdown), with an ETag
 
      Returns the content verbatim. Send If-None-Match with the ETag for a 304.
@@ -183,7 +182,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error | str
+        Union[Any, Error, str]
      """
 
 

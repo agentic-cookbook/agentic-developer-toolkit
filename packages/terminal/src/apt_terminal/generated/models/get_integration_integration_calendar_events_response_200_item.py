@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,59 +23,59 @@ class GetIntegrationIntegrationCalendarEventsResponse200Item:
         Attributes:
             id (str):
             title (str):
-            description (None | str):
-            start_time (None | str):
-            end_time (None | str):
-            start_date (None | str):
-            end_date (None | str):
+            description (Union[None, str]):
+            start_time (Union[None, str]):
+            end_time (Union[None, str]):
+            start_date (Union[None, str]):
+            end_date (Union[None, str]):
             is_all_day (bool):
-            location (None | str):
+            location (Union[None, str]):
             source (str):
             external_id (str):
-            connection_id (None | str):
-            calendar_name (None | str):
-            calendar_color (None | str):
+            connection_id (Union[None, str]):
+            calendar_name (Union[None, str]):
+            calendar_color (Union[None, str]):
             status (str):
-            organizer (None | str):
-            attendees (None | str):
-            reminders (None | str):
-            url (None | str):
-            ai_extraction (None | str):
+            organizer (Union[None, str]):
+            attendees (Union[None, str]):
+            reminders (Union[None, str]):
+            url (Union[None, str]):
+            ai_extraction (Union[None, str]):
             created_at (str):
             updated_at (str):
             is_deleted (bool):
             sync_version (int):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
      """
 
     id: str
     title: str
-    description: None | str
-    start_time: None | str
-    end_time: None | str
-    start_date: None | str
-    end_date: None | str
+    description: Union[None, str]
+    start_time: Union[None, str]
+    end_time: Union[None, str]
+    start_date: Union[None, str]
+    end_date: Union[None, str]
     is_all_day: bool
-    location: None | str
+    location: Union[None, str]
     source: str
     external_id: str
-    connection_id: None | str
-    calendar_name: None | str
-    calendar_color: None | str
+    connection_id: Union[None, str]
+    calendar_name: Union[None, str]
+    calendar_color: Union[None, str]
     status: str
-    organizer: None | str
-    attendees: None | str
-    reminders: None | str
-    url: None | str
-    ai_extraction: None | str
+    organizer: Union[None, str]
+    attendees: Union[None, str]
+    reminders: Union[None, str]
+    url: Union[None, str]
+    ai_extraction: Union[None, str]
     created_at: str
     updated_at: str
     is_deleted: bool
     sync_version: int
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
 
 
@@ -89,54 +87,54 @@ class GetIntegrationIntegrationCalendarEventsResponse200Item:
 
         title = self.title
 
-        description: None | str
+        description: Union[None, str]
         description = self.description
 
-        start_time: None | str
+        start_time: Union[None, str]
         start_time = self.start_time
 
-        end_time: None | str
+        end_time: Union[None, str]
         end_time = self.end_time
 
-        start_date: None | str
+        start_date: Union[None, str]
         start_date = self.start_date
 
-        end_date: None | str
+        end_date: Union[None, str]
         end_date = self.end_date
 
         is_all_day = self.is_all_day
 
-        location: None | str
+        location: Union[None, str]
         location = self.location
 
         source = self.source
 
         external_id = self.external_id
 
-        connection_id: None | str
+        connection_id: Union[None, str]
         connection_id = self.connection_id
 
-        calendar_name: None | str
+        calendar_name: Union[None, str]
         calendar_name = self.calendar_name
 
-        calendar_color: None | str
+        calendar_color: Union[None, str]
         calendar_color = self.calendar_color
 
         status = self.status
 
-        organizer: None | str
+        organizer: Union[None, str]
         organizer = self.organizer
 
-        attendees: None | str
+        attendees: Union[None, str]
         attendees = self.attendees
 
-        reminders: None | str
+        reminders: Union[None, str]
         reminders = self.reminders
 
-        url: None | str
+        url: Union[None, str]
         url = self.url
 
-        ai_extraction: None | str
+        ai_extraction: Union[None, str]
         ai_extraction = self.ai_extraction
 
         created_at = self.created_at
@@ -149,7 +147,7 @@ class GetIntegrationIntegrationCalendarEventsResponse200Item:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -198,52 +196,52 @@ class GetIntegrationIntegrationCalendarEventsResponse200Item:
 
         title = d.pop("title")
 
-        def _parse_description(data: object) -> None | str:
+        def _parse_description(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         description = _parse_description(d.pop("description"))
 
 
-        def _parse_start_time(data: object) -> None | str:
+        def _parse_start_time(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         start_time = _parse_start_time(d.pop("startTime"))
 
 
-        def _parse_end_time(data: object) -> None | str:
+        def _parse_end_time(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         end_time = _parse_end_time(d.pop("endTime"))
 
 
-        def _parse_start_date(data: object) -> None | str:
+        def _parse_start_date(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         start_date = _parse_start_date(d.pop("startDate"))
 
 
-        def _parse_end_date(data: object) -> None | str:
+        def _parse_end_date(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         end_date = _parse_end_date(d.pop("endDate"))
 
 
         is_all_day = d.pop("isAllDay")
 
-        def _parse_location(data: object) -> None | str:
+        def _parse_location(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         location = _parse_location(d.pop("location"))
 
@@ -252,68 +250,68 @@ class GetIntegrationIntegrationCalendarEventsResponse200Item:
 
         external_id = d.pop("externalId")
 
-        def _parse_connection_id(data: object) -> None | str:
+        def _parse_connection_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         connection_id = _parse_connection_id(d.pop("connectionId"))
 
 
-        def _parse_calendar_name(data: object) -> None | str:
+        def _parse_calendar_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         calendar_name = _parse_calendar_name(d.pop("calendarName"))
 
 
-        def _parse_calendar_color(data: object) -> None | str:
+        def _parse_calendar_color(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         calendar_color = _parse_calendar_color(d.pop("calendarColor"))
 
 
         status = d.pop("status")
 
-        def _parse_organizer(data: object) -> None | str:
+        def _parse_organizer(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         organizer = _parse_organizer(d.pop("organizer"))
 
 
-        def _parse_attendees(data: object) -> None | str:
+        def _parse_attendees(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         attendees = _parse_attendees(d.pop("attendees"))
 
 
-        def _parse_reminders(data: object) -> None | str:
+        def _parse_reminders(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         reminders = _parse_reminders(d.pop("reminders"))
 
 
-        def _parse_url(data: object) -> None | str:
+        def _parse_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         url = _parse_url(d.pop("url"))
 
 
-        def _parse_ai_extraction(data: object) -> None | str:
+        def _parse_ai_extraction(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         ai_extraction = _parse_ai_extraction(d.pop("aiExtraction"))
 
@@ -328,10 +326,10 @@ class GetIntegrationIntegrationCalendarEventsResponse200Item:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 

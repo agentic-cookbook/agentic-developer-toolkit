@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_oauth_clients_slug_providers_provider_slug_body import PutOauthClientsSlugProvidersProviderSlugBody
 from ...models.put_oauth_clients_slug_providers_provider_slug_response_200 import PutOauthClientsSlugProvidersProviderSlugResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -20,7 +18,7 @@ def _get_kwargs(
     slug: str,
     provider_slug: str,
     *,
-    body: PutOauthClientsSlugProvidersProviderSlugBody | Unset = UNSET,
+    body: PutOauthClientsSlugProvidersProviderSlugBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -32,12 +30,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/oauth/clients/{slug}/providers/{provider_slug}".format(slug=quote(str(slug), safe=""),provider_slug=quote(str(provider_slug), safe=""),),
+        "url": "/oauth/clients/{slug}/providers/{provider_slug}".format(slug=slug,provider_slug=provider_slug,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -46,7 +43,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutOauthClientsSlugProvidersProviderSlugResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]:
     if response.status_code == 200:
         response_200 = PutOauthClientsSlugProvidersProviderSlugResponse200.from_dict(response.json())
 
@@ -81,7 +78,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutOauthClientsSlugProvidersProviderSlugResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,22 +92,22 @@ def sync_detailed(
     provider_slug: str,
     *,
     client: AuthenticatedClient,
-    body: PutOauthClientsSlugProvidersProviderSlugBody | Unset = UNSET,
+    body: PutOauthClientsSlugProvidersProviderSlugBody,
 
-) -> Response[Error | PutOauthClientsSlugProvidersProviderSlugResponse200]:
+) -> Response[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]:
     """ Link a provider to a client, optional per-client credential override (admin)
 
     Args:
         slug (str):
         provider_slug (str):
-        body (PutOauthClientsSlugProvidersProviderSlugBody | Unset):
+        body (PutOauthClientsSlugProvidersProviderSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutOauthClientsSlugProvidersProviderSlugResponse200]
+        Response[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]
      """
 
 
@@ -132,22 +129,22 @@ def sync(
     provider_slug: str,
     *,
     client: AuthenticatedClient,
-    body: PutOauthClientsSlugProvidersProviderSlugBody | Unset = UNSET,
+    body: PutOauthClientsSlugProvidersProviderSlugBody,
 
-) -> Error | PutOauthClientsSlugProvidersProviderSlugResponse200 | None:
+) -> Optional[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]:
     """ Link a provider to a client, optional per-client credential override (admin)
 
     Args:
         slug (str):
         provider_slug (str):
-        body (PutOauthClientsSlugProvidersProviderSlugBody | Unset):
+        body (PutOauthClientsSlugProvidersProviderSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutOauthClientsSlugProvidersProviderSlugResponse200
+        Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]
      """
 
 
@@ -164,22 +161,22 @@ async def asyncio_detailed(
     provider_slug: str,
     *,
     client: AuthenticatedClient,
-    body: PutOauthClientsSlugProvidersProviderSlugBody | Unset = UNSET,
+    body: PutOauthClientsSlugProvidersProviderSlugBody,
 
-) -> Response[Error | PutOauthClientsSlugProvidersProviderSlugResponse200]:
+) -> Response[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]:
     """ Link a provider to a client, optional per-client credential override (admin)
 
     Args:
         slug (str):
         provider_slug (str):
-        body (PutOauthClientsSlugProvidersProviderSlugBody | Unset):
+        body (PutOauthClientsSlugProvidersProviderSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutOauthClientsSlugProvidersProviderSlugResponse200]
+        Response[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]
      """
 
 
@@ -201,22 +198,22 @@ async def asyncio(
     provider_slug: str,
     *,
     client: AuthenticatedClient,
-    body: PutOauthClientsSlugProvidersProviderSlugBody | Unset = UNSET,
+    body: PutOauthClientsSlugProvidersProviderSlugBody,
 
-) -> Error | PutOauthClientsSlugProvidersProviderSlugResponse200 | None:
+) -> Optional[Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]]:
     """ Link a provider to a client, optional per-client credential override (admin)
 
     Args:
         slug (str):
         provider_slug (str):
-        body (PutOauthClientsSlugProvidersProviderSlugBody | Unset):
+        body (PutOauthClientsSlugProvidersProviderSlugBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutOauthClientsSlugProvidersProviderSlugResponse200
+        Union[Error, PutOauthClientsSlugProvidersProviderSlugResponse200]
      """
 
 

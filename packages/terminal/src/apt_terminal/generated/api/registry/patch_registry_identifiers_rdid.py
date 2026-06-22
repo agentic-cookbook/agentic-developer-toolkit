@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.patch_registry_identifiers_rdid_body import PatchRegistryIdentifiersRdidBody
 from ...models.registry_identifier import RegistryIdentifier
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     rdid: str,
     *,
-    body: PatchRegistryIdentifiersRdidBody | Unset = UNSET,
+    body: PatchRegistryIdentifiersRdidBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/registry/identifiers/{rdid}".format(rdid=quote(str(rdid), safe=""),),
+        "url": "/registry/identifiers/{rdid}".format(rdid=rdid,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | RegistryIdentifier | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, RegistryIdentifier]]:
     if response.status_code == 200:
         response_200 = RegistryIdentifier.from_dict(response.json())
 
@@ -87,7 +84,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | RegistryIdentifier]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, RegistryIdentifier]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -100,21 +97,21 @@ def sync_detailed(
     rdid: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryIdentifiersRdidBody | Unset = UNSET,
+    body: PatchRegistryIdentifiersRdidBody,
 
-) -> Response[Error | RegistryIdentifier]:
+) -> Response[Union[Error, RegistryIdentifier]]:
     """ Rename an rdid (entity/uuid unchanged)
 
     Args:
         rdid (str):
-        body (PatchRegistryIdentifiersRdidBody | Unset):
+        body (PatchRegistryIdentifiersRdidBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryIdentifier]
+        Response[Union[Error, RegistryIdentifier]]
      """
 
 
@@ -134,21 +131,21 @@ def sync(
     rdid: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryIdentifiersRdidBody | Unset = UNSET,
+    body: PatchRegistryIdentifiersRdidBody,
 
-) -> Error | RegistryIdentifier | None:
+) -> Optional[Union[Error, RegistryIdentifier]]:
     """ Rename an rdid (entity/uuid unchanged)
 
     Args:
         rdid (str):
-        body (PatchRegistryIdentifiersRdidBody | Unset):
+        body (PatchRegistryIdentifiersRdidBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryIdentifier
+        Union[Error, RegistryIdentifier]
      """
 
 
@@ -163,21 +160,21 @@ async def asyncio_detailed(
     rdid: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryIdentifiersRdidBody | Unset = UNSET,
+    body: PatchRegistryIdentifiersRdidBody,
 
-) -> Response[Error | RegistryIdentifier]:
+) -> Response[Union[Error, RegistryIdentifier]]:
     """ Rename an rdid (entity/uuid unchanged)
 
     Args:
         rdid (str):
-        body (PatchRegistryIdentifiersRdidBody | Unset):
+        body (PatchRegistryIdentifiersRdidBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | RegistryIdentifier]
+        Response[Union[Error, RegistryIdentifier]]
      """
 
 
@@ -197,21 +194,21 @@ async def asyncio(
     rdid: str,
     *,
     client: AuthenticatedClient,
-    body: PatchRegistryIdentifiersRdidBody | Unset = UNSET,
+    body: PatchRegistryIdentifiersRdidBody,
 
-) -> Error | RegistryIdentifier | None:
+) -> Optional[Union[Error, RegistryIdentifier]]:
     """ Rename an rdid (entity/uuid unchanged)
 
     Args:
         rdid (str):
-        body (PatchRegistryIdentifiersRdidBody | Unset):
+        body (PatchRegistryIdentifiersRdidBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | RegistryIdentifier
+        Union[Error, RegistryIdentifier]
      """
 
 

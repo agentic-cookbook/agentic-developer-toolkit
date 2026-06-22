@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -33,7 +32,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | list[SystemService] | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, list['SystemService']]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -66,7 +65,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | list[SystemService]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, list['SystemService']]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,7 +78,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | list[SystemService]]:
+) -> Response[Union[Error, list['SystemService']]]:
     """ List external-service configurations (admin; secrets redacted)
 
     Raises:
@@ -87,7 +86,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[SystemService]]
+        Response[Union[Error, list['SystemService']]]
      """
 
 
@@ -105,7 +104,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | list[SystemService] | None:
+) -> Optional[Union[Error, list['SystemService']]]:
     """ List external-service configurations (admin; secrets redacted)
 
     Raises:
@@ -113,7 +112,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[SystemService]
+        Union[Error, list['SystemService']]
      """
 
 
@@ -126,7 +125,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | list[SystemService]]:
+) -> Response[Union[Error, list['SystemService']]]:
     """ List external-service configurations (admin; secrets redacted)
 
     Raises:
@@ -134,7 +133,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | list[SystemService]]
+        Response[Union[Error, list['SystemService']]]
      """
 
 
@@ -152,7 +151,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | list[SystemService] | None:
+) -> Optional[Union[Error, list['SystemService']]]:
     """ List external-service configurations (admin; secrets redacted)
 
     Raises:
@@ -160,7 +159,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | list[SystemService]
+        Union[Error, list['SystemService']]
      """
 
 

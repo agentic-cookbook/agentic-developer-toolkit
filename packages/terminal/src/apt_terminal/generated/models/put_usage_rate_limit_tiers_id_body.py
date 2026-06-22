@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,30 +23,30 @@ T = TypeVar("T", bound="PutUsageRateLimitTiersIdBody")
 class PutUsageRateLimitTiersIdBody:
     """ 
         Attributes:
-            slug (str | Unset):
-            name (str | Unset):
-            rate_capacity (int | Unset):
-            rate_refill_tokens (int | Unset):
-            rate_refill_seconds (int | Unset):
-            quota_requests (int | None | Unset):
-            quota_bytes (int | None | Unset):
-            quota_period_days (int | Unset):
-            quota_enforced (bool | Unset):
-            is_default (bool | Unset):
-            is_active (bool | Unset):
+            slug (Union[Unset, str]):
+            name (Union[Unset, str]):
+            rate_capacity (Union[Unset, int]):
+            rate_refill_tokens (Union[Unset, int]):
+            rate_refill_seconds (Union[Unset, int]):
+            quota_requests (Union[None, Unset, int]):
+            quota_bytes (Union[None, Unset, int]):
+            quota_period_days (Union[Unset, int]):
+            quota_enforced (Union[Unset, bool]):
+            is_default (Union[Unset, bool]):
+            is_active (Union[Unset, bool]):
      """
 
-    slug: str | Unset = UNSET
-    name: str | Unset = UNSET
-    rate_capacity: int | Unset = UNSET
-    rate_refill_tokens: int | Unset = UNSET
-    rate_refill_seconds: int | Unset = UNSET
-    quota_requests: int | None | Unset = UNSET
-    quota_bytes: int | None | Unset = UNSET
-    quota_period_days: int | Unset = UNSET
-    quota_enforced: bool | Unset = UNSET
-    is_default: bool | Unset = UNSET
-    is_active: bool | Unset = UNSET
+    slug: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
+    rate_capacity: Union[Unset, int] = UNSET
+    rate_refill_tokens: Union[Unset, int] = UNSET
+    rate_refill_seconds: Union[Unset, int] = UNSET
+    quota_requests: Union[None, Unset, int] = UNSET
+    quota_bytes: Union[None, Unset, int] = UNSET
+    quota_period_days: Union[Unset, int] = UNSET
+    quota_enforced: Union[Unset, bool] = UNSET
+    is_default: Union[Unset, bool] = UNSET
+    is_active: Union[Unset, bool] = UNSET
 
 
 
@@ -64,13 +63,13 @@ class PutUsageRateLimitTiersIdBody:
 
         rate_refill_seconds = self.rate_refill_seconds
 
-        quota_requests: int | None | Unset
+        quota_requests: Union[None, Unset, int]
         if isinstance(self.quota_requests, Unset):
             quota_requests = UNSET
         else:
             quota_requests = self.quota_requests
 
-        quota_bytes: int | None | Unset
+        quota_bytes: Union[None, Unset, int]
         if isinstance(self.quota_bytes, Unset):
             quota_bytes = UNSET
         else:
@@ -129,22 +128,22 @@ class PutUsageRateLimitTiersIdBody:
 
         rate_refill_seconds = d.pop("rateRefillSeconds", UNSET)
 
-        def _parse_quota_requests(data: object) -> int | None | Unset:
+        def _parse_quota_requests(data: object) -> Union[None, Unset, int]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(int | None | Unset, data)
+            return cast(Union[None, Unset, int], data)
 
         quota_requests = _parse_quota_requests(d.pop("quotaRequests", UNSET))
 
 
-        def _parse_quota_bytes(data: object) -> int | None | Unset:
+        def _parse_quota_bytes(data: object) -> Union[None, Unset, int]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(int | None | Unset, data)
+            return cast(Union[None, Unset, int], data)
 
         quota_bytes = _parse_quota_bytes(d.pop("quotaBytes", UNSET))
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.get_ecosystem_ecosystem_capabilities_response_200_item_config_type_0_type_1 import GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1
@@ -27,15 +26,15 @@ class GetEcosystemEcosystemCapabilitiesResponse200Item:
         Attributes:
             ecosystem_id (str):
             capability (str):
-            config (bool | float | GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1 | list[Any] | None |
-                str):
+            config (Union['GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1', None, bool, float, list[Any],
+                str]):
             created_at (str):
             updated_at (str):
      """
 
     ecosystem_id: str
     capability: str
-    config: bool | float | GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1 | list[Any] | None | str
+    config: Union['GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1', None, bool, float, list[Any], str]
     created_at: str
     updated_at: str
 
@@ -49,7 +48,7 @@ class GetEcosystemEcosystemCapabilitiesResponse200Item:
 
         capability = self.capability
 
-        config: bool | dict[str, Any] | float | list[Any] | None | str
+        config: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.config, GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1):
             config = self.config.to_dict()
         elif isinstance(self.config, list):
@@ -86,7 +85,7 @@ class GetEcosystemEcosystemCapabilitiesResponse200Item:
 
         capability = d.pop("capability")
 
-        def _parse_config(data: object) -> bool | float | GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1 | list[Any] | None | str:
+        def _parse_config(data: object) -> Union['GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1', None, bool, float, list[Any], str]:
             if data is None:
                 return data
             try:
@@ -97,7 +96,7 @@ class GetEcosystemEcosystemCapabilitiesResponse200Item:
 
 
                 return config_type_0_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -105,9 +104,9 @@ class GetEcosystemEcosystemCapabilitiesResponse200Item:
                 config_type_0_type_2 = cast(list[Any], data)
 
                 return config_type_0_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1 | list[Any] | None | str, data)
+            return cast(Union['GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1', None, bool, float, list[Any], str], data)
 
         config = _parse_config(d.pop("config"))
 

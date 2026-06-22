@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -29,8 +27,8 @@ class GetUsageRateLimitTiersIdResponse200:
             rate_capacity (int):
             rate_refill_tokens (int):
             rate_refill_seconds (int):
-            quota_requests (int | None):
-            quota_bytes (int | None):
+            quota_requests (Union[None, int]):
+            quota_bytes (Union[None, int]):
             quota_period_days (int):
             quota_enforced (bool):
             is_default (bool):
@@ -45,8 +43,8 @@ class GetUsageRateLimitTiersIdResponse200:
     rate_capacity: int
     rate_refill_tokens: int
     rate_refill_seconds: int
-    quota_requests: int | None
-    quota_bytes: int | None
+    quota_requests: Union[None, int]
+    quota_bytes: Union[None, int]
     quota_period_days: int
     quota_enforced: bool
     is_default: bool
@@ -71,10 +69,10 @@ class GetUsageRateLimitTiersIdResponse200:
 
         rate_refill_seconds = self.rate_refill_seconds
 
-        quota_requests: int | None
+        quota_requests: Union[None, int]
         quota_requests = self.quota_requests
 
-        quota_bytes: int | None
+        quota_bytes: Union[None, int]
         quota_bytes = self.quota_bytes
 
         quota_period_days = self.quota_period_days
@@ -128,18 +126,18 @@ class GetUsageRateLimitTiersIdResponse200:
 
         rate_refill_seconds = d.pop("rateRefillSeconds")
 
-        def _parse_quota_requests(data: object) -> int | None:
+        def _parse_quota_requests(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         quota_requests = _parse_quota_requests(d.pop("quotaRequests"))
 
 
-        def _parse_quota_bytes(data: object) -> int | None:
+        def _parse_quota_bytes(data: object) -> Union[None, int]:
             if data is None:
                 return data
-            return cast(int | None, data)
+            return cast(Union[None, int], data)
 
         quota_bytes = _parse_quota_bytes(d.pop("quotaBytes"))
 

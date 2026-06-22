@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/public/themes/{key}".format(key=quote(str(key), safe=""),),
+        "url": "/public/themes/{key}".format(key=key,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | Theme | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, Theme]]:
     if response.status_code == 200:
         response_200 = Theme.from_dict(response.json())
 
@@ -55,7 +54,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | Theme]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, Theme]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -67,9 +66,9 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     key: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[Error | Theme]:
+) -> Response[Union[Error, Theme]]:
     """ Get one live theme by key
 
     Args:
@@ -80,7 +79,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | Theme]
+        Response[Union[Error, Theme]]
      """
 
 
@@ -98,9 +97,9 @@ def sync_detailed(
 def sync(
     key: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Error | Theme | None:
+) -> Optional[Union[Error, Theme]]:
     """ Get one live theme by key
 
     Args:
@@ -111,7 +110,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | Theme
+        Union[Error, Theme]
      """
 
 
@@ -124,9 +123,9 @@ client=client,
 async def asyncio_detailed(
     key: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[Error | Theme]:
+) -> Response[Union[Error, Theme]]:
     """ Get one live theme by key
 
     Args:
@@ -137,7 +136,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | Theme]
+        Response[Union[Error, Theme]]
      """
 
 
@@ -155,9 +154,9 @@ async def asyncio_detailed(
 async def asyncio(
     key: str,
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Error | Theme | None:
+) -> Optional[Union[Error, Theme]]:
     """ Get one live theme by key
 
     Args:
@@ -168,7 +167,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | Theme
+        Union[Error, Theme]
      """
 
 

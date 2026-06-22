@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -29,8 +29,8 @@ class PostOauthClientsResponse201Client:
             name (str):
             allowed_return_origins (list[str]):
             is_internal (bool):
-            default_ecosystem_id (None | str | Unset):
-            app_token_prefix (None | str | Unset):
+            default_ecosystem_id (Union[None, Unset, str]):
+            app_token_prefix (Union[None, Unset, str]):
      """
 
     id: str
@@ -38,8 +38,8 @@ class PostOauthClientsResponse201Client:
     name: str
     allowed_return_origins: list[str]
     is_internal: bool
-    default_ecosystem_id: None | str | Unset = UNSET
-    app_token_prefix: None | str | Unset = UNSET
+    default_ecosystem_id: Union[None, Unset, str] = UNSET
+    app_token_prefix: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -59,13 +59,13 @@ class PostOauthClientsResponse201Client:
 
         is_internal = self.is_internal
 
-        default_ecosystem_id: None | str | Unset
+        default_ecosystem_id: Union[None, Unset, str]
         if isinstance(self.default_ecosystem_id, Unset):
             default_ecosystem_id = UNSET
         else:
             default_ecosystem_id = self.default_ecosystem_id
 
-        app_token_prefix: None | str | Unset
+        app_token_prefix: Union[None, Unset, str]
         if isinstance(self.app_token_prefix, Unset):
             app_token_prefix = UNSET
         else:
@@ -104,22 +104,22 @@ class PostOauthClientsResponse201Client:
 
         is_internal = d.pop("isInternal")
 
-        def _parse_default_ecosystem_id(data: object) -> None | str | Unset:
+        def _parse_default_ecosystem_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         default_ecosystem_id = _parse_default_ecosystem_id(d.pop("defaultEcosystemId", UNSET))
 
 
-        def _parse_app_token_prefix(data: object) -> None | str | Unset:
+        def _parse_app_token_prefix(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         app_token_prefix = _parse_app_token_prefix(d.pop("appTokenPrefix", UNSET))
 

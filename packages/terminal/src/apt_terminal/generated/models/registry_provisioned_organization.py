@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -11,8 +9,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.registry_ecosystem import RegistryEcosystem
   from ..models.registry_namespace import RegistryNamespace
+  from ..models.registry_ecosystem import RegistryEcosystem
   from ..models.registry_organization import RegistryOrganization
 
 
@@ -33,10 +31,10 @@ class RegistryProvisionedOrganization:
             ecosystem (RegistryEcosystem):
      """
 
-    organization: RegistryOrganization
-    namespace: RegistryNamespace
+    organization: 'RegistryOrganization'
+    namespace: 'RegistryNamespace'
     team_id: str
-    ecosystem: RegistryEcosystem
+    ecosystem: 'RegistryEcosystem'
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -44,8 +42,8 @@ class RegistryProvisionedOrganization:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.registry_ecosystem import RegistryEcosystem
         from ..models.registry_namespace import RegistryNamespace
+        from ..models.registry_ecosystem import RegistryEcosystem
         from ..models.registry_organization import RegistryOrganization
         organization = self.organization.to_dict()
 
@@ -71,8 +69,8 @@ class RegistryProvisionedOrganization:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.registry_ecosystem import RegistryEcosystem
         from ..models.registry_namespace import RegistryNamespace
+        from ..models.registry_ecosystem import RegistryEcosystem
         from ..models.registry_organization import RegistryOrganization
         d = dict(src_dict)
         organization = RegistryOrganization.from_dict(d.pop("organization"))

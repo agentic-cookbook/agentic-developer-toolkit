@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.get_system_server_bag_key_response_200_value_type_1 import GetSystemServerBagKeyResponse200ValueType1
@@ -26,14 +25,14 @@ class GetSystemServerBagKeyResponse200:
     """ 
         Attributes:
             key (str):
-            value (bool | float | GetSystemServerBagKeyResponse200ValueType1 | list[Any] | None | str):
+            value (Union['GetSystemServerBagKeyResponse200ValueType1', None, bool, float, list[Any], str]):
             description (str):
             created_at (str):
             updated_at (str):
      """
 
     key: str
-    value: bool | float | GetSystemServerBagKeyResponse200ValueType1 | list[Any] | None | str
+    value: Union['GetSystemServerBagKeyResponse200ValueType1', None, bool, float, list[Any], str]
     description: str
     created_at: str
     updated_at: str
@@ -46,7 +45,7 @@ class GetSystemServerBagKeyResponse200:
         from ..models.get_system_server_bag_key_response_200_value_type_1 import GetSystemServerBagKeyResponse200ValueType1
         key = self.key
 
-        value: bool | dict[str, Any] | float | list[Any] | None | str
+        value: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.value, GetSystemServerBagKeyResponse200ValueType1):
             value = self.value.to_dict()
         elif isinstance(self.value, list):
@@ -83,7 +82,7 @@ class GetSystemServerBagKeyResponse200:
         d = dict(src_dict)
         key = d.pop("key")
 
-        def _parse_value(data: object) -> bool | float | GetSystemServerBagKeyResponse200ValueType1 | list[Any] | None | str:
+        def _parse_value(data: object) -> Union['GetSystemServerBagKeyResponse200ValueType1', None, bool, float, list[Any], str]:
             if data is None:
                 return data
             try:
@@ -94,7 +93,7 @@ class GetSystemServerBagKeyResponse200:
 
 
                 return value_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -102,9 +101,9 @@ class GetSystemServerBagKeyResponse200:
                 value_type_2 = cast(list[Any], data)
 
                 return value_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | GetSystemServerBagKeyResponse200ValueType1 | list[Any] | None | str, data)
+            return cast(Union['GetSystemServerBagKeyResponse200ValueType1', None, bool, float, list[Any], str], data)
 
         value = _parse_value(d.pop("value"))
 

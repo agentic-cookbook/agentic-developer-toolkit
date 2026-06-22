@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,14 +22,14 @@ T = TypeVar("T", bound="PutCommunityUserBadgesIdBody")
 class PutCommunityUserBadgesIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            badge_type (str | Unset):
-            awarded_at (str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            badge_type (Union[Unset, str]):
+            awarded_at (Union[Unset, str]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    badge_type: str | Unset = UNSET
-    awarded_at: str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    badge_type: Union[Unset, str] = UNSET
+    awarded_at: Union[Unset, str] = UNSET
 
 
 

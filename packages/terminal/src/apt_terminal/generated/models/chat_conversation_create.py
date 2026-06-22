@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,14 +22,14 @@ T = TypeVar("T", bound="ChatConversationCreate")
 class ChatConversationCreate:
     """ 
         Attributes:
-            title (str | Unset):
-            model (str | Unset):
-            persona_slug (str | Unset):
+            title (Union[Unset, str]):
+            model (Union[Unset, str]):
+            persona_slug (Union[Unset, str]):
      """
 
-    title: str | Unset = UNSET
-    model: str | Unset = UNSET
-    persona_slug: str | Unset = UNSET
+    title: Union[Unset, str] = UNSET
+    model: Union[Unset, str] = UNSET
+    persona_slug: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

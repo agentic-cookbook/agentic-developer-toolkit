@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.auth_method_setting import AuthMethodSetting
 from ...models.error import Error
 from ...models.patch_auth_methods_method_body import PatchAuthMethodsMethodBody
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     method: str,
     *,
-    body: PatchAuthMethodsMethodBody | Unset = UNSET,
+    body: PatchAuthMethodsMethodBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/auth/methods/{method}".format(method=quote(str(method), safe=""),),
+        "url": "/auth/methods/{method}".format(method=method,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AuthMethodSetting | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[AuthMethodSetting, Error]]:
     if response.status_code == 200:
         response_200 = AuthMethodSetting.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[AuthMethodSetting | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[AuthMethodSetting, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     method: str,
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMethodsMethodBody | Unset = UNSET,
+    body: PatchAuthMethodsMethodBody,
 
-) -> Response[AuthMethodSetting | Error]:
+) -> Response[Union[AuthMethodSetting, Error]]:
     """ Enable or disable an auth method setting, upserting it (admin)
 
     Args:
         method (str):
-        body (PatchAuthMethodsMethodBody | Unset):
+        body (PatchAuthMethodsMethodBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AuthMethodSetting | Error]
+        Response[Union[AuthMethodSetting, Error]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     method: str,
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMethodsMethodBody | Unset = UNSET,
+    body: PatchAuthMethodsMethodBody,
 
-) -> AuthMethodSetting | Error | None:
+) -> Optional[Union[AuthMethodSetting, Error]]:
     """ Enable or disable an auth method setting, upserting it (admin)
 
     Args:
         method (str):
-        body (PatchAuthMethodsMethodBody | Unset):
+        body (PatchAuthMethodsMethodBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AuthMethodSetting | Error
+        Union[AuthMethodSetting, Error]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     method: str,
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMethodsMethodBody | Unset = UNSET,
+    body: PatchAuthMethodsMethodBody,
 
-) -> Response[AuthMethodSetting | Error]:
+) -> Response[Union[AuthMethodSetting, Error]]:
     """ Enable or disable an auth method setting, upserting it (admin)
 
     Args:
         method (str):
-        body (PatchAuthMethodsMethodBody | Unset):
+        body (PatchAuthMethodsMethodBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[AuthMethodSetting | Error]
+        Response[Union[AuthMethodSetting, Error]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     method: str,
     *,
     client: AuthenticatedClient,
-    body: PatchAuthMethodsMethodBody | Unset = UNSET,
+    body: PatchAuthMethodsMethodBody,
 
-) -> AuthMethodSetting | Error | None:
+) -> Optional[Union[AuthMethodSetting, Error]]:
     """ Enable or disable an auth method setting, upserting it (admin)
 
     Args:
         method (str):
-        body (PatchAuthMethodsMethodBody | Unset):
+        body (PatchAuthMethodsMethodBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        AuthMethodSetting | Error
+        Union[AuthMethodSetting, Error]
      """
 
 

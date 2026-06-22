@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.markdown_document_summary_frontmatter_type_0 import MarkdownDocumentSummaryFrontmatterType0
@@ -33,8 +33,8 @@ class MarkdownDocumentSummary:
             current_version (int):
             created_at (str):
             updated_at (str):
-            frontmatter (MarkdownDocumentSummaryFrontmatterType0 | None | Unset):
-            latest_version_id (None | str | Unset):
+            frontmatter (Union['MarkdownDocumentSummaryFrontmatterType0', None, Unset]):
+            latest_version_id (Union[None, Unset, str]):
      """
 
     id: str
@@ -44,8 +44,8 @@ class MarkdownDocumentSummary:
     current_version: int
     created_at: str
     updated_at: str
-    frontmatter: MarkdownDocumentSummaryFrontmatterType0 | None | Unset = UNSET
-    latest_version_id: None | str | Unset = UNSET
+    frontmatter: Union['MarkdownDocumentSummaryFrontmatterType0', None, Unset] = UNSET
+    latest_version_id: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -68,7 +68,7 @@ class MarkdownDocumentSummary:
 
         updated_at = self.updated_at
 
-        frontmatter: dict[str, Any] | None | Unset
+        frontmatter: Union[None, Unset, dict[str, Any]]
         if isinstance(self.frontmatter, Unset):
             frontmatter = UNSET
         elif isinstance(self.frontmatter, MarkdownDocumentSummaryFrontmatterType0):
@@ -76,7 +76,7 @@ class MarkdownDocumentSummary:
         else:
             frontmatter = self.frontmatter
 
-        latest_version_id: None | str | Unset
+        latest_version_id: Union[None, Unset, str]
         if isinstance(self.latest_version_id, Unset):
             latest_version_id = UNSET
         else:
@@ -121,7 +121,7 @@ class MarkdownDocumentSummary:
 
         updated_at = d.pop("updatedAt")
 
-        def _parse_frontmatter(data: object) -> MarkdownDocumentSummaryFrontmatterType0 | None | Unset:
+        def _parse_frontmatter(data: object) -> Union['MarkdownDocumentSummaryFrontmatterType0', None, Unset]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -134,19 +134,19 @@ class MarkdownDocumentSummary:
 
 
                 return frontmatter_type_0
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(MarkdownDocumentSummaryFrontmatterType0 | None | Unset, data)
+            return cast(Union['MarkdownDocumentSummaryFrontmatterType0', None, Unset], data)
 
         frontmatter = _parse_frontmatter(d.pop("frontmatter", UNSET))
 
 
-        def _parse_latest_version_id(data: object) -> None | str | Unset:
+        def _parse_latest_version_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         latest_version_id = _parse_latest_version_id(d.pop("latestVersionId", UNSET))
 

@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -32,8 +30,8 @@ class PutChatChatParticipantsIdResponse200:
             state (str):
             joined_at (str):
             state_changed_at (str):
-            contact_id (None | str):
-            last_read_message_id (None | str):
+            contact_id (Union[None, str]):
+            last_read_message_id (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
@@ -47,8 +45,8 @@ class PutChatChatParticipantsIdResponse200:
     state: str
     joined_at: str
     state_changed_at: str
-    contact_id: None | str
-    last_read_message_id: None | str
+    contact_id: Union[None, str]
+    last_read_message_id: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -75,10 +73,10 @@ class PutChatChatParticipantsIdResponse200:
 
         state_changed_at = self.state_changed_at
 
-        contact_id: None | str
+        contact_id: Union[None, str]
         contact_id = self.contact_id
 
-        last_read_message_id: None | str
+        last_read_message_id: Union[None, str]
         last_read_message_id = self.last_read_message_id
 
         created_at = self.created_at
@@ -129,18 +127,18 @@ class PutChatChatParticipantsIdResponse200:
 
         state_changed_at = d.pop("stateChangedAt")
 
-        def _parse_contact_id(data: object) -> None | str:
+        def _parse_contact_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         contact_id = _parse_contact_id(d.pop("contactId"))
 
 
-        def _parse_last_read_message_id(data: object) -> None | str:
+        def _parse_last_read_message_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         last_read_message_id = _parse_last_read_message_id(d.pop("lastReadMessageId"))
 

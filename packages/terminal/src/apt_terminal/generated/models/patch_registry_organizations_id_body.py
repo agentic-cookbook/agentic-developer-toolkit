@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -24,12 +23,12 @@ class PatchRegistryOrganizationsIdBody:
     """ At least one of name or slug is required.
 
         Attributes:
-            name (str | Unset):
-            slug (str | Unset):
+            name (Union[Unset, str]):
+            slug (Union[Unset, str]):
      """
 
-    name: str | Unset = UNSET
-    slug: str | Unset = UNSET
+    name: Union[Unset, str] = UNSET
+    slug: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

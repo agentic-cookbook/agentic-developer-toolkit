@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.theme_data import ThemeData
@@ -27,7 +26,7 @@ class Theme:
         Attributes:
             key (str):
             label (str):
-            based_on (None | str):
+            based_on (Union[None, str]):
             data (ThemeData):
             created_at (str):
             updated_at (str):
@@ -35,8 +34,8 @@ class Theme:
 
     key: str
     label: str
-    based_on: None | str
-    data: ThemeData
+    based_on: Union[None, str]
+    data: 'ThemeData'
     created_at: str
     updated_at: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -51,7 +50,7 @@ class Theme:
 
         label = self.label
 
-        based_on: None | str
+        based_on: Union[None, str]
         based_on = self.based_on
 
         data = self.data.to_dict()
@@ -84,10 +83,10 @@ class Theme:
 
         label = d.pop("label")
 
-        def _parse_based_on(data: object) -> None | str:
+        def _parse_based_on(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         based_on = _parse_based_on(d.pop("basedOn"))
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,18 +24,18 @@ class PostAuthLinkProviderBody:
         Attributes:
             client_slug (str):
             provider_slug (str):
-            code (str | Unset):
-            access_token (str | Unset):
-            id_token (str | Unset):
-            redirect_uri (str | Unset):
+            code (Union[Unset, str]):
+            access_token (Union[Unset, str]):
+            id_token (Union[Unset, str]):
+            redirect_uri (Union[Unset, str]):
      """
 
     client_slug: str
     provider_slug: str
-    code: str | Unset = UNSET
-    access_token: str | Unset = UNSET
-    id_token: str | Unset = UNSET
-    redirect_uri: str | Unset = UNSET
+    code: Union[Unset, str] = UNSET
+    access_token: Union[Unset, str] = UNSET
+    id_token: Union[Unset, str] = UNSET
+    redirect_uri: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

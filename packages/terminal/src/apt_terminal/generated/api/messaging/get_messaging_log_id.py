@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/messaging/log/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/messaging/log/{id}".format(id=id,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | MessagingLogEntry | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, MessagingLogEntry]]:
     if response.status_code == 200:
         response_200 = MessagingLogEntry.from_dict(response.json())
 
@@ -69,7 +68,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | MessagingLogEntry]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, MessagingLogEntry]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,7 +82,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | MessagingLogEntry]:
+) -> Response[Union[Error, MessagingLogEntry]]:
     """ Get a single message-log entry by id (admin)
 
     Args:
@@ -94,7 +93,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | MessagingLogEntry]
+        Response[Union[Error, MessagingLogEntry]]
      """
 
 
@@ -114,7 +113,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | MessagingLogEntry | None:
+) -> Optional[Union[Error, MessagingLogEntry]]:
     """ Get a single message-log entry by id (admin)
 
     Args:
@@ -125,7 +124,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | MessagingLogEntry
+        Union[Error, MessagingLogEntry]
      """
 
 
@@ -140,7 +139,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | MessagingLogEntry]:
+) -> Response[Union[Error, MessagingLogEntry]]:
     """ Get a single message-log entry by id (admin)
 
     Args:
@@ -151,7 +150,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | MessagingLogEntry]
+        Response[Union[Error, MessagingLogEntry]]
      """
 
 
@@ -171,7 +170,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | MessagingLogEntry | None:
+) -> Optional[Union[Error, MessagingLogEntry]]:
     """ Get a single message-log entry by id (admin)
 
     Args:
@@ -182,7 +181,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | MessagingLogEntry
+        Union[Error, MessagingLogEntry]
      """
 
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,20 +23,20 @@ T = TypeVar("T", bound="PutCommunityDiscussionNotificationsIdBody")
 class PutCommunityDiscussionNotificationsIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            type_ (str | Unset):
-            thread_id (str | Unset):
-            reply_id (None | str | Unset):
-            actor_id (str | Unset):
-            is_read (bool | Unset):
+            ecosystem_id (Union[Unset, str]):
+            type_ (Union[Unset, str]):
+            thread_id (Union[Unset, str]):
+            reply_id (Union[None, Unset, str]):
+            actor_id (Union[Unset, str]):
+            is_read (Union[Unset, bool]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    type_: str | Unset = UNSET
-    thread_id: str | Unset = UNSET
-    reply_id: None | str | Unset = UNSET
-    actor_id: str | Unset = UNSET
-    is_read: bool | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    type_: Union[Unset, str] = UNSET
+    thread_id: Union[Unset, str] = UNSET
+    reply_id: Union[None, Unset, str] = UNSET
+    actor_id: Union[Unset, str] = UNSET
+    is_read: Union[Unset, bool] = UNSET
 
 
 
@@ -50,7 +49,7 @@ class PutCommunityDiscussionNotificationsIdBody:
 
         thread_id = self.thread_id
 
-        reply_id: None | str | Unset
+        reply_id: Union[None, Unset, str]
         if isinstance(self.reply_id, Unset):
             reply_id = UNSET
         else:
@@ -91,12 +90,12 @@ class PutCommunityDiscussionNotificationsIdBody:
 
         thread_id = d.pop("threadId", UNSET)
 
-        def _parse_reply_id(data: object) -> None | str | Unset:
+        def _parse_reply_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         reply_id = _parse_reply_id(d.pop("replyId", UNSET))
 

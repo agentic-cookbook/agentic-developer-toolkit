@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -32,7 +31,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> list[Theme] | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[list['Theme']]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -51,7 +50,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[list[Theme]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[list['Theme']]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -62,9 +61,9 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[list[Theme]]:
+) -> Response[list['Theme']]:
     """ List every live theme (suite-wide; empty in production)
 
     Raises:
@@ -72,7 +71,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[list[Theme]]
+        Response[list['Theme']]
      """
 
 
@@ -88,9 +87,9 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> list[Theme] | None:
+) -> Optional[list['Theme']]:
     """ List every live theme (suite-wide; empty in production)
 
     Raises:
@@ -98,7 +97,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        list[Theme]
+        list['Theme']
      """
 
 
@@ -109,9 +108,9 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> Response[list[Theme]]:
+) -> Response[list['Theme']]:
     """ List every live theme (suite-wide; empty in production)
 
     Raises:
@@ -119,7 +118,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[list[Theme]]
+        Response[list['Theme']]
      """
 
 
@@ -135,9 +134,9 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: AuthenticatedClient | Client,
+    client: Union[AuthenticatedClient, Client],
 
-) -> list[Theme] | None:
+) -> Optional[list['Theme']]:
     """ List every live theme (suite-wide; empty in production)
 
     Raises:
@@ -145,7 +144,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        list[Theme]
+        list['Theme']
      """
 
 

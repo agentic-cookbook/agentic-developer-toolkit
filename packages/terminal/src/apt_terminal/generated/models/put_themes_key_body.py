@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.put_themes_key_body_data import PutThemesKeyBodyData
@@ -26,14 +26,14 @@ T = TypeVar("T", bound="PutThemesKeyBody")
 class PutThemesKeyBody:
     """ 
         Attributes:
-            label (str | Unset):
-            based_on (None | str | Unset):
-            data (PutThemesKeyBodyData | Unset):
+            label (Union[Unset, str]):
+            based_on (Union[None, Unset, str]):
+            data (Union[Unset, PutThemesKeyBodyData]):
      """
 
-    label: str | Unset = UNSET
-    based_on: None | str | Unset = UNSET
-    data: PutThemesKeyBodyData | Unset = UNSET
+    label: Union[Unset, str] = UNSET
+    based_on: Union[None, Unset, str] = UNSET
+    data: Union[Unset, 'PutThemesKeyBodyData'] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -44,13 +44,13 @@ class PutThemesKeyBody:
         from ..models.put_themes_key_body_data import PutThemesKeyBodyData
         label = self.label
 
-        based_on: None | str | Unset
+        based_on: Union[None, Unset, str]
         if isinstance(self.based_on, Unset):
             based_on = UNSET
         else:
             based_on = self.based_on
 
-        data: dict[str, Any] | Unset = UNSET
+        data: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
@@ -76,18 +76,18 @@ class PutThemesKeyBody:
         d = dict(src_dict)
         label = d.pop("label", UNSET)
 
-        def _parse_based_on(data: object) -> None | str | Unset:
+        def _parse_based_on(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         based_on = _parse_based_on(d.pop("basedOn", UNSET))
 
 
         _data = d.pop("data", UNSET)
-        data: PutThemesKeyBodyData | Unset
+        data: Union[Unset, PutThemesKeyBodyData]
         if isinstance(_data,  Unset):
             data = UNSET
         else:

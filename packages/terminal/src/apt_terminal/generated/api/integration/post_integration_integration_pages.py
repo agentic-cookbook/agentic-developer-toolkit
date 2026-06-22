@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.post_integration_integration_pages_body import PostIntegrationIntegrationPagesBody
 from ...models.post_integration_integration_pages_response_201 import PostIntegrationIntegrationPagesResponse201
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostIntegrationIntegrationPagesBody | Unset = UNSET,
+    body: PostIntegrationIntegrationPagesBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/integration/integration-pages",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PostIntegrationIntegrationPagesResponse201 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostIntegrationIntegrationPagesResponse201]]:
     if response.status_code == 201:
         response_201 = PostIntegrationIntegrationPagesResponse201.from_dict(response.json())
 
@@ -72,7 +69,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PostIntegrationIntegrationPagesResponse201]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostIntegrationIntegrationPagesResponse201]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,20 +81,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostIntegrationIntegrationPagesBody | Unset = UNSET,
+    body: PostIntegrationIntegrationPagesBody,
 
-) -> Response[Error | PostIntegrationIntegrationPagesResponse201]:
+) -> Response[Union[Error, PostIntegrationIntegrationPagesResponse201]]:
     """ Create integration_pages
 
     Args:
-        body (PostIntegrationIntegrationPagesBody | Unset):
+        body (PostIntegrationIntegrationPagesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostIntegrationIntegrationPagesResponse201]
+        Response[Union[Error, PostIntegrationIntegrationPagesResponse201]]
      """
 
 
@@ -115,20 +112,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostIntegrationIntegrationPagesBody | Unset = UNSET,
+    body: PostIntegrationIntegrationPagesBody,
 
-) -> Error | PostIntegrationIntegrationPagesResponse201 | None:
+) -> Optional[Union[Error, PostIntegrationIntegrationPagesResponse201]]:
     """ Create integration_pages
 
     Args:
-        body (PostIntegrationIntegrationPagesBody | Unset):
+        body (PostIntegrationIntegrationPagesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostIntegrationIntegrationPagesResponse201
+        Union[Error, PostIntegrationIntegrationPagesResponse201]
      """
 
 
@@ -141,20 +138,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostIntegrationIntegrationPagesBody | Unset = UNSET,
+    body: PostIntegrationIntegrationPagesBody,
 
-) -> Response[Error | PostIntegrationIntegrationPagesResponse201]:
+) -> Response[Union[Error, PostIntegrationIntegrationPagesResponse201]]:
     """ Create integration_pages
 
     Args:
-        body (PostIntegrationIntegrationPagesBody | Unset):
+        body (PostIntegrationIntegrationPagesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostIntegrationIntegrationPagesResponse201]
+        Response[Union[Error, PostIntegrationIntegrationPagesResponse201]]
      """
 
 
@@ -172,20 +169,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostIntegrationIntegrationPagesBody | Unset = UNSET,
+    body: PostIntegrationIntegrationPagesBody,
 
-) -> Error | PostIntegrationIntegrationPagesResponse201 | None:
+) -> Optional[Union[Error, PostIntegrationIntegrationPagesResponse201]]:
     """ Create integration_pages
 
     Args:
-        body (PostIntegrationIntegrationPagesBody | Unset):
+        body (PostIntegrationIntegrationPagesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostIntegrationIntegrationPagesResponse201
+        Union[Error, PostIntegrationIntegrationPagesResponse201]
      """
 
 

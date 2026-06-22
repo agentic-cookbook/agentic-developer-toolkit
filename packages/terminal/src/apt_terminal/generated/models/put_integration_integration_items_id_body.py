@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,53 +23,53 @@ T = TypeVar("T", bound="PutIntegrationIntegrationItemsIdBody")
 class PutIntegrationIntegrationItemsIdBody:
     """ 
         Attributes:
-            deleted_at (None | str | Unset):
-            owner_id (str | Unset):
-            connection_id (str | Unset):
-            external_id (str | Unset):
-            item_type (str | Unset):
-            title (str | Unset):
-            body (None | str | Unset):
-            state (str | Unset):
-            repo_full_name (str | Unset):
-            repo_url (None | str | Unset):
-            item_url (None | str | Unset):
-            number (int | None | Unset):
-            labels (None | str | Unset):
-            assignees (None | str | Unset):
-            is_read (bool | Unset):
-            notification_reason (None | str | Unset):
-            is_deleted (bool | Unset):
-            external_created_at (None | str | Unset):
-            external_updated_at (None | str | Unset):
+            deleted_at (Union[None, Unset, str]):
+            owner_id (Union[Unset, str]):
+            connection_id (Union[Unset, str]):
+            external_id (Union[Unset, str]):
+            item_type (Union[Unset, str]):
+            title (Union[Unset, str]):
+            body (Union[None, Unset, str]):
+            state (Union[Unset, str]):
+            repo_full_name (Union[Unset, str]):
+            repo_url (Union[None, Unset, str]):
+            item_url (Union[None, Unset, str]):
+            number (Union[None, Unset, int]):
+            labels (Union[None, Unset, str]):
+            assignees (Union[None, Unset, str]):
+            is_read (Union[Unset, bool]):
+            notification_reason (Union[None, Unset, str]):
+            is_deleted (Union[Unset, bool]):
+            external_created_at (Union[None, Unset, str]):
+            external_updated_at (Union[None, Unset, str]):
      """
 
-    deleted_at: None | str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    connection_id: str | Unset = UNSET
-    external_id: str | Unset = UNSET
-    item_type: str | Unset = UNSET
-    title: str | Unset = UNSET
-    body: None | str | Unset = UNSET
-    state: str | Unset = UNSET
-    repo_full_name: str | Unset = UNSET
-    repo_url: None | str | Unset = UNSET
-    item_url: None | str | Unset = UNSET
-    number: int | None | Unset = UNSET
-    labels: None | str | Unset = UNSET
-    assignees: None | str | Unset = UNSET
-    is_read: bool | Unset = UNSET
-    notification_reason: None | str | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
-    external_created_at: None | str | Unset = UNSET
-    external_updated_at: None | str | Unset = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    connection_id: Union[Unset, str] = UNSET
+    external_id: Union[Unset, str] = UNSET
+    item_type: Union[Unset, str] = UNSET
+    title: Union[Unset, str] = UNSET
+    body: Union[None, Unset, str] = UNSET
+    state: Union[Unset, str] = UNSET
+    repo_full_name: Union[Unset, str] = UNSET
+    repo_url: Union[None, Unset, str] = UNSET
+    item_url: Union[None, Unset, str] = UNSET
+    number: Union[None, Unset, int] = UNSET
+    labels: Union[None, Unset, str] = UNSET
+    assignees: Union[None, Unset, str] = UNSET
+    is_read: Union[Unset, bool] = UNSET
+    notification_reason: Union[None, Unset, str] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
+    external_created_at: Union[None, Unset, str] = UNSET
+    external_updated_at: Union[None, Unset, str] = UNSET
 
 
 
 
 
     def to_dict(self) -> dict[str, Any]:
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -86,7 +85,7 @@ class PutIntegrationIntegrationItemsIdBody:
 
         title = self.title
 
-        body: None | str | Unset
+        body: Union[None, Unset, str]
         if isinstance(self.body, Unset):
             body = UNSET
         else:
@@ -96,31 +95,31 @@ class PutIntegrationIntegrationItemsIdBody:
 
         repo_full_name = self.repo_full_name
 
-        repo_url: None | str | Unset
+        repo_url: Union[None, Unset, str]
         if isinstance(self.repo_url, Unset):
             repo_url = UNSET
         else:
             repo_url = self.repo_url
 
-        item_url: None | str | Unset
+        item_url: Union[None, Unset, str]
         if isinstance(self.item_url, Unset):
             item_url = UNSET
         else:
             item_url = self.item_url
 
-        number: int | None | Unset
+        number: Union[None, Unset, int]
         if isinstance(self.number, Unset):
             number = UNSET
         else:
             number = self.number
 
-        labels: None | str | Unset
+        labels: Union[None, Unset, str]
         if isinstance(self.labels, Unset):
             labels = UNSET
         else:
             labels = self.labels
 
-        assignees: None | str | Unset
+        assignees: Union[None, Unset, str]
         if isinstance(self.assignees, Unset):
             assignees = UNSET
         else:
@@ -128,7 +127,7 @@ class PutIntegrationIntegrationItemsIdBody:
 
         is_read = self.is_read
 
-        notification_reason: None | str | Unset
+        notification_reason: Union[None, Unset, str]
         if isinstance(self.notification_reason, Unset):
             notification_reason = UNSET
         else:
@@ -136,13 +135,13 @@ class PutIntegrationIntegrationItemsIdBody:
 
         is_deleted = self.is_deleted
 
-        external_created_at: None | str | Unset
+        external_created_at: Union[None, Unset, str]
         if isinstance(self.external_created_at, Unset):
             external_created_at = UNSET
         else:
             external_created_at = self.external_created_at
 
-        external_updated_at: None | str | Unset
+        external_updated_at: Union[None, Unset, str]
         if isinstance(self.external_updated_at, Unset):
             external_updated_at = UNSET
         else:
@@ -199,12 +198,12 @@ class PutIntegrationIntegrationItemsIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
@@ -219,12 +218,12 @@ class PutIntegrationIntegrationItemsIdBody:
 
         title = d.pop("title", UNSET)
 
-        def _parse_body(data: object) -> None | str | Unset:
+        def _parse_body(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         body = _parse_body(d.pop("body", UNSET))
 
@@ -233,86 +232,86 @@ class PutIntegrationIntegrationItemsIdBody:
 
         repo_full_name = d.pop("repoFullName", UNSET)
 
-        def _parse_repo_url(data: object) -> None | str | Unset:
+        def _parse_repo_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         repo_url = _parse_repo_url(d.pop("repoUrl", UNSET))
 
 
-        def _parse_item_url(data: object) -> None | str | Unset:
+        def _parse_item_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         item_url = _parse_item_url(d.pop("itemUrl", UNSET))
 
 
-        def _parse_number(data: object) -> int | None | Unset:
+        def _parse_number(data: object) -> Union[None, Unset, int]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(int | None | Unset, data)
+            return cast(Union[None, Unset, int], data)
 
         number = _parse_number(d.pop("number", UNSET))
 
 
-        def _parse_labels(data: object) -> None | str | Unset:
+        def _parse_labels(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         labels = _parse_labels(d.pop("labels", UNSET))
 
 
-        def _parse_assignees(data: object) -> None | str | Unset:
+        def _parse_assignees(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         assignees = _parse_assignees(d.pop("assignees", UNSET))
 
 
         is_read = d.pop("isRead", UNSET)
 
-        def _parse_notification_reason(data: object) -> None | str | Unset:
+        def _parse_notification_reason(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         notification_reason = _parse_notification_reason(d.pop("notificationReason", UNSET))
 
 
         is_deleted = d.pop("isDeleted", UNSET)
 
-        def _parse_external_created_at(data: object) -> None | str | Unset:
+        def _parse_external_created_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         external_created_at = _parse_external_created_at(d.pop("externalCreatedAt", UNSET))
 
 
-        def _parse_external_updated_at(data: object) -> None | str | Unset:
+        def _parse_external_updated_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         external_updated_at = _parse_external_updated_at(d.pop("externalUpdatedAt", UNSET))
 

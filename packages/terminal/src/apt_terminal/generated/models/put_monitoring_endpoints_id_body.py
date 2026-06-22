@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,26 +23,26 @@ T = TypeVar("T", bound="PutMonitoringEndpointsIdBody")
 class PutMonitoringEndpointsIdBody:
     """ 
         Attributes:
-            site_id (str | Unset):
-            kind (str | Unset):
-            url (str | Unset):
-            expected_status (int | Unset):
-            expected_body_contains (None | str | Unset):
-            timeout_ms (int | Unset):
-            degraded_threshold_ms (int | Unset):
-            check_interval_seconds (int | Unset):
-            is_active (bool | Unset):
+            site_id (Union[Unset, str]):
+            kind (Union[Unset, str]):
+            url (Union[Unset, str]):
+            expected_status (Union[Unset, int]):
+            expected_body_contains (Union[None, Unset, str]):
+            timeout_ms (Union[Unset, int]):
+            degraded_threshold_ms (Union[Unset, int]):
+            check_interval_seconds (Union[Unset, int]):
+            is_active (Union[Unset, bool]):
      """
 
-    site_id: str | Unset = UNSET
-    kind: str | Unset = UNSET
-    url: str | Unset = UNSET
-    expected_status: int | Unset = UNSET
-    expected_body_contains: None | str | Unset = UNSET
-    timeout_ms: int | Unset = UNSET
-    degraded_threshold_ms: int | Unset = UNSET
-    check_interval_seconds: int | Unset = UNSET
-    is_active: bool | Unset = UNSET
+    site_id: Union[Unset, str] = UNSET
+    kind: Union[Unset, str] = UNSET
+    url: Union[Unset, str] = UNSET
+    expected_status: Union[Unset, int] = UNSET
+    expected_body_contains: Union[None, Unset, str] = UNSET
+    timeout_ms: Union[Unset, int] = UNSET
+    degraded_threshold_ms: Union[Unset, int] = UNSET
+    check_interval_seconds: Union[Unset, int] = UNSET
+    is_active: Union[Unset, bool] = UNSET
 
 
 
@@ -58,7 +57,7 @@ class PutMonitoringEndpointsIdBody:
 
         expected_status = self.expected_status
 
-        expected_body_contains: None | str | Unset
+        expected_body_contains: Union[None, Unset, str]
         if isinstance(self.expected_body_contains, Unset):
             expected_body_contains = UNSET
         else:
@@ -111,12 +110,12 @@ class PutMonitoringEndpointsIdBody:
 
         expected_status = d.pop("expectedStatus", UNSET)
 
-        def _parse_expected_body_contains(data: object) -> None | str | Unset:
+        def _parse_expected_body_contains(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         expected_body_contains = _parse_expected_body_contains(d.pop("expectedBodyContains", UNSET))
 

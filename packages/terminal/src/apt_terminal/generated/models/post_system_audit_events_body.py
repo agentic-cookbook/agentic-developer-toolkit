@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -25,21 +24,21 @@ class PostSystemAuditEventsBody:
     """ 
         Attributes:
             event_type (str):
-            ecosystem_id (None | str | Unset):
-            developer_id (None | str | Unset):
-            actor_user_id (None | str | Unset):
-            payload (str | Unset):
-            ip_address (str | Unset):
-            user_agent (str | Unset):
+            ecosystem_id (Union[None, Unset, str]):
+            developer_id (Union[None, Unset, str]):
+            actor_user_id (Union[None, Unset, str]):
+            payload (Union[Unset, str]):
+            ip_address (Union[Unset, str]):
+            user_agent (Union[Unset, str]):
      """
 
     event_type: str
-    ecosystem_id: None | str | Unset = UNSET
-    developer_id: None | str | Unset = UNSET
-    actor_user_id: None | str | Unset = UNSET
-    payload: str | Unset = UNSET
-    ip_address: str | Unset = UNSET
-    user_agent: str | Unset = UNSET
+    ecosystem_id: Union[None, Unset, str] = UNSET
+    developer_id: Union[None, Unset, str] = UNSET
+    actor_user_id: Union[None, Unset, str] = UNSET
+    payload: Union[Unset, str] = UNSET
+    ip_address: Union[Unset, str] = UNSET
+    user_agent: Union[Unset, str] = UNSET
 
 
 
@@ -48,19 +47,19 @@ class PostSystemAuditEventsBody:
     def to_dict(self) -> dict[str, Any]:
         event_type = self.event_type
 
-        ecosystem_id: None | str | Unset
+        ecosystem_id: Union[None, Unset, str]
         if isinstance(self.ecosystem_id, Unset):
             ecosystem_id = UNSET
         else:
             ecosystem_id = self.ecosystem_id
 
-        developer_id: None | str | Unset
+        developer_id: Union[None, Unset, str]
         if isinstance(self.developer_id, Unset):
             developer_id = UNSET
         else:
             developer_id = self.developer_id
 
-        actor_user_id: None | str | Unset
+        actor_user_id: Union[None, Unset, str]
         if isinstance(self.actor_user_id, Unset):
             actor_user_id = UNSET
         else:
@@ -100,32 +99,32 @@ class PostSystemAuditEventsBody:
         d = dict(src_dict)
         event_type = d.pop("eventType")
 
-        def _parse_ecosystem_id(data: object) -> None | str | Unset:
+        def _parse_ecosystem_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         ecosystem_id = _parse_ecosystem_id(d.pop("ecosystemId", UNSET))
 
 
-        def _parse_developer_id(data: object) -> None | str | Unset:
+        def _parse_developer_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         developer_id = _parse_developer_id(d.pop("developerId", UNSET))
 
 
-        def _parse_actor_user_id(data: object) -> None | str | Unset:
+        def _parse_actor_user_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         actor_user_id = _parse_actor_user_id(d.pop("actorUserId", UNSET))
 

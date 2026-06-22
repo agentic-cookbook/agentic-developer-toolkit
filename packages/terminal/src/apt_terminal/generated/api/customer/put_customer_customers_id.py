@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_customer_customers_id_body import PutCustomerCustomersIdBody
 from ...models.put_customer_customers_id_response_200 import PutCustomerCustomersIdResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     id: str,
     *,
-    body: PutCustomerCustomersIdBody | Unset = UNSET,
+    body: PutCustomerCustomersIdBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/customer/customers/{id}".format(id=quote(str(id), safe=""),),
+        "url": "/customer/customers/{id}".format(id=id,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutCustomerCustomersIdResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutCustomerCustomersIdResponse200]]:
     if response.status_code == 200:
         response_200 = PutCustomerCustomersIdResponse200.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutCustomerCustomersIdResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutCustomerCustomersIdResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCustomerCustomersIdBody | Unset = UNSET,
+    body: PutCustomerCustomersIdBody,
 
-) -> Response[Error | PutCustomerCustomersIdResponse200]:
+) -> Response[Union[Error, PutCustomerCustomersIdResponse200]]:
     """ Update customers
 
     Args:
         id (str):
-        body (PutCustomerCustomersIdBody | Unset):
+        body (PutCustomerCustomersIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutCustomerCustomersIdResponse200]
+        Response[Union[Error, PutCustomerCustomersIdResponse200]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCustomerCustomersIdBody | Unset = UNSET,
+    body: PutCustomerCustomersIdBody,
 
-) -> Error | PutCustomerCustomersIdResponse200 | None:
+) -> Optional[Union[Error, PutCustomerCustomersIdResponse200]]:
     """ Update customers
 
     Args:
         id (str):
-        body (PutCustomerCustomersIdBody | Unset):
+        body (PutCustomerCustomersIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutCustomerCustomersIdResponse200
+        Union[Error, PutCustomerCustomersIdResponse200]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCustomerCustomersIdBody | Unset = UNSET,
+    body: PutCustomerCustomersIdBody,
 
-) -> Response[Error | PutCustomerCustomersIdResponse200]:
+) -> Response[Union[Error, PutCustomerCustomersIdResponse200]]:
     """ Update customers
 
     Args:
         id (str):
-        body (PutCustomerCustomersIdBody | Unset):
+        body (PutCustomerCustomersIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutCustomerCustomersIdResponse200]
+        Response[Union[Error, PutCustomerCustomersIdResponse200]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-    body: PutCustomerCustomersIdBody | Unset = UNSET,
+    body: PutCustomerCustomersIdBody,
 
-) -> Error | PutCustomerCustomersIdResponse200 | None:
+) -> Optional[Union[Error, PutCustomerCustomersIdResponse200]]:
     """ Update customers
 
     Args:
         id (str):
-        body (PutCustomerCustomersIdBody | Unset):
+        body (PutCustomerCustomersIdBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutCustomerCustomersIdResponse200
+        Union[Error, PutCustomerCustomersIdResponse200]
      """
 
 

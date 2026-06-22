@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.error_error import ErrorError
@@ -26,10 +25,10 @@ T = TypeVar("T", bound="Error")
 class Error:
     """ 
         Attributes:
-            error (ErrorError | Unset):
+            error (Union[Unset, ErrorError]):
      """
 
-    error: ErrorError | Unset = UNSET
+    error: Union[Unset, 'ErrorError'] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -38,7 +37,7 @@ class Error:
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.error_error import ErrorError
-        error: dict[str, Any] | Unset = UNSET
+        error: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.error, Unset):
             error = self.error.to_dict()
 
@@ -59,7 +58,7 @@ class Error:
         from ..models.error_error import ErrorError
         d = dict(src_dict)
         _error = d.pop("error", UNSET)
-        error: ErrorError | Unset
+        error: Union[Unset, ErrorError]
         if isinstance(_error,  Unset):
             error = UNSET
         else:

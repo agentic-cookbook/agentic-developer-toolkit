@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,16 +22,16 @@ T = TypeVar("T", bound="PutCommunityDiscussionTagsIdBody")
 class PutCommunityDiscussionTagsIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            name (str | Unset):
-            slug (str | Unset):
-            color (str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            name (Union[Unset, str]):
+            slug (Union[Unset, str]):
+            color (Union[Unset, str]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    name: str | Unset = UNSET
-    slug: str | Unset = UNSET
-    color: str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
+    slug: Union[Unset, str] = UNSET
+    color: Union[Unset, str] = UNSET
 
 
 

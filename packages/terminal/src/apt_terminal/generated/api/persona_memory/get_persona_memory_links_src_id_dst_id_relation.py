@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -28,7 +27,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/persona-memory/links/{src_id}/{dst_id}/{relation}".format(src_id=quote(str(src_id), safe=""),dst_id=quote(str(dst_id), safe=""),relation=quote(str(relation), safe=""),),
+        "url": "/persona-memory/links/{src_id}/{dst_id}/{relation}".format(src_id=src_id,dst_id=dst_id,relation=relation,),
     }
 
 
@@ -36,7 +35,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     if response.status_code == 200:
         response_200 = GetPersonaMemoryLinksSrcIdDstIdRelationResponse200.from_dict(response.json())
 
@@ -64,7 +63,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -80,7 +79,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]:
+) -> Response[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Get links by id
 
     Args:
@@ -93,7 +92,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]
+        Response[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]
      """
 
 
@@ -117,7 +116,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200 | None:
+) -> Optional[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Get links by id
 
     Args:
@@ -130,7 +129,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200
+        Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]
      """
 
 
@@ -149,7 +148,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]:
+) -> Response[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Get links by id
 
     Args:
@@ -162,7 +161,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]
+        Response[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]
      """
 
 
@@ -186,7 +185,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200 | None:
+) -> Optional[Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]]:
     """ Get links by id
 
     Args:
@@ -199,7 +198,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetPersonaMemoryLinksSrcIdDstIdRelationResponse200
+        Union[Error, GetPersonaMemoryLinksSrcIdDstIdRelationResponse200]
      """
 
 

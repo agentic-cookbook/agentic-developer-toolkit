@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 from uuid import UUID
 
 
@@ -27,14 +25,14 @@ class ChatMessage:
             id (UUID):
             role (str): e.g. user, assistant, tool, system
             content (str):
-            tool_name (None | str):
+            tool_name (Union[None, str]):
             created_at (str):
      """
 
     id: UUID
     role: str
     content: str
-    tool_name: None | str
+    tool_name: Union[None, str]
     created_at: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,7 +47,7 @@ class ChatMessage:
 
         content = self.content
 
-        tool_name: None | str
+        tool_name: Union[None, str]
         tool_name = self.tool_name
 
         created_at = self.created_at
@@ -81,10 +79,10 @@ class ChatMessage:
 
         content = d.pop("content")
 
-        def _parse_tool_name(data: object) -> None | str:
+        def _parse_tool_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         tool_name = _parse_tool_name(d.pop("toolName"))
 

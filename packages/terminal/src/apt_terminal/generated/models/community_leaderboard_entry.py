@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -24,14 +22,14 @@ class CommunityLeaderboardEntry:
     """ 
         Attributes:
             user_id (str):
-            name (None | str): customer.customers.display_name
+            name (Union[None, str]): customer.customers.display_name
             avatar_url (str):
             total_points (int): SUM(amount) over the selected period
             level (str): Level name computed from totalPoints
      """
 
     user_id: str
-    name: None | str
+    name: Union[None, str]
     avatar_url: str
     total_points: int
     level: str
@@ -44,7 +42,7 @@ class CommunityLeaderboardEntry:
     def to_dict(self) -> dict[str, Any]:
         user_id = self.user_id
 
-        name: None | str
+        name: Union[None, str]
         name = self.name
 
         avatar_url = self.avatar_url
@@ -73,10 +71,10 @@ class CommunityLeaderboardEntry:
         d = dict(src_dict)
         user_id = d.pop("userId")
 
-        def _parse_name(data: object) -> None | str:
+        def _parse_name(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         name = _parse_name(d.pop("name"))
 

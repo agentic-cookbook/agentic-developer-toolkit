@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast
+from typing import cast, Union
 
 
 
@@ -27,7 +26,7 @@ class User:
             email (str):
             name (str):
             avatar_url (str):
-            slug (None | str):
+            slug (Union[None, str]):
             capabilities (list[str]):
      """
 
@@ -35,7 +34,7 @@ class User:
     email: str
     name: str
     avatar_url: str
-    slug: None | str
+    slug: Union[None, str]
     capabilities: list[str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -52,7 +51,7 @@ class User:
 
         avatar_url = self.avatar_url
 
-        slug: None | str
+        slug: Union[None, str]
         slug = self.slug
 
         capabilities = self.capabilities
@@ -86,10 +85,10 @@ class User:
 
         avatar_url = d.pop("avatarUrl")
 
-        def _parse_slug(data: object) -> None | str:
+        def _parse_slug(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         slug = _parse_slug(d.pop("slug"))
 

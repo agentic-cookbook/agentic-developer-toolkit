@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..models.public_persona_visibility import PublicPersonaVisibility
 from typing import cast
+from typing import cast, Union
 
 if TYPE_CHECKING:
   from ..models.public_owner_type_0 import PublicOwnerType0
@@ -28,26 +27,26 @@ class PublicPersona:
         Attributes:
             slug (str):
             name (str):
-            description (None | str):
+            description (Union[None, str]):
             model_prompt (str):
-            voice (None | str):
-            character (None | str):
-            examples (None | str):
+            voice (Union[None, str]):
+            character (Union[None, str]):
+            examples (Union[None, str]):
             visibility (PublicPersonaVisibility):
             created_at (str):
-            owner (None | PublicOwnerType0):
+            owner (Union['PublicOwnerType0', None]):
      """
 
     slug: str
     name: str
-    description: None | str
+    description: Union[None, str]
     model_prompt: str
-    voice: None | str
-    character: None | str
-    examples: None | str
+    voice: Union[None, str]
+    character: Union[None, str]
+    examples: Union[None, str]
     visibility: PublicPersonaVisibility
     created_at: str
-    owner: None | PublicOwnerType0
+    owner: Union['PublicOwnerType0', None]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -60,25 +59,25 @@ class PublicPersona:
 
         name = self.name
 
-        description: None | str
+        description: Union[None, str]
         description = self.description
 
         model_prompt = self.model_prompt
 
-        voice: None | str
+        voice: Union[None, str]
         voice = self.voice
 
-        character: None | str
+        character: Union[None, str]
         character = self.character
 
-        examples: None | str
+        examples: Union[None, str]
         examples = self.examples
 
         visibility = self.visibility.value
 
         created_at = self.created_at
 
-        owner: dict[str, Any] | None
+        owner: Union[None, dict[str, Any]]
         if isinstance(self.owner, PublicOwnerType0):
             owner = self.owner.to_dict()
         else:
@@ -112,36 +111,36 @@ class PublicPersona:
 
         name = d.pop("name")
 
-        def _parse_description(data: object) -> None | str:
+        def _parse_description(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         description = _parse_description(d.pop("description"))
 
 
         model_prompt = d.pop("modelPrompt")
 
-        def _parse_voice(data: object) -> None | str:
+        def _parse_voice(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         voice = _parse_voice(d.pop("voice"))
 
 
-        def _parse_character(data: object) -> None | str:
+        def _parse_character(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         character = _parse_character(d.pop("character"))
 
 
-        def _parse_examples(data: object) -> None | str:
+        def _parse_examples(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         examples = _parse_examples(d.pop("examples"))
 
@@ -153,7 +152,7 @@ class PublicPersona:
 
         created_at = d.pop("createdAt")
 
-        def _parse_owner(data: object) -> None | PublicOwnerType0:
+        def _parse_owner(data: object) -> Union['PublicOwnerType0', None]:
             if data is None:
                 return data
             try:
@@ -164,9 +163,9 @@ class PublicPersona:
 
 
                 return componentsschemas_public_owner_type_0
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(None | PublicOwnerType0, data)
+            return cast(Union['PublicOwnerType0', None], data)
 
         owner = _parse_owner(d.pop("owner"))
 

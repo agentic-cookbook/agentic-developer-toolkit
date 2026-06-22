@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.persona_service_model_type_1 import PersonaServiceModelType1
@@ -32,13 +32,13 @@ class PersonaService:
             base_url (str):
             has_api_key (bool):
             connect_status (str):
-            models (list[PersonaServiceModelType1 | str]):
-            template_id (None | str | Unset):
-            connect_error (None | str | Unset):
-            last_connected_at (None | str | Unset):
-            documentation_url (None | str | Unset):
-            status_url (None | str | Unset):
-            models_fetched_at (None | str | Unset):
+            models (list[Union['PersonaServiceModelType1', str]]):
+            template_id (Union[None, Unset, str]):
+            connect_error (Union[None, Unset, str]):
+            last_connected_at (Union[None, Unset, str]):
+            documentation_url (Union[None, Unset, str]):
+            status_url (Union[None, Unset, str]):
+            models_fetched_at (Union[None, Unset, str]):
      """
 
     id: str
@@ -47,13 +47,13 @@ class PersonaService:
     base_url: str
     has_api_key: bool
     connect_status: str
-    models: list[PersonaServiceModelType1 | str]
-    template_id: None | str | Unset = UNSET
-    connect_error: None | str | Unset = UNSET
-    last_connected_at: None | str | Unset = UNSET
-    documentation_url: None | str | Unset = UNSET
-    status_url: None | str | Unset = UNSET
-    models_fetched_at: None | str | Unset = UNSET
+    models: list[Union['PersonaServiceModelType1', str]]
+    template_id: Union[None, Unset, str] = UNSET
+    connect_error: Union[None, Unset, str] = UNSET
+    last_connected_at: Union[None, Unset, str] = UNSET
+    documentation_url: Union[None, Unset, str] = UNSET
+    status_url: Union[None, Unset, str] = UNSET
+    models_fetched_at: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -76,7 +76,7 @@ class PersonaService:
 
         models = []
         for models_item_data in self.models:
-            models_item: dict[str, Any] | str
+            models_item: Union[dict[str, Any], str]
             if isinstance(models_item_data, PersonaServiceModelType1):
                 models_item = models_item_data.to_dict()
             else:
@@ -85,37 +85,37 @@ class PersonaService:
 
 
 
-        template_id: None | str | Unset
+        template_id: Union[None, Unset, str]
         if isinstance(self.template_id, Unset):
             template_id = UNSET
         else:
             template_id = self.template_id
 
-        connect_error: None | str | Unset
+        connect_error: Union[None, Unset, str]
         if isinstance(self.connect_error, Unset):
             connect_error = UNSET
         else:
             connect_error = self.connect_error
 
-        last_connected_at: None | str | Unset
+        last_connected_at: Union[None, Unset, str]
         if isinstance(self.last_connected_at, Unset):
             last_connected_at = UNSET
         else:
             last_connected_at = self.last_connected_at
 
-        documentation_url: None | str | Unset
+        documentation_url: Union[None, Unset, str]
         if isinstance(self.documentation_url, Unset):
             documentation_url = UNSET
         else:
             documentation_url = self.documentation_url
 
-        status_url: None | str | Unset
+        status_url: Union[None, Unset, str]
         if isinstance(self.status_url, Unset):
             status_url = UNSET
         else:
             status_url = self.status_url
 
-        models_fetched_at: None | str | Unset
+        models_fetched_at: Union[None, Unset, str]
         if isinstance(self.models_fetched_at, Unset):
             models_fetched_at = UNSET
         else:
@@ -169,7 +169,7 @@ class PersonaService:
         models = []
         _models = d.pop("models")
         for models_item_data in (_models):
-            def _parse_models_item(data: object) -> PersonaServiceModelType1 | str:
+            def _parse_models_item(data: object) -> Union['PersonaServiceModelType1', str]:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
@@ -178,71 +178,71 @@ class PersonaService:
 
 
                     return componentsschemas_persona_service_model_type_1
-                except (TypeError, ValueError, AttributeError, KeyError):
+                except: # noqa: E722
                     pass
-                return cast(PersonaServiceModelType1 | str, data)
+                return cast(Union['PersonaServiceModelType1', str], data)
 
             models_item = _parse_models_item(models_item_data)
 
             models.append(models_item)
 
 
-        def _parse_template_id(data: object) -> None | str | Unset:
+        def _parse_template_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         template_id = _parse_template_id(d.pop("templateId", UNSET))
 
 
-        def _parse_connect_error(data: object) -> None | str | Unset:
+        def _parse_connect_error(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         connect_error = _parse_connect_error(d.pop("connectError", UNSET))
 
 
-        def _parse_last_connected_at(data: object) -> None | str | Unset:
+        def _parse_last_connected_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         last_connected_at = _parse_last_connected_at(d.pop("lastConnectedAt", UNSET))
 
 
-        def _parse_documentation_url(data: object) -> None | str | Unset:
+        def _parse_documentation_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         documentation_url = _parse_documentation_url(d.pop("documentationUrl", UNSET))
 
 
-        def _parse_status_url(data: object) -> None | str | Unset:
+        def _parse_status_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         status_url = _parse_status_url(d.pop("statusUrl", UNSET))
 
 
-        def _parse_models_fetched_at(data: object) -> None | str | Unset:
+        def _parse_models_fetched_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         models_fetched_at = _parse_models_fetched_at(d.pop("modelsFetchedAt", UNSET))
 

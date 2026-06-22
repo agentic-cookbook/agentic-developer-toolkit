@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -29,8 +27,8 @@ class GetCommunityDiscussionConversationsIdResponse200:
             participant_2_id (str):
             last_message_at (str):
             created_at (str):
-            participant_1_archived_at (None | str):
-            participant_2_archived_at (None | str):
+            participant_1_archived_at (Union[None, str]):
+            participant_2_archived_at (Union[None, str]):
      """
 
     id: str
@@ -39,8 +37,8 @@ class GetCommunityDiscussionConversationsIdResponse200:
     participant_2_id: str
     last_message_at: str
     created_at: str
-    participant_1_archived_at: None | str
-    participant_2_archived_at: None | str
+    participant_1_archived_at: Union[None, str]
+    participant_2_archived_at: Union[None, str]
 
 
 
@@ -59,10 +57,10 @@ class GetCommunityDiscussionConversationsIdResponse200:
 
         created_at = self.created_at
 
-        participant_1_archived_at: None | str
+        participant_1_archived_at: Union[None, str]
         participant_1_archived_at = self.participant_1_archived_at
 
-        participant_2_archived_at: None | str
+        participant_2_archived_at: Union[None, str]
         participant_2_archived_at = self.participant_2_archived_at
 
 
@@ -98,18 +96,18 @@ class GetCommunityDiscussionConversationsIdResponse200:
 
         created_at = d.pop("createdAt")
 
-        def _parse_participant_1_archived_at(data: object) -> None | str:
+        def _parse_participant_1_archived_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         participant_1_archived_at = _parse_participant_1_archived_at(d.pop("participant1ArchivedAt"))
 
 
-        def _parse_participant_2_archived_at(data: object) -> None | str:
+        def _parse_participant_2_archived_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         participant_2_archived_at = _parse_participant_2_archived_at(d.pop("participant2ArchivedAt"))
 

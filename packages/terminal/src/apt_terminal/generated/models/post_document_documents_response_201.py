@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -25,7 +23,7 @@ class PostDocumentDocumentsResponse201:
         Attributes:
             id (str):
             customer_id (str):
-            deleted_at (None | str):
+            deleted_at (Union[None, str]):
             owner_id (str):
             title (str):
             doc_type (str):
@@ -33,13 +31,13 @@ class PostDocumentDocumentsResponse201:
             updated_at (str):
             is_deleted (bool):
             sync_version (int):
-            last_op_id (None | str):
-            last_snapshot_id (None | str):
+            last_op_id (Union[None, str]):
+            last_snapshot_id (Union[None, str]):
      """
 
     id: str
     customer_id: str
-    deleted_at: None | str
+    deleted_at: Union[None, str]
     owner_id: str
     title: str
     doc_type: str
@@ -47,8 +45,8 @@ class PostDocumentDocumentsResponse201:
     updated_at: str
     is_deleted: bool
     sync_version: int
-    last_op_id: None | str
-    last_snapshot_id: None | str
+    last_op_id: Union[None, str]
+    last_snapshot_id: Union[None, str]
 
 
 
@@ -59,7 +57,7 @@ class PostDocumentDocumentsResponse201:
 
         customer_id = self.customer_id
 
-        deleted_at: None | str
+        deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
         owner_id = self.owner_id
@@ -76,10 +74,10 @@ class PostDocumentDocumentsResponse201:
 
         sync_version = self.sync_version
 
-        last_op_id: None | str
+        last_op_id: Union[None, str]
         last_op_id = self.last_op_id
 
-        last_snapshot_id: None | str
+        last_snapshot_id: Union[None, str]
         last_snapshot_id = self.last_snapshot_id
 
 
@@ -111,10 +109,10 @@ class PostDocumentDocumentsResponse201:
 
         customer_id = d.pop("customerId")
 
-        def _parse_deleted_at(data: object) -> None | str:
+        def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
@@ -133,18 +131,18 @@ class PostDocumentDocumentsResponse201:
 
         sync_version = d.pop("syncVersion")
 
-        def _parse_last_op_id(data: object) -> None | str:
+        def _parse_last_op_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         last_op_id = _parse_last_op_id(d.pop("lastOpId"))
 
 
-        def _parse_last_snapshot_id(data: object) -> None | str:
+        def _parse_last_snapshot_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         last_snapshot_id = _parse_last_snapshot_id(d.pop("lastSnapshotId"))
 

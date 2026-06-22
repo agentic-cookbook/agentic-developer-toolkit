@@ -25,7 +25,10 @@ dev = [
     "respx>=0.21",
     "ruff>=0.5",
     "mypy>=1.10",
-    "openapi-python-client>=0.21",
+    # Pinned (like the swift generator's --branch pin) so `pnpm gen` is reproducible:
+    # an unpinned range reformats the whole generated tree whenever the installed
+    # version drifts. Bump deliberately + regenerate.
+    "openapi-python-client==0.26.2",
 ]
 
 [project.scripts]

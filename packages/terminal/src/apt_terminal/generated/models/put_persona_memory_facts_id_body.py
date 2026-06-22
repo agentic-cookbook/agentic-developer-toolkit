@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,42 +23,42 @@ T = TypeVar("T", bound="PutPersonaMemoryFactsIdBody")
 class PutPersonaMemoryFactsIdBody:
     """ 
         Attributes:
-            owner_id (str | Unset):
-            deleted_at (None | str | Unset):
-            persona_id (str | Unset):
-            scope (str | Unset):
-            memory_id (None | str | Unset):
-            subject_table (None | str | Unset):
-            subject_id (None | str | Unset):
-            predicate (str | Unset):
-            object_table (None | str | Unset):
-            object_id (None | str | Unset):
-            object_value (None | str | Unset):
-            source (str | Unset):
-            confidence (int | Unset):
-            valid_from (None | str | Unset):
-            valid_to (None | str | Unset):
-            status (str | Unset):
-            supersedes_id (None | str | Unset):
+            owner_id (Union[Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            persona_id (Union[Unset, str]):
+            scope (Union[Unset, str]):
+            memory_id (Union[None, Unset, str]):
+            subject_table (Union[None, Unset, str]):
+            subject_id (Union[None, Unset, str]):
+            predicate (Union[Unset, str]):
+            object_table (Union[None, Unset, str]):
+            object_id (Union[None, Unset, str]):
+            object_value (Union[None, Unset, str]):
+            source (Union[Unset, str]):
+            confidence (Union[Unset, int]):
+            valid_from (Union[None, Unset, str]):
+            valid_to (Union[None, Unset, str]):
+            status (Union[Unset, str]):
+            supersedes_id (Union[None, Unset, str]):
      """
 
-    owner_id: str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    persona_id: str | Unset = UNSET
-    scope: str | Unset = UNSET
-    memory_id: None | str | Unset = UNSET
-    subject_table: None | str | Unset = UNSET
-    subject_id: None | str | Unset = UNSET
-    predicate: str | Unset = UNSET
-    object_table: None | str | Unset = UNSET
-    object_id: None | str | Unset = UNSET
-    object_value: None | str | Unset = UNSET
-    source: str | Unset = UNSET
-    confidence: int | Unset = UNSET
-    valid_from: None | str | Unset = UNSET
-    valid_to: None | str | Unset = UNSET
-    status: str | Unset = UNSET
-    supersedes_id: None | str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    persona_id: Union[Unset, str] = UNSET
+    scope: Union[Unset, str] = UNSET
+    memory_id: Union[None, Unset, str] = UNSET
+    subject_table: Union[None, Unset, str] = UNSET
+    subject_id: Union[None, Unset, str] = UNSET
+    predicate: Union[Unset, str] = UNSET
+    object_table: Union[None, Unset, str] = UNSET
+    object_id: Union[None, Unset, str] = UNSET
+    object_value: Union[None, Unset, str] = UNSET
+    source: Union[Unset, str] = UNSET
+    confidence: Union[Unset, int] = UNSET
+    valid_from: Union[None, Unset, str] = UNSET
+    valid_to: Union[None, Unset, str] = UNSET
+    status: Union[Unset, str] = UNSET
+    supersedes_id: Union[None, Unset, str] = UNSET
 
 
 
@@ -68,7 +67,7 @@ class PutPersonaMemoryFactsIdBody:
     def to_dict(self) -> dict[str, Any]:
         owner_id = self.owner_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -78,19 +77,19 @@ class PutPersonaMemoryFactsIdBody:
 
         scope = self.scope
 
-        memory_id: None | str | Unset
+        memory_id: Union[None, Unset, str]
         if isinstance(self.memory_id, Unset):
             memory_id = UNSET
         else:
             memory_id = self.memory_id
 
-        subject_table: None | str | Unset
+        subject_table: Union[None, Unset, str]
         if isinstance(self.subject_table, Unset):
             subject_table = UNSET
         else:
             subject_table = self.subject_table
 
-        subject_id: None | str | Unset
+        subject_id: Union[None, Unset, str]
         if isinstance(self.subject_id, Unset):
             subject_id = UNSET
         else:
@@ -98,19 +97,19 @@ class PutPersonaMemoryFactsIdBody:
 
         predicate = self.predicate
 
-        object_table: None | str | Unset
+        object_table: Union[None, Unset, str]
         if isinstance(self.object_table, Unset):
             object_table = UNSET
         else:
             object_table = self.object_table
 
-        object_id: None | str | Unset
+        object_id: Union[None, Unset, str]
         if isinstance(self.object_id, Unset):
             object_id = UNSET
         else:
             object_id = self.object_id
 
-        object_value: None | str | Unset
+        object_value: Union[None, Unset, str]
         if isinstance(self.object_value, Unset):
             object_value = UNSET
         else:
@@ -120,13 +119,13 @@ class PutPersonaMemoryFactsIdBody:
 
         confidence = self.confidence
 
-        valid_from: None | str | Unset
+        valid_from: Union[None, Unset, str]
         if isinstance(self.valid_from, Unset):
             valid_from = UNSET
         else:
             valid_from = self.valid_from
 
-        valid_to: None | str | Unset
+        valid_to: Union[None, Unset, str]
         if isinstance(self.valid_to, Unset):
             valid_to = UNSET
         else:
@@ -134,7 +133,7 @@ class PutPersonaMemoryFactsIdBody:
 
         status = self.status
 
-        supersedes_id: None | str | Unset
+        supersedes_id: Union[None, Unset, str]
         if isinstance(self.supersedes_id, Unset):
             supersedes_id = UNSET
         else:
@@ -189,12 +188,12 @@ class PutPersonaMemoryFactsIdBody:
         d = dict(src_dict)
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
@@ -203,64 +202,64 @@ class PutPersonaMemoryFactsIdBody:
 
         scope = d.pop("scope", UNSET)
 
-        def _parse_memory_id(data: object) -> None | str | Unset:
+        def _parse_memory_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         memory_id = _parse_memory_id(d.pop("memoryId", UNSET))
 
 
-        def _parse_subject_table(data: object) -> None | str | Unset:
+        def _parse_subject_table(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         subject_table = _parse_subject_table(d.pop("subjectTable", UNSET))
 
 
-        def _parse_subject_id(data: object) -> None | str | Unset:
+        def _parse_subject_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         subject_id = _parse_subject_id(d.pop("subjectId", UNSET))
 
 
         predicate = d.pop("predicate", UNSET)
 
-        def _parse_object_table(data: object) -> None | str | Unset:
+        def _parse_object_table(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         object_table = _parse_object_table(d.pop("objectTable", UNSET))
 
 
-        def _parse_object_id(data: object) -> None | str | Unset:
+        def _parse_object_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         object_id = _parse_object_id(d.pop("objectId", UNSET))
 
 
-        def _parse_object_value(data: object) -> None | str | Unset:
+        def _parse_object_value(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         object_value = _parse_object_value(d.pop("objectValue", UNSET))
 
@@ -269,34 +268,34 @@ class PutPersonaMemoryFactsIdBody:
 
         confidence = d.pop("confidence", UNSET)
 
-        def _parse_valid_from(data: object) -> None | str | Unset:
+        def _parse_valid_from(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         valid_from = _parse_valid_from(d.pop("validFrom", UNSET))
 
 
-        def _parse_valid_to(data: object) -> None | str | Unset:
+        def _parse_valid_to(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         valid_to = _parse_valid_to(d.pop("validTo", UNSET))
 
 
         status = d.pop("status", UNSET)
 
-        def _parse_supersedes_id(data: object) -> None | str | Unset:
+        def _parse_supersedes_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         supersedes_id = _parse_supersedes_id(d.pop("supersedesId", UNSET))
 

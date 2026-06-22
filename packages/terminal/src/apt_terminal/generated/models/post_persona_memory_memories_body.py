@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -29,18 +29,18 @@ class PostPersonaMemoryMemoriesBody:
             memory_type (str):
             description (str):
             body (str):
-            owner_id (str | Unset):
-            deleted_at (None | str | Unset):
-            scope (str | Unset):
-            subject_table (None | str | Unset):
-            subject_id (None | str | Unset):
-            status (str | Unset):
-            supersedes_id (None | str | Unset):
-            source (str | Unset):
-            confidence (int | Unset):
-            tags (list[str] | Unset):
-            valid_from (None | str | Unset):
-            valid_to (None | str | Unset):
+            owner_id (Union[Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            scope (Union[Unset, str]):
+            subject_table (Union[None, Unset, str]):
+            subject_id (Union[None, Unset, str]):
+            status (Union[Unset, str]):
+            supersedes_id (Union[None, Unset, str]):
+            source (Union[Unset, str]):
+            confidence (Union[Unset, int]):
+            tags (Union[Unset, list[str]]):
+            valid_from (Union[None, Unset, str]):
+            valid_to (Union[None, Unset, str]):
      """
 
     persona_id: str
@@ -48,18 +48,18 @@ class PostPersonaMemoryMemoriesBody:
     memory_type: str
     description: str
     body: str
-    owner_id: str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    scope: str | Unset = UNSET
-    subject_table: None | str | Unset = UNSET
-    subject_id: None | str | Unset = UNSET
-    status: str | Unset = UNSET
-    supersedes_id: None | str | Unset = UNSET
-    source: str | Unset = UNSET
-    confidence: int | Unset = UNSET
-    tags: list[str] | Unset = UNSET
-    valid_from: None | str | Unset = UNSET
-    valid_to: None | str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    scope: Union[Unset, str] = UNSET
+    subject_table: Union[None, Unset, str] = UNSET
+    subject_id: Union[None, Unset, str] = UNSET
+    status: Union[Unset, str] = UNSET
+    supersedes_id: Union[None, Unset, str] = UNSET
+    source: Union[Unset, str] = UNSET
+    confidence: Union[Unset, int] = UNSET
+    tags: Union[Unset, list[str]] = UNSET
+    valid_from: Union[None, Unset, str] = UNSET
+    valid_to: Union[None, Unset, str] = UNSET
 
 
 
@@ -78,7 +78,7 @@ class PostPersonaMemoryMemoriesBody:
 
         owner_id = self.owner_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -86,13 +86,13 @@ class PostPersonaMemoryMemoriesBody:
 
         scope = self.scope
 
-        subject_table: None | str | Unset
+        subject_table: Union[None, Unset, str]
         if isinstance(self.subject_table, Unset):
             subject_table = UNSET
         else:
             subject_table = self.subject_table
 
-        subject_id: None | str | Unset
+        subject_id: Union[None, Unset, str]
         if isinstance(self.subject_id, Unset):
             subject_id = UNSET
         else:
@@ -100,7 +100,7 @@ class PostPersonaMemoryMemoriesBody:
 
         status = self.status
 
-        supersedes_id: None | str | Unset
+        supersedes_id: Union[None, Unset, str]
         if isinstance(self.supersedes_id, Unset):
             supersedes_id = UNSET
         else:
@@ -110,19 +110,19 @@ class PostPersonaMemoryMemoriesBody:
 
         confidence = self.confidence
 
-        tags: list[str] | Unset = UNSET
+        tags: Union[Unset, list[str]] = UNSET
         if not isinstance(self.tags, Unset):
             tags = self.tags
 
 
 
-        valid_from: None | str | Unset
+        valid_from: Union[None, Unset, str]
         if isinstance(self.valid_from, Unset):
             valid_from = UNSET
         else:
             valid_from = self.valid_from
 
-        valid_to: None | str | Unset
+        valid_to: Union[None, Unset, str]
         if isinstance(self.valid_to, Unset):
             valid_to = UNSET
         else:
@@ -182,46 +182,46 @@ class PostPersonaMemoryMemoriesBody:
 
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
         scope = d.pop("scope", UNSET)
 
-        def _parse_subject_table(data: object) -> None | str | Unset:
+        def _parse_subject_table(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         subject_table = _parse_subject_table(d.pop("subjectTable", UNSET))
 
 
-        def _parse_subject_id(data: object) -> None | str | Unset:
+        def _parse_subject_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         subject_id = _parse_subject_id(d.pop("subjectId", UNSET))
 
 
         status = d.pop("status", UNSET)
 
-        def _parse_supersedes_id(data: object) -> None | str | Unset:
+        def _parse_supersedes_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         supersedes_id = _parse_supersedes_id(d.pop("supersedesId", UNSET))
 
@@ -233,22 +233,22 @@ class PostPersonaMemoryMemoriesBody:
         tags = cast(list[str], d.pop("tags", UNSET))
 
 
-        def _parse_valid_from(data: object) -> None | str | Unset:
+        def _parse_valid_from(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         valid_from = _parse_valid_from(d.pop("validFrom", UNSET))
 
 
-        def _parse_valid_to(data: object) -> None | str | Unset:
+        def _parse_valid_to(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         valid_to = _parse_valid_to(d.pop("validTo", UNSET))
 

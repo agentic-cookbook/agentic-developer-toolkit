@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,28 +23,28 @@ T = TypeVar("T", bound="PutDocumentOperationsIdBody")
 class PutDocumentOperationsIdBody:
     """ 
         Attributes:
-            document_id (str | Unset):
-            block_id (None | str | Unset):
-            deleted_at (None | str | Unset):
-            owner_id (str | Unset):
-            client_id (str | Unset):
-            client_seq (int | Unset):
-            op_type (str | Unset):
-            op_payload (str | Unset):
-            undo_group_id (None | str | Unset):
-            inverse_of_op_id (None | str | Unset):
+            document_id (Union[Unset, str]):
+            block_id (Union[None, Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            owner_id (Union[Unset, str]):
+            client_id (Union[Unset, str]):
+            client_seq (Union[Unset, int]):
+            op_type (Union[Unset, str]):
+            op_payload (Union[Unset, str]):
+            undo_group_id (Union[None, Unset, str]):
+            inverse_of_op_id (Union[None, Unset, str]):
      """
 
-    document_id: str | Unset = UNSET
-    block_id: None | str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    client_id: str | Unset = UNSET
-    client_seq: int | Unset = UNSET
-    op_type: str | Unset = UNSET
-    op_payload: str | Unset = UNSET
-    undo_group_id: None | str | Unset = UNSET
-    inverse_of_op_id: None | str | Unset = UNSET
+    document_id: Union[Unset, str] = UNSET
+    block_id: Union[None, Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    client_id: Union[Unset, str] = UNSET
+    client_seq: Union[Unset, int] = UNSET
+    op_type: Union[Unset, str] = UNSET
+    op_payload: Union[Unset, str] = UNSET
+    undo_group_id: Union[None, Unset, str] = UNSET
+    inverse_of_op_id: Union[None, Unset, str] = UNSET
 
 
 
@@ -54,13 +53,13 @@ class PutDocumentOperationsIdBody:
     def to_dict(self) -> dict[str, Any]:
         document_id = self.document_id
 
-        block_id: None | str | Unset
+        block_id: Union[None, Unset, str]
         if isinstance(self.block_id, Unset):
             block_id = UNSET
         else:
             block_id = self.block_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -76,13 +75,13 @@ class PutDocumentOperationsIdBody:
 
         op_payload = self.op_payload
 
-        undo_group_id: None | str | Unset
+        undo_group_id: Union[None, Unset, str]
         if isinstance(self.undo_group_id, Unset):
             undo_group_id = UNSET
         else:
             undo_group_id = self.undo_group_id
 
-        inverse_of_op_id: None | str | Unset
+        inverse_of_op_id: Union[None, Unset, str]
         if isinstance(self.inverse_of_op_id, Unset):
             inverse_of_op_id = UNSET
         else:
@@ -123,22 +122,22 @@ class PutDocumentOperationsIdBody:
         d = dict(src_dict)
         document_id = d.pop("documentId", UNSET)
 
-        def _parse_block_id(data: object) -> None | str | Unset:
+        def _parse_block_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         block_id = _parse_block_id(d.pop("blockId", UNSET))
 
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
@@ -153,22 +152,22 @@ class PutDocumentOperationsIdBody:
 
         op_payload = d.pop("opPayload", UNSET)
 
-        def _parse_undo_group_id(data: object) -> None | str | Unset:
+        def _parse_undo_group_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         undo_group_id = _parse_undo_group_id(d.pop("undoGroupId", UNSET))
 
 
-        def _parse_inverse_of_op_id(data: object) -> None | str | Unset:
+        def _parse_inverse_of_op_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         inverse_of_op_id = _parse_inverse_of_op_id(d.pop("inverseOfOpId", UNSET))
 

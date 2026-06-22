@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -10,14 +9,13 @@ from ... import errors
 
 from ...models.error import Error
 from ...models.post_auth_capabilities_grant_body import PostAuthCapabilitiesGrantBody
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostAuthCapabilitiesGrantBody | Unset = UNSET,
+    body: PostAuthCapabilitiesGrantBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -32,9 +30,8 @@ def _get_kwargs(
         "url": "/auth/capabilities/grant",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -43,7 +40,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Any, Error]]:
     if response.status_code == 201:
         response_201 = cast(Any, None)
         return response_201
@@ -75,7 +72,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Any, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -87,20 +84,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostAuthCapabilitiesGrantBody | Unset = UNSET,
+    body: PostAuthCapabilitiesGrantBody,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Grant a capability to a user (admin)
 
     Args:
-        body (PostAuthCapabilitiesGrantBody | Unset):
+        body (PostAuthCapabilitiesGrantBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -118,20 +115,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostAuthCapabilitiesGrantBody | Unset = UNSET,
+    body: PostAuthCapabilitiesGrantBody,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Grant a capability to a user (admin)
 
     Args:
-        body (PostAuthCapabilitiesGrantBody | Unset):
+        body (PostAuthCapabilitiesGrantBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 
@@ -144,20 +141,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostAuthCapabilitiesGrantBody | Unset = UNSET,
+    body: PostAuthCapabilitiesGrantBody,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Grant a capability to a user (admin)
 
     Args:
-        body (PostAuthCapabilitiesGrantBody | Unset):
+        body (PostAuthCapabilitiesGrantBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -175,20 +172,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostAuthCapabilitiesGrantBody | Unset = UNSET,
+    body: PostAuthCapabilitiesGrantBody,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Grant a capability to a user (admin)
 
     Args:
-        body (PostAuthCapabilitiesGrantBody | Unset):
+        body (PostAuthCapabilitiesGrantBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 

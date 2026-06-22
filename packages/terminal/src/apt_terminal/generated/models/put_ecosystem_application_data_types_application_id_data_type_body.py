@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,12 +22,12 @@ T = TypeVar("T", bound="PutEcosystemApplicationDataTypesApplicationIdDataTypeBod
 class PutEcosystemApplicationDataTypesApplicationIdDataTypeBody:
     """ 
         Attributes:
-            application_id (str | Unset):
-            data_type (str | Unset):
+            application_id (Union[Unset, str]):
+            data_type (Union[Unset, str]):
      """
 
-    application_id: str | Unset = UNSET
-    data_type: str | Unset = UNSET
+    application_id: Union[Unset, str] = UNSET
+    data_type: Union[Unset, str] = UNSET
 
 
 

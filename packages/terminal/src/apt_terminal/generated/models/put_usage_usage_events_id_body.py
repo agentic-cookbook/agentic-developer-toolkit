@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,26 +23,26 @@ T = TypeVar("T", bound="PutUsageUsageEventsIdBody")
 class PutUsageUsageEventsIdBody:
     """ 
         Attributes:
-            scope (str | Unset):
-            principal_id (str | Unset):
-            owner_id (None | str | Unset):
-            route (str | Unset):
-            method (str | Unset):
-            status (int | Unset):
-            request_bytes (int | Unset):
-            response_bytes (int | Unset):
-            occurred_at (str | Unset):
+            scope (Union[Unset, str]):
+            principal_id (Union[Unset, str]):
+            owner_id (Union[None, Unset, str]):
+            route (Union[Unset, str]):
+            method (Union[Unset, str]):
+            status (Union[Unset, int]):
+            request_bytes (Union[Unset, int]):
+            response_bytes (Union[Unset, int]):
+            occurred_at (Union[Unset, str]):
      """
 
-    scope: str | Unset = UNSET
-    principal_id: str | Unset = UNSET
-    owner_id: None | str | Unset = UNSET
-    route: str | Unset = UNSET
-    method: str | Unset = UNSET
-    status: int | Unset = UNSET
-    request_bytes: int | Unset = UNSET
-    response_bytes: int | Unset = UNSET
-    occurred_at: str | Unset = UNSET
+    scope: Union[Unset, str] = UNSET
+    principal_id: Union[Unset, str] = UNSET
+    owner_id: Union[None, Unset, str] = UNSET
+    route: Union[Unset, str] = UNSET
+    method: Union[Unset, str] = UNSET
+    status: Union[Unset, int] = UNSET
+    request_bytes: Union[Unset, int] = UNSET
+    response_bytes: Union[Unset, int] = UNSET
+    occurred_at: Union[Unset, str] = UNSET
 
 
 
@@ -54,7 +53,7 @@ class PutUsageUsageEventsIdBody:
 
         principal_id = self.principal_id
 
-        owner_id: None | str | Unset
+        owner_id: Union[None, Unset, str]
         if isinstance(self.owner_id, Unset):
             owner_id = UNSET
         else:
@@ -107,12 +106,12 @@ class PutUsageUsageEventsIdBody:
 
         principal_id = d.pop("principalId", UNSET)
 
-        def _parse_owner_id(data: object) -> None | str | Unset:
+        def _parse_owner_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         owner_id = _parse_owner_id(d.pop("ownerId", UNSET))
 

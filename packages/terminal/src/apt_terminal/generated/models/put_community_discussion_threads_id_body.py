@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,30 +23,30 @@ T = TypeVar("T", bound="PutCommunityDiscussionThreadsIdBody")
 class PutCommunityDiscussionThreadsIdBody:
     """ 
         Attributes:
-            ecosystem_id (str | Unset):
-            category_id (str | Unset):
-            author_id (str | Unset):
-            title (str | Unset):
-            body (str | Unset):
-            is_pinned (bool | Unset):
-            is_locked (bool | Unset):
-            is_deleted (bool | Unset):
-            reply_count (int | Unset):
-            answered_reply_id (None | str | Unset):
-            last_activity_at (str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            category_id (Union[Unset, str]):
+            author_id (Union[Unset, str]):
+            title (Union[Unset, str]):
+            body (Union[Unset, str]):
+            is_pinned (Union[Unset, bool]):
+            is_locked (Union[Unset, bool]):
+            is_deleted (Union[Unset, bool]):
+            reply_count (Union[Unset, int]):
+            answered_reply_id (Union[None, Unset, str]):
+            last_activity_at (Union[Unset, str]):
      """
 
-    ecosystem_id: str | Unset = UNSET
-    category_id: str | Unset = UNSET
-    author_id: str | Unset = UNSET
-    title: str | Unset = UNSET
-    body: str | Unset = UNSET
-    is_pinned: bool | Unset = UNSET
-    is_locked: bool | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
-    reply_count: int | Unset = UNSET
-    answered_reply_id: None | str | Unset = UNSET
-    last_activity_at: str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    category_id: Union[Unset, str] = UNSET
+    author_id: Union[Unset, str] = UNSET
+    title: Union[Unset, str] = UNSET
+    body: Union[Unset, str] = UNSET
+    is_pinned: Union[Unset, bool] = UNSET
+    is_locked: Union[Unset, bool] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
+    reply_count: Union[Unset, int] = UNSET
+    answered_reply_id: Union[None, Unset, str] = UNSET
+    last_activity_at: Union[Unset, str] = UNSET
 
 
 
@@ -72,7 +71,7 @@ class PutCommunityDiscussionThreadsIdBody:
 
         reply_count = self.reply_count
 
-        answered_reply_id: None | str | Unset
+        answered_reply_id: Union[None, Unset, str]
         if isinstance(self.answered_reply_id, Unset):
             answered_reply_id = UNSET
         else:
@@ -133,12 +132,12 @@ class PutCommunityDiscussionThreadsIdBody:
 
         reply_count = d.pop("replyCount", UNSET)
 
-        def _parse_answered_reply_id(data: object) -> None | str | Unset:
+        def _parse_answered_reply_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         answered_reply_id = _parse_answered_reply_id(d.pop("answeredReplyId", UNSET))
 

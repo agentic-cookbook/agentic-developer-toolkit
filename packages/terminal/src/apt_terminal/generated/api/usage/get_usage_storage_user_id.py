@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -26,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/usage/storage/{user_id}".format(user_id=quote(str(user_id), safe=""),),
+        "url": "/usage/storage/{user_id}".format(user_id=user_id,),
     }
 
 
@@ -34,7 +33,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | UsageStorageQuota | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, UsageStorageQuota]]:
     if response.status_code == 200:
         response_200 = UsageStorageQuota.from_dict(response.json())
 
@@ -62,7 +61,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | UsageStorageQuota]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, UsageStorageQuota]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +75,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | UsageStorageQuota]:
+) -> Response[Union[Error, UsageStorageQuota]]:
     """ Get a user's storage quota + usage (admin)
 
     Args:
@@ -87,7 +86,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | UsageStorageQuota]
+        Response[Union[Error, UsageStorageQuota]]
      """
 
 
@@ -107,7 +106,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Error | UsageStorageQuota | None:
+) -> Optional[Union[Error, UsageStorageQuota]]:
     """ Get a user's storage quota + usage (admin)
 
     Args:
@@ -118,7 +117,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | UsageStorageQuota
+        Union[Error, UsageStorageQuota]
      """
 
 
@@ -133,7 +132,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Error | UsageStorageQuota]:
+) -> Response[Union[Error, UsageStorageQuota]]:
     """ Get a user's storage quota + usage (admin)
 
     Args:
@@ -144,7 +143,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | UsageStorageQuota]
+        Response[Union[Error, UsageStorageQuota]]
      """
 
 
@@ -164,7 +163,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Error | UsageStorageQuota | None:
+) -> Optional[Union[Error, UsageStorageQuota]]:
     """ Get a user's storage quota + usage (admin)
 
     Args:
@@ -175,7 +174,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | UsageStorageQuota
+        Union[Error, UsageStorageQuota]
      """
 
 

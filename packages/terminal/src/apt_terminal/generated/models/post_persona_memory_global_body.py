@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -12,6 +10,7 @@ from ..models.post_persona_memory_global_body_memory_type import PostPersonaMemo
 from ..models.post_persona_memory_global_body_source import PostPersonaMemoryGlobalBodySource
 from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
@@ -31,11 +30,11 @@ class PostPersonaMemoryGlobalBody:
             memory_type (PostPersonaMemoryGlobalBodyMemoryType):
             description (str):
             body (str):
-            subject_table (str | Unset):
-            subject_id (str | Unset):
-            source (PostPersonaMemoryGlobalBodySource | Unset):
-            confidence (int | Unset):
-            tags (list[str] | Unset):
+            subject_table (Union[Unset, str]):
+            subject_id (Union[Unset, str]):
+            source (Union[Unset, PostPersonaMemoryGlobalBodySource]):
+            confidence (Union[Unset, int]):
+            tags (Union[Unset, list[str]]):
      """
 
     persona_id: str
@@ -43,11 +42,11 @@ class PostPersonaMemoryGlobalBody:
     memory_type: PostPersonaMemoryGlobalBodyMemoryType
     description: str
     body: str
-    subject_table: str | Unset = UNSET
-    subject_id: str | Unset = UNSET
-    source: PostPersonaMemoryGlobalBodySource | Unset = UNSET
-    confidence: int | Unset = UNSET
-    tags: list[str] | Unset = UNSET
+    subject_table: Union[Unset, str] = UNSET
+    subject_id: Union[Unset, str] = UNSET
+    source: Union[Unset, PostPersonaMemoryGlobalBodySource] = UNSET
+    confidence: Union[Unset, int] = UNSET
+    tags: Union[Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -69,14 +68,14 @@ class PostPersonaMemoryGlobalBody:
 
         subject_id = self.subject_id
 
-        source: str | Unset = UNSET
+        source: Union[Unset, str] = UNSET
         if not isinstance(self.source, Unset):
             source = self.source.value
 
 
         confidence = self.confidence
 
-        tags: list[str] | Unset = UNSET
+        tags: Union[Unset, list[str]] = UNSET
         if not isinstance(self.tags, Unset):
             tags = self.tags
 
@@ -128,7 +127,7 @@ class PostPersonaMemoryGlobalBody:
         subject_id = d.pop("subjectId", UNSET)
 
         _source = d.pop("source", UNSET)
-        source: PostPersonaMemoryGlobalBodySource | Unset
+        source: Union[Unset, PostPersonaMemoryGlobalBodySource]
         if isinstance(_source,  Unset):
             source = UNSET
         else:

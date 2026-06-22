@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,7 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
@@ -28,20 +27,20 @@ class PatchOauthProvidersSlugBodyIdentityMapping:
             email_field (str):
             name_field (str):
             avatar_field (str):
-            verification_url (str | Unset):
-            require_email_verified (bool | Unset):
-            allowed_audiences (list[str] | Unset):
-            secondary_email_url (str | Unset):
+            verification_url (Union[Unset, str]):
+            require_email_verified (Union[Unset, bool]):
+            allowed_audiences (Union[Unset, list[str]]):
+            secondary_email_url (Union[Unset, str]):
      """
 
     subject_field: str
     email_field: str
     name_field: str
     avatar_field: str
-    verification_url: str | Unset = UNSET
-    require_email_verified: bool | Unset = UNSET
-    allowed_audiences: list[str] | Unset = UNSET
-    secondary_email_url: str | Unset = UNSET
+    verification_url: Union[Unset, str] = UNSET
+    require_email_verified: Union[Unset, bool] = UNSET
+    allowed_audiences: Union[Unset, list[str]] = UNSET
+    secondary_email_url: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -61,7 +60,7 @@ class PatchOauthProvidersSlugBodyIdentityMapping:
 
         require_email_verified = self.require_email_verified
 
-        allowed_audiences: list[str] | Unset = UNSET
+        allowed_audiences: Union[Unset, list[str]] = UNSET
         if not isinstance(self.allowed_audiences, Unset):
             allowed_audiences = self.allowed_audiences
 

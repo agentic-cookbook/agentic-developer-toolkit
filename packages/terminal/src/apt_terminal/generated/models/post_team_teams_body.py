@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -25,18 +24,18 @@ class PostTeamTeamsBody:
         Attributes:
             slug (str):
             name (str):
-            owner_kind (str | Unset):
-            owner_id (str | Unset):
-            description (str | Unset):
-            is_deleted (bool | Unset):
+            owner_kind (Union[Unset, str]):
+            owner_id (Union[Unset, str]):
+            description (Union[Unset, str]):
+            is_deleted (Union[Unset, bool]):
      """
 
     slug: str
     name: str
-    owner_kind: str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    description: str | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
+    owner_kind: Union[Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
 
 
 

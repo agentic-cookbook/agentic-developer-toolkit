@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -13,14 +12,15 @@ from ...models.error import Error
 from ...models.get_community_leaderboard_period import GetCommunityLeaderboardPeriod
 from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
-    period: GetCommunityLeaderboardPeriod | Unset = GetCommunityLeaderboardPeriod.ALL,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    period: Union[Unset, GetCommunityLeaderboardPeriod] = GetCommunityLeaderboardPeriod.ALL,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -29,7 +29,7 @@ def _get_kwargs(
 
     params: dict[str, Any] = {}
 
-    json_period: str | Unset = UNSET
+    json_period: Union[Unset, str] = UNSET
     if not isinstance(period, Unset):
         json_period = period.value
 
@@ -54,7 +54,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CommunityLeaderboard | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[CommunityLeaderboard, Error]]:
     if response.status_code == 200:
         response_200 = CommunityLeaderboard.from_dict(response.json())
 
@@ -75,7 +75,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CommunityLeaderboard | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[CommunityLeaderboard, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -87,25 +87,25 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    period: GetCommunityLeaderboardPeriod | Unset = GetCommunityLeaderboardPeriod.ALL,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    period: Union[Unset, GetCommunityLeaderboardPeriod] = GetCommunityLeaderboardPeriod.ALL,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> Response[CommunityLeaderboard | Error]:
+) -> Response[Union[CommunityLeaderboard, Error]]:
     """ Ranked leaderboard by summed points for the caller’s ecosystem
 
     Args:
-        period (GetCommunityLeaderboardPeriod | Unset):  Default:
+        period (Union[Unset, GetCommunityLeaderboardPeriod]):  Default:
             GetCommunityLeaderboardPeriod.ALL.
-        page (str | Unset):
-        page_size (str | Unset):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CommunityLeaderboard | Error]
+        Response[Union[CommunityLeaderboard, Error]]
      """
 
 
@@ -125,25 +125,25 @@ page_size=page_size,
 def sync(
     *,
     client: AuthenticatedClient,
-    period: GetCommunityLeaderboardPeriod | Unset = GetCommunityLeaderboardPeriod.ALL,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    period: Union[Unset, GetCommunityLeaderboardPeriod] = GetCommunityLeaderboardPeriod.ALL,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> CommunityLeaderboard | Error | None:
+) -> Optional[Union[CommunityLeaderboard, Error]]:
     """ Ranked leaderboard by summed points for the caller’s ecosystem
 
     Args:
-        period (GetCommunityLeaderboardPeriod | Unset):  Default:
+        period (Union[Unset, GetCommunityLeaderboardPeriod]):  Default:
             GetCommunityLeaderboardPeriod.ALL.
-        page (str | Unset):
-        page_size (str | Unset):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        CommunityLeaderboard | Error
+        Union[CommunityLeaderboard, Error]
      """
 
 
@@ -158,25 +158,25 @@ page_size=page_size,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    period: GetCommunityLeaderboardPeriod | Unset = GetCommunityLeaderboardPeriod.ALL,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    period: Union[Unset, GetCommunityLeaderboardPeriod] = GetCommunityLeaderboardPeriod.ALL,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> Response[CommunityLeaderboard | Error]:
+) -> Response[Union[CommunityLeaderboard, Error]]:
     """ Ranked leaderboard by summed points for the caller’s ecosystem
 
     Args:
-        period (GetCommunityLeaderboardPeriod | Unset):  Default:
+        period (Union[Unset, GetCommunityLeaderboardPeriod]):  Default:
             GetCommunityLeaderboardPeriod.ALL.
-        page (str | Unset):
-        page_size (str | Unset):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CommunityLeaderboard | Error]
+        Response[Union[CommunityLeaderboard, Error]]
      """
 
 
@@ -196,25 +196,25 @@ page_size=page_size,
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    period: GetCommunityLeaderboardPeriod | Unset = GetCommunityLeaderboardPeriod.ALL,
-    page: str | Unset = UNSET,
-    page_size: str | Unset = UNSET,
+    period: Union[Unset, GetCommunityLeaderboardPeriod] = GetCommunityLeaderboardPeriod.ALL,
+    page: Union[Unset, str] = UNSET,
+    page_size: Union[Unset, str] = UNSET,
 
-) -> CommunityLeaderboard | Error | None:
+) -> Optional[Union[CommunityLeaderboard, Error]]:
     """ Ranked leaderboard by summed points for the caller’s ecosystem
 
     Args:
-        period (GetCommunityLeaderboardPeriod | Unset):  Default:
+        period (Union[Unset, GetCommunityLeaderboardPeriod]):  Default:
             GetCommunityLeaderboardPeriod.ALL.
-        page (str | Unset):
-        page_size (str | Unset):
+        page (Union[Unset, str]):
+        page_size (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        CommunityLeaderboard | Error
+        Union[CommunityLeaderboard, Error]
      """
 
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -28,7 +27,7 @@ class PostCommunityDiscussionEditsBody:
             previous_body (str):
             editor_id (str):
             edited_at (str):
-            ecosystem_id (str | Unset):
+            ecosystem_id (Union[Unset, str]):
      """
 
     entity_type: str
@@ -36,7 +35,7 @@ class PostCommunityDiscussionEditsBody:
     previous_body: str
     editor_id: str
     edited_at: str
-    ecosystem_id: str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
 
 
 

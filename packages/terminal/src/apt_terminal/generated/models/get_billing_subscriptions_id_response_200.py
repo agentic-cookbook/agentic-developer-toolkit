@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -30,8 +28,8 @@ class GetBillingSubscriptionsIdResponse200:
             status (str):
             source (str):
             started_at (str):
-            expires_at (None | str):
-            assigned_by (None | str):
+            expires_at (Union[None, str]):
+            assigned_by (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
@@ -43,8 +41,8 @@ class GetBillingSubscriptionsIdResponse200:
     status: str
     source: str
     started_at: str
-    expires_at: None | str
-    assigned_by: None | str
+    expires_at: Union[None, str]
+    assigned_by: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -67,10 +65,10 @@ class GetBillingSubscriptionsIdResponse200:
 
         started_at = self.started_at
 
-        expires_at: None | str
+        expires_at: Union[None, str]
         expires_at = self.expires_at
 
-        assigned_by: None | str
+        assigned_by: Union[None, str]
         assigned_by = self.assigned_by
 
         created_at = self.created_at
@@ -115,18 +113,18 @@ class GetBillingSubscriptionsIdResponse200:
 
         started_at = d.pop("startedAt")
 
-        def _parse_expires_at(data: object) -> None | str:
+        def _parse_expires_at(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         expires_at = _parse_expires_at(d.pop("expiresAt"))
 
 
-        def _parse_assigned_by(data: object) -> None | str:
+        def _parse_assigned_by(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         assigned_by = _parse_assigned_by(d.pop("assignedBy"))
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,22 +23,22 @@ T = TypeVar("T", bound="PutProjectProjectsIdBody")
 class PutProjectProjectsIdBody:
     """ 
         Attributes:
-            name (str | Unset):
-            description (str | Unset):
-            status (str | Unset):
-            color (str | Unset):
-            is_deleted (bool | Unset):
-            deleted_at (None | str | Unset):
-            owner_id (str | Unset):
+            name (Union[Unset, str]):
+            description (Union[Unset, str]):
+            status (Union[Unset, str]):
+            color (Union[Unset, str]):
+            is_deleted (Union[Unset, bool]):
+            deleted_at (Union[None, Unset, str]):
+            owner_id (Union[Unset, str]):
      """
 
-    name: str | Unset = UNSET
-    description: str | Unset = UNSET
-    status: str | Unset = UNSET
-    color: str | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    owner_id: str | Unset = UNSET
+    name: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
+    status: Union[Unset, str] = UNSET
+    color: Union[Unset, str] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
 
 
 
@@ -56,7 +55,7 @@ class PutProjectProjectsIdBody:
 
         is_deleted = self.is_deleted
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -101,12 +100,12 @@ class PutProjectProjectsIdBody:
 
         is_deleted = d.pop("isDeleted", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 

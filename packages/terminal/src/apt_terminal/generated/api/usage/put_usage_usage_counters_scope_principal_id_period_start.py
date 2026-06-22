@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_usage_usage_counters_scope_principal_id_period_start_body import PutUsageUsageCountersScopePrincipalIdPeriodStartBody
 from ...models.put_usage_usage_counters_scope_principal_id_period_start_response_200 import PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -21,7 +19,7 @@ def _get_kwargs(
     principal_id: str,
     period_start: str,
     *,
-    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset = UNSET,
+    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,12 +31,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/usage/usage-counters/{scope}/{principal_id}/{period_start}".format(scope=quote(str(scope), safe=""),principal_id=quote(str(principal_id), safe=""),period_start=quote(str(period_start), safe=""),),
+        "url": "/usage/usage-counters/{scope}/{principal_id}/{period_start}".format(scope=scope,principal_id=principal_id,period_start=period_start,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -47,7 +44,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     if response.status_code == 200:
         response_200 = PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200.from_dict(response.json())
 
@@ -82,7 +79,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -97,23 +94,23 @@ def sync_detailed(
     period_start: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset = UNSET,
+    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody,
 
-) -> Response[Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]:
+) -> Response[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Update usage_counters
 
     Args:
         scope (str):
         principal_id (str):
         period_start (str):
-        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset):
+        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
+        Response[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]
      """
 
 
@@ -137,23 +134,23 @@ def sync(
     period_start: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset = UNSET,
+    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody,
 
-) -> Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200 | None:
+) -> Optional[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Update usage_counters
 
     Args:
         scope (str):
         principal_id (str):
         period_start (str):
-        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset):
+        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200
+        Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
      """
 
 
@@ -172,23 +169,23 @@ async def asyncio_detailed(
     period_start: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset = UNSET,
+    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody,
 
-) -> Response[Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]:
+) -> Response[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Update usage_counters
 
     Args:
         scope (str):
         principal_id (str):
         period_start (str):
-        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset):
+        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
+        Response[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]
      """
 
 
@@ -212,23 +209,23 @@ async def asyncio(
     period_start: str,
     *,
     client: AuthenticatedClient,
-    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset = UNSET,
+    body: PutUsageUsageCountersScopePrincipalIdPeriodStartBody,
 
-) -> Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200 | None:
+) -> Optional[Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]]:
     """ Update usage_counters
 
     Args:
         scope (str):
         principal_id (str):
         period_start (str):
-        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody | Unset):
+        body (PutUsageUsageCountersScopePrincipalIdPeriodStartBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200
+        Union[Error, PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200]
      """
 
 

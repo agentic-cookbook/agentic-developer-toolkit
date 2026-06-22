@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -27,7 +25,7 @@ class GetTeamPermissionsIdResponse200:
             ecosystem_id (str):
             team_id (str):
             permission (str):
-            granted_by (None | str):
+            granted_by (Union[None, str]):
             granted_at (str):
      """
 
@@ -35,7 +33,7 @@ class GetTeamPermissionsIdResponse200:
     ecosystem_id: str
     team_id: str
     permission: str
-    granted_by: None | str
+    granted_by: Union[None, str]
     granted_at: str
 
 
@@ -51,7 +49,7 @@ class GetTeamPermissionsIdResponse200:
 
         permission = self.permission
 
-        granted_by: None | str
+        granted_by: Union[None, str]
         granted_by = self.granted_by
 
         granted_at = self.granted_at
@@ -83,10 +81,10 @@ class GetTeamPermissionsIdResponse200:
 
         permission = d.pop("permission")
 
-        def _parse_granted_by(data: object) -> None | str:
+        def _parse_granted_by(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         granted_by = _parse_granted_by(d.pop("grantedBy"))
 

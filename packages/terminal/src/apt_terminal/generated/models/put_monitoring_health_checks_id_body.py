@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,20 +23,20 @@ T = TypeVar("T", bound="PutMonitoringHealthChecksIdBody")
 class PutMonitoringHealthChecksIdBody:
     """ 
         Attributes:
-            endpoint_id (str | Unset):
-            status (str | Unset):
-            response_time_ms (int | None | Unset):
-            status_code (int | None | Unset):
-            error_message (None | str | Unset):
-            checked_at (str | Unset):
+            endpoint_id (Union[Unset, str]):
+            status (Union[Unset, str]):
+            response_time_ms (Union[None, Unset, int]):
+            status_code (Union[None, Unset, int]):
+            error_message (Union[None, Unset, str]):
+            checked_at (Union[Unset, str]):
      """
 
-    endpoint_id: str | Unset = UNSET
-    status: str | Unset = UNSET
-    response_time_ms: int | None | Unset = UNSET
-    status_code: int | None | Unset = UNSET
-    error_message: None | str | Unset = UNSET
-    checked_at: str | Unset = UNSET
+    endpoint_id: Union[Unset, str] = UNSET
+    status: Union[Unset, str] = UNSET
+    response_time_ms: Union[None, Unset, int] = UNSET
+    status_code: Union[None, Unset, int] = UNSET
+    error_message: Union[None, Unset, str] = UNSET
+    checked_at: Union[Unset, str] = UNSET
 
 
 
@@ -48,19 +47,19 @@ class PutMonitoringHealthChecksIdBody:
 
         status = self.status
 
-        response_time_ms: int | None | Unset
+        response_time_ms: Union[None, Unset, int]
         if isinstance(self.response_time_ms, Unset):
             response_time_ms = UNSET
         else:
             response_time_ms = self.response_time_ms
 
-        status_code: int | None | Unset
+        status_code: Union[None, Unset, int]
         if isinstance(self.status_code, Unset):
             status_code = UNSET
         else:
             status_code = self.status_code
 
-        error_message: None | str | Unset
+        error_message: Union[None, Unset, str]
         if isinstance(self.error_message, Unset):
             error_message = UNSET
         else:
@@ -97,32 +96,32 @@ class PutMonitoringHealthChecksIdBody:
 
         status = d.pop("status", UNSET)
 
-        def _parse_response_time_ms(data: object) -> int | None | Unset:
+        def _parse_response_time_ms(data: object) -> Union[None, Unset, int]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(int | None | Unset, data)
+            return cast(Union[None, Unset, int], data)
 
         response_time_ms = _parse_response_time_ms(d.pop("responseTimeMs", UNSET))
 
 
-        def _parse_status_code(data: object) -> int | None | Unset:
+        def _parse_status_code(data: object) -> Union[None, Unset, int]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(int | None | Unset, data)
+            return cast(Union[None, Unset, int], data)
 
         status_code = _parse_status_code(d.pop("statusCode", UNSET))
 
 
-        def _parse_error_message(data: object) -> None | str | Unset:
+        def _parse_error_message(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         error_message = _parse_error_message(d.pop("errorMessage", UNSET))
 

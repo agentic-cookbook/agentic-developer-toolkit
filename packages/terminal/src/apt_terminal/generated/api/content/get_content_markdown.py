@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -12,13 +11,14 @@ from ...models.error import Error
 from ...models.get_content_markdown_response_200 import GetContentMarkdownResponse200
 from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 50,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 50,
 
 ) -> dict[str, Any]:
     
@@ -46,7 +46,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | GetContentMarkdownResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetContentMarkdownResponse200]]:
     if response.status_code == 200:
         response_200 = GetContentMarkdownResponse200.from_dict(response.json())
 
@@ -67,7 +67,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | GetContentMarkdownResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetContentMarkdownResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,22 +79,22 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 50,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 50,
 
-) -> Response[Error | GetContentMarkdownResponse200]:
+) -> Response[Union[Error, GetContentMarkdownResponse200]]:
     """ List the caller's markdown documents (metadata only)
 
     Args:
-        page (int | Unset):
-        page_size (int | Unset):  Default: 50.
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 50.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetContentMarkdownResponse200]
+        Response[Union[Error, GetContentMarkdownResponse200]]
      """
 
 
@@ -113,22 +113,22 @@ page_size=page_size,
 def sync(
     *,
     client: AuthenticatedClient,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 50,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 50,
 
-) -> Error | GetContentMarkdownResponse200 | None:
+) -> Optional[Union[Error, GetContentMarkdownResponse200]]:
     """ List the caller's markdown documents (metadata only)
 
     Args:
-        page (int | Unset):
-        page_size (int | Unset):  Default: 50.
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 50.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetContentMarkdownResponse200
+        Union[Error, GetContentMarkdownResponse200]
      """
 
 
@@ -142,22 +142,22 @@ page_size=page_size,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 50,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 50,
 
-) -> Response[Error | GetContentMarkdownResponse200]:
+) -> Response[Union[Error, GetContentMarkdownResponse200]]:
     """ List the caller's markdown documents (metadata only)
 
     Args:
-        page (int | Unset):
-        page_size (int | Unset):  Default: 50.
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 50.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | GetContentMarkdownResponse200]
+        Response[Union[Error, GetContentMarkdownResponse200]]
      """
 
 
@@ -176,22 +176,22 @@ page_size=page_size,
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    page: int | Unset = UNSET,
-    page_size: int | Unset = 50,
+    page: Union[Unset, int] = UNSET,
+    page_size: Union[Unset, int] = 50,
 
-) -> Error | GetContentMarkdownResponse200 | None:
+) -> Optional[Union[Error, GetContentMarkdownResponse200]]:
     """ List the caller's markdown documents (metadata only)
 
     Args:
-        page (int | Unset):
-        page_size (int | Unset):  Default: 50.
+        page (Union[Unset, int]):
+        page_size (Union[Unset, int]):  Default: 50.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | GetContentMarkdownResponse200
+        Union[Error, GetContentMarkdownResponse200]
      """
 
 

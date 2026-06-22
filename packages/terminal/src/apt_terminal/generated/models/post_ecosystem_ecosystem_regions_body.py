@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -24,15 +23,15 @@ class PostEcosystemEcosystemRegionsBody:
     """ 
         Attributes:
             display_name (str):
-            postgres_host (str | Unset):
-            railway_service_id (str | Unset):
-            is_default_for_new_projects (bool | Unset):
+            postgres_host (Union[Unset, str]):
+            railway_service_id (Union[Unset, str]):
+            is_default_for_new_projects (Union[Unset, bool]):
      """
 
     display_name: str
-    postgres_host: str | Unset = UNSET
-    railway_service_id: str | Unset = UNSET
-    is_default_for_new_projects: bool | Unset = UNSET
+    postgres_host: Union[Unset, str] = UNSET
+    railway_service_id: Union[Unset, str] = UNSET
+    is_default_for_new_projects: Union[Unset, bool] = UNSET
 
 
 

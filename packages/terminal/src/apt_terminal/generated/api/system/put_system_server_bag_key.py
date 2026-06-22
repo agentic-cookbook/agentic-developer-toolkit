@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,7 +10,6 @@ from ... import errors
 from ...models.error import Error
 from ...models.put_system_server_bag_key_body import PutSystemServerBagKeyBody
 from ...models.put_system_server_bag_key_response_200 import PutSystemServerBagKeyResponse200
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     key: str,
     *,
-    body: PutSystemServerBagKeyBody | Unset = UNSET,
+    body: PutSystemServerBagKeyBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/system/server-bag/{key}".format(key=quote(str(key), safe=""),),
+        "url": "/system/server-bag/{key}".format(key=key,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PutSystemServerBagKeyResponse200 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutSystemServerBagKeyResponse200]]:
     if response.status_code == 200:
         response_200 = PutSystemServerBagKeyResponse200.from_dict(response.json())
 
@@ -80,7 +77,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PutSystemServerBagKeyResponse200]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutSystemServerBagKeyResponse200]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -93,21 +90,21 @@ def sync_detailed(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutSystemServerBagKeyBody | Unset = UNSET,
+    body: PutSystemServerBagKeyBody,
 
-) -> Response[Error | PutSystemServerBagKeyResponse200]:
+) -> Response[Union[Error, PutSystemServerBagKeyResponse200]]:
     """ Update server_bag
 
     Args:
         key (str):
-        body (PutSystemServerBagKeyBody | Unset):
+        body (PutSystemServerBagKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutSystemServerBagKeyResponse200]
+        Response[Union[Error, PutSystemServerBagKeyResponse200]]
      """
 
 
@@ -127,21 +124,21 @@ def sync(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutSystemServerBagKeyBody | Unset = UNSET,
+    body: PutSystemServerBagKeyBody,
 
-) -> Error | PutSystemServerBagKeyResponse200 | None:
+) -> Optional[Union[Error, PutSystemServerBagKeyResponse200]]:
     """ Update server_bag
 
     Args:
         key (str):
-        body (PutSystemServerBagKeyBody | Unset):
+        body (PutSystemServerBagKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutSystemServerBagKeyResponse200
+        Union[Error, PutSystemServerBagKeyResponse200]
      """
 
 
@@ -156,21 +153,21 @@ async def asyncio_detailed(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutSystemServerBagKeyBody | Unset = UNSET,
+    body: PutSystemServerBagKeyBody,
 
-) -> Response[Error | PutSystemServerBagKeyResponse200]:
+) -> Response[Union[Error, PutSystemServerBagKeyResponse200]]:
     """ Update server_bag
 
     Args:
         key (str):
-        body (PutSystemServerBagKeyBody | Unset):
+        body (PutSystemServerBagKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PutSystemServerBagKeyResponse200]
+        Response[Union[Error, PutSystemServerBagKeyResponse200]]
      """
 
 
@@ -190,21 +187,21 @@ async def asyncio(
     key: str,
     *,
     client: AuthenticatedClient,
-    body: PutSystemServerBagKeyBody | Unset = UNSET,
+    body: PutSystemServerBagKeyBody,
 
-) -> Error | PutSystemServerBagKeyResponse200 | None:
+) -> Optional[Union[Error, PutSystemServerBagKeyResponse200]]:
     """ Update server_bag
 
     Args:
         key (str):
-        body (PutSystemServerBagKeyBody | Unset):
+        body (PutSystemServerBagKeyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PutSystemServerBagKeyResponse200
+        Union[Error, PutSystemServerBagKeyResponse200]
      """
 
 

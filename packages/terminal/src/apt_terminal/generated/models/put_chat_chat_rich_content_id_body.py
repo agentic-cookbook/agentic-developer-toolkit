@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,18 +22,18 @@ T = TypeVar("T", bound="PutChatChatRichContentIdBody")
 class PutChatChatRichContentIdBody:
     """ 
         Attributes:
-            owner_id (str | Unset):
-            message_id (str | Unset):
-            display_order (int | Unset):
-            kind (str | Unset):
-            payload (str | Unset):
+            owner_id (Union[Unset, str]):
+            message_id (Union[Unset, str]):
+            display_order (Union[Unset, int]):
+            kind (Union[Unset, str]):
+            payload (Union[Unset, str]):
      """
 
-    owner_id: str | Unset = UNSET
-    message_id: str | Unset = UNSET
-    display_order: int | Unset = UNSET
-    kind: str | Unset = UNSET
-    payload: str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    message_id: Union[Unset, str] = UNSET
+    display_order: Union[Unset, int] = UNSET
+    kind: Union[Unset, str] = UNSET
+    payload: Union[Unset, str] = UNSET
 
 
 

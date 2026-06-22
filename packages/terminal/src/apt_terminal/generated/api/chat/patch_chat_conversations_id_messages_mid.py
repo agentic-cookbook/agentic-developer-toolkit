@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -10,7 +9,6 @@ from ... import errors
 
 from ...models.chat_message_edit import ChatMessageEdit
 from ...models.error import Error
-from ...types import UNSET, Unset
 from typing import cast
 
 
@@ -19,7 +17,7 @@ def _get_kwargs(
     id: str,
     mid: str,
     *,
-    body: ChatMessageEdit | Unset = UNSET,
+    body: ChatMessageEdit,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -31,12 +29,11 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
-        "url": "/chat/conversations/{id}/messages/{mid}".format(id=quote(str(id), safe=""),mid=quote(str(mid), safe=""),),
+        "url": "/chat/conversations/{id}/messages/{mid}".format(id=id,mid=mid,),
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -45,7 +42,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Any, Error]]:
     if response.status_code == 204:
         response_204 = cast(Any, None)
         return response_204
@@ -77,7 +74,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Any, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -91,22 +88,22 @@ def sync_detailed(
     mid: str,
     *,
     client: AuthenticatedClient,
-    body: ChatMessageEdit | Unset = UNSET,
+    body: ChatMessageEdit,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Edit a user message
 
     Args:
         id (str):
         mid (str):
-        body (ChatMessageEdit | Unset):
+        body (ChatMessageEdit):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -128,22 +125,22 @@ def sync(
     mid: str,
     *,
     client: AuthenticatedClient,
-    body: ChatMessageEdit | Unset = UNSET,
+    body: ChatMessageEdit,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Edit a user message
 
     Args:
         id (str):
         mid (str):
-        body (ChatMessageEdit | Unset):
+        body (ChatMessageEdit):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 
@@ -160,22 +157,22 @@ async def asyncio_detailed(
     mid: str,
     *,
     client: AuthenticatedClient,
-    body: ChatMessageEdit | Unset = UNSET,
+    body: ChatMessageEdit,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Edit a user message
 
     Args:
         id (str):
         mid (str):
-        body (ChatMessageEdit | Unset):
+        body (ChatMessageEdit):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -197,22 +194,22 @@ async def asyncio(
     mid: str,
     *,
     client: AuthenticatedClient,
-    body: ChatMessageEdit | Unset = UNSET,
+    body: ChatMessageEdit,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Edit a user message
 
     Args:
         id (str):
         mid (str):
-        body (ChatMessageEdit | Unset):
+        body (ChatMessageEdit):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 

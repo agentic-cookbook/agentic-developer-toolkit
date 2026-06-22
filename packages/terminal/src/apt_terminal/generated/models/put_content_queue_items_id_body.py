@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.put_content_queue_items_id_body_payload_type_1 import PutContentQueueItemsIdBodyPayloadType1
@@ -26,26 +26,26 @@ T = TypeVar("T", bound="PutContentQueueItemsIdBody")
 class PutContentQueueItemsIdBody:
     """ 
         Attributes:
-            owner_id (str | Unset):
-            deleted_at (None | str | Unset):
-            queue_id (str | Unset):
-            payload (bool | float | list[Any] | None | PutContentQueueItemsIdBodyPayloadType1 | str | Unset):
-            status (str | Unset):
-            enqueued_at (str | Unset):
-            dequeued_at (None | str | Unset):
-            acked_at (None | str | Unset):
-            nacked_at (None | str | Unset):
+            owner_id (Union[Unset, str]):
+            deleted_at (Union[None, Unset, str]):
+            queue_id (Union[Unset, str]):
+            payload (Union['PutContentQueueItemsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str]):
+            status (Union[Unset, str]):
+            enqueued_at (Union[Unset, str]):
+            dequeued_at (Union[None, Unset, str]):
+            acked_at (Union[None, Unset, str]):
+            nacked_at (Union[None, Unset, str]):
      """
 
-    owner_id: str | Unset = UNSET
-    deleted_at: None | str | Unset = UNSET
-    queue_id: str | Unset = UNSET
-    payload: bool | float | list[Any] | None | PutContentQueueItemsIdBodyPayloadType1 | str | Unset = UNSET
-    status: str | Unset = UNSET
-    enqueued_at: str | Unset = UNSET
-    dequeued_at: None | str | Unset = UNSET
-    acked_at: None | str | Unset = UNSET
-    nacked_at: None | str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    queue_id: Union[Unset, str] = UNSET
+    payload: Union['PutContentQueueItemsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str] = UNSET
+    status: Union[Unset, str] = UNSET
+    enqueued_at: Union[Unset, str] = UNSET
+    dequeued_at: Union[None, Unset, str] = UNSET
+    acked_at: Union[None, Unset, str] = UNSET
+    nacked_at: Union[None, Unset, str] = UNSET
 
 
 
@@ -55,7 +55,7 @@ class PutContentQueueItemsIdBody:
         from ..models.put_content_queue_items_id_body_payload_type_1 import PutContentQueueItemsIdBodyPayloadType1
         owner_id = self.owner_id
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -63,7 +63,7 @@ class PutContentQueueItemsIdBody:
 
         queue_id = self.queue_id
 
-        payload: bool | dict[str, Any] | float | list[Any] | None | str | Unset
+        payload: Union[None, Unset, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.payload, Unset):
             payload = UNSET
         elif isinstance(self.payload, PutContentQueueItemsIdBodyPayloadType1):
@@ -79,19 +79,19 @@ class PutContentQueueItemsIdBody:
 
         enqueued_at = self.enqueued_at
 
-        dequeued_at: None | str | Unset
+        dequeued_at: Union[None, Unset, str]
         if isinstance(self.dequeued_at, Unset):
             dequeued_at = UNSET
         else:
             dequeued_at = self.dequeued_at
 
-        acked_at: None | str | Unset
+        acked_at: Union[None, Unset, str]
         if isinstance(self.acked_at, Unset):
             acked_at = UNSET
         else:
             acked_at = self.acked_at
 
-        nacked_at: None | str | Unset
+        nacked_at: Union[None, Unset, str]
         if isinstance(self.nacked_at, Unset):
             nacked_at = UNSET
         else:
@@ -131,19 +131,19 @@ class PutContentQueueItemsIdBody:
         d = dict(src_dict)
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
         queue_id = d.pop("queueId", UNSET)
 
-        def _parse_payload(data: object) -> bool | float | list[Any] | None | PutContentQueueItemsIdBodyPayloadType1 | str | Unset:
+        def _parse_payload(data: object) -> Union['PutContentQueueItemsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -156,7 +156,7 @@ class PutContentQueueItemsIdBody:
 
 
                 return payload_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -164,9 +164,9 @@ class PutContentQueueItemsIdBody:
                 payload_type_2 = cast(list[Any], data)
 
                 return payload_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PutContentQueueItemsIdBodyPayloadType1 | str | Unset, data)
+            return cast(Union['PutContentQueueItemsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str], data)
 
         payload = _parse_payload(d.pop("payload", UNSET))
 
@@ -175,32 +175,32 @@ class PutContentQueueItemsIdBody:
 
         enqueued_at = d.pop("enqueuedAt", UNSET)
 
-        def _parse_dequeued_at(data: object) -> None | str | Unset:
+        def _parse_dequeued_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         dequeued_at = _parse_dequeued_at(d.pop("dequeuedAt", UNSET))
 
 
-        def _parse_acked_at(data: object) -> None | str | Unset:
+        def _parse_acked_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         acked_at = _parse_acked_at(d.pop("ackedAt", UNSET))
 
 
-        def _parse_nacked_at(data: object) -> None | str | Unset:
+        def _parse_nacked_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         nacked_at = _parse_nacked_at(d.pop("nackedAt", UNSET))
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -23,12 +22,12 @@ T = TypeVar("T", bound="PutPersonaModelsIdBody")
 class PutPersonaModelsIdBody:
     """ 
         Attributes:
-            template_id (str | Unset):
-            name (str | Unset):
+            template_id (Union[Unset, str]):
+            name (Union[Unset, str]):
      """
 
-    template_id: str | Unset = UNSET
-    name: str | Unset = UNSET
+    template_id: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
 
 
 

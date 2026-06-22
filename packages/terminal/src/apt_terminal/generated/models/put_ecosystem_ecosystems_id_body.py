@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -24,28 +23,28 @@ T = TypeVar("T", bound="PutEcosystemEcosystemsIdBody")
 class PutEcosystemEcosystemsIdBody:
     """ 
         Attributes:
-            owner_id (str | Unset):
-            slug (str | Unset):
-            name (str | Unset):
-            description (str | Unset):
-            region (str | Unset):
-            dedicated_db_connection_id (None | str | Unset):
-            primary_domain (str | Unset):
-            is_deleted (bool | Unset):
-            type_ (str | Unset):
-            namespace_id (None | str | Unset):
+            owner_id (Union[Unset, str]):
+            slug (Union[Unset, str]):
+            name (Union[Unset, str]):
+            description (Union[Unset, str]):
+            region (Union[Unset, str]):
+            dedicated_db_connection_id (Union[None, Unset, str]):
+            primary_domain (Union[Unset, str]):
+            is_deleted (Union[Unset, bool]):
+            type_ (Union[Unset, str]):
+            namespace_id (Union[None, Unset, str]):
      """
 
-    owner_id: str | Unset = UNSET
-    slug: str | Unset = UNSET
-    name: str | Unset = UNSET
-    description: str | Unset = UNSET
-    region: str | Unset = UNSET
-    dedicated_db_connection_id: None | str | Unset = UNSET
-    primary_domain: str | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
-    type_: str | Unset = UNSET
-    namespace_id: None | str | Unset = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    slug: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
+    region: Union[Unset, str] = UNSET
+    dedicated_db_connection_id: Union[None, Unset, str] = UNSET
+    primary_domain: Union[Unset, str] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
+    type_: Union[Unset, str] = UNSET
+    namespace_id: Union[None, Unset, str] = UNSET
 
 
 
@@ -62,7 +61,7 @@ class PutEcosystemEcosystemsIdBody:
 
         region = self.region
 
-        dedicated_db_connection_id: None | str | Unset
+        dedicated_db_connection_id: Union[None, Unset, str]
         if isinstance(self.dedicated_db_connection_id, Unset):
             dedicated_db_connection_id = UNSET
         else:
@@ -74,7 +73,7 @@ class PutEcosystemEcosystemsIdBody:
 
         type_ = self.type_
 
-        namespace_id: None | str | Unset
+        namespace_id: Union[None, Unset, str]
         if isinstance(self.namespace_id, Unset):
             namespace_id = UNSET
         else:
@@ -123,12 +122,12 @@ class PutEcosystemEcosystemsIdBody:
 
         region = d.pop("region", UNSET)
 
-        def _parse_dedicated_db_connection_id(data: object) -> None | str | Unset:
+        def _parse_dedicated_db_connection_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         dedicated_db_connection_id = _parse_dedicated_db_connection_id(d.pop("dedicatedDbConnectionId", UNSET))
 
@@ -139,12 +138,12 @@ class PutEcosystemEcosystemsIdBody:
 
         type_ = d.pop("type", UNSET)
 
-        def _parse_namespace_id(data: object) -> None | str | Unset:
+        def _parse_namespace_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         namespace_id = _parse_namespace_id(d.pop("namespaceId", UNSET))
 

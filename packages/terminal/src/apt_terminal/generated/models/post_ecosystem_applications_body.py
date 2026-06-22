@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -26,17 +25,17 @@ class PostEcosystemApplicationsBody:
             slug (str):
             display_name (str):
             consumer_kind (str):
-            ecosystem_id (str | Unset):
-            is_deleted (bool | Unset):
-            id (str | Unset):
+            ecosystem_id (Union[Unset, str]):
+            is_deleted (Union[Unset, bool]):
+            id (Union[Unset, str]):
      """
 
     slug: str
     display_name: str
     consumer_kind: str
-    ecosystem_id: str | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
-    id: str | Unset = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
+    id: Union[Unset, str] = UNSET
 
 
 

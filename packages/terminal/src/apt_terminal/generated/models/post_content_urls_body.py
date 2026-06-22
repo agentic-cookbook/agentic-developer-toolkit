@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,7 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
-from typing import cast
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -27,35 +26,35 @@ class PostContentUrlsBody:
             original_url (str):
             canonical_url (str):
             canonical_url_hash (str):
-            deleted_at (None | str | Unset):
-            owner_id (str | Unset):
-            title (None | str | Unset):
-            description (None | str | Unset):
-            note (None | str | Unset):
-            preview_storage_key (None | str | Unset):
-            preview_url (None | str | Unset):
-            preview_status (str | Unset):
-            preview_error (None | str | Unset):
-            preview_generated_at (None | str | Unset):
-            preview_attempts (int | Unset):
-            is_deleted (bool | Unset):
+            deleted_at (Union[None, Unset, str]):
+            owner_id (Union[Unset, str]):
+            title (Union[None, Unset, str]):
+            description (Union[None, Unset, str]):
+            note (Union[None, Unset, str]):
+            preview_storage_key (Union[None, Unset, str]):
+            preview_url (Union[None, Unset, str]):
+            preview_status (Union[Unset, str]):
+            preview_error (Union[None, Unset, str]):
+            preview_generated_at (Union[None, Unset, str]):
+            preview_attempts (Union[Unset, int]):
+            is_deleted (Union[Unset, bool]):
      """
 
     original_url: str
     canonical_url: str
     canonical_url_hash: str
-    deleted_at: None | str | Unset = UNSET
-    owner_id: str | Unset = UNSET
-    title: None | str | Unset = UNSET
-    description: None | str | Unset = UNSET
-    note: None | str | Unset = UNSET
-    preview_storage_key: None | str | Unset = UNSET
-    preview_url: None | str | Unset = UNSET
-    preview_status: str | Unset = UNSET
-    preview_error: None | str | Unset = UNSET
-    preview_generated_at: None | str | Unset = UNSET
-    preview_attempts: int | Unset = UNSET
-    is_deleted: bool | Unset = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    title: Union[None, Unset, str] = UNSET
+    description: Union[None, Unset, str] = UNSET
+    note: Union[None, Unset, str] = UNSET
+    preview_storage_key: Union[None, Unset, str] = UNSET
+    preview_url: Union[None, Unset, str] = UNSET
+    preview_status: Union[Unset, str] = UNSET
+    preview_error: Union[None, Unset, str] = UNSET
+    preview_generated_at: Union[None, Unset, str] = UNSET
+    preview_attempts: Union[Unset, int] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
 
 
 
@@ -68,7 +67,7 @@ class PostContentUrlsBody:
 
         canonical_url_hash = self.canonical_url_hash
 
-        deleted_at: None | str | Unset
+        deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
             deleted_at = UNSET
         else:
@@ -76,31 +75,31 @@ class PostContentUrlsBody:
 
         owner_id = self.owner_id
 
-        title: None | str | Unset
+        title: Union[None, Unset, str]
         if isinstance(self.title, Unset):
             title = UNSET
         else:
             title = self.title
 
-        description: None | str | Unset
+        description: Union[None, Unset, str]
         if isinstance(self.description, Unset):
             description = UNSET
         else:
             description = self.description
 
-        note: None | str | Unset
+        note: Union[None, Unset, str]
         if isinstance(self.note, Unset):
             note = UNSET
         else:
             note = self.note
 
-        preview_storage_key: None | str | Unset
+        preview_storage_key: Union[None, Unset, str]
         if isinstance(self.preview_storage_key, Unset):
             preview_storage_key = UNSET
         else:
             preview_storage_key = self.preview_storage_key
 
-        preview_url: None | str | Unset
+        preview_url: Union[None, Unset, str]
         if isinstance(self.preview_url, Unset):
             preview_url = UNSET
         else:
@@ -108,13 +107,13 @@ class PostContentUrlsBody:
 
         preview_status = self.preview_status
 
-        preview_error: None | str | Unset
+        preview_error: Union[None, Unset, str]
         if isinstance(self.preview_error, Unset):
             preview_error = UNSET
         else:
             preview_error = self.preview_error
 
-        preview_generated_at: None | str | Unset
+        preview_generated_at: Union[None, Unset, str]
         if isinstance(self.preview_generated_at, Unset):
             preview_generated_at = UNSET
         else:
@@ -170,86 +169,86 @@ class PostContentUrlsBody:
 
         canonical_url_hash = d.pop("canonicalUrlHash")
 
-        def _parse_deleted_at(data: object) -> None | str | Unset:
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
         owner_id = d.pop("ownerId", UNSET)
 
-        def _parse_title(data: object) -> None | str | Unset:
+        def _parse_title(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         title = _parse_title(d.pop("title", UNSET))
 
 
-        def _parse_description(data: object) -> None | str | Unset:
+        def _parse_description(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         description = _parse_description(d.pop("description", UNSET))
 
 
-        def _parse_note(data: object) -> None | str | Unset:
+        def _parse_note(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         note = _parse_note(d.pop("note", UNSET))
 
 
-        def _parse_preview_storage_key(data: object) -> None | str | Unset:
+        def _parse_preview_storage_key(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         preview_storage_key = _parse_preview_storage_key(d.pop("previewStorageKey", UNSET))
 
 
-        def _parse_preview_url(data: object) -> None | str | Unset:
+        def _parse_preview_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         preview_url = _parse_preview_url(d.pop("previewUrl", UNSET))
 
 
         preview_status = d.pop("previewStatus", UNSET)
 
-        def _parse_preview_error(data: object) -> None | str | Unset:
+        def _parse_preview_error(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         preview_error = _parse_preview_error(d.pop("previewError", UNSET))
 
 
-        def _parse_preview_generated_at(data: object) -> None | str | Unset:
+        def _parse_preview_generated_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            return cast(Union[None, Unset, str], data)
 
         preview_generated_at = _parse_preview_generated_at(d.pop("previewGeneratedAt", UNSET))
 

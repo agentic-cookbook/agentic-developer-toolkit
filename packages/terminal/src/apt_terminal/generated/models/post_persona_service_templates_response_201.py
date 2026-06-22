@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -27,8 +25,8 @@ class PostPersonaServiceTemplatesResponse201:
             provider_kind (str):
             name (str):
             base_url (str):
-            documentation_url (None | str):
-            status_url (None | str):
+            documentation_url (Union[None, str]):
+            status_url (Union[None, str]):
             created_at (str):
             updated_at (str):
      """
@@ -37,8 +35,8 @@ class PostPersonaServiceTemplatesResponse201:
     provider_kind: str
     name: str
     base_url: str
-    documentation_url: None | str
-    status_url: None | str
+    documentation_url: Union[None, str]
+    status_url: Union[None, str]
     created_at: str
     updated_at: str
 
@@ -55,10 +53,10 @@ class PostPersonaServiceTemplatesResponse201:
 
         base_url = self.base_url
 
-        documentation_url: None | str
+        documentation_url: Union[None, str]
         documentation_url = self.documentation_url
 
-        status_url: None | str
+        status_url: Union[None, str]
         status_url = self.status_url
 
         created_at = self.created_at
@@ -94,18 +92,18 @@ class PostPersonaServiceTemplatesResponse201:
 
         base_url = d.pop("baseUrl")
 
-        def _parse_documentation_url(data: object) -> None | str:
+        def _parse_documentation_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         documentation_url = _parse_documentation_url(d.pop("documentationUrl"))
 
 
-        def _parse_status_url(data: object) -> None | str:
+        def _parse_status_url(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         status_url = _parse_status_url(d.pop("statusUrl"))
 

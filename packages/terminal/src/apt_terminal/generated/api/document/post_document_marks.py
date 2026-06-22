@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.post_document_marks_body import PostDocumentMarksBody
 from ...models.post_document_marks_response_201 import PostDocumentMarksResponse201
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostDocumentMarksBody | Unset = UNSET,
+    body: PostDocumentMarksBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/document/marks",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PostDocumentMarksResponse201 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostDocumentMarksResponse201]]:
     if response.status_code == 201:
         response_201 = PostDocumentMarksResponse201.from_dict(response.json())
 
@@ -72,7 +69,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PostDocumentMarksResponse201]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostDocumentMarksResponse201]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,20 +81,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostDocumentMarksBody | Unset = UNSET,
+    body: PostDocumentMarksBody,
 
-) -> Response[Error | PostDocumentMarksResponse201]:
+) -> Response[Union[Error, PostDocumentMarksResponse201]]:
     """ Create marks
 
     Args:
-        body (PostDocumentMarksBody | Unset):
+        body (PostDocumentMarksBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostDocumentMarksResponse201]
+        Response[Union[Error, PostDocumentMarksResponse201]]
      """
 
 
@@ -115,20 +112,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostDocumentMarksBody | Unset = UNSET,
+    body: PostDocumentMarksBody,
 
-) -> Error | PostDocumentMarksResponse201 | None:
+) -> Optional[Union[Error, PostDocumentMarksResponse201]]:
     """ Create marks
 
     Args:
-        body (PostDocumentMarksBody | Unset):
+        body (PostDocumentMarksBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostDocumentMarksResponse201
+        Union[Error, PostDocumentMarksResponse201]
      """
 
 
@@ -141,20 +138,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostDocumentMarksBody | Unset = UNSET,
+    body: PostDocumentMarksBody,
 
-) -> Response[Error | PostDocumentMarksResponse201]:
+) -> Response[Union[Error, PostDocumentMarksResponse201]]:
     """ Create marks
 
     Args:
-        body (PostDocumentMarksBody | Unset):
+        body (PostDocumentMarksBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostDocumentMarksResponse201]
+        Response[Union[Error, PostDocumentMarksResponse201]]
      """
 
 
@@ -172,20 +169,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostDocumentMarksBody | Unset = UNSET,
+    body: PostDocumentMarksBody,
 
-) -> Error | PostDocumentMarksResponse201 | None:
+) -> Optional[Union[Error, PostDocumentMarksResponse201]]:
     """ Create marks
 
     Args:
-        body (PostDocumentMarksBody | Unset):
+        body (PostDocumentMarksBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostDocumentMarksResponse201
+        Union[Error, PostDocumentMarksResponse201]
      """
 
 

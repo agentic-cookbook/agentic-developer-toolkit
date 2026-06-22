@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -27,7 +25,7 @@ class PostTeamMembersResponse201:
             team_id (str):
             user_id (str):
             role (str):
-            added_by (None | str):
+            added_by (Union[None, str]):
             added_at (str):
      """
 
@@ -35,7 +33,7 @@ class PostTeamMembersResponse201:
     team_id: str
     user_id: str
     role: str
-    added_by: None | str
+    added_by: Union[None, str]
     added_at: str
 
 
@@ -51,7 +49,7 @@ class PostTeamMembersResponse201:
 
         role = self.role
 
-        added_by: None | str
+        added_by: Union[None, str]
         added_by = self.added_by
 
         added_at = self.added_at
@@ -83,10 +81,10 @@ class PostTeamMembersResponse201:
 
         role = d.pop("role")
 
-        def _parse_added_by(data: object) -> None | str:
+        def _parse_added_by(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         added_by = _parse_added_by(d.pop("addedBy"))
 

@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,10 +23,10 @@ T = TypeVar("T", bound="GetContentMarkdownIdVersionsResponse200")
 class GetContentMarkdownIdVersionsResponse200:
     """ 
         Attributes:
-            items (list[MarkdownDocumentVersionSummary]):
+            items (list['MarkdownDocumentVersionSummary']):
      """
 
-    items: list[MarkdownDocumentVersionSummary]
+    items: list['MarkdownDocumentVersionSummary']
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 

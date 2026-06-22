@@ -5,6 +5,14 @@ from .api_token_created import ApiTokenCreated
 from .auth_method_setting import AuthMethodSetting
 from .auth_result import AuthResult
 from .auth_user_method import AuthUserMethod
+from .bucket_access_group import BucketAccessGroup
+from .bucket_access_group_detail import BucketAccessGroupDetail
+from .bucket_access_group_list import BucketAccessGroupList
+from .bucket_access_group_member import BucketAccessGroupMember
+from .bucket_access_group_member_member_type import BucketAccessGroupMemberMemberType
+from .bucket_access_group_metadata_type_0 import BucketAccessGroupMetadataType0
+from .bucket_grant import BucketGrant
+from .bucket_grant_target_type import BucketGrantTargetType
 from .bucket_row import BucketRow
 from .bucket_row_list import BucketRowList
 from .chat_conversation import ChatConversation
@@ -43,14 +51,14 @@ from .get_billing_subscriptions_id_response_200 import GetBillingSubscriptionsId
 from .get_billing_subscriptions_response_200_item import GetBillingSubscriptionsResponse200Item
 from .get_billing_tier_entitlements_id_response_200 import GetBillingTierEntitlementsIdResponse200
 from .get_billing_tier_entitlements_response_200_item import GetBillingTierEntitlementsResponse200Item
-from .get_bucket_schema_tables_id_response_200 import GetBucketSchemaTablesIdResponse200
-from .get_bucket_schema_tables_id_response_200_metadata_type_0_type_1 import GetBucketSchemaTablesIdResponse200MetadataType0Type1
-from .get_bucket_schema_tables_response_200_item import GetBucketSchemaTablesResponse200Item
-from .get_bucket_schema_tables_response_200_item_metadata_type_0_type_1 import GetBucketSchemaTablesResponse200ItemMetadataType0Type1
-from .get_bucket_schemas_id_response_200 import GetBucketSchemasIdResponse200
-from .get_bucket_schemas_id_response_200_metadata_type_0_type_1 import GetBucketSchemasIdResponse200MetadataType0Type1
-from .get_bucket_schemas_response_200_item import GetBucketSchemasResponse200Item
-from .get_bucket_schemas_response_200_item_metadata_type_0_type_1 import GetBucketSchemasResponse200ItemMetadataType0Type1
+from .get_bucket_bucket_types_id_response_200 import GetBucketBucketTypesIdResponse200
+from .get_bucket_bucket_types_id_response_200_metadata_type_0_type_1 import GetBucketBucketTypesIdResponse200MetadataType0Type1
+from .get_bucket_bucket_types_response_200_item import GetBucketBucketTypesResponse200Item
+from .get_bucket_bucket_types_response_200_item_metadata_type_0_type_1 import GetBucketBucketTypesResponse200ItemMetadataType0Type1
+from .get_bucket_buckets_id_response_200 import GetBucketBucketsIdResponse200
+from .get_bucket_buckets_id_response_200_metadata_type_0_type_1 import GetBucketBucketsIdResponse200MetadataType0Type1
+from .get_bucket_buckets_response_200_item import GetBucketBucketsResponse200Item
+from .get_bucket_buckets_response_200_item_metadata_type_0_type_1 import GetBucketBucketsResponse200ItemMetadataType0Type1
 from .get_chat_chat_mentions_id_response_200 import GetChatChatMentionsIdResponse200
 from .get_chat_chat_mentions_response_200_item import GetChatChatMentionsResponse200Item
 from .get_chat_chat_messages_id_response_200 import GetChatChatMessagesIdResponse200
@@ -291,6 +299,7 @@ from .notification_preference import NotificationPreference
 from .notification_preference_category import NotificationPreferenceCategory
 from .patch_auth_me_body import PatchAuthMeBody
 from .patch_auth_methods_method_body import PatchAuthMethodsMethodBody
+from .patch_bucket_access_groups_group_id_body import PatchBucketAccessGroupsGroupIdBody
 from .patch_oauth_clients_slug_body import PatchOauthClientsSlugBody
 from .patch_oauth_clients_slug_response_200 import PatchOauthClientsSlugResponse200
 from .patch_oauth_providers_slug_body import PatchOauthProvidersSlugBody
@@ -331,14 +340,17 @@ from .post_billing_subscriptions_body import PostBillingSubscriptionsBody
 from .post_billing_subscriptions_response_201 import PostBillingSubscriptionsResponse201
 from .post_billing_tier_entitlements_body import PostBillingTierEntitlementsBody
 from .post_billing_tier_entitlements_response_201 import PostBillingTierEntitlementsResponse201
-from .post_bucket_schema_tables_body import PostBucketSchemaTablesBody
-from .post_bucket_schema_tables_body_metadata_type_0_type_1 import PostBucketSchemaTablesBodyMetadataType0Type1
-from .post_bucket_schema_tables_response_201 import PostBucketSchemaTablesResponse201
-from .post_bucket_schema_tables_response_201_metadata_type_0_type_1 import PostBucketSchemaTablesResponse201MetadataType0Type1
-from .post_bucket_schemas_body import PostBucketSchemasBody
-from .post_bucket_schemas_body_metadata_type_0_type_1 import PostBucketSchemasBodyMetadataType0Type1
-from .post_bucket_schemas_response_201 import PostBucketSchemasResponse201
-from .post_bucket_schemas_response_201_metadata_type_0_type_1 import PostBucketSchemasResponse201MetadataType0Type1
+from .post_bucket_access_groups_group_id_members_body import PostBucketAccessGroupsGroupIdMembersBody
+from .post_bucket_access_groups_group_id_members_body_member_type import PostBucketAccessGroupsGroupIdMembersBodyMemberType
+from .post_bucket_bucket_types_body import PostBucketBucketTypesBody
+from .post_bucket_bucket_types_body_metadata_type_0_type_1 import PostBucketBucketTypesBodyMetadataType0Type1
+from .post_bucket_bucket_types_response_201 import PostBucketBucketTypesResponse201
+from .post_bucket_bucket_types_response_201_metadata_type_0_type_1 import PostBucketBucketTypesResponse201MetadataType0Type1
+from .post_bucket_buckets_body import PostBucketBucketsBody
+from .post_bucket_buckets_body_metadata_type_0_type_1 import PostBucketBucketsBodyMetadataType0Type1
+from .post_bucket_buckets_bucket_id_access_groups_body import PostBucketBucketsBucketIdAccessGroupsBody
+from .post_bucket_buckets_response_201 import PostBucketBucketsResponse201
+from .post_bucket_buckets_response_201_metadata_type_0_type_1 import PostBucketBucketsResponse201MetadataType0Type1
 from .post_chat_chat_mentions_body import PostChatChatMentionsBody
 from .post_chat_chat_mentions_response_201 import PostChatChatMentionsResponse201
 from .post_chat_chat_messages_body import PostChatChatMessagesBody
@@ -588,14 +600,16 @@ from .put_billing_subscriptions_id_body import PutBillingSubscriptionsIdBody
 from .put_billing_subscriptions_id_response_200 import PutBillingSubscriptionsIdResponse200
 from .put_billing_tier_entitlements_id_body import PutBillingTierEntitlementsIdBody
 from .put_billing_tier_entitlements_id_response_200 import PutBillingTierEntitlementsIdResponse200
-from .put_bucket_schema_tables_id_body import PutBucketSchemaTablesIdBody
-from .put_bucket_schema_tables_id_body_metadata_type_0_type_1 import PutBucketSchemaTablesIdBodyMetadataType0Type1
-from .put_bucket_schema_tables_id_response_200 import PutBucketSchemaTablesIdResponse200
-from .put_bucket_schema_tables_id_response_200_metadata_type_0_type_1 import PutBucketSchemaTablesIdResponse200MetadataType0Type1
-from .put_bucket_schemas_id_body import PutBucketSchemasIdBody
-from .put_bucket_schemas_id_body_metadata_type_0_type_1 import PutBucketSchemasIdBodyMetadataType0Type1
-from .put_bucket_schemas_id_response_200 import PutBucketSchemasIdResponse200
-from .put_bucket_schemas_id_response_200_metadata_type_0_type_1 import PutBucketSchemasIdResponse200MetadataType0Type1
+from .put_bucket_access_groups_group_id_grants_body import PutBucketAccessGroupsGroupIdGrantsBody
+from .put_bucket_access_groups_group_id_grants_body_target_type import PutBucketAccessGroupsGroupIdGrantsBodyTargetType
+from .put_bucket_bucket_types_id_body import PutBucketBucketTypesIdBody
+from .put_bucket_bucket_types_id_body_metadata_type_0_type_1 import PutBucketBucketTypesIdBodyMetadataType0Type1
+from .put_bucket_bucket_types_id_response_200 import PutBucketBucketTypesIdResponse200
+from .put_bucket_bucket_types_id_response_200_metadata_type_0_type_1 import PutBucketBucketTypesIdResponse200MetadataType0Type1
+from .put_bucket_buckets_id_body import PutBucketBucketsIdBody
+from .put_bucket_buckets_id_body_metadata_type_0_type_1 import PutBucketBucketsIdBodyMetadataType0Type1
+from .put_bucket_buckets_id_response_200 import PutBucketBucketsIdResponse200
+from .put_bucket_buckets_id_response_200_metadata_type_0_type_1 import PutBucketBucketsIdResponse200MetadataType0Type1
 from .put_chat_chat_mentions_id_body import PutChatChatMentionsIdBody
 from .put_chat_chat_mentions_id_response_200 import PutChatChatMentionsIdResponse200
 from .put_chat_chat_messages_id_body import PutChatChatMessagesIdBody
@@ -834,6 +848,14 @@ __all__ = (
     "AuthMethodSetting",
     "AuthResult",
     "AuthUserMethod",
+    "BucketAccessGroup",
+    "BucketAccessGroupDetail",
+    "BucketAccessGroupList",
+    "BucketAccessGroupMember",
+    "BucketAccessGroupMemberMemberType",
+    "BucketAccessGroupMetadataType0",
+    "BucketGrant",
+    "BucketGrantTargetType",
     "BucketRow",
     "BucketRowList",
     "ChatConversation",
@@ -872,14 +894,14 @@ __all__ = (
     "GetBillingSubscriptionTiersResponse200Item",
     "GetBillingTierEntitlementsIdResponse200",
     "GetBillingTierEntitlementsResponse200Item",
-    "GetBucketSchemasIdResponse200",
-    "GetBucketSchemasIdResponse200MetadataType0Type1",
-    "GetBucketSchemasResponse200Item",
-    "GetBucketSchemasResponse200ItemMetadataType0Type1",
-    "GetBucketSchemaTablesIdResponse200",
-    "GetBucketSchemaTablesIdResponse200MetadataType0Type1",
-    "GetBucketSchemaTablesResponse200Item",
-    "GetBucketSchemaTablesResponse200ItemMetadataType0Type1",
+    "GetBucketBucketsIdResponse200",
+    "GetBucketBucketsIdResponse200MetadataType0Type1",
+    "GetBucketBucketsResponse200Item",
+    "GetBucketBucketsResponse200ItemMetadataType0Type1",
+    "GetBucketBucketTypesIdResponse200",
+    "GetBucketBucketTypesIdResponse200MetadataType0Type1",
+    "GetBucketBucketTypesResponse200Item",
+    "GetBucketBucketTypesResponse200ItemMetadataType0Type1",
     "GetChatChatMentionsIdResponse200",
     "GetChatChatMentionsResponse200Item",
     "GetChatChatMessagesIdResponse200",
@@ -1120,6 +1142,7 @@ __all__ = (
     "NotificationPreferenceCategory",
     "PatchAuthMeBody",
     "PatchAuthMethodsMethodBody",
+    "PatchBucketAccessGroupsGroupIdBody",
     "PatchOauthClientsSlugBody",
     "PatchOauthClientsSlugResponse200",
     "PatchOauthProvidersSlugBody",
@@ -1160,14 +1183,17 @@ __all__ = (
     "PostBillingSubscriptionTiersResponse201",
     "PostBillingTierEntitlementsBody",
     "PostBillingTierEntitlementsResponse201",
-    "PostBucketSchemasBody",
-    "PostBucketSchemasBodyMetadataType0Type1",
-    "PostBucketSchemasResponse201",
-    "PostBucketSchemasResponse201MetadataType0Type1",
-    "PostBucketSchemaTablesBody",
-    "PostBucketSchemaTablesBodyMetadataType0Type1",
-    "PostBucketSchemaTablesResponse201",
-    "PostBucketSchemaTablesResponse201MetadataType0Type1",
+    "PostBucketAccessGroupsGroupIdMembersBody",
+    "PostBucketAccessGroupsGroupIdMembersBodyMemberType",
+    "PostBucketBucketsBody",
+    "PostBucketBucketsBodyMetadataType0Type1",
+    "PostBucketBucketsBucketIdAccessGroupsBody",
+    "PostBucketBucketsResponse201",
+    "PostBucketBucketsResponse201MetadataType0Type1",
+    "PostBucketBucketTypesBody",
+    "PostBucketBucketTypesBodyMetadataType0Type1",
+    "PostBucketBucketTypesResponse201",
+    "PostBucketBucketTypesResponse201MetadataType0Type1",
     "PostChatChatMentionsBody",
     "PostChatChatMentionsResponse201",
     "PostChatChatMessagesBody",
@@ -1417,14 +1443,16 @@ __all__ = (
     "PutBillingSubscriptionTiersIdResponse200",
     "PutBillingTierEntitlementsIdBody",
     "PutBillingTierEntitlementsIdResponse200",
-    "PutBucketSchemasIdBody",
-    "PutBucketSchemasIdBodyMetadataType0Type1",
-    "PutBucketSchemasIdResponse200",
-    "PutBucketSchemasIdResponse200MetadataType0Type1",
-    "PutBucketSchemaTablesIdBody",
-    "PutBucketSchemaTablesIdBodyMetadataType0Type1",
-    "PutBucketSchemaTablesIdResponse200",
-    "PutBucketSchemaTablesIdResponse200MetadataType0Type1",
+    "PutBucketAccessGroupsGroupIdGrantsBody",
+    "PutBucketAccessGroupsGroupIdGrantsBodyTargetType",
+    "PutBucketBucketsIdBody",
+    "PutBucketBucketsIdBodyMetadataType0Type1",
+    "PutBucketBucketsIdResponse200",
+    "PutBucketBucketsIdResponse200MetadataType0Type1",
+    "PutBucketBucketTypesIdBody",
+    "PutBucketBucketTypesIdBodyMetadataType0Type1",
+    "PutBucketBucketTypesIdResponse200",
+    "PutBucketBucketTypesIdResponse200MetadataType0Type1",
     "PutChatChatMentionsIdBody",
     "PutChatChatMentionsIdResponse200",
     "PutChatChatMessagesIdBody",

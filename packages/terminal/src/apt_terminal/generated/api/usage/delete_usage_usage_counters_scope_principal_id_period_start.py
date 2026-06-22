@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -27,7 +26,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "delete",
-        "url": "/usage/usage-counters/{scope}/{principal_id}/{period_start}".format(scope=quote(str(scope), safe=""),principal_id=quote(str(principal_id), safe=""),period_start=quote(str(period_start), safe=""),),
+        "url": "/usage/usage-counters/{scope}/{principal_id}/{period_start}".format(scope=scope,principal_id=principal_id,period_start=period_start,),
     }
 
 
@@ -35,7 +34,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Error | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Any, Error]]:
     if response.status_code == 204:
         response_204 = cast(Any, None)
         return response_204
@@ -60,7 +59,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Error]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Any, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,7 +75,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Delete usage_counters
 
     Args:
@@ -89,7 +88,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -113,7 +112,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Delete usage_counters
 
     Args:
@@ -126,7 +125,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 
@@ -145,7 +144,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Any | Error]:
+) -> Response[Union[Any, Error]]:
     """ Delete usage_counters
 
     Args:
@@ -158,7 +157,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Union[Any, Error]]
      """
 
 
@@ -182,7 +181,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Any | Error | None:
+) -> Optional[Union[Any, Error]]:
     """ Delete usage_counters
 
     Args:
@@ -195,7 +194,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Union[Any, Error]
      """
 
 

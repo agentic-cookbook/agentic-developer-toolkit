@@ -1,14 +1,12 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from typing import cast
+from typing import cast, Union
 
 
 
@@ -29,7 +27,7 @@ class GetTeamTeamsResponse200Item:
             slug (str):
             name (str):
             description (str):
-            created_by (None | str):
+            created_by (Union[None, str]):
             created_at (str):
             updated_at (str):
             is_deleted (bool):
@@ -41,7 +39,7 @@ class GetTeamTeamsResponse200Item:
     slug: str
     name: str
     description: str
-    created_by: None | str
+    created_by: Union[None, str]
     created_at: str
     updated_at: str
     is_deleted: bool
@@ -63,7 +61,7 @@ class GetTeamTeamsResponse200Item:
 
         description = self.description
 
-        created_by: None | str
+        created_by: Union[None, str]
         created_by = self.created_by
 
         created_at = self.created_at
@@ -107,10 +105,10 @@ class GetTeamTeamsResponse200Item:
 
         description = d.pop("description")
 
-        def _parse_created_by(data: object) -> None | str:
+        def _parse_created_by(data: object) -> Union[None, str]:
             if data is None:
                 return data
-            return cast(None | str, data)
+            return cast(Union[None, str], data)
 
         created_by = _parse_created_by(d.pop("createdBy"))
 

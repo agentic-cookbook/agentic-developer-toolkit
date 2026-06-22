@@ -1,6 +1,5 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -11,14 +10,13 @@ from ... import errors
 from ...models.error import Error
 from ...models.post_notifications_preferences_body import PostNotificationsPreferencesBody
 from ...models.post_notifications_preferences_response_201 import PostNotificationsPreferencesResponse201
-from ...types import UNSET, Unset
 from typing import cast
 
 
 
 def _get_kwargs(
     *,
-    body: PostNotificationsPreferencesBody | Unset = UNSET,
+    body: PostNotificationsPreferencesBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -33,9 +31,8 @@ def _get_kwargs(
         "url": "/notifications/preferences",
     }
 
-    
-    if not isinstance(body, Unset):
-        _kwargs["json"] = body.to_dict()
+    _kwargs["json"] = body.to_dict()
+
 
     headers["Content-Type"] = "application/json"
 
@@ -44,7 +41,7 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | PostNotificationsPreferencesResponse201 | None:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostNotificationsPreferencesResponse201]]:
     if response.status_code == 201:
         response_201 = PostNotificationsPreferencesResponse201.from_dict(response.json())
 
@@ -79,7 +76,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Error | PostNotificationsPreferencesResponse201]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostNotificationsPreferencesResponse201]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -91,20 +88,20 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostNotificationsPreferencesBody | Unset = UNSET,
+    body: PostNotificationsPreferencesBody,
 
-) -> Response[Error | PostNotificationsPreferencesResponse201]:
+) -> Response[Union[Error, PostNotificationsPreferencesResponse201]]:
     """ Create a notification preference for one category
 
     Args:
-        body (PostNotificationsPreferencesBody | Unset):
+        body (PostNotificationsPreferencesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostNotificationsPreferencesResponse201]
+        Response[Union[Error, PostNotificationsPreferencesResponse201]]
      """
 
 
@@ -122,20 +119,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: PostNotificationsPreferencesBody | Unset = UNSET,
+    body: PostNotificationsPreferencesBody,
 
-) -> Error | PostNotificationsPreferencesResponse201 | None:
+) -> Optional[Union[Error, PostNotificationsPreferencesResponse201]]:
     """ Create a notification preference for one category
 
     Args:
-        body (PostNotificationsPreferencesBody | Unset):
+        body (PostNotificationsPreferencesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostNotificationsPreferencesResponse201
+        Union[Error, PostNotificationsPreferencesResponse201]
      """
 
 
@@ -148,20 +145,20 @@ body=body,
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: PostNotificationsPreferencesBody | Unset = UNSET,
+    body: PostNotificationsPreferencesBody,
 
-) -> Response[Error | PostNotificationsPreferencesResponse201]:
+) -> Response[Union[Error, PostNotificationsPreferencesResponse201]]:
     """ Create a notification preference for one category
 
     Args:
-        body (PostNotificationsPreferencesBody | Unset):
+        body (PostNotificationsPreferencesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Error | PostNotificationsPreferencesResponse201]
+        Response[Union[Error, PostNotificationsPreferencesResponse201]]
      """
 
 
@@ -179,20 +176,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: PostNotificationsPreferencesBody | Unset = UNSET,
+    body: PostNotificationsPreferencesBody,
 
-) -> Error | PostNotificationsPreferencesResponse201 | None:
+) -> Optional[Union[Error, PostNotificationsPreferencesResponse201]]:
     """ Create a notification preference for one category
 
     Args:
-        body (PostNotificationsPreferencesBody | Unset):
+        body (PostNotificationsPreferencesBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Error | PostNotificationsPreferencesResponse201
+        Union[Error, PostNotificationsPreferencesResponse201]
      """
 
 

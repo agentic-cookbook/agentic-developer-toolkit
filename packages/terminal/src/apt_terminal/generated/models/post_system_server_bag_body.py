@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -10,6 +8,8 @@ from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
 from typing import cast
+from typing import cast, Union
+from typing import Union
 
 if TYPE_CHECKING:
   from ..models.post_system_server_bag_body_value_type_1 import PostSystemServerBagBodyValueType1
@@ -27,13 +27,13 @@ class PostSystemServerBagBody:
     """ 
         Attributes:
             key (str):
-            value (bool | float | list[Any] | None | PostSystemServerBagBodyValueType1 | str):
-            description (str | Unset):
+            value (Union['PostSystemServerBagBodyValueType1', None, bool, float, list[Any], str]):
+            description (Union[Unset, str]):
      """
 
     key: str
-    value: bool | float | list[Any] | None | PostSystemServerBagBodyValueType1 | str
-    description: str | Unset = UNSET
+    value: Union['PostSystemServerBagBodyValueType1', None, bool, float, list[Any], str]
+    description: Union[Unset, str] = UNSET
 
 
 
@@ -43,7 +43,7 @@ class PostSystemServerBagBody:
         from ..models.post_system_server_bag_body_value_type_1 import PostSystemServerBagBodyValueType1
         key = self.key
 
-        value: bool | dict[str, Any] | float | list[Any] | None | str
+        value: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.value, PostSystemServerBagBodyValueType1):
             value = self.value.to_dict()
         elif isinstance(self.value, list):
@@ -75,7 +75,7 @@ class PostSystemServerBagBody:
         d = dict(src_dict)
         key = d.pop("key")
 
-        def _parse_value(data: object) -> bool | float | list[Any] | None | PostSystemServerBagBodyValueType1 | str:
+        def _parse_value(data: object) -> Union['PostSystemServerBagBodyValueType1', None, bool, float, list[Any], str]:
             if data is None:
                 return data
             try:
@@ -86,7 +86,7 @@ class PostSystemServerBagBody:
 
 
                 return value_type_1
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
             try:
                 if not isinstance(data, list):
@@ -94,9 +94,9 @@ class PostSystemServerBagBody:
                 value_type_2 = cast(list[Any], data)
 
                 return value_type_2
-            except (TypeError, ValueError, AttributeError, KeyError):
+            except: # noqa: E722
                 pass
-            return cast(bool | float | list[Any] | None | PostSystemServerBagBodyValueType1 | str, data)
+            return cast(Union['PostSystemServerBagBodyValueType1', None, bool, float, list[Any], str], data)
 
         value = _parse_value(d.pop("value"))
 
