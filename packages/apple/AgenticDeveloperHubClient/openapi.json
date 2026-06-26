@@ -90,11 +90,11 @@
   ],
   "servers": [
     {
-      "url": "https://api.agenticdeveloperstorage.com",
+      "url": "https://api.agenticdeveloperhub.com",
       "description": "production"
     },
     {
-      "url": "https://testing.api.agenticdeveloperstorage.com",
+      "url": "https://testing.api.agenticdeveloperhub.com",
       "description": "testing"
     },
     {

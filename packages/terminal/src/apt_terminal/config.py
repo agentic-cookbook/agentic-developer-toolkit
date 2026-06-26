@@ -10,7 +10,7 @@ import tomli_w
 
 from apt_terminal.errors import ConfigError
 
-DEFAULT_BASE_URL = "https://api.agenticdeveloperstorage.com"
+DEFAULT_BASE_URL = "https://api.agenticdeveloperhub.com"
 
 
 @dataclass

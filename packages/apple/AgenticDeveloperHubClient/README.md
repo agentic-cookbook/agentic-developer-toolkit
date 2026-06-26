@@ -1,9 +1,9 @@
 # AgenticDeveloperHubClient
 
-A Swift client for the **entire** `api.agenticdeveloperstorage.com` REST API, callable
+A Swift client for the **entire** `api.agenticdeveloperhub.com` REST API, callable
 through either of two interchangeable transports chosen at runtime:
 
-1. **Direct** — HTTPS straight to `https://api.agenticdeveloperstorage.com`.
+1. **Direct** — HTTPS straight to `https://api.agenticdeveloperhub.com`.
 2. **Daemon** — HTTP to the local `adhd` daemon (a transparent caching
    reverse-proxy) at `http://127.0.0.1:22850`.
 

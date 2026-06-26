@@ -19,7 +19,7 @@ import Foundation
 public enum DaemonContract {
 
     /// Production backend base URL — the `Direct` transport target.
-    public static let backendURL = URL(string: "https://api.agenticdeveloperstorage.com")!
+    public static let backendURL = URL(string: "https://api.agenticdeveloperhub.com")!
 
     /// Fixed loopback port the daemon listens on (Stenographer model — a fixed
     /// port in the dynamic range rather than a discovered one). This is the

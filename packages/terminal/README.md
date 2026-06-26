@@ -1,6 +1,6 @@
 # apt
 
-CLI for the Agentic Developer backend (`api.agenticdeveloperstorage.com`),
+CLI for the Agentic Developer backend (`api.agenticdeveloperhub.com`),
 built on a generated `openapi-python-client` client.
 
 ## Auth
