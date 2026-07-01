@@ -12,9 +12,9 @@ from typing import cast, Union
 from typing import Union
 
 if TYPE_CHECKING:
-  from ..models.bucket_grant import BucketGrant
-  from ..models.bucket_access_group_member import BucketAccessGroupMember
   from ..models.bucket_access_group_metadata_type_0 import BucketAccessGroupMetadataType0
+  from ..models.bucket_access_group_member import BucketAccessGroupMember
+  from ..models.bucket_grant import BucketGrant
 
 
 
@@ -59,9 +59,9 @@ class BucketAccessGroupDetail:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.bucket_grant import BucketGrant
-        from ..models.bucket_access_group_member import BucketAccessGroupMember
         from ..models.bucket_access_group_metadata_type_0 import BucketAccessGroupMetadataType0
+        from ..models.bucket_access_group_member import BucketAccessGroupMember
+        from ..models.bucket_grant import BucketGrant
         id = self.id
 
         owner_id = self.owner_id
@@ -124,9 +124,9 @@ class BucketAccessGroupDetail:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.bucket_grant import BucketGrant
-        from ..models.bucket_access_group_member import BucketAccessGroupMember
         from ..models.bucket_access_group_metadata_type_0 import BucketAccessGroupMetadataType0
+        from ..models.bucket_access_group_member import BucketAccessGroupMember
+        from ..models.bucket_grant import BucketGrant
         d = dict(src_dict)
         id = d.pop("id")
 

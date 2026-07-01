@@ -52,6 +52,9 @@
       "name": "integration"
     },
     {
+      "name": "interactions"
+    },
+    {
       "name": "messaging"
     },
     {
@@ -1934,6 +1937,124 @@
           "deletedAt": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "Reaction": {
+        "type": "object",
+        "required": [
+          "id",
+          "customerId",
+          "ownerId",
+          "targetKind",
+          "targetId",
+          "emoji",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "ownerId": {
+            "type": "string"
+          },
+          "targetKind": {
+            "type": "string"
+          },
+          "targetId": {
+            "type": "string"
+          },
+          "emoji": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PollVote": {
+        "type": "object",
+        "required": [
+          "id",
+          "ownerId",
+          "customerId",
+          "optionId",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "ownerId": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "optionId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PollTallyOption": {
+        "type": "object",
+        "required": [
+          "optionId",
+          "text",
+          "sortOrder",
+          "votes"
+        ],
+        "properties": {
+          "optionId": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "sortOrder": {
+            "type": "integer"
+          },
+          "votes": {
+            "type": "integer"
+          }
+        }
+      },
+      "PollTally": {
+        "type": "object",
+        "required": [
+          "pollId",
+          "options",
+          "myOptionIds"
+        ],
+        "properties": {
+          "pollId": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PollTallyOption"
+            }
+          },
+          "myOptionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -13635,6 +13756,389 @@
         "responses": {
           "204": {
             "description": "Bookmark removed"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/reactions": {
+      "get": {
+        "tags": [
+          "interactions"
+        ],
+        "summary": "List all reactions on a target (public within the ecosystem)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "targetKind",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "targetId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reactions on the target",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Reaction"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "interactions"
+        ],
+        "summary": "Add a reaction (idempotent on the caller's target+emoji)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "targetKind",
+                  "targetId",
+                  "emoji"
+                ],
+                "properties": {
+                  "targetKind": {
+                    "type": "string"
+                  },
+                  "targetId": {
+                    "type": "string"
+                  },
+                  "emoji": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reaction already existed (idempotent)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reaction"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Reaction created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/reactions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "interactions"
+        ],
+        "summary": "Remove one of the caller's reactions",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Reaction removed"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/poll-votes": {
+      "get": {
+        "tags": [
+          "interactions"
+        ],
+        "summary": "Tally a poll — per-option counts + the caller’s chosen options",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pollId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Poll tally",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PollTally"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "interactions"
+        ],
+        "summary": "Cast a vote (single-choice polls replace the caller’s prior vote)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "optionId"
+                ],
+                "properties": {
+                  "optionId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Vote already existed (idempotent)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PollVote"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Vote cast",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PollVote"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/poll-votes/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "interactions"
+        ],
+        "summary": "Remove one of the caller's votes",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Vote removed"
           },
           "401": {
             "description": "Error",
@@ -32598,460 +33102,6 @@
         }
       }
     },
-    "/content/poll-votes": {
-      "get": {
-        "tags": [
-          "content"
-        ],
-        "summary": "List poll_votes",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$schema": "https://json-schema.org/draft/2020-12/schema",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "ownerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "customerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "deletedAt": {
-                        "anyOf": [
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "optionId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "createdAt": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "ownerId",
-                      "customerId",
-                      "deletedAt",
-                      "optionId",
-                      "createdAt"
-                    ],
-                    "additionalProperties": false
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Create poll_votes",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "optionId": {
-                    "type": "string",
-                    "maxLength": 36
-                  }
-                },
-                "required": [
-                  "optionId"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "poll_votes",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "optionId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "ownerId",
-                    "customerId",
-                    "deletedAt",
-                    "optionId",
-                    "createdAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/content/poll-votes/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "get": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Get poll_votes by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "poll_votes",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "optionId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "ownerId",
-                    "customerId",
-                    "deletedAt",
-                    "optionId",
-                    "createdAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Update poll_votes",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "optionId": {
-                    "type": "string",
-                    "maxLength": 36
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "poll_votes",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "optionId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "ownerId",
-                    "customerId",
-                    "deletedAt",
-                    "optionId",
-                    "createdAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Delete poll_votes",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/content/polls": {
       "get": {
         "tags": [
@@ -35037,518 +35087,6 @@
           "content"
         ],
         "summary": "Delete queues",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/content/reactions": {
-      "get": {
-        "tags": [
-          "content"
-        ],
-        "summary": "List reactions",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$schema": "https://json-schema.org/draft/2020-12/schema",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "customerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "deletedAt": {
-                        "anyOf": [
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "ownerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "targetKind": {
-                        "type": "string",
-                        "maxLength": 100
-                      },
-                      "targetId": {
-                        "type": "string",
-                        "maxLength": 128
-                      },
-                      "emoji": {
-                        "type": "string",
-                        "maxLength": 50
-                      },
-                      "createdAt": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "customerId",
-                      "deletedAt",
-                      "ownerId",
-                      "targetKind",
-                      "targetId",
-                      "emoji",
-                      "createdAt"
-                    ],
-                    "additionalProperties": false
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Create reactions",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "targetKind": {
-                    "type": "string",
-                    "maxLength": 100
-                  },
-                  "targetId": {
-                    "type": "string",
-                    "maxLength": 128
-                  },
-                  "emoji": {
-                    "type": "string",
-                    "maxLength": 50
-                  }
-                },
-                "required": [
-                  "targetKind",
-                  "targetId",
-                  "emoji"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "reactions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "targetKind": {
-                      "type": "string",
-                      "maxLength": 100
-                    },
-                    "targetId": {
-                      "type": "string",
-                      "maxLength": 128
-                    },
-                    "emoji": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "deletedAt",
-                    "ownerId",
-                    "targetKind",
-                    "targetId",
-                    "emoji",
-                    "createdAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/content/reactions/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "get": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Get reactions by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "reactions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "targetKind": {
-                      "type": "string",
-                      "maxLength": 100
-                    },
-                    "targetId": {
-                      "type": "string",
-                      "maxLength": 128
-                    },
-                    "emoji": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "deletedAt",
-                    "ownerId",
-                    "targetKind",
-                    "targetId",
-                    "emoji",
-                    "createdAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Update reactions",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "targetKind": {
-                    "type": "string",
-                    "maxLength": 100
-                  },
-                  "targetId": {
-                    "type": "string",
-                    "maxLength": 128
-                  },
-                  "emoji": {
-                    "type": "string",
-                    "maxLength": 50
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "reactions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "targetKind": {
-                      "type": "string",
-                      "maxLength": 100
-                    },
-                    "targetId": {
-                      "type": "string",
-                      "maxLength": 128
-                    },
-                    "emoji": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "deletedAt",
-                    "ownerId",
-                    "targetKind",
-                    "targetId",
-                    "emoji",
-                    "createdAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "content"
-        ],
-        "summary": "Delete reactions",
         "security": [
           {
             "bearerAuth": []
@@ -45399,552 +44937,6 @@
           "ecosystem"
         ],
         "summary": "Delete ecosystems",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/gamification/badge-definitions": {
-      "get": {
-        "tags": [
-          "gamification"
-        ],
-        "summary": "List badge_definitions",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$schema": "https://json-schema.org/draft/2020-12/schema",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "name": {
-                        "type": "string",
-                        "maxLength": 100
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "icon": {
-                        "type": "string",
-                        "maxLength": 50
-                      },
-                      "criteriaType": {
-                        "type": "string",
-                        "maxLength": 50
-                      },
-                      "criteriaThreshold": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647
-                      },
-                      "pointValue": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647
-                      },
-                      "subjectType": {
-                        "anyOf": [
-                          {
-                            "type": "string",
-                            "maxLength": 32
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name",
-                      "description",
-                      "icon",
-                      "criteriaType",
-                      "criteriaThreshold",
-                      "pointValue",
-                      "subjectType"
-                    ],
-                    "additionalProperties": false
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "gamification"
-        ],
-        "summary": "Create badge_definitions",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "maxLength": 100
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "icon": {
-                    "type": "string",
-                    "maxLength": 50
-                  },
-                  "criteriaType": {
-                    "type": "string",
-                    "maxLength": 50
-                  },
-                  "criteriaThreshold": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "pointValue": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "subjectType": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 32
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "name",
-                  "description",
-                  "icon",
-                  "criteriaType",
-                  "criteriaThreshold"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "badge_definitions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "name": {
-                      "type": "string",
-                      "maxLength": 100
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "icon": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "criteriaType": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "criteriaThreshold": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "pointValue": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "subjectType": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 32
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "icon",
-                    "criteriaType",
-                    "criteriaThreshold",
-                    "pointValue",
-                    "subjectType"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/gamification/badge-definitions/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "get": {
-        "tags": [
-          "gamification"
-        ],
-        "summary": "Get badge_definitions by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "badge_definitions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "name": {
-                      "type": "string",
-                      "maxLength": 100
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "icon": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "criteriaType": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "criteriaThreshold": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "pointValue": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "subjectType": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 32
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "icon",
-                    "criteriaType",
-                    "criteriaThreshold",
-                    "pointValue",
-                    "subjectType"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "gamification"
-        ],
-        "summary": "Update badge_definitions",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "maxLength": 100
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "icon": {
-                    "type": "string",
-                    "maxLength": 50
-                  },
-                  "criteriaType": {
-                    "type": "string",
-                    "maxLength": 50
-                  },
-                  "criteriaThreshold": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "pointValue": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "subjectType": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 32
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "badge_definitions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "name": {
-                      "type": "string",
-                      "maxLength": 100
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "icon": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "criteriaType": {
-                      "type": "string",
-                      "maxLength": 50
-                    },
-                    "criteriaThreshold": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "pointValue": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "subjectType": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 32
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "icon",
-                    "criteriaType",
-                    "criteriaThreshold",
-                    "pointValue",
-                    "subjectType"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "gamification"
-        ],
-        "summary": "Delete badge_definitions",
         "security": [
           {
             "bearerAuth": []

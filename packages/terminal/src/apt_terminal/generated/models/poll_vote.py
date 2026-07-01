@@ -1,0 +1,130 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast, Union
+from typing import Union
+
+
+
+
+
+
+T = TypeVar("T", bound="PollVote")
+
+
+
+@_attrs_define
+class PollVote:
+    """ 
+        Attributes:
+            id (str):
+            owner_id (str):
+            customer_id (str):
+            option_id (str):
+            created_at (str):
+            deleted_at (Union[None, Unset, str]):
+     """
+
+    id: str
+    owner_id: str
+    customer_id: str
+    option_id: str
+    created_at: str
+    deleted_at: Union[None, Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        id = self.id
+
+        owner_id = self.owner_id
+
+        customer_id = self.customer_id
+
+        option_id = self.option_id
+
+        created_at = self.created_at
+
+        deleted_at: Union[None, Unset, str]
+        if isinstance(self.deleted_at, Unset):
+            deleted_at = UNSET
+        else:
+            deleted_at = self.deleted_at
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "id": id,
+            "ownerId": owner_id,
+            "customerId": customer_id,
+            "optionId": option_id,
+            "createdAt": created_at,
+        })
+        if deleted_at is not UNSET:
+            field_dict["deletedAt"] = deleted_at
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        id = d.pop("id")
+
+        owner_id = d.pop("ownerId")
+
+        customer_id = d.pop("customerId")
+
+        option_id = d.pop("optionId")
+
+        created_at = d.pop("createdAt")
+
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
+
+
+        poll_vote = cls(
+            id=id,
+            owner_id=owner_id,
+            customer_id=customer_id,
+            option_id=option_id,
+            created_at=created_at,
+            deleted_at=deleted_at,
+        )
+
+
+        poll_vote.additional_properties = d
+        return poll_vote
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

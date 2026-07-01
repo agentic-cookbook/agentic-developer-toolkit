@@ -138,8 +138,6 @@ from .get_content_markdown_id_versions_response_200 import GetContentMarkdownIdV
 from .get_content_markdown_response_200 import GetContentMarkdownResponse200
 from .get_content_poll_options_id_response_200 import GetContentPollOptionsIdResponse200
 from .get_content_poll_options_response_200_item import GetContentPollOptionsResponse200Item
-from .get_content_poll_votes_id_response_200 import GetContentPollVotesIdResponse200
-from .get_content_poll_votes_response_200_item import GetContentPollVotesResponse200Item
 from .get_content_polls_id_response_200 import GetContentPollsIdResponse200
 from .get_content_polls_response_200_item import GetContentPollsResponse200Item
 from .get_content_queue_items_id_response_200 import GetContentQueueItemsIdResponse200
@@ -148,8 +146,7 @@ from .get_content_queue_items_response_200_item import GetContentQueueItemsRespo
 from .get_content_queue_items_response_200_item_payload_type_1 import GetContentQueueItemsResponse200ItemPayloadType1
 from .get_content_queues_id_response_200 import GetContentQueuesIdResponse200
 from .get_content_queues_response_200_item import GetContentQueuesResponse200Item
-from .get_content_reactions_id_response_200 import GetContentReactionsIdResponse200
-from .get_content_reactions_response_200_item import GetContentReactionsResponse200Item
+from .get_content_reactions_response_200 import GetContentReactionsResponse200
 from .get_content_urls_id_response_200 import GetContentUrlsIdResponse200
 from .get_content_urls_response_200_item import GetContentUrlsResponse200Item
 from .get_customer_customers_id_response_200 import GetCustomerCustomersIdResponse200
@@ -182,8 +179,6 @@ from .get_ecosystem_ecosystem_regions_id_response_200 import GetEcosystemEcosyst
 from .get_ecosystem_ecosystem_regions_response_200_item import GetEcosystemEcosystemRegionsResponse200Item
 from .get_ecosystem_ecosystems_id_response_200 import GetEcosystemEcosystemsIdResponse200
 from .get_ecosystem_ecosystems_response_200_item import GetEcosystemEcosystemsResponse200Item
-from .get_gamification_badge_definitions_id_response_200 import GetGamificationBadgeDefinitionsIdResponse200
-from .get_gamification_badge_definitions_response_200_item import GetGamificationBadgeDefinitionsResponse200Item
 from .get_gamification_leaderboard_period import GetGamificationLeaderboardPeriod
 from .get_integration_integration_bookmarks_id_response_200 import GetIntegrationIntegrationBookmarksIdResponse200
 from .get_integration_integration_bookmarks_response_200_item import GetIntegrationIntegrationBookmarksResponse200Item
@@ -340,6 +335,9 @@ from .persona_memory_source import PersonaMemorySource
 from .persona_memory_status import PersonaMemoryStatus
 from .persona_service import PersonaService
 from .persona_service_model_type_1 import PersonaServiceModelType1
+from .poll_tally import PollTally
+from .poll_tally_option import PollTallyOption
+from .poll_vote import PollVote
 from .post_account_contacts_body import PostAccountContactsBody
 from .post_account_contacts_body_type import PostAccountContactsBodyType
 from .post_account_contacts_id_verify_confirm_body import PostAccountContactsIdVerifyConfirmBody
@@ -456,7 +454,6 @@ from .post_content_markdown_id_publish_body import PostContentMarkdownIdPublishB
 from .post_content_poll_options_body import PostContentPollOptionsBody
 from .post_content_poll_options_response_201 import PostContentPollOptionsResponse201
 from .post_content_poll_votes_body import PostContentPollVotesBody
-from .post_content_poll_votes_response_201 import PostContentPollVotesResponse201
 from .post_content_polls_body import PostContentPollsBody
 from .post_content_polls_response_201 import PostContentPollsResponse201
 from .post_content_queue_items_body import PostContentQueueItemsBody
@@ -466,7 +463,6 @@ from .post_content_queue_items_response_201_payload_type_1 import PostContentQue
 from .post_content_queues_body import PostContentQueuesBody
 from .post_content_queues_response_201 import PostContentQueuesResponse201
 from .post_content_reactions_body import PostContentReactionsBody
-from .post_content_reactions_response_201 import PostContentReactionsResponse201
 from .post_content_urls_body import PostContentUrlsBody
 from .post_content_urls_response_201 import PostContentUrlsResponse201
 from .post_customer_customers_body import PostCustomerCustomersBody
@@ -509,8 +505,6 @@ from .post_ecosystem_ecosystem_regions_response_201 import PostEcosystemEcosyste
 from .post_ecosystem_ecosystems_body import PostEcosystemEcosystemsBody
 from .post_ecosystem_ecosystems_response_201 import PostEcosystemEcosystemsResponse201
 from .post_gamification_award_body import PostGamificationAwardBody
-from .post_gamification_badge_definitions_body import PostGamificationBadgeDefinitionsBody
-from .post_gamification_badge_definitions_response_201 import PostGamificationBadgeDefinitionsResponse201
 from .post_integration_integration_bookmarks_body import PostIntegrationIntegrationBookmarksBody
 from .post_integration_integration_bookmarks_response_201 import PostIntegrationIntegrationBookmarksResponse201
 from .post_integration_integration_calendar_events_body import PostIntegrationIntegrationCalendarEventsBody
@@ -711,8 +705,6 @@ from .put_content_markdown_id_body import PutContentMarkdownIdBody
 from .put_content_markdown_id_body_author import PutContentMarkdownIdBodyAuthor
 from .put_content_poll_options_id_body import PutContentPollOptionsIdBody
 from .put_content_poll_options_id_response_200 import PutContentPollOptionsIdResponse200
-from .put_content_poll_votes_id_body import PutContentPollVotesIdBody
-from .put_content_poll_votes_id_response_200 import PutContentPollVotesIdResponse200
 from .put_content_polls_id_body import PutContentPollsIdBody
 from .put_content_polls_id_response_200 import PutContentPollsIdResponse200
 from .put_content_queue_items_id_body import PutContentQueueItemsIdBody
@@ -721,8 +713,6 @@ from .put_content_queue_items_id_response_200 import PutContentQueueItemsIdRespo
 from .put_content_queue_items_id_response_200_payload_type_1 import PutContentQueueItemsIdResponse200PayloadType1
 from .put_content_queues_id_body import PutContentQueuesIdBody
 from .put_content_queues_id_response_200 import PutContentQueuesIdResponse200
-from .put_content_reactions_id_body import PutContentReactionsIdBody
-from .put_content_reactions_id_response_200 import PutContentReactionsIdResponse200
 from .put_content_urls_id_body import PutContentUrlsIdBody
 from .put_content_urls_id_response_200 import PutContentUrlsIdResponse200
 from .put_customer_customers_id_body import PutCustomerCustomersIdBody
@@ -755,8 +745,6 @@ from .put_ecosystem_ecosystem_regions_id_body import PutEcosystemEcosystemRegion
 from .put_ecosystem_ecosystem_regions_id_response_200 import PutEcosystemEcosystemRegionsIdResponse200
 from .put_ecosystem_ecosystems_id_body import PutEcosystemEcosystemsIdBody
 from .put_ecosystem_ecosystems_id_response_200 import PutEcosystemEcosystemsIdResponse200
-from .put_gamification_badge_definitions_id_body import PutGamificationBadgeDefinitionsIdBody
-from .put_gamification_badge_definitions_id_response_200 import PutGamificationBadgeDefinitionsIdResponse200
 from .put_gamification_subjects_subject_type_subject_id_preference_body import PutGamificationSubjectsSubjectTypeSubjectIdPreferenceBody
 from .put_integration_integration_bookmarks_id_body import PutIntegrationIntegrationBookmarksIdBody
 from .put_integration_integration_bookmarks_id_response_200 import PutIntegrationIntegrationBookmarksIdResponse200
@@ -849,6 +837,7 @@ from .put_usage_usage_counters_scope_principal_id_period_start_body import PutUs
 from .put_usage_usage_counters_scope_principal_id_period_start_response_200 import PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200
 from .put_usage_usage_events_id_body import PutUsageUsageEventsIdBody
 from .put_usage_usage_events_id_response_200 import PutUsageUsageEventsIdResponse200
+from .reaction import Reaction
 from .refresh_result import RefreshResult
 from .registry_ecosystem import RegistryEcosystem
 from .registry_identifier import RegistryIdentifier
@@ -1026,16 +1015,13 @@ __all__ = (
     "GetContentPollOptionsResponse200Item",
     "GetContentPollsIdResponse200",
     "GetContentPollsResponse200Item",
-    "GetContentPollVotesIdResponse200",
-    "GetContentPollVotesResponse200Item",
     "GetContentQueueItemsIdResponse200",
     "GetContentQueueItemsIdResponse200PayloadType1",
     "GetContentQueueItemsResponse200Item",
     "GetContentQueueItemsResponse200ItemPayloadType1",
     "GetContentQueuesIdResponse200",
     "GetContentQueuesResponse200Item",
-    "GetContentReactionsIdResponse200",
-    "GetContentReactionsResponse200Item",
+    "GetContentReactionsResponse200",
     "GetContentUrlsIdResponse200",
     "GetContentUrlsResponse200Item",
     "GetCustomerCustomersIdResponse200",
@@ -1068,8 +1054,6 @@ __all__ = (
     "GetEcosystemEcosystemRegionsResponse200Item",
     "GetEcosystemEcosystemsIdResponse200",
     "GetEcosystemEcosystemsResponse200Item",
-    "GetGamificationBadgeDefinitionsIdResponse200",
-    "GetGamificationBadgeDefinitionsResponse200Item",
     "GetGamificationLeaderboardPeriod",
     "GetIntegrationIntegrationBookmarksIdResponse200",
     "GetIntegrationIntegrationBookmarksResponse200Item",
@@ -1226,6 +1210,9 @@ __all__ = (
     "PersonaMemoryStatus",
     "PersonaService",
     "PersonaServiceModelType1",
+    "PollTally",
+    "PollTallyOption",
+    "PollVote",
     "PostAccountContactsBody",
     "PostAccountContactsBodyType",
     "PostAccountContactsIdVerifyConfirmBody",
@@ -1344,7 +1331,6 @@ __all__ = (
     "PostContentPollsBody",
     "PostContentPollsResponse201",
     "PostContentPollVotesBody",
-    "PostContentPollVotesResponse201",
     "PostContentQueueItemsBody",
     "PostContentQueueItemsBodyPayloadType1",
     "PostContentQueueItemsResponse201",
@@ -1352,7 +1338,6 @@ __all__ = (
     "PostContentQueuesBody",
     "PostContentQueuesResponse201",
     "PostContentReactionsBody",
-    "PostContentReactionsResponse201",
     "PostContentUrlsBody",
     "PostContentUrlsResponse201",
     "PostCustomerCustomersBody",
@@ -1395,8 +1380,6 @@ __all__ = (
     "PostEcosystemEcosystemsBody",
     "PostEcosystemEcosystemsResponse201",
     "PostGamificationAwardBody",
-    "PostGamificationBadgeDefinitionsBody",
-    "PostGamificationBadgeDefinitionsResponse201",
     "PostIntegrationIntegrationBookmarksBody",
     "PostIntegrationIntegrationBookmarksResponse201",
     "PostIntegrationIntegrationCalendarEventsBody",
@@ -1599,16 +1582,12 @@ __all__ = (
     "PutContentPollOptionsIdResponse200",
     "PutContentPollsIdBody",
     "PutContentPollsIdResponse200",
-    "PutContentPollVotesIdBody",
-    "PutContentPollVotesIdResponse200",
     "PutContentQueueItemsIdBody",
     "PutContentQueueItemsIdBodyPayloadType1",
     "PutContentQueueItemsIdResponse200",
     "PutContentQueueItemsIdResponse200PayloadType1",
     "PutContentQueuesIdBody",
     "PutContentQueuesIdResponse200",
-    "PutContentReactionsIdBody",
-    "PutContentReactionsIdResponse200",
     "PutContentUrlsIdBody",
     "PutContentUrlsIdResponse200",
     "PutCustomerCustomersIdBody",
@@ -1641,8 +1620,6 @@ __all__ = (
     "PutEcosystemEcosystemRegionsIdResponse200",
     "PutEcosystemEcosystemsIdBody",
     "PutEcosystemEcosystemsIdResponse200",
-    "PutGamificationBadgeDefinitionsIdBody",
-    "PutGamificationBadgeDefinitionsIdResponse200",
     "PutGamificationSubjectsSubjectTypeSubjectIdPreferenceBody",
     "PutIntegrationIntegrationBookmarksIdBody",
     "PutIntegrationIntegrationBookmarksIdResponse200",
@@ -1735,6 +1712,7 @@ __all__ = (
     "PutUsageUsageCountersScopePrincipalIdPeriodStartResponse200",
     "PutUsageUsageEventsIdBody",
     "PutUsageUsageEventsIdResponse200",
+    "Reaction",
     "RefreshResult",
     "RegistryEcosystem",
     "RegistryIdentifier",
