@@ -97,8 +97,9 @@ def sync_detailed(
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
-            full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
+            title change appends a full-state version (author attaches to it); a category/tags-only
+            change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -132,8 +133,9 @@ def sync(
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
-            full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
+            title change appends a full-state version (author attaches to it); a category/tags-only
+            change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -162,8 +164,9 @@ async def asyncio_detailed(
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
-            full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
+            title change appends a full-state version (author attaches to it); a category/tags-only
+            change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -197,8 +200,9 @@ async def asyncio(
 
     Args:
         id (str):
-        body (PutContentMarkdownIdBody): At least one of content/title. Any real change appends a
-            full-state version (author attaches to it); a no-op returns the doc unchanged.
+        body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
+            title change appends a full-state version (author attaches to it); a category/tags-only
+            change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

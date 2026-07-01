@@ -9,8 +9,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.get_oauth_clients_slug_response_200_client import GetOauthClientsSlugResponse200Client
   from ..models.get_oauth_clients_slug_response_200_providers_item import GetOauthClientsSlugResponse200ProvidersItem
+  from ..models.get_oauth_clients_slug_response_200_client import GetOauthClientsSlugResponse200Client
 
 
 
@@ -37,8 +37,8 @@ class GetOauthClientsSlugResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.get_oauth_clients_slug_response_200_client import GetOauthClientsSlugResponse200Client
         from ..models.get_oauth_clients_slug_response_200_providers_item import GetOauthClientsSlugResponse200ProvidersItem
+        from ..models.get_oauth_clients_slug_response_200_client import GetOauthClientsSlugResponse200Client
         client = self.client.to_dict()
 
         providers = []
@@ -62,8 +62,8 @@ class GetOauthClientsSlugResponse200:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_oauth_clients_slug_response_200_client import GetOauthClientsSlugResponse200Client
         from ..models.get_oauth_clients_slug_response_200_providers_item import GetOauthClientsSlugResponse200ProvidersItem
+        from ..models.get_oauth_clients_slug_response_200_client import GetOauthClientsSlugResponse200Client
         d = dict(src_dict)
         client = GetOauthClientsSlugResponse200Client.from_dict(d.pop("client"))
 

@@ -27,12 +27,16 @@ class PostContentMarkdownBody:
         Attributes:
             content (str): Full raw markdown (stored byte-exact).
             title (Union[Unset, str]): Optional; derived from frontmatter/H1 if omitted.
+            category (Union[Unset, str]): Optional classification label.
+            tags (Union[Unset, list[str]]): Optional tag set (trimmed + de-duplicated server-side).
             author (Union[Unset, PostContentMarkdownBodyAuthor]): Author of this revision; omit to attribute to the calling
                 customer. customer/user are pinned to the caller; other types are caller-asserted (unverified).
      """
 
     content: str
     title: Union[Unset, str] = UNSET
+    category: Union[Unset, str] = UNSET
+    tags: Union[Unset, list[str]] = UNSET
     author: Union[Unset, 'PostContentMarkdownBodyAuthor'] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -46,6 +50,14 @@ class PostContentMarkdownBody:
 
         title = self.title
 
+        category = self.category
+
+        tags: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.tags, Unset):
+            tags = self.tags
+
+
+
         author: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.author, Unset):
             author = self.author.to_dict()
@@ -58,6 +70,10 @@ class PostContentMarkdownBody:
         })
         if title is not UNSET:
             field_dict["title"] = title
+        if category is not UNSET:
+            field_dict["category"] = category
+        if tags is not UNSET:
+            field_dict["tags"] = tags
         if author is not UNSET:
             field_dict["author"] = author
 
@@ -73,6 +89,11 @@ class PostContentMarkdownBody:
 
         title = d.pop("title", UNSET)
 
+        category = d.pop("category", UNSET)
+
+        tags = cast(list[str], d.pop("tags", UNSET))
+
+
         _author = d.pop("author", UNSET)
         author: Union[Unset, PostContentMarkdownBodyAuthor]
         if isinstance(_author,  Unset):
@@ -86,6 +107,8 @@ class PostContentMarkdownBody:
         post_content_markdown_body = cls(
             content=content,
             title=title,
+            category=category,
+            tags=tags,
             author=author,
         )
 

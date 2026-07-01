@@ -6,7 +6,10 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
 from typing import cast, Union
+from typing import Union
 
 
 
@@ -28,6 +31,8 @@ class ApiTokenCreated:
             expires_at (Union[None, str]):
             last_used_at (Union[None, str]):
             token (str): The raw token value — shown exactly once
+            scope (Union[None, Unset, list[str]]): REST path prefixes this token may reach (e.g. ["/content/markdown"],
+                optional ":read" suffix, "*" = all). null = legacy curated-only.
      """
 
     id: str
@@ -37,6 +42,7 @@ class ApiTokenCreated:
     expires_at: Union[None, str]
     last_used_at: Union[None, str]
     token: str
+    scope: Union[None, Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -60,6 +66,16 @@ class ApiTokenCreated:
 
         token = self.token
 
+        scope: Union[None, Unset, list[str]]
+        if isinstance(self.scope, Unset):
+            scope = UNSET
+        elif isinstance(self.scope, list):
+            scope = self.scope
+
+
+        else:
+            scope = self.scope
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -72,6 +88,8 @@ class ApiTokenCreated:
             "lastUsedAt": last_used_at,
             "token": token,
         })
+        if scope is not UNSET:
+            field_dict["scope"] = scope
 
         return field_dict
 
@@ -106,6 +124,24 @@ class ApiTokenCreated:
 
         token = d.pop("token")
 
+        def _parse_scope(data: object) -> Union[None, Unset, list[str]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                scope_type_0 = cast(list[str], data)
+
+                return scope_type_0
+            except: # noqa: E722
+                pass
+            return cast(Union[None, Unset, list[str]], data)
+
+        scope = _parse_scope(d.pop("scope", UNSET))
+
+
         api_token_created = cls(
             id=id,
             name=name,
@@ -114,6 +150,7 @@ class ApiTokenCreated:
             expires_at=expires_at,
             last_used_at=last_used_at,
             token=token,
+            scope=scope,
         )
 
 

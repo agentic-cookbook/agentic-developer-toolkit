@@ -27,9 +27,11 @@ class PutCustomerCustomersIdBody:
             external_id (Union[None, Unset, str]):
             email (Union[None, Unset, str]):
             display_name (Union[None, Unset, str]):
-            slug (Union[None, Unset, str]):
+            slug (Union[Unset, str]):
             avatar_url (Union[Unset, str]):
+            public_profile_enabled (Union[Unset, bool]):
             token_version (Union[Unset, int]):
+            preferred_mfa_method (Union[None, Unset, str]):
             deleted_at (Union[None, Unset, str]):
      """
 
@@ -37,9 +39,11 @@ class PutCustomerCustomersIdBody:
     external_id: Union[None, Unset, str] = UNSET
     email: Union[None, Unset, str] = UNSET
     display_name: Union[None, Unset, str] = UNSET
-    slug: Union[None, Unset, str] = UNSET
+    slug: Union[Unset, str] = UNSET
     avatar_url: Union[Unset, str] = UNSET
+    public_profile_enabled: Union[Unset, bool] = UNSET
     token_version: Union[Unset, int] = UNSET
+    preferred_mfa_method: Union[None, Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
 
 
@@ -67,15 +71,19 @@ class PutCustomerCustomersIdBody:
         else:
             display_name = self.display_name
 
-        slug: Union[None, Unset, str]
-        if isinstance(self.slug, Unset):
-            slug = UNSET
-        else:
-            slug = self.slug
+        slug = self.slug
 
         avatar_url = self.avatar_url
 
+        public_profile_enabled = self.public_profile_enabled
+
         token_version = self.token_version
+
+        preferred_mfa_method: Union[None, Unset, str]
+        if isinstance(self.preferred_mfa_method, Unset):
+            preferred_mfa_method = UNSET
+        else:
+            preferred_mfa_method = self.preferred_mfa_method
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -100,8 +108,12 @@ class PutCustomerCustomersIdBody:
             field_dict["slug"] = slug
         if avatar_url is not UNSET:
             field_dict["avatarUrl"] = avatar_url
+        if public_profile_enabled is not UNSET:
+            field_dict["publicProfileEnabled"] = public_profile_enabled
         if token_version is not UNSET:
             field_dict["tokenVersion"] = token_version
+        if preferred_mfa_method is not UNSET:
+            field_dict["preferredMfaMethod"] = preferred_mfa_method
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
 
@@ -144,19 +156,23 @@ class PutCustomerCustomersIdBody:
         display_name = _parse_display_name(d.pop("displayName", UNSET))
 
 
-        def _parse_slug(data: object) -> Union[None, Unset, str]:
+        slug = d.pop("slug", UNSET)
+
+        avatar_url = d.pop("avatarUrl", UNSET)
+
+        public_profile_enabled = d.pop("publicProfileEnabled", UNSET)
+
+        token_version = d.pop("tokenVersion", UNSET)
+
+        def _parse_preferred_mfa_method(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        slug = _parse_slug(d.pop("slug", UNSET))
+        preferred_mfa_method = _parse_preferred_mfa_method(d.pop("preferredMfaMethod", UNSET))
 
-
-        avatar_url = d.pop("avatarUrl", UNSET)
-
-        token_version = d.pop("tokenVersion", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -175,7 +191,9 @@ class PutCustomerCustomersIdBody:
             display_name=display_name,
             slug=slug,
             avatar_url=avatar_url,
+            public_profile_enabled=public_profile_enabled,
             token_version=token_version,
+            preferred_mfa_method=preferred_mfa_method,
             deleted_at=deleted_at,
         )
 

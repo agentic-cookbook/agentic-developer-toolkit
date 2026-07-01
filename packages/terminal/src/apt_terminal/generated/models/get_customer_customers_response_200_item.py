@@ -26,9 +26,13 @@ class GetCustomerCustomersResponse200Item:
             external_id (Union[None, str]):
             email (Union[None, str]):
             display_name (Union[None, str]):
-            slug (Union[None, str]):
+            slug (str):
             avatar_url (str):
+            public_profile_enabled (bool):
             token_version (int):
+            preferred_mfa_method (Union[None, str]):
+            mfa_failed_attempts (int):
+            mfa_locked_until (Union[None, str]):
             deleted_at (Union[None, str]):
             created_at (str):
             updated_at (str):
@@ -39,9 +43,13 @@ class GetCustomerCustomersResponse200Item:
     external_id: Union[None, str]
     email: Union[None, str]
     display_name: Union[None, str]
-    slug: Union[None, str]
+    slug: str
     avatar_url: str
+    public_profile_enabled: bool
     token_version: int
+    preferred_mfa_method: Union[None, str]
+    mfa_failed_attempts: int
+    mfa_locked_until: Union[None, str]
     deleted_at: Union[None, str]
     created_at: str
     updated_at: str
@@ -64,12 +72,21 @@ class GetCustomerCustomersResponse200Item:
         display_name: Union[None, str]
         display_name = self.display_name
 
-        slug: Union[None, str]
         slug = self.slug
 
         avatar_url = self.avatar_url
 
+        public_profile_enabled = self.public_profile_enabled
+
         token_version = self.token_version
+
+        preferred_mfa_method: Union[None, str]
+        preferred_mfa_method = self.preferred_mfa_method
+
+        mfa_failed_attempts = self.mfa_failed_attempts
+
+        mfa_locked_until: Union[None, str]
+        mfa_locked_until = self.mfa_locked_until
 
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
@@ -89,7 +106,11 @@ class GetCustomerCustomersResponse200Item:
             "displayName": display_name,
             "slug": slug,
             "avatarUrl": avatar_url,
+            "publicProfileEnabled": public_profile_enabled,
             "tokenVersion": token_version,
+            "preferredMfaMethod": preferred_mfa_method,
+            "mfaFailedAttempts": mfa_failed_attempts,
+            "mfaLockedUntil": mfa_locked_until,
             "deletedAt": deleted_at,
             "createdAt": created_at,
             "updatedAt": updated_at,
@@ -130,17 +151,31 @@ class GetCustomerCustomersResponse200Item:
         display_name = _parse_display_name(d.pop("displayName"))
 
 
-        def _parse_slug(data: object) -> Union[None, str]:
+        slug = d.pop("slug")
+
+        avatar_url = d.pop("avatarUrl")
+
+        public_profile_enabled = d.pop("publicProfileEnabled")
+
+        token_version = d.pop("tokenVersion")
+
+        def _parse_preferred_mfa_method(data: object) -> Union[None, str]:
             if data is None:
                 return data
             return cast(Union[None, str], data)
 
-        slug = _parse_slug(d.pop("slug"))
+        preferred_mfa_method = _parse_preferred_mfa_method(d.pop("preferredMfaMethod"))
 
 
-        avatar_url = d.pop("avatarUrl")
+        mfa_failed_attempts = d.pop("mfaFailedAttempts")
 
-        token_version = d.pop("tokenVersion")
+        def _parse_mfa_locked_until(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        mfa_locked_until = _parse_mfa_locked_until(d.pop("mfaLockedUntil"))
+
 
         def _parse_deleted_at(data: object) -> Union[None, str]:
             if data is None:
@@ -162,7 +197,11 @@ class GetCustomerCustomersResponse200Item:
             display_name=display_name,
             slug=slug,
             avatar_url=avatar_url,
+            public_profile_enabled=public_profile_enabled,
             token_version=token_version,
+            preferred_mfa_method=preferred_mfa_method,
+            mfa_failed_attempts=mfa_failed_attempts,
+            mfa_locked_until=mfa_locked_until,
             deleted_at=deleted_at,
             created_at=created_at,
             updated_at=updated_at,

@@ -10,8 +10,8 @@ from typing import cast
 
 if TYPE_CHECKING:
   from ..models.registry_namespace import RegistryNamespace
-  from ..models.registry_ecosystem import RegistryEcosystem
   from ..models.registry_organization import RegistryOrganization
+  from ..models.registry_ecosystem import RegistryEcosystem
 
 
 
@@ -43,8 +43,8 @@ class RegistryProvisionedOrganization:
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.registry_namespace import RegistryNamespace
-        from ..models.registry_ecosystem import RegistryEcosystem
         from ..models.registry_organization import RegistryOrganization
+        from ..models.registry_ecosystem import RegistryEcosystem
         organization = self.organization.to_dict()
 
         namespace = self.namespace.to_dict()
@@ -70,8 +70,8 @@ class RegistryProvisionedOrganization:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.registry_namespace import RegistryNamespace
-        from ..models.registry_ecosystem import RegistryEcosystem
         from ..models.registry_organization import RegistryOrganization
+        from ..models.registry_ecosystem import RegistryEcosystem
         d = dict(src_dict)
         organization = RegistryOrganization.from_dict(d.pop("organization"))
 

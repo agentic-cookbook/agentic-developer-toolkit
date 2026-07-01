@@ -19,6 +19,10 @@ def _get_kwargs(
     *,
     page: Union[Unset, int] = UNSET,
     page_size: Union[Unset, int] = 50,
+    q: Union[Unset, str] = UNSET,
+    category: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -30,6 +34,14 @@ def _get_kwargs(
     params["page"] = page
 
     params["pageSize"] = page_size
+
+    params["q"] = q
+
+    params["category"] = category
+
+    params["tag"] = tag
+
+    params["source"] = source
 
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -81,13 +93,25 @@ def sync_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     page_size: Union[Unset, int] = 50,
+    q: Union[Unset, str] = UNSET,
+    category: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetContentMarkdownResponse200]]:
-    """ List the caller's markdown documents (metadata only)
+    """ List/search the caller's markdown documents (metadata only)
+
+     Lists the caller’s documents, most-recently-updated first. Optional filters narrow the set: `q`
+    (free-text, case-insensitive substring across title, body, category, and tags), `category` (exact
+    match), and `tag` (set membership).
 
     Args:
         page (Union[Unset, int]):
         page_size (Union[Unset, int]):  Default: 50.
+        q (Union[Unset, str]):
+        category (Union[Unset, str]):
+        tag (Union[Unset, str]):
+        source (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -101,6 +125,10 @@ def sync_detailed(
     kwargs = _get_kwargs(
         page=page,
 page_size=page_size,
+q=q,
+category=category,
+tag=tag,
+source=source,
 
     )
 
@@ -115,13 +143,25 @@ def sync(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     page_size: Union[Unset, int] = 50,
+    q: Union[Unset, str] = UNSET,
+    category: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetContentMarkdownResponse200]]:
-    """ List the caller's markdown documents (metadata only)
+    """ List/search the caller's markdown documents (metadata only)
+
+     Lists the caller’s documents, most-recently-updated first. Optional filters narrow the set: `q`
+    (free-text, case-insensitive substring across title, body, category, and tags), `category` (exact
+    match), and `tag` (set membership).
 
     Args:
         page (Union[Unset, int]):
         page_size (Union[Unset, int]):  Default: 50.
+        q (Union[Unset, str]):
+        category (Union[Unset, str]):
+        tag (Union[Unset, str]):
+        source (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,6 +176,10 @@ def sync(
         client=client,
 page=page,
 page_size=page_size,
+q=q,
+category=category,
+tag=tag,
+source=source,
 
     ).parsed
 
@@ -144,13 +188,25 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     page_size: Union[Unset, int] = 50,
+    q: Union[Unset, str] = UNSET,
+    category: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetContentMarkdownResponse200]]:
-    """ List the caller's markdown documents (metadata only)
+    """ List/search the caller's markdown documents (metadata only)
+
+     Lists the caller’s documents, most-recently-updated first. Optional filters narrow the set: `q`
+    (free-text, case-insensitive substring across title, body, category, and tags), `category` (exact
+    match), and `tag` (set membership).
 
     Args:
         page (Union[Unset, int]):
         page_size (Union[Unset, int]):  Default: 50.
+        q (Union[Unset, str]):
+        category (Union[Unset, str]):
+        tag (Union[Unset, str]):
+        source (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -164,6 +220,10 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         page=page,
 page_size=page_size,
+q=q,
+category=category,
+tag=tag,
+source=source,
 
     )
 
@@ -178,13 +238,25 @@ async def asyncio(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     page_size: Union[Unset, int] = 50,
+    q: Union[Unset, str] = UNSET,
+    category: Union[Unset, str] = UNSET,
+    tag: Union[Unset, str] = UNSET,
+    source: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetContentMarkdownResponse200]]:
-    """ List the caller's markdown documents (metadata only)
+    """ List/search the caller's markdown documents (metadata only)
+
+     Lists the caller’s documents, most-recently-updated first. Optional filters narrow the set: `q`
+    (free-text, case-insensitive substring across title, body, category, and tags), `category` (exact
+    match), and `tag` (set membership).
 
     Args:
         page (Union[Unset, int]):
         page_size (Union[Unset, int]):  Default: 50.
+        q (Union[Unset, str]):
+        category (Union[Unset, str]):
+        tag (Union[Unset, str]):
+        source (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -199,5 +271,9 @@ async def asyncio(
         client=client,
 page=page,
 page_size=page_size,
+q=q,
+category=category,
+tag=tag,
+source=source,
 
     )).parsed

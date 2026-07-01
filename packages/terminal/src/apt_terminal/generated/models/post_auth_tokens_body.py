@@ -28,10 +28,12 @@ class PostAuthTokensBody:
         Attributes:
             name (str):
             expires_at (Union[None, Unset, datetime.datetime]):
+            scope (Union[Unset, list[str]]): REST path prefixes the token may reach
      """
 
     name: str
     expires_at: Union[None, Unset, datetime.datetime] = UNSET
+    scope: Union[Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -49,6 +51,12 @@ class PostAuthTokensBody:
         else:
             expires_at = self.expires_at
 
+        scope: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.scope, Unset):
+            scope = self.scope
+
+
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -57,6 +65,8 @@ class PostAuthTokensBody:
         })
         if expires_at is not UNSET:
             field_dict["expiresAt"] = expires_at
+        if scope is not UNSET:
+            field_dict["scope"] = scope
 
         return field_dict
 
@@ -87,9 +97,13 @@ class PostAuthTokensBody:
         expires_at = _parse_expires_at(d.pop("expiresAt", UNSET))
 
 
+        scope = cast(list[str], d.pop("scope", UNSET))
+
+
         post_auth_tokens_body = cls(
             name=name,
             expires_at=expires_at,
+            scope=scope,
         )
 
 

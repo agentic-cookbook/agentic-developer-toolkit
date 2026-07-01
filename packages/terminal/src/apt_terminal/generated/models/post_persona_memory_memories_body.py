@@ -10,6 +10,7 @@ from ..types import UNSET, Unset
 from typing import cast
 from typing import cast, Union
 from typing import Union
+from uuid import UUID
 
 
 
@@ -24,7 +25,7 @@ T = TypeVar("T", bound="PostPersonaMemoryMemoriesBody")
 class PostPersonaMemoryMemoriesBody:
     """ 
         Attributes:
-            persona_id (str):
+            persona_id (UUID):
             slug (str):
             memory_type (str):
             description (str):
@@ -43,7 +44,7 @@ class PostPersonaMemoryMemoriesBody:
             valid_to (Union[None, Unset, str]):
      """
 
-    persona_id: str
+    persona_id: UUID
     slug: str
     memory_type: str
     description: str
@@ -66,7 +67,7 @@ class PostPersonaMemoryMemoriesBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        persona_id = self.persona_id
+        persona_id = str(self.persona_id)
 
         slug = self.slug
 
@@ -170,7 +171,10 @@ class PostPersonaMemoryMemoriesBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        persona_id = d.pop("personaId")
+        persona_id = UUID(d.pop("personaId"))
+
+
+
 
         slug = d.pop("slug")
 

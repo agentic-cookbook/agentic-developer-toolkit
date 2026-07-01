@@ -25,24 +25,26 @@ class Notification:
         Attributes:
             id (str):
             user_id (str):
-            ecosystem_id (str):
+            owner_id (str):
             type_ (str):
-            thread_id (str):
+            topic_id (str):
             actor_id (str):
             is_read (bool):
             created_at (str):
-            reply_id (Union[None, Unset, str]):
+            customer_id (Union[Unset, str]):
+            post_id (Union[None, Unset, str]):
      """
 
     id: str
     user_id: str
-    ecosystem_id: str
+    owner_id: str
     type_: str
-    thread_id: str
+    topic_id: str
     actor_id: str
     is_read: bool
     created_at: str
-    reply_id: Union[None, Unset, str] = UNSET
+    customer_id: Union[Unset, str] = UNSET
+    post_id: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -54,11 +56,11 @@ class Notification:
 
         user_id = self.user_id
 
-        ecosystem_id = self.ecosystem_id
+        owner_id = self.owner_id
 
         type_ = self.type_
 
-        thread_id = self.thread_id
+        topic_id = self.topic_id
 
         actor_id = self.actor_id
 
@@ -66,11 +68,13 @@ class Notification:
 
         created_at = self.created_at
 
-        reply_id: Union[None, Unset, str]
-        if isinstance(self.reply_id, Unset):
-            reply_id = UNSET
+        customer_id = self.customer_id
+
+        post_id: Union[None, Unset, str]
+        if isinstance(self.post_id, Unset):
+            post_id = UNSET
         else:
-            reply_id = self.reply_id
+            post_id = self.post_id
 
 
         field_dict: dict[str, Any] = {}
@@ -78,15 +82,17 @@ class Notification:
         field_dict.update({
             "id": id,
             "userId": user_id,
-            "ecosystemId": ecosystem_id,
+            "ownerId": owner_id,
             "type": type_,
-            "threadId": thread_id,
+            "topicId": topic_id,
             "actorId": actor_id,
             "isRead": is_read,
             "createdAt": created_at,
         })
-        if reply_id is not UNSET:
-            field_dict["replyId"] = reply_id
+        if customer_id is not UNSET:
+            field_dict["customerId"] = customer_id
+        if post_id is not UNSET:
+            field_dict["postId"] = post_id
 
         return field_dict
 
@@ -99,11 +105,11 @@ class Notification:
 
         user_id = d.pop("userId")
 
-        ecosystem_id = d.pop("ecosystemId")
+        owner_id = d.pop("ownerId")
 
         type_ = d.pop("type")
 
-        thread_id = d.pop("threadId")
+        topic_id = d.pop("topicId")
 
         actor_id = d.pop("actorId")
 
@@ -111,26 +117,29 @@ class Notification:
 
         created_at = d.pop("createdAt")
 
-        def _parse_reply_id(data: object) -> Union[None, Unset, str]:
+        customer_id = d.pop("customerId", UNSET)
+
+        def _parse_post_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        reply_id = _parse_reply_id(d.pop("replyId", UNSET))
+        post_id = _parse_post_id(d.pop("postId", UNSET))
 
 
         notification = cls(
             id=id,
             user_id=user_id,
-            ecosystem_id=ecosystem_id,
+            owner_id=owner_id,
             type_=type_,
-            thread_id=thread_id,
+            topic_id=topic_id,
             actor_id=actor_id,
             is_read=is_read,
             created_at=created_at,
-            reply_id=reply_id,
+            customer_id=customer_id,
+            post_id=post_id,
         )
 
 

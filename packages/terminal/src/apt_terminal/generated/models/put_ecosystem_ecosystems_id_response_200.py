@@ -32,6 +32,7 @@ class PutEcosystemEcosystemsIdResponse200:
             created_at (str):
             updated_at (str):
             is_deleted (bool):
+            is_default (bool):
             type_ (str):
             namespace_id (Union[None, str]):
      """
@@ -47,6 +48,7 @@ class PutEcosystemEcosystemsIdResponse200:
     created_at: str
     updated_at: str
     is_deleted: bool
+    is_default: bool
     type_: str
     namespace_id: Union[None, str]
 
@@ -78,6 +80,8 @@ class PutEcosystemEcosystemsIdResponse200:
 
         is_deleted = self.is_deleted
 
+        is_default = self.is_default
+
         type_ = self.type_
 
         namespace_id: Union[None, str]
@@ -98,6 +102,7 @@ class PutEcosystemEcosystemsIdResponse200:
             "createdAt": created_at,
             "updatedAt": updated_at,
             "isDeleted": is_deleted,
+            "isDefault": is_default,
             "type": type_,
             "namespaceId": namespace_id,
         })
@@ -137,6 +142,8 @@ class PutEcosystemEcosystemsIdResponse200:
 
         is_deleted = d.pop("isDeleted")
 
+        is_default = d.pop("isDefault")
+
         type_ = d.pop("type")
 
         def _parse_namespace_id(data: object) -> Union[None, str]:
@@ -159,6 +166,7 @@ class PutEcosystemEcosystemsIdResponse200:
             created_at=created_at,
             updated_at=updated_at,
             is_deleted=is_deleted,
+            is_default=is_default,
             type_=type_,
             namespace_id=namespace_id,
         )

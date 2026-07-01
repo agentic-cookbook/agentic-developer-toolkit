@@ -9,6 +9,7 @@ from ... import errors
 
 from ...models.auth_result import AuthResult
 from ...models.error import Error
+from ...models.mfa_challenge import MfaChallenge
 from ...models.post_auth_login_body import PostAuthLoginBody
 from typing import cast
 
@@ -41,13 +42,20 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[AuthResult, Error]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[AuthResult, Error, MfaChallenge]]:
     if response.status_code == 200:
         response_200 = AuthResult.from_dict(response.json())
 
 
 
         return response_200
+
+    if response.status_code == 202:
+        response_202 = MfaChallenge.from_dict(response.json())
+
+
+
+        return response_202
 
     if response.status_code == 401:
         response_401 = Error.from_dict(response.json())
@@ -62,7 +70,7 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[AuthResult, Error]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[AuthResult, Error, MfaChallenge]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,8 +84,8 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthLoginBody,
 
-) -> Response[Union[AuthResult, Error]]:
-    """ Sign in
+) -> Response[Union[AuthResult, Error, MfaChallenge]]:
+    """ Sign in (may require a second factor)
 
     Args:
         body (PostAuthLoginBody):
@@ -87,7 +95,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AuthResult, Error]]
+        Response[Union[AuthResult, Error, MfaChallenge]]
      """
 
 
@@ -107,8 +115,8 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthLoginBody,
 
-) -> Optional[Union[AuthResult, Error]]:
-    """ Sign in
+) -> Optional[Union[AuthResult, Error, MfaChallenge]]:
+    """ Sign in (may require a second factor)
 
     Args:
         body (PostAuthLoginBody):
@@ -118,7 +126,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AuthResult, Error]
+        Union[AuthResult, Error, MfaChallenge]
      """
 
 
@@ -133,8 +141,8 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthLoginBody,
 
-) -> Response[Union[AuthResult, Error]]:
-    """ Sign in
+) -> Response[Union[AuthResult, Error, MfaChallenge]]:
+    """ Sign in (may require a second factor)
 
     Args:
         body (PostAuthLoginBody):
@@ -144,7 +152,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AuthResult, Error]]
+        Response[Union[AuthResult, Error, MfaChallenge]]
      """
 
 
@@ -164,8 +172,8 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthLoginBody,
 
-) -> Optional[Union[AuthResult, Error]]:
-    """ Sign in
+) -> Optional[Union[AuthResult, Error, MfaChallenge]]:
+    """ Sign in (may require a second factor)
 
     Args:
         body (PostAuthLoginBody):
@@ -175,7 +183,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AuthResult, Error]
+        Union[AuthResult, Error, MfaChallenge]
      """
 
 

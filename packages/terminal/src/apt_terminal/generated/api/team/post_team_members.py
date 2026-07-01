@@ -9,7 +9,7 @@ from ... import errors
 
 from ...models.error import Error
 from ...models.post_team_members_body import PostTeamMembersBody
-from ...models.post_team_members_response_201 import PostTeamMembersResponse201
+from ...models.team_member import TeamMember
 from typing import cast
 
 
@@ -41,9 +41,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostTeamMembersResponse201]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, TeamMember]]:
     if response.status_code == 201:
-        response_201 = PostTeamMembersResponse201.from_dict(response.json())
+        response_201 = TeamMember.from_dict(response.json())
 
 
 
@@ -63,13 +63,27 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 404:
+        response_404 = Error.from_dict(response.json())
+
+
+
+        return response_404
+
+    if response.status_code == 409:
+        response_409 = Error.from_dict(response.json())
+
+
+
+        return response_409
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostTeamMembersResponse201]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, TeamMember]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,8 +97,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: PostTeamMembersBody,
 
-) -> Response[Union[Error, PostTeamMembersResponse201]]:
-    """ Create members
+) -> Response[Union[Error, TeamMember]]:
+    """ Add a member to a team by email
 
     Args:
         body (PostTeamMembersBody):
@@ -94,7 +108,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PostTeamMembersResponse201]]
+        Response[Union[Error, TeamMember]]
      """
 
 
@@ -114,8 +128,8 @@ def sync(
     client: AuthenticatedClient,
     body: PostTeamMembersBody,
 
-) -> Optional[Union[Error, PostTeamMembersResponse201]]:
-    """ Create members
+) -> Optional[Union[Error, TeamMember]]:
+    """ Add a member to a team by email
 
     Args:
         body (PostTeamMembersBody):
@@ -125,7 +139,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PostTeamMembersResponse201]
+        Union[Error, TeamMember]
      """
 
 
@@ -140,8 +154,8 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: PostTeamMembersBody,
 
-) -> Response[Union[Error, PostTeamMembersResponse201]]:
-    """ Create members
+) -> Response[Union[Error, TeamMember]]:
+    """ Add a member to a team by email
 
     Args:
         body (PostTeamMembersBody):
@@ -151,7 +165,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PostTeamMembersResponse201]]
+        Response[Union[Error, TeamMember]]
      """
 
 
@@ -171,8 +185,8 @@ async def asyncio(
     client: AuthenticatedClient,
     body: PostTeamMembersBody,
 
-) -> Optional[Union[Error, PostTeamMembersResponse201]]:
-    """ Create members
+) -> Optional[Union[Error, TeamMember]]:
+    """ Add a member to a team by email
 
     Args:
         body (PostTeamMembersBody):
@@ -182,7 +196,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PostTeamMembersResponse201]
+        Union[Error, TeamMember]
      """
 
 

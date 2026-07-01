@@ -20,15 +20,19 @@ T = TypeVar("T", bound="PatchAuthMeBody")
 
 @_attrs_define
 class PatchAuthMeBody:
-    """ At least one of name or slug is required.
+    """ At least one profile field is required.
 
         Attributes:
             name (Union[Unset, str]):
             slug (Union[Unset, str]):
+            avatar_url (Union[Unset, str]):
+            public_profile_enabled (Union[Unset, bool]):
      """
 
     name: Union[Unset, str] = UNSET
     slug: Union[Unset, str] = UNSET
+    avatar_url: Union[Unset, str] = UNSET
+    public_profile_enabled: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -40,6 +44,10 @@ class PatchAuthMeBody:
 
         slug = self.slug
 
+        avatar_url = self.avatar_url
+
+        public_profile_enabled = self.public_profile_enabled
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -49,6 +57,10 @@ class PatchAuthMeBody:
             field_dict["name"] = name
         if slug is not UNSET:
             field_dict["slug"] = slug
+        if avatar_url is not UNSET:
+            field_dict["avatarUrl"] = avatar_url
+        if public_profile_enabled is not UNSET:
+            field_dict["publicProfileEnabled"] = public_profile_enabled
 
         return field_dict
 
@@ -61,9 +73,15 @@ class PatchAuthMeBody:
 
         slug = d.pop("slug", UNSET)
 
+        avatar_url = d.pop("avatarUrl", UNSET)
+
+        public_profile_enabled = d.pop("publicProfileEnabled", UNSET)
+
         patch_auth_me_body = cls(
             name=name,
             slug=slug,
+            avatar_url=avatar_url,
+            public_profile_enabled=public_profile_enabled,
         )
 
 

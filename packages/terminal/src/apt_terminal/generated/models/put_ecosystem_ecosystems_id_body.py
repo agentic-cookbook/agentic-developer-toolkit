@@ -31,6 +31,7 @@ class PutEcosystemEcosystemsIdBody:
             dedicated_db_connection_id (Union[None, Unset, str]):
             primary_domain (Union[Unset, str]):
             is_deleted (Union[Unset, bool]):
+            is_default (Union[Unset, bool]):
             type_ (Union[Unset, str]):
             namespace_id (Union[None, Unset, str]):
      """
@@ -43,6 +44,7 @@ class PutEcosystemEcosystemsIdBody:
     dedicated_db_connection_id: Union[None, Unset, str] = UNSET
     primary_domain: Union[Unset, str] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
+    is_default: Union[Unset, bool] = UNSET
     type_: Union[Unset, str] = UNSET
     namespace_id: Union[None, Unset, str] = UNSET
 
@@ -70,6 +72,8 @@ class PutEcosystemEcosystemsIdBody:
         primary_domain = self.primary_domain
 
         is_deleted = self.is_deleted
+
+        is_default = self.is_default
 
         type_ = self.type_
 
@@ -100,6 +104,8 @@ class PutEcosystemEcosystemsIdBody:
             field_dict["primaryDomain"] = primary_domain
         if is_deleted is not UNSET:
             field_dict["isDeleted"] = is_deleted
+        if is_default is not UNSET:
+            field_dict["isDefault"] = is_default
         if type_ is not UNSET:
             field_dict["type"] = type_
         if namespace_id is not UNSET:
@@ -136,6 +142,8 @@ class PutEcosystemEcosystemsIdBody:
 
         is_deleted = d.pop("isDeleted", UNSET)
 
+        is_default = d.pop("isDefault", UNSET)
+
         type_ = d.pop("type", UNSET)
 
         def _parse_namespace_id(data: object) -> Union[None, Unset, str]:
@@ -157,6 +165,7 @@ class PutEcosystemEcosystemsIdBody:
             dedicated_db_connection_id=dedicated_db_connection_id,
             primary_domain=primary_domain,
             is_deleted=is_deleted,
+            is_default=is_default,
             type_=type_,
             namespace_id=namespace_id,
         )

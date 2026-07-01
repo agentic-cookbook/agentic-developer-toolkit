@@ -9,8 +9,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.search_discussion_thread_result import SearchDiscussionThreadResult
-  from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
+  from ..models.search_discussion_post_result import SearchDiscussionPostResult
+  from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
 
 
 
@@ -24,20 +24,20 @@ T = TypeVar("T", bound="GetSearchDiscussionsResponse200")
 class GetSearchDiscussionsResponse200:
     """ 
         Attributes:
-            threads (list['SearchDiscussionThreadResult']):
-            replies (list['SearchDiscussionReplyResult']):
+            topics (list['SearchDiscussionTopicResult']):
+            posts (list['SearchDiscussionPostResult']):
             page (int):
             page_size (int):
-            threads_has_more (bool):
-            replies_has_more (bool):
+            topics_has_more (bool):
+            posts_has_more (bool):
      """
 
-    threads: list['SearchDiscussionThreadResult']
-    replies: list['SearchDiscussionReplyResult']
+    topics: list['SearchDiscussionTopicResult']
+    posts: list['SearchDiscussionPostResult']
     page: int
     page_size: int
-    threads_has_more: bool
-    replies_has_more: bool
+    topics_has_more: bool
+    posts_has_more: bool
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -45,19 +45,19 @@ class GetSearchDiscussionsResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.search_discussion_thread_result import SearchDiscussionThreadResult
-        from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
-        threads = []
-        for threads_item_data in self.threads:
-            threads_item = threads_item_data.to_dict()
-            threads.append(threads_item)
+        from ..models.search_discussion_post_result import SearchDiscussionPostResult
+        from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
+        topics = []
+        for topics_item_data in self.topics:
+            topics_item = topics_item_data.to_dict()
+            topics.append(topics_item)
 
 
 
-        replies = []
-        for replies_item_data in self.replies:
-            replies_item = replies_item_data.to_dict()
-            replies.append(replies_item)
+        posts = []
+        for posts_item_data in self.posts:
+            posts_item = posts_item_data.to_dict()
+            posts.append(posts_item)
 
 
 
@@ -65,20 +65,20 @@ class GetSearchDiscussionsResponse200:
 
         page_size = self.page_size
 
-        threads_has_more = self.threads_has_more
+        topics_has_more = self.topics_has_more
 
-        replies_has_more = self.replies_has_more
+        posts_has_more = self.posts_has_more
 
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
-            "threads": threads,
-            "replies": replies,
+            "topics": topics,
+            "posts": posts,
             "page": page,
             "pageSize": page_size,
-            "threadsHasMore": threads_has_more,
-            "repliesHasMore": replies_has_more,
+            "topicsHasMore": topics_has_more,
+            "postsHasMore": posts_has_more,
         })
 
         return field_dict
@@ -87,44 +87,44 @@ class GetSearchDiscussionsResponse200:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_discussion_thread_result import SearchDiscussionThreadResult
-        from ..models.search_discussion_reply_result import SearchDiscussionReplyResult
+        from ..models.search_discussion_post_result import SearchDiscussionPostResult
+        from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
         d = dict(src_dict)
-        threads = []
-        _threads = d.pop("threads")
-        for threads_item_data in (_threads):
-            threads_item = SearchDiscussionThreadResult.from_dict(threads_item_data)
+        topics = []
+        _topics = d.pop("topics")
+        for topics_item_data in (_topics):
+            topics_item = SearchDiscussionTopicResult.from_dict(topics_item_data)
 
 
 
-            threads.append(threads_item)
+            topics.append(topics_item)
 
 
-        replies = []
-        _replies = d.pop("replies")
-        for replies_item_data in (_replies):
-            replies_item = SearchDiscussionReplyResult.from_dict(replies_item_data)
+        posts = []
+        _posts = d.pop("posts")
+        for posts_item_data in (_posts):
+            posts_item = SearchDiscussionPostResult.from_dict(posts_item_data)
 
 
 
-            replies.append(replies_item)
+            posts.append(posts_item)
 
 
         page = d.pop("page")
 
         page_size = d.pop("pageSize")
 
-        threads_has_more = d.pop("threadsHasMore")
+        topics_has_more = d.pop("topicsHasMore")
 
-        replies_has_more = d.pop("repliesHasMore")
+        posts_has_more = d.pop("postsHasMore")
 
         get_search_discussions_response_200 = cls(
-            threads=threads,
-            replies=replies,
+            topics=topics,
+            posts=posts,
             page=page,
             page_size=page_size,
-            threads_has_more=threads_has_more,
-            replies_has_more=replies_has_more,
+            topics_has_more=topics_has_more,
+            posts_has_more=posts_has_more,
         )
 
 

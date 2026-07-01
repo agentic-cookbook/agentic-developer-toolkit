@@ -9,8 +9,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.chat_conversation import ChatConversation
   from ..models.chat_message import ChatMessage
+  from ..models.chat_conversation import ChatConversation
 
 
 
@@ -37,8 +37,8 @@ class ChatConversationDetail:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.chat_conversation import ChatConversation
         from ..models.chat_message import ChatMessage
+        from ..models.chat_conversation import ChatConversation
         conversation = self.conversation.to_dict()
 
         messages = []
@@ -62,8 +62,8 @@ class ChatConversationDetail:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.chat_conversation import ChatConversation
         from ..models.chat_message import ChatMessage
+        from ..models.chat_conversation import ChatConversation
         d = dict(src_dict)
         conversation = ChatConversation.from_dict(d.pop("conversation"))
 

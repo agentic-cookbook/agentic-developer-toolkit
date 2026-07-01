@@ -8,6 +8,7 @@ from ..types import UNSET, Unset
 
 from typing import cast
 from typing import cast, Union
+from uuid import UUID
 
 
 
@@ -26,7 +27,7 @@ class PostPersonaMemoryMemoriesResponse201:
             owner_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            persona_id (str):
+            persona_id (UUID):
             scope (str):
             slug (str):
             memory_type (str):
@@ -53,7 +54,7 @@ class PostPersonaMemoryMemoriesResponse201:
     owner_id: str
     customer_id: str
     deleted_at: Union[None, str]
-    persona_id: str
+    persona_id: UUID
     scope: str
     slug: str
     memory_type: str
@@ -89,7 +90,7 @@ class PostPersonaMemoryMemoriesResponse201:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        persona_id = self.persona_id
+        persona_id = str(self.persona_id)
 
         scope = self.scope
 
@@ -198,7 +199,10 @@ class PostPersonaMemoryMemoriesResponse201:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        persona_id = d.pop("personaId")
+        persona_id = UUID(d.pop("personaId"))
+
+
+
 
         scope = d.pop("scope")
 

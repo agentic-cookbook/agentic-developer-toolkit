@@ -7,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from typing import cast, Union
+from uuid import UUID
 
 
 
@@ -25,7 +26,7 @@ class PostPersonaMemoryFactsResponse201:
             owner_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            persona_id (str):
+            persona_id (UUID):
             scope (str):
             memory_id (Union[None, str]):
             subject_table (Union[None, str]):
@@ -48,7 +49,7 @@ class PostPersonaMemoryFactsResponse201:
     owner_id: str
     customer_id: str
     deleted_at: Union[None, str]
-    persona_id: str
+    persona_id: UUID
     scope: str
     memory_id: Union[None, str]
     subject_table: Union[None, str]
@@ -80,7 +81,7 @@ class PostPersonaMemoryFactsResponse201:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        persona_id = self.persona_id
+        persona_id = str(self.persona_id)
 
         scope = self.scope
 
@@ -171,7 +172,10 @@ class PostPersonaMemoryFactsResponse201:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        persona_id = d.pop("personaId")
+        persona_id = UUID(d.pop("personaId"))
+
+
+
 
         scope = d.pop("scope")
 

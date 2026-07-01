@@ -63,13 +63,6 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
-    if response.status_code == 403:
-        response_403 = Error.from_dict(response.json())
-
-
-
-        return response_403
-
     if response.status_code == 409:
         response_409 = Error.from_dict(response.json())
 
@@ -98,7 +91,7 @@ def sync_detailed(
     body: PostRegistryOrganizationsBody,
 
 ) -> Response[Union[Error, RegistryProvisionedOrganization]]:
-    """ Create + provision an organization and its ownership chain (site-admin)
+    """ Create + provision an organization and its ownership chain
 
     Args:
         body (PostRegistryOrganizationsBody):
@@ -129,7 +122,7 @@ def sync(
     body: PostRegistryOrganizationsBody,
 
 ) -> Optional[Union[Error, RegistryProvisionedOrganization]]:
-    """ Create + provision an organization and its ownership chain (site-admin)
+    """ Create + provision an organization and its ownership chain
 
     Args:
         body (PostRegistryOrganizationsBody):
@@ -155,7 +148,7 @@ async def asyncio_detailed(
     body: PostRegistryOrganizationsBody,
 
 ) -> Response[Union[Error, RegistryProvisionedOrganization]]:
-    """ Create + provision an organization and its ownership chain (site-admin)
+    """ Create + provision an organization and its ownership chain
 
     Args:
         body (PostRegistryOrganizationsBody):
@@ -186,7 +179,7 @@ async def asyncio(
     body: PostRegistryOrganizationsBody,
 
 ) -> Optional[Union[Error, RegistryProvisionedOrganization]]:
-    """ Create + provision an organization and its ownership chain (site-admin)
+    """ Create + provision an organization and its ownership chain
 
     Args:
         body (PostRegistryOrganizationsBody):

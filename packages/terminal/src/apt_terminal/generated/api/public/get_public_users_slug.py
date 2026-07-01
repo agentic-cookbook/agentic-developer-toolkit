@@ -69,7 +69,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
 
 ) -> Response[Union[Error, PublicUserProfile]]:
-    """ Get a public user profile and its public personas
+    """ Get a public user profile card and its public personas
 
     Args:
         slug (str):
@@ -100,7 +100,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
 
 ) -> Optional[Union[Error, PublicUserProfile]]:
-    """ Get a public user profile and its public personas
+    """ Get a public user profile card and its public personas
 
     Args:
         slug (str):
@@ -126,7 +126,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
 
 ) -> Response[Union[Error, PublicUserProfile]]:
-    """ Get a public user profile and its public personas
+    """ Get a public user profile card and its public personas
 
     Args:
         slug (str):
@@ -157,7 +157,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
 
 ) -> Optional[Union[Error, PublicUserProfile]]:
-    """ Get a public user profile and its public personas
+    """ Get a public user profile card and its public personas
 
     Args:
         slug (str):

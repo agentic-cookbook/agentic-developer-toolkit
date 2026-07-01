@@ -24,13 +24,11 @@ class PostRegistryOrganizationsBody:
         Attributes:
             slug (str):
             name (str):
-            namespace (str): The reverse-domain prefix the org's namespace will own
             default_ecosystem_slug (Union[Unset, str]):  Default: 'default'.
      """
 
     slug: str
     name: str
-    namespace: str
     default_ecosystem_slug: Union[Unset, str] = 'default'
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -43,8 +41,6 @@ class PostRegistryOrganizationsBody:
 
         name = self.name
 
-        namespace = self.namespace
-
         default_ecosystem_slug = self.default_ecosystem_slug
 
 
@@ -53,7 +49,6 @@ class PostRegistryOrganizationsBody:
         field_dict.update({
             "slug": slug,
             "name": name,
-            "namespace": namespace,
         })
         if default_ecosystem_slug is not UNSET:
             field_dict["defaultEcosystemSlug"] = default_ecosystem_slug
@@ -69,14 +64,11 @@ class PostRegistryOrganizationsBody:
 
         name = d.pop("name")
 
-        namespace = d.pop("namespace")
-
         default_ecosystem_slug = d.pop("defaultEcosystemSlug", UNSET)
 
         post_registry_organizations_body = cls(
             slug=slug,
             name=name,
-            namespace=namespace,
             default_ecosystem_slug=default_ecosystem_slug,
         )
 

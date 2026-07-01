@@ -1,0 +1,118 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import cast
+from typing import cast, Union
+
+
+
+
+
+
+T = TypeVar("T", bound="PublicPaperSummary")
+
+
+
+@_attrs_define
+class PublicPaperSummary:
+    """ 
+        Attributes:
+            route (str):
+            title (str):
+            category (Union[None, str]):
+            tags (list[str]):
+            updated_at (str):
+     """
+
+    route: str
+    title: str
+    category: Union[None, str]
+    tags: list[str]
+    updated_at: str
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        route = self.route
+
+        title = self.title
+
+        category: Union[None, str]
+        category = self.category
+
+        tags = self.tags
+
+
+
+        updated_at = self.updated_at
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "route": route,
+            "title": title,
+            "category": category,
+            "tags": tags,
+            "updatedAt": updated_at,
+        })
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        route = d.pop("route")
+
+        title = d.pop("title")
+
+        def _parse_category(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        category = _parse_category(d.pop("category"))
+
+
+        tags = cast(list[str], d.pop("tags"))
+
+
+        updated_at = d.pop("updatedAt")
+
+        public_paper_summary = cls(
+            route=route,
+            title=title,
+            category=category,
+            tags=tags,
+            updated_at=updated_at,
+        )
+
+
+        public_paper_summary.additional_properties = d
+        return public_paper_summary
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

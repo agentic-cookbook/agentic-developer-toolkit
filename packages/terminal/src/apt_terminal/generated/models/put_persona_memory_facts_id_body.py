@@ -9,6 +9,7 @@ from ..types import UNSET, Unset
 from ..types import UNSET, Unset
 from typing import cast, Union
 from typing import Union
+from uuid import UUID
 
 
 
@@ -25,7 +26,7 @@ class PutPersonaMemoryFactsIdBody:
         Attributes:
             owner_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
-            persona_id (Union[Unset, str]):
+            persona_id (Union[Unset, UUID]):
             scope (Union[Unset, str]):
             memory_id (Union[None, Unset, str]):
             subject_table (Union[None, Unset, str]):
@@ -44,7 +45,7 @@ class PutPersonaMemoryFactsIdBody:
 
     owner_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
-    persona_id: Union[Unset, str] = UNSET
+    persona_id: Union[Unset, UUID] = UNSET
     scope: Union[Unset, str] = UNSET
     memory_id: Union[None, Unset, str] = UNSET
     subject_table: Union[None, Unset, str] = UNSET
@@ -73,7 +74,9 @@ class PutPersonaMemoryFactsIdBody:
         else:
             deleted_at = self.deleted_at
 
-        persona_id = self.persona_id
+        persona_id: Union[Unset, str] = UNSET
+        if not isinstance(self.persona_id, Unset):
+            persona_id = str(self.persona_id)
 
         scope = self.scope
 
@@ -198,7 +201,15 @@ class PutPersonaMemoryFactsIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        persona_id = d.pop("personaId", UNSET)
+        _persona_id = d.pop("personaId", UNSET)
+        persona_id: Union[Unset, UUID]
+        if isinstance(_persona_id,  Unset):
+            persona_id = UNSET
+        else:
+            persona_id = UUID(_persona_id)
+
+
+
 
         scope = d.pop("scope", UNSET)
 

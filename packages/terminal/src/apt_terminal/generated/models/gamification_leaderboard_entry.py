@@ -1,0 +1,143 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast, Union
+from typing import Union
+
+
+
+
+
+
+T = TypeVar("T", bound="GamificationLeaderboardEntry")
+
+
+
+@_attrs_define
+class GamificationLeaderboardEntry:
+    """ 
+        Attributes:
+            subject_type (str):
+            subject_id (str):
+            avatar_url (str):
+            total_points (int):
+            name (Union[None, Unset, str]): Display name (users only)
+            level (Union[None, Unset, str]):
+     """
+
+    subject_type: str
+    subject_id: str
+    avatar_url: str
+    total_points: int
+    name: Union[None, Unset, str] = UNSET
+    level: Union[None, Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        subject_type = self.subject_type
+
+        subject_id = self.subject_id
+
+        avatar_url = self.avatar_url
+
+        total_points = self.total_points
+
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
+
+        level: Union[None, Unset, str]
+        if isinstance(self.level, Unset):
+            level = UNSET
+        else:
+            level = self.level
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "subjectType": subject_type,
+            "subjectId": subject_id,
+            "avatarUrl": avatar_url,
+            "totalPoints": total_points,
+        })
+        if name is not UNSET:
+            field_dict["name"] = name
+        if level is not UNSET:
+            field_dict["level"] = level
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        subject_type = d.pop("subjectType")
+
+        subject_id = d.pop("subjectId")
+
+        avatar_url = d.pop("avatarUrl")
+
+        total_points = d.pop("totalPoints")
+
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        name = _parse_name(d.pop("name", UNSET))
+
+
+        def _parse_level(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        level = _parse_level(d.pop("level", UNSET))
+
+
+        gamification_leaderboard_entry = cls(
+            subject_type=subject_type,
+            subject_id=subject_id,
+            avatar_url=avatar_url,
+            total_points=total_points,
+            name=name,
+            level=level,
+        )
+
+
+        gamification_leaderboard_entry.additional_properties = d
+        return gamification_leaderboard_entry
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

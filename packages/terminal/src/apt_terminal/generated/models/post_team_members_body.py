@@ -23,13 +23,14 @@ class PostTeamMembersBody:
     """ 
         Attributes:
             team_id (str):
-            added_at (str):
+            email (str):
             role (Union[Unset, str]):
      """
 
     team_id: str
-    added_at: str
+    email: str
     role: Union[Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
 
@@ -38,16 +39,16 @@ class PostTeamMembersBody:
     def to_dict(self) -> dict[str, Any]:
         team_id = self.team_id
 
-        added_at = self.added_at
+        email = self.email
 
         role = self.role
 
 
         field_dict: dict[str, Any] = {}
-
+        field_dict.update(self.additional_properties)
         field_dict.update({
             "teamId": team_id,
-            "addedAt": added_at,
+            "email": email,
         })
         if role is not UNSET:
             field_dict["role"] = role
@@ -61,15 +62,32 @@ class PostTeamMembersBody:
         d = dict(src_dict)
         team_id = d.pop("teamId")
 
-        added_at = d.pop("addedAt")
+        email = d.pop("email")
 
         role = d.pop("role", UNSET)
 
         post_team_members_body = cls(
             team_id=team_id,
-            added_at=added_at,
+            email=email,
             role=role,
         )
 
+
+        post_team_members_body.additional_properties = d
         return post_team_members_body
 
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

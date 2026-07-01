@@ -28,23 +28,31 @@ class MarkdownDocumentSummary:
         Attributes:
             id (str):
             title (str):
+            tags (list[str]):
+            published (bool):
             content_hash (str):
             size_bytes (int):
             current_version (int):
             created_at (str):
             updated_at (str):
             frontmatter (Union['MarkdownDocumentSummaryFrontmatterType0', None, Unset]):
+            category (Union[None, Unset, str]):
+            public_route (Union[None, Unset, str]):
             latest_version_id (Union[None, Unset, str]):
      """
 
     id: str
     title: str
+    tags: list[str]
+    published: bool
     content_hash: str
     size_bytes: int
     current_version: int
     created_at: str
     updated_at: str
     frontmatter: Union['MarkdownDocumentSummaryFrontmatterType0', None, Unset] = UNSET
+    category: Union[None, Unset, str] = UNSET
+    public_route: Union[None, Unset, str] = UNSET
     latest_version_id: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -57,6 +65,12 @@ class MarkdownDocumentSummary:
         id = self.id
 
         title = self.title
+
+        tags = self.tags
+
+
+
+        published = self.published
 
         content_hash = self.content_hash
 
@@ -76,6 +90,18 @@ class MarkdownDocumentSummary:
         else:
             frontmatter = self.frontmatter
 
+        category: Union[None, Unset, str]
+        if isinstance(self.category, Unset):
+            category = UNSET
+        else:
+            category = self.category
+
+        public_route: Union[None, Unset, str]
+        if isinstance(self.public_route, Unset):
+            public_route = UNSET
+        else:
+            public_route = self.public_route
+
         latest_version_id: Union[None, Unset, str]
         if isinstance(self.latest_version_id, Unset):
             latest_version_id = UNSET
@@ -88,6 +114,8 @@ class MarkdownDocumentSummary:
         field_dict.update({
             "id": id,
             "title": title,
+            "tags": tags,
+            "published": published,
             "contentHash": content_hash,
             "sizeBytes": size_bytes,
             "currentVersion": current_version,
@@ -96,6 +124,10 @@ class MarkdownDocumentSummary:
         })
         if frontmatter is not UNSET:
             field_dict["frontmatter"] = frontmatter
+        if category is not UNSET:
+            field_dict["category"] = category
+        if public_route is not UNSET:
+            field_dict["publicRoute"] = public_route
         if latest_version_id is not UNSET:
             field_dict["latestVersionId"] = latest_version_id
 
@@ -110,6 +142,11 @@ class MarkdownDocumentSummary:
         id = d.pop("id")
 
         title = d.pop("title")
+
+        tags = cast(list[str], d.pop("tags"))
+
+
+        published = d.pop("published")
 
         content_hash = d.pop("contentHash")
 
@@ -141,6 +178,26 @@ class MarkdownDocumentSummary:
         frontmatter = _parse_frontmatter(d.pop("frontmatter", UNSET))
 
 
+        def _parse_category(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        category = _parse_category(d.pop("category", UNSET))
+
+
+        def _parse_public_route(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        public_route = _parse_public_route(d.pop("publicRoute", UNSET))
+
+
         def _parse_latest_version_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
@@ -154,12 +211,16 @@ class MarkdownDocumentSummary:
         markdown_document_summary = cls(
             id=id,
             title=title,
+            tags=tags,
+            published=published,
             content_hash=content_hash,
             size_bytes=size_bytes,
             current_version=current_version,
             created_at=created_at,
             updated_at=updated_at,
             frontmatter=frontmatter,
+            category=category,
+            public_route=public_route,
             latest_version_id=latest_version_id,
         )
 

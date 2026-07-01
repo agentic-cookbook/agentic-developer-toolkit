@@ -10,7 +10,9 @@ from typing import cast
 from typing import cast, Union
 
 if TYPE_CHECKING:
+  from ..models.public_social_link import PublicSocialLink
   from ..models.public_persona_summary import PublicPersonaSummary
+  from ..models.public_address import PublicAddress
 
 
 
@@ -28,6 +30,10 @@ class PublicUserProfile:
             display_name (Union[None, str]):
             avatar_url (Union[None, str]):
             created_at (str):
+            social_links (list['PublicSocialLink']):
+            emails (list[str]):
+            phones (list[str]):
+            addresses (list['PublicAddress']):
             personas (list['PublicPersonaSummary']):
      """
 
@@ -35,6 +41,10 @@ class PublicUserProfile:
     display_name: Union[None, str]
     avatar_url: Union[None, str]
     created_at: str
+    social_links: list['PublicSocialLink']
+    emails: list[str]
+    phones: list[str]
+    addresses: list['PublicAddress']
     personas: list['PublicPersonaSummary']
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -43,7 +53,9 @@ class PublicUserProfile:
 
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.public_social_link import PublicSocialLink
         from ..models.public_persona_summary import PublicPersonaSummary
+        from ..models.public_address import PublicAddress
         slug = self.slug
 
         display_name: Union[None, str]
@@ -53,6 +65,28 @@ class PublicUserProfile:
         avatar_url = self.avatar_url
 
         created_at = self.created_at
+
+        social_links = []
+        for social_links_item_data in self.social_links:
+            social_links_item = social_links_item_data.to_dict()
+            social_links.append(social_links_item)
+
+
+
+        emails = self.emails
+
+
+
+        phones = self.phones
+
+
+
+        addresses = []
+        for addresses_item_data in self.addresses:
+            addresses_item = addresses_item_data.to_dict()
+            addresses.append(addresses_item)
+
+
 
         personas = []
         for personas_item_data in self.personas:
@@ -69,6 +103,10 @@ class PublicUserProfile:
             "displayName": display_name,
             "avatarUrl": avatar_url,
             "createdAt": created_at,
+            "socialLinks": social_links,
+            "emails": emails,
+            "phones": phones,
+            "addresses": addresses,
             "personas": personas,
         })
 
@@ -78,7 +116,9 @@ class PublicUserProfile:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.public_social_link import PublicSocialLink
         from ..models.public_persona_summary import PublicPersonaSummary
+        from ..models.public_address import PublicAddress
         d = dict(src_dict)
         slug = d.pop("slug")
 
@@ -100,6 +140,32 @@ class PublicUserProfile:
 
         created_at = d.pop("createdAt")
 
+        social_links = []
+        _social_links = d.pop("socialLinks")
+        for social_links_item_data in (_social_links):
+            social_links_item = PublicSocialLink.from_dict(social_links_item_data)
+
+
+
+            social_links.append(social_links_item)
+
+
+        emails = cast(list[str], d.pop("emails"))
+
+
+        phones = cast(list[str], d.pop("phones"))
+
+
+        addresses = []
+        _addresses = d.pop("addresses")
+        for addresses_item_data in (_addresses):
+            addresses_item = PublicAddress.from_dict(addresses_item_data)
+
+
+
+            addresses.append(addresses_item)
+
+
         personas = []
         _personas = d.pop("personas")
         for personas_item_data in (_personas):
@@ -115,6 +181,10 @@ class PublicUserProfile:
             display_name=display_name,
             avatar_url=avatar_url,
             created_at=created_at,
+            social_links=social_links,
+            emails=emails,
+            phones=phones,
+            addresses=addresses,
             personas=personas,
         )
 

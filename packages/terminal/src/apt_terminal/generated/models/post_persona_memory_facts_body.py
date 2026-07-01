@@ -9,6 +9,7 @@ from ..types import UNSET, Unset
 from ..types import UNSET, Unset
 from typing import cast, Union
 from typing import Union
+from uuid import UUID
 
 
 
@@ -23,7 +24,7 @@ T = TypeVar("T", bound="PostPersonaMemoryFactsBody")
 class PostPersonaMemoryFactsBody:
     """ 
         Attributes:
-            persona_id (str):
+            persona_id (UUID):
             predicate (str):
             owner_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
@@ -42,7 +43,7 @@ class PostPersonaMemoryFactsBody:
             supersedes_id (Union[None, Unset, str]):
      """
 
-    persona_id: str
+    persona_id: UUID
     predicate: str
     owner_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
@@ -65,7 +66,7 @@ class PostPersonaMemoryFactsBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        persona_id = self.persona_id
+        persona_id = str(self.persona_id)
 
         predicate = self.predicate
 
@@ -184,7 +185,10 @@ class PostPersonaMemoryFactsBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        persona_id = d.pop("personaId")
+        persona_id = UUID(d.pop("personaId"))
+
+
+
 
         predicate = d.pop("predicate")
 

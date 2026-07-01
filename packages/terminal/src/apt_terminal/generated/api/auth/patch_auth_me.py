@@ -98,10 +98,10 @@ def sync_detailed(
     body: PatchAuthMeBody,
 
 ) -> Response[Union[Error, User]]:
-    """ Update the caller's own profile (display name and/or login slug)
+    """ Update the caller's own profile (name, slug, avatar, public-profile toggle)
 
     Args:
-        body (PatchAuthMeBody): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one profile field is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -129,10 +129,10 @@ def sync(
     body: PatchAuthMeBody,
 
 ) -> Optional[Union[Error, User]]:
-    """ Update the caller's own profile (display name and/or login slug)
+    """ Update the caller's own profile (name, slug, avatar, public-profile toggle)
 
     Args:
-        body (PatchAuthMeBody): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one profile field is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -155,10 +155,10 @@ async def asyncio_detailed(
     body: PatchAuthMeBody,
 
 ) -> Response[Union[Error, User]]:
-    """ Update the caller's own profile (display name and/or login slug)
+    """ Update the caller's own profile (name, slug, avatar, public-profile toggle)
 
     Args:
-        body (PatchAuthMeBody): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one profile field is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -186,10 +186,10 @@ async def asyncio(
     body: PatchAuthMeBody,
 
 ) -> Optional[Union[Error, User]]:
-    """ Update the caller's own profile (display name and/or login slug)
+    """ Update the caller's own profile (name, slug, avatar, public-profile toggle)
 
     Args:
-        body (PatchAuthMeBody): At least one of name or slug is required.
+        body (PatchAuthMeBody): At least one profile field is required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -1,0 +1,246 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast
+from typing import cast, Union
+from typing import Union
+from uuid import UUID
+
+if TYPE_CHECKING:
+  from ..models.ai_processing_webhook_delivery_payload import AiProcessingWebhookDeliveryPayload
+
+
+
+
+
+T = TypeVar("T", bound="AiProcessingWebhookDelivery")
+
+
+
+@_attrs_define
+class AiProcessingWebhookDelivery:
+    """ 
+        Attributes:
+            id (UUID):
+            owner_id (str):
+            endpoint_id (UUID):
+            event_id (UUID):
+            event_type (str):
+            payload (AiProcessingWebhookDeliveryPayload):
+            status (str): pending | delivered | failed | dead
+            attempts (int):
+            max_attempts (int):
+            next_attempt_at (str):
+            created_at (str):
+            updated_at (str):
+            response_status (Union[None, Unset, int]):
+            last_error (Union[None, Unset, str]):
+            delivered_at (Union[None, Unset, str]):
+     """
+
+    id: UUID
+    owner_id: str
+    endpoint_id: UUID
+    event_id: UUID
+    event_type: str
+    payload: 'AiProcessingWebhookDeliveryPayload'
+    status: str
+    attempts: int
+    max_attempts: int
+    next_attempt_at: str
+    created_at: str
+    updated_at: str
+    response_status: Union[None, Unset, int] = UNSET
+    last_error: Union[None, Unset, str] = UNSET
+    delivered_at: Union[None, Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        from ..models.ai_processing_webhook_delivery_payload import AiProcessingWebhookDeliveryPayload
+        id = str(self.id)
+
+        owner_id = self.owner_id
+
+        endpoint_id = str(self.endpoint_id)
+
+        event_id = str(self.event_id)
+
+        event_type = self.event_type
+
+        payload = self.payload.to_dict()
+
+        status = self.status
+
+        attempts = self.attempts
+
+        max_attempts = self.max_attempts
+
+        next_attempt_at = self.next_attempt_at
+
+        created_at = self.created_at
+
+        updated_at = self.updated_at
+
+        response_status: Union[None, Unset, int]
+        if isinstance(self.response_status, Unset):
+            response_status = UNSET
+        else:
+            response_status = self.response_status
+
+        last_error: Union[None, Unset, str]
+        if isinstance(self.last_error, Unset):
+            last_error = UNSET
+        else:
+            last_error = self.last_error
+
+        delivered_at: Union[None, Unset, str]
+        if isinstance(self.delivered_at, Unset):
+            delivered_at = UNSET
+        else:
+            delivered_at = self.delivered_at
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "id": id,
+            "ownerId": owner_id,
+            "endpointId": endpoint_id,
+            "eventId": event_id,
+            "eventType": event_type,
+            "payload": payload,
+            "status": status,
+            "attempts": attempts,
+            "maxAttempts": max_attempts,
+            "nextAttemptAt": next_attempt_at,
+            "createdAt": created_at,
+            "updatedAt": updated_at,
+        })
+        if response_status is not UNSET:
+            field_dict["responseStatus"] = response_status
+        if last_error is not UNSET:
+            field_dict["lastError"] = last_error
+        if delivered_at is not UNSET:
+            field_dict["deliveredAt"] = delivered_at
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.ai_processing_webhook_delivery_payload import AiProcessingWebhookDeliveryPayload
+        d = dict(src_dict)
+        id = UUID(d.pop("id"))
+
+
+
+
+        owner_id = d.pop("ownerId")
+
+        endpoint_id = UUID(d.pop("endpointId"))
+
+
+
+
+        event_id = UUID(d.pop("eventId"))
+
+
+
+
+        event_type = d.pop("eventType")
+
+        payload = AiProcessingWebhookDeliveryPayload.from_dict(d.pop("payload"))
+
+
+
+
+        status = d.pop("status")
+
+        attempts = d.pop("attempts")
+
+        max_attempts = d.pop("maxAttempts")
+
+        next_attempt_at = d.pop("nextAttemptAt")
+
+        created_at = d.pop("createdAt")
+
+        updated_at = d.pop("updatedAt")
+
+        def _parse_response_status(data: object) -> Union[None, Unset, int]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int], data)
+
+        response_status = _parse_response_status(d.pop("responseStatus", UNSET))
+
+
+        def _parse_last_error(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        last_error = _parse_last_error(d.pop("lastError", UNSET))
+
+
+        def _parse_delivered_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        delivered_at = _parse_delivered_at(d.pop("deliveredAt", UNSET))
+
+
+        ai_processing_webhook_delivery = cls(
+            id=id,
+            owner_id=owner_id,
+            endpoint_id=endpoint_id,
+            event_id=event_id,
+            event_type=event_type,
+            payload=payload,
+            status=status,
+            attempts=attempts,
+            max_attempts=max_attempts,
+            next_attempt_at=next_attempt_at,
+            created_at=created_at,
+            updated_at=updated_at,
+            response_status=response_status,
+            last_error=last_error,
+            delivered_at=delivered_at,
+        )
+
+
+        ai_processing_webhook_delivery.additional_properties = d
+        return ai_processing_webhook_delivery
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

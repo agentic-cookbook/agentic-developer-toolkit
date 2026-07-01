@@ -9,6 +9,7 @@ from ... import errors
 
 from ...models.customer_auth_result import CustomerAuthResult
 from ...models.error import Error
+from ...models.mfa_challenge import MfaChallenge
 from ...models.post_customer_login_body import PostCustomerLoginBody
 from typing import cast
 
@@ -41,13 +42,20 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[CustomerAuthResult, Error]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[CustomerAuthResult, Error, MfaChallenge]]:
     if response.status_code == 200:
         response_200 = CustomerAuthResult.from_dict(response.json())
 
 
 
         return response_200
+
+    if response.status_code == 202:
+        response_202 = MfaChallenge.from_dict(response.json())
+
+
+
+        return response_202
 
     if response.status_code == 400:
         response_400 = Error.from_dict(response.json())
@@ -69,7 +77,7 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[CustomerAuthResult, Error]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[CustomerAuthResult, Error, MfaChallenge]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,7 +91,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: PostCustomerLoginBody,
 
-) -> Response[Union[CustomerAuthResult, Error]]:
+) -> Response[Union[CustomerAuthResult, Error, MfaChallenge]]:
     """ Authenticate one of the caller's end-customers (email + password)
 
     Args:
@@ -95,7 +103,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CustomerAuthResult, Error]]
+        Response[Union[CustomerAuthResult, Error, MfaChallenge]]
      """
 
 
@@ -115,7 +123,7 @@ def sync(
     client: AuthenticatedClient,
     body: PostCustomerLoginBody,
 
-) -> Optional[Union[CustomerAuthResult, Error]]:
+) -> Optional[Union[CustomerAuthResult, Error, MfaChallenge]]:
     """ Authenticate one of the caller's end-customers (email + password)
 
     Args:
@@ -127,7 +135,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[CustomerAuthResult, Error]
+        Union[CustomerAuthResult, Error, MfaChallenge]
      """
 
 
@@ -142,7 +150,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: PostCustomerLoginBody,
 
-) -> Response[Union[CustomerAuthResult, Error]]:
+) -> Response[Union[CustomerAuthResult, Error, MfaChallenge]]:
     """ Authenticate one of the caller's end-customers (email + password)
 
     Args:
@@ -154,7 +162,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CustomerAuthResult, Error]]
+        Response[Union[CustomerAuthResult, Error, MfaChallenge]]
      """
 
 
@@ -174,7 +182,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: PostCustomerLoginBody,
 
-) -> Optional[Union[CustomerAuthResult, Error]]:
+) -> Optional[Union[CustomerAuthResult, Error, MfaChallenge]]:
     """ Authenticate one of the caller's end-customers (email + password)
 
     Args:
@@ -186,7 +194,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[CustomerAuthResult, Error]
+        Union[CustomerAuthResult, Error, MfaChallenge]
      """
 
 

@@ -27,6 +27,7 @@ class User:
             name (str):
             avatar_url (str):
             slug (Union[None, str]):
+            public_profile_enabled (bool): Whether the public profile card is visible at /public/users/:slug
             capabilities (list[str]):
      """
 
@@ -35,6 +36,7 @@ class User:
     name: str
     avatar_url: str
     slug: Union[None, str]
+    public_profile_enabled: bool
     capabilities: list[str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -54,6 +56,8 @@ class User:
         slug: Union[None, str]
         slug = self.slug
 
+        public_profile_enabled = self.public_profile_enabled
+
         capabilities = self.capabilities
 
 
@@ -67,6 +71,7 @@ class User:
             "name": name,
             "avatarUrl": avatar_url,
             "slug": slug,
+            "publicProfileEnabled": public_profile_enabled,
             "capabilities": capabilities,
         })
 
@@ -93,6 +98,8 @@ class User:
         slug = _parse_slug(d.pop("slug"))
 
 
+        public_profile_enabled = d.pop("publicProfileEnabled")
+
         capabilities = cast(list[str], d.pop("capabilities"))
 
 
@@ -102,6 +109,7 @@ class User:
             name=name,
             avatar_url=avatar_url,
             slug=slug,
+            public_profile_enabled=public_profile_enabled,
             capabilities=capabilities,
         )
 

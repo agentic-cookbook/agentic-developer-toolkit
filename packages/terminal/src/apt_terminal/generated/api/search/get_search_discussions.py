@@ -103,7 +103,7 @@ def sync_detailed(
     page_size: Union[Unset, int] = 20,
 
 ) -> Response[Union[Error, GetSearchDiscussionsResponse200]]:
-    """ Full-text search discussions (threads and/or replies)
+    """ Search discussions — topics by title, posts by body (via content.markdown)
 
     Args:
         q (str):
@@ -143,7 +143,7 @@ def sync(
     page_size: Union[Unset, int] = 20,
 
 ) -> Optional[Union[Error, GetSearchDiscussionsResponse200]]:
-    """ Full-text search discussions (threads and/or replies)
+    """ Search discussions — topics by title, posts by body (via content.markdown)
 
     Args:
         q (str):
@@ -178,7 +178,7 @@ async def asyncio_detailed(
     page_size: Union[Unset, int] = 20,
 
 ) -> Response[Union[Error, GetSearchDiscussionsResponse200]]:
-    """ Full-text search discussions (threads and/or replies)
+    """ Search discussions — topics by title, posts by body (via content.markdown)
 
     Args:
         q (str):
@@ -218,7 +218,7 @@ async def asyncio(
     page_size: Union[Unset, int] = 20,
 
 ) -> Optional[Union[Error, GetSearchDiscussionsResponse200]]:
-    """ Full-text search discussions (threads and/or replies)
+    """ Search discussions — topics by title, posts by body (via content.markdown)
 
     Args:
         q (str):

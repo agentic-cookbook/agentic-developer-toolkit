@@ -1,8 +1,8 @@
 from enum import Enum
 
 class GetSearchDiscussionsType(str, Enum):
-    REPLIES = "replies"
-    THREADS = "threads"
+    POSTS = "posts"
+    TOPICS = "topics"
 
     def __str__(self) -> str:
         return str(self.value)
