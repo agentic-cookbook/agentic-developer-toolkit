@@ -52,6 +52,9 @@
       "name": "integration"
     },
     {
+      "name": "integrations"
+    },
+    {
       "name": "interactions"
     },
     {
@@ -570,6 +573,431 @@
           "updatedAt": {
             "type": "string",
             "description": "Timestamp of the last status transition"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "required": [
+          "title",
+          "status"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "URI identifying the problem type; 'about:blank' when unspecified"
+          },
+          "title": {
+            "type": "string",
+            "description": "Short, human-readable summary of the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code, duplicated in the body"
+          },
+          "detail": {
+            "type": "string",
+            "description": "Explanation specific to this occurrence"
+          },
+          "instance": {
+            "type": "string",
+            "description": "URI reference for this occurrence (the request path)"
+          }
+        }
+      },
+      "IntegrationConnection": {
+        "type": "object",
+        "required": [
+          "id",
+          "provider",
+          "serviceType",
+          "status",
+          "displayName",
+          "username",
+          "externalAccountId",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "provider": {
+            "type": "string",
+            "description": "Provider slug (e.g. google-calendar, github)"
+          },
+          "serviceType": {
+            "type": "string",
+            "description": "Service within the provider (e.g. calendar)"
+          },
+          "status": {
+            "type": "string",
+            "description": "active | error | revoked | pending"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "externalAccountId": {
+            "type": "string",
+            "description": "Provider-side account id"
+          },
+          "lastSyncAt": {
+            "type": "string",
+            "nullable": true,
+            "description": "Last successful sync (null = never)"
+          },
+          "lastError": {
+            "type": "string",
+            "nullable": true,
+            "description": "Last recorded sync error"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "IntegrationProvider": {
+        "type": "object",
+        "required": [
+          "providerId",
+          "displayName",
+          "authMethod",
+          "serviceTypes",
+          "capabilities",
+          "defaultPollIntervalMs"
+        ],
+        "properties": {
+          "providerId": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "authMethod": {
+            "type": "string",
+            "enum": [
+              "oauth",
+              "oauth_instance",
+              "plaid_link",
+              "api_key",
+              "app_password"
+            ]
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "read | write | auth"
+          },
+          "defaultPollIntervalMs": {
+            "type": "integer",
+            "description": "Default minimum sync interval (ms)"
+          }
+        }
+      },
+      "IntegrationGlobalConfig": {
+        "type": "object",
+        "required": [
+          "providerId",
+          "config",
+          "hasSecret"
+        ],
+        "properties": {
+          "providerId": {
+            "type": "string"
+          },
+          "config": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Non-secret config: clientId, scopes, URLs, endpoints, credentialStyle"
+          },
+          "hasSecret": {
+            "type": "boolean",
+            "description": "Whether a client secret is stored (the value is never returned)"
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IntegrationConnectRequest": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "providerId",
+              "serviceType",
+              "code",
+              "redirectUri",
+              "state"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "oauth"
+                ]
+              },
+              "providerId": {
+                "type": "string"
+              },
+              "serviceType": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string",
+                "description": "OAuth authorization code"
+              },
+              "redirectUri": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string",
+                "description": "The HMAC-signed state returned by the auth-url endpoint (CSRF)"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "providerId",
+              "serviceType",
+              "apiKey"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "api_key"
+                ]
+              },
+              "providerId": {
+                "type": "string"
+              },
+              "serviceType": {
+                "type": "string"
+              },
+              "apiKey": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "providerId",
+              "serviceType",
+              "identifier",
+              "password"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "app_password"
+                ]
+              },
+              "providerId": {
+                "type": "string"
+              },
+              "serviceType": {
+                "type": "string"
+              },
+              "identifier": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "instanceUrl": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "providerId",
+              "serviceType",
+              "publicToken"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "plaid_link"
+                ]
+              },
+              "providerId": {
+                "type": "string"
+              },
+              "serviceType": {
+                "type": "string"
+              },
+              "publicToken": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "providerId",
+              "serviceType",
+              "code",
+              "state"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "oauth_instance"
+                ]
+              },
+              "providerId": {
+                "type": "string"
+              },
+              "serviceType": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "IntegrationActionRequest": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "actionType=send — an outbound email; at least one body is required",
+            "required": [
+              "to",
+              "subject"
+            ],
+            "properties": {
+              "to": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "cc": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "bcc": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "subject": {
+                "type": "string"
+              },
+              "bodyText": {
+                "type": "string"
+              },
+              "bodyHtml": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "actionType=post — an outbound social post; requires text or media",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "media": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "url"
+                  ],
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "altText": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "replyTo": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "IntegrationActionResult": {
+        "type": "object",
+        "required": [
+          "ok",
+          "status",
+          "actionLogId",
+          "externalId",
+          "deduped"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "description": "true when status is ok"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "error"
+            ]
+          },
+          "actionLogId": {
+            "type": "string",
+            "description": "The integration_action_logs row id"
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Provider-side id produced, if any"
+          },
+          "deduped": {
+            "type": "boolean",
+            "description": "true when an Idempotency-Key replay returned a prior row"
+          },
+          "error": {
+            "type": "string",
+            "description": "Failure message when status is error"
           }
         }
       },
@@ -1366,6 +1794,119 @@
           }
         }
       },
+      "DiscussionTopic": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "isPinned",
+          "isLocked",
+          "isPublic",
+          "replyCount",
+          "lastActivityAt",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Author (server-stamped principal). Omitted on the public surface."
+          },
+          "title": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPinned": {
+            "type": "boolean"
+          },
+          "isLocked": {
+            "type": "boolean"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "replyCount": {
+            "type": "integer"
+          },
+          "answeredPostId": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastActivityAt": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "DiscussionPost": {
+        "type": "object",
+        "required": [
+          "id",
+          "topicId",
+          "parentPostId",
+          "postNumber",
+          "bodyDocumentId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "topicId": {
+            "type": "string"
+          },
+          "parentPostId": {
+            "type": "string",
+            "nullable": true
+          },
+          "postNumber": {
+            "type": "integer"
+          },
+          "bodyDocumentId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The content.markdown doc backing this post’s body."
+          },
+          "customerId": {
+            "type": "string",
+            "description": "Author (server-stamped principal). Omitted on the public surface."
+          },
+          "ownerId": {
+            "type": "string",
+            "description": "Owning ecosystem (present on create only)."
+          },
+          "content": {
+            "type": "string",
+            "nullable": true,
+            "description": "Resolved markdown body (present on the list routes; null if the body doc was deleted)."
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "StringList": {
         "type": "object",
         "title": "StringList",
@@ -1395,7 +1936,9 @@
           "sizeBytes",
           "currentVersion",
           "tags",
-          "published",
+          "visibility",
+          "stage",
+          "kind",
           "createdAt",
           "updatedAt",
           "isDeleted"
@@ -1439,14 +1982,34 @@
             },
             "description": "Tag set (defaults to [])."
           },
-          "published": {
-            "type": "boolean",
-            "description": "True when readable on the public surface."
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "private",
+              "public"
+            ],
+            "description": "Publication state: 'public' is readable on the public surface, 'private' is a draft."
+          },
+          "stage": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "final"
+            ],
+            "description": "Editorial stage: 'draft' is editable; 'final' is immutable (content/title edits + version writes are rejected)."
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "paper",
+              "research"
+            ],
+            "description": "Document kind: 'paper' (ordinary) or 'research' (AI-ingested, carries an adh_source frontmatter key)."
           },
           "publicRoute": {
             "type": "string",
             "nullable": true,
-            "description": "Public route slug (non-null iff published); unique per author."
+            "description": "Public route slug (non-null iff visibility='public'); unique per author."
           },
           "contentHash": {
             "type": "string",
@@ -1483,7 +2046,9 @@
           "sizeBytes",
           "currentVersion",
           "tags",
-          "published",
+          "visibility",
+          "stage",
+          "kind",
           "createdAt",
           "updatedAt"
         ],
@@ -1509,8 +2074,26 @@
               "type": "string"
             }
           },
-          "published": {
-            "type": "boolean"
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "private",
+              "public"
+            ]
+          },
+          "stage": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "final"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "paper",
+              "research"
+            ]
           },
           "publicRoute": {
             "type": "string",
@@ -2706,10 +3289,13 @@
         "required": [
           "id",
           "title",
+          "kind",
           "publicRoute",
           "author",
           "category",
           "tags",
+          "summary",
+          "evaluation",
           "snippet",
           "createdAt",
           "updatedAt"
@@ -2720,6 +3306,14 @@
           },
           "title": {
             "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "paper",
+              "research"
+            ],
+            "description": "Document kind: 'paper' (ordinary) or 'research' (AI-ingested)."
           },
           "publicRoute": {
             "type": "string",
@@ -2750,6 +3344,16 @@
             "items": {
               "type": "string"
             }
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true,
+            "description": "Display summary read from the doc frontmatter (jsonb), or null."
+          },
+          "evaluation": {
+            "type": "string",
+            "nullable": true,
+            "description": "Display evaluation read from the doc frontmatter (jsonb), or null."
           },
           "snippet": {
             "type": "string",
@@ -8091,6 +8695,1132 @@
         }
       }
     },
+    "/integrations": {
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List the caller's connections (secrets redacted)",
+        "description": "Returns the caller's own integration connections. Secret columns are never included.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connections",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "connections"
+                  ],
+                  "properties": {
+                    "connections": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/IntegrationConnection"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/providers": {
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List the provider catalog",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provider catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "providers"
+                  ],
+                  "properties": {
+                    "providers": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/IntegrationProvider"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/providers/{providerId}/auth-url": {
+      "parameters": [
+        {
+          "name": "providerId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Get the OAuth authorize URL for a provider",
+        "description": "Only valid for oauth providers (400 otherwise). 404 for an unknown provider.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "redirectUri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serviceType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scopes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorize URL + round-trip state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "url",
+                    "state"
+                  ],
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/providers/{providerId}/link-token": {
+      "parameters": [
+        {
+          "name": "providerId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Mint a Plaid Link token",
+        "description": "Only valid for plaid_link providers (400 otherwise). 404 for an unknown provider.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "serviceType": {
+                    "type": "string",
+                    "description": "Defaults to the provider primary service type"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Plaid link token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "linkToken"
+                  ],
+                  "properties": {
+                    "linkToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/providers/{providerId}/register-instance": {
+      "parameters": [
+        {
+          "name": "providerId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Register a self-hosted OAuth instance (Mastodon)",
+        "description": "Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "instanceUrl",
+                  "redirectUri"
+                ],
+                "properties": {
+                  "instanceUrl": {
+                    "type": "string"
+                  },
+                  "redirectUri": {
+                    "type": "string"
+                  },
+                  "serviceType": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Instance registration → authorize URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "state",
+                    "authorizeUrl",
+                    "clientId"
+                  ],
+                  "properties": {
+                    "state": {
+                      "type": "string"
+                    },
+                    "authorizeUrl": {
+                      "type": "string"
+                    },
+                    "clientId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/connect": {
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Connect an integration (polymorphic by auth method)",
+        "description": "Finishes any auth method's connect flow and persists the connection. The owning ecosystem is forced to the caller. Returns the redacted connection (tokens never echoed).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntegrationConnectRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Connected (redacted)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationConnection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{connectionId}": {
+      "parameters": [
+        {
+          "name": "connectionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Disconnect a connection (ownership-checked)",
+        "description": "Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the connection is not the caller's.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok"
+                  ],
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{connectionId}/sync": {
+      "parameters": [
+        {
+          "name": "connectionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Trigger an immediate sync (sync now)",
+        "description": "Runs the connection's worker once, independent of the background scheduler. 404 when not the caller's; 503 when no worker is registered for its provider:serviceType (the sync capability is unavailable, retryable once a worker ships).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Sync dispatched",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok"
+                  ],
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{connectionId}/actions/{actionType}": {
+      "parameters": [
+        {
+          "name": "connectionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "actionType",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Act as the user (outbound action)",
+        "description": "Performs one outbound action (e.g. send an email, post a status) as the connection, and records exactly one action-log row. The provider is derived from the connection (never in the URL). 404 when not the caller's; 422 when no action handler is registered for its provider:actionType; 400 on an unknown actionType or invalid body. An optional `Idempotency-Key` header makes a repeat collapse onto the first row (no re-perform).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional client key; a repeat returns the first recorded result."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntegrationActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Action recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationActionResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{connectionId}/settings": {
+      "parameters": [
+        {
+          "name": "connectionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "patch": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Update per-connection sync settings",
+        "description": "Owner-scoped, validated write of the caller-tunable sync settings the sync worker reads (e.g. gmailLabelIds / gmailWindowDays). 404 when not the caller's; 400 on an invalid body.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "gmailLabelIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Gmail label ids to sync (default INBOX)."
+                  },
+                  "gmailWindowDays": {
+                    "type": "integer",
+                    "description": "Days of history to sync (default 30, max 366)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated sync settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "ok",
+                    "syncSettings"
+                  ],
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "syncSettings": {
+                      "type": "object",
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/admin/configs": {
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List provider global configs (admin; secrets masked)",
+        "description": "Paged by limit/offset (limit defaults to 50, capped at 100; offset defaults to 0). Returns a pagination envelope: `items` is the page; `total` is the unfiltered provider-config count; `limit`/`offset` echo the applied paging.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Masked provider configs (paginated)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items",
+                    "total",
+                    "limit",
+                    "offset"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/IntegrationGlobalConfig"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "Unfiltered count of provider configs"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "offset": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/admin/configs/{providerId}": {
+      "parameters": [
+        {
+          "name": "providerId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Get one provider global config (admin; secret masked)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Masked provider config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationGlobalConfig"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Upsert a provider global config (admin)",
+        "description": "Merges the non-secret config; a blank/absent clientSecret preserves the stored encrypted secret, a present one is encrypted at rest.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientId": {
+                    "type": "string"
+                  },
+                  "scopes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "authUrl": {
+                    "type": "string"
+                  },
+                  "tokenUrl": {
+                    "type": "string"
+                  },
+                  "userinfoUrl": {
+                    "type": "string"
+                  },
+                  "validateUrl": {
+                    "type": "string"
+                  },
+                  "credentialStyle": {
+                    "type": "string",
+                    "enum": [
+                      "form_body",
+                      "basic_auth"
+                    ]
+                  },
+                  "endpoints": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "clientSecret": {
+                    "type": "string",
+                    "description": "Blank/absent preserves the existing secret"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Masked provider config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationGlobalConfig"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Delete a provider global config (admin)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "401": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Problem Details (RFC 9457)",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth/user-methods": {
       "get": {
         "tags": [
@@ -11634,6 +13364,734 @@
         }
       }
     },
+    "/discussion/topics": {
+      "get": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "List the ecosystem’s live discussion topics (most-recently-active first)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ecosystem’s live topics, most-recently-active first",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DiscussionTopic"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "Create a topic (atomically born with its opening post)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "body"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 500
+                  },
+                  "body": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Opening-post markdown; stored as a content.markdown body document."
+                  },
+                  "isPublic": {
+                    "type": "boolean",
+                    "description": "Whether anonymous callers can read the topic via /public/discussion (default true)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created topic",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscussionTopic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/discussion/topics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "Get one live topic",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The topic",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscussionTopic"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "Edit a topic title (author/admin) and/or moderation flags (admin)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 500
+                  },
+                  "isPinned": {
+                    "type": "boolean",
+                    "description": "Admin only."
+                  },
+                  "isLocked": {
+                    "type": "boolean",
+                    "description": "Admin only."
+                  },
+                  "answeredPostId": {
+                    "type": "string",
+                    "nullable": true,
+                    "maxLength": 36,
+                    "description": "Admin only; must be a live post in this topic (or null to clear)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated topic",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscussionTopic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "Soft-delete a topic (author or admin)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Topic deleted"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/discussion/topics/{id}/posts": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "List a topic’s live posts (with resolved markdown bodies), thread order",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The topic’s live posts in thread order (post_number ASC)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DiscussionPost"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "Reply to a topic (bumps the topic’s reply count + last activity)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "body"
+                ],
+                "properties": {
+                  "body": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Reply markdown; stored as a content.markdown body document."
+                  },
+                  "parentPostId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 36,
+                    "description": "Id of the post this reply nests under (a flat reply when omitted)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created reply post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscussionPost"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/discussion/posts/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "Soft-delete a reply post (author or admin; not the opening post)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Post deleted"
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/discussion/topics": {
+      "get": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "List the hub’s live PUBLIC topics (anonymous; author id omitted)",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ecosystem’s live topics, most-recently-active first",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DiscussionTopic"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/discussion/topics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "Get one live PUBLIC hub topic (404 if missing/private/deleted — indistinguishable)",
+        "responses": {
+          "200": {
+            "description": "The public topic",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscussionTopic"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/discussion/topics/{id}/posts": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "discussion"
+        ],
+        "summary": "List a PUBLIC topic’s live posts (with resolved markdown bodies), thread order",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The topic’s live posts in thread order (post_number ASC)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DiscussionPost"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/content/markdown": {
       "get": {
         "tags": [
@@ -12354,6 +14812,118 @@
         "responses": {
           "200": {
             "description": "The unpublished document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkdownDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/markdown/{id}/finalize": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "content"
+        ],
+        "summary": "Finalize a document (stage='final'; content becomes immutable)",
+        "description": "Marks the document final: content/title edits and version restores are rejected with 409 until definalize. Publication state is deliberately NOT covered — a final document can still be published/unpublished. Idempotent: re-finalizing a final document is a 200 no-op.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The finalized document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkdownDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/markdown/{id}/definalize": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "content"
+        ],
+        "summary": "Definalize a document (revert to stage='draft'; edits work again)",
+        "description": "Reverts a final document to an editable draft, lifting the content-immutability guard. Idempotent: definalizing a draft is a 200 no-op.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The definalized document",
             "content": {
               "application/json": {
                 "schema": {
@@ -37580,1406 +40150,6 @@
           "discussion"
         ],
         "summary": "Delete notifications",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/discussion/posts": {
-      "get": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "List posts",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$schema": "https://json-schema.org/draft/2020-12/schema",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "customerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "ownerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "topicId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "parentPostId": {
-                        "anyOf": [
-                          {
-                            "type": "string",
-                            "maxLength": 36
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "postNumber": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647
-                      },
-                      "bodyDocumentId": {
-                        "anyOf": [
-                          {
-                            "type": "string",
-                            "maxLength": 36
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "isDeleted": {
-                        "type": "boolean"
-                      },
-                      "createdAt": {
-                        "type": "string"
-                      },
-                      "updatedAt": {
-                        "type": "string"
-                      },
-                      "deletedAt": {
-                        "anyOf": [
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "customerId",
-                      "ownerId",
-                      "topicId",
-                      "parentPostId",
-                      "postNumber",
-                      "bodyDocumentId",
-                      "isDeleted",
-                      "createdAt",
-                      "updatedAt",
-                      "deletedAt"
-                    ],
-                    "additionalProperties": false
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Create posts",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "topicId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "parentPostId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "postNumber": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "bodyDocumentId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "isDeleted": {
-                    "type": "boolean"
-                  },
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "topicId",
-                  "postNumber"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "posts",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "topicId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "parentPostId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "postNumber": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "bodyDocumentId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "isDeleted": {
-                      "type": "boolean"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "ownerId",
-                    "topicId",
-                    "parentPostId",
-                    "postNumber",
-                    "bodyDocumentId",
-                    "isDeleted",
-                    "createdAt",
-                    "updatedAt",
-                    "deletedAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/discussion/posts/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "get": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Get posts by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "posts",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "topicId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "parentPostId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "postNumber": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "bodyDocumentId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "isDeleted": {
-                      "type": "boolean"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "ownerId",
-                    "topicId",
-                    "parentPostId",
-                    "postNumber",
-                    "bodyDocumentId",
-                    "isDeleted",
-                    "createdAt",
-                    "updatedAt",
-                    "deletedAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Update posts",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "topicId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "parentPostId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "postNumber": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "bodyDocumentId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "isDeleted": {
-                    "type": "boolean"
-                  },
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "posts",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "topicId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "parentPostId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "postNumber": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "bodyDocumentId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "isDeleted": {
-                      "type": "boolean"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "ownerId",
-                    "topicId",
-                    "parentPostId",
-                    "postNumber",
-                    "bodyDocumentId",
-                    "isDeleted",
-                    "createdAt",
-                    "updatedAt",
-                    "deletedAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Delete posts",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/discussion/topics": {
-      "get": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "List topics",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$schema": "https://json-schema.org/draft/2020-12/schema",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "customerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "ownerId": {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      "title": {
-                        "type": "string",
-                        "maxLength": 500
-                      },
-                      "categoryId": {
-                        "anyOf": [
-                          {
-                            "type": "string",
-                            "maxLength": 36
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "isPinned": {
-                        "type": "boolean"
-                      },
-                      "isLocked": {
-                        "type": "boolean"
-                      },
-                      "isDeleted": {
-                        "type": "boolean"
-                      },
-                      "replyCount": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647
-                      },
-                      "answeredPostId": {
-                        "anyOf": [
-                          {
-                            "type": "string",
-                            "maxLength": 36
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "lastActivityAt": {
-                        "type": "string"
-                      },
-                      "createdAt": {
-                        "type": "string"
-                      },
-                      "updatedAt": {
-                        "type": "string"
-                      },
-                      "deletedAt": {
-                        "anyOf": [
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "customerId",
-                      "ownerId",
-                      "title",
-                      "categoryId",
-                      "isPinned",
-                      "isLocked",
-                      "isDeleted",
-                      "replyCount",
-                      "answeredPostId",
-                      "lastActivityAt",
-                      "createdAt",
-                      "updatedAt",
-                      "deletedAt"
-                    ],
-                    "additionalProperties": false
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Create topics",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "title": {
-                    "type": "string",
-                    "maxLength": 500
-                  },
-                  "categoryId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "isPinned": {
-                    "type": "boolean"
-                  },
-                  "isLocked": {
-                    "type": "boolean"
-                  },
-                  "isDeleted": {
-                    "type": "boolean"
-                  },
-                  "replyCount": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "answeredPostId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "lastActivityAt": {
-                    "type": "string"
-                  },
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "title",
-                  "lastActivityAt"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "topics",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "title": {
-                      "type": "string",
-                      "maxLength": 500
-                    },
-                    "categoryId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "isPinned": {
-                      "type": "boolean"
-                    },
-                    "isLocked": {
-                      "type": "boolean"
-                    },
-                    "isDeleted": {
-                      "type": "boolean"
-                    },
-                    "replyCount": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "answeredPostId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "lastActivityAt": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "ownerId",
-                    "title",
-                    "categoryId",
-                    "isPinned",
-                    "isLocked",
-                    "isDeleted",
-                    "replyCount",
-                    "answeredPostId",
-                    "lastActivityAt",
-                    "createdAt",
-                    "updatedAt",
-                    "deletedAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/discussion/topics/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "get": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Get topics by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "topics",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "title": {
-                      "type": "string",
-                      "maxLength": 500
-                    },
-                    "categoryId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "isPinned": {
-                      "type": "boolean"
-                    },
-                    "isLocked": {
-                      "type": "boolean"
-                    },
-                    "isDeleted": {
-                      "type": "boolean"
-                    },
-                    "replyCount": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "answeredPostId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "lastActivityAt": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "ownerId",
-                    "title",
-                    "categoryId",
-                    "isPinned",
-                    "isLocked",
-                    "isDeleted",
-                    "replyCount",
-                    "answeredPostId",
-                    "lastActivityAt",
-                    "createdAt",
-                    "updatedAt",
-                    "deletedAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Update topics",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "type": "object",
-                "properties": {
-                  "ownerId": {
-                    "type": "string",
-                    "maxLength": 36
-                  },
-                  "title": {
-                    "type": "string",
-                    "maxLength": 500
-                  },
-                  "categoryId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "isPinned": {
-                    "type": "boolean"
-                  },
-                  "isLocked": {
-                    "type": "boolean"
-                  },
-                  "isDeleted": {
-                    "type": "boolean"
-                  },
-                  "replyCount": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "answeredPostId": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "maxLength": 36
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "lastActivityAt": {
-                    "type": "string"
-                  },
-                  "deletedAt": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "topics",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "ownerId": {
-                      "type": "string",
-                      "maxLength": 36
-                    },
-                    "title": {
-                      "type": "string",
-                      "maxLength": 500
-                    },
-                    "categoryId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "isPinned": {
-                      "type": "boolean"
-                    },
-                    "isLocked": {
-                      "type": "boolean"
-                    },
-                    "isDeleted": {
-                      "type": "boolean"
-                    },
-                    "replyCount": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647
-                    },
-                    "answeredPostId": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "maxLength": 36
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "lastActivityAt": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "deletedAt": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "customerId",
-                    "ownerId",
-                    "title",
-                    "categoryId",
-                    "isPinned",
-                    "isLocked",
-                    "isDeleted",
-                    "replyCount",
-                    "answeredPostId",
-                    "lastActivityAt",
-                    "createdAt",
-                    "updatedAt",
-                    "deletedAt"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "discussion"
-        ],
-        "summary": "Delete topics",
         "security": [
           {
             "bearerAuth": []

@@ -41,6 +41,9 @@ from .customer_auth_result import CustomerAuthResult
 from .customer_register_result import CustomerRegisterResult
 from .customer_resolve_result import CustomerResolveResult
 from .delete_ai_processing_webhooks_id_response_200 import DeleteAiProcessingWebhooksIdResponse200
+from .delete_integrations_connection_id_response_200 import DeleteIntegrationsConnectionIdResponse200
+from .discussion_post import DiscussionPost
+from .discussion_topic import DiscussionTopic
 from .error import Error
 from .error_error import ErrorError
 from .feed_item import FeedItem
@@ -153,10 +156,8 @@ from .get_customer_customers_id_response_200 import GetCustomerCustomersIdRespon
 from .get_customer_customers_response_200_item import GetCustomerCustomersResponse200Item
 from .get_discussion_notifications_id_response_200 import GetDiscussionNotificationsIdResponse200
 from .get_discussion_notifications_response_200_item import GetDiscussionNotificationsResponse200Item
-from .get_discussion_posts_id_response_200 import GetDiscussionPostsIdResponse200
-from .get_discussion_posts_response_200_item import GetDiscussionPostsResponse200Item
-from .get_discussion_topics_id_response_200 import GetDiscussionTopicsIdResponse200
-from .get_discussion_topics_response_200_item import GetDiscussionTopicsResponse200Item
+from .get_discussion_topics_id_posts_response_200 import GetDiscussionTopicsIdPostsResponse200
+from .get_discussion_topics_response_200 import GetDiscussionTopicsResponse200
 from .get_document_blocks_id_response_200 import GetDocumentBlocksIdResponse200
 from .get_document_blocks_response_200_item import GetDocumentBlocksResponse200Item
 from .get_document_documents_id_response_200 import GetDocumentDocumentsIdResponse200
@@ -194,6 +195,10 @@ from .get_integration_integration_pages_id_response_200 import GetIntegrationInt
 from .get_integration_integration_pages_response_200_item import GetIntegrationIntegrationPagesResponse200Item
 from .get_integration_integration_social_notifications_id_response_200 import GetIntegrationIntegrationSocialNotificationsIdResponse200
 from .get_integration_integration_social_notifications_response_200_item import GetIntegrationIntegrationSocialNotificationsResponse200Item
+from .get_integrations_admin_configs_response_200 import GetIntegrationsAdminConfigsResponse200
+from .get_integrations_providers_provider_id_auth_url_response_200 import GetIntegrationsProvidersProviderIdAuthUrlResponse200
+from .get_integrations_providers_response_200 import GetIntegrationsProvidersResponse200
+from .get_integrations_response_200 import GetIntegrationsResponse200
 from .get_monitoring_endpoints_id_response_200 import GetMonitoringEndpointsIdResponse200
 from .get_monitoring_endpoints_response_200_item import GetMonitoringEndpointsResponse200Item
 from .get_monitoring_health_checks_id_response_200 import GetMonitoringHealthChecksIdResponse200
@@ -263,6 +268,8 @@ from .get_project_projects_id_response_200 import GetProjectProjectsIdResponse20
 from .get_project_projects_response_200_item import GetProjectProjectsResponse200Item
 from .get_project_tasks_id_response_200 import GetProjectTasksIdResponse200
 from .get_project_tasks_response_200_item import GetProjectTasksResponse200Item
+from .get_public_discussion_topics_id_posts_response_200 import GetPublicDiscussionTopicsIdPostsResponse200
+from .get_public_discussion_topics_response_200 import GetPublicDiscussionTopicsResponse200
 from .get_public_papers_response_200 import GetPublicPapersResponse200
 from .get_public_users_slug_papers_response_200 import GetPublicUsersSlugPapersResponse200
 from .get_registry_identifiers_rdid_exists_response_200 import GetRegistryIdentifiersRdidExistsResponse200
@@ -288,13 +295,38 @@ from .get_usage_usage_counters_response_200_item import GetUsageUsageCountersRes
 from .get_usage_usage_counters_scope_principal_id_period_start_response_200 import GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200
 from .get_usage_usage_events_id_response_200 import GetUsageUsageEventsIdResponse200
 from .get_usage_usage_events_response_200_item import GetUsageUsageEventsResponse200Item
+from .integration_action_request_type_0 import IntegrationActionRequestType0
+from .integration_action_request_type_1_media_item import IntegrationActionRequestType1MediaItem
+from .integration_action_result import IntegrationActionResult
+from .integration_action_result_status import IntegrationActionResultStatus
+from .integration_connect_request_type_0 import IntegrationConnectRequestType0
+from .integration_connect_request_type_0_type import IntegrationConnectRequestType0Type
+from .integration_connect_request_type_1 import IntegrationConnectRequestType1
+from .integration_connect_request_type_1_type import IntegrationConnectRequestType1Type
+from .integration_connect_request_type_2 import IntegrationConnectRequestType2
+from .integration_connect_request_type_2_type import IntegrationConnectRequestType2Type
+from .integration_connect_request_type_3 import IntegrationConnectRequestType3
+from .integration_connect_request_type_3_type import IntegrationConnectRequestType3Type
+from .integration_connect_request_type_4 import IntegrationConnectRequestType4
+from .integration_connect_request_type_4_type import IntegrationConnectRequestType4Type
+from .integration_connection import IntegrationConnection
+from .integration_global_config import IntegrationGlobalConfig
+from .integration_global_config_config import IntegrationGlobalConfigConfig
+from .integration_provider import IntegrationProvider
+from .integration_provider_auth_method import IntegrationProviderAuthMethod
 from .markdown_document import MarkdownDocument
 from .markdown_document_frontmatter_type_0 import MarkdownDocumentFrontmatterType0
+from .markdown_document_kind import MarkdownDocumentKind
+from .markdown_document_stage import MarkdownDocumentStage
 from .markdown_document_summary import MarkdownDocumentSummary
 from .markdown_document_summary_frontmatter_type_0 import MarkdownDocumentSummaryFrontmatterType0
+from .markdown_document_summary_kind import MarkdownDocumentSummaryKind
+from .markdown_document_summary_stage import MarkdownDocumentSummaryStage
+from .markdown_document_summary_visibility import MarkdownDocumentSummaryVisibility
 from .markdown_document_version import MarkdownDocumentVersion
 from .markdown_document_version_frontmatter_type_0 import MarkdownDocumentVersionFrontmatterType0
 from .markdown_document_version_summary import MarkdownDocumentVersionSummary
+from .markdown_document_visibility import MarkdownDocumentVisibility
 from .messaging_log_entry import MessagingLogEntry
 from .messaging_log_entry_channel import MessagingLogEntryChannel
 from .messaging_log_entry_status import MessagingLogEntryStatus
@@ -312,6 +344,9 @@ from .patch_ai_processing_webhooks_id_body import PatchAiProcessingWebhooksIdBod
 from .patch_auth_me_body import PatchAuthMeBody
 from .patch_auth_methods_method_body import PatchAuthMethodsMethodBody
 from .patch_bucket_access_groups_group_id_body import PatchBucketAccessGroupsGroupIdBody
+from .patch_integrations_connection_id_settings_body import PatchIntegrationsConnectionIdSettingsBody
+from .patch_integrations_connection_id_settings_response_200 import PatchIntegrationsConnectionIdSettingsResponse200
+from .patch_integrations_connection_id_settings_response_200_sync_settings import PatchIntegrationsConnectionIdSettingsResponse200SyncSettings
 from .patch_oauth_clients_slug_body import PatchOauthClientsSlugBody
 from .patch_oauth_clients_slug_response_200 import PatchOauthClientsSlugResponse200
 from .patch_oauth_providers_slug_body import PatchOauthProvidersSlugBody
@@ -478,10 +513,8 @@ from .post_customer_resolve_body import PostCustomerResolveBody
 from .post_customer_revoke_body import PostCustomerRevokeBody
 from .post_discussion_notifications_body import PostDiscussionNotificationsBody
 from .post_discussion_notifications_response_201 import PostDiscussionNotificationsResponse201
-from .post_discussion_posts_body import PostDiscussionPostsBody
-from .post_discussion_posts_response_201 import PostDiscussionPostsResponse201
 from .post_discussion_topics_body import PostDiscussionTopicsBody
-from .post_discussion_topics_response_201 import PostDiscussionTopicsResponse201
+from .post_discussion_topics_id_posts_body import PostDiscussionTopicsIdPostsBody
 from .post_document_blocks_body import PostDocumentBlocksBody
 from .post_document_blocks_response_201 import PostDocumentBlocksResponse201
 from .post_document_documents_body import PostDocumentDocumentsBody
@@ -519,6 +552,11 @@ from .post_integration_integration_pages_body import PostIntegrationIntegrationP
 from .post_integration_integration_pages_response_201 import PostIntegrationIntegrationPagesResponse201
 from .post_integration_integration_social_notifications_body import PostIntegrationIntegrationSocialNotificationsBody
 from .post_integration_integration_social_notifications_response_201 import PostIntegrationIntegrationSocialNotificationsResponse201
+from .post_integrations_connection_id_sync_response_202 import PostIntegrationsConnectionIdSyncResponse202
+from .post_integrations_providers_provider_id_link_token_body import PostIntegrationsProvidersProviderIdLinkTokenBody
+from .post_integrations_providers_provider_id_link_token_response_200 import PostIntegrationsProvidersProviderIdLinkTokenResponse200
+from .post_integrations_providers_provider_id_register_instance_body import PostIntegrationsProvidersProviderIdRegisterInstanceBody
+from .post_integrations_providers_provider_id_register_instance_response_200 import PostIntegrationsProvidersProviderIdRegisterInstanceResponse200
 from .post_messaging_send_body import PostMessagingSendBody
 from .post_messaging_send_body_channel import PostMessagingSendBodyChannel
 from .post_messaging_send_body_template_vars import PostMessagingSendBodyTemplateVars
@@ -627,11 +665,13 @@ from .post_usage_usage_events_body import PostUsageUsageEventsBody
 from .post_usage_usage_events_response_201 import PostUsageUsageEventsResponse201
 from .privacy_grant import PrivacyGrant
 from .privacy_grant_target_table import PrivacyGrantTargetTable
+from .problem_details import ProblemDetails
 from .public_address import PublicAddress
 from .public_owner_type_0 import PublicOwnerType0
 from .public_paper import PublicPaper
 from .public_paper_search_hit import PublicPaperSearchHit
 from .public_paper_search_hit_author import PublicPaperSearchHitAuthor
+from .public_paper_search_hit_kind import PublicPaperSearchHitKind
 from .public_paper_summary import PublicPaperSummary
 from .public_persona import PublicPersona
 from .public_persona_summary import PublicPersonaSummary
@@ -719,10 +759,7 @@ from .put_customer_customers_id_body import PutCustomerCustomersIdBody
 from .put_customer_customers_id_response_200 import PutCustomerCustomersIdResponse200
 from .put_discussion_notifications_id_body import PutDiscussionNotificationsIdBody
 from .put_discussion_notifications_id_response_200 import PutDiscussionNotificationsIdResponse200
-from .put_discussion_posts_id_body import PutDiscussionPostsIdBody
-from .put_discussion_posts_id_response_200 import PutDiscussionPostsIdResponse200
 from .put_discussion_topics_id_body import PutDiscussionTopicsIdBody
-from .put_discussion_topics_id_response_200 import PutDiscussionTopicsIdResponse200
 from .put_document_blocks_id_body import PutDocumentBlocksIdBody
 from .put_document_blocks_id_response_200 import PutDocumentBlocksIdResponse200
 from .put_document_documents_id_body import PutDocumentDocumentsIdBody
@@ -760,6 +797,9 @@ from .put_integration_integration_pages_id_body import PutIntegrationIntegration
 from .put_integration_integration_pages_id_response_200 import PutIntegrationIntegrationPagesIdResponse200
 from .put_integration_integration_social_notifications_id_body import PutIntegrationIntegrationSocialNotificationsIdBody
 from .put_integration_integration_social_notifications_id_response_200 import PutIntegrationIntegrationSocialNotificationsIdResponse200
+from .put_integrations_admin_configs_provider_id_body import PutIntegrationsAdminConfigsProviderIdBody
+from .put_integrations_admin_configs_provider_id_body_credential_style import PutIntegrationsAdminConfigsProviderIdBodyCredentialStyle
+from .put_integrations_admin_configs_provider_id_body_endpoints import PutIntegrationsAdminConfigsProviderIdBodyEndpoints
 from .put_monitoring_endpoints_id_body import PutMonitoringEndpointsIdBody
 from .put_monitoring_endpoints_id_response_200 import PutMonitoringEndpointsIdResponse200
 from .put_monitoring_health_checks_id_body import PutMonitoringHealthChecksIdBody
@@ -916,6 +956,9 @@ __all__ = (
     "CustomerRegisterResult",
     "CustomerResolveResult",
     "DeleteAiProcessingWebhooksIdResponse200",
+    "DeleteIntegrationsConnectionIdResponse200",
+    "DiscussionPost",
+    "DiscussionTopic",
     "Error",
     "ErrorError",
     "FeedItem",
@@ -1028,10 +1071,8 @@ __all__ = (
     "GetCustomerCustomersResponse200Item",
     "GetDiscussionNotificationsIdResponse200",
     "GetDiscussionNotificationsResponse200Item",
-    "GetDiscussionPostsIdResponse200",
-    "GetDiscussionPostsResponse200Item",
-    "GetDiscussionTopicsIdResponse200",
-    "GetDiscussionTopicsResponse200Item",
+    "GetDiscussionTopicsIdPostsResponse200",
+    "GetDiscussionTopicsResponse200",
     "GetDocumentBlocksIdResponse200",
     "GetDocumentBlocksResponse200Item",
     "GetDocumentDocumentsIdResponse200",
@@ -1069,6 +1110,10 @@ __all__ = (
     "GetIntegrationIntegrationPagesResponse200Item",
     "GetIntegrationIntegrationSocialNotificationsIdResponse200",
     "GetIntegrationIntegrationSocialNotificationsResponse200Item",
+    "GetIntegrationsAdminConfigsResponse200",
+    "GetIntegrationsProvidersProviderIdAuthUrlResponse200",
+    "GetIntegrationsProvidersResponse200",
+    "GetIntegrationsResponse200",
     "GetMonitoringEndpointsIdResponse200",
     "GetMonitoringEndpointsResponse200Item",
     "GetMonitoringHealthChecksIdResponse200",
@@ -1138,6 +1183,8 @@ __all__ = (
     "GetProjectProjectsResponse200Item",
     "GetProjectTasksIdResponse200",
     "GetProjectTasksResponse200Item",
+    "GetPublicDiscussionTopicsIdPostsResponse200",
+    "GetPublicDiscussionTopicsResponse200",
     "GetPublicPapersResponse200",
     "GetPublicUsersSlugPapersResponse200",
     "GetRegistryIdentifiersRdidExistsResponse200",
@@ -1163,13 +1210,38 @@ __all__ = (
     "GetUsageUsageCountersScopePrincipalIdPeriodStartResponse200",
     "GetUsageUsageEventsIdResponse200",
     "GetUsageUsageEventsResponse200Item",
+    "IntegrationActionRequestType0",
+    "IntegrationActionRequestType1MediaItem",
+    "IntegrationActionResult",
+    "IntegrationActionResultStatus",
+    "IntegrationConnection",
+    "IntegrationConnectRequestType0",
+    "IntegrationConnectRequestType0Type",
+    "IntegrationConnectRequestType1",
+    "IntegrationConnectRequestType1Type",
+    "IntegrationConnectRequestType2",
+    "IntegrationConnectRequestType2Type",
+    "IntegrationConnectRequestType3",
+    "IntegrationConnectRequestType3Type",
+    "IntegrationConnectRequestType4",
+    "IntegrationConnectRequestType4Type",
+    "IntegrationGlobalConfig",
+    "IntegrationGlobalConfigConfig",
+    "IntegrationProvider",
+    "IntegrationProviderAuthMethod",
     "MarkdownDocument",
     "MarkdownDocumentFrontmatterType0",
+    "MarkdownDocumentKind",
+    "MarkdownDocumentStage",
     "MarkdownDocumentSummary",
     "MarkdownDocumentSummaryFrontmatterType0",
+    "MarkdownDocumentSummaryKind",
+    "MarkdownDocumentSummaryStage",
+    "MarkdownDocumentSummaryVisibility",
     "MarkdownDocumentVersion",
     "MarkdownDocumentVersionFrontmatterType0",
     "MarkdownDocumentVersionSummary",
+    "MarkdownDocumentVisibility",
     "MessagingLogEntry",
     "MessagingLogEntryChannel",
     "MessagingLogEntryStatus",
@@ -1187,6 +1259,9 @@ __all__ = (
     "PatchAuthMeBody",
     "PatchAuthMethodsMethodBody",
     "PatchBucketAccessGroupsGroupIdBody",
+    "PatchIntegrationsConnectionIdSettingsBody",
+    "PatchIntegrationsConnectionIdSettingsResponse200",
+    "PatchIntegrationsConnectionIdSettingsResponse200SyncSettings",
     "PatchOauthClientsSlugBody",
     "PatchOauthClientsSlugResponse200",
     "PatchOauthProvidersSlugBody",
@@ -1353,10 +1428,8 @@ __all__ = (
     "PostCustomerRevokeBody",
     "PostDiscussionNotificationsBody",
     "PostDiscussionNotificationsResponse201",
-    "PostDiscussionPostsBody",
-    "PostDiscussionPostsResponse201",
     "PostDiscussionTopicsBody",
-    "PostDiscussionTopicsResponse201",
+    "PostDiscussionTopicsIdPostsBody",
     "PostDocumentBlocksBody",
     "PostDocumentBlocksResponse201",
     "PostDocumentDocumentsBody",
@@ -1394,6 +1467,11 @@ __all__ = (
     "PostIntegrationIntegrationPagesResponse201",
     "PostIntegrationIntegrationSocialNotificationsBody",
     "PostIntegrationIntegrationSocialNotificationsResponse201",
+    "PostIntegrationsConnectionIdSyncResponse202",
+    "PostIntegrationsProvidersProviderIdLinkTokenBody",
+    "PostIntegrationsProvidersProviderIdLinkTokenResponse200",
+    "PostIntegrationsProvidersProviderIdRegisterInstanceBody",
+    "PostIntegrationsProvidersProviderIdRegisterInstanceResponse200",
     "PostMessagingSendBody",
     "PostMessagingSendBodyChannel",
     "PostMessagingSendBodyTemplateVars",
@@ -1502,11 +1580,13 @@ __all__ = (
     "PostUsageUsageEventsResponse201",
     "PrivacyGrant",
     "PrivacyGrantTargetTable",
+    "ProblemDetails",
     "PublicAddress",
     "PublicOwnerType0",
     "PublicPaper",
     "PublicPaperSearchHit",
     "PublicPaperSearchHitAuthor",
+    "PublicPaperSearchHitKind",
     "PublicPaperSummary",
     "PublicPersona",
     "PublicPersonaSummary",
@@ -1594,10 +1674,7 @@ __all__ = (
     "PutCustomerCustomersIdResponse200",
     "PutDiscussionNotificationsIdBody",
     "PutDiscussionNotificationsIdResponse200",
-    "PutDiscussionPostsIdBody",
-    "PutDiscussionPostsIdResponse200",
     "PutDiscussionTopicsIdBody",
-    "PutDiscussionTopicsIdResponse200",
     "PutDocumentBlocksIdBody",
     "PutDocumentBlocksIdResponse200",
     "PutDocumentDocumentsIdBody",
@@ -1635,6 +1712,9 @@ __all__ = (
     "PutIntegrationIntegrationPagesIdResponse200",
     "PutIntegrationIntegrationSocialNotificationsIdBody",
     "PutIntegrationIntegrationSocialNotificationsIdResponse200",
+    "PutIntegrationsAdminConfigsProviderIdBody",
+    "PutIntegrationsAdminConfigsProviderIdBodyCredentialStyle",
+    "PutIntegrationsAdminConfigsProviderIdBodyEndpoints",
     "PutMonitoringEndpointsIdBody",
     "PutMonitoringEndpointsIdResponse200",
     "PutMonitoringHealthChecksIdBody",

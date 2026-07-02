@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
+from ...models.discussion_topic import DiscussionTopic
 from ...models.error import Error
 from ...models.post_discussion_topics_body import PostDiscussionTopicsBody
-from ...models.post_discussion_topics_response_201 import PostDiscussionTopicsResponse201
 from typing import cast
 
 
@@ -41,9 +41,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostDiscussionTopicsResponse201]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[DiscussionTopic, Error]]:
     if response.status_code == 201:
-        response_201 = PostDiscussionTopicsResponse201.from_dict(response.json())
+        response_201 = DiscussionTopic.from_dict(response.json())
 
 
 
@@ -69,7 +69,7 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostDiscussionTopicsResponse201]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[DiscussionTopic, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,8 +83,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: PostDiscussionTopicsBody,
 
-) -> Response[Union[Error, PostDiscussionTopicsResponse201]]:
-    """ Create topics
+) -> Response[Union[DiscussionTopic, Error]]:
+    """ Create a topic (atomically born with its opening post)
 
     Args:
         body (PostDiscussionTopicsBody):
@@ -94,7 +94,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PostDiscussionTopicsResponse201]]
+        Response[Union[DiscussionTopic, Error]]
      """
 
 
@@ -114,8 +114,8 @@ def sync(
     client: AuthenticatedClient,
     body: PostDiscussionTopicsBody,
 
-) -> Optional[Union[Error, PostDiscussionTopicsResponse201]]:
-    """ Create topics
+) -> Optional[Union[DiscussionTopic, Error]]:
+    """ Create a topic (atomically born with its opening post)
 
     Args:
         body (PostDiscussionTopicsBody):
@@ -125,7 +125,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PostDiscussionTopicsResponse201]
+        Union[DiscussionTopic, Error]
      """
 
 
@@ -140,8 +140,8 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: PostDiscussionTopicsBody,
 
-) -> Response[Union[Error, PostDiscussionTopicsResponse201]]:
-    """ Create topics
+) -> Response[Union[DiscussionTopic, Error]]:
+    """ Create a topic (atomically born with its opening post)
 
     Args:
         body (PostDiscussionTopicsBody):
@@ -151,7 +151,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PostDiscussionTopicsResponse201]]
+        Response[Union[DiscussionTopic, Error]]
      """
 
 
@@ -171,8 +171,8 @@ async def asyncio(
     client: AuthenticatedClient,
     body: PostDiscussionTopicsBody,
 
-) -> Optional[Union[Error, PostDiscussionTopicsResponse201]]:
-    """ Create topics
+) -> Optional[Union[DiscussionTopic, Error]]:
+    """ Create a topic (atomically born with its opening post)
 
     Args:
         body (PostDiscussionTopicsBody):
@@ -182,7 +182,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PostDiscussionTopicsResponse201]
+        Union[DiscussionTopic, Error]
      """
 
 

@@ -1,0 +1,197 @@
+from http import HTTPStatus
+from typing import Any, Optional, Union, cast
+
+import httpx
+
+from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...models.delete_integrations_connection_id_response_200 import DeleteIntegrationsConnectionIdResponse200
+from ...models.problem_details import ProblemDetails
+from typing import cast
+
+
+
+def _get_kwargs(
+    connection_id: str,
+
+) -> dict[str, Any]:
+    
+
+    
+
+    
+
+    _kwargs: dict[str, Any] = {
+        "method": "delete",
+        "url": "/integrations/{connection_id}".format(connection_id=connection_id,),
+    }
+
+
+    return _kwargs
+
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
+    if response.status_code == 200:
+        response_200 = DeleteIntegrationsConnectionIdResponse200.from_dict(response.json())
+
+
+
+        return response_200
+
+    if response.status_code == 401:
+        response_401 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_401
+
+    if response.status_code == 404:
+        response_404 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_404
+
+    if client.raise_on_unexpected_status:
+        raise errors.UnexpectedStatus(response.status_code, response.content)
+    else:
+        return None
+
+
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
+    return Response(
+        status_code=HTTPStatus(response.status_code),
+        content=response.content,
+        headers=response.headers,
+        parsed=_parse_response(client=client, response=response),
+    )
+
+
+def sync_detailed(
+    connection_id: str,
+    *,
+    client: AuthenticatedClient,
+
+) -> Response[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
+    """ Disconnect a connection (ownership-checked)
+
+     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
+    connection is not the caller's.
+
+    Args:
+        connection_id (str):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]
+     """
+
+
+    kwargs = _get_kwargs(
+        connection_id=connection_id,
+
+    )
+
+    response = client.get_httpx_client().request(
+        **kwargs,
+    )
+
+    return _build_response(client=client, response=response)
+
+def sync(
+    connection_id: str,
+    *,
+    client: AuthenticatedClient,
+
+) -> Optional[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
+    """ Disconnect a connection (ownership-checked)
+
+     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
+    connection is not the caller's.
+
+    Args:
+        connection_id (str):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]
+     """
+
+
+    return sync_detailed(
+        connection_id=connection_id,
+client=client,
+
+    ).parsed
+
+async def asyncio_detailed(
+    connection_id: str,
+    *,
+    client: AuthenticatedClient,
+
+) -> Response[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
+    """ Disconnect a connection (ownership-checked)
+
+     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
+    connection is not the caller's.
+
+    Args:
+        connection_id (str):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]
+     """
+
+
+    kwargs = _get_kwargs(
+        connection_id=connection_id,
+
+    )
+
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
+
+    return _build_response(client=client, response=response)
+
+async def asyncio(
+    connection_id: str,
+    *,
+    client: AuthenticatedClient,
+
+) -> Optional[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
+    """ Disconnect a connection (ownership-checked)
+
+     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
+    connection is not the caller's.
+
+    Args:
+        connection_id (str):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]
+     """
+
+
+    return (await asyncio_detailed(
+        connection_id=connection_id,
+client=client,
+
+    )).parsed

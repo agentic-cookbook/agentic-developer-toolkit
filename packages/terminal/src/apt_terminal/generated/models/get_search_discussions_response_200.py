@@ -9,8 +9,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
   from ..models.search_discussion_post_result import SearchDiscussionPostResult
+  from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
 
 
 
@@ -45,8 +45,8 @@ class GetSearchDiscussionsResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
         from ..models.search_discussion_post_result import SearchDiscussionPostResult
+        from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
         topics = []
         for topics_item_data in self.topics:
             topics_item = topics_item_data.to_dict()
@@ -87,8 +87,8 @@ class GetSearchDiscussionsResponse200:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
         from ..models.search_discussion_post_result import SearchDiscussionPostResult
+        from ..models.search_discussion_topic_result import SearchDiscussionTopicResult
         d = dict(src_dict)
         topics = []
         _topics = d.pop("topics")

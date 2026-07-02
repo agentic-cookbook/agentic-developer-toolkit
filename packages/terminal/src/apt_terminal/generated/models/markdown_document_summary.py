@@ -6,6 +6,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.markdown_document_summary_kind import MarkdownDocumentSummaryKind
+from ..models.markdown_document_summary_stage import MarkdownDocumentSummaryStage
+from ..models.markdown_document_summary_visibility import MarkdownDocumentSummaryVisibility
 from ..types import UNSET, Unset
 from typing import cast
 from typing import cast, Union
@@ -29,7 +32,9 @@ class MarkdownDocumentSummary:
             id (str):
             title (str):
             tags (list[str]):
-            published (bool):
+            visibility (MarkdownDocumentSummaryVisibility):
+            stage (MarkdownDocumentSummaryStage):
+            kind (MarkdownDocumentSummaryKind):
             content_hash (str):
             size_bytes (int):
             current_version (int):
@@ -44,7 +49,9 @@ class MarkdownDocumentSummary:
     id: str
     title: str
     tags: list[str]
-    published: bool
+    visibility: MarkdownDocumentSummaryVisibility
+    stage: MarkdownDocumentSummaryStage
+    kind: MarkdownDocumentSummaryKind
     content_hash: str
     size_bytes: int
     current_version: int
@@ -70,7 +77,11 @@ class MarkdownDocumentSummary:
 
 
 
-        published = self.published
+        visibility = self.visibility.value
+
+        stage = self.stage.value
+
+        kind = self.kind.value
 
         content_hash = self.content_hash
 
@@ -115,7 +126,9 @@ class MarkdownDocumentSummary:
             "id": id,
             "title": title,
             "tags": tags,
-            "published": published,
+            "visibility": visibility,
+            "stage": stage,
+            "kind": kind,
             "contentHash": content_hash,
             "sizeBytes": size_bytes,
             "currentVersion": current_version,
@@ -146,7 +159,20 @@ class MarkdownDocumentSummary:
         tags = cast(list[str], d.pop("tags"))
 
 
-        published = d.pop("published")
+        visibility = MarkdownDocumentSummaryVisibility(d.pop("visibility"))
+
+
+
+
+        stage = MarkdownDocumentSummaryStage(d.pop("stage"))
+
+
+
+
+        kind = MarkdownDocumentSummaryKind(d.pop("kind"))
+
+
+
 
         content_hash = d.pop("contentHash")
 
@@ -212,7 +238,9 @@ class MarkdownDocumentSummary:
             id=id,
             title=title,
             tags=tags,
-            published=published,
+            visibility=visibility,
+            stage=stage,
+            kind=kind,
             content_hash=content_hash,
             size_bytes=size_bytes,
             current_version=current_version,

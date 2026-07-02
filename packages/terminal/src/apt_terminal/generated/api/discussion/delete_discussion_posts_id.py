@@ -37,12 +37,26 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         response_204 = cast(Any, None)
         return response_204
 
+    if response.status_code == 400:
+        response_400 = Error.from_dict(response.json())
+
+
+
+        return response_400
+
     if response.status_code == 401:
         response_401 = Error.from_dict(response.json())
 
 
 
         return response_401
+
+    if response.status_code == 403:
+        response_403 = Error.from_dict(response.json())
+
+
+
+        return response_403
 
     if response.status_code == 404:
         response_404 = Error.from_dict(response.json())
@@ -72,7 +86,7 @@ def sync_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[Any, Error]]:
-    """ Delete posts
+    """ Soft-delete a reply post (author or admin; not the opening post)
 
     Args:
         id (str):
@@ -103,7 +117,7 @@ def sync(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[Any, Error]]:
-    """ Delete posts
+    """ Soft-delete a reply post (author or admin; not the opening post)
 
     Args:
         id (str):
@@ -129,7 +143,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[Any, Error]]:
-    """ Delete posts
+    """ Soft-delete a reply post (author or admin; not the opening post)
 
     Args:
         id (str):
@@ -160,7 +174,7 @@ async def asyncio(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[Any, Error]]:
-    """ Delete posts
+    """ Soft-delete a reply post (author or admin; not the opening post)
 
     Args:
         id (str):

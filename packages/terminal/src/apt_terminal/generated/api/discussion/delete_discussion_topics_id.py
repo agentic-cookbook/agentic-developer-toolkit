@@ -44,6 +44,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = Error.from_dict(response.json())
+
+
+
+        return response_403
+
     if response.status_code == 404:
         response_404 = Error.from_dict(response.json())
 
@@ -72,7 +79,7 @@ def sync_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[Any, Error]]:
-    """ Delete topics
+    """ Soft-delete a topic (author or admin)
 
     Args:
         id (str):
@@ -103,7 +110,7 @@ def sync(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[Any, Error]]:
-    """ Delete topics
+    """ Soft-delete a topic (author or admin)
 
     Args:
         id (str):
@@ -129,7 +136,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[Any, Error]]:
-    """ Delete topics
+    """ Soft-delete a topic (author or admin)
 
     Args:
         id (str):
@@ -160,7 +167,7 @@ async def asyncio(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[Any, Error]]:
-    """ Delete topics
+    """ Soft-delete a topic (author or admin)
 
     Args:
         id (str):

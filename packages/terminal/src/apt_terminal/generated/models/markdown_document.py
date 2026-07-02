@@ -6,6 +6,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.markdown_document_kind import MarkdownDocumentKind
+from ..models.markdown_document_stage import MarkdownDocumentStage
+from ..models.markdown_document_visibility import MarkdownDocumentVisibility
 from ..types import UNSET, Unset
 from typing import cast
 from typing import cast, Union
@@ -32,7 +35,12 @@ class MarkdownDocument:
             title (str):
             content (str): Full raw markdown, byte-exact.
             tags (list[str]): Tag set (defaults to []).
-            published (bool): True when readable on the public surface.
+            visibility (MarkdownDocumentVisibility): Publication state: 'public' is readable on the public surface,
+                'private' is a draft.
+            stage (MarkdownDocumentStage): Editorial stage: 'draft' is editable; 'final' is immutable (content/title edits +
+                version writes are rejected).
+            kind (MarkdownDocumentKind): Document kind: 'paper' (ordinary) or 'research' (AI-ingested, carries an adh_source
+                frontmatter key).
             content_hash (str): SHA-256 hex of content (ETag).
             size_bytes (int):
             current_version (int): The current revision number (incremented on every edit).
@@ -42,7 +50,7 @@ class MarkdownDocument:
             deleted_at (Union[None, Unset, str]):
             frontmatter (Union['MarkdownDocumentFrontmatterType0', None, Unset]):
             category (Union[None, Unset, str]): Optional classification label.
-            public_route (Union[None, Unset, str]): Public route slug (non-null iff published); unique per author.
+            public_route (Union[None, Unset, str]): Public route slug (non-null iff visibility='public'); unique per author.
             latest_version_id (Union[None, Unset, str]):
      """
 
@@ -52,7 +60,9 @@ class MarkdownDocument:
     title: str
     content: str
     tags: list[str]
-    published: bool
+    visibility: MarkdownDocumentVisibility
+    stage: MarkdownDocumentStage
+    kind: MarkdownDocumentKind
     content_hash: str
     size_bytes: int
     current_version: int
@@ -86,7 +96,11 @@ class MarkdownDocument:
 
 
 
-        published = self.published
+        visibility = self.visibility.value
+
+        stage = self.stage.value
+
+        kind = self.kind.value
 
         content_hash = self.content_hash
 
@@ -142,7 +156,9 @@ class MarkdownDocument:
             "title": title,
             "content": content,
             "tags": tags,
-            "published": published,
+            "visibility": visibility,
+            "stage": stage,
+            "kind": kind,
             "contentHash": content_hash,
             "sizeBytes": size_bytes,
             "currentVersion": current_version,
@@ -182,7 +198,20 @@ class MarkdownDocument:
         tags = cast(list[str], d.pop("tags"))
 
 
-        published = d.pop("published")
+        visibility = MarkdownDocumentVisibility(d.pop("visibility"))
+
+
+
+
+        stage = MarkdownDocumentStage(d.pop("stage"))
+
+
+
+
+        kind = MarkdownDocumentKind(d.pop("kind"))
+
+
+
 
         content_hash = d.pop("contentHash")
 
@@ -263,7 +292,9 @@ class MarkdownDocument:
             title=title,
             content=content,
             tags=tags,
-            published=published,
+            visibility=visibility,
+            stage=stage,
+            kind=kind,
             content_hash=content_hash,
             size_bytes=size_bytes,
             current_version=current_version,

@@ -6,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.public_paper_search_hit_kind import PublicPaperSearchHitKind
 from typing import cast
 from typing import cast, Union
 
@@ -26,10 +27,13 @@ class PublicPaperSearchHit:
         Attributes:
             id (str):
             title (str):
+            kind (PublicPaperSearchHitKind): Document kind: 'paper' (ordinary) or 'research' (AI-ingested).
             public_route (str): Published route slug; link as /public/users/{author.slug}/papers/{publicRoute}.
             author (PublicPaperSearchHitAuthor):
             category (Union[None, str]):
             tags (list[str]):
+            summary (Union[None, str]): Display summary read from the doc frontmatter (jsonb), or null.
+            evaluation (Union[None, str]): Display evaluation read from the doc frontmatter (jsonb), or null.
             snippet (str): ~200-char match-context excerpt around the first q hit (head of content when q is empty/absent).
             created_at (str):
             updated_at (str):
@@ -37,10 +41,13 @@ class PublicPaperSearchHit:
 
     id: str
     title: str
+    kind: PublicPaperSearchHitKind
     public_route: str
     author: 'PublicPaperSearchHitAuthor'
     category: Union[None, str]
     tags: list[str]
+    summary: Union[None, str]
+    evaluation: Union[None, str]
     snippet: str
     created_at: str
     updated_at: str
@@ -56,6 +63,8 @@ class PublicPaperSearchHit:
 
         title = self.title
 
+        kind = self.kind.value
+
         public_route = self.public_route
 
         author = self.author.to_dict()
@@ -66,6 +75,12 @@ class PublicPaperSearchHit:
         tags = self.tags
 
 
+
+        summary: Union[None, str]
+        summary = self.summary
+
+        evaluation: Union[None, str]
+        evaluation = self.evaluation
 
         snippet = self.snippet
 
@@ -79,10 +94,13 @@ class PublicPaperSearchHit:
         field_dict.update({
             "id": id,
             "title": title,
+            "kind": kind,
             "publicRoute": public_route,
             "author": author,
             "category": category,
             "tags": tags,
+            "summary": summary,
+            "evaluation": evaluation,
             "snippet": snippet,
             "createdAt": created_at,
             "updatedAt": updated_at,
@@ -99,6 +117,11 @@ class PublicPaperSearchHit:
         id = d.pop("id")
 
         title = d.pop("title")
+
+        kind = PublicPaperSearchHitKind(d.pop("kind"))
+
+
+
 
         public_route = d.pop("publicRoute")
 
@@ -118,6 +141,22 @@ class PublicPaperSearchHit:
         tags = cast(list[str], d.pop("tags"))
 
 
+        def _parse_summary(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        summary = _parse_summary(d.pop("summary"))
+
+
+        def _parse_evaluation(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        evaluation = _parse_evaluation(d.pop("evaluation"))
+
+
         snippet = d.pop("snippet")
 
         created_at = d.pop("createdAt")
@@ -127,10 +166,13 @@ class PublicPaperSearchHit:
         public_paper_search_hit = cls(
             id=id,
             title=title,
+            kind=kind,
             public_route=public_route,
             author=author,
             category=category,
             tags=tags,
+            summary=summary,
+            evaluation=evaluation,
             snippet=snippet,
             created_at=created_at,
             updated_at=updated_at,

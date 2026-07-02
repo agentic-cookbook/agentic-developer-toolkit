@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
+from ...models.discussion_topic import DiscussionTopic
 from ...models.error import Error
 from ...models.put_discussion_topics_id_body import PutDiscussionTopicsIdBody
-from ...models.put_discussion_topics_id_response_200 import PutDiscussionTopicsIdResponse200
 from typing import cast
 
 
@@ -42,9 +42,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PutDiscussionTopicsIdResponse200]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[DiscussionTopic, Error]]:
     if response.status_code == 200:
-        response_200 = PutDiscussionTopicsIdResponse200.from_dict(response.json())
+        response_200 = DiscussionTopic.from_dict(response.json())
 
 
 
@@ -64,6 +64,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = Error.from_dict(response.json())
+
+
+
+        return response_403
+
     if response.status_code == 404:
         response_404 = Error.from_dict(response.json())
 
@@ -77,7 +84,7 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PutDiscussionTopicsIdResponse200]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[DiscussionTopic, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -92,8 +99,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: PutDiscussionTopicsIdBody,
 
-) -> Response[Union[Error, PutDiscussionTopicsIdResponse200]]:
-    """ Update topics
+) -> Response[Union[DiscussionTopic, Error]]:
+    """ Edit a topic title (author/admin) and/or moderation flags (admin)
 
     Args:
         id (str):
@@ -104,7 +111,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PutDiscussionTopicsIdResponse200]]
+        Response[Union[DiscussionTopic, Error]]
      """
 
 
@@ -126,8 +133,8 @@ def sync(
     client: AuthenticatedClient,
     body: PutDiscussionTopicsIdBody,
 
-) -> Optional[Union[Error, PutDiscussionTopicsIdResponse200]]:
-    """ Update topics
+) -> Optional[Union[DiscussionTopic, Error]]:
+    """ Edit a topic title (author/admin) and/or moderation flags (admin)
 
     Args:
         id (str):
@@ -138,7 +145,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PutDiscussionTopicsIdResponse200]
+        Union[DiscussionTopic, Error]
      """
 
 
@@ -155,8 +162,8 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: PutDiscussionTopicsIdBody,
 
-) -> Response[Union[Error, PutDiscussionTopicsIdResponse200]]:
-    """ Update topics
+) -> Response[Union[DiscussionTopic, Error]]:
+    """ Edit a topic title (author/admin) and/or moderation flags (admin)
 
     Args:
         id (str):
@@ -167,7 +174,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PutDiscussionTopicsIdResponse200]]
+        Response[Union[DiscussionTopic, Error]]
      """
 
 
@@ -189,8 +196,8 @@ async def asyncio(
     client: AuthenticatedClient,
     body: PutDiscussionTopicsIdBody,
 
-) -> Optional[Union[Error, PutDiscussionTopicsIdResponse200]]:
-    """ Update topics
+) -> Optional[Union[DiscussionTopic, Error]]:
+    """ Edit a topic title (author/admin) and/or moderation flags (admin)
 
     Args:
         id (str):
@@ -201,7 +208,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PutDiscussionTopicsIdResponse200]
+        Union[DiscussionTopic, Error]
      """
 
 

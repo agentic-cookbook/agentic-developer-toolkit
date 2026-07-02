@@ -7,8 +7,8 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
+from ...models.discussion_topic import DiscussionTopic
 from ...models.error import Error
-from ...models.get_discussion_topics_id_response_200 import GetDiscussionTopicsIdResponse200
 from typing import cast
 
 
@@ -33,9 +33,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, GetDiscussionTopicsIdResponse200]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[DiscussionTopic, Error]]:
     if response.status_code == 200:
-        response_200 = GetDiscussionTopicsIdResponse200.from_dict(response.json())
+        response_200 = DiscussionTopic.from_dict(response.json())
 
 
 
@@ -61,7 +61,7 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, GetDiscussionTopicsIdResponse200]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[DiscussionTopic, Error]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -75,8 +75,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Union[Error, GetDiscussionTopicsIdResponse200]]:
-    """ Get topics by id
+) -> Response[Union[DiscussionTopic, Error]]:
+    """ Get one live topic
 
     Args:
         id (str):
@@ -86,7 +86,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, GetDiscussionTopicsIdResponse200]]
+        Response[Union[DiscussionTopic, Error]]
      """
 
 
@@ -106,8 +106,8 @@ def sync(
     *,
     client: AuthenticatedClient,
 
-) -> Optional[Union[Error, GetDiscussionTopicsIdResponse200]]:
-    """ Get topics by id
+) -> Optional[Union[DiscussionTopic, Error]]:
+    """ Get one live topic
 
     Args:
         id (str):
@@ -117,7 +117,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, GetDiscussionTopicsIdResponse200]
+        Union[DiscussionTopic, Error]
      """
 
 
@@ -132,8 +132,8 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 
-) -> Response[Union[Error, GetDiscussionTopicsIdResponse200]]:
-    """ Get topics by id
+) -> Response[Union[DiscussionTopic, Error]]:
+    """ Get one live topic
 
     Args:
         id (str):
@@ -143,7 +143,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, GetDiscussionTopicsIdResponse200]]
+        Response[Union[DiscussionTopic, Error]]
      """
 
 
@@ -163,8 +163,8 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 
-) -> Optional[Union[Error, GetDiscussionTopicsIdResponse200]]:
-    """ Get topics by id
+) -> Optional[Union[DiscussionTopic, Error]]:
+    """ Get one live topic
 
     Args:
         id (str):
@@ -174,7 +174,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, GetDiscussionTopicsIdResponse200]
+        Union[DiscussionTopic, Error]
      """
 
 

@@ -1,0 +1,209 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast, Union
+from typing import Union
+
+
+
+
+
+
+T = TypeVar("T", bound="DiscussionPost")
+
+
+
+@_attrs_define
+class DiscussionPost:
+    """ 
+        Attributes:
+            id (str):
+            topic_id (str):
+            parent_post_id (Union[None, str]):
+            post_number (int):
+            body_document_id (Union[None, str]): The content.markdown doc backing this post’s body.
+            created_at (str):
+            updated_at (str):
+            customer_id (Union[Unset, str]): Author (server-stamped principal). Omitted on the public surface.
+            owner_id (Union[Unset, str]): Owning ecosystem (present on create only).
+            content (Union[None, Unset, str]): Resolved markdown body (present on the list routes; null if the body doc was
+                deleted).
+            is_deleted (Union[Unset, bool]):
+            deleted_at (Union[None, Unset, str]):
+     """
+
+    id: str
+    topic_id: str
+    parent_post_id: Union[None, str]
+    post_number: int
+    body_document_id: Union[None, str]
+    created_at: str
+    updated_at: str
+    customer_id: Union[Unset, str] = UNSET
+    owner_id: Union[Unset, str] = UNSET
+    content: Union[None, Unset, str] = UNSET
+    is_deleted: Union[Unset, bool] = UNSET
+    deleted_at: Union[None, Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        id = self.id
+
+        topic_id = self.topic_id
+
+        parent_post_id: Union[None, str]
+        parent_post_id = self.parent_post_id
+
+        post_number = self.post_number
+
+        body_document_id: Union[None, str]
+        body_document_id = self.body_document_id
+
+        created_at = self.created_at
+
+        updated_at = self.updated_at
+
+        customer_id = self.customer_id
+
+        owner_id = self.owner_id
+
+        content: Union[None, Unset, str]
+        if isinstance(self.content, Unset):
+            content = UNSET
+        else:
+            content = self.content
+
+        is_deleted = self.is_deleted
+
+        deleted_at: Union[None, Unset, str]
+        if isinstance(self.deleted_at, Unset):
+            deleted_at = UNSET
+        else:
+            deleted_at = self.deleted_at
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "id": id,
+            "topicId": topic_id,
+            "parentPostId": parent_post_id,
+            "postNumber": post_number,
+            "bodyDocumentId": body_document_id,
+            "createdAt": created_at,
+            "updatedAt": updated_at,
+        })
+        if customer_id is not UNSET:
+            field_dict["customerId"] = customer_id
+        if owner_id is not UNSET:
+            field_dict["ownerId"] = owner_id
+        if content is not UNSET:
+            field_dict["content"] = content
+        if is_deleted is not UNSET:
+            field_dict["isDeleted"] = is_deleted
+        if deleted_at is not UNSET:
+            field_dict["deletedAt"] = deleted_at
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        id = d.pop("id")
+
+        topic_id = d.pop("topicId")
+
+        def _parse_parent_post_id(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        parent_post_id = _parse_parent_post_id(d.pop("parentPostId"))
+
+
+        post_number = d.pop("postNumber")
+
+        def _parse_body_document_id(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        body_document_id = _parse_body_document_id(d.pop("bodyDocumentId"))
+
+
+        created_at = d.pop("createdAt")
+
+        updated_at = d.pop("updatedAt")
+
+        customer_id = d.pop("customerId", UNSET)
+
+        owner_id = d.pop("ownerId", UNSET)
+
+        def _parse_content(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        content = _parse_content(d.pop("content", UNSET))
+
+
+        is_deleted = d.pop("isDeleted", UNSET)
+
+        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
+
+
+        discussion_post = cls(
+            id=id,
+            topic_id=topic_id,
+            parent_post_id=parent_post_id,
+            post_number=post_number,
+            body_document_id=body_document_id,
+            created_at=created_at,
+            updated_at=updated_at,
+            customer_id=customer_id,
+            owner_id=owner_id,
+            content=content,
+            is_deleted=is_deleted,
+            deleted_at=deleted_at,
+        )
+
+
+        discussion_post.additional_properties = d
+        return discussion_post
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties
