@@ -1,7 +1,7 @@
 # swift-openapi-generator configuration.
 # Emits a typed client + types (no server stubs) for the entire
 # api.agenticdeveloperhub.com surface described in openapi.json
-# (snapshot fetched from the Scalar docs site, apidocs.agenticdeveloperstorage.com).
+# (snapshot fetched from the Scalar docs site, apidocs.agenticdeveloperhub.com).
 #
 # Regenerate with: python3 scripts/generate.py
 generate:

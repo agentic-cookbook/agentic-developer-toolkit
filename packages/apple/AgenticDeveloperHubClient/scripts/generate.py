@@ -34,7 +34,7 @@ GENERATOR_VERSION = "1.12.2"
 # The machine-readable spec is served by the Scalar docs site, not the API host
 # (the API host returns 404 for /openapi.json). The runtime API itself lives at
 # https://api.agenticdeveloperhub.com — see DaemonContract.backendURL.
-SPEC_URL = "https://apidocs.agenticdeveloperstorage.com/openapi.json"
+SPEC_URL = "https://apidocs.agenticdeveloperhub.com/openapi.json"
 
 ROOT = Path(__file__).resolve().parent.parent
 TOOLING = ROOT / ".tooling" / "swift-openapi-generator"
