@@ -140,7 +140,7 @@ export function useAvatarEngine<E extends string>(
       return;
     }
     const pose = poses[effective];
-    if (pose) loopRef.current = applyPose(rig, pose, eyesShut);
+    if (pose) loopRef.current = applyPose(rig, pose, eyesShut, { calm: tuning.swayCalm, lively: tuning.swayLively });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effective]);
   // Kill any surviving loops on unmount (the next pose change kills them otherwise).

@@ -128,7 +128,13 @@ export interface IrisChannel {
 export interface AntennaeChannel {
   leftRef: Ref<SVGPathElement>;
   rightRef: Ref<SVGPathElement>;
-  /** transformOrigin for the per-pose rotate/translate. Default "50% 0%". */
+  /**
+   * transformOrigin for the per-pose rotate/translate. Default "50% 0%".
+   * Deliberately bbox-relative (a curved resting path puts it slightly off
+   * the anatomical anchor): an absolute svgOrigin drifts unboundedly on
+   * these elements because their `d` is continuously morphed by the sway
+   * loop and GSAP re-derives SVG origins against the current bbox.
+   */
   origin?: string;
   /** Builds the bend path `d` for one side at a given sway amplitude (avatar geometry). */
   bend: (side: "left" | "right", amp: number) => string;
@@ -227,6 +233,10 @@ export interface Tuning {
   alertAfterTypingMs: number;
   /** While asleep, mutter on this loop (ms) — sparser than waking chatter. */
   sleepMutterMs: number;
+  /** Antenna sway: tip amplitude (viewBox units) of the always-on gentle wave… */
+  swayCalm: number;
+  /** …and of the fast wave while a pose sets `wiggle` — retune per anatomy. */
+  swayLively: number;
 }
 
 export const DEFAULT_TUNING: Tuning = {
@@ -243,6 +253,8 @@ export const DEFAULT_TUNING: Tuning = {
   asleepAfterMs: 14000,
   alertAfterTypingMs: 30000,
   sleepMutterMs: 11000,
+  swayCalm: 8,
+  swayLively: 18,
 };
 
 /** The inactivity ladder rung. */

@@ -18,7 +18,12 @@ const present = <T>(...els: (T | null)[]): T[] =>
  * pivot, brow/antenna pivots, the bend curve, the descender paths) all comes
  * from the rig, so this stays pure mechanism — no avatar's anatomy is baked in.
  */
-export function applyPose(rig: AvatarRig, pose: Pose, eyesShut: boolean): gsap.core.Animation[] {
+export function applyPose(
+  rig: AvatarRig,
+  pose: Pose,
+  eyesShut: boolean,
+  sway: { calm: number; lively: number } = { calm: 8, lively: 18 },
+): gsap.core.Animation[] {
   const loops: gsap.core.Animation[] = [];
   const dur = pose.dur;
   const ease = pose.ease;
@@ -68,6 +73,10 @@ export function applyPose(rig: AvatarRig, pose: Pose, eyesShut: boolean): gsap.c
   // ── antennae: per-pose rotation/y, then an always-on bend/wiggle on top ──
   if (rig.antennae) {
     const { bend } = rig.antennae;
+    // Bbox-relative on purpose: an absolute svgOrigin was tried and drifts
+    // unboundedly here, because GSAP re-derives an SVG origin against the
+    // element's CURRENT bbox and these paths are continuously morphing (the
+    // sway loop below). The bbox origin re-resolves cleanly every tween.
     const origin = rig.antennae.origin ?? "50% 0%";
     const leftEl = rig.antennae.leftRef.current;
     const rightEl = rig.antennae.rightRef.current;
@@ -76,11 +85,11 @@ export function applyPose(rig: AvatarRig, pose: Pose, eyesShut: boolean): gsap.c
     if (pose.lRight && rightEl)
       gsap.to(rightEl, { rotation: pose.lRight.rotation, x: spread, y: pose.lRight.y, transformOrigin: origin, duration: dur, ease, delay: 0.04 });
     if (eyesShut) {
-      // held straight & still while asleep
+      // held at rest & still while asleep
       if (leftEl) gsap.to(leftEl, { morphSVG: bend("left", 0), duration: 0.5, ease: "sine.out" });
       if (rightEl) gsap.to(rightEl, { morphSVG: bend("right", 0), duration: 0.5, ease: "sine.out" });
     } else {
-      const amp = wiggle > 0 ? 18 : 8; // big & fast when lively, small otherwise
+      const amp = wiggle > 0 ? sway.lively : sway.calm; // big & fast when lively, small otherwise
       if (leftEl) {
         gsap.set(leftEl, { attr: { d: bend("left", -amp) } });
         loops.push(gsap.to(leftEl, { morphSVG: bend("left", amp), duration: wiggle > 0 ? 0.3 : 0.85, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.12 }));
