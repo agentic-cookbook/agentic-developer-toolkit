@@ -31,3 +31,27 @@ describe('RichContent image gating', () => {
     expect(img.style.display).toBe('')
   })
 })
+
+// SEC-L4: link URLs come from the persona/LLM response; a `javascript:` (or data:/vbscript:) href
+// would execute in this page's origin and could read the localStorage access token when clicked.
+describe('RichContent link protocol allowlist (SEC-L4)', () => {
+  it('drops the href for a javascript: URL (no execution sink)', () => {
+    render(
+      <RichContent items={[{ type: 'link', url: 'javascript:alert(document.cookie)', label: 'click' }]} />,
+    )
+    expect((screen.getByText('click') as HTMLAnchorElement).getAttribute('href')).toBeNull()
+  })
+
+  it('keeps http/https/mailto links', () => {
+    render(
+      <RichContent
+        items={[
+          { type: 'link', url: 'https://example.com/x', label: 'web' },
+          { type: 'link', url: 'mailto:a@b.com', label: 'mail' },
+        ]}
+      />,
+    )
+    expect((screen.getByText('web') as HTMLAnchorElement).getAttribute('href')).toBe('https://example.com/x')
+    expect((screen.getByText('mail') as HTMLAnchorElement).getAttribute('href')).toBe('mailto:a@b.com')
+  })
+})
