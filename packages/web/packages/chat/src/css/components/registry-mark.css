@@ -29,7 +29,7 @@
    * computed by RegistryMark.tsx from the artwork geometry (viewBox + @
    * center) and passed as inline custom properties, so CSS and SVG cannot
    * drift; the fallbacks mirror the current artwork for CSS-only hosts. */
-  transform: translate(var(--pc-rm-anchor-x, 62.5%), var(--pc-rm-anchor-y, -53.85%));
+  transform: translate(var(--pc-rm-anchor-x, 62.5%), var(--pc-rm-anchor-y, -53.846%));
   z-index: 2;
   display: block;
   width: var(--pc-rm-size, 46px);
@@ -57,23 +57,28 @@
  * the hub highlight gold, sparkles in ADH gold. Keyboard focus only
  * (:has(:focus-visible), not :focus-within): a mouse click on the link keeps
  * DOM focus after opening the new tab, and must not leave the bloom and
- * popover stuck open. */
+ * popover stuck open. The :has() is wrapped in :is() so that on a browser
+ * without :has() support the (forgiving) :is() simply matches nothing rather
+ * than invalidating the whole selector list — the :hover branch still works.
+ * The bloom golds resolve the same --pc-rm-*-gold custom props RegistryMark.tsx
+ * injects (single-sourced from its color constants), with the hex as a
+ * CSS-only-host fallback. */
 .pc-registry-mark .pc-rm-glyph,
 .pc-registry-mark .pc-rm-eyes,
 .pc-registry-mark .pc-rm-gold {
   transition: filter 0.18s ease;
 }
 .pc-registry-mark:hover .pc-rm-glyph,
-.pc-registry-mark:has(:focus-visible) .pc-rm-glyph {
+.pc-registry-mark:is(:has(:focus-visible)) .pc-rm-glyph {
   filter: drop-shadow(0 0 4px currentColor);
 }
 .pc-registry-mark:hover .pc-rm-eyes,
-.pc-registry-mark:has(:focus-visible) .pc-rm-eyes {
-  filter: drop-shadow(0 0 4px #d9bb74);
+.pc-registry-mark:is(:has(:focus-visible)) .pc-rm-eyes {
+  filter: drop-shadow(0 0 4px var(--pc-rm-hub-gold, #d9bb74));
 }
 .pc-registry-mark:hover .pc-rm-gold,
-.pc-registry-mark:has(:focus-visible) .pc-rm-gold {
-  filter: drop-shadow(0 0 4px #c4a35a);
+.pc-registry-mark:is(:has(:focus-visible)) .pc-rm-gold {
+  filter: drop-shadow(0 0 4px var(--pc-rm-adh-gold, #c4a35a));
 }
 
 /* Popover ABOVE the mark on hover/focus — a card with an arrow poking down
@@ -138,7 +143,7 @@
   height: 9px;
 }
 .pc-registry-mark:hover .pc-rm-tip,
-.pc-registry-mark:has(:focus-visible) .pc-rm-tip {
+.pc-registry-mark:is(:has(:focus-visible)) .pc-rm-tip {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);

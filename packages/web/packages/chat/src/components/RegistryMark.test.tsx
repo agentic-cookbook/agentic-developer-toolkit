@@ -13,8 +13,8 @@ describe('RegistryMark', () => {
     expect(link).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
-  it('renders popover content, links included', () => {
-    render(
+  it('renders popover content inside the .pc-rm-tip element, links included', () => {
+    const { container } = render(
       <RegistryMark
         profileUrl={PROFILE}
         label="profile"
@@ -25,11 +25,26 @@ describe('RegistryMark', () => {
         }
       />,
     )
-    expect(screen.getByRole('link', { name: 'Registry' })).toHaveAttribute('href', PROFILE)
+    const tip = container.querySelector('.pc-rm-tip')
+    expect(tip).not.toBeNull()
+    const link = screen.getByRole('link', { name: 'Registry' })
+    expect(tip).toContainElement(link) // the show/hide gate keys off .pc-rm-tip
+    expect(link).toHaveAttribute('href', PROFILE)
   })
 
   it('renders no popover without a tip', () => {
     const { container } = render(<RegistryMark profileUrl={PROFILE} label="profile" />)
     expect(container.querySelector('.pc-rm-tip')).toBeNull()
+  })
+
+  it('merges a custom className and injects the anchor + ink custom properties', () => {
+    const { container } = render(
+      <RegistryMark profileUrl={PROFILE} label="profile" className="extra" />,
+    )
+    const root = container.querySelector('.pc-registry-mark') as HTMLElement
+    expect(root).toHaveClass('extra')
+    // Corner anchoring rides these inline vars; the CSS only carries fallbacks.
+    expect(root.style.getPropertyValue('--pc-rm-anchor-x')).toBe('62.5%')
+    expect(root.style.getPropertyValue('--pc-rm-hub-gold')).toBe('#d9bb74')
   })
 })

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { CSSProperties, ReactElement, ReactNode } from 'react'
 
 /**
@@ -34,9 +35,13 @@ const pct = (fraction: number): string => `${+(fraction * 100).toFixed(3)}%`
 /** Translate that moves AT_CENTER onto the box's pinned top-right corner. */
 const ANCHOR_X = pct(1 - (AT_CENTER.x - VIEW.minX) / VIEW.width) // 62.5%
 const ANCHOR_Y = pct(-((AT_CENTER.y - VIEW.minY) / VIEW.height)) // -53.846%
-const ANCHOR_VARS = {
+const MARK_STYLE = {
   '--pc-rm-anchor-x': ANCHOR_X,
   '--pc-rm-anchor-y': ANCHOR_Y,
+  // Single-source the hub inks: the SVG below uses the constants directly, while
+  // the popover-bloom CSS reads these custom props — one source, no TS↔CSS drift.
+  '--pc-rm-hub-gold': HUB_HIGHLIGHT,
+  '--pc-rm-adh-gold': ADH_GOLD,
 } as CSSProperties
 
 /** Four-pointed AI sparkle at (cx, cy), radius r — N/E/S/W points, concave sides. */
@@ -72,7 +77,7 @@ export interface RegistryMarkProps {
   className?: string
 }
 
-export function RegistryMark({
+function RegistryMarkImpl({
   profileUrl,
   label,
   tip,
@@ -80,8 +85,8 @@ export function RegistryMark({
 }: RegistryMarkProps): ReactElement {
   return (
     <span
-      className={['pc-registry-mark', className].filter(Boolean).join(' ')}
-      style={ANCHOR_VARS}
+      className={className ? `pc-registry-mark ${className}` : 'pc-registry-mark'}
+      style={MARK_STYLE}
     >
       <a
         className="pc-rm-link"
@@ -98,12 +103,12 @@ export function RegistryMark({
           strokeLinejoin="round"
           aria-hidden="true"
         >
-          {/* The @ ring: Lucide's at-sign outer stroke, but the trailing arc
-              is carried further down and flicked up-and-out into the @'s
-              characteristic tail (the last `q`), so it reads as an @ and not a
-              ring-with-a-hook — the inner "a" bowl is the eyes below. */}
+          {/* The @ ring, drawn as a vertical oval (narrower than it is tall,
+              the way most fonts cut an @) with a proportionally heavier stroke.
+              The small hook on the right is the "a" stem; the eyes below are its
+              bowl. Centered on (12,12) so the corner anchoring stays valid. */}
           <g className="pc-rm-glyph">
-            <path d="M16,8 v5 a3,3 0 0 0 6,0 v-1 a10,10 0 1 0 -5.7,8.85 q2.1,1.7 4.9,0.95" strokeWidth="1.6" />
+            <path d="M15.5,8 v5 a2.25,2.25 0 0 0 4.5,0 v-1 a8,10.5 0 1 0 -4,9" strokeWidth="2.2" />
           </g>
           {/* The eyes carry the hub inks so they read as eyes, not more ring —
               only the @ itself is persona-tinted. */}
@@ -124,3 +129,8 @@ export function RegistryMark({
     </span>
   )
 }
+
+/* Memoized: the host chat re-renders on every streamed token, but the mark's
+ * props are static after mount, so it re-renders once and then stays put — as
+ * long as callers pass a stable `tip` (a module constant, not inline JSX). */
+export const RegistryMark = memo(RegistryMarkImpl)
