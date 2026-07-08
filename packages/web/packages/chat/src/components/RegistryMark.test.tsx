@@ -44,7 +44,7 @@ describe('RegistryMark', () => {
     const root = container.querySelector('.pc-registry-mark') as HTMLElement
     expect(root).toHaveClass('extra')
     // Corner anchoring rides these inline vars; the CSS only carries fallbacks.
-    expect(root.style.getPropertyValue('--pc-rm-anchor-x')).toBe('62.5%')
+    expect(root.style.getPropertyValue('--pc-rm-anchor-x')).toBe('66.25%')
     expect(root.style.getPropertyValue('--pc-rm-adh-gold')).toBe('#c4a35a')
   })
 })
