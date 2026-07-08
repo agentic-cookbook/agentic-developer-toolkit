@@ -93,7 +93,7 @@
   right: 16px;
   width: max-content;
   max-width: 240px;
-  padding: 7px 11px;
+  padding: 9px 13px;
   background: var(--_rm-tip-bg);
   border: 1px solid var(--_rm-tip-border);
   border-radius: var(--pc-rm-tip-radius, 2px);
@@ -106,7 +106,7 @@
   transition:
     opacity 0.15s ease 0.15s,
     transform 0.15s ease 0.15s,
-    visibility 0s linear 0.3s;
+    visibility 0s linear 0.45s;
 }
 /* Arrow pointing down at the mark. */
 .pc-registry-mark .pc-rm-tip::before {
@@ -122,14 +122,19 @@
   transform: rotate(45deg);
 }
 /* Invisible bridge over the mark↔popover gap so the pointer can travel up
- * into the popover without the hover breaking. Exactly the 9px gap — any
- * taller and it would overlap the mark and steal clicks from the link. */
+ * into the popover without the hover breaking. Height stays at the 9px gap
+ * (any taller would reach down over the mark and steal clicks from the link),
+ * but it widens well past the card on both sides — the mark sits low and to
+ * the right of the card, so a diagonal trip up-left to the link would
+ * otherwise leave the narrow straight-up corridor and dismiss the popover.
+ * The extra width lives entirely in that empty 9px strip above the mark, so
+ * it never overlaps anything clickable. */
 .pc-registry-mark .pc-rm-tip::after {
   content: "";
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
+  left: -14px;
+  right: -30px;
   height: 9px;
 }
 .pc-registry-mark:hover .pc-rm-tip,

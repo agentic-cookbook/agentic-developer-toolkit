@@ -98,8 +98,12 @@ export function RegistryMark({
           strokeLinejoin="round"
           aria-hidden="true"
         >
+          {/* The @ ring: Lucide's at-sign outer stroke, but the trailing arc
+              is carried further down and flicked up-and-out into the @'s
+              characteristic tail (the last `q`), so it reads as an @ and not a
+              ring-with-a-hook — the inner "a" bowl is the eyes below. */}
           <g className="pc-rm-glyph">
-            <path d="M16,8 v5 a3,3 0 0 0 6,0 v-1 a10,10 0 1 0 -4,8" strokeWidth="1.6" />
+            <path d="M16,8 v5 a3,3 0 0 0 6,0 v-1 a10,10 0 1 0 -5.7,8.85 q2.1,1.7 4.9,0.95" strokeWidth="1.6" />
           </g>
           {/* The eyes carry the hub inks so they read as eyes, not more ring —
               only the @ itself is persona-tinted. */}
