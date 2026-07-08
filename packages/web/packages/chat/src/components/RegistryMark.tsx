@@ -9,18 +9,15 @@ import type { CSSProperties, ReactElement, ReactNode } from 'react'
  * css/components/registry-mark.css. If the page shell clips overflow (e.g.
  * ViewportShell), open it — see ViewportShell's `clip` prop.
  *
- * Three inks: the @ ring rides currentColor — tint it by setting `color` on
- * the mark or an ancestor (the registry house color, or the persona's own
- * hue) — while the eyes (hub highlight gold shells, AI-blue irises) and the
- * sparkle cluster (ADH gold) are the hub's constant inks. They are hex
- * literals ON PURPOSE, not theme tokens like --accent: the credential's inks
- * must not retint with the host theme, or the registry brand dissolves into
- * whatever skin the chat wears.
+ * Inks: the @ ring and the eye shells ride currentColor — tint them by setting
+ * `color` on the mark or an ancestor (the registry house color, or the
+ * persona's own hue) — with the eyes set apart from the ring by their shape, a
+ * finer stroke, and constant blue irises. The irises (AI-blue) and the sparkle
+ * cluster (ADH gold) are the hub's constant accents: hex literals ON PURPOSE,
+ * not theme tokens like --accent, so they don't dissolve into the host skin.
  */
 
 const ADH_GOLD = '#c4a35a'
-/** The hub's highlight gold (the registry's brighter accent) — the eye shells. */
-const HUB_HIGHLIGHT = '#d9bb74'
 /** Iris blue — the generic AI-eye iris, not any one persona's. */
 const IRIS_BLUE = '#33ccff'
 
@@ -38,9 +35,8 @@ const ANCHOR_Y = pct(-((AT_CENTER.y - VIEW.minY) / VIEW.height)) // -53.846%
 const MARK_STYLE = {
   '--pc-rm-anchor-x': ANCHOR_X,
   '--pc-rm-anchor-y': ANCHOR_Y,
-  // Single-source the hub inks: the SVG below uses the constants directly, while
-  // the popover-bloom CSS reads these custom props — one source, no TS↔CSS drift.
-  '--pc-rm-hub-gold': HUB_HIGHLIGHT,
+  // Single-source the ADH gold: the SVG sparkles use the constant directly, the
+  // popover-bloom CSS reads this custom prop — one source, no TS↔CSS drift.
   '--pc-rm-adh-gold': ADH_GOLD,
 } as CSSProperties
 
@@ -110,11 +106,12 @@ function RegistryMarkImpl({
           <g className="pc-rm-glyph">
             <path d="M15.5,8 v5 a2.25,2.25 0 0 0 4.5,0 v-1 a8,10.5 0 1 0 -4,9" strokeWidth="2.2" />
           </g>
-          {/* The eyes carry the hub inks so they read as eyes, not more ring —
-              only the @ itself is persona-tinted. */}
+          {/* The eyes ride currentColor like the ring, but read as eyes — not
+              more ring — via their shape, a finer stroke, and the constant blue
+              irises. */}
           <g className="pc-rm-eyes">
-            <ellipse cx="9.5" cy="12" rx="1.95" ry="3.3" stroke={HUB_HIGHLIGHT} strokeWidth="1.6" />
-            <ellipse cx="13.4" cy="12" rx="1.95" ry="3.3" stroke={HUB_HIGHLIGHT} strokeWidth="1.6" />
+            <ellipse cx="9.5" cy="12" rx="1.95" ry="3.3" stroke="currentColor" strokeWidth="1.2" />
+            <ellipse cx="13.4" cy="12" rx="1.95" ry="3.3" stroke="currentColor" strokeWidth="1.2" />
             <circle cx="9.5" cy="12" r="1.3" fill={IRIS_BLUE} stroke="none" />
             <circle cx="13.4" cy="12" r="1.3" fill={IRIS_BLUE} stroke="none" />
           </g>
