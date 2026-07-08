@@ -11,8 +11,8 @@
  *   color                — the @ ring tint (persona hue or registry house
  *                          color); the popover text and default borders
  *                          follow it via currentColor.
- *   --pc-rm-size         — mark width (default 46px; height follows the
- *                          32:26 artwork).
+ *   --pc-rm-size         — mark width (default 52px; height follows the
+ *                          38:26 artwork).
  *   --pc-rm-tip-bg       — popover card background (default near-black).
  *   --pc-rm-tip-border   — popover border (default: the tint at 35%).
  *   --pc-rm-tip-radius   — popover corner radius (default 2px).
@@ -29,11 +29,11 @@
    * computed by RegistryMark.tsx from the artwork geometry (viewBox + @
    * center) and passed as inline custom properties, so CSS and SVG cannot
    * drift; the fallbacks mirror the current artwork for CSS-only hosts. */
-  transform: translate(var(--pc-rm-anchor-x, 62.5%), var(--pc-rm-anchor-y, -53.846%));
+  transform: translate(var(--pc-rm-anchor-x, 73.684%), var(--pc-rm-anchor-y, -53.846%));
   z-index: 2;
   display: block;
-  width: var(--pc-rm-size, 46px);
-  aspect-ratio: 32 / 26;
+  width: var(--pc-rm-size, 52px);
+  aspect-ratio: 38 / 26;
   /* Dark halo lifts the mark off whatever backdrop it overhangs. */
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.9));
 }
@@ -89,7 +89,7 @@
  * `visibility` (not just opacity) gates the closed state: it keeps the
  * hidden popover — and any link inside it — out of the accessibility tree
  * and tab order, so screen readers don't hear the credential twice. The
- * 0.3s visibility delay on hide covers the pointer's trip across the gap
+ * 0.45s visibility delay on hide covers the pointer's trip across the gap
  * (with the ::after bridge) AND the Tab keystroke's blur→focus handoff from
  * the mark link into the popover link. */
 .pc-registry-mark .pc-rm-tip {

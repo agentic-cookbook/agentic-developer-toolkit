@@ -23,14 +23,17 @@ const IRIS_BLUE = '#33ccff'
 
 /* Artwork geometry — the single source for BOTH the SVG viewBox and the CSS
  * corner anchoring (exported below as --pc-rm-anchor-*, so the two cannot
- * drift). The anchor point is the @ ring's CENTER (its bbox center), not the
- * box center — the sparkle cluster makes the box asymmetric, so box-centering
- * would shove the @ off the corner. */
-const VIEW = { minX: 0, minY: -2, width: 32, height: 26 }
+ * drift). The mark is "@o": the at-sign is a vertical-OVAL ring (a typographic
+ * @, taller than wide), a round eye sits in it as the inner "a", a second round
+ * eye "o" tucks against the ring's right edge, and the sparkles trail off the
+ * top-right. The anchor point is the @ RING's center (12,12), NOT the box
+ * center, so the @ itself perches on the host corner and the eye + sparkles
+ * overhang up and to the right. The viewBox is the measured content bounds. */
+const VIEW = { minX: 2, minY: -2, width: 38, height: 26 }
 const AT_CENTER = { x: 12, y: 12 }
 const pct = (fraction: number): string => `${+(fraction * 100).toFixed(3)}%`
 /** Translate that moves AT_CENTER onto the box's pinned top-right corner. */
-const ANCHOR_X = pct(1 - (AT_CENTER.x - VIEW.minX) / VIEW.width) // 62.5%
+const ANCHOR_X = pct(1 - (AT_CENTER.x - VIEW.minX) / VIEW.width) // 73.684%
 const ANCHOR_Y = pct(-((AT_CENTER.y - VIEW.minY) / VIEW.height)) // -53.846%
 const MARK_STYLE = {
   '--pc-rm-anchor-x': ANCHOR_X,
@@ -52,11 +55,12 @@ function star(cx: number, cy: number, r: number): string {
   )
 }
 
-/* The gold cluster, top-right outside the ring — computed once at module
- * load (the host chat re-renders per streamed token; these never change). */
-const SPARKLE_MAIN = star(25.4, 4.4, 3.8)
-const SPARKLE_TOP = star(22.4, 0, 1.6)
-const SPARKLE_LOW = star(28.9, 9, 2.3)
+/* The gold cluster, off the top-right past the standalone eye — computed once
+ * at module load (the host chat re-renders per streamed token; these never
+ * change). */
+const SPARKLE_MAIN = star(33, 4, 3.6)
+const SPARKLE_TOP = star(30, -0.4, 1.5)
+const SPARKLE_LOW = star(36.4, 8.6, 2.2)
 
 export interface RegistryMarkProps {
   /** The persona's profile URL on the registry — the mark links here. */
@@ -99,21 +103,25 @@ function RegistryMarkImpl({
           strokeLinejoin="round"
           aria-hidden="true"
         >
-          {/* The @ ring: the recognizable at-sign — a near-closed oval ring
-              with the little "a" stem hooking in on the right and the tail at
-              the lower right — drawn heavier (2.2). The two eyes below are its
-              inner "a", so the whole thing reads as an @ with eyes. */}
-          <g className="pc-rm-glyph">
-            <path d="M15.5,8 v5 a2.25,2.25 0 0 0 4.5,0 v-1 a8,10.5 0 1 0 -4,9" strokeWidth="2.2" />
+          {/* The @ ring: Lucide's at-sign (outer ring + "a" stem + tail),
+              squished horizontally about its center (12,12) into a vertical
+              OVAL — a typographic @, taller than wide, its sides a hair finer
+              than its top/bottom from the non-uniform scale. Drawn heavier (2.2). */}
+          <g
+            className="pc-rm-glyph"
+            transform="translate(12,12) scale(0.78,1) translate(-12,-12)"
+          >
+            <path d="M16,8 v5 a3,3 0 0 0 6,0 v-1 a10,10 0 1 0 -4,8" strokeWidth="2.2" />
           </g>
-          {/* The two eyes are the @'s inner "a" — a larger left eye and a
-              smaller one beside it. They ride currentColor like the ring but
-              read as eyes via their shape, a finer stroke, and the blue irises. */}
+          {/* "@o": two ROUND eyes. The first is the @'s inner "a", centered in
+              the oval ring; the second is a standalone eye "o" tucked against
+              (touching) the ring's right edge. Both shells ride currentColor
+              like the ring; the blue irises mark them as eyes. */}
           <g className="pc-rm-eyes">
-            <ellipse cx="9.4" cy="12" rx="1.8" ry="3" stroke="currentColor" strokeWidth="1.2" />
-            <ellipse cx="13.1" cy="12.2" rx="1.55" ry="2.55" stroke="currentColor" strokeWidth="1.2" />
-            <circle cx="9.4" cy="12" r="1.2" fill={IRIS_BLUE} stroke="none" />
-            <circle cx="13.1" cy="12.2" r="1" fill={IRIS_BLUE} stroke="none" />
+            <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.3" />
+            <circle cx="12" cy="12" r="1.7" fill={IRIS_BLUE} stroke="none" />
+            <circle cx="25.5" cy="12" r="4" stroke="currentColor" strokeWidth="1.3" />
+            <circle cx="25.5" cy="12" r="1.7" fill={IRIS_BLUE} stroke="none" />
           </g>
           <g className="pc-rm-gold" fill={ADH_GOLD} stroke="none">
             <path d={SPARKLE_MAIN} />
