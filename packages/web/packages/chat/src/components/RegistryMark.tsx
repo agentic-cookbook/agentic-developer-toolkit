@@ -23,15 +23,15 @@ const IRIS_BLUE = '#33ccff'
 
 /* Artwork geometry — the single source for BOTH the SVG viewBox and the CSS
  * corner anchoring (exported below as --pc-rm-anchor-*, so the two cannot
- * drift). The anchor point is the @ swoosh's CENTER (its bbox center, measured
- * from the path), not the box center — the sparkle cluster makes the box
- * asymmetric, so box-centering would shove the @ off the corner. */
+ * drift). The anchor point is the @ ring's CENTER (its bbox center), not the
+ * box center — the sparkle cluster makes the box asymmetric, so box-centering
+ * would shove the @ off the corner. */
 const VIEW = { minX: 0, minY: -2, width: 32, height: 26 }
-const AT_CENTER = { x: 10.8, y: 13.7 }
+const AT_CENTER = { x: 12, y: 12 }
 const pct = (fraction: number): string => `${+(fraction * 100).toFixed(3)}%`
 /** Translate that moves AT_CENTER onto the box's pinned top-right corner. */
-const ANCHOR_X = pct(1 - (AT_CENTER.x - VIEW.minX) / VIEW.width) // 66.25%
-const ANCHOR_Y = pct(-((AT_CENTER.y - VIEW.minY) / VIEW.height)) // -60.385%
+const ANCHOR_X = pct(1 - (AT_CENTER.x - VIEW.minX) / VIEW.width) // 62.5%
+const ANCHOR_Y = pct(-((AT_CENTER.y - VIEW.minY) / VIEW.height)) // -53.846%
 const MARK_STYLE = {
   '--pc-rm-anchor-x': ANCHOR_X,
   '--pc-rm-anchor-y': ANCHOR_Y,
@@ -99,23 +99,21 @@ function RegistryMarkImpl({
           strokeLinejoin="round"
           aria-hidden="true"
         >
-          {/* The @ built the way the character reads: a swoosh that springs
-              from the top of the left eye, arcs up and over the top, sweeps
-              down the left and around the bottom, then hooks up at the
-              bottom-right — open on the right, where the tail curls. The two
-              eyes are the inner "a": a taller left eye (the a's bowl) and a
-              smaller right eye tucked in the opening. */}
+          {/* The @ ring: the recognizable at-sign — a near-closed oval ring
+              with the little "a" stem hooking in on the right and the tail at
+              the lower right — drawn heavier (2.2). The two eyes below are its
+              inner "a", so the whole thing reads as an @ with eyes. */}
           <g className="pc-rm-glyph">
-            <path d="M11.2,7.8 C 9.8,4.2 5,4.2 3.3,8.4 C 1.9,11.6 2.3,16.2 4.8,19.2 C 6.9,22 12,23 16,21.6 C 18.4,20.6 19.4,18.8 19,16" strokeWidth="2.2" />
+            <path d="M15.5,8 v5 a2.25,2.25 0 0 0 4.5,0 v-1 a8,10.5 0 1 0 -4,9" strokeWidth="2.2" />
           </g>
-          {/* The eyes ride currentColor like the swoosh, but read as eyes — not
-              more ring — via their shape, a finer stroke, and the constant blue
-              irises. */}
+          {/* The two eyes are the @'s inner "a" — a larger left eye and a
+              smaller one beside it. They ride currentColor like the ring but
+              read as eyes via their shape, a finer stroke, and the blue irises. */}
           <g className="pc-rm-eyes">
-            <ellipse cx="10" cy="12" rx="2.1" ry="3.5" stroke="currentColor" strokeWidth="1.2" />
-            <ellipse cx="14.3" cy="12.7" rx="1.7" ry="2.7" stroke="currentColor" strokeWidth="1.2" />
-            <circle cx="10" cy="12" r="1.25" fill={IRIS_BLUE} stroke="none" />
-            <circle cx="14.3" cy="12.7" r="1" fill={IRIS_BLUE} stroke="none" />
+            <ellipse cx="9.4" cy="12" rx="1.8" ry="3" stroke="currentColor" strokeWidth="1.2" />
+            <ellipse cx="13.1" cy="12.2" rx="1.55" ry="2.55" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="9.4" cy="12" r="1.2" fill={IRIS_BLUE} stroke="none" />
+            <circle cx="13.1" cy="12.2" r="1" fill={IRIS_BLUE} stroke="none" />
           </g>
           <g className="pc-rm-gold" fill={ADH_GOLD} stroke="none">
             <path d={SPARKLE_MAIN} />

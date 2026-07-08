@@ -29,7 +29,7 @@
    * computed by RegistryMark.tsx from the artwork geometry (viewBox + @
    * center) and passed as inline custom properties, so CSS and SVG cannot
    * drift; the fallbacks mirror the current artwork for CSS-only hosts. */
-  transform: translate(var(--pc-rm-anchor-x, 66.25%), var(--pc-rm-anchor-y, -60.385%));
+  transform: translate(var(--pc-rm-anchor-x, 62.5%), var(--pc-rm-anchor-y, -53.846%));
   z-index: 2;
   display: block;
   width: var(--pc-rm-size, 46px);
