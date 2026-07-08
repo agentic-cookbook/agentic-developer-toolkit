@@ -27,6 +27,13 @@ body {
   overflow: hidden;
 }
 
+/* `clip={false}` on ViewportShell: content may overhang the shell's box (a
+ * corner badge, a decorative flourish). Safe because html/body above still
+ * lock the page. */
+.viewport-shell.vp-shell--open {
+  overflow: visible;
+}
+
 .vp-spacer {
   flex: 1 1 0;
   min-height: 0;

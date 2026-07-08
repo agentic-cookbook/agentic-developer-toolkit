@@ -1,0 +1,148 @@
+/*
+ * RegistryMark — the Agentic Persona Registry credential, perched on the
+ * top-right corner of the host's position:relative wrapper (the same wrapper
+ * that contains the chat view). The mark deliberately overhangs that box, so
+ * no ancestor between the wrapper and the viewport may overflow-clip (for
+ * ViewportShell hosts, pass `clip={false}` to the shell).
+ *
+ * Opt-in: import this file only where the mark is rendered.
+ *
+ * Knobs:
+ *   color                — the @ ring tint (persona hue or registry house
+ *                          color); the popover text and default borders
+ *                          follow it via currentColor.
+ *   --pc-rm-size         — mark width (default 46px; height follows the
+ *                          32:26 artwork).
+ *   --pc-rm-tip-bg       — popover card background (default near-black).
+ *   --pc-rm-tip-border   — popover border (default: the tint at 35%).
+ *   --pc-rm-tip-radius   — popover corner radius (default 2px).
+ */
+.pc-registry-mark {
+  /* The popover card and its arrow must share these exactly, so resolve the
+   * public knobs (with their defaults) once here. */
+  --_rm-tip-bg: var(--pc-rm-tip-bg, #050805);
+  --_rm-tip-border: var(--pc-rm-tip-border, color-mix(in srgb, currentColor 35%, transparent));
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* Anchor the @ ring's own center on the corner. The percentages are
+   * computed by RegistryMark.tsx from the artwork geometry (viewBox + @
+   * center) and passed as inline custom properties, so CSS and SVG cannot
+   * drift; the fallbacks mirror the current artwork for CSS-only hosts. */
+  transform: translate(var(--pc-rm-anchor-x, 62.5%), var(--pc-rm-anchor-y, -53.85%));
+  z-index: 2;
+  display: block;
+  width: var(--pc-rm-size, 46px);
+  aspect-ratio: 32 / 26;
+  /* Dark halo lifts the mark off whatever backdrop it overhangs. */
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.9));
+}
+.pc-registry-mark .pc-rm-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+.pc-registry-mark .pc-rm-link:focus-visible {
+  outline: 1px solid color-mix(in srgb, currentColor 50%, transparent);
+  outline-offset: 3px;
+}
+.pc-registry-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hover/focus: each ink blooms in its own color — ring in the tint, eyes in
+ * the hub highlight gold, sparkles in ADH gold. Keyboard focus only
+ * (:has(:focus-visible), not :focus-within): a mouse click on the link keeps
+ * DOM focus after opening the new tab, and must not leave the bloom and
+ * popover stuck open. */
+.pc-registry-mark .pc-rm-glyph,
+.pc-registry-mark .pc-rm-eyes,
+.pc-registry-mark .pc-rm-gold {
+  transition: filter 0.18s ease;
+}
+.pc-registry-mark:hover .pc-rm-glyph,
+.pc-registry-mark:has(:focus-visible) .pc-rm-glyph {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+.pc-registry-mark:hover .pc-rm-eyes,
+.pc-registry-mark:has(:focus-visible) .pc-rm-eyes {
+  filter: drop-shadow(0 0 4px #d9bb74);
+}
+.pc-registry-mark:hover .pc-rm-gold,
+.pc-registry-mark:has(:focus-visible) .pc-rm-gold {
+  filter: drop-shadow(0 0 4px #c4a35a);
+}
+
+/* Popover ABOVE the mark on hover/focus — a card with an arrow poking down
+ * at the mark. Anchored 16px in from the mark's right edge so it stays
+ * on-screen even where the mark overhangs the viewport edge on phones. It
+ * inherits the mark's dark drop-shadow, lifting it off the backdrop.
+ *
+ * `visibility` (not just opacity) gates the closed state: it keeps the
+ * hidden popover — and any link inside it — out of the accessibility tree
+ * and tab order, so screen readers don't hear the credential twice. The
+ * 0.3s visibility delay on hide covers the pointer's trip across the gap
+ * (with the ::after bridge) AND the Tab keystroke's blur→focus handoff from
+ * the mark link into the popover link. */
+.pc-registry-mark .pc-rm-tip {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  right: 16px;
+  width: max-content;
+  max-width: 240px;
+  padding: 7px 11px;
+  background: var(--_rm-tip-bg);
+  border: 1px solid var(--_rm-tip-border);
+  border-radius: var(--pc-rm-tip-radius, 2px);
+  font-size: 11px;
+  line-height: 1.5;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition:
+    opacity 0.15s ease 0.15s,
+    transform 0.15s ease 0.15s,
+    visibility 0s linear 0.3s;
+}
+/* Arrow pointing down at the mark. */
+.pc-registry-mark .pc-rm-tip::before {
+  content: "";
+  position: absolute;
+  bottom: -4.5px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: var(--_rm-tip-bg);
+  border-right: 1px solid var(--_rm-tip-border);
+  border-bottom: 1px solid var(--_rm-tip-border);
+  transform: rotate(45deg);
+}
+/* Invisible bridge over the mark↔popover gap so the pointer can travel up
+ * into the popover without the hover breaking. Exactly the 9px gap — any
+ * taller and it would overlap the mark and steal clicks from the link. */
+.pc-registry-mark .pc-rm-tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 9px;
+}
+.pc-registry-mark:hover .pc-rm-tip,
+.pc-registry-mark:has(:focus-visible) .pc-rm-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+/* Links inside the popover keep the tint and read as links. */
+.pc-registry-mark .pc-rm-tip a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

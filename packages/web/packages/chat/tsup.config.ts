@@ -13,6 +13,7 @@ export default defineConfig({
     'components/ChatInput': 'src/components/ChatInput.tsx',
     'components/RichContent': 'src/components/RichContent.tsx',
     'components/InlinePopover': 'src/components/InlinePopover.tsx',
+    'components/RegistryMark': 'src/components/RegistryMark.tsx',
     'components/ContentOverlay': 'src/components/ContentOverlay.tsx',
     'components/SendIcon': 'src/components/SendIcon.tsx',
     'components/TypingIndicator': 'src/components/TypingIndicator.tsx',

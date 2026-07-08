@@ -12,6 +12,8 @@ export { PersonaChat } from './modes/PersonaChat'
 export { Transcript } from './components/Transcript'
 export { ContentOverlay } from './components/ContentOverlay'
 export type { ContentOverlayProps } from './components/ContentOverlay'
+export { RegistryMark } from './components/RegistryMark'
+export type { RegistryMarkProps } from './components/RegistryMark'
 
 // Backends
 export { MockBackend } from './backends/MockBackend'
