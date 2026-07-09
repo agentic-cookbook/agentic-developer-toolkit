@@ -65,12 +65,12 @@ function star(cx: number, cy: number, rx: number, ry: number): string {
   )
 }
 
-/* The AI star, sized to the "@" counter (the "o") — the counter's own bounds are
- * x:[12.38,15.86], y:[8.91,15.52], center ~(14.1, 12.2), a tall-narrow oval — so
- * rx/ry (2.0×3.3) fill it top-to-bottom with the points just kissing the opening
- * rather than crossing the ring. Computed once at module load (the host chat
- * re-renders per streamed token; this never changes). */
-const STAR = star(14.1, 12.2, 2.0, 3.3)
+/* The AI star, centered on the "@" counter (the "o", center ~(14.1, 12.2)) but
+ * scaled 2× past the counter-fit radii (2.0×3.3 → 4.0×6.6) so it reads as a bold
+ * star overrunning the "@" ring while its points still stay inside the glyph
+ * viewBox (east point x≈18.1 < 19, so nothing clips). Computed once at module
+ * load (the host chat re-renders per streamed token; this never changes). */
+const STAR = star(14.1, 12.2, 4.0, 6.6)
 
 export interface RegistryMarkProps {
   /** The persona's profile URL on the registry — the mark links here. */
