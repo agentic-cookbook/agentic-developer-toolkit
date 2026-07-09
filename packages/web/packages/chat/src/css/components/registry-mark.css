@@ -81,6 +81,14 @@
  * on-screen even where the mark overhangs the viewport edge on phones. It
  * inherits the mark's dark drop-shadow, lifting it off the backdrop.
  *
+ * This is a purpose-built, CSS-only hover/focus TOOLTIP — deliberately NOT the
+ * package's InlinePopover. InlinePopover is a JS-driven, click-to-toggle
+ * popover (title + description + action links) anchored to interactive content;
+ * this is a passive credential label that must appear on hover with zero JS and
+ * zero client bundle so a static mark stays static. Different interaction model,
+ * different trigger, different a11y timing — sharing one abstraction would bend
+ * both out of shape, so they stay separate on purpose.
+ *
  * `visibility` (not just opacity) gates the closed state: it keeps the
  * hidden popover — and any link inside it — out of the accessibility tree
  * and tab order, so screen readers don't hear the credential twice. The

@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import type { CSSProperties, ReactElement, ReactNode } from 'react'
+import type { CSSProperties, NamedExoticComponent, ReactElement, ReactNode } from 'react'
 
 /**
  * The Agentic Persona Registry mark — the registry credential a persona chat
@@ -95,7 +95,7 @@ function RegistryMarkImpl({
 }: RegistryMarkProps): ReactElement {
   return (
     <span
-      className={className ? `pc-registry-mark ${className}` : 'pc-registry-mark'}
+      className={['pc-registry-mark', className].filter(Boolean).join(' ')}
       style={MARK_STYLE}
     >
       <a
@@ -124,4 +124,4 @@ function RegistryMarkImpl({
 /* Memoized: the host chat re-renders on every streamed token, but the mark's
  * props are static after mount, so it re-renders once and then stays put — as
  * long as callers pass a stable `tip` (a module constant, not inline JSX). */
-export const RegistryMark = memo(RegistryMarkImpl)
+export const RegistryMark: NamedExoticComponent<RegistryMarkProps> = memo(RegistryMarkImpl)
