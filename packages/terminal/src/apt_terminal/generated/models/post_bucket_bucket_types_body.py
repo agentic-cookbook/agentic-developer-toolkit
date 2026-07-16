@@ -29,8 +29,9 @@ class PostBucketBucketTypesBody:
             bucket_id (str):
             sql_table_name (str):
             name (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             description (Union[Unset, str]):
+            ref_mode (Union[Unset, str]):
             metadata (Union['PostBucketBucketTypesBodyMetadataType0Type1', None, Unset, bool, float, list[Any], str]):
             id (Union[Unset, str]):
      """
@@ -38,8 +39,9 @@ class PostBucketBucketTypesBody:
     bucket_id: str
     sql_table_name: str
     name: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
+    ref_mode: Union[Unset, str] = UNSET
     metadata: Union['PostBucketBucketTypesBodyMetadataType0Type1', None, Unset, bool, float, list[Any], str] = UNSET
     id: Union[Unset, str] = UNSET
 
@@ -55,9 +57,11 @@ class PostBucketBucketTypesBody:
 
         name = self.name
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         description = self.description
+
+        ref_mode = self.ref_mode
 
         metadata: Union[None, Unset, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.metadata, Unset):
@@ -81,10 +85,12 @@ class PostBucketBucketTypesBody:
             "sqlTableName": sql_table_name,
             "name": name,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if description is not UNSET:
             field_dict["description"] = description
+        if ref_mode is not UNSET:
+            field_dict["refMode"] = ref_mode
         if metadata is not UNSET:
             field_dict["metadata"] = metadata
         if id is not UNSET:
@@ -104,9 +110,11 @@ class PostBucketBucketTypesBody:
 
         name = d.pop("name")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         description = d.pop("description", UNSET)
+
+        ref_mode = d.pop("refMode", UNSET)
 
         def _parse_metadata(data: object) -> Union['PostBucketBucketTypesBodyMetadataType0Type1', None, Unset, bool, float, list[Any], str]:
             if data is None:
@@ -142,8 +150,9 @@ class PostBucketBucketTypesBody:
             bucket_id=bucket_id,
             sql_table_name=sql_table_name,
             name=name,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             description=description,
+            ref_mode=ref_mode,
             metadata=metadata,
             id=id,
         )

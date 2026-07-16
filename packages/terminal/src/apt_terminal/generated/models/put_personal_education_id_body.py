@@ -24,7 +24,7 @@ class PutPersonalEducationIdBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             institution (Union[Unset, str]):
             degree (Union[Unset, str]):
             field_of_study (Union[Unset, str]):
@@ -35,7 +35,7 @@ class PutPersonalEducationIdBody:
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     institution: Union[Unset, str] = UNSET
     degree: Union[Unset, str] = UNSET
     field_of_study: Union[Unset, str] = UNSET
@@ -55,7 +55,7 @@ class PutPersonalEducationIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         institution = self.institution
 
@@ -82,8 +82,8 @@ class PutPersonalEducationIdBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if institution is not UNSET:
             field_dict["institution"] = institution
         if degree is not UNSET:
@@ -116,7 +116,7 @@ class PutPersonalEducationIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         institution = d.pop("institution", UNSET)
 
@@ -142,7 +142,7 @@ class PutPersonalEducationIdBody:
 
         put_personal_education_id_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             institution=institution,
             degree=degree,
             field_of_study=field_of_study,

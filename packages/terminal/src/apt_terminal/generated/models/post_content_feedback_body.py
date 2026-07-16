@@ -29,7 +29,7 @@ class PostContentFeedbackBody:
             body (str):
             platform (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             app_version (Union[Unset, str]):
             os_version (Union[Unset, str]):
             device_info (Union[Unset, str]):
@@ -43,7 +43,7 @@ class PostContentFeedbackBody:
     body: str
     platform: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     app_version: Union[Unset, str] = UNSET
     os_version: Union[Unset, str] = UNSET
     device_info: Union[Unset, str] = UNSET
@@ -71,7 +71,7 @@ class PostContentFeedbackBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         app_version = self.app_version
 
@@ -95,8 +95,8 @@ class PostContentFeedbackBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if app_version is not UNSET:
             field_dict["appVersion"] = app_version
         if os_version is not UNSET:
@@ -135,7 +135,7 @@ class PostContentFeedbackBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         app_version = d.pop("appVersion", UNSET)
 
@@ -154,7 +154,7 @@ class PostContentFeedbackBody:
             body=body,
             platform=platform,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             app_version=app_version,
             os_version=os_version,
             device_info=device_info,

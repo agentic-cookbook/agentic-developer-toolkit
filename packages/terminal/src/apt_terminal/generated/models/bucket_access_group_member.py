@@ -22,7 +22,7 @@ class BucketAccessGroupMember:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             access_group_id (str):
             member_type (BucketAccessGroupMemberMemberType):
             member_id (str):
@@ -31,7 +31,7 @@ class BucketAccessGroupMember:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     access_group_id: str
     member_type: BucketAccessGroupMemberMemberType
     member_id: str
@@ -46,7 +46,7 @@ class BucketAccessGroupMember:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         access_group_id = self.access_group_id
 
@@ -63,7 +63,7 @@ class BucketAccessGroupMember:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "accessGroupId": access_group_id,
             "memberType": member_type,
             "memberId": member_id,
@@ -80,7 +80,7 @@ class BucketAccessGroupMember:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         access_group_id = d.pop("accessGroupId")
 
@@ -97,7 +97,7 @@ class BucketAccessGroupMember:
 
         bucket_access_group_member = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             access_group_id=access_group_id,
             member_type=member_type,
             member_id=member_id,

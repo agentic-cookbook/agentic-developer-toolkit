@@ -6,6 +6,9 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast, Union
+from typing import Union
 
 
 
@@ -23,11 +26,13 @@ class RegistryOrganization:
             id (str):
             slug (str):
             name (str):
+            description (Union[None, Unset, str]):
      """
 
     id: str
     slug: str
     name: str
+    description: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -41,6 +46,12 @@ class RegistryOrganization:
 
         name = self.name
 
+        description: Union[None, Unset, str]
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -49,6 +60,8 @@ class RegistryOrganization:
             "slug": slug,
             "name": name,
         })
+        if description is not UNSET:
+            field_dict["description"] = description
 
         return field_dict
 
@@ -63,10 +76,21 @@ class RegistryOrganization:
 
         name = d.pop("name")
 
+        def _parse_description(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        description = _parse_description(d.pop("description", UNSET))
+
+
         registry_organization = cls(
             id=id,
             slug=slug,
             name=name,
+            description=description,
         )
 
 

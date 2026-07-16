@@ -6,6 +6,8 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import Union
 
 
 
@@ -20,12 +22,16 @@ T = TypeVar("T", bound="PostAuthLoginBody")
 class PostAuthLoginBody:
     """ 
         Attributes:
-            email (str):
             password (str):
+            email (Union[Unset, str]): Email address
+            slug (Union[Unset, str]): User id (login handle)
+            identifier (Union[Unset, str]): Email, user id, or a verified phone number (E.164) — classified server-side
      """
 
-    email: str
     password: str
+    email: Union[Unset, str] = UNSET
+    slug: Union[Unset, str] = UNSET
+    identifier: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -33,17 +39,26 @@ class PostAuthLoginBody:
 
 
     def to_dict(self) -> dict[str, Any]:
+        password = self.password
+
         email = self.email
 
-        password = self.password
+        slug = self.slug
+
+        identifier = self.identifier
 
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
-            "email": email,
             "password": password,
         })
+        if email is not UNSET:
+            field_dict["email"] = email
+        if slug is not UNSET:
+            field_dict["slug"] = slug
+        if identifier is not UNSET:
+            field_dict["identifier"] = identifier
 
         return field_dict
 
@@ -52,13 +67,19 @@ class PostAuthLoginBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        email = d.pop("email")
-
         password = d.pop("password")
 
+        email = d.pop("email", UNSET)
+
+        slug = d.pop("slug", UNSET)
+
+        identifier = d.pop("identifier", UNSET)
+
         post_auth_login_body = cls(
-            email=email,
             password=password,
+            email=email,
+            slug=slug,
+            identifier=identifier,
         )
 
 

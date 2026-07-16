@@ -31,7 +31,7 @@ class AiProcessingClaimedJob:
             payload (AiProcessingClaimedJobPayload): Arbitrary job-specific input
             claimed_at (str): Drizzle-read timestamp of when the job was claimed
             lease_expires_at (str): Drizzle-read timestamp when the lease expires
-            lease_token (str): HMAC token required for heartbeat / complete / fail
+            lease_token (str): Opaque lease token required for heartbeat / complete / fail
      """
 
     id: UUID

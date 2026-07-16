@@ -28,13 +28,13 @@ class PostContentEventsBody:
         Attributes:
             type_ (str):
             payload (Union['PostContentEventsBodyPayloadType1', None, bool, float, list[Any], str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
      """
 
     type_: str
     payload: Union['PostContentEventsBodyPayloadType1', None, bool, float, list[Any], str]
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
 
 
@@ -55,7 +55,7 @@ class PostContentEventsBody:
         else:
             payload = self.payload
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -70,8 +70,8 @@ class PostContentEventsBody:
             "type": type_,
             "payload": payload,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
 
@@ -111,7 +111,7 @@ class PostContentEventsBody:
         payload = _parse_payload(d.pop("payload"))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -126,7 +126,7 @@ class PostContentEventsBody:
         post_content_events_body = cls(
             type_=type_,
             payload=payload,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
         )
 

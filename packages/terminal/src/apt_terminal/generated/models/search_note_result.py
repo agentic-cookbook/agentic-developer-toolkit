@@ -6,9 +6,6 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast, Union
-from typing import Union
 
 
 
@@ -24,29 +21,17 @@ class SearchNoteResult:
     """ 
         Attributes:
             id (str):
-            customer_id (str):
-            owner_id (str):
             title (str):
-            body (str):
-            occurred_at (str):
+            content (str):
             created_at (str):
             updated_at (str):
-            deleted_at (Union[None, Unset, str]):
-            subject_table (Union[None, Unset, str]):
-            subject_id (Union[None, Unset, str]):
      """
 
     id: str
-    customer_id: str
-    owner_id: str
     title: str
-    body: str
-    occurred_at: str
+    content: str
     created_at: str
     updated_at: str
-    deleted_at: Union[None, Unset, str] = UNSET
-    subject_table: Union[None, Unset, str] = UNSET
-    subject_id: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -56,57 +41,24 @@ class SearchNoteResult:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        customer_id = self.customer_id
-
-        owner_id = self.owner_id
-
         title = self.title
 
-        body = self.body
-
-        occurred_at = self.occurred_at
+        content = self.content
 
         created_at = self.created_at
 
         updated_at = self.updated_at
-
-        deleted_at: Union[None, Unset, str]
-        if isinstance(self.deleted_at, Unset):
-            deleted_at = UNSET
-        else:
-            deleted_at = self.deleted_at
-
-        subject_table: Union[None, Unset, str]
-        if isinstance(self.subject_table, Unset):
-            subject_table = UNSET
-        else:
-            subject_table = self.subject_table
-
-        subject_id: Union[None, Unset, str]
-        if isinstance(self.subject_id, Unset):
-            subject_id = UNSET
-        else:
-            subject_id = self.subject_id
 
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "customerId": customer_id,
-            "ownerId": owner_id,
             "title": title,
-            "body": body,
-            "occurredAt": occurred_at,
+            "content": content,
             "createdAt": created_at,
             "updatedAt": updated_at,
         })
-        if deleted_at is not UNSET:
-            field_dict["deletedAt"] = deleted_at
-        if subject_table is not UNSET:
-            field_dict["subjectTable"] = subject_table
-        if subject_id is not UNSET:
-            field_dict["subjectId"] = subject_id
 
         return field_dict
 
@@ -117,62 +69,20 @@ class SearchNoteResult:
         d = dict(src_dict)
         id = d.pop("id")
 
-        customer_id = d.pop("customerId")
-
-        owner_id = d.pop("ownerId")
-
         title = d.pop("title")
 
-        body = d.pop("body")
-
-        occurred_at = d.pop("occurredAt")
+        content = d.pop("content")
 
         created_at = d.pop("createdAt")
 
         updated_at = d.pop("updatedAt")
 
-        def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(Union[None, Unset, str], data)
-
-        deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
-
-
-        def _parse_subject_table(data: object) -> Union[None, Unset, str]:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(Union[None, Unset, str], data)
-
-        subject_table = _parse_subject_table(d.pop("subjectTable", UNSET))
-
-
-        def _parse_subject_id(data: object) -> Union[None, Unset, str]:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(Union[None, Unset, str], data)
-
-        subject_id = _parse_subject_id(d.pop("subjectId", UNSET))
-
-
         search_note_result = cls(
             id=id,
-            customer_id=customer_id,
-            owner_id=owner_id,
             title=title,
-            body=body,
-            occurred_at=occurred_at,
+            content=content,
             created_at=created_at,
             updated_at=updated_at,
-            deleted_at=deleted_at,
-            subject_table=subject_table,
-            subject_id=subject_id,
         )
 
 

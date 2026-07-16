@@ -24,7 +24,7 @@ class PutDocumentDocumentsIdBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             title (Union[Unset, str]):
             doc_type (Union[Unset, str]):
             is_deleted (Union[Unset, bool]):
@@ -33,7 +33,7 @@ class PutDocumentDocumentsIdBody:
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     doc_type: Union[Unset, str] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
@@ -51,7 +51,7 @@ class PutDocumentDocumentsIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         title = self.title
 
@@ -78,8 +78,8 @@ class PutDocumentDocumentsIdBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if title is not UNSET:
             field_dict["title"] = title
         if doc_type is not UNSET:
@@ -108,7 +108,7 @@ class PutDocumentDocumentsIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         title = d.pop("title", UNSET)
 
@@ -138,7 +138,7 @@ class PutDocumentDocumentsIdBody:
 
         put_document_documents_id_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             title=title,
             doc_type=doc_type,
             is_deleted=is_deleted,

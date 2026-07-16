@@ -25,22 +25,24 @@ class PostBucketBucketTypesResponse201:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             bucket_id (str):
             sql_table_name (str):
             name (str):
             description (str):
+            ref_mode (str):
             metadata (Union['PostBucketBucketTypesResponse201MetadataType0Type1', None, bool, float, list[Any], str]):
             created_at (str):
             updated_at (str):
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     bucket_id: str
     sql_table_name: str
     name: str
     description: str
+    ref_mode: str
     metadata: Union['PostBucketBucketTypesResponse201MetadataType0Type1', None, bool, float, list[Any], str]
     created_at: str
     updated_at: str
@@ -53,7 +55,7 @@ class PostBucketBucketTypesResponse201:
         from ..models.post_bucket_bucket_types_response_201_metadata_type_0_type_1 import PostBucketBucketTypesResponse201MetadataType0Type1
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         bucket_id = self.bucket_id
 
@@ -62,6 +64,8 @@ class PostBucketBucketTypesResponse201:
         name = self.name
 
         description = self.description
+
+        ref_mode = self.ref_mode
 
         metadata: Union[None, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.metadata, PostBucketBucketTypesResponse201MetadataType0Type1):
@@ -82,11 +86,12 @@ class PostBucketBucketTypesResponse201:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "bucketId": bucket_id,
             "sqlTableName": sql_table_name,
             "name": name,
             "description": description,
+            "refMode": ref_mode,
             "metadata": metadata,
             "createdAt": created_at,
             "updatedAt": updated_at,
@@ -102,7 +107,7 @@ class PostBucketBucketTypesResponse201:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         bucket_id = d.pop("bucketId")
 
@@ -111,6 +116,8 @@ class PostBucketBucketTypesResponse201:
         name = d.pop("name")
 
         description = d.pop("description")
+
+        ref_mode = d.pop("refMode")
 
         def _parse_metadata(data: object) -> Union['PostBucketBucketTypesResponse201MetadataType0Type1', None, bool, float, list[Any], str]:
             if data is None:
@@ -144,11 +151,12 @@ class PostBucketBucketTypesResponse201:
 
         post_bucket_bucket_types_response_201 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             bucket_id=bucket_id,
             sql_table_name=sql_table_name,
             name=name,
             description=description,
+            ref_mode=ref_mode,
             metadata=metadata,
             created_at=created_at,
             updated_at=updated_at,

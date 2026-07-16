@@ -28,13 +28,13 @@ class PostContentKeyValuePairsBody:
         Attributes:
             key (str):
             value (Union['PostContentKeyValuePairsBodyValueType1', None, bool, float, list[Any], str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
      """
 
     key: str
     value: Union['PostContentKeyValuePairsBodyValueType1', None, bool, float, list[Any], str]
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
 
 
@@ -55,7 +55,7 @@ class PostContentKeyValuePairsBody:
         else:
             value = self.value
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -70,8 +70,8 @@ class PostContentKeyValuePairsBody:
             "key": key,
             "value": value,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
 
@@ -111,7 +111,7 @@ class PostContentKeyValuePairsBody:
         value = _parse_value(d.pop("value"))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -126,7 +126,7 @@ class PostContentKeyValuePairsBody:
         post_content_key_value_pairs_body = cls(
             key=key,
             value=value,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
         )
 

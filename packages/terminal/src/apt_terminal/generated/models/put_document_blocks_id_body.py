@@ -25,7 +25,7 @@ class PutDocumentBlocksIdBody:
         Attributes:
             document_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             position (Union[Unset, str]):
             block_type (Union[Unset, str]):
             content_text (Union[Unset, str]):
@@ -36,7 +36,7 @@ class PutDocumentBlocksIdBody:
 
     document_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     position: Union[Unset, str] = UNSET
     block_type: Union[Unset, str] = UNSET
     content_text: Union[Unset, str] = UNSET
@@ -57,7 +57,7 @@ class PutDocumentBlocksIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         position = self.position
 
@@ -84,8 +84,8 @@ class PutDocumentBlocksIdBody:
             field_dict["documentId"] = document_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if position is not UNSET:
             field_dict["position"] = position
         if block_type is not UNSET:
@@ -118,7 +118,7 @@ class PutDocumentBlocksIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         position = d.pop("position", UNSET)
 
@@ -143,7 +143,7 @@ class PutDocumentBlocksIdBody:
         put_document_blocks_id_body = cls(
             document_id=document_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             position=position,
             block_type=block_type,
             content_text=content_text,

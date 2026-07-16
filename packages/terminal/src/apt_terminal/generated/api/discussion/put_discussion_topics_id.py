@@ -100,7 +100,7 @@ def sync_detailed(
     body: PutDiscussionTopicsIdBody,
 
 ) -> Response[Union[DiscussionTopic, Error]]:
-    """ Edit a topic title (author/admin) and/or moderation flags (admin)
+    """ Edit a topic title (author/admin) and/or moderation flags (community moderator)
 
     Args:
         id (str):
@@ -134,7 +134,7 @@ def sync(
     body: PutDiscussionTopicsIdBody,
 
 ) -> Optional[Union[DiscussionTopic, Error]]:
-    """ Edit a topic title (author/admin) and/or moderation flags (admin)
+    """ Edit a topic title (author/admin) and/or moderation flags (community moderator)
 
     Args:
         id (str):
@@ -163,7 +163,7 @@ async def asyncio_detailed(
     body: PutDiscussionTopicsIdBody,
 
 ) -> Response[Union[DiscussionTopic, Error]]:
-    """ Edit a topic title (author/admin) and/or moderation flags (admin)
+    """ Edit a topic title (author/admin) and/or moderation flags (community moderator)
 
     Args:
         id (str):
@@ -197,7 +197,7 @@ async def asyncio(
     body: PutDiscussionTopicsIdBody,
 
 ) -> Optional[Union[DiscussionTopic, Error]]:
-    """ Edit a topic title (author/admin) and/or moderation flags (admin)
+    """ Edit a topic title (author/admin) and/or moderation flags (community moderator)
 
     Args:
         id (str):

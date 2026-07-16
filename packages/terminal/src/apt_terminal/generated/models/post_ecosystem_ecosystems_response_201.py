@@ -33,7 +33,7 @@ class PostEcosystemEcosystemsResponse201:
             updated_at (str):
             is_deleted (bool):
             is_default (bool):
-            type_ (str):
+            is_infrastructure (bool):
             namespace_id (Union[None, str]):
      """
 
@@ -49,7 +49,7 @@ class PostEcosystemEcosystemsResponse201:
     updated_at: str
     is_deleted: bool
     is_default: bool
-    type_: str
+    is_infrastructure: bool
     namespace_id: Union[None, str]
 
 
@@ -82,7 +82,7 @@ class PostEcosystemEcosystemsResponse201:
 
         is_default = self.is_default
 
-        type_ = self.type_
+        is_infrastructure = self.is_infrastructure
 
         namespace_id: Union[None, str]
         namespace_id = self.namespace_id
@@ -103,7 +103,7 @@ class PostEcosystemEcosystemsResponse201:
             "updatedAt": updated_at,
             "isDeleted": is_deleted,
             "isDefault": is_default,
-            "type": type_,
+            "isInfrastructure": is_infrastructure,
             "namespaceId": namespace_id,
         })
 
@@ -144,7 +144,7 @@ class PostEcosystemEcosystemsResponse201:
 
         is_default = d.pop("isDefault")
 
-        type_ = d.pop("type")
+        is_infrastructure = d.pop("isInfrastructure")
 
         def _parse_namespace_id(data: object) -> Union[None, str]:
             if data is None:
@@ -167,7 +167,7 @@ class PostEcosystemEcosystemsResponse201:
             updated_at=updated_at,
             is_deleted=is_deleted,
             is_default=is_default,
-            type_=type_,
+            is_infrastructure=is_infrastructure,
             namespace_id=namespace_id,
         )
 

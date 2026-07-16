@@ -1,0 +1,9 @@
+from enum import Enum
+
+class PutMeAppearanceBodyColorMode(str, Enum):
+    AUTO = "auto"
+    DARK = "dark"
+    LIGHT = "light"
+
+    def __str__(self) -> str:
+        return str(self.value)

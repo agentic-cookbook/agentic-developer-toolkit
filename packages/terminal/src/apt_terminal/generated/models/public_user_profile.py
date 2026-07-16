@@ -10,9 +10,9 @@ from typing import cast
 from typing import cast, Union
 
 if TYPE_CHECKING:
-  from ..models.public_address import PublicAddress
   from ..models.public_social_link import PublicSocialLink
   from ..models.public_persona_summary import PublicPersonaSummary
+  from ..models.public_address import PublicAddress
 
 
 
@@ -53,9 +53,9 @@ class PublicUserProfile:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.public_address import PublicAddress
         from ..models.public_social_link import PublicSocialLink
         from ..models.public_persona_summary import PublicPersonaSummary
+        from ..models.public_address import PublicAddress
         slug = self.slug
 
         display_name: Union[None, str]
@@ -116,9 +116,9 @@ class PublicUserProfile:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.public_address import PublicAddress
         from ..models.public_social_link import PublicSocialLink
         from ..models.public_persona_summary import PublicPersonaSummary
+        from ..models.public_address import PublicAddress
         d = dict(src_dict)
         slug = d.pop("slug")
 

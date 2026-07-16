@@ -22,7 +22,7 @@ class PutContentQueuesIdResponse200:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
             name (str):
@@ -30,7 +30,7 @@ class PutContentQueuesIdResponse200:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     deleted_at: Union[None, str]
     name: str
@@ -43,7 +43,7 @@ class PutContentQueuesIdResponse200:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -59,7 +59,7 @@ class PutContentQueuesIdResponse200:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
             "name": name,
@@ -75,7 +75,7 @@ class PutContentQueuesIdResponse200:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -93,7 +93,7 @@ class PutContentQueuesIdResponse200:
 
         put_content_queues_id_response_200 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             deleted_at=deleted_at,
             name=name,

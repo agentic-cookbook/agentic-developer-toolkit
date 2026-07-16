@@ -26,7 +26,7 @@ class PostContentKeywordItemsBody:
             keyword_id (str):
             target_kind (str):
             target_id (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             sort_order (Union[Unset, int]):
      """
@@ -34,7 +34,7 @@ class PostContentKeywordItemsBody:
     keyword_id: str
     target_kind: str
     target_id: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     sort_order: Union[Unset, int] = UNSET
 
@@ -49,7 +49,7 @@ class PostContentKeywordItemsBody:
 
         target_id = self.target_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -67,8 +67,8 @@ class PostContentKeywordItemsBody:
             "targetKind": target_kind,
             "targetId": target_id,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if sort_order is not UNSET:
@@ -87,7 +87,7 @@ class PostContentKeywordItemsBody:
 
         target_id = d.pop("targetId")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -105,7 +105,7 @@ class PostContentKeywordItemsBody:
             keyword_id=keyword_id,
             target_kind=target_kind,
             target_id=target_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             sort_order=sort_order,
         )

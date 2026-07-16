@@ -9,6 +9,9 @@ from ... import errors
 
 from ...models.integration_action_request_type_0 import IntegrationActionRequestType0
 from ...models.integration_action_request_type_1 import IntegrationActionRequestType1
+from ...models.integration_action_request_type_2 import IntegrationActionRequestType2
+from ...models.integration_action_request_type_3 import IntegrationActionRequestType3
+from ...models.integration_action_request_type_4 import IntegrationActionRequestType4
 from ...models.integration_action_result import IntegrationActionResult
 from ...models.problem_details import ProblemDetails
 from ...types import UNSET, Unset
@@ -22,7 +25,7 @@ def _get_kwargs(
     connection_id: str,
     action_type: str,
     *,
-    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1'],
+    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1', 'IntegrationActionRequestType2', 'IntegrationActionRequestType3', 'IntegrationActionRequestType4'],
     idempotency_key: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
@@ -43,6 +46,12 @@ def _get_kwargs(
 
     _kwargs["json"]: dict[str, Any]
     if isinstance(body, IntegrationActionRequestType0):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, IntegrationActionRequestType1):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, IntegrationActionRequestType2):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, IntegrationActionRequestType3):
         _kwargs["json"] = body.to_dict()
     else:
         _kwargs["json"] = body.to_dict()
@@ -77,6 +86,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
 
         return response_401
+
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
 
     if response.status_code == 404:
         response_404 = ProblemDetails.from_dict(response.json())
@@ -126,7 +142,7 @@ def sync_detailed(
     action_type: str,
     *,
     client: AuthenticatedClient,
-    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1'],
+    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1', 'IntegrationActionRequestType2', 'IntegrationActionRequestType3', 'IntegrationActionRequestType4'],
     idempotency_key: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[IntegrationActionResult, ProblemDetails]]:
@@ -142,7 +158,9 @@ def sync_detailed(
         connection_id (str):
         action_type (str):
         idempotency_key (Union[Unset, str]):
-        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1']):
+        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1',
+            'IntegrationActionRequestType2', 'IntegrationActionRequestType3',
+            'IntegrationActionRequestType4']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -172,7 +190,7 @@ def sync(
     action_type: str,
     *,
     client: AuthenticatedClient,
-    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1'],
+    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1', 'IntegrationActionRequestType2', 'IntegrationActionRequestType3', 'IntegrationActionRequestType4'],
     idempotency_key: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[IntegrationActionResult, ProblemDetails]]:
@@ -188,7 +206,9 @@ def sync(
         connection_id (str):
         action_type (str):
         idempotency_key (Union[Unset, str]):
-        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1']):
+        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1',
+            'IntegrationActionRequestType2', 'IntegrationActionRequestType3',
+            'IntegrationActionRequestType4']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -213,7 +233,7 @@ async def asyncio_detailed(
     action_type: str,
     *,
     client: AuthenticatedClient,
-    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1'],
+    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1', 'IntegrationActionRequestType2', 'IntegrationActionRequestType3', 'IntegrationActionRequestType4'],
     idempotency_key: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[IntegrationActionResult, ProblemDetails]]:
@@ -229,7 +249,9 @@ async def asyncio_detailed(
         connection_id (str):
         action_type (str):
         idempotency_key (Union[Unset, str]):
-        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1']):
+        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1',
+            'IntegrationActionRequestType2', 'IntegrationActionRequestType3',
+            'IntegrationActionRequestType4']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -259,7 +281,7 @@ async def asyncio(
     action_type: str,
     *,
     client: AuthenticatedClient,
-    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1'],
+    body: Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1', 'IntegrationActionRequestType2', 'IntegrationActionRequestType3', 'IntegrationActionRequestType4'],
     idempotency_key: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[IntegrationActionResult, ProblemDetails]]:
@@ -275,7 +297,9 @@ async def asyncio(
         connection_id (str):
         action_type (str):
         idempotency_key (Union[Unset, str]):
-        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1']):
+        body (Union['IntegrationActionRequestType0', 'IntegrationActionRequestType1',
+            'IntegrationActionRequestType2', 'IntegrationActionRequestType3',
+            'IntegrationActionRequestType4']):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

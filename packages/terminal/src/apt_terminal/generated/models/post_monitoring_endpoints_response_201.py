@@ -23,6 +23,9 @@ class PostMonitoringEndpointsResponse201:
         Attributes:
             id (str):
             site_id (str):
+            user_id (str):
+            owner_kind (str):
+            owner_id (str):
             kind (str):
             url (str):
             expected_status (int):
@@ -37,6 +40,9 @@ class PostMonitoringEndpointsResponse201:
 
     id: str
     site_id: str
+    user_id: str
+    owner_kind: str
+    owner_id: str
     kind: str
     url: str
     expected_status: int
@@ -56,6 +62,12 @@ class PostMonitoringEndpointsResponse201:
         id = self.id
 
         site_id = self.site_id
+
+        user_id = self.user_id
+
+        owner_kind = self.owner_kind
+
+        owner_id = self.owner_id
 
         kind = self.kind
 
@@ -84,6 +96,9 @@ class PostMonitoringEndpointsResponse201:
         field_dict.update({
             "id": id,
             "siteId": site_id,
+            "userId": user_id,
+            "ownerKind": owner_kind,
+            "ownerId": owner_id,
             "kind": kind,
             "url": url,
             "expectedStatus": expected_status,
@@ -106,6 +121,12 @@ class PostMonitoringEndpointsResponse201:
         id = d.pop("id")
 
         site_id = d.pop("siteId")
+
+        user_id = d.pop("userId")
+
+        owner_kind = d.pop("ownerKind")
+
+        owner_id = d.pop("ownerId")
 
         kind = d.pop("kind")
 
@@ -136,6 +157,9 @@ class PostMonitoringEndpointsResponse201:
         post_monitoring_endpoints_response_201 = cls(
             id=id,
             site_id=site_id,
+            user_id=user_id,
+            owner_kind=owner_kind,
+            owner_id=owner_id,
             kind=kind,
             url=url,
             expected_status=expected_status,

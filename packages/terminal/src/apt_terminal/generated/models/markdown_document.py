@@ -7,6 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..models.markdown_document_kind import MarkdownDocumentKind
+from ..models.markdown_document_owner_kind import MarkdownDocumentOwnerKind
 from ..models.markdown_document_stage import MarkdownDocumentStage
 from ..models.markdown_document_visibility import MarkdownDocumentVisibility
 from ..types import UNSET, Unset
@@ -30,8 +31,11 @@ class MarkdownDocument:
     """ 
         Attributes:
             id (str):
-            customer_id (str):
-            owner_id (str): Ecosystem (tenant) id.
+            customer_id (str): The CREATOR/author (public routes key on this).
+            ecosystem_id (str): Ecosystem (tenant) id.
+            owner_kind (MarkdownDocumentOwnerKind): The kind of principal that OWNS the doc (what access scopes by).
+            owner_id (str): The owning principal (customer or organization id); server-stamped from the verified ?workspace=
+                scope, else the creator.
             title (str):
             content (str): Full raw markdown, byte-exact.
             tags (list[str]): Tag set (defaults to []).
@@ -56,6 +60,8 @@ class MarkdownDocument:
 
     id: str
     customer_id: str
+    ecosystem_id: str
+    owner_kind: MarkdownDocumentOwnerKind
     owner_id: str
     title: str
     content: str
@@ -85,6 +91,10 @@ class MarkdownDocument:
         id = self.id
 
         customer_id = self.customer_id
+
+        ecosystem_id = self.ecosystem_id
+
+        owner_kind = self.owner_kind.value
 
         owner_id = self.owner_id
 
@@ -152,6 +162,8 @@ class MarkdownDocument:
         field_dict.update({
             "id": id,
             "customerId": customer_id,
+            "ecosystemId": ecosystem_id,
+            "ownerKind": owner_kind,
             "ownerId": owner_id,
             "title": title,
             "content": content,
@@ -188,6 +200,13 @@ class MarkdownDocument:
         id = d.pop("id")
 
         customer_id = d.pop("customerId")
+
+        ecosystem_id = d.pop("ecosystemId")
+
+        owner_kind = MarkdownDocumentOwnerKind(d.pop("ownerKind"))
+
+
+
 
         owner_id = d.pop("ownerId")
 
@@ -288,6 +307,8 @@ class MarkdownDocument:
         markdown_document = cls(
             id=id,
             customer_id=customer_id,
+            ecosystem_id=ecosystem_id,
+            owner_kind=owner_kind,
             owner_id=owner_id,
             title=title,
             content=content,

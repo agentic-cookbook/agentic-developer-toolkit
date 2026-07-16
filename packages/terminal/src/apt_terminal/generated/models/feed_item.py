@@ -25,7 +25,7 @@ class FeedItem:
         Attributes:
             id (str):
             customer_id (str):
-            owner_id (str):
+            ecosystem_id (str):
             source (str):
             entity_type (str):
             action (str):
@@ -40,7 +40,7 @@ class FeedItem:
 
     id: str
     customer_id: str
-    owner_id: str
+    ecosystem_id: str
     source: str
     entity_type: str
     action: str
@@ -62,7 +62,7 @@ class FeedItem:
 
         customer_id = self.customer_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         source = self.source
 
@@ -106,7 +106,7 @@ class FeedItem:
         field_dict.update({
             "id": id,
             "customerId": customer_id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "source": source,
             "entityType": entity_type,
             "action": action,
@@ -134,7 +134,7 @@ class FeedItem:
 
         customer_id = d.pop("customerId")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         source = d.pop("source")
 
@@ -191,7 +191,7 @@ class FeedItem:
         feed_item = cls(
             id=id,
             customer_id=customer_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             source=source,
             entity_type=entity_type,
             action=action,

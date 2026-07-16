@@ -22,14 +22,14 @@ T = TypeVar("T", bound="PutChatChatRichContentIdBody")
 class PutChatChatRichContentIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             message_id (Union[Unset, str]):
             display_order (Union[Unset, int]):
             kind (Union[Unset, str]):
             payload (Union[Unset, str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     message_id: Union[Unset, str] = UNSET
     display_order: Union[Unset, int] = UNSET
     kind: Union[Unset, str] = UNSET
@@ -40,7 +40,7 @@ class PutChatChatRichContentIdBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         message_id = self.message_id
 
@@ -55,8 +55,8 @@ class PutChatChatRichContentIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if message_id is not UNSET:
             field_dict["messageId"] = message_id
         if display_order is not UNSET:
@@ -73,7 +73,7 @@ class PutChatChatRichContentIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         message_id = d.pop("messageId", UNSET)
 
@@ -84,7 +84,7 @@ class PutChatChatRichContentIdBody:
         payload = d.pop("payload", UNSET)
 
         put_chat_chat_rich_content_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             message_id=message_id,
             display_order=display_order,
             kind=kind,

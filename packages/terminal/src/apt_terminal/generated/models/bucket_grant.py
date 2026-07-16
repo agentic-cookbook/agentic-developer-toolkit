@@ -25,7 +25,7 @@ class BucketGrant:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             access_group_id (str):
             target_type (BucketGrantTargetType):
             target_id (str):
@@ -36,7 +36,7 @@ class BucketGrant:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     access_group_id: str
     target_type: BucketGrantTargetType
     target_id: str
@@ -53,7 +53,7 @@ class BucketGrant:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         access_group_id = self.access_group_id
 
@@ -78,7 +78,7 @@ class BucketGrant:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "accessGroupId": access_group_id,
             "targetType": target_type,
             "targetId": target_id,
@@ -98,7 +98,7 @@ class BucketGrant:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         access_group_id = d.pop("accessGroupId")
 
@@ -127,7 +127,7 @@ class BucketGrant:
 
         bucket_grant = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             access_group_id=access_group_id,
             target_type=target_type,
             target_id=target_id,

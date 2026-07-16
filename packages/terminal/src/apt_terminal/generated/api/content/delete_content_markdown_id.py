@@ -8,23 +8,34 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.error import Error
+from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     id: str,
+    *,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
 
     
 
-    
+    params: dict[str, Any] = {}
+
+    params["workspace"] = workspace
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "delete",
         "url": "/content/markdown/{id}".format(id=id,),
+        "params": params,
     }
 
 
@@ -70,12 +81,14 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Any, Error]]:
     """ Soft-delete a document
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -88,6 +101,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
+workspace=workspace,
 
     )
 
@@ -101,12 +115,14 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Any, Error]]:
     """ Soft-delete a document
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -120,6 +136,7 @@ def sync(
     return sync_detailed(
         id=id,
 client=client,
+workspace=workspace,
 
     ).parsed
 
@@ -127,12 +144,14 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Any, Error]]:
     """ Soft-delete a document
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -145,6 +164,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
+workspace=workspace,
 
     )
 
@@ -158,12 +178,14 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Any, Error]]:
     """ Soft-delete a document
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -177,5 +199,6 @@ async def asyncio(
     return (await asyncio_detailed(
         id=id,
 client=client,
+workspace=workspace,
 
     )).parsed

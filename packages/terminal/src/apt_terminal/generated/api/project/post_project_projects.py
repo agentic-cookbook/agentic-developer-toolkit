@@ -9,14 +9,17 @@ from ... import errors
 
 from ...models.error import Error
 from ...models.post_project_projects_body import PostProjectProjectsBody
-from ...models.post_project_projects_response_201 import PostProjectProjectsResponse201
+from ...models.project import Project
+from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
     body: PostProjectProjectsBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -24,11 +27,18 @@ def _get_kwargs(
 
     
 
-    
+    params: dict[str, Any] = {}
+
+    params["workspace"] = workspace
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/project/projects",
+        "params": params,
     }
 
     _kwargs["json"] = body.to_dict()
@@ -41,9 +51,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostProjectProjectsResponse201]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, Project]]:
     if response.status_code == 201:
-        response_201 = PostProjectProjectsResponse201.from_dict(response.json())
+        response_201 = Project.from_dict(response.json())
 
 
 
@@ -63,13 +73,20 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 404:
+        response_404 = Error.from_dict(response.json())
+
+
+
+        return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostProjectProjectsResponse201]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, Project]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -82,11 +99,13 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: PostProjectProjectsBody,
+    workspace: Union[Unset, str] = UNSET,
 
-) -> Response[Union[Error, PostProjectProjectsResponse201]]:
-    """ Create projects
+) -> Response[Union[Error, Project]]:
+    """ Create a project (seeds default statuses + a project.created activity)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostProjectProjectsBody):
 
     Raises:
@@ -94,12 +113,13 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PostProjectProjectsResponse201]]
+        Response[Union[Error, Project]]
      """
 
 
     kwargs = _get_kwargs(
         body=body,
+workspace=workspace,
 
     )
 
@@ -113,11 +133,13 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: PostProjectProjectsBody,
+    workspace: Union[Unset, str] = UNSET,
 
-) -> Optional[Union[Error, PostProjectProjectsResponse201]]:
-    """ Create projects
+) -> Optional[Union[Error, Project]]:
+    """ Create a project (seeds default statuses + a project.created activity)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostProjectProjectsBody):
 
     Raises:
@@ -125,13 +147,14 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PostProjectProjectsResponse201]
+        Union[Error, Project]
      """
 
 
     return sync_detailed(
         client=client,
 body=body,
+workspace=workspace,
 
     ).parsed
 
@@ -139,11 +162,13 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: PostProjectProjectsBody,
+    workspace: Union[Unset, str] = UNSET,
 
-) -> Response[Union[Error, PostProjectProjectsResponse201]]:
-    """ Create projects
+) -> Response[Union[Error, Project]]:
+    """ Create a project (seeds default statuses + a project.created activity)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostProjectProjectsBody):
 
     Raises:
@@ -151,12 +176,13 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, PostProjectProjectsResponse201]]
+        Response[Union[Error, Project]]
      """
 
 
     kwargs = _get_kwargs(
         body=body,
+workspace=workspace,
 
     )
 
@@ -170,11 +196,13 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: PostProjectProjectsBody,
+    workspace: Union[Unset, str] = UNSET,
 
-) -> Optional[Union[Error, PostProjectProjectsResponse201]]:
-    """ Create projects
+) -> Optional[Union[Error, Project]]:
+    """ Create a project (seeds default statuses + a project.created activity)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostProjectProjectsBody):
 
     Raises:
@@ -182,12 +210,13 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, PostProjectProjectsResponse201]
+        Union[Error, Project]
      """
 
 
     return (await asyncio_detailed(
         client=client,
 body=body,
+workspace=workspace,
 
     )).parsed

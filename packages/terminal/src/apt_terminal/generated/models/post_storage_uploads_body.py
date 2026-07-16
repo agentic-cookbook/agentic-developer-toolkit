@@ -26,7 +26,7 @@ class PostStorageUploadsBody:
             filename (str):
             content_type (str):
             owner_type (Union[Unset, str]): Polymorphic owner kind (defaults to 'standalone').
-            owner_id (Union[None, Unset, str]):
+            ecosystem_id (Union[None, Unset, str]):
             size_bytes (Union[Unset, int]): Declared size; enforced against the storage quota at init.
             content_hash (Union[Unset, str]): When it matches an existing ready object, the upload is deduplicated.
      """
@@ -34,7 +34,7 @@ class PostStorageUploadsBody:
     filename: str
     content_type: str
     owner_type: Union[Unset, str] = UNSET
-    owner_id: Union[None, Unset, str] = UNSET
+    ecosystem_id: Union[None, Unset, str] = UNSET
     size_bytes: Union[Unset, int] = UNSET
     content_hash: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -50,11 +50,11 @@ class PostStorageUploadsBody:
 
         owner_type = self.owner_type
 
-        owner_id: Union[None, Unset, str]
-        if isinstance(self.owner_id, Unset):
-            owner_id = UNSET
+        ecosystem_id: Union[None, Unset, str]
+        if isinstance(self.ecosystem_id, Unset):
+            ecosystem_id = UNSET
         else:
-            owner_id = self.owner_id
+            ecosystem_id = self.ecosystem_id
 
         size_bytes = self.size_bytes
 
@@ -69,8 +69,8 @@ class PostStorageUploadsBody:
         })
         if owner_type is not UNSET:
             field_dict["ownerType"] = owner_type
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if size_bytes is not UNSET:
             field_dict["sizeBytes"] = size_bytes
         if content_hash is not UNSET:
@@ -89,14 +89,14 @@ class PostStorageUploadsBody:
 
         owner_type = d.pop("ownerType", UNSET)
 
-        def _parse_owner_id(data: object) -> Union[None, Unset, str]:
+        def _parse_ecosystem_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        owner_id = _parse_owner_id(d.pop("ownerId", UNSET))
+        ecosystem_id = _parse_ecosystem_id(d.pop("ecosystemId", UNSET))
 
 
         size_bytes = d.pop("sizeBytes", UNSET)
@@ -107,7 +107,7 @@ class PostStorageUploadsBody:
             filename=filename,
             content_type=content_type,
             owner_type=owner_type,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             size_bytes=size_bytes,
             content_hash=content_hash,
         )

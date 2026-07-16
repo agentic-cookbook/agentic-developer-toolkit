@@ -24,7 +24,7 @@ class PostPersonalJobsBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             company (Union[Unset, str]):
             role (Union[Unset, str]):
             start_date (Union[Unset, str]):
@@ -35,7 +35,7 @@ class PostPersonalJobsBody:
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     company: Union[Unset, str] = UNSET
     role: Union[Unset, str] = UNSET
     start_date: Union[Unset, str] = UNSET
@@ -55,7 +55,7 @@ class PostPersonalJobsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         company = self.company
 
@@ -82,8 +82,8 @@ class PostPersonalJobsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if company is not UNSET:
             field_dict["company"] = company
         if role is not UNSET:
@@ -116,7 +116,7 @@ class PostPersonalJobsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         company = d.pop("company", UNSET)
 
@@ -142,7 +142,7 @@ class PostPersonalJobsBody:
 
         post_personal_jobs_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             company=company,
             role=role,
             start_date=start_date,

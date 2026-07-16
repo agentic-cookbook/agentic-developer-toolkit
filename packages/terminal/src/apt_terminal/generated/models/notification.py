@@ -6,10 +6,14 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.notification_status import NotificationStatus
 from ..types import UNSET, Unset
+from typing import cast
 from typing import cast, Union
 from typing import Union
 
+if TYPE_CHECKING:
+  from ..models.notification_data import NotificationData
 
 
 
@@ -24,27 +28,39 @@ class Notification:
     """ 
         Attributes:
             id (str):
+            ecosystem_id (str):
             user_id (str):
-            owner_id (str):
-            type_ (str):
-            topic_id (str):
-            actor_id (str):
+            category (str):
+            title (str):
+            data (NotificationData):
+            status (NotificationStatus):
             is_read (bool):
             created_at (str):
-            customer_id (Union[Unset, str]):
-            post_id (Union[None, Unset, str]):
+            updated_at (str):
+            actor_id (Union[None, Unset, str]):
+            entity_kind (Union[None, Unset, str]):
+            entity_id (Union[None, Unset, str]):
+            body (Union[None, Unset, str]):
+            dedupe_key (Union[None, Unset, str]):
+            read_at (Union[None, Unset, str]):
      """
 
     id: str
+    ecosystem_id: str
     user_id: str
-    owner_id: str
-    type_: str
-    topic_id: str
-    actor_id: str
+    category: str
+    title: str
+    data: 'NotificationData'
+    status: NotificationStatus
     is_read: bool
     created_at: str
-    customer_id: Union[Unset, str] = UNSET
-    post_id: Union[None, Unset, str] = UNSET
+    updated_at: str
+    actor_id: Union[None, Unset, str] = UNSET
+    entity_kind: Union[None, Unset, str] = UNSET
+    entity_id: Union[None, Unset, str] = UNSET
+    body: Union[None, Unset, str] = UNSET
+    dedupe_key: Union[None, Unset, str] = UNSET
+    read_at: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -52,47 +68,90 @@ class Notification:
 
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.notification_data import NotificationData
         id = self.id
+
+        ecosystem_id = self.ecosystem_id
 
         user_id = self.user_id
 
-        owner_id = self.owner_id
+        category = self.category
 
-        type_ = self.type_
+        title = self.title
 
-        topic_id = self.topic_id
+        data = self.data.to_dict()
 
-        actor_id = self.actor_id
+        status = self.status.value
 
         is_read = self.is_read
 
         created_at = self.created_at
 
-        customer_id = self.customer_id
+        updated_at = self.updated_at
 
-        post_id: Union[None, Unset, str]
-        if isinstance(self.post_id, Unset):
-            post_id = UNSET
+        actor_id: Union[None, Unset, str]
+        if isinstance(self.actor_id, Unset):
+            actor_id = UNSET
         else:
-            post_id = self.post_id
+            actor_id = self.actor_id
+
+        entity_kind: Union[None, Unset, str]
+        if isinstance(self.entity_kind, Unset):
+            entity_kind = UNSET
+        else:
+            entity_kind = self.entity_kind
+
+        entity_id: Union[None, Unset, str]
+        if isinstance(self.entity_id, Unset):
+            entity_id = UNSET
+        else:
+            entity_id = self.entity_id
+
+        body: Union[None, Unset, str]
+        if isinstance(self.body, Unset):
+            body = UNSET
+        else:
+            body = self.body
+
+        dedupe_key: Union[None, Unset, str]
+        if isinstance(self.dedupe_key, Unset):
+            dedupe_key = UNSET
+        else:
+            dedupe_key = self.dedupe_key
+
+        read_at: Union[None, Unset, str]
+        if isinstance(self.read_at, Unset):
+            read_at = UNSET
+        else:
+            read_at = self.read_at
 
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
+            "ecosystemId": ecosystem_id,
             "userId": user_id,
-            "ownerId": owner_id,
-            "type": type_,
-            "topicId": topic_id,
-            "actorId": actor_id,
+            "category": category,
+            "title": title,
+            "data": data,
+            "status": status,
             "isRead": is_read,
             "createdAt": created_at,
+            "updatedAt": updated_at,
         })
-        if customer_id is not UNSET:
-            field_dict["customerId"] = customer_id
-        if post_id is not UNSET:
-            field_dict["postId"] = post_id
+        if actor_id is not UNSET:
+            field_dict["actorId"] = actor_id
+        if entity_kind is not UNSET:
+            field_dict["entityKind"] = entity_kind
+        if entity_id is not UNSET:
+            field_dict["entityId"] = entity_id
+        if body is not UNSET:
+            field_dict["body"] = body
+        if dedupe_key is not UNSET:
+            field_dict["dedupeKey"] = dedupe_key
+        if read_at is not UNSET:
+            field_dict["readAt"] = read_at
 
         return field_dict
 
@@ -100,46 +159,111 @@ class Notification:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.notification_data import NotificationData
         d = dict(src_dict)
         id = d.pop("id")
 
+        ecosystem_id = d.pop("ecosystemId")
+
         user_id = d.pop("userId")
 
-        owner_id = d.pop("ownerId")
+        category = d.pop("category")
 
-        type_ = d.pop("type")
+        title = d.pop("title")
 
-        topic_id = d.pop("topicId")
+        data = NotificationData.from_dict(d.pop("data"))
 
-        actor_id = d.pop("actorId")
+
+
+
+        status = NotificationStatus(d.pop("status"))
+
+
+
 
         is_read = d.pop("isRead")
 
         created_at = d.pop("createdAt")
 
-        customer_id = d.pop("customerId", UNSET)
+        updated_at = d.pop("updatedAt")
 
-        def _parse_post_id(data: object) -> Union[None, Unset, str]:
+        def _parse_actor_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        post_id = _parse_post_id(d.pop("postId", UNSET))
+        actor_id = _parse_actor_id(d.pop("actorId", UNSET))
+
+
+        def _parse_entity_kind(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        entity_kind = _parse_entity_kind(d.pop("entityKind", UNSET))
+
+
+        def _parse_entity_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        entity_id = _parse_entity_id(d.pop("entityId", UNSET))
+
+
+        def _parse_body(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        body = _parse_body(d.pop("body", UNSET))
+
+
+        def _parse_dedupe_key(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        dedupe_key = _parse_dedupe_key(d.pop("dedupeKey", UNSET))
+
+
+        def _parse_read_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        read_at = _parse_read_at(d.pop("readAt", UNSET))
 
 
         notification = cls(
             id=id,
+            ecosystem_id=ecosystem_id,
             user_id=user_id,
-            owner_id=owner_id,
-            type_=type_,
-            topic_id=topic_id,
-            actor_id=actor_id,
+            category=category,
+            title=title,
+            data=data,
+            status=status,
             is_read=is_read,
             created_at=created_at,
-            customer_id=customer_id,
-            post_id=post_id,
+            updated_at=updated_at,
+            actor_id=actor_id,
+            entity_kind=entity_kind,
+            entity_id=entity_id,
+            body=body,
+            dedupe_key=dedupe_key,
+            read_at=read_at,
         )
 
 

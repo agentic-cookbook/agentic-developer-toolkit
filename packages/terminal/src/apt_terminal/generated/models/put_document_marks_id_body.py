@@ -25,7 +25,7 @@ class PutDocumentMarksIdBody:
         Attributes:
             block_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             mark_type (Union[Unset, str]):
             start_anchor (Union[Unset, str]):
             end_anchor (Union[Unset, str]):
@@ -35,7 +35,7 @@ class PutDocumentMarksIdBody:
 
     block_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     mark_type: Union[Unset, str] = UNSET
     start_anchor: Union[Unset, str] = UNSET
     end_anchor: Union[Unset, str] = UNSET
@@ -55,7 +55,7 @@ class PutDocumentMarksIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         mark_type = self.mark_type
 
@@ -76,8 +76,8 @@ class PutDocumentMarksIdBody:
             field_dict["blockId"] = block_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if mark_type is not UNSET:
             field_dict["markType"] = mark_type
         if start_anchor is not UNSET:
@@ -108,7 +108,7 @@ class PutDocumentMarksIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         mark_type = d.pop("markType", UNSET)
 
@@ -123,7 +123,7 @@ class PutDocumentMarksIdBody:
         put_document_marks_id_body = cls(
             block_id=block_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             mark_type=mark_type,
             start_anchor=start_anchor,
             end_anchor=end_anchor,

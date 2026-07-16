@@ -24,7 +24,7 @@ class PostContentKeywordsResponse201:
             id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
             label (str):
             color (str):
             description (str):
@@ -35,7 +35,7 @@ class PostContentKeywordsResponse201:
     id: str
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
     label: str
     color: str
     description: str
@@ -54,7 +54,7 @@ class PostContentKeywordsResponse201:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         label = self.label
 
@@ -73,7 +73,7 @@ class PostContentKeywordsResponse201:
             "id": id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "label": label,
             "color": color,
             "description": description,
@@ -100,7 +100,7 @@ class PostContentKeywordsResponse201:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         label = d.pop("label")
 
@@ -116,7 +116,7 @@ class PostContentKeywordsResponse201:
             id=id,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             label=label,
             color=color,
             description=description,

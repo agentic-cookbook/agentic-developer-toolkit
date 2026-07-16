@@ -22,7 +22,7 @@ class GetChatChatPluginsResponse200Item:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             message_id (str):
             kind (str):
             state (str):
@@ -34,7 +34,7 @@ class GetChatChatPluginsResponse200Item:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     message_id: str
     kind: str
     state: str
@@ -51,7 +51,7 @@ class GetChatChatPluginsResponse200Item:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         message_id = self.message_id
 
@@ -75,7 +75,7 @@ class GetChatChatPluginsResponse200Item:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "messageId": message_id,
             "kind": kind,
             "state": state,
@@ -95,7 +95,7 @@ class GetChatChatPluginsResponse200Item:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         message_id = d.pop("messageId")
 
@@ -121,7 +121,7 @@ class GetChatChatPluginsResponse200Item:
 
         get_chat_chat_plugins_response_200_item = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             message_id=message_id,
             kind=kind,
             state=state,

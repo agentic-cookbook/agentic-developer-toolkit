@@ -47,7 +47,7 @@ class PutIntegrationIntegrationCalendarEventsIdResponse200:
             sync_version (int):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
      """
 
     id: str
@@ -76,7 +76,7 @@ class PutIntegrationIntegrationCalendarEventsIdResponse200:
     sync_version: int
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
 
 
 
@@ -150,7 +150,7 @@ class PutIntegrationIntegrationCalendarEventsIdResponse200:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
 
         field_dict: dict[str, Any] = {}
@@ -182,7 +182,7 @@ class PutIntegrationIntegrationCalendarEventsIdResponse200:
             "syncVersion": sync_version,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
         })
 
         return field_dict
@@ -334,7 +334,7 @@ class PutIntegrationIntegrationCalendarEventsIdResponse200:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         put_integration_integration_calendar_events_id_response_200 = cls(
             id=id,
@@ -363,7 +363,7 @@ class PutIntegrationIntegrationCalendarEventsIdResponse200:
             sync_version=sync_version,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
         )
 
         return put_integration_integration_calendar_events_id_response_200

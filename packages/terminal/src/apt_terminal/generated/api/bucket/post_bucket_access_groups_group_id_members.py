@@ -100,7 +100,7 @@ def sync_detailed(
     body: PostBucketAccessGroupsGroupIdMembersBody,
 
 ) -> Response[Union[BucketAccessGroupMember, Error]]:
-    """ Add a member (user/organization/persona/app) to an access group
+    """ Add a member (user/organization/persona/app/token) to an access group
 
     Args:
         group_id (str):
@@ -134,7 +134,7 @@ def sync(
     body: PostBucketAccessGroupsGroupIdMembersBody,
 
 ) -> Optional[Union[BucketAccessGroupMember, Error]]:
-    """ Add a member (user/organization/persona/app) to an access group
+    """ Add a member (user/organization/persona/app/token) to an access group
 
     Args:
         group_id (str):
@@ -163,7 +163,7 @@ async def asyncio_detailed(
     body: PostBucketAccessGroupsGroupIdMembersBody,
 
 ) -> Response[Union[BucketAccessGroupMember, Error]]:
-    """ Add a member (user/organization/persona/app) to an access group
+    """ Add a member (user/organization/persona/app/token) to an access group
 
     Args:
         group_id (str):
@@ -197,7 +197,7 @@ async def asyncio(
     body: PostBucketAccessGroupsGroupIdMembersBody,
 
 ) -> Optional[Union[BucketAccessGroupMember, Error]]:
-    """ Add a member (user/organization/persona/app) to an access group
+    """ Add a member (user/organization/persona/app/token) to an access group
 
     Args:
         group_id (str):

@@ -24,13 +24,13 @@ class PutSettingsUserIdBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             key (Union[Unset, str]):
             value (Union[Unset, str]):
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     key: Union[Unset, str] = UNSET
     value: Union[Unset, str] = UNSET
 
@@ -45,7 +45,7 @@ class PutSettingsUserIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         key = self.key
 
@@ -58,8 +58,8 @@ class PutSettingsUserIdBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if key is not UNSET:
             field_dict["key"] = key
         if value is not UNSET:
@@ -82,7 +82,7 @@ class PutSettingsUserIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         key = d.pop("key", UNSET)
 
@@ -90,7 +90,7 @@ class PutSettingsUserIdBody:
 
         put_settings_user_id_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             key=key,
             value=value,
         )

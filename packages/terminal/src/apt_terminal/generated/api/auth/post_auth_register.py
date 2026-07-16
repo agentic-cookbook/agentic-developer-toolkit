@@ -7,9 +7,9 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
-from ...models.auth_result import AuthResult
 from ...models.error import Error
 from ...models.post_auth_register_body import PostAuthRegisterBody
+from ...models.post_auth_register_response_201 import PostAuthRegisterResponse201
 from typing import cast
 
 
@@ -41,9 +41,9 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[AuthResult, Error]]:
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, PostAuthRegisterResponse201]]:
     if response.status_code == 201:
-        response_201 = AuthResult.from_dict(response.json())
+        response_201 = PostAuthRegisterResponse201.from_dict(response.json())
 
 
 
@@ -76,7 +76,7 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[AuthResult, Error]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, PostAuthRegisterResponse201]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -90,7 +90,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthRegisterBody,
 
-) -> Response[Union[AuthResult, Error]]:
+) -> Response[Union[Error, PostAuthRegisterResponse201]]:
     """ Create an account (email + password)
 
     Args:
@@ -101,7 +101,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AuthResult, Error]]
+        Response[Union[Error, PostAuthRegisterResponse201]]
      """
 
 
@@ -121,7 +121,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthRegisterBody,
 
-) -> Optional[Union[AuthResult, Error]]:
+) -> Optional[Union[Error, PostAuthRegisterResponse201]]:
     """ Create an account (email + password)
 
     Args:
@@ -132,7 +132,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AuthResult, Error]
+        Union[Error, PostAuthRegisterResponse201]
      """
 
 
@@ -147,7 +147,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthRegisterBody,
 
-) -> Response[Union[AuthResult, Error]]:
+) -> Response[Union[Error, PostAuthRegisterResponse201]]:
     """ Create an account (email + password)
 
     Args:
@@ -158,7 +158,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AuthResult, Error]]
+        Response[Union[Error, PostAuthRegisterResponse201]]
      """
 
 
@@ -178,7 +178,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     body: PostAuthRegisterBody,
 
-) -> Optional[Union[AuthResult, Error]]:
+) -> Optional[Union[Error, PostAuthRegisterResponse201]]:
     """ Create an account (email + password)
 
     Args:
@@ -189,7 +189,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AuthResult, Error]
+        Union[Error, PostAuthRegisterResponse201]
      """
 
 

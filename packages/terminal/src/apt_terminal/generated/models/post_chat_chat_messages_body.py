@@ -26,7 +26,7 @@ class PostChatChatMessagesBody:
             chat_id (str):
             role (str):
             date_sent (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             sender_participant_id (Union[None, Unset, str]):
             client_message_id (Union[None, Unset, str]):
             seq (Union[Unset, int]):
@@ -44,7 +44,7 @@ class PostChatChatMessagesBody:
     chat_id: str
     role: str
     date_sent: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     sender_participant_id: Union[None, Unset, str] = UNSET
     client_message_id: Union[None, Unset, str] = UNSET
     seq: Union[Unset, int] = UNSET
@@ -69,7 +69,7 @@ class PostChatChatMessagesBody:
 
         date_sent = self.date_sent
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         sender_participant_id: Union[None, Unset, str]
         if isinstance(self.sender_participant_id, Unset):
@@ -143,8 +143,8 @@ class PostChatChatMessagesBody:
             "role": role,
             "dateSent": date_sent,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if sender_participant_id is not UNSET:
             field_dict["senderParticipantId"] = sender_participant_id
         if client_message_id is not UNSET:
@@ -183,7 +183,7 @@ class PostChatChatMessagesBody:
 
         date_sent = d.pop("dateSent")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_sender_participant_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -293,7 +293,7 @@ class PostChatChatMessagesBody:
             chat_id=chat_id,
             role=role,
             date_sent=date_sent,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             sender_participant_id=sender_participant_id,
             client_message_id=client_message_id,
             seq=seq,

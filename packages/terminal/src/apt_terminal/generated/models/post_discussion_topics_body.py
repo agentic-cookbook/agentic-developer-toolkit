@@ -24,12 +24,17 @@ class PostDiscussionTopicsBody:
         Attributes:
             title (str):
             body (str): Opening-post markdown; stored as a content.markdown body document.
+            community_id (str): Community instance to create under; the caller must be its admin (else 403).
+            category_id (Union[Unset, str]): Optional category to file the topic under; must belong to the same community
+                (else 400).
             is_public (Union[Unset, bool]): Whether anonymous callers can read the topic via /public/discussion (default
                 true).
      """
 
     title: str
     body: str
+    community_id: str
+    category_id: Union[Unset, str] = UNSET
     is_public: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -42,6 +47,10 @@ class PostDiscussionTopicsBody:
 
         body = self.body
 
+        community_id = self.community_id
+
+        category_id = self.category_id
+
         is_public = self.is_public
 
 
@@ -50,7 +59,10 @@ class PostDiscussionTopicsBody:
         field_dict.update({
             "title": title,
             "body": body,
+            "communityId": community_id,
         })
+        if category_id is not UNSET:
+            field_dict["categoryId"] = category_id
         if is_public is not UNSET:
             field_dict["isPublic"] = is_public
 
@@ -65,11 +77,17 @@ class PostDiscussionTopicsBody:
 
         body = d.pop("body")
 
+        community_id = d.pop("communityId")
+
+        category_id = d.pop("categoryId", UNSET)
+
         is_public = d.pop("isPublic", UNSET)
 
         post_discussion_topics_body = cls(
             title=title,
             body=body,
+            community_id=community_id,
+            category_id=category_id,
             is_public=is_public,
         )
 

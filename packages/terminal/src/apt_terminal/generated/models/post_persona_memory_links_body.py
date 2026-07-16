@@ -24,13 +24,13 @@ class PostPersonaMemoryLinksBody:
         Attributes:
             src_id (str):
             dst_id (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             relation (Union[Unset, str]):
      """
 
     src_id: str
     dst_id: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     relation: Union[Unset, str] = UNSET
 
 
@@ -42,7 +42,7 @@ class PostPersonaMemoryLinksBody:
 
         dst_id = self.dst_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         relation = self.relation
 
@@ -53,8 +53,8 @@ class PostPersonaMemoryLinksBody:
             "srcId": src_id,
             "dstId": dst_id,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if relation is not UNSET:
             field_dict["relation"] = relation
 
@@ -69,14 +69,14 @@ class PostPersonaMemoryLinksBody:
 
         dst_id = d.pop("dstId")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         relation = d.pop("relation", UNSET)
 
         post_persona_memory_links_body = cls(
             src_id=src_id,
             dst_id=dst_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             relation=relation,
         )
 

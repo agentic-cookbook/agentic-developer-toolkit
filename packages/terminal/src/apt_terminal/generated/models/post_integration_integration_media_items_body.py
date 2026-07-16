@@ -29,7 +29,7 @@ class PostIntegrationIntegrationMediaItemsBody:
             media_type (str):
             title (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             artist (Union[None, Unset, str]):
             album (Union[None, Unset, str]):
             image_url (Union[None, Unset, str]):
@@ -47,7 +47,7 @@ class PostIntegrationIntegrationMediaItemsBody:
     media_type: str
     title: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     artist: Union[None, Unset, str] = UNSET
     album: Union[None, Unset, str] = UNSET
     image_url: Union[None, Unset, str] = UNSET
@@ -79,7 +79,7 @@ class PostIntegrationIntegrationMediaItemsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         artist: Union[None, Unset, str]
         if isinstance(self.artist, Unset):
@@ -139,8 +139,8 @@ class PostIntegrationIntegrationMediaItemsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if artist is not UNSET:
             field_dict["artist"] = artist
         if album is not UNSET:
@@ -187,7 +187,7 @@ class PostIntegrationIntegrationMediaItemsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_artist(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -270,7 +270,7 @@ class PostIntegrationIntegrationMediaItemsBody:
             media_type=media_type,
             title=title,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             artist=artist,
             album=album,
             image_url=image_url,

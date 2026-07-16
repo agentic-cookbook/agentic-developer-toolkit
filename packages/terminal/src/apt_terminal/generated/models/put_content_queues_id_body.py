@@ -23,12 +23,12 @@ T = TypeVar("T", bound="PutContentQueuesIdBody")
 class PutContentQueuesIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             name (Union[Unset, str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
 
@@ -37,7 +37,7 @@ class PutContentQueuesIdBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -52,8 +52,8 @@ class PutContentQueuesIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if name is not UNSET:
@@ -66,7 +66,7 @@ class PutContentQueuesIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -81,7 +81,7 @@ class PutContentQueuesIdBody:
         name = d.pop("name", UNSET)
 
         put_content_queues_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             name=name,
         )

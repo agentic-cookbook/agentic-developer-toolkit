@@ -27,7 +27,7 @@ class MessagingLogEntry:
         Attributes:
             id (str):
             customer_id (str): Target user (recipient) id
-            owner_id (str): Ecosystem (tenant) id
+            ecosystem_id (str): Ecosystem (tenant) id
             channel (MessagingLogEntryChannel):
             recipient (str): Resolved destination (email address or phone)
             body (str):
@@ -43,7 +43,7 @@ class MessagingLogEntry:
 
     id: str
     customer_id: str
-    owner_id: str
+    ecosystem_id: str
     channel: MessagingLogEntryChannel
     recipient: str
     body: str
@@ -66,7 +66,7 @@ class MessagingLogEntry:
 
         customer_id = self.customer_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         channel = self.channel.value
 
@@ -120,7 +120,7 @@ class MessagingLogEntry:
         field_dict.update({
             "id": id,
             "customerId": customer_id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "channel": channel,
             "recipient": recipient,
             "body": body,
@@ -151,7 +151,7 @@ class MessagingLogEntry:
 
         customer_id = d.pop("customerId")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         channel = MessagingLogEntryChannel(d.pop("channel"))
 
@@ -232,7 +232,7 @@ class MessagingLogEntry:
         messaging_log_entry = cls(
             id=id,
             customer_id=customer_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             channel=channel,
             recipient=recipient,
             body=body,

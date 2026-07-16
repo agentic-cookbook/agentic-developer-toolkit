@@ -26,13 +26,13 @@ T = TypeVar("T", bound="PutContentKeyValuePairsIdBody")
 class PutContentKeyValuePairsIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             key (Union[Unset, str]):
             value (Union['PutContentKeyValuePairsIdBodyValueType1', None, Unset, bool, float, list[Any], str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     key: Union[Unset, str] = UNSET
     value: Union['PutContentKeyValuePairsIdBodyValueType1', None, Unset, bool, float, list[Any], str] = UNSET
@@ -43,7 +43,7 @@ class PutContentKeyValuePairsIdBody:
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.put_content_key_value_pairs_id_body_value_type_1 import PutContentKeyValuePairsIdBodyValueType1
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -70,8 +70,8 @@ class PutContentKeyValuePairsIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if key is not UNSET:
@@ -87,7 +87,7 @@ class PutContentKeyValuePairsIdBody:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.put_content_key_value_pairs_id_body_value_type_1 import PutContentKeyValuePairsIdBodyValueType1
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -130,7 +130,7 @@ class PutContentKeyValuePairsIdBody:
 
 
         put_content_key_value_pairs_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             key=key,
             value=value,

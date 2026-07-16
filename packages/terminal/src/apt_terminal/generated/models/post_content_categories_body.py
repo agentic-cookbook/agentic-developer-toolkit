@@ -25,7 +25,7 @@ class PostContentCategoriesBody:
         Attributes:
             name (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             description (Union[Unset, str]):
             color (Union[Unset, str]):
             icon (Union[Unset, str]):
@@ -35,7 +35,7 @@ class PostContentCategoriesBody:
 
     name: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
     color: Union[Unset, str] = UNSET
     icon: Union[Unset, str] = UNSET
@@ -55,7 +55,7 @@ class PostContentCategoriesBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         description = self.description
 
@@ -79,8 +79,8 @@ class PostContentCategoriesBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if description is not UNSET:
             field_dict["description"] = description
         if color is not UNSET:
@@ -111,7 +111,7 @@ class PostContentCategoriesBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         description = d.pop("description", UNSET)
 
@@ -134,7 +134,7 @@ class PostContentCategoriesBody:
         post_content_categories_body = cls(
             name=name,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             description=description,
             color=color,
             icon=icon,

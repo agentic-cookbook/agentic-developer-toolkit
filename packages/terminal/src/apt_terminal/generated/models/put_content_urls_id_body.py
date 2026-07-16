@@ -24,7 +24,7 @@ class PutContentUrlsIdBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             original_url (Union[Unset, str]):
             canonical_url (Union[Unset, str]):
             canonical_url_hash (Union[Unset, str]):
@@ -41,7 +41,7 @@ class PutContentUrlsIdBody:
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     original_url: Union[Unset, str] = UNSET
     canonical_url: Union[Unset, str] = UNSET
     canonical_url_hash: Union[Unset, str] = UNSET
@@ -67,7 +67,7 @@ class PutContentUrlsIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         original_url = self.original_url
 
@@ -130,8 +130,8 @@ class PutContentUrlsIdBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if original_url is not UNSET:
             field_dict["originalUrl"] = original_url
         if canonical_url is not UNSET:
@@ -176,7 +176,7 @@ class PutContentUrlsIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         original_url = d.pop("originalUrl", UNSET)
 
@@ -262,7 +262,7 @@ class PutContentUrlsIdBody:
 
         put_content_urls_id_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             original_url=original_url,
             canonical_url=canonical_url,
             canonical_url_hash=canonical_url_hash,

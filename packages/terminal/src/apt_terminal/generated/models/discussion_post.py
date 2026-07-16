@@ -31,7 +31,8 @@ class DiscussionPost:
             created_at (str):
             updated_at (str):
             customer_id (Union[Unset, str]): Author (server-stamped principal). Omitted on the public surface.
-            owner_id (Union[Unset, str]): Owning ecosystem (present on create only).
+            ecosystem_id (Union[Unset, str]): Owning ecosystem (present on create only).
+            community_id (Union[Unset, str]): The community instance (inherited from the topic; present on create only).
             content (Union[None, Unset, str]): Resolved markdown body (present on the list routes; null if the body doc was
                 deleted).
             is_deleted (Union[Unset, bool]):
@@ -46,7 +47,8 @@ class DiscussionPost:
     created_at: str
     updated_at: str
     customer_id: Union[Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
+    community_id: Union[Unset, str] = UNSET
     content: Union[None, Unset, str] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
@@ -75,7 +77,9 @@ class DiscussionPost:
 
         customer_id = self.customer_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
+
+        community_id = self.community_id
 
         content: Union[None, Unset, str]
         if isinstance(self.content, Unset):
@@ -105,8 +109,10 @@ class DiscussionPost:
         })
         if customer_id is not UNSET:
             field_dict["customerId"] = customer_id
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
+        if community_id is not UNSET:
+            field_dict["communityId"] = community_id
         if content is not UNSET:
             field_dict["content"] = content
         if is_deleted is not UNSET:
@@ -149,7 +155,9 @@ class DiscussionPost:
 
         customer_id = d.pop("customerId", UNSET)
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
+
+        community_id = d.pop("communityId", UNSET)
 
         def _parse_content(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -182,7 +190,8 @@ class DiscussionPost:
             created_at=created_at,
             updated_at=updated_at,
             customer_id=customer_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
+            community_id=community_id,
             content=content,
             is_deleted=is_deleted,
             deleted_at=deleted_at,

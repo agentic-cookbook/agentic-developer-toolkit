@@ -64,6 +64,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
+
     if response.status_code == 404:
         response_404 = ProblemDetails.from_dict(response.json())
 
@@ -95,8 +102,10 @@ def sync_detailed(
 ) -> Response[Union[PatchIntegrationsConnectionIdSettingsResponse200, ProblemDetails]]:
     """ Update per-connection sync settings
 
-     Owner-scoped, validated write of the caller-tunable sync settings the sync worker reads (e.g.
-    gmailLabelIds / gmailWindowDays). 404 when not the caller's; 400 on an invalid body.
+     Ecosystem-authorized, validated write of the caller-tunable sync settings the sync worker reads
+    (e.g. gmailLabelIds / gmailWindowDays / redditSubreddits / redditKeywords). The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 400 on an invalid body.
 
     Args:
         connection_id (str):
@@ -132,8 +141,10 @@ def sync(
 ) -> Optional[Union[PatchIntegrationsConnectionIdSettingsResponse200, ProblemDetails]]:
     """ Update per-connection sync settings
 
-     Owner-scoped, validated write of the caller-tunable sync settings the sync worker reads (e.g.
-    gmailLabelIds / gmailWindowDays). 404 when not the caller's; 400 on an invalid body.
+     Ecosystem-authorized, validated write of the caller-tunable sync settings the sync worker reads
+    (e.g. gmailLabelIds / gmailWindowDays / redditSubreddits / redditKeywords). The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 400 on an invalid body.
 
     Args:
         connection_id (str):
@@ -164,8 +175,10 @@ async def asyncio_detailed(
 ) -> Response[Union[PatchIntegrationsConnectionIdSettingsResponse200, ProblemDetails]]:
     """ Update per-connection sync settings
 
-     Owner-scoped, validated write of the caller-tunable sync settings the sync worker reads (e.g.
-    gmailLabelIds / gmailWindowDays). 404 when not the caller's; 400 on an invalid body.
+     Ecosystem-authorized, validated write of the caller-tunable sync settings the sync worker reads
+    (e.g. gmailLabelIds / gmailWindowDays / redditSubreddits / redditKeywords). The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 400 on an invalid body.
 
     Args:
         connection_id (str):
@@ -201,8 +214,10 @@ async def asyncio(
 ) -> Optional[Union[PatchIntegrationsConnectionIdSettingsResponse200, ProblemDetails]]:
     """ Update per-connection sync settings
 
-     Owner-scoped, validated write of the caller-tunable sync settings the sync worker reads (e.g.
-    gmailLabelIds / gmailWindowDays). 404 when not the caller's; 400 on an invalid body.
+     Ecosystem-authorized, validated write of the caller-tunable sync settings the sync worker reads
+    (e.g. gmailLabelIds / gmailWindowDays / redditSubreddits / redditKeywords). The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 400 on an invalid body.
 
     Args:
         connection_id (str):

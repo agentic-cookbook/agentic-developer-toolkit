@@ -25,7 +25,7 @@ class GetContentEventsIdResponse200:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
             type_ (str):
@@ -34,7 +34,7 @@ class GetContentEventsIdResponse200:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     deleted_at: Union[None, str]
     type_: str
@@ -49,7 +49,7 @@ class GetContentEventsIdResponse200:
         from ..models.get_content_events_id_response_200_payload_type_1 import GetContentEventsIdResponse200PayloadType1
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -75,7 +75,7 @@ class GetContentEventsIdResponse200:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
             "type": type_,
@@ -93,7 +93,7 @@ class GetContentEventsIdResponse200:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -137,7 +137,7 @@ class GetContentEventsIdResponse200:
 
         get_content_events_id_response_200 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             deleted_at=deleted_at,
             type_=type_,

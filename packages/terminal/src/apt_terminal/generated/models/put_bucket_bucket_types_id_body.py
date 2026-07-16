@@ -26,19 +26,21 @@ T = TypeVar("T", bound="PutBucketBucketTypesIdBody")
 class PutBucketBucketTypesIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             bucket_id (Union[Unset, str]):
             sql_table_name (Union[Unset, str]):
             name (Union[Unset, str]):
             description (Union[Unset, str]):
+            ref_mode (Union[Unset, str]):
             metadata (Union['PutBucketBucketTypesIdBodyMetadataType0Type1', None, Unset, bool, float, list[Any], str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     bucket_id: Union[Unset, str] = UNSET
     sql_table_name: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
+    ref_mode: Union[Unset, str] = UNSET
     metadata: Union['PutBucketBucketTypesIdBodyMetadataType0Type1', None, Unset, bool, float, list[Any], str] = UNSET
 
 
@@ -47,7 +49,7 @@ class PutBucketBucketTypesIdBody:
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.put_bucket_bucket_types_id_body_metadata_type_0_type_1 import PutBucketBucketTypesIdBodyMetadataType0Type1
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         bucket_id = self.bucket_id
 
@@ -56,6 +58,8 @@ class PutBucketBucketTypesIdBody:
         name = self.name
 
         description = self.description
+
+        ref_mode = self.ref_mode
 
         metadata: Union[None, Unset, bool, dict[str, Any], float, list[Any], str]
         if isinstance(self.metadata, Unset):
@@ -74,8 +78,8 @@ class PutBucketBucketTypesIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if bucket_id is not UNSET:
             field_dict["bucketId"] = bucket_id
         if sql_table_name is not UNSET:
@@ -84,6 +88,8 @@ class PutBucketBucketTypesIdBody:
             field_dict["name"] = name
         if description is not UNSET:
             field_dict["description"] = description
+        if ref_mode is not UNSET:
+            field_dict["refMode"] = ref_mode
         if metadata is not UNSET:
             field_dict["metadata"] = metadata
 
@@ -95,7 +101,7 @@ class PutBucketBucketTypesIdBody:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.put_bucket_bucket_types_id_body_metadata_type_0_type_1 import PutBucketBucketTypesIdBodyMetadataType0Type1
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         bucket_id = d.pop("bucketId", UNSET)
 
@@ -104,6 +110,8 @@ class PutBucketBucketTypesIdBody:
         name = d.pop("name", UNSET)
 
         description = d.pop("description", UNSET)
+
+        ref_mode = d.pop("refMode", UNSET)
 
         def _parse_metadata(data: object) -> Union['PutBucketBucketTypesIdBodyMetadataType0Type1', None, Unset, bool, float, list[Any], str]:
             if data is None:
@@ -134,11 +142,12 @@ class PutBucketBucketTypesIdBody:
 
 
         put_bucket_bucket_types_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             bucket_id=bucket_id,
             sql_table_name=sql_table_name,
             name=name,
             description=description,
+            ref_mode=ref_mode,
             metadata=metadata,
         )
 

@@ -25,7 +25,7 @@ class GetDocumentBlocksIdResponse200:
             document_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
             position (str):
             block_type (str):
             content_text (str):
@@ -41,7 +41,7 @@ class GetDocumentBlocksIdResponse200:
     document_id: str
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
     position: str
     block_type: str
     content_text: str
@@ -66,7 +66,7 @@ class GetDocumentBlocksIdResponse200:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         position = self.position
 
@@ -95,7 +95,7 @@ class GetDocumentBlocksIdResponse200:
             "documentId": document_id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "position": position,
             "blockType": block_type,
             "contentText": content_text,
@@ -128,7 +128,7 @@ class GetDocumentBlocksIdResponse200:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         position = d.pop("position")
 
@@ -159,7 +159,7 @@ class GetDocumentBlocksIdResponse200:
             document_id=document_id,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             position=position,
             block_type=block_type,
             content_text=content_text,

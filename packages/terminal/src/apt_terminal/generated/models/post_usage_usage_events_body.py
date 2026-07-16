@@ -31,7 +31,7 @@ class PostUsageUsageEventsBody:
             request_bytes (int):
             response_bytes (int):
             occurred_at (str):
-            owner_id (Union[None, Unset, str]):
+            ecosystem_id (Union[None, Unset, str]):
      """
 
     scope: str
@@ -42,7 +42,7 @@ class PostUsageUsageEventsBody:
     request_bytes: int
     response_bytes: int
     occurred_at: str
-    owner_id: Union[None, Unset, str] = UNSET
+    ecosystem_id: Union[None, Unset, str] = UNSET
 
 
 
@@ -65,11 +65,11 @@ class PostUsageUsageEventsBody:
 
         occurred_at = self.occurred_at
 
-        owner_id: Union[None, Unset, str]
-        if isinstance(self.owner_id, Unset):
-            owner_id = UNSET
+        ecosystem_id: Union[None, Unset, str]
+        if isinstance(self.ecosystem_id, Unset):
+            ecosystem_id = UNSET
         else:
-            owner_id = self.owner_id
+            ecosystem_id = self.ecosystem_id
 
 
         field_dict: dict[str, Any] = {}
@@ -84,8 +84,8 @@ class PostUsageUsageEventsBody:
             "responseBytes": response_bytes,
             "occurredAt": occurred_at,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
 
         return field_dict
 
@@ -110,14 +110,14 @@ class PostUsageUsageEventsBody:
 
         occurred_at = d.pop("occurredAt")
 
-        def _parse_owner_id(data: object) -> Union[None, Unset, str]:
+        def _parse_ecosystem_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        owner_id = _parse_owner_id(d.pop("ownerId", UNSET))
+        ecosystem_id = _parse_ecosystem_id(d.pop("ecosystemId", UNSET))
 
 
         post_usage_usage_events_body = cls(
@@ -129,7 +129,7 @@ class PostUsageUsageEventsBody:
             request_bytes=request_bytes,
             response_bytes=response_bytes,
             occurred_at=occurred_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
         )
 
         return post_usage_usage_events_body

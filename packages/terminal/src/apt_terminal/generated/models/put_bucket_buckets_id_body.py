@@ -26,7 +26,7 @@ T = TypeVar("T", bound="PutBucketBucketsIdBody")
 class PutBucketBucketsIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             parent_id (Union[None, Unset, str]):
             name (Union[Unset, str]):
             description (Union[Unset, str]):
@@ -34,7 +34,7 @@ class PutBucketBucketsIdBody:
             metadata (Union['PutBucketBucketsIdBodyMetadataType0Type1', None, Unset, bool, float, list[Any], str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     parent_id: Union[None, Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
@@ -47,7 +47,7 @@ class PutBucketBucketsIdBody:
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.put_bucket_buckets_id_body_metadata_type_0_type_1 import PutBucketBucketsIdBodyMetadataType0Type1
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         parent_id: Union[None, Unset, str]
         if isinstance(self.parent_id, Unset):
@@ -78,8 +78,8 @@ class PutBucketBucketsIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if parent_id is not UNSET:
             field_dict["parentId"] = parent_id
         if name is not UNSET:
@@ -99,7 +99,7 @@ class PutBucketBucketsIdBody:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.put_bucket_buckets_id_body_metadata_type_0_type_1 import PutBucketBucketsIdBodyMetadataType0Type1
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_parent_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -146,7 +146,7 @@ class PutBucketBucketsIdBody:
 
 
         put_bucket_buckets_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             parent_id=parent_id,
             name=name,
             description=description,

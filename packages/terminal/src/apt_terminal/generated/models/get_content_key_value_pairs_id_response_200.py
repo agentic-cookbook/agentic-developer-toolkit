@@ -25,7 +25,7 @@ class GetContentKeyValuePairsIdResponse200:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
             key (str):
@@ -35,7 +35,7 @@ class GetContentKeyValuePairsIdResponse200:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     deleted_at: Union[None, str]
     key: str
@@ -51,7 +51,7 @@ class GetContentKeyValuePairsIdResponse200:
         from ..models.get_content_key_value_pairs_id_response_200_value_type_1 import GetContentKeyValuePairsIdResponse200ValueType1
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -79,7 +79,7 @@ class GetContentKeyValuePairsIdResponse200:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
             "key": key,
@@ -98,7 +98,7 @@ class GetContentKeyValuePairsIdResponse200:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -144,7 +144,7 @@ class GetContentKeyValuePairsIdResponse200:
 
         get_content_key_value_pairs_id_response_200 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             deleted_at=deleted_at,
             key=key,

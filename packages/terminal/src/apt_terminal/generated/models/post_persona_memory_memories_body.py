@@ -30,7 +30,7 @@ class PostPersonaMemoryMemoriesBody:
             memory_type (str):
             description (str):
             body (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             scope (Union[Unset, str]):
             subject_table (Union[None, Unset, str]):
@@ -49,7 +49,7 @@ class PostPersonaMemoryMemoriesBody:
     memory_type: str
     description: str
     body: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     scope: Union[Unset, str] = UNSET
     subject_table: Union[None, Unset, str] = UNSET
@@ -77,7 +77,7 @@ class PostPersonaMemoryMemoriesBody:
 
         body = self.body
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -139,8 +139,8 @@ class PostPersonaMemoryMemoriesBody:
             "description": description,
             "body": body,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if scope is not UNSET:
@@ -184,7 +184,7 @@ class PostPersonaMemoryMemoriesBody:
 
         body = d.pop("body")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -263,7 +263,7 @@ class PostPersonaMemoryMemoriesBody:
             memory_type=memory_type,
             description=description,
             body=body,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             scope=scope,
             subject_table=subject_table,

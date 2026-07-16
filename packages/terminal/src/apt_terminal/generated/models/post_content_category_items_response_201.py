@@ -22,7 +22,7 @@ class PostContentCategoryItemsResponse201:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
             category_id (str):
@@ -33,7 +33,7 @@ class PostContentCategoryItemsResponse201:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     deleted_at: Union[None, str]
     category_id: str
@@ -49,7 +49,7 @@ class PostContentCategoryItemsResponse201:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -71,7 +71,7 @@ class PostContentCategoryItemsResponse201:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
             "categoryId": category_id,
@@ -90,7 +90,7 @@ class PostContentCategoryItemsResponse201:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -114,7 +114,7 @@ class PostContentCategoryItemsResponse201:
 
         post_content_category_items_response_201 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             deleted_at=deleted_at,
             category_id=category_id,

@@ -21,14 +21,14 @@ class PostChatChatMentionsResponse201:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             message_id (str):
             mentioned_participant_id (str):
             created_at (str):
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     message_id: str
     mentioned_participant_id: str
     created_at: str
@@ -40,7 +40,7 @@ class PostChatChatMentionsResponse201:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         message_id = self.message_id
 
@@ -53,7 +53,7 @@ class PostChatChatMentionsResponse201:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "messageId": message_id,
             "mentionedParticipantId": mentioned_participant_id,
             "createdAt": created_at,
@@ -68,7 +68,7 @@ class PostChatChatMentionsResponse201:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         message_id = d.pop("messageId")
 
@@ -78,7 +78,7 @@ class PostChatChatMentionsResponse201:
 
         post_chat_chat_mentions_response_201 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             message_id=message_id,
             mentioned_participant_id=mentioned_participant_id,
             created_at=created_at,

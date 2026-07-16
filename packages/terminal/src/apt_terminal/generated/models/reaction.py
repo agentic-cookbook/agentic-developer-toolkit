@@ -25,7 +25,7 @@ class Reaction:
         Attributes:
             id (str):
             customer_id (str):
-            owner_id (str):
+            ecosystem_id (str):
             target_kind (str):
             target_id (str):
             emoji (str):
@@ -35,7 +35,7 @@ class Reaction:
 
     id: str
     customer_id: str
-    owner_id: str
+    ecosystem_id: str
     target_kind: str
     target_id: str
     emoji: str
@@ -52,7 +52,7 @@ class Reaction:
 
         customer_id = self.customer_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         target_kind = self.target_kind
 
@@ -74,7 +74,7 @@ class Reaction:
         field_dict.update({
             "id": id,
             "customerId": customer_id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "targetKind": target_kind,
             "targetId": target_id,
             "emoji": emoji,
@@ -94,7 +94,7 @@ class Reaction:
 
         customer_id = d.pop("customerId")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         target_kind = d.pop("targetKind")
 
@@ -117,7 +117,7 @@ class Reaction:
         reaction = cls(
             id=id,
             customer_id=customer_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             target_kind=target_kind,
             target_id=target_id,
             emoji=emoji,

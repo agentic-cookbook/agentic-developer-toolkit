@@ -23,7 +23,7 @@ T = TypeVar("T", bound="PutChatChatMessagesIdBody")
 class PutChatChatMessagesIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             chat_id (Union[Unset, str]):
             sender_participant_id (Union[None, Unset, str]):
             client_message_id (Union[None, Unset, str]):
@@ -41,7 +41,7 @@ class PutChatChatMessagesIdBody:
             edited_at (Union[None, Unset, str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     chat_id: Union[Unset, str] = UNSET
     sender_participant_id: Union[None, Unset, str] = UNSET
     client_message_id: Union[None, Unset, str] = UNSET
@@ -63,7 +63,7 @@ class PutChatChatMessagesIdBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         chat_id = self.chat_id
 
@@ -140,8 +140,8 @@ class PutChatChatMessagesIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if chat_id is not UNSET:
             field_dict["chatId"] = chat_id
         if sender_participant_id is not UNSET:
@@ -180,7 +180,7 @@ class PutChatChatMessagesIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         chat_id = d.pop("chatId", UNSET)
 
@@ -293,7 +293,7 @@ class PutChatChatMessagesIdBody:
 
 
         put_chat_chat_messages_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             chat_id=chat_id,
             sender_participant_id=sender_participant_id,
             client_message_id=client_message_id,

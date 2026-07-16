@@ -40,7 +40,7 @@ class StorageAttachment:
             status (StorageAttachmentStatus): 'pending' (presigned, awaiting upload) → 'ready' (bytes confirmed).
             created_at (str):
             updated_at (str):
-            owner_id (Union[None, Unset, str]):
+            owner_id (Union[None, Unset, str]): Polymorphic domain owner (NOT the tenant).
             width (Union[None, Unset, int]):
             height (Union[None, Unset, int]):
             duration_ms (Union[None, Unset, int]):

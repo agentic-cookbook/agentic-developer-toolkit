@@ -25,7 +25,7 @@ class PutUsageUsageEventsIdBody:
         Attributes:
             scope (Union[Unset, str]):
             principal_id (Union[Unset, str]):
-            owner_id (Union[None, Unset, str]):
+            ecosystem_id (Union[None, Unset, str]):
             route (Union[Unset, str]):
             method (Union[Unset, str]):
             status (Union[Unset, int]):
@@ -36,7 +36,7 @@ class PutUsageUsageEventsIdBody:
 
     scope: Union[Unset, str] = UNSET
     principal_id: Union[Unset, str] = UNSET
-    owner_id: Union[None, Unset, str] = UNSET
+    ecosystem_id: Union[None, Unset, str] = UNSET
     route: Union[Unset, str] = UNSET
     method: Union[Unset, str] = UNSET
     status: Union[Unset, int] = UNSET
@@ -53,11 +53,11 @@ class PutUsageUsageEventsIdBody:
 
         principal_id = self.principal_id
 
-        owner_id: Union[None, Unset, str]
-        if isinstance(self.owner_id, Unset):
-            owner_id = UNSET
+        ecosystem_id: Union[None, Unset, str]
+        if isinstance(self.ecosystem_id, Unset):
+            ecosystem_id = UNSET
         else:
-            owner_id = self.owner_id
+            ecosystem_id = self.ecosystem_id
 
         route = self.route
 
@@ -80,8 +80,8 @@ class PutUsageUsageEventsIdBody:
             field_dict["scope"] = scope
         if principal_id is not UNSET:
             field_dict["principalId"] = principal_id
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if route is not UNSET:
             field_dict["route"] = route
         if method is not UNSET:
@@ -106,14 +106,14 @@ class PutUsageUsageEventsIdBody:
 
         principal_id = d.pop("principalId", UNSET)
 
-        def _parse_owner_id(data: object) -> Union[None, Unset, str]:
+        def _parse_ecosystem_id(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        owner_id = _parse_owner_id(d.pop("ownerId", UNSET))
+        ecosystem_id = _parse_ecosystem_id(d.pop("ecosystemId", UNSET))
 
 
         route = d.pop("route", UNSET)
@@ -131,7 +131,7 @@ class PutUsageUsageEventsIdBody:
         put_usage_usage_events_id_body = cls(
             scope=scope,
             principal_id=principal_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             route=route,
             method=method,
             status=status,

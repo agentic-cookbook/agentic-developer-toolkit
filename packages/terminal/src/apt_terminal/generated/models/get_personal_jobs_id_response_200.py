@@ -24,7 +24,7 @@ class GetPersonalJobsIdResponse200:
             id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
             company (str):
             role (str):
             start_date (str):
@@ -39,7 +39,7 @@ class GetPersonalJobsIdResponse200:
     id: str
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
     company: str
     role: str
     start_date: str
@@ -62,7 +62,7 @@ class GetPersonalJobsIdResponse200:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         company = self.company
 
@@ -90,7 +90,7 @@ class GetPersonalJobsIdResponse200:
             "id": id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "company": company,
             "role": role,
             "startDate": start_date,
@@ -121,7 +121,7 @@ class GetPersonalJobsIdResponse200:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         company = d.pop("company")
 
@@ -151,7 +151,7 @@ class GetPersonalJobsIdResponse200:
             id=id,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             company=company,
             role=role,
             start_date=start_date,

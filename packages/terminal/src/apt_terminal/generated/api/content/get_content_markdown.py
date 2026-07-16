@@ -23,6 +23,7 @@ def _get_kwargs(
     category: Union[Unset, str] = UNSET,
     tag: Union[Unset, str] = UNSET,
     source: Union[Unset, str] = UNSET,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -42,6 +43,8 @@ def _get_kwargs(
     params["tag"] = tag
 
     params["source"] = source
+
+    params["workspace"] = workspace
 
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -97,6 +100,7 @@ def sync_detailed(
     category: Union[Unset, str] = UNSET,
     tag: Union[Unset, str] = UNSET,
     source: Union[Unset, str] = UNSET,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetContentMarkdownResponse200]]:
     """ List/search the caller's markdown documents (metadata only)
@@ -112,6 +116,7 @@ def sync_detailed(
         category (Union[Unset, str]):
         tag (Union[Unset, str]):
         source (Union[Unset, str]):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -129,6 +134,7 @@ q=q,
 category=category,
 tag=tag,
 source=source,
+workspace=workspace,
 
     )
 
@@ -147,6 +153,7 @@ def sync(
     category: Union[Unset, str] = UNSET,
     tag: Union[Unset, str] = UNSET,
     source: Union[Unset, str] = UNSET,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetContentMarkdownResponse200]]:
     """ List/search the caller's markdown documents (metadata only)
@@ -162,6 +169,7 @@ def sync(
         category (Union[Unset, str]):
         tag (Union[Unset, str]):
         source (Union[Unset, str]):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -180,6 +188,7 @@ q=q,
 category=category,
 tag=tag,
 source=source,
+workspace=workspace,
 
     ).parsed
 
@@ -192,6 +201,7 @@ async def asyncio_detailed(
     category: Union[Unset, str] = UNSET,
     tag: Union[Unset, str] = UNSET,
     source: Union[Unset, str] = UNSET,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetContentMarkdownResponse200]]:
     """ List/search the caller's markdown documents (metadata only)
@@ -207,6 +217,7 @@ async def asyncio_detailed(
         category (Union[Unset, str]):
         tag (Union[Unset, str]):
         source (Union[Unset, str]):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -224,6 +235,7 @@ q=q,
 category=category,
 tag=tag,
 source=source,
+workspace=workspace,
 
     )
 
@@ -242,6 +254,7 @@ async def asyncio(
     category: Union[Unset, str] = UNSET,
     tag: Union[Unset, str] = UNSET,
     source: Union[Unset, str] = UNSET,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetContentMarkdownResponse200]]:
     """ List/search the caller's markdown documents (metadata only)
@@ -257,6 +270,7 @@ async def asyncio(
         category (Union[Unset, str]):
         tag (Union[Unset, str]):
         source (Union[Unset, str]):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -275,5 +289,6 @@ q=q,
 category=category,
 tag=tag,
 source=source,
+workspace=workspace,
 
     )).parsed

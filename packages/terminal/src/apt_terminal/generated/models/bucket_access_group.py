@@ -27,7 +27,7 @@ class BucketAccessGroup:
     """ 
         Attributes:
             id (str):
-            owner_id (str): owning ecosystem
+            ecosystem_id (str): owning ecosystem
             bucket_id (str):
             name (str):
             description (str):
@@ -38,7 +38,7 @@ class BucketAccessGroup:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     bucket_id: str
     name: str
     description: str
@@ -56,7 +56,7 @@ class BucketAccessGroup:
         from ..models.bucket_access_group_metadata_type_0 import BucketAccessGroupMetadataType0
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         bucket_id = self.bucket_id
 
@@ -83,7 +83,7 @@ class BucketAccessGroup:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "bucketId": bucket_id,
             "name": name,
             "description": description,
@@ -104,7 +104,7 @@ class BucketAccessGroup:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         bucket_id = d.pop("bucketId")
 
@@ -140,7 +140,7 @@ class BucketAccessGroup:
 
         bucket_access_group = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             bucket_id=bucket_id,
             name=name,
             description=description,

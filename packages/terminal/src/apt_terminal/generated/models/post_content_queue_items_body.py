@@ -30,7 +30,7 @@ class PostContentQueueItemsBody:
             payload (Union['PostContentQueueItemsBodyPayloadType1', None, bool, float, list[Any], str]):
             status (str):
             enqueued_at (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             dequeued_at (Union[None, Unset, str]):
             acked_at (Union[None, Unset, str]):
@@ -41,7 +41,7 @@ class PostContentQueueItemsBody:
     payload: Union['PostContentQueueItemsBodyPayloadType1', None, bool, float, list[Any], str]
     status: str
     enqueued_at: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     dequeued_at: Union[None, Unset, str] = UNSET
     acked_at: Union[None, Unset, str] = UNSET
@@ -69,7 +69,7 @@ class PostContentQueueItemsBody:
 
         enqueued_at = self.enqueued_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -104,8 +104,8 @@ class PostContentQueueItemsBody:
             "status": status,
             "enqueuedAt": enqueued_at,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if dequeued_at is not UNSET:
@@ -155,7 +155,7 @@ class PostContentQueueItemsBody:
 
         enqueued_at = d.pop("enqueuedAt")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -202,7 +202,7 @@ class PostContentQueueItemsBody:
             payload=payload,
             status=status,
             enqueued_at=enqueued_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             dequeued_at=dequeued_at,
             acked_at=acked_at,

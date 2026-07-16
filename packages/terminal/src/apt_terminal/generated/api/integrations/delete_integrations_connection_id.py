@@ -48,6 +48,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
+
     if response.status_code == 404:
         response_404 = ProblemDetails.from_dict(response.json())
 
@@ -76,10 +83,11 @@ def sync_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
-    """ Disconnect a connection (ownership-checked)
+    """ Disconnect a connection (ecosystem-authorized)
 
-     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
-    connection is not the caller's.
+     Soft-deletes the connection and tombstones every synced-data row it produced. The owning ecosystem
+    is derived from the connection; the caller must manage it. 404 when the connection is
+    absent/deleted; 403 when the caller cannot manage its ecosystem.
 
     Args:
         connection_id (str):
@@ -110,10 +118,11 @@ def sync(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
-    """ Disconnect a connection (ownership-checked)
+    """ Disconnect a connection (ecosystem-authorized)
 
-     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
-    connection is not the caller's.
+     Soft-deletes the connection and tombstones every synced-data row it produced. The owning ecosystem
+    is derived from the connection; the caller must manage it. 404 when the connection is
+    absent/deleted; 403 when the caller cannot manage its ecosystem.
 
     Args:
         connection_id (str):
@@ -139,10 +148,11 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
-    """ Disconnect a connection (ownership-checked)
+    """ Disconnect a connection (ecosystem-authorized)
 
-     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
-    connection is not the caller's.
+     Soft-deletes the connection and tombstones every synced-data row it produced. The owning ecosystem
+    is derived from the connection; the caller must manage it. 404 when the connection is
+    absent/deleted; 403 when the caller cannot manage its ecosystem.
 
     Args:
         connection_id (str):
@@ -173,10 +183,11 @@ async def asyncio(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[DeleteIntegrationsConnectionIdResponse200, ProblemDetails]]:
-    """ Disconnect a connection (ownership-checked)
+    """ Disconnect a connection (ecosystem-authorized)
 
-     Soft-deletes the connection and tombstones every synced-data row it produced. 404 when the
-    connection is not the caller's.
+     Soft-deletes the connection and tombstones every synced-data row it produced. The owning ecosystem
+    is derived from the connection; the caller must manage it. 404 when the connection is
+    absent/deleted; 403 when the caller cannot manage its ecosystem.
 
     Args:
         connection_id (str):

@@ -30,7 +30,7 @@ class PostIntegrationIntegrationItemsBody:
             state (str):
             repo_full_name (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             body (Union[None, Unset, str]):
             repo_url (Union[None, Unset, str]):
             item_url (Union[None, Unset, str]):
@@ -51,7 +51,7 @@ class PostIntegrationIntegrationItemsBody:
     state: str
     repo_full_name: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     body: Union[None, Unset, str] = UNSET
     repo_url: Union[None, Unset, str] = UNSET
     item_url: Union[None, Unset, str] = UNSET
@@ -87,7 +87,7 @@ class PostIntegrationIntegrationItemsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         body: Union[None, Unset, str]
         if isinstance(self.body, Unset):
@@ -160,8 +160,8 @@ class PostIntegrationIntegrationItemsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if body is not UNSET:
             field_dict["body"] = body
         if repo_url is not UNSET:
@@ -214,7 +214,7 @@ class PostIntegrationIntegrationItemsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_body(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -318,7 +318,7 @@ class PostIntegrationIntegrationItemsBody:
             state=state,
             repo_full_name=repo_full_name,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             body=body,
             repo_url=repo_url,
             item_url=item_url,

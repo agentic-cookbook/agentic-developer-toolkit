@@ -22,7 +22,7 @@ T = TypeVar("T", bound="PostAiProcessingJobsIdHeartbeatBody")
 class PostAiProcessingJobsIdHeartbeatBody:
     """ 
         Attributes:
-            lease_token (str): HMAC token returned by /claim
+            lease_token (str): Opaque lease token returned by /claim
             lease_ms (Union[Unset, int]): New lease duration in ms (default 30 000)
      """
 

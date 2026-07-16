@@ -29,7 +29,7 @@ class PostDocumentOperationsBody:
             op_type (str):
             block_id (Union[None, Unset, str]):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             op_payload (Union[Unset, str]):
             undo_group_id (Union[None, Unset, str]):
             inverse_of_op_id (Union[None, Unset, str]):
@@ -41,7 +41,7 @@ class PostDocumentOperationsBody:
     op_type: str
     block_id: Union[None, Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     op_payload: Union[Unset, str] = UNSET
     undo_group_id: Union[None, Unset, str] = UNSET
     inverse_of_op_id: Union[None, Unset, str] = UNSET
@@ -71,7 +71,7 @@ class PostDocumentOperationsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         op_payload = self.op_payload
 
@@ -100,8 +100,8 @@ class PostDocumentOperationsBody:
             field_dict["blockId"] = block_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if op_payload is not UNSET:
             field_dict["opPayload"] = op_payload
         if undo_group_id is not UNSET:
@@ -144,7 +144,7 @@ class PostDocumentOperationsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         op_payload = d.pop("opPayload", UNSET)
 
@@ -175,7 +175,7 @@ class PostDocumentOperationsBody:
             op_type=op_type,
             block_id=block_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             op_payload=op_payload,
             undo_group_id=undo_group_id,
             inverse_of_op_id=inverse_of_op_id,

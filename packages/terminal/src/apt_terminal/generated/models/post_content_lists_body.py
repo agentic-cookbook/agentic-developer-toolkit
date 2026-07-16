@@ -24,13 +24,13 @@ class PostContentListsBody:
     """ 
         Attributes:
             name (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             description (Union[None, Unset, str]):
      """
 
     name: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     description: Union[None, Unset, str] = UNSET
 
@@ -41,7 +41,7 @@ class PostContentListsBody:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -61,8 +61,8 @@ class PostContentListsBody:
         field_dict.update({
             "name": name,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if description is not UNSET:
@@ -77,7 +77,7 @@ class PostContentListsBody:
         d = dict(src_dict)
         name = d.pop("name")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -101,7 +101,7 @@ class PostContentListsBody:
 
         post_content_lists_body = cls(
             name=name,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             description=description,
         )

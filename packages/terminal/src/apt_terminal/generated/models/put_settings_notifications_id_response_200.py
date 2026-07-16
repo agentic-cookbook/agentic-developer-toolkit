@@ -24,10 +24,11 @@ class PutSettingsNotificationsIdResponse200:
             id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
             category (str):
             email (bool):
             sms (bool):
+            in_app (bool):
             created_at (str):
             updated_at (str):
      """
@@ -35,10 +36,11 @@ class PutSettingsNotificationsIdResponse200:
     id: str
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
     category: str
     email: bool
     sms: bool
+    in_app: bool
     created_at: str
     updated_at: str
 
@@ -54,13 +56,15 @@ class PutSettingsNotificationsIdResponse200:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         category = self.category
 
         email = self.email
 
         sms = self.sms
+
+        in_app = self.in_app
 
         created_at = self.created_at
 
@@ -73,10 +77,11 @@ class PutSettingsNotificationsIdResponse200:
             "id": id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "category": category,
             "email": email,
             "sms": sms,
+            "inApp": in_app,
             "createdAt": created_at,
             "updatedAt": updated_at,
         })
@@ -100,13 +105,15 @@ class PutSettingsNotificationsIdResponse200:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         category = d.pop("category")
 
         email = d.pop("email")
 
         sms = d.pop("sms")
+
+        in_app = d.pop("inApp")
 
         created_at = d.pop("createdAt")
 
@@ -116,10 +123,11 @@ class PutSettingsNotificationsIdResponse200:
             id=id,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             category=category,
             email=email,
             sms=sms,
+            in_app=in_app,
             created_at=created_at,
             updated_at=updated_at,
         )

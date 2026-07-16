@@ -24,6 +24,7 @@ class IntegrationConnectRequestType0:
             type_ (IntegrationConnectRequestType0Type):
             provider_id (str):
             service_type (str):
+            ecosystem_id (str): Target ecosystem id (the caller must manage it)
             code (str): OAuth authorization code
             redirect_uri (str):
             state (str): The HMAC-signed state returned by the auth-url endpoint (CSRF)
@@ -32,6 +33,7 @@ class IntegrationConnectRequestType0:
     type_: IntegrationConnectRequestType0Type
     provider_id: str
     service_type: str
+    ecosystem_id: str
     code: str
     redirect_uri: str
     state: str
@@ -48,6 +50,8 @@ class IntegrationConnectRequestType0:
 
         service_type = self.service_type
 
+        ecosystem_id = self.ecosystem_id
+
         code = self.code
 
         redirect_uri = self.redirect_uri
@@ -61,6 +65,7 @@ class IntegrationConnectRequestType0:
             "type": type_,
             "providerId": provider_id,
             "serviceType": service_type,
+            "ecosystemId": ecosystem_id,
             "code": code,
             "redirectUri": redirect_uri,
             "state": state,
@@ -82,6 +87,8 @@ class IntegrationConnectRequestType0:
 
         service_type = d.pop("serviceType")
 
+        ecosystem_id = d.pop("ecosystemId")
+
         code = d.pop("code")
 
         redirect_uri = d.pop("redirectUri")
@@ -92,6 +99,7 @@ class IntegrationConnectRequestType0:
             type_=type_,
             provider_id=provider_id,
             service_type=service_type,
+            ecosystem_id=ecosystem_id,
             code=code,
             redirect_uri=redirect_uri,
             state=state,

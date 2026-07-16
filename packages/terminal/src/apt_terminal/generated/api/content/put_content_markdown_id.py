@@ -10,7 +10,9 @@ from ... import errors
 from ...models.error import Error
 from ...models.markdown_document import MarkdownDocument
 from ...models.put_content_markdown_id_body import PutContentMarkdownIdBody
+from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
@@ -18,6 +20,7 @@ def _get_kwargs(
     id: str,
     *,
     body: PutContentMarkdownIdBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -25,11 +28,18 @@ def _get_kwargs(
 
     
 
-    
+    params: dict[str, Any] = {}
+
+    params["workspace"] = workspace
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "put",
         "url": "/content/markdown/{id}".format(id=id,),
+        "params": params,
     }
 
     _kwargs["json"] = body.to_dict()
@@ -91,12 +101,14 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: PutContentMarkdownIdBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
         body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
             title change appends a full-state version (author attaches to it); a category/tags-only
             change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
@@ -113,6 +125,7 @@ def sync_detailed(
     kwargs = _get_kwargs(
         id=id,
 body=body,
+workspace=workspace,
 
     )
 
@@ -127,12 +140,14 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: PutContentMarkdownIdBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
         body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
             title change appends a full-state version (author attaches to it); a category/tags-only
             change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
@@ -150,6 +165,7 @@ def sync(
         id=id,
 client=client,
 body=body,
+workspace=workspace,
 
     ).parsed
 
@@ -158,12 +174,14 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: PutContentMarkdownIdBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
         body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
             title change appends a full-state version (author attaches to it); a category/tags-only
             change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
@@ -180,6 +198,7 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         id=id,
 body=body,
+workspace=workspace,
 
     )
 
@@ -194,12 +213,14 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: PutContentMarkdownIdBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, MarkdownDocument]]:
     """ Update a document; any real change appends a full-state version
 
     Args:
         id (str):
+        workspace (Union[Unset, str]):
         body (PutContentMarkdownIdBody): At least one of content/title/category/tags. A content or
             title change appends a full-state version (author attaches to it); a category/tags-only
             change updates the head in place WITHOUT a new version; a no-op returns the doc unchanged.
@@ -217,5 +238,6 @@ async def asyncio(
         id=id,
 client=client,
 body=body,
+workspace=workspace,
 
     )).parsed

@@ -26,13 +26,13 @@ T = TypeVar("T", bound="PutContentEventsIdBody")
 class PutContentEventsIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             type_ (Union[Unset, str]):
             payload (Union['PutContentEventsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     type_: Union[Unset, str] = UNSET
     payload: Union['PutContentEventsIdBodyPayloadType1', None, Unset, bool, float, list[Any], str] = UNSET
@@ -43,7 +43,7 @@ class PutContentEventsIdBody:
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.put_content_events_id_body_payload_type_1 import PutContentEventsIdBodyPayloadType1
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -70,8 +70,8 @@ class PutContentEventsIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if type_ is not UNSET:
@@ -87,7 +87,7 @@ class PutContentEventsIdBody:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.put_content_events_id_body_payload_type_1 import PutContentEventsIdBodyPayloadType1
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -130,7 +130,7 @@ class PutContentEventsIdBody:
 
 
         put_content_events_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             type_=type_,
             payload=payload,

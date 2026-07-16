@@ -26,7 +26,7 @@ class AiProcessingWebhookEndpointCreated:
     """ 
         Attributes:
             id (UUID):
-            owner_id (str): Ecosystem that owns this endpoint
+            ecosystem_id (str): Ecosystem that owns this endpoint
             customer_id (str): User who registered the endpoint
             url (str): HTTPS-only delivery target URL
             event_types (list[str]): Subscribed event types (e.g. job.succeeded, job.failed)
@@ -39,7 +39,7 @@ class AiProcessingWebhookEndpointCreated:
      """
 
     id: UUID
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     url: str
     event_types: list[str]
@@ -57,7 +57,7 @@ class AiProcessingWebhookEndpointCreated:
     def to_dict(self) -> dict[str, Any]:
         id = str(self.id)
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -86,7 +86,7 @@ class AiProcessingWebhookEndpointCreated:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "url": url,
             "eventTypes": event_types,
@@ -110,7 +110,7 @@ class AiProcessingWebhookEndpointCreated:
 
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -139,7 +139,7 @@ class AiProcessingWebhookEndpointCreated:
 
         ai_processing_webhook_endpoint_created = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             url=url,
             event_types=event_types,

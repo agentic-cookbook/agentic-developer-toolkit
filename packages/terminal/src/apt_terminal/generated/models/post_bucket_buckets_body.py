@@ -27,7 +27,7 @@ class PostBucketBucketsBody:
     """ 
         Attributes:
             name (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             parent_id (Union[None, Unset, str]):
             description (Union[Unset, str]):
             kind (Union[Unset, str]):
@@ -36,7 +36,7 @@ class PostBucketBucketsBody:
      """
 
     name: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     parent_id: Union[None, Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
     kind: Union[Unset, str] = UNSET
@@ -51,7 +51,7 @@ class PostBucketBucketsBody:
         from ..models.post_bucket_buckets_body_metadata_type_0_type_1 import PostBucketBucketsBodyMetadataType0Type1
         name = self.name
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         parent_id: Union[None, Unset, str]
         if isinstance(self.parent_id, Unset):
@@ -83,8 +83,8 @@ class PostBucketBucketsBody:
         field_dict.update({
             "name": name,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if parent_id is not UNSET:
             field_dict["parentId"] = parent_id
         if description is not UNSET:
@@ -106,7 +106,7 @@ class PostBucketBucketsBody:
         d = dict(src_dict)
         name = d.pop("name")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_parent_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -154,7 +154,7 @@ class PostBucketBucketsBody:
 
         post_bucket_buckets_body = cls(
             name=name,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             parent_id=parent_id,
             description=description,
             kind=kind,

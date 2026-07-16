@@ -24,7 +24,7 @@ class PutContentFeedbackIdBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             user_email (Union[Unset, str]):
             category (Union[Unset, str]):
             subject (Union[Unset, str]):
@@ -38,7 +38,7 @@ class PutContentFeedbackIdBody:
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     user_email: Union[Unset, str] = UNSET
     category: Union[Unset, str] = UNSET
     subject: Union[Unset, str] = UNSET
@@ -61,7 +61,7 @@ class PutContentFeedbackIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         user_email = self.user_email
 
@@ -90,8 +90,8 @@ class PutContentFeedbackIdBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if user_email is not UNSET:
             field_dict["userEmail"] = user_email
         if category is not UNSET:
@@ -130,7 +130,7 @@ class PutContentFeedbackIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         user_email = d.pop("userEmail", UNSET)
 
@@ -154,7 +154,7 @@ class PutContentFeedbackIdBody:
 
         put_content_feedback_id_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             user_email=user_email,
             category=category,
             subject=subject,

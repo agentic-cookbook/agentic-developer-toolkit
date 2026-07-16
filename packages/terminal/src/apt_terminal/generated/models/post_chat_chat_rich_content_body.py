@@ -24,14 +24,14 @@ class PostChatChatRichContentBody:
         Attributes:
             message_id (str):
             kind (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             display_order (Union[Unset, int]):
             payload (Union[Unset, str]):
      """
 
     message_id: str
     kind: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     display_order: Union[Unset, int] = UNSET
     payload: Union[Unset, str] = UNSET
 
@@ -44,7 +44,7 @@ class PostChatChatRichContentBody:
 
         kind = self.kind
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         display_order = self.display_order
 
@@ -57,8 +57,8 @@ class PostChatChatRichContentBody:
             "messageId": message_id,
             "kind": kind,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if display_order is not UNSET:
             field_dict["displayOrder"] = display_order
         if payload is not UNSET:
@@ -75,7 +75,7 @@ class PostChatChatRichContentBody:
 
         kind = d.pop("kind")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         display_order = d.pop("displayOrder", UNSET)
 
@@ -84,7 +84,7 @@ class PostChatChatRichContentBody:
         post_chat_chat_rich_content_body = cls(
             message_id=message_id,
             kind=kind,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             display_order=display_order,
             payload=payload,
         )

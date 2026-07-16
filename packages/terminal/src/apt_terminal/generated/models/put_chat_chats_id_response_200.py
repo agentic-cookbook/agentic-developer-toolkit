@@ -23,7 +23,7 @@ class PutChatChatsIdResponse200:
         Attributes:
             id (str):
             owner_user_id (str):
-            owner_id (str):
+            ecosystem_id (str):
             type_ (str):
             name (str):
             description (str):
@@ -41,7 +41,7 @@ class PutChatChatsIdResponse200:
 
     id: str
     owner_user_id: str
-    owner_id: str
+    ecosystem_id: str
     type_: str
     name: str
     description: str
@@ -65,7 +65,7 @@ class PutChatChatsIdResponse200:
 
         owner_user_id = self.owner_user_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         type_ = self.type_
 
@@ -101,7 +101,7 @@ class PutChatChatsIdResponse200:
         field_dict.update({
             "id": id,
             "ownerUserId": owner_user_id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "type": type_,
             "name": name,
             "description": description,
@@ -128,7 +128,7 @@ class PutChatChatsIdResponse200:
 
         owner_user_id = d.pop("ownerUserId")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         type_ = d.pop("type")
 
@@ -171,7 +171,7 @@ class PutChatChatsIdResponse200:
         put_chat_chats_id_response_200 = cls(
             id=id,
             owner_user_id=owner_user_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             type_=type_,
             name=name,
             description=description,

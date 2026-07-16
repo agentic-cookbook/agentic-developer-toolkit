@@ -63,6 +63,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = Error.from_dict(response.json())
+
+
+
+        return response_403
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -84,7 +91,7 @@ def sync_detailed(
     body: PostDiscussionTopicsBody,
 
 ) -> Response[Union[DiscussionTopic, Error]]:
-    """ Create a topic (atomically born with its opening post)
+    """ Create a topic (atomically born with its opening post; community admin only)
 
     Args:
         body (PostDiscussionTopicsBody):
@@ -115,7 +122,7 @@ def sync(
     body: PostDiscussionTopicsBody,
 
 ) -> Optional[Union[DiscussionTopic, Error]]:
-    """ Create a topic (atomically born with its opening post)
+    """ Create a topic (atomically born with its opening post; community admin only)
 
     Args:
         body (PostDiscussionTopicsBody):
@@ -141,7 +148,7 @@ async def asyncio_detailed(
     body: PostDiscussionTopicsBody,
 
 ) -> Response[Union[DiscussionTopic, Error]]:
-    """ Create a topic (atomically born with its opening post)
+    """ Create a topic (atomically born with its opening post; community admin only)
 
     Args:
         body (PostDiscussionTopicsBody):
@@ -172,7 +179,7 @@ async def asyncio(
     body: PostDiscussionTopicsBody,
 
 ) -> Optional[Union[DiscussionTopic, Error]]:
-    """ Create a topic (atomically born with its opening post)
+    """ Create a topic (atomically born with its opening post; community admin only)
 
     Args:
         body (PostDiscussionTopicsBody):

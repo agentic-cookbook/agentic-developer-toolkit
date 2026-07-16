@@ -48,6 +48,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
+
     if response.status_code == 404:
         response_404 = ProblemDetails.from_dict(response.json())
 
@@ -85,9 +92,10 @@ def sync_detailed(
 ) -> Response[Union[PostIntegrationsConnectionIdSyncResponse202, ProblemDetails]]:
     """ Trigger an immediate sync (sync now)
 
-     Runs the connection's worker once, independent of the background scheduler. 404 when not the
-    caller's; 503 when no worker is registered for its provider:serviceType (the sync capability is
-    unavailable, retryable once a worker ships).
+     Runs the connection's worker once, independent of the background scheduler. The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 503 when no worker is registered for its provider:serviceType
+    (retryable once a worker ships).
 
     Args:
         connection_id (str):
@@ -120,9 +128,10 @@ def sync(
 ) -> Optional[Union[PostIntegrationsConnectionIdSyncResponse202, ProblemDetails]]:
     """ Trigger an immediate sync (sync now)
 
-     Runs the connection's worker once, independent of the background scheduler. 404 when not the
-    caller's; 503 when no worker is registered for its provider:serviceType (the sync capability is
-    unavailable, retryable once a worker ships).
+     Runs the connection's worker once, independent of the background scheduler. The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 503 when no worker is registered for its provider:serviceType
+    (retryable once a worker ships).
 
     Args:
         connection_id (str):
@@ -150,9 +159,10 @@ async def asyncio_detailed(
 ) -> Response[Union[PostIntegrationsConnectionIdSyncResponse202, ProblemDetails]]:
     """ Trigger an immediate sync (sync now)
 
-     Runs the connection's worker once, independent of the background scheduler. 404 when not the
-    caller's; 503 when no worker is registered for its provider:serviceType (the sync capability is
-    unavailable, retryable once a worker ships).
+     Runs the connection's worker once, independent of the background scheduler. The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 503 when no worker is registered for its provider:serviceType
+    (retryable once a worker ships).
 
     Args:
         connection_id (str):
@@ -185,9 +195,10 @@ async def asyncio(
 ) -> Optional[Union[PostIntegrationsConnectionIdSyncResponse202, ProblemDetails]]:
     """ Trigger an immediate sync (sync now)
 
-     Runs the connection's worker once, independent of the background scheduler. 404 when not the
-    caller's; 503 when no worker is registered for its provider:serviceType (the sync capability is
-    unavailable, retryable once a worker ships).
+     Runs the connection's worker once, independent of the background scheduler. The owning ecosystem is
+    derived from the connection; the caller must manage it. 404 when absent/deleted; 403 when the caller
+    cannot manage its ecosystem; 503 when no worker is registered for its provider:serviceType
+    (retryable once a worker ships).
 
     Args:
         connection_id (str):

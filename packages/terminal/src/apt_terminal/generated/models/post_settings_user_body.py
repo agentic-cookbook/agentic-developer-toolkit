@@ -26,13 +26,13 @@ class PostSettingsUserBody:
             key (str):
             value (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
      """
 
     key: str
     value: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
 
 
 
@@ -49,7 +49,7 @@ class PostSettingsUserBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
 
         field_dict: dict[str, Any] = {}
@@ -60,8 +60,8 @@ class PostSettingsUserBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
 
         return field_dict
 
@@ -84,13 +84,13 @@ class PostSettingsUserBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         post_settings_user_body = cls(
             key=key,
             value=value,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
         )
 
         return post_settings_user_body

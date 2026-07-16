@@ -24,17 +24,19 @@ class PutSettingsNotificationsIdBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             category (Union[Unset, str]):
             email (Union[Unset, bool]):
             sms (Union[Unset, bool]):
+            in_app (Union[Unset, bool]):
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     category: Union[Unset, str] = UNSET
     email: Union[Unset, bool] = UNSET
     sms: Union[Unset, bool] = UNSET
+    in_app: Union[Unset, bool] = UNSET
 
 
 
@@ -47,13 +49,15 @@ class PutSettingsNotificationsIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         category = self.category
 
         email = self.email
 
         sms = self.sms
+
+        in_app = self.in_app
 
 
         field_dict: dict[str, Any] = {}
@@ -62,14 +66,16 @@ class PutSettingsNotificationsIdBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if category is not UNSET:
             field_dict["category"] = category
         if email is not UNSET:
             field_dict["email"] = email
         if sms is not UNSET:
             field_dict["sms"] = sms
+        if in_app is not UNSET:
+            field_dict["inApp"] = in_app
 
         return field_dict
 
@@ -88,7 +94,7 @@ class PutSettingsNotificationsIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         category = d.pop("category", UNSET)
 
@@ -96,12 +102,15 @@ class PutSettingsNotificationsIdBody:
 
         sms = d.pop("sms", UNSET)
 
+        in_app = d.pop("inApp", UNSET)
+
         put_settings_notifications_id_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             category=category,
             email=email,
             sms=sms,
+            in_app=in_app,
         )
 
         return put_settings_notifications_id_body

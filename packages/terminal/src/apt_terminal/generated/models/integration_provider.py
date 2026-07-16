@@ -7,8 +7,12 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..models.integration_provider_auth_method import IntegrationProviderAuthMethod
+from ..types import UNSET, Unset
 from typing import cast
+from typing import Union
 
+if TYPE_CHECKING:
+  from ..models.integration_provider_config_fields_item import IntegrationProviderConfigFieldsItem
 
 
 
@@ -28,6 +32,9 @@ class IntegrationProvider:
             service_types (list[str]):
             capabilities (list[str]): read | write | auth
             default_poll_interval_ms (int): Default minimum sync interval (ms)
+            config_fields (Union[Unset, list['IntegrationProviderConfigFieldsItem']]): For api_key providers: declarative
+                config/credential fields, rendered + validated identically at ecosystem and user scope (absent for OAuth-style
+                providers).
      """
 
     provider_id: str
@@ -36,6 +43,7 @@ class IntegrationProvider:
     service_types: list[str]
     capabilities: list[str]
     default_poll_interval_ms: int
+    config_fields: Union[Unset, list['IntegrationProviderConfigFieldsItem']] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -43,6 +51,7 @@ class IntegrationProvider:
 
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.integration_provider_config_fields_item import IntegrationProviderConfigFieldsItem
         provider_id = self.provider_id
 
         display_name = self.display_name
@@ -59,6 +68,15 @@ class IntegrationProvider:
 
         default_poll_interval_ms = self.default_poll_interval_ms
 
+        config_fields: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.config_fields, Unset):
+            config_fields = []
+            for config_fields_item_data in self.config_fields:
+                config_fields_item = config_fields_item_data.to_dict()
+                config_fields.append(config_fields_item)
+
+
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -70,6 +88,8 @@ class IntegrationProvider:
             "capabilities": capabilities,
             "defaultPollIntervalMs": default_poll_interval_ms,
         })
+        if config_fields is not UNSET:
+            field_dict["configFields"] = config_fields
 
         return field_dict
 
@@ -77,6 +97,7 @@ class IntegrationProvider:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.integration_provider_config_fields_item import IntegrationProviderConfigFieldsItem
         d = dict(src_dict)
         provider_id = d.pop("providerId")
 
@@ -95,6 +116,16 @@ class IntegrationProvider:
 
         default_poll_interval_ms = d.pop("defaultPollIntervalMs")
 
+        config_fields = []
+        _config_fields = d.pop("configFields", UNSET)
+        for config_fields_item_data in (_config_fields or []):
+            config_fields_item = IntegrationProviderConfigFieldsItem.from_dict(config_fields_item_data)
+
+
+
+            config_fields.append(config_fields_item)
+
+
         integration_provider = cls(
             provider_id=provider_id,
             display_name=display_name,
@@ -102,6 +133,7 @@ class IntegrationProvider:
             service_types=service_types,
             capabilities=capabilities,
             default_poll_interval_ms=default_poll_interval_ms,
+            config_fields=config_fields,
         )
 
 

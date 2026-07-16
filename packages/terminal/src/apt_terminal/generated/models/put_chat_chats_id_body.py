@@ -24,7 +24,7 @@ class PutChatChatsIdBody:
     """ 
         Attributes:
             owner_user_id (Union[Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             type_ (Union[Unset, str]):
             name (Union[Unset, str]):
             description (Union[Unset, str]):
@@ -39,7 +39,7 @@ class PutChatChatsIdBody:
      """
 
     owner_user_id: Union[Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     type_: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
@@ -59,7 +59,7 @@ class PutChatChatsIdBody:
     def to_dict(self) -> dict[str, Any]:
         owner_user_id = self.owner_user_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         type_ = self.type_
 
@@ -98,8 +98,8 @@ class PutChatChatsIdBody:
         })
         if owner_user_id is not UNSET:
             field_dict["ownerUserId"] = owner_user_id
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if type_ is not UNSET:
             field_dict["type"] = type_
         if name is not UNSET:
@@ -132,7 +132,7 @@ class PutChatChatsIdBody:
         d = dict(src_dict)
         owner_user_id = d.pop("ownerUserId", UNSET)
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         type_ = d.pop("type", UNSET)
 
@@ -174,7 +174,7 @@ class PutChatChatsIdBody:
 
         put_chat_chats_id_body = cls(
             owner_user_id=owner_user_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             type_=type_,
             name=name,
             description=description,

@@ -9,22 +9,33 @@ from ... import errors
 
 from ...models.error import Error
 from ...models.get_content_markdown_export_response_200 import GetContentMarkdownExportResponse200
+from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
-    
+    *,
+    workspace: Union[Unset, str] = UNSET,
+
 ) -> dict[str, Any]:
     
 
     
 
-    
+    params: dict[str, Any] = {}
+
+    params["workspace"] = workspace
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/content/markdown/export",
+        "params": params,
     }
 
 
@@ -65,9 +76,13 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetContentMarkdownExportResponse200]]:
     """ Bulk export the caller's documents WITH content (download a whole set)
+
+    Args:
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -79,7 +94,8 @@ def sync_detailed(
 
 
     kwargs = _get_kwargs(
-        
+        workspace=workspace,
+
     )
 
     response = client.get_httpx_client().request(
@@ -91,9 +107,13 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetContentMarkdownExportResponse200]]:
     """ Bulk export the caller's documents WITH content (download a whole set)
+
+    Args:
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -106,15 +126,20 @@ def sync(
 
     return sync_detailed(
         client=client,
+workspace=workspace,
 
     ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetContentMarkdownExportResponse200]]:
     """ Bulk export the caller's documents WITH content (download a whole set)
+
+    Args:
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -126,7 +151,8 @@ async def asyncio_detailed(
 
 
     kwargs = _get_kwargs(
-        
+        workspace=workspace,
+
     )
 
     response = await client.get_async_httpx_client().request(
@@ -138,9 +164,13 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetContentMarkdownExportResponse200]]:
     """ Bulk export the caller's documents WITH content (download a whole set)
+
+    Args:
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -153,5 +183,6 @@ async def asyncio(
 
     return (await asyncio_detailed(
         client=client,
+workspace=workspace,
 
     )).parsed

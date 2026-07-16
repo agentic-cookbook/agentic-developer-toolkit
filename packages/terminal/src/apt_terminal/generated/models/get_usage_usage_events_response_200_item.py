@@ -24,7 +24,7 @@ class GetUsageUsageEventsResponse200Item:
             id (int):
             scope (str):
             principal_id (str):
-            owner_id (Union[None, str]):
+            ecosystem_id (Union[None, str]):
             route (str):
             method (str):
             status (int):
@@ -36,7 +36,7 @@ class GetUsageUsageEventsResponse200Item:
     id: int
     scope: str
     principal_id: str
-    owner_id: Union[None, str]
+    ecosystem_id: Union[None, str]
     route: str
     method: str
     status: int
@@ -55,8 +55,8 @@ class GetUsageUsageEventsResponse200Item:
 
         principal_id = self.principal_id
 
-        owner_id: Union[None, str]
-        owner_id = self.owner_id
+        ecosystem_id: Union[None, str]
+        ecosystem_id = self.ecosystem_id
 
         route = self.route
 
@@ -77,7 +77,7 @@ class GetUsageUsageEventsResponse200Item:
             "id": id,
             "scope": scope,
             "principalId": principal_id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "route": route,
             "method": method,
             "status": status,
@@ -99,12 +99,12 @@ class GetUsageUsageEventsResponse200Item:
 
         principal_id = d.pop("principalId")
 
-        def _parse_owner_id(data: object) -> Union[None, str]:
+        def _parse_ecosystem_id(data: object) -> Union[None, str]:
             if data is None:
                 return data
             return cast(Union[None, str], data)
 
-        owner_id = _parse_owner_id(d.pop("ownerId"))
+        ecosystem_id = _parse_ecosystem_id(d.pop("ecosystemId"))
 
 
         route = d.pop("route")
@@ -123,7 +123,7 @@ class GetUsageUsageEventsResponse200Item:
             id=id,
             scope=scope,
             principal_id=principal_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             route=route,
             method=method,
             status=status,

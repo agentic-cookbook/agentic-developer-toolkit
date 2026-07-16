@@ -72,7 +72,7 @@ def sync_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[Any, Error]]:
-    """ Delete projects
+    """ Soft-delete a project (+ a project.deleted activity)
 
     Args:
         id (str):
@@ -103,7 +103,7 @@ def sync(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[Any, Error]]:
-    """ Delete projects
+    """ Soft-delete a project (+ a project.deleted activity)
 
     Args:
         id (str):
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
 
 ) -> Response[Union[Any, Error]]:
-    """ Delete projects
+    """ Soft-delete a project (+ a project.deleted activity)
 
     Args:
         id (str):
@@ -160,7 +160,7 @@ async def asyncio(
     client: AuthenticatedClient,
 
 ) -> Optional[Union[Any, Error]]:
-    """ Delete projects
+    """ Soft-delete a project (+ a project.deleted activity)
 
     Args:
         id (str):

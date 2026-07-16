@@ -7,10 +7,13 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import cast
 from typing import cast, Union
 from typing import Union
 from uuid import UUID
 
+if TYPE_CHECKING:
+  from ..models.integration_connection_sync_settings_type_0 import IntegrationConnectionSyncSettingsType0
 
 
 
@@ -34,6 +37,9 @@ class IntegrationConnection:
             created_at (str):
             last_sync_at (Union[None, Unset, str]): Last successful sync (null = never)
             last_error (Union[None, Unset, str]): Last recorded sync error
+            sync_settings (Union['IntegrationConnectionSyncSettingsType0', None, Unset]): Caller-tunable sync settings
+                (gmailLabelIds / redditSubreddits / …) — non-secret, returned so settings forms can prefill instead of blind-
+                overwriting.
      """
 
     id: UUID
@@ -46,6 +52,7 @@ class IntegrationConnection:
     created_at: str
     last_sync_at: Union[None, Unset, str] = UNSET
     last_error: Union[None, Unset, str] = UNSET
+    sync_settings: Union['IntegrationConnectionSyncSettingsType0', None, Unset] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -53,6 +60,7 @@ class IntegrationConnection:
 
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.integration_connection_sync_settings_type_0 import IntegrationConnectionSyncSettingsType0
         id = str(self.id)
 
         provider = self.provider
@@ -81,6 +89,14 @@ class IntegrationConnection:
         else:
             last_error = self.last_error
 
+        sync_settings: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.sync_settings, Unset):
+            sync_settings = UNSET
+        elif isinstance(self.sync_settings, IntegrationConnectionSyncSettingsType0):
+            sync_settings = self.sync_settings.to_dict()
+        else:
+            sync_settings = self.sync_settings
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -98,6 +114,8 @@ class IntegrationConnection:
             field_dict["lastSyncAt"] = last_sync_at
         if last_error is not UNSET:
             field_dict["lastError"] = last_error
+        if sync_settings is not UNSET:
+            field_dict["syncSettings"] = sync_settings
 
         return field_dict
 
@@ -105,6 +123,7 @@ class IntegrationConnection:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.integration_connection_sync_settings_type_0 import IntegrationConnectionSyncSettingsType0
         d = dict(src_dict)
         id = UUID(d.pop("id"))
 
@@ -145,6 +164,26 @@ class IntegrationConnection:
         last_error = _parse_last_error(d.pop("lastError", UNSET))
 
 
+        def _parse_sync_settings(data: object) -> Union['IntegrationConnectionSyncSettingsType0', None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                sync_settings_type_0 = IntegrationConnectionSyncSettingsType0.from_dict(data)
+
+
+
+                return sync_settings_type_0
+            except: # noqa: E722
+                pass
+            return cast(Union['IntegrationConnectionSyncSettingsType0', None, Unset], data)
+
+        sync_settings = _parse_sync_settings(d.pop("syncSettings", UNSET))
+
+
         integration_connection = cls(
             id=id,
             provider=provider,
@@ -156,6 +195,7 @@ class IntegrationConnection:
             created_at=created_at,
             last_sync_at=last_sync_at,
             last_error=last_error,
+            sync_settings=sync_settings,
         )
 
 

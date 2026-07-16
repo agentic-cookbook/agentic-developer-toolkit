@@ -29,7 +29,7 @@ class PostIntegrationIntegrationBookmarksBody:
             title (str):
             url (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             excerpt (Union[None, Unset, str]):
             note (Union[None, Unset, str]):
             tags (Union[None, Unset, str]):
@@ -47,7 +47,7 @@ class PostIntegrationIntegrationBookmarksBody:
     title: str
     url: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     excerpt: Union[None, Unset, str] = UNSET
     note: Union[None, Unset, str] = UNSET
     tags: Union[None, Unset, str] = UNSET
@@ -79,7 +79,7 @@ class PostIntegrationIntegrationBookmarksBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         excerpt: Union[None, Unset, str]
         if isinstance(self.excerpt, Unset):
@@ -139,8 +139,8 @@ class PostIntegrationIntegrationBookmarksBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if excerpt is not UNSET:
             field_dict["excerpt"] = excerpt
         if note is not UNSET:
@@ -187,7 +187,7 @@ class PostIntegrationIntegrationBookmarksBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_excerpt(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -270,7 +270,7 @@ class PostIntegrationIntegrationBookmarksBody:
             title=title,
             url=url,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             excerpt=excerpt,
             note=note,
             tags=tags,

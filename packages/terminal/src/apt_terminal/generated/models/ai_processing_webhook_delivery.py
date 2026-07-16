@@ -28,7 +28,7 @@ class AiProcessingWebhookDelivery:
     """ 
         Attributes:
             id (UUID):
-            owner_id (str):
+            ecosystem_id (str):
             endpoint_id (UUID):
             event_id (UUID):
             event_type (str):
@@ -45,7 +45,7 @@ class AiProcessingWebhookDelivery:
      """
 
     id: UUID
-    owner_id: str
+    ecosystem_id: str
     endpoint_id: UUID
     event_id: UUID
     event_type: str
@@ -69,7 +69,7 @@ class AiProcessingWebhookDelivery:
         from ..models.ai_processing_webhook_delivery_payload import AiProcessingWebhookDeliveryPayload
         id = str(self.id)
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         endpoint_id = str(self.endpoint_id)
 
@@ -114,7 +114,7 @@ class AiProcessingWebhookDelivery:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "endpointId": endpoint_id,
             "eventId": event_id,
             "eventType": event_type,
@@ -146,7 +146,7 @@ class AiProcessingWebhookDelivery:
 
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         endpoint_id = UUID(d.pop("endpointId"))
 
@@ -209,7 +209,7 @@ class AiProcessingWebhookDelivery:
 
         ai_processing_webhook_delivery = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             endpoint_id=endpoint_id,
             event_id=event_id,
             event_type=event_type,

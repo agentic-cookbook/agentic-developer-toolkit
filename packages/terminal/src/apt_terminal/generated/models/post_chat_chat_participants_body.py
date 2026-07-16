@@ -28,7 +28,7 @@ class PostChatChatParticipantsBody:
             type_ (str):
             joined_at (str):
             state_changed_at (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             role (Union[Unset, str]):
             state (Union[Unset, str]):
             contact_id (Union[None, Unset, str]):
@@ -40,7 +40,7 @@ class PostChatChatParticipantsBody:
     type_: str
     joined_at: str
     state_changed_at: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     role: Union[Unset, str] = UNSET
     state: Union[Unset, str] = UNSET
     contact_id: Union[None, Unset, str] = UNSET
@@ -61,7 +61,7 @@ class PostChatChatParticipantsBody:
 
         state_changed_at = self.state_changed_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         role = self.role
 
@@ -89,8 +89,8 @@ class PostChatChatParticipantsBody:
             "joinedAt": joined_at,
             "stateChangedAt": state_changed_at,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if role is not UNSET:
             field_dict["role"] = role
         if state is not UNSET:
@@ -117,7 +117,7 @@ class PostChatChatParticipantsBody:
 
         state_changed_at = d.pop("stateChangedAt")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         role = d.pop("role", UNSET)
 
@@ -149,7 +149,7 @@ class PostChatChatParticipantsBody:
             type_=type_,
             joined_at=joined_at,
             state_changed_at=state_changed_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             role=role,
             state=state,
             contact_id=contact_id,

@@ -20,15 +20,17 @@ T = TypeVar("T", bound="PatchRegistryOrganizationsIdBody")
 
 @_attrs_define
 class PatchRegistryOrganizationsIdBody:
-    """ At least one of name or slug is required.
+    """ At least one of name, slug, or description is required.
 
         Attributes:
             name (Union[Unset, str]):
             slug (Union[Unset, str]):
+            description (Union[Unset, str]):
      """
 
     name: Union[Unset, str] = UNSET
     slug: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -40,6 +42,8 @@ class PatchRegistryOrganizationsIdBody:
 
         slug = self.slug
 
+        description = self.description
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -49,6 +53,8 @@ class PatchRegistryOrganizationsIdBody:
             field_dict["name"] = name
         if slug is not UNSET:
             field_dict["slug"] = slug
+        if description is not UNSET:
+            field_dict["description"] = description
 
         return field_dict
 
@@ -61,9 +67,12 @@ class PatchRegistryOrganizationsIdBody:
 
         slug = d.pop("slug", UNSET)
 
+        description = d.pop("description", UNSET)
+
         patch_registry_organizations_id_body = cls(
             name=name,
             slug=slug,
+            description=description,
         )
 
 

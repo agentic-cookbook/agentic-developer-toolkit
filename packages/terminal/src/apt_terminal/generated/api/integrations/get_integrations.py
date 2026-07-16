@@ -14,17 +14,26 @@ from typing import cast
 
 
 def _get_kwargs(
-    
+    *,
+    ecosystem_id: str,
+
 ) -> dict[str, Any]:
     
 
     
 
-    
+    params: dict[str, Any] = {}
+
+    params["ecosystemId"] = ecosystem_id
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/integrations",
+        "params": params,
     }
 
 
@@ -40,12 +49,33 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_200
 
+    if response.status_code == 400:
+        response_400 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_400
+
     if response.status_code == 401:
         response_401 = ProblemDetails.from_dict(response.json())
 
 
 
         return response_401
+
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
+
+    if response.status_code == 404:
+        response_404 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_404
 
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
@@ -65,11 +95,17 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
 
 ) -> Response[Union[GetIntegrationsResponse200, ProblemDetails]]:
-    """ List the caller's connections (secrets redacted)
+    """ List a target ecosystem's connections (secrets redacted)
 
-     Returns the caller's own integration connections. Secret columns are never included.
+     Returns every integration connection OWNED by the target ecosystem `ecosystemId` (the caller must
+    manage it). Secret columns are never included. 400 when `ecosystemId` is omitted; 404/403 when the
+    ecosystem is unknown / not the caller's.
+
+    Args:
+        ecosystem_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -81,7 +117,8 @@ def sync_detailed(
 
 
     kwargs = _get_kwargs(
-        
+        ecosystem_id=ecosystem_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -93,11 +130,17 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
 
 ) -> Optional[Union[GetIntegrationsResponse200, ProblemDetails]]:
-    """ List the caller's connections (secrets redacted)
+    """ List a target ecosystem's connections (secrets redacted)
 
-     Returns the caller's own integration connections. Secret columns are never included.
+     Returns every integration connection OWNED by the target ecosystem `ecosystemId` (the caller must
+    manage it). Secret columns are never included. 400 when `ecosystemId` is omitted; 404/403 when the
+    ecosystem is unknown / not the caller's.
+
+    Args:
+        ecosystem_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -110,17 +153,24 @@ def sync(
 
     return sync_detailed(
         client=client,
+ecosystem_id=ecosystem_id,
 
     ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
 
 ) -> Response[Union[GetIntegrationsResponse200, ProblemDetails]]:
-    """ List the caller's connections (secrets redacted)
+    """ List a target ecosystem's connections (secrets redacted)
 
-     Returns the caller's own integration connections. Secret columns are never included.
+     Returns every integration connection OWNED by the target ecosystem `ecosystemId` (the caller must
+    manage it). Secret columns are never included. 400 when `ecosystemId` is omitted; 404/403 when the
+    ecosystem is unknown / not the caller's.
+
+    Args:
+        ecosystem_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -132,7 +182,8 @@ async def asyncio_detailed(
 
 
     kwargs = _get_kwargs(
-        
+        ecosystem_id=ecosystem_id,
+
     )
 
     response = await client.get_async_httpx_client().request(
@@ -144,11 +195,17 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
 
 ) -> Optional[Union[GetIntegrationsResponse200, ProblemDetails]]:
-    """ List the caller's connections (secrets redacted)
+    """ List a target ecosystem's connections (secrets redacted)
 
-     Returns the caller's own integration connections. Secret columns are never included.
+     Returns every integration connection OWNED by the target ecosystem `ecosystemId` (the caller must
+    manage it). Secret columns are never included. 400 when `ecosystemId` is omitted; 404/403 when the
+    ecosystem is unknown / not the caller's.
+
+    Args:
+        ecosystem_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -161,5 +218,6 @@ async def asyncio(
 
     return (await asyncio_detailed(
         client=client,
+ecosystem_id=ecosystem_id,
 
     )).parsed

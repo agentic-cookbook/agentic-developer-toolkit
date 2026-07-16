@@ -26,7 +26,7 @@ class PutDocumentOperationsIdResponse200:
             block_id (Union[None, str]):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
             client_id (str):
             client_seq (int):
             op_type (str):
@@ -42,7 +42,7 @@ class PutDocumentOperationsIdResponse200:
     block_id: Union[None, str]
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
     client_id: str
     client_seq: int
     op_type: str
@@ -69,7 +69,7 @@ class PutDocumentOperationsIdResponse200:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         client_id = self.client_id
 
@@ -98,7 +98,7 @@ class PutDocumentOperationsIdResponse200:
             "blockId": block_id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "clientId": client_id,
             "clientSeq": client_seq,
             "opType": op_type,
@@ -138,7 +138,7 @@ class PutDocumentOperationsIdResponse200:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         client_id = d.pop("clientId")
 
@@ -174,7 +174,7 @@ class PutDocumentOperationsIdResponse200:
             block_id=block_id,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             client_id=client_id,
             client_seq=client_seq,
             op_type=op_type,

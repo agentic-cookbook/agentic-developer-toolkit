@@ -9,24 +9,35 @@ from ... import errors
 
 from ...models.error import Error
 from ...models.markdown_document import MarkdownDocument
+from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     id: str,
     version: str,
+    *,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
 
     
 
-    
+    params: dict[str, Any] = {}
+
+    params["workspace"] = workspace
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/content/markdown/{id}/versions/{version}/restore".format(id=id,version=version,),
+        "params": params,
     }
 
 
@@ -83,6 +94,7 @@ def sync_detailed(
     version: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, MarkdownDocument]]:
     """ Restore a version (re-applies its full state as a new version; non-destructive)
@@ -90,6 +102,7 @@ def sync_detailed(
     Args:
         id (str):
         version (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -103,6 +116,7 @@ def sync_detailed(
     kwargs = _get_kwargs(
         id=id,
 version=version,
+workspace=workspace,
 
     )
 
@@ -117,6 +131,7 @@ def sync(
     version: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, MarkdownDocument]]:
     """ Restore a version (re-applies its full state as a new version; non-destructive)
@@ -124,6 +139,7 @@ def sync(
     Args:
         id (str):
         version (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -138,6 +154,7 @@ def sync(
         id=id,
 version=version,
 client=client,
+workspace=workspace,
 
     ).parsed
 
@@ -146,6 +163,7 @@ async def asyncio_detailed(
     version: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, MarkdownDocument]]:
     """ Restore a version (re-applies its full state as a new version; non-destructive)
@@ -153,6 +171,7 @@ async def asyncio_detailed(
     Args:
         id (str):
         version (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -166,6 +185,7 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         id=id,
 version=version,
+workspace=workspace,
 
     )
 
@@ -180,6 +200,7 @@ async def asyncio(
     version: str,
     *,
     client: AuthenticatedClient,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, MarkdownDocument]]:
     """ Restore a version (re-applies its full state as a new version; non-destructive)
@@ -187,6 +208,7 @@ async def asyncio(
     Args:
         id (str):
         version (str):
+        workspace (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -201,5 +223,6 @@ async def asyncio(
         id=id,
 version=version,
 client=client,
+workspace=workspace,
 
     )).parsed

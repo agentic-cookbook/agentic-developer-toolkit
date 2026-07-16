@@ -24,7 +24,7 @@ class PostIntegrationIntegrationItemsResponse201:
             id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
             connection_id (str):
             external_id (str):
             item_type (str):
@@ -50,7 +50,7 @@ class PostIntegrationIntegrationItemsResponse201:
     id: str
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
     connection_id: str
     external_id: str
     item_type: str
@@ -84,7 +84,7 @@ class PostIntegrationIntegrationItemsResponse201:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         connection_id = self.connection_id
 
@@ -142,7 +142,7 @@ class PostIntegrationIntegrationItemsResponse201:
             "id": id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "connectionId": connection_id,
             "externalId": external_id,
             "itemType": item_type,
@@ -184,7 +184,7 @@ class PostIntegrationIntegrationItemsResponse201:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         connection_id = d.pop("connectionId")
 
@@ -284,7 +284,7 @@ class PostIntegrationIntegrationItemsResponse201:
             id=id,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             connection_id=connection_id,
             external_id=external_id,
             item_type=item_type,

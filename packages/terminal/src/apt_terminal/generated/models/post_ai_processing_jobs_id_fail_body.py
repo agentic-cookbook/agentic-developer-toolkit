@@ -22,7 +22,7 @@ T = TypeVar("T", bound="PostAiProcessingJobsIdFailBody")
 class PostAiProcessingJobsIdFailBody:
     """ 
         Attributes:
-            lease_token (str): HMAC token returned by /claim
+            lease_token (str): Opaque lease token returned by /claim
             error (str): Human-readable error stored as last_error
             retry (Union[Unset, bool]): Re-queue if attempts remain (default true)
      """

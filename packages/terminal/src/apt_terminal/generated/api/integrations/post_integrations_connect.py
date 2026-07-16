@@ -79,6 +79,20 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
+
+    if response.status_code == 404:
+        response_404 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -102,8 +116,9 @@ def sync_detailed(
 ) -> Response[Union[IntegrationConnection, ProblemDetails]]:
     """ Connect an integration (polymorphic by auth method)
 
-     Finishes any auth method's connect flow and persists the connection. The owning ecosystem is forced
-    to the caller. Returns the redacted connection (tokens never echoed).
+     Finishes any auth method's connect flow and persists the connection under the target ecosystem
+    `ecosystemId` the client names; the caller must manage it (404/403 otherwise). Returns the redacted
+    connection (tokens never echoed).
 
     Args:
         body (Union['IntegrationConnectRequestType0', 'IntegrationConnectRequestType1',
@@ -138,8 +153,9 @@ def sync(
 ) -> Optional[Union[IntegrationConnection, ProblemDetails]]:
     """ Connect an integration (polymorphic by auth method)
 
-     Finishes any auth method's connect flow and persists the connection. The owning ecosystem is forced
-    to the caller. Returns the redacted connection (tokens never echoed).
+     Finishes any auth method's connect flow and persists the connection under the target ecosystem
+    `ecosystemId` the client names; the caller must manage it (404/403 otherwise). Returns the redacted
+    connection (tokens never echoed).
 
     Args:
         body (Union['IntegrationConnectRequestType0', 'IntegrationConnectRequestType1',
@@ -169,8 +185,9 @@ async def asyncio_detailed(
 ) -> Response[Union[IntegrationConnection, ProblemDetails]]:
     """ Connect an integration (polymorphic by auth method)
 
-     Finishes any auth method's connect flow and persists the connection. The owning ecosystem is forced
-    to the caller. Returns the redacted connection (tokens never echoed).
+     Finishes any auth method's connect flow and persists the connection under the target ecosystem
+    `ecosystemId` the client names; the caller must manage it (404/403 otherwise). Returns the redacted
+    connection (tokens never echoed).
 
     Args:
         body (Union['IntegrationConnectRequestType0', 'IntegrationConnectRequestType1',
@@ -205,8 +222,9 @@ async def asyncio(
 ) -> Optional[Union[IntegrationConnection, ProblemDetails]]:
     """ Connect an integration (polymorphic by auth method)
 
-     Finishes any auth method's connect flow and persists the connection. The owning ecosystem is forced
-    to the caller. Returns the redacted connection (tokens never echoed).
+     Finishes any auth method's connect flow and persists the connection under the target ecosystem
+    `ecosystemId` the client names; the caller must manage it (404/403 otherwise). Returns the redacted
+    connection (tokens never echoed).
 
     Args:
         body (Union['IntegrationConnectRequestType0', 'IntegrationConnectRequestType1',

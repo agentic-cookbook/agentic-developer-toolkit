@@ -24,6 +24,7 @@ class DiscussionTopic:
     """ 
         Attributes:
             id (str):
+            community_id (str): The community instance this topic belongs to.
             title (str):
             is_pinned (bool):
             is_locked (bool):
@@ -35,9 +36,19 @@ class DiscussionTopic:
             customer_id (Union[Unset, str]): Author (server-stamped principal). Omitted on the public surface.
             category_id (Union[None, Unset, str]):
             answered_post_id (Union[None, Unset, str]):
+            excerpt (Union[None, Unset, str]): LIST routes only: the opening post’s leading prose, flattened from markdown
+                server-side (≤240 chars; null when its body doc was soft-deleted). Absent on single-topic reads and
+                create/update responses.
+            author_name (Union[None, Unset, str]): Authed COMMUNITY list route only: the author’s display name. Never on the
+                public surface or the flat /discussion/topics list.
+            author_slug (Union[None, Unset, str]): Authed COMMUNITY list route only: the author’s public handle. Never on
+                the public surface or the flat /discussion/topics list.
+            author_avatar_url (Union[None, Unset, str]): Authed COMMUNITY list route only: the author’s avatar URL. Never on
+                the public surface or the flat /discussion/topics list.
      """
 
     id: str
+    community_id: str
     title: str
     is_pinned: bool
     is_locked: bool
@@ -49,6 +60,10 @@ class DiscussionTopic:
     customer_id: Union[Unset, str] = UNSET
     category_id: Union[None, Unset, str] = UNSET
     answered_post_id: Union[None, Unset, str] = UNSET
+    excerpt: Union[None, Unset, str] = UNSET
+    author_name: Union[None, Unset, str] = UNSET
+    author_slug: Union[None, Unset, str] = UNSET
+    author_avatar_url: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -57,6 +72,8 @@ class DiscussionTopic:
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
+
+        community_id = self.community_id
 
         title = self.title
 
@@ -88,11 +105,36 @@ class DiscussionTopic:
         else:
             answered_post_id = self.answered_post_id
 
+        excerpt: Union[None, Unset, str]
+        if isinstance(self.excerpt, Unset):
+            excerpt = UNSET
+        else:
+            excerpt = self.excerpt
+
+        author_name: Union[None, Unset, str]
+        if isinstance(self.author_name, Unset):
+            author_name = UNSET
+        else:
+            author_name = self.author_name
+
+        author_slug: Union[None, Unset, str]
+        if isinstance(self.author_slug, Unset):
+            author_slug = UNSET
+        else:
+            author_slug = self.author_slug
+
+        author_avatar_url: Union[None, Unset, str]
+        if isinstance(self.author_avatar_url, Unset):
+            author_avatar_url = UNSET
+        else:
+            author_avatar_url = self.author_avatar_url
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
+            "communityId": community_id,
             "title": title,
             "isPinned": is_pinned,
             "isLocked": is_locked,
@@ -108,6 +150,14 @@ class DiscussionTopic:
             field_dict["categoryId"] = category_id
         if answered_post_id is not UNSET:
             field_dict["answeredPostId"] = answered_post_id
+        if excerpt is not UNSET:
+            field_dict["excerpt"] = excerpt
+        if author_name is not UNSET:
+            field_dict["authorName"] = author_name
+        if author_slug is not UNSET:
+            field_dict["authorSlug"] = author_slug
+        if author_avatar_url is not UNSET:
+            field_dict["authorAvatarUrl"] = author_avatar_url
 
         return field_dict
 
@@ -117,6 +167,8 @@ class DiscussionTopic:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         id = d.pop("id")
+
+        community_id = d.pop("communityId")
 
         title = d.pop("title")
 
@@ -156,8 +208,49 @@ class DiscussionTopic:
         answered_post_id = _parse_answered_post_id(d.pop("answeredPostId", UNSET))
 
 
+        def _parse_excerpt(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        excerpt = _parse_excerpt(d.pop("excerpt", UNSET))
+
+
+        def _parse_author_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        author_name = _parse_author_name(d.pop("authorName", UNSET))
+
+
+        def _parse_author_slug(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        author_slug = _parse_author_slug(d.pop("authorSlug", UNSET))
+
+
+        def _parse_author_avatar_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        author_avatar_url = _parse_author_avatar_url(d.pop("authorAvatarUrl", UNSET))
+
+
         discussion_topic = cls(
             id=id,
+            community_id=community_id,
             title=title,
             is_pinned=is_pinned,
             is_locked=is_locked,
@@ -169,6 +262,10 @@ class DiscussionTopic:
             customer_id=customer_id,
             category_id=category_id,
             answered_post_id=answered_post_id,
+            excerpt=excerpt,
+            author_name=author_name,
+            author_slug=author_slug,
+            author_avatar_url=author_avatar_url,
         )
 
 

@@ -107,11 +107,13 @@ def sync_detailed(
     body: PatchRegistryOrganizationsIdBody,
 
 ) -> Response[Union[Error, RegistryOrganization]]:
-    """ Update an organization handle/label (site-admin)
+    """ Update an organization (name/description: org-team admin or site-admin; slug: site-admin only — re-
+    mints the global rdids)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name, slug, or description is
+            required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -141,11 +143,13 @@ def sync(
     body: PatchRegistryOrganizationsIdBody,
 
 ) -> Optional[Union[Error, RegistryOrganization]]:
-    """ Update an organization handle/label (site-admin)
+    """ Update an organization (name/description: org-team admin or site-admin; slug: site-admin only — re-
+    mints the global rdids)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name, slug, or description is
+            required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -170,11 +174,13 @@ async def asyncio_detailed(
     body: PatchRegistryOrganizationsIdBody,
 
 ) -> Response[Union[Error, RegistryOrganization]]:
-    """ Update an organization handle/label (site-admin)
+    """ Update an organization (name/description: org-team admin or site-admin; slug: site-admin only — re-
+    mints the global rdids)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name, slug, or description is
+            required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -204,11 +210,13 @@ async def asyncio(
     body: PatchRegistryOrganizationsIdBody,
 
 ) -> Optional[Union[Error, RegistryOrganization]]:
-    """ Update an organization handle/label (site-admin)
+    """ Update an organization (name/description: org-team admin or site-admin; slug: site-admin only — re-
+    mints the global rdids)
 
     Args:
         id (str):
-        body (PatchRegistryOrganizationsIdBody): At least one of name or slug is required.
+        body (PatchRegistryOrganizationsIdBody): At least one of name, slug, or description is
+            required.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -21,7 +21,7 @@ class PutChatChatRichContentIdResponse200:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             message_id (str):
             display_order (int):
             kind (str):
@@ -31,7 +31,7 @@ class PutChatChatRichContentIdResponse200:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     message_id: str
     display_order: int
     kind: str
@@ -46,7 +46,7 @@ class PutChatChatRichContentIdResponse200:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         message_id = self.message_id
 
@@ -65,7 +65,7 @@ class PutChatChatRichContentIdResponse200:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "messageId": message_id,
             "displayOrder": display_order,
             "kind": kind,
@@ -83,7 +83,7 @@ class PutChatChatRichContentIdResponse200:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         message_id = d.pop("messageId")
 
@@ -99,7 +99,7 @@ class PutChatChatRichContentIdResponse200:
 
         put_chat_chat_rich_content_id_response_200 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             message_id=message_id,
             display_order=display_order,
             kind=kind,

@@ -84,7 +84,7 @@ def sync_detailed(
     q: str,
 
 ) -> Response[Union[Error, GetSearchNotesResponse200]]:
-    """ Substring search the caller's notes (title + body)
+    """ Full-text search the caller's notes (markdown body)
 
     Args:
         q (str):
@@ -115,7 +115,7 @@ def sync(
     q: str,
 
 ) -> Optional[Union[Error, GetSearchNotesResponse200]]:
-    """ Substring search the caller's notes (title + body)
+    """ Full-text search the caller's notes (markdown body)
 
     Args:
         q (str):
@@ -141,7 +141,7 @@ async def asyncio_detailed(
     q: str,
 
 ) -> Response[Union[Error, GetSearchNotesResponse200]]:
-    """ Substring search the caller's notes (title + body)
+    """ Full-text search the caller's notes (markdown body)
 
     Args:
         q (str):
@@ -172,7 +172,7 @@ async def asyncio(
     q: str,
 
 ) -> Optional[Union[Error, GetSearchNotesResponse200]]:
-    """ Substring search the caller's notes (title + body)
+    """ Full-text search the caller's notes (markdown body)
 
     Args:
         q (str):

@@ -30,7 +30,7 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
             name (str):
             transaction_date (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             account_name (Union[None, Unset, str]):
             institution_name (Union[None, Unset, str]):
             currency (Union[Unset, str]):
@@ -50,7 +50,7 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
     name: str
     transaction_date: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     account_name: Union[None, Unset, str] = UNSET
     institution_name: Union[None, Unset, str] = UNSET
     currency: Union[Unset, str] = UNSET
@@ -85,7 +85,7 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         account_name: Union[None, Unset, str]
         if isinstance(self.account_name, Unset):
@@ -148,8 +148,8 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if account_name is not UNSET:
             field_dict["accountName"] = account_name
         if institution_name is not UNSET:
@@ -200,7 +200,7 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_account_name(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -286,7 +286,7 @@ class PostIntegrationIntegrationFinancialTransactionsBody:
             name=name,
             transaction_date=transaction_date,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             account_name=account_name,
             institution_name=institution_name,
             currency=currency,

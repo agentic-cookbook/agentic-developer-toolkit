@@ -23,6 +23,8 @@ class GetMonitoringSiteGroupsResponse200Item:
         Attributes:
             id (str):
             user_id (str):
+            owner_kind (str):
+            owner_id (str):
             name (str):
             slug (str):
             description (Union[None, str]):
@@ -34,6 +36,8 @@ class GetMonitoringSiteGroupsResponse200Item:
 
     id: str
     user_id: str
+    owner_kind: str
+    owner_id: str
     name: str
     slug: str
     description: Union[None, str]
@@ -50,6 +54,10 @@ class GetMonitoringSiteGroupsResponse200Item:
         id = self.id
 
         user_id = self.user_id
+
+        owner_kind = self.owner_kind
+
+        owner_id = self.owner_id
 
         name = self.name
 
@@ -72,6 +80,8 @@ class GetMonitoringSiteGroupsResponse200Item:
         field_dict.update({
             "id": id,
             "userId": user_id,
+            "ownerKind": owner_kind,
+            "ownerId": owner_id,
             "name": name,
             "slug": slug,
             "description": description,
@@ -91,6 +101,10 @@ class GetMonitoringSiteGroupsResponse200Item:
         id = d.pop("id")
 
         user_id = d.pop("userId")
+
+        owner_kind = d.pop("ownerKind")
+
+        owner_id = d.pop("ownerId")
 
         name = d.pop("name")
 
@@ -115,6 +129,8 @@ class GetMonitoringSiteGroupsResponse200Item:
         get_monitoring_site_groups_response_200_item = cls(
             id=id,
             user_id=user_id,
+            owner_kind=owner_kind,
+            owner_id=owner_id,
             name=name,
             slug=slug,
             description=description,

@@ -23,7 +23,7 @@ T = TypeVar("T", bound="PutContentKeywordItemsIdBody")
 class PutContentKeywordItemsIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             keyword_id (Union[Unset, str]):
             target_kind (Union[Unset, str]):
@@ -31,7 +31,7 @@ class PutContentKeywordItemsIdBody:
             sort_order (Union[Unset, int]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     keyword_id: Union[Unset, str] = UNSET
     target_kind: Union[Unset, str] = UNSET
@@ -43,7 +43,7 @@ class PutContentKeywordItemsIdBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -64,8 +64,8 @@ class PutContentKeywordItemsIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if keyword_id is not UNSET:
@@ -84,7 +84,7 @@ class PutContentKeywordItemsIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -105,7 +105,7 @@ class PutContentKeywordItemsIdBody:
         sort_order = d.pop("sortOrder", UNSET)
 
         put_content_keyword_items_id_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             keyword_id=keyword_id,
             target_kind=target_kind,

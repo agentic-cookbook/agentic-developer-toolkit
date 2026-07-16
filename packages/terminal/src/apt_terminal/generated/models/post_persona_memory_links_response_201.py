@@ -20,14 +20,14 @@ T = TypeVar("T", bound="PostPersonaMemoryLinksResponse201")
 class PostPersonaMemoryLinksResponse201:
     """ 
         Attributes:
-            owner_id (str):
+            ecosystem_id (str):
             src_id (str):
             dst_id (str):
             relation (str):
             created_at (str):
      """
 
-    owner_id: str
+    ecosystem_id: str
     src_id: str
     dst_id: str
     relation: str
@@ -38,7 +38,7 @@ class PostPersonaMemoryLinksResponse201:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         src_id = self.src_id
 
@@ -52,7 +52,7 @@ class PostPersonaMemoryLinksResponse201:
         field_dict: dict[str, Any] = {}
 
         field_dict.update({
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "srcId": src_id,
             "dstId": dst_id,
             "relation": relation,
@@ -66,7 +66,7 @@ class PostPersonaMemoryLinksResponse201:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         src_id = d.pop("srcId")
 
@@ -77,7 +77,7 @@ class PostPersonaMemoryLinksResponse201:
         created_at = d.pop("createdAt")
 
         post_persona_memory_links_response_201 = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             src_id=src_id,
             dst_id=dst_id,
             relation=relation,

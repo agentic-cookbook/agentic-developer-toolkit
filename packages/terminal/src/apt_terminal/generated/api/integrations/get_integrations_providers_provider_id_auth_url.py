@@ -18,6 +18,7 @@ from typing import Union
 def _get_kwargs(
     provider_id: str,
     *,
+    ecosystem_id: str,
     redirect_uri: str,
     service_type: Union[Unset, str] = UNSET,
     scopes: Union[Unset, str] = UNSET,
@@ -28,6 +29,8 @@ def _get_kwargs(
     
 
     params: dict[str, Any] = {}
+
+    params["ecosystemId"] = ecosystem_id
 
     params["redirectUri"] = redirect_uri
 
@@ -72,6 +75,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
+
     if response.status_code == 404:
         response_404 = ProblemDetails.from_dict(response.json())
 
@@ -98,6 +108,7 @@ def sync_detailed(
     provider_id: str,
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
     redirect_uri: str,
     service_type: Union[Unset, str] = UNSET,
     scopes: Union[Unset, str] = UNSET,
@@ -105,10 +116,13 @@ def sync_detailed(
 ) -> Response[Union[GetIntegrationsProvidersProviderIdAuthUrlResponse200, ProblemDetails]]:
     """ Get the OAuth authorize URL for a provider
 
-     Only valid for oauth providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth providers (400 otherwise). 404 for an unknown provider. The authorize URL uses
+    the target ecosystem `ecosystemId`'s client id; the caller must manage it (400 when omitted; 404/403
+    when unknown / not the caller's).
 
     Args:
         provider_id (str):
+        ecosystem_id (str):
         redirect_uri (str):
         service_type (Union[Unset, str]):
         scopes (Union[Unset, str]):
@@ -124,6 +138,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         provider_id=provider_id,
+ecosystem_id=ecosystem_id,
 redirect_uri=redirect_uri,
 service_type=service_type,
 scopes=scopes,
@@ -140,6 +155,7 @@ def sync(
     provider_id: str,
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
     redirect_uri: str,
     service_type: Union[Unset, str] = UNSET,
     scopes: Union[Unset, str] = UNSET,
@@ -147,10 +163,13 @@ def sync(
 ) -> Optional[Union[GetIntegrationsProvidersProviderIdAuthUrlResponse200, ProblemDetails]]:
     """ Get the OAuth authorize URL for a provider
 
-     Only valid for oauth providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth providers (400 otherwise). 404 for an unknown provider. The authorize URL uses
+    the target ecosystem `ecosystemId`'s client id; the caller must manage it (400 when omitted; 404/403
+    when unknown / not the caller's).
 
     Args:
         provider_id (str):
+        ecosystem_id (str):
         redirect_uri (str):
         service_type (Union[Unset, str]):
         scopes (Union[Unset, str]):
@@ -167,6 +186,7 @@ def sync(
     return sync_detailed(
         provider_id=provider_id,
 client=client,
+ecosystem_id=ecosystem_id,
 redirect_uri=redirect_uri,
 service_type=service_type,
 scopes=scopes,
@@ -177,6 +197,7 @@ async def asyncio_detailed(
     provider_id: str,
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
     redirect_uri: str,
     service_type: Union[Unset, str] = UNSET,
     scopes: Union[Unset, str] = UNSET,
@@ -184,10 +205,13 @@ async def asyncio_detailed(
 ) -> Response[Union[GetIntegrationsProvidersProviderIdAuthUrlResponse200, ProblemDetails]]:
     """ Get the OAuth authorize URL for a provider
 
-     Only valid for oauth providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth providers (400 otherwise). 404 for an unknown provider. The authorize URL uses
+    the target ecosystem `ecosystemId`'s client id; the caller must manage it (400 when omitted; 404/403
+    when unknown / not the caller's).
 
     Args:
         provider_id (str):
+        ecosystem_id (str):
         redirect_uri (str):
         service_type (Union[Unset, str]):
         scopes (Union[Unset, str]):
@@ -203,6 +227,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         provider_id=provider_id,
+ecosystem_id=ecosystem_id,
 redirect_uri=redirect_uri,
 service_type=service_type,
 scopes=scopes,
@@ -219,6 +244,7 @@ async def asyncio(
     provider_id: str,
     *,
     client: AuthenticatedClient,
+    ecosystem_id: str,
     redirect_uri: str,
     service_type: Union[Unset, str] = UNSET,
     scopes: Union[Unset, str] = UNSET,
@@ -226,10 +252,13 @@ async def asyncio(
 ) -> Optional[Union[GetIntegrationsProvidersProviderIdAuthUrlResponse200, ProblemDetails]]:
     """ Get the OAuth authorize URL for a provider
 
-     Only valid for oauth providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth providers (400 otherwise). 404 for an unknown provider. The authorize URL uses
+    the target ecosystem `ecosystemId`'s client id; the caller must manage it (400 when omitted; 404/403
+    when unknown / not the caller's).
 
     Args:
         provider_id (str):
+        ecosystem_id (str):
         redirect_uri (str):
         service_type (Union[Unset, str]):
         scopes (Union[Unset, str]):
@@ -246,6 +275,7 @@ async def asyncio(
     return (await asyncio_detailed(
         provider_id=provider_id,
 client=client,
+ecosystem_id=ecosystem_id,
 redirect_uri=redirect_uri,
 service_type=service_type,
 scopes=scopes,

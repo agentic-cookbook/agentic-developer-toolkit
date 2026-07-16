@@ -1,0 +1,171 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..models.project_field_type import ProjectFieldType
+from ..types import UNSET, Unset
+from typing import cast
+from typing import cast, Union
+from typing import Union
+
+
+
+
+
+
+T = TypeVar("T", bound="ProjectField")
+
+
+
+@_attrs_define
+class ProjectField:
+    """ 
+        Attributes:
+            id (str):
+            ecosystem_id (str):
+            project_id (str):
+            key (str): stable identifier, unique within the project
+            label (str):
+            type_ (ProjectFieldType):
+            position (int): field order (ascending)
+            created_at (str):
+            options (Union[None, Unset, list[str]]): the choices for a select field (non-empty); null for every other type
+     """
+
+    id: str
+    ecosystem_id: str
+    project_id: str
+    key: str
+    label: str
+    type_: ProjectFieldType
+    position: int
+    created_at: str
+    options: Union[None, Unset, list[str]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        id = self.id
+
+        ecosystem_id = self.ecosystem_id
+
+        project_id = self.project_id
+
+        key = self.key
+
+        label = self.label
+
+        type_ = self.type_.value
+
+        position = self.position
+
+        created_at = self.created_at
+
+        options: Union[None, Unset, list[str]]
+        if isinstance(self.options, Unset):
+            options = UNSET
+        elif isinstance(self.options, list):
+            options = self.options
+
+
+        else:
+            options = self.options
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "id": id,
+            "ecosystemId": ecosystem_id,
+            "projectId": project_id,
+            "key": key,
+            "label": label,
+            "type": type_,
+            "position": position,
+            "createdAt": created_at,
+        })
+        if options is not UNSET:
+            field_dict["options"] = options
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        id = d.pop("id")
+
+        ecosystem_id = d.pop("ecosystemId")
+
+        project_id = d.pop("projectId")
+
+        key = d.pop("key")
+
+        label = d.pop("label")
+
+        type_ = ProjectFieldType(d.pop("type"))
+
+
+
+
+        position = d.pop("position")
+
+        created_at = d.pop("createdAt")
+
+        def _parse_options(data: object) -> Union[None, Unset, list[str]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                options_type_0 = cast(list[str], data)
+
+                return options_type_0
+            except: # noqa: E722
+                pass
+            return cast(Union[None, Unset, list[str]], data)
+
+        options = _parse_options(d.pop("options", UNSET))
+
+
+        project_field = cls(
+            id=id,
+            ecosystem_id=ecosystem_id,
+            project_id=project_id,
+            key=key,
+            label=label,
+            type_=type_,
+            position=position,
+            created_at=created_at,
+            options=options,
+        )
+
+
+        project_field.additional_properties = d
+        return project_field
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

@@ -25,7 +25,7 @@ class GetContentListItemsIdResponse200:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
             list_id (str):
@@ -36,7 +36,7 @@ class GetContentListItemsIdResponse200:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     deleted_at: Union[None, str]
     list_id: str
@@ -53,7 +53,7 @@ class GetContentListItemsIdResponse200:
         from ..models.get_content_list_items_id_response_200_value_type_1 import GetContentListItemsIdResponse200ValueType1
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -83,7 +83,7 @@ class GetContentListItemsIdResponse200:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
             "listId": list_id,
@@ -103,7 +103,7 @@ class GetContentListItemsIdResponse200:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -151,7 +151,7 @@ class GetContentListItemsIdResponse200:
 
         get_content_list_items_id_response_200 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             deleted_at=deleted_at,
             list_id=list_id,

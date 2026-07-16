@@ -24,9 +24,10 @@ class PutDiscussionTopicsIdBody:
     """ 
         Attributes:
             title (Union[Unset, str]):
-            is_pinned (Union[Unset, bool]): Admin only.
-            is_locked (Union[Unset, bool]): Admin only.
-            answered_post_id (Union[None, Unset, str]): Admin only; must be a live post in this topic (or null to clear).
+            is_pinned (Union[Unset, bool]): Community moderator only.
+            is_locked (Union[Unset, bool]): Community moderator only.
+            answered_post_id (Union[None, Unset, str]): Topic author or community moderator; must be a live post in this
+                topic (or null to clear).
      """
 
     title: Union[Unset, str] = UNSET

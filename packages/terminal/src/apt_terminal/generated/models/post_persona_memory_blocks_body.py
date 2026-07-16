@@ -28,14 +28,14 @@ class PostPersonaMemoryBlocksBody:
         Attributes:
             name (str):
             content (Union['PostPersonaMemoryBlocksBodyContentType1', None, bool, float, list[Any], str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
             size_limit (Union[None, Unset, int]):
      """
 
     name: str
     content: Union['PostPersonaMemoryBlocksBodyContentType1', None, bool, float, list[Any], str]
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
     size_limit: Union[None, Unset, int] = UNSET
 
@@ -57,7 +57,7 @@ class PostPersonaMemoryBlocksBody:
         else:
             content = self.content
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -78,8 +78,8 @@ class PostPersonaMemoryBlocksBody:
             "name": name,
             "content": content,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
         if size_limit is not UNSET:
@@ -121,7 +121,7 @@ class PostPersonaMemoryBlocksBody:
         content = _parse_content(d.pop("content"))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -146,7 +146,7 @@ class PostPersonaMemoryBlocksBody:
         post_persona_memory_blocks_body = cls(
             name=name,
             content=content,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
             size_limit=size_limit,
         )

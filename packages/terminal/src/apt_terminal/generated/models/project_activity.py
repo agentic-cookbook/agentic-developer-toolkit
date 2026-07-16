@@ -1,0 +1,232 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast
+from typing import cast, Union
+from typing import Union
+
+if TYPE_CHECKING:
+  from ..models.project_activity_detail_type_0 import ProjectActivityDetailType0
+
+
+
+
+
+T = TypeVar("T", bound="ProjectActivity")
+
+
+
+@_attrs_define
+class ProjectActivity:
+    """ 
+        Attributes:
+            id (str):
+            ecosystem_id (str):
+            project_id (str):
+            action (str): the event, e.g. project.created/updated/deleted, status.*, participant.*,
+                work_item.created/updated/status_changed/assigned/deleted, comment.added
+            created_at (str):
+            work_item_id (Union[None, Unset, str]): set when the event is card-scoped
+            actor_kind (Union[None, Unset, str]):
+            actor_id (Union[None, Unset, str]):
+            actor_label (Union[None, Unset, str]):
+            detail (Union['ProjectActivityDetailType0', None, Unset]): action-specific payload (jsonb)
+     """
+
+    id: str
+    ecosystem_id: str
+    project_id: str
+    action: str
+    created_at: str
+    work_item_id: Union[None, Unset, str] = UNSET
+    actor_kind: Union[None, Unset, str] = UNSET
+    actor_id: Union[None, Unset, str] = UNSET
+    actor_label: Union[None, Unset, str] = UNSET
+    detail: Union['ProjectActivityDetailType0', None, Unset] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        from ..models.project_activity_detail_type_0 import ProjectActivityDetailType0
+        id = self.id
+
+        ecosystem_id = self.ecosystem_id
+
+        project_id = self.project_id
+
+        action = self.action
+
+        created_at = self.created_at
+
+        work_item_id: Union[None, Unset, str]
+        if isinstance(self.work_item_id, Unset):
+            work_item_id = UNSET
+        else:
+            work_item_id = self.work_item_id
+
+        actor_kind: Union[None, Unset, str]
+        if isinstance(self.actor_kind, Unset):
+            actor_kind = UNSET
+        else:
+            actor_kind = self.actor_kind
+
+        actor_id: Union[None, Unset, str]
+        if isinstance(self.actor_id, Unset):
+            actor_id = UNSET
+        else:
+            actor_id = self.actor_id
+
+        actor_label: Union[None, Unset, str]
+        if isinstance(self.actor_label, Unset):
+            actor_label = UNSET
+        else:
+            actor_label = self.actor_label
+
+        detail: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.detail, Unset):
+            detail = UNSET
+        elif isinstance(self.detail, ProjectActivityDetailType0):
+            detail = self.detail.to_dict()
+        else:
+            detail = self.detail
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "id": id,
+            "ecosystemId": ecosystem_id,
+            "projectId": project_id,
+            "action": action,
+            "createdAt": created_at,
+        })
+        if work_item_id is not UNSET:
+            field_dict["workItemId"] = work_item_id
+        if actor_kind is not UNSET:
+            field_dict["actorKind"] = actor_kind
+        if actor_id is not UNSET:
+            field_dict["actorId"] = actor_id
+        if actor_label is not UNSET:
+            field_dict["actorLabel"] = actor_label
+        if detail is not UNSET:
+            field_dict["detail"] = detail
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.project_activity_detail_type_0 import ProjectActivityDetailType0
+        d = dict(src_dict)
+        id = d.pop("id")
+
+        ecosystem_id = d.pop("ecosystemId")
+
+        project_id = d.pop("projectId")
+
+        action = d.pop("action")
+
+        created_at = d.pop("createdAt")
+
+        def _parse_work_item_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        work_item_id = _parse_work_item_id(d.pop("workItemId", UNSET))
+
+
+        def _parse_actor_kind(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        actor_kind = _parse_actor_kind(d.pop("actorKind", UNSET))
+
+
+        def _parse_actor_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        actor_id = _parse_actor_id(d.pop("actorId", UNSET))
+
+
+        def _parse_actor_label(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        actor_label = _parse_actor_label(d.pop("actorLabel", UNSET))
+
+
+        def _parse_detail(data: object) -> Union['ProjectActivityDetailType0', None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                detail_type_0 = ProjectActivityDetailType0.from_dict(data)
+
+
+
+                return detail_type_0
+            except: # noqa: E722
+                pass
+            return cast(Union['ProjectActivityDetailType0', None, Unset], data)
+
+        detail = _parse_detail(d.pop("detail", UNSET))
+
+
+        project_activity = cls(
+            id=id,
+            ecosystem_id=ecosystem_id,
+            project_id=project_id,
+            action=action,
+            created_at=created_at,
+            work_item_id=work_item_id,
+            actor_kind=actor_kind,
+            actor_id=actor_id,
+            actor_label=actor_label,
+            detail=detail,
+        )
+
+
+        project_activity.additional_properties = d
+        return project_activity
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

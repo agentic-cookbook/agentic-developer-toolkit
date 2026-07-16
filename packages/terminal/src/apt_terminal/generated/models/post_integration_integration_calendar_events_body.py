@@ -44,7 +44,7 @@ class PostIntegrationIntegrationCalendarEventsBody:
             ai_extraction (Union[None, Unset, str]):
             is_deleted (Union[Unset, bool]):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
      """
 
     title: str
@@ -68,7 +68,7 @@ class PostIntegrationIntegrationCalendarEventsBody:
     ai_extraction: Union[None, Unset, str] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
 
 
 
@@ -177,7 +177,7 @@ class PostIntegrationIntegrationCalendarEventsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
 
         field_dict: dict[str, Any] = {}
@@ -223,8 +223,8 @@ class PostIntegrationIntegrationCalendarEventsBody:
             field_dict["isDeleted"] = is_deleted
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
 
         return field_dict
 
@@ -395,7 +395,7 @@ class PostIntegrationIntegrationCalendarEventsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         post_integration_integration_calendar_events_body = cls(
             title=title,
@@ -419,7 +419,7 @@ class PostIntegrationIntegrationCalendarEventsBody:
             ai_extraction=ai_extraction,
             is_deleted=is_deleted,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
         )
 
         return post_integration_integration_calendar_events_body

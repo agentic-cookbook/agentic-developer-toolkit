@@ -1,0 +1,154 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast, Union
+from typing import Union
+
+
+
+
+
+
+T = TypeVar("T", bound="RegistryAgentMcpServer")
+
+
+
+@_attrs_define
+class RegistryAgentMcpServer:
+    """ 
+        Attributes:
+            id (str):
+            slug (str): The `<server>` segment in `mcp.<server>.<tool>`
+            name (str):
+            url (str): The remote MCP server's http(s) endpoint URL
+            enabled (bool): Opt-in: a server contributes no tools until an operator enables it
+            has_auth_secret (bool): true iff a per-server bearer secret is stored; the secret itself is NEVER returned
+            created_at (str):
+            updated_at (str):
+            created_by (Union[None, Unset, str]): The admin who registered it (null for system rows)
+     """
+
+    id: str
+    slug: str
+    name: str
+    url: str
+    enabled: bool
+    has_auth_secret: bool
+    created_at: str
+    updated_at: str
+    created_by: Union[None, Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        id = self.id
+
+        slug = self.slug
+
+        name = self.name
+
+        url = self.url
+
+        enabled = self.enabled
+
+        has_auth_secret = self.has_auth_secret
+
+        created_at = self.created_at
+
+        updated_at = self.updated_at
+
+        created_by: Union[None, Unset, str]
+        if isinstance(self.created_by, Unset):
+            created_by = UNSET
+        else:
+            created_by = self.created_by
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "id": id,
+            "slug": slug,
+            "name": name,
+            "url": url,
+            "enabled": enabled,
+            "hasAuthSecret": has_auth_secret,
+            "createdAt": created_at,
+            "updatedAt": updated_at,
+        })
+        if created_by is not UNSET:
+            field_dict["createdBy"] = created_by
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        id = d.pop("id")
+
+        slug = d.pop("slug")
+
+        name = d.pop("name")
+
+        url = d.pop("url")
+
+        enabled = d.pop("enabled")
+
+        has_auth_secret = d.pop("hasAuthSecret")
+
+        created_at = d.pop("createdAt")
+
+        updated_at = d.pop("updatedAt")
+
+        def _parse_created_by(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        created_by = _parse_created_by(d.pop("createdBy", UNSET))
+
+
+        registry_agent_mcp_server = cls(
+            id=id,
+            slug=slug,
+            name=name,
+            url=url,
+            enabled=enabled,
+            has_auth_secret=has_auth_secret,
+            created_at=created_at,
+            updated_at=updated_at,
+            created_by=created_by,
+        )
+
+
+        registry_agent_mcp_server.additional_properties = d
+        return registry_agent_mcp_server
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

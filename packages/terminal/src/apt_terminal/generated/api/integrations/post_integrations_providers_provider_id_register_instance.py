@@ -64,6 +64,13 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
 
         return response_401
 
+    if response.status_code == 403:
+        response_403 = ProblemDetails.from_dict(response.json())
+
+
+
+        return response_403
+
     if response.status_code == 404:
         response_404 = ProblemDetails.from_dict(response.json())
 
@@ -95,7 +102,9 @@ def sync_detailed(
 ) -> Response[Union[PostIntegrationsProvidersProviderIdRegisterInstanceResponse200, ProblemDetails]]:
     """ Register a self-hosted OAuth instance (Mastodon)
 
-     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider. The instance
+    is registered under the target ecosystem `ecosystemId`; the caller must manage it (404/403 when
+    unknown / not the caller's).
 
     Args:
         provider_id (str):
@@ -131,7 +140,9 @@ def sync(
 ) -> Optional[Union[PostIntegrationsProvidersProviderIdRegisterInstanceResponse200, ProblemDetails]]:
     """ Register a self-hosted OAuth instance (Mastodon)
 
-     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider. The instance
+    is registered under the target ecosystem `ecosystemId`; the caller must manage it (404/403 when
+    unknown / not the caller's).
 
     Args:
         provider_id (str):
@@ -162,7 +173,9 @@ async def asyncio_detailed(
 ) -> Response[Union[PostIntegrationsProvidersProviderIdRegisterInstanceResponse200, ProblemDetails]]:
     """ Register a self-hosted OAuth instance (Mastodon)
 
-     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider. The instance
+    is registered under the target ecosystem `ecosystemId`; the caller must manage it (404/403 when
+    unknown / not the caller's).
 
     Args:
         provider_id (str):
@@ -198,7 +211,9 @@ async def asyncio(
 ) -> Optional[Union[PostIntegrationsProvidersProviderIdRegisterInstanceResponse200, ProblemDetails]]:
     """ Register a self-hosted OAuth instance (Mastodon)
 
-     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider.
+     Only valid for oauth_instance providers (400 otherwise). 404 for an unknown provider. The instance
+    is registered under the target ecosystem `ecosystemId`; the caller must manage it (404/403 when
+    unknown / not the caller's).
 
     Args:
         provider_id (str):

@@ -9,6 +9,7 @@ from ... import errors
 
 from ...models.error import Error
 from ...models.get_notifications_response_200 import GetNotificationsResponse200
+from ...models.get_notifications_status import GetNotificationsStatus
 from ...types import UNSET, Unset
 from typing import cast
 from typing import Union
@@ -19,6 +20,9 @@ def _get_kwargs(
     *,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    category: Union[Unset, list[str]] = UNSET,
+    status: Union[Unset, GetNotificationsStatus] = GetNotificationsStatus.INBOX,
+    read: Union[Unset, bool] = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -30,6 +34,21 @@ def _get_kwargs(
     params["page"] = page
 
     params["pageSize"] = page_size
+
+    json_category: Union[Unset, list[str]] = UNSET
+    if not isinstance(category, Unset):
+        json_category = category
+
+
+    params["category"] = json_category
+
+    json_status: Union[Unset, str] = UNSET
+    if not isinstance(status, Unset):
+        json_status = status.value
+
+    params["status"] = json_status
+
+    params["read"] = read
 
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -81,13 +100,19 @@ def sync_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    category: Union[Unset, list[str]] = UNSET,
+    status: Union[Unset, GetNotificationsStatus] = GetNotificationsStatus.INBOX,
+    read: Union[Unset, bool] = UNSET,
 
 ) -> Response[Union[Error, GetNotificationsResponse200]]:
-    """ List the caller's in-app notifications (paginated)
+    """ List the caller's in-app notifications (paginated, filterable)
 
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        category (Union[Unset, list[str]]):
+        status (Union[Unset, GetNotificationsStatus]):  Default: GetNotificationsStatus.INBOX.
+        read (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -101,6 +126,9 @@ def sync_detailed(
     kwargs = _get_kwargs(
         page=page,
 page_size=page_size,
+category=category,
+status=status,
+read=read,
 
     )
 
@@ -115,13 +143,19 @@ def sync(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    category: Union[Unset, list[str]] = UNSET,
+    status: Union[Unset, GetNotificationsStatus] = GetNotificationsStatus.INBOX,
+    read: Union[Unset, bool] = UNSET,
 
 ) -> Optional[Union[Error, GetNotificationsResponse200]]:
-    """ List the caller's in-app notifications (paginated)
+    """ List the caller's in-app notifications (paginated, filterable)
 
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        category (Union[Unset, list[str]]):
+        status (Union[Unset, GetNotificationsStatus]):  Default: GetNotificationsStatus.INBOX.
+        read (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,6 +170,9 @@ def sync(
         client=client,
 page=page,
 page_size=page_size,
+category=category,
+status=status,
+read=read,
 
     ).parsed
 
@@ -144,13 +181,19 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    category: Union[Unset, list[str]] = UNSET,
+    status: Union[Unset, GetNotificationsStatus] = GetNotificationsStatus.INBOX,
+    read: Union[Unset, bool] = UNSET,
 
 ) -> Response[Union[Error, GetNotificationsResponse200]]:
-    """ List the caller's in-app notifications (paginated)
+    """ List the caller's in-app notifications (paginated, filterable)
 
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        category (Union[Unset, list[str]]):
+        status (Union[Unset, GetNotificationsStatus]):  Default: GetNotificationsStatus.INBOX.
+        read (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -164,6 +207,9 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         page=page,
 page_size=page_size,
+category=category,
+status=status,
+read=read,
 
     )
 
@@ -178,13 +224,19 @@ async def asyncio(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    category: Union[Unset, list[str]] = UNSET,
+    status: Union[Unset, GetNotificationsStatus] = GetNotificationsStatus.INBOX,
+    read: Union[Unset, bool] = UNSET,
 
 ) -> Optional[Union[Error, GetNotificationsResponse200]]:
-    """ List the caller's in-app notifications (paginated)
+    """ List the caller's in-app notifications (paginated, filterable)
 
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        category (Union[Unset, list[str]]):
+        status (Union[Unset, GetNotificationsStatus]):  Default: GetNotificationsStatus.INBOX.
+        read (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -199,5 +251,8 @@ async def asyncio(
         client=client,
 page=page,
 page_size=page_size,
+category=category,
+status=status,
+read=read,
 
     )).parsed

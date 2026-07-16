@@ -29,6 +29,9 @@ class PublicPersona:
             name (str):
             description (Union[None, str]):
             model_prompt (str):
+            provider (Union[None, str]):
+            model (str):
+            avatar_url (Union[None, str]):
             voice (Union[None, str]):
             character (Union[None, str]):
             examples (Union[None, str]):
@@ -41,6 +44,9 @@ class PublicPersona:
     name: str
     description: Union[None, str]
     model_prompt: str
+    provider: Union[None, str]
+    model: str
+    avatar_url: Union[None, str]
     voice: Union[None, str]
     character: Union[None, str]
     examples: Union[None, str]
@@ -63,6 +69,14 @@ class PublicPersona:
         description = self.description
 
         model_prompt = self.model_prompt
+
+        provider: Union[None, str]
+        provider = self.provider
+
+        model = self.model
+
+        avatar_url: Union[None, str]
+        avatar_url = self.avatar_url
 
         voice: Union[None, str]
         voice = self.voice
@@ -91,6 +105,9 @@ class PublicPersona:
             "name": name,
             "description": description,
             "modelPrompt": model_prompt,
+            "provider": provider,
+            "model": model,
+            "avatarUrl": avatar_url,
             "voice": voice,
             "character": character,
             "examples": examples,
@@ -120,6 +137,24 @@ class PublicPersona:
 
 
         model_prompt = d.pop("modelPrompt")
+
+        def _parse_provider(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        provider = _parse_provider(d.pop("provider"))
+
+
+        model = d.pop("model")
+
+        def _parse_avatar_url(data: object) -> Union[None, str]:
+            if data is None:
+                return data
+            return cast(Union[None, str], data)
+
+        avatar_url = _parse_avatar_url(d.pop("avatarUrl"))
+
 
         def _parse_voice(data: object) -> Union[None, str]:
             if data is None:
@@ -175,6 +210,9 @@ class PublicPersona:
             name=name,
             description=description,
             model_prompt=model_prompt,
+            provider=provider,
+            model=model,
+            avatar_url=avatar_url,
             voice=voice,
             character=character,
             examples=examples,

@@ -20,7 +20,7 @@ T = TypeVar("T", bound="PostAiProcessingJobsIdCompleteBody")
 class PostAiProcessingJobsIdCompleteBody:
     """ 
         Attributes:
-            lease_token (str): HMAC token returned by /claim
+            lease_token (str): Opaque lease token returned by /claim
             result (Any): Arbitrary result jsonb
      """
 

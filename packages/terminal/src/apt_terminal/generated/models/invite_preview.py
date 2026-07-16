@@ -1,0 +1,123 @@
+from collections.abc import Mapping
+from typing import Any, TypeVar, Optional, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..models.invite_preview_state import InvitePreviewState
+from ..types import UNSET, Unset
+from typing import cast, Union
+from typing import Union
+
+
+
+
+
+
+T = TypeVar("T", bound="InvitePreview")
+
+
+
+@_attrs_define
+class InvitePreview:
+    """ 
+        Attributes:
+            state (InvitePreviewState):
+            ecosystem_name (Union[None, Unset, str]):
+            masked_destination (Union[None, Unset, str]):
+     """
+
+    state: InvitePreviewState
+    ecosystem_name: Union[None, Unset, str] = UNSET
+    masked_destination: Union[None, Unset, str] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
+
+    def to_dict(self) -> dict[str, Any]:
+        state = self.state.value
+
+        ecosystem_name: Union[None, Unset, str]
+        if isinstance(self.ecosystem_name, Unset):
+            ecosystem_name = UNSET
+        else:
+            ecosystem_name = self.ecosystem_name
+
+        masked_destination: Union[None, Unset, str]
+        if isinstance(self.masked_destination, Unset):
+            masked_destination = UNSET
+        else:
+            masked_destination = self.masked_destination
+
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({
+            "state": state,
+        })
+        if ecosystem_name is not UNSET:
+            field_dict["ecosystemName"] = ecosystem_name
+        if masked_destination is not UNSET:
+            field_dict["maskedDestination"] = masked_destination
+
+        return field_dict
+
+
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        state = InvitePreviewState(d.pop("state"))
+
+
+
+
+        def _parse_ecosystem_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        ecosystem_name = _parse_ecosystem_name(d.pop("ecosystemName", UNSET))
+
+
+        def _parse_masked_destination(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        masked_destination = _parse_masked_destination(d.pop("maskedDestination", UNSET))
+
+
+        invite_preview = cls(
+            state=state,
+            ecosystem_name=ecosystem_name,
+            masked_destination=masked_destination,
+        )
+
+
+        invite_preview.additional_properties = d
+        return invite_preview
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

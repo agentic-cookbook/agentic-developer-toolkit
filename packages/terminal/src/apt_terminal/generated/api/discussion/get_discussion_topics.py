@@ -19,6 +19,7 @@ def _get_kwargs(
     *,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    community_id: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -30,6 +31,8 @@ def _get_kwargs(
     params["page"] = page
 
     params["pageSize"] = page_size
+
+    params["communityId"] = community_id
 
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -81,6 +84,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    community_id: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetDiscussionTopicsResponse200]]:
     """ List the ecosystem’s live discussion topics (most-recently-active first)
@@ -88,6 +92,7 @@ def sync_detailed(
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        community_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -101,6 +106,7 @@ def sync_detailed(
     kwargs = _get_kwargs(
         page=page,
 page_size=page_size,
+community_id=community_id,
 
     )
 
@@ -115,6 +121,7 @@ def sync(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    community_id: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetDiscussionTopicsResponse200]]:
     """ List the ecosystem’s live discussion topics (most-recently-active first)
@@ -122,6 +129,7 @@ def sync(
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        community_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,6 +144,7 @@ def sync(
         client=client,
 page=page,
 page_size=page_size,
+community_id=community_id,
 
     ).parsed
 
@@ -144,6 +153,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    community_id: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, GetDiscussionTopicsResponse200]]:
     """ List the ecosystem’s live discussion topics (most-recently-active first)
@@ -151,6 +161,7 @@ async def asyncio_detailed(
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        community_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -164,6 +175,7 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         page=page,
 page_size=page_size,
+community_id=community_id,
 
     )
 
@@ -178,6 +190,7 @@ async def asyncio(
     client: AuthenticatedClient,
     page: Union[Unset, str] = UNSET,
     page_size: Union[Unset, str] = UNSET,
+    community_id: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, GetDiscussionTopicsResponse200]]:
     """ List the ecosystem’s live discussion topics (most-recently-active first)
@@ -185,6 +198,7 @@ async def asyncio(
     Args:
         page (Union[Unset, str]):
         page_size (Union[Unset, str]):
+        community_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -199,5 +213,6 @@ async def asyncio(
         client=client,
 page=page,
 page_size=page_size,
+community_id=community_id,
 
     )).parsed

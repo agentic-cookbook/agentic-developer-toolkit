@@ -24,7 +24,7 @@ class PutContentPollsIdResponse200:
             id (str):
             customer_id (str):
             deleted_at (Union[None, str]):
-            owner_id (str):
+            ecosystem_id (str):
             host_kind (Union[None, str]):
             host_id (Union[None, str]):
             question (str):
@@ -37,7 +37,7 @@ class PutContentPollsIdResponse200:
     id: str
     customer_id: str
     deleted_at: Union[None, str]
-    owner_id: str
+    ecosystem_id: str
     host_kind: Union[None, str]
     host_id: Union[None, str]
     question: str
@@ -58,7 +58,7 @@ class PutContentPollsIdResponse200:
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         host_kind: Union[None, str]
         host_kind = self.host_kind
@@ -84,7 +84,7 @@ class PutContentPollsIdResponse200:
             "id": id,
             "customerId": customer_id,
             "deletedAt": deleted_at,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "hostKind": host_kind,
             "hostId": host_id,
             "question": question,
@@ -113,7 +113,7 @@ class PutContentPollsIdResponse200:
         deleted_at = _parse_deleted_at(d.pop("deletedAt"))
 
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         def _parse_host_kind(data: object) -> Union[None, str]:
             if data is None:
@@ -151,7 +151,7 @@ class PutContentPollsIdResponse200:
             id=id,
             customer_id=customer_id,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             host_kind=host_kind,
             host_id=host_id,
             question=question,

@@ -1,0 +1,236 @@
+from http import HTTPStatus
+from typing import Any, Optional, Union, cast
+
+import httpx
+
+from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from ...models.error import Error
+from ...models.post_tokens_body import PostTokensBody
+from ...models.token_principal_created import TokenPrincipalCreated
+from ...types import UNSET, Unset
+from typing import cast
+from typing import Union
+
+
+
+def _get_kwargs(
+    *,
+    body: PostTokensBody,
+    workspace: Union[Unset, str] = UNSET,
+
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
+
+
+    
+
+    params: dict[str, Any] = {}
+
+    params["workspace"] = workspace
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
+
+    _kwargs: dict[str, Any] = {
+        "method": "post",
+        "url": "/tokens",
+        "params": params,
+    }
+
+    _kwargs["json"] = body.to_dict()
+
+
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Error, TokenPrincipalCreated]]:
+    if response.status_code == 201:
+        response_201 = TokenPrincipalCreated.from_dict(response.json())
+
+
+
+        return response_201
+
+    if response.status_code == 400:
+        response_400 = Error.from_dict(response.json())
+
+
+
+        return response_400
+
+    if response.status_code == 401:
+        response_401 = Error.from_dict(response.json())
+
+
+
+        return response_401
+
+    if response.status_code == 403:
+        response_403 = Error.from_dict(response.json())
+
+
+
+        return response_403
+
+    if response.status_code == 404:
+        response_404 = Error.from_dict(response.json())
+
+
+
+        return response_404
+
+    if response.status_code == 409:
+        response_409 = Error.from_dict(response.json())
+
+
+
+        return response_409
+
+    if client.raise_on_unexpected_status:
+        raise errors.UnexpectedStatus(response.status_code, response.content)
+    else:
+        return None
+
+
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Error, TokenPrincipalCreated]]:
+    return Response(
+        status_code=HTTPStatus(response.status_code),
+        content=response.content,
+        headers=response.headers,
+        parsed=_parse_response(client=client, response=response),
+    )
+
+
+def sync_detailed(
+    *,
+    client: AuthenticatedClient,
+    body: PostTokensBody,
+    workspace: Union[Unset, str] = UNSET,
+
+) -> Response[Union[Error, TokenPrincipalCreated]]:
+    """ Mint a token principal (raw `adh_…` secret shown once)
+
+    Args:
+        workspace (Union[Unset, str]):
+        body (PostTokensBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Error, TokenPrincipalCreated]]
+     """
+
+
+    kwargs = _get_kwargs(
+        body=body,
+workspace=workspace,
+
+    )
+
+    response = client.get_httpx_client().request(
+        **kwargs,
+    )
+
+    return _build_response(client=client, response=response)
+
+def sync(
+    *,
+    client: AuthenticatedClient,
+    body: PostTokensBody,
+    workspace: Union[Unset, str] = UNSET,
+
+) -> Optional[Union[Error, TokenPrincipalCreated]]:
+    """ Mint a token principal (raw `adh_…` secret shown once)
+
+    Args:
+        workspace (Union[Unset, str]):
+        body (PostTokensBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Error, TokenPrincipalCreated]
+     """
+
+
+    return sync_detailed(
+        client=client,
+body=body,
+workspace=workspace,
+
+    ).parsed
+
+async def asyncio_detailed(
+    *,
+    client: AuthenticatedClient,
+    body: PostTokensBody,
+    workspace: Union[Unset, str] = UNSET,
+
+) -> Response[Union[Error, TokenPrincipalCreated]]:
+    """ Mint a token principal (raw `adh_…` secret shown once)
+
+    Args:
+        workspace (Union[Unset, str]):
+        body (PostTokensBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Error, TokenPrincipalCreated]]
+     """
+
+
+    kwargs = _get_kwargs(
+        body=body,
+workspace=workspace,
+
+    )
+
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
+
+    return _build_response(client=client, response=response)
+
+async def asyncio(
+    *,
+    client: AuthenticatedClient,
+    body: PostTokensBody,
+    workspace: Union[Unset, str] = UNSET,
+
+) -> Optional[Union[Error, TokenPrincipalCreated]]:
+    """ Mint a token principal (raw `adh_…` secret shown once)
+
+    Args:
+        workspace (Union[Unset, str]):
+        body (PostTokensBody):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Error, TokenPrincipalCreated]
+     """
+
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+workspace=workspace,
+
+    )).parsed

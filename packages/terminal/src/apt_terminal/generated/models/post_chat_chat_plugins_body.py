@@ -25,7 +25,7 @@ class PostChatChatPluginsBody:
         Attributes:
             message_id (str):
             kind (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             state (Union[Unset, str]):
             config (Union[Unset, str]):
             state_data (Union[Unset, str]):
@@ -34,7 +34,7 @@ class PostChatChatPluginsBody:
 
     message_id: str
     kind: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     state: Union[Unset, str] = UNSET
     config: Union[Unset, str] = UNSET
     state_data: Union[Unset, str] = UNSET
@@ -49,7 +49,7 @@ class PostChatChatPluginsBody:
 
         kind = self.kind
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         state = self.state
 
@@ -70,8 +70,8 @@ class PostChatChatPluginsBody:
             "messageId": message_id,
             "kind": kind,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if state is not UNSET:
             field_dict["state"] = state
         if config is not UNSET:
@@ -92,7 +92,7 @@ class PostChatChatPluginsBody:
 
         kind = d.pop("kind")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         state = d.pop("state", UNSET)
 
@@ -113,7 +113,7 @@ class PostChatChatPluginsBody:
         post_chat_chat_plugins_body = cls(
             message_id=message_id,
             kind=kind,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             state=state,
             config=config,
             state_data=state_data,

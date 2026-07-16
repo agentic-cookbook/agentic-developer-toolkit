@@ -26,6 +26,7 @@ class IntegrationConnectRequestType2:
             type_ (IntegrationConnectRequestType2Type):
             provider_id (str):
             service_type (str):
+            ecosystem_id (str): Target ecosystem id (the caller must manage it)
             identifier (str):
             password (str):
             instance_url (Union[Unset, str]):
@@ -34,6 +35,7 @@ class IntegrationConnectRequestType2:
     type_: IntegrationConnectRequestType2Type
     provider_id: str
     service_type: str
+    ecosystem_id: str
     identifier: str
     password: str
     instance_url: Union[Unset, str] = UNSET
@@ -50,6 +52,8 @@ class IntegrationConnectRequestType2:
 
         service_type = self.service_type
 
+        ecosystem_id = self.ecosystem_id
+
         identifier = self.identifier
 
         password = self.password
@@ -63,6 +67,7 @@ class IntegrationConnectRequestType2:
             "type": type_,
             "providerId": provider_id,
             "serviceType": service_type,
+            "ecosystemId": ecosystem_id,
             "identifier": identifier,
             "password": password,
         })
@@ -85,6 +90,8 @@ class IntegrationConnectRequestType2:
 
         service_type = d.pop("serviceType")
 
+        ecosystem_id = d.pop("ecosystemId")
+
         identifier = d.pop("identifier")
 
         password = d.pop("password")
@@ -95,6 +102,7 @@ class IntegrationConnectRequestType2:
             type_=type_,
             provider_id=provider_id,
             service_type=service_type,
+            ecosystem_id=ecosystem_id,
             identifier=identifier,
             password=password,
             instance_url=instance_url,

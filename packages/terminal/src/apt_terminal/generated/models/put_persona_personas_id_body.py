@@ -23,7 +23,6 @@ T = TypeVar("T", bound="PutPersonaPersonasIdBody")
 class PutPersonaPersonasIdBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
             slug (Union[Unset, str]):
             name (Union[Unset, str]):
             description (Union[None, Unset, str]):
@@ -31,13 +30,13 @@ class PutPersonaPersonasIdBody:
             model (Union[Unset, str]):
             service_id (Union[None, Unset, str]):
             app_id (Union[None, Unset, str]):
+            avatar_attachment_id (Union[None, Unset, str]):
             model_prompt (Union[Unset, str]):
             voice (Union[None, Unset, str]):
             character (Union[None, Unset, str]):
             examples (Union[None, Unset, str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
     slug: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     description: Union[None, Unset, str] = UNSET
@@ -45,6 +44,7 @@ class PutPersonaPersonasIdBody:
     model: Union[Unset, str] = UNSET
     service_id: Union[None, Unset, str] = UNSET
     app_id: Union[None, Unset, str] = UNSET
+    avatar_attachment_id: Union[None, Unset, str] = UNSET
     model_prompt: Union[Unset, str] = UNSET
     voice: Union[None, Unset, str] = UNSET
     character: Union[None, Unset, str] = UNSET
@@ -55,8 +55,6 @@ class PutPersonaPersonasIdBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
-
         slug = self.slug
 
         name = self.name
@@ -83,6 +81,12 @@ class PutPersonaPersonasIdBody:
         else:
             app_id = self.app_id
 
+        avatar_attachment_id: Union[None, Unset, str]
+        if isinstance(self.avatar_attachment_id, Unset):
+            avatar_attachment_id = UNSET
+        else:
+            avatar_attachment_id = self.avatar_attachment_id
+
         model_prompt = self.model_prompt
 
         voice: Union[None, Unset, str]
@@ -108,8 +112,6 @@ class PutPersonaPersonasIdBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
         if slug is not UNSET:
             field_dict["slug"] = slug
         if name is not UNSET:
@@ -124,6 +126,8 @@ class PutPersonaPersonasIdBody:
             field_dict["serviceId"] = service_id
         if app_id is not UNSET:
             field_dict["appId"] = app_id
+        if avatar_attachment_id is not UNSET:
+            field_dict["avatarAttachmentId"] = avatar_attachment_id
         if model_prompt is not UNSET:
             field_dict["modelPrompt"] = model_prompt
         if voice is not UNSET:
@@ -140,8 +144,6 @@ class PutPersonaPersonasIdBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
-
         slug = d.pop("slug", UNSET)
 
         name = d.pop("name", UNSET)
@@ -180,6 +182,16 @@ class PutPersonaPersonasIdBody:
         app_id = _parse_app_id(d.pop("appId", UNSET))
 
 
+        def _parse_avatar_attachment_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        avatar_attachment_id = _parse_avatar_attachment_id(d.pop("avatarAttachmentId", UNSET))
+
+
         model_prompt = d.pop("modelPrompt", UNSET)
 
         def _parse_voice(data: object) -> Union[None, Unset, str]:
@@ -213,7 +225,6 @@ class PutPersonaPersonasIdBody:
 
 
         put_persona_personas_id_body = cls(
-            owner_id=owner_id,
             slug=slug,
             name=name,
             description=description,
@@ -221,6 +232,7 @@ class PutPersonaPersonasIdBody:
             model=model,
             service_id=service_id,
             app_id=app_id,
+            avatar_attachment_id=avatar_attachment_id,
             model_prompt=model_prompt,
             voice=voice,
             character=character,

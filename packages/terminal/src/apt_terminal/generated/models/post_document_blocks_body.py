@@ -27,7 +27,7 @@ class PostDocumentBlocksBody:
             position (str):
             block_type (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             content_text (Union[Unset, str]):
             content_meta (Union[Unset, str]):
             is_deleted (Union[Unset, bool]):
@@ -38,7 +38,7 @@ class PostDocumentBlocksBody:
     position: str
     block_type: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     content_text: Union[Unset, str] = UNSET
     content_meta: Union[Unset, str] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
@@ -61,7 +61,7 @@ class PostDocumentBlocksBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         content_text = self.content_text
 
@@ -85,8 +85,8 @@ class PostDocumentBlocksBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if content_text is not UNSET:
             field_dict["contentText"] = content_text
         if content_meta is not UNSET:
@@ -119,7 +119,7 @@ class PostDocumentBlocksBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         content_text = d.pop("contentText", UNSET)
 
@@ -142,7 +142,7 @@ class PostDocumentBlocksBody:
             position=position,
             block_type=block_type,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             content_text=content_text,
             content_meta=content_meta,
             is_deleted=is_deleted,

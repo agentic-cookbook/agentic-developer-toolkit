@@ -24,14 +24,14 @@ class PutContentKeywordsIdBody:
     """ 
         Attributes:
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             label (Union[Unset, str]):
             color (Union[Unset, str]):
             description (Union[Unset, str]):
      """
 
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     label: Union[Unset, str] = UNSET
     color: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
@@ -47,7 +47,7 @@ class PutContentKeywordsIdBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         label = self.label
 
@@ -62,8 +62,8 @@ class PutContentKeywordsIdBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if label is not UNSET:
             field_dict["label"] = label
         if color is not UNSET:
@@ -88,7 +88,7 @@ class PutContentKeywordsIdBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         label = d.pop("label", UNSET)
 
@@ -98,7 +98,7 @@ class PutContentKeywordsIdBody:
 
         put_content_keywords_id_body = cls(
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             label=label,
             color=color,
             description=description,

@@ -29,7 +29,7 @@ class PersonaMemory:
     """ 
         Attributes:
             id (str):
-            owner_id (str): Ecosystem (tenant) id
+            ecosystem_id (str): Ecosystem (tenant) id
             customer_id (str): Owning user; empty for a global memory
             persona_id (str):
             scope (PersonaMemoryScope):
@@ -55,7 +55,7 @@ class PersonaMemory:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     persona_id: str
     scope: PersonaMemoryScope
@@ -87,7 +87,7 @@ class PersonaMemory:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -172,7 +172,7 @@ class PersonaMemory:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "personaId": persona_id,
             "scope": scope,
@@ -214,7 +214,7 @@ class PersonaMemory:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -339,7 +339,7 @@ class PersonaMemory:
 
         persona_memory = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             persona_id=persona_id,
             scope=scope,

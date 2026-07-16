@@ -22,13 +22,13 @@ T = TypeVar("T", bound="PutPersonaMemoryLinksSrcIdDstIdRelationBody")
 class PutPersonaMemoryLinksSrcIdDstIdRelationBody:
     """ 
         Attributes:
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             src_id (Union[Unset, str]):
             dst_id (Union[Unset, str]):
             relation (Union[Unset, str]):
      """
 
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     src_id: Union[Unset, str] = UNSET
     dst_id: Union[Unset, str] = UNSET
     relation: Union[Unset, str] = UNSET
@@ -38,7 +38,7 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationBody:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         src_id = self.src_id
 
@@ -51,8 +51,8 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationBody:
 
         field_dict.update({
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if src_id is not UNSET:
             field_dict["srcId"] = src_id
         if dst_id is not UNSET:
@@ -67,7 +67,7 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         src_id = d.pop("srcId", UNSET)
 
@@ -76,7 +76,7 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationBody:
         relation = d.pop("relation", UNSET)
 
         put_persona_memory_links_src_id_dst_id_relation_body = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             src_id=src_id,
             dst_id=dst_id,
             relation=relation,

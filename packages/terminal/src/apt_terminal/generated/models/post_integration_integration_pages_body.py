@@ -27,7 +27,7 @@ class PostIntegrationIntegrationPagesBody:
             external_id (str):
             object_type (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             title (Union[Unset, str]):
             url (Union[None, Unset, str]):
             icon (Union[None, Unset, str]):
@@ -42,7 +42,7 @@ class PostIntegrationIntegrationPagesBody:
     external_id: str
     object_type: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     url: Union[None, Unset, str] = UNSET
     icon: Union[None, Unset, str] = UNSET
@@ -69,7 +69,7 @@ class PostIntegrationIntegrationPagesBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         title = self.title
 
@@ -117,8 +117,8 @@ class PostIntegrationIntegrationPagesBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if title is not UNSET:
             field_dict["title"] = title
         if url is not UNSET:
@@ -159,7 +159,7 @@ class PostIntegrationIntegrationPagesBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         title = d.pop("title", UNSET)
 
@@ -222,7 +222,7 @@ class PostIntegrationIntegrationPagesBody:
             external_id=external_id,
             object_type=object_type,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             title=title,
             url=url,
             icon=icon,

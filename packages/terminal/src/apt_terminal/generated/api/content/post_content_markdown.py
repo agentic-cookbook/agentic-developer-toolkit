@@ -10,13 +10,16 @@ from ... import errors
 from ...models.error import Error
 from ...models.markdown_document import MarkdownDocument
 from ...models.post_content_markdown_body import PostContentMarkdownBody
+from ...types import UNSET, Unset
 from typing import cast
+from typing import Union
 
 
 
 def _get_kwargs(
     *,
     body: PostContentMarkdownBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -24,11 +27,18 @@ def _get_kwargs(
 
     
 
-    
+    params: dict[str, Any] = {}
+
+    params["workspace"] = workspace
+
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/content/markdown",
+        "params": params,
     }
 
     _kwargs["json"] = body.to_dict()
@@ -82,11 +92,13 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: PostContentMarkdownBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, MarkdownDocument]]:
     """ Create a markdown document (writes the head + version 1)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostContentMarkdownBody):
 
     Raises:
@@ -100,6 +112,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         body=body,
+workspace=workspace,
 
     )
 
@@ -113,11 +126,13 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: PostContentMarkdownBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, MarkdownDocument]]:
     """ Create a markdown document (writes the head + version 1)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostContentMarkdownBody):
 
     Raises:
@@ -132,6 +147,7 @@ def sync(
     return sync_detailed(
         client=client,
 body=body,
+workspace=workspace,
 
     ).parsed
 
@@ -139,11 +155,13 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: PostContentMarkdownBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Response[Union[Error, MarkdownDocument]]:
     """ Create a markdown document (writes the head + version 1)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostContentMarkdownBody):
 
     Raises:
@@ -157,6 +175,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         body=body,
+workspace=workspace,
 
     )
 
@@ -170,11 +189,13 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: PostContentMarkdownBody,
+    workspace: Union[Unset, str] = UNSET,
 
 ) -> Optional[Union[Error, MarkdownDocument]]:
     """ Create a markdown document (writes the head + version 1)
 
     Args:
+        workspace (Union[Unset, str]):
         body (PostContentMarkdownBody):
 
     Raises:
@@ -189,5 +210,6 @@ async def asyncio(
     return (await asyncio_detailed(
         client=client,
 body=body,
+workspace=workspace,
 
     )).parsed

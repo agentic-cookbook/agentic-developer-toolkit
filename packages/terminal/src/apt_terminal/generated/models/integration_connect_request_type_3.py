@@ -24,12 +24,14 @@ class IntegrationConnectRequestType3:
             type_ (IntegrationConnectRequestType3Type):
             provider_id (str):
             service_type (str):
+            ecosystem_id (str): Target ecosystem id (the caller must manage it)
             public_token (str):
      """
 
     type_: IntegrationConnectRequestType3Type
     provider_id: str
     service_type: str
+    ecosystem_id: str
     public_token: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -44,6 +46,8 @@ class IntegrationConnectRequestType3:
 
         service_type = self.service_type
 
+        ecosystem_id = self.ecosystem_id
+
         public_token = self.public_token
 
 
@@ -53,6 +57,7 @@ class IntegrationConnectRequestType3:
             "type": type_,
             "providerId": provider_id,
             "serviceType": service_type,
+            "ecosystemId": ecosystem_id,
             "publicToken": public_token,
         })
 
@@ -72,12 +77,15 @@ class IntegrationConnectRequestType3:
 
         service_type = d.pop("serviceType")
 
+        ecosystem_id = d.pop("ecosystemId")
+
         public_token = d.pop("publicToken")
 
         integration_connect_request_type_3 = cls(
             type_=type_,
             provider_id=provider_id,
             service_type=service_type,
+            ecosystem_id=ecosystem_id,
             public_token=public_token,
         )
 

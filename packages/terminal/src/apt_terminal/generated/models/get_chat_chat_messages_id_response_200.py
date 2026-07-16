@@ -22,7 +22,7 @@ class GetChatChatMessagesIdResponse200:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             chat_id (str):
             sender_participant_id (Union[None, str]):
             client_message_id (Union[None, str]):
@@ -41,7 +41,7 @@ class GetChatChatMessagesIdResponse200:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     chat_id: str
     sender_participant_id: Union[None, str]
     client_message_id: Union[None, str]
@@ -65,7 +65,7 @@ class GetChatChatMessagesIdResponse200:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         chat_id = self.chat_id
 
@@ -112,7 +112,7 @@ class GetChatChatMessagesIdResponse200:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "chatId": chat_id,
             "senderParticipantId": sender_participant_id,
             "clientMessageId": client_message_id,
@@ -139,7 +139,7 @@ class GetChatChatMessagesIdResponse200:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         chat_id = d.pop("chatId")
 
@@ -233,7 +233,7 @@ class GetChatChatMessagesIdResponse200:
 
         get_chat_chat_messages_id_response_200 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             chat_id=chat_id,
             sender_participant_id=sender_participant_id,
             client_message_id=client_message_id,

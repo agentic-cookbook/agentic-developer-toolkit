@@ -6,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.post_persona_services_body_provider_kind import PostPersonaServicesBodyProviderKind
 from ..types import UNSET, Unset
 from typing import Union
 
@@ -23,14 +24,14 @@ class PostPersonaServicesBody:
     """ 
         Attributes:
             name (str):
-            provider_kind (str):
+            provider_kind (PostPersonaServicesBodyProviderKind):
             base_url (str):
             template_id (Union[Unset, str]):
             api_key (Union[Unset, str]): Plaintext provider key; stored, never returned
      """
 
     name: str
-    provider_kind: str
+    provider_kind: PostPersonaServicesBodyProviderKind
     base_url: str
     template_id: Union[Unset, str] = UNSET
     api_key: Union[Unset, str] = UNSET
@@ -43,7 +44,7 @@ class PostPersonaServicesBody:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        provider_kind = self.provider_kind
+        provider_kind = self.provider_kind.value
 
         base_url = self.base_url
 
@@ -73,7 +74,10 @@ class PostPersonaServicesBody:
         d = dict(src_dict)
         name = d.pop("name")
 
-        provider_kind = d.pop("providerKind")
+        provider_kind = PostPersonaServicesBodyProviderKind(d.pop("providerKind"))
+
+
+
 
         base_url = d.pop("baseUrl")
 

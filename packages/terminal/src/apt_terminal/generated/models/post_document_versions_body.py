@@ -28,7 +28,7 @@ class PostDocumentVersionsBody:
             pinned_op_id (str):
             pinned_sync_version (int):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             description (Union[Unset, str]):
             is_deleted (Union[Unset, bool]):
      """
@@ -38,7 +38,7 @@ class PostDocumentVersionsBody:
     pinned_op_id: str
     pinned_sync_version: int
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
 
@@ -61,7 +61,7 @@ class PostDocumentVersionsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         description = self.description
 
@@ -78,8 +78,8 @@ class PostDocumentVersionsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if description is not UNSET:
             field_dict["description"] = description
         if is_deleted is not UNSET:
@@ -110,7 +110,7 @@ class PostDocumentVersionsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         description = d.pop("description", UNSET)
 
@@ -122,7 +122,7 @@ class PostDocumentVersionsBody:
             pinned_op_id=pinned_op_id,
             pinned_sync_version=pinned_sync_version,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             description=description,
             is_deleted=is_deleted,
         )

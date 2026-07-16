@@ -24,7 +24,7 @@ class PostChatChatsBody:
     """ 
         Attributes:
             owner_user_id (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             type_ (Union[Unset, str]):
             name (Union[Unset, str]):
             description (Union[Unset, str]):
@@ -39,7 +39,7 @@ class PostChatChatsBody:
      """
 
     owner_user_id: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     type_: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
@@ -59,7 +59,7 @@ class PostChatChatsBody:
     def to_dict(self) -> dict[str, Any]:
         owner_user_id = self.owner_user_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         type_ = self.type_
 
@@ -97,8 +97,8 @@ class PostChatChatsBody:
         field_dict.update({
             "ownerUserId": owner_user_id,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if type_ is not UNSET:
             field_dict["type"] = type_
         if name is not UNSET:
@@ -131,7 +131,7 @@ class PostChatChatsBody:
         d = dict(src_dict)
         owner_user_id = d.pop("ownerUserId")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         type_ = d.pop("type", UNSET)
 
@@ -173,7 +173,7 @@ class PostChatChatsBody:
 
         post_chat_chats_body = cls(
             owner_user_id=owner_user_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             type_=type_,
             name=name,
             description=description,

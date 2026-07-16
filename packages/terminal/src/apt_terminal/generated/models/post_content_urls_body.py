@@ -27,7 +27,7 @@ class PostContentUrlsBody:
             canonical_url (str):
             canonical_url_hash (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             title (Union[None, Unset, str]):
             description (Union[None, Unset, str]):
             note (Union[None, Unset, str]):
@@ -44,7 +44,7 @@ class PostContentUrlsBody:
     canonical_url: str
     canonical_url_hash: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     title: Union[None, Unset, str] = UNSET
     description: Union[None, Unset, str] = UNSET
     note: Union[None, Unset, str] = UNSET
@@ -73,7 +73,7 @@ class PostContentUrlsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         title: Union[None, Unset, str]
         if isinstance(self.title, Unset):
@@ -133,8 +133,8 @@ class PostContentUrlsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if title is not UNSET:
             field_dict["title"] = title
         if description is not UNSET:
@@ -179,7 +179,7 @@ class PostContentUrlsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_title(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -262,7 +262,7 @@ class PostContentUrlsBody:
             canonical_url=canonical_url,
             canonical_url_hash=canonical_url_hash,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             title=title,
             description=description,
             note=note,

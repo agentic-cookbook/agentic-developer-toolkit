@@ -24,12 +24,12 @@ class PostChatChatMentionsBody:
         Attributes:
             message_id (str):
             mentioned_participant_id (str):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
      """
 
     message_id: str
     mentioned_participant_id: str
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
 
 
 
@@ -40,7 +40,7 @@ class PostChatChatMentionsBody:
 
         mentioned_participant_id = self.mentioned_participant_id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
 
         field_dict: dict[str, Any] = {}
@@ -49,8 +49,8 @@ class PostChatChatMentionsBody:
             "messageId": message_id,
             "mentionedParticipantId": mentioned_participant_id,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
 
         return field_dict
 
@@ -63,12 +63,12 @@ class PostChatChatMentionsBody:
 
         mentioned_participant_id = d.pop("mentionedParticipantId")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         post_chat_chat_mentions_body = cls(
             message_id=message_id,
             mentioned_participant_id=mentioned_participant_id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
         )
 
         return post_chat_chat_mentions_body

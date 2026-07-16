@@ -6,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.markdown_document_version_owner_kind import MarkdownDocumentVersionOwnerKind
 from ..types import UNSET, Unset
 from typing import cast
 from typing import cast, Union
@@ -28,8 +29,10 @@ class MarkdownDocumentVersion:
         Attributes:
             id (str):
             document_id (str):
-            customer_id (str):
-            owner_id (str):
+            customer_id (str): The revision WRITER.
+            ecosystem_id (str):
+            owner_kind (MarkdownDocumentVersionOwnerKind): Inherited from the head document at write.
+            owner_id (str): Inherited from the head document at write.
             version (int):
             title (str): Document title at this revision (full-state snapshot).
             content (str):
@@ -47,6 +50,8 @@ class MarkdownDocumentVersion:
     id: str
     document_id: str
     customer_id: str
+    ecosystem_id: str
+    owner_kind: MarkdownDocumentVersionOwnerKind
     owner_id: str
     version: int
     title: str
@@ -73,6 +78,10 @@ class MarkdownDocumentVersion:
         document_id = self.document_id
 
         customer_id = self.customer_id
+
+        ecosystem_id = self.ecosystem_id
+
+        owner_kind = self.owner_kind.value
 
         owner_id = self.owner_id
 
@@ -129,6 +138,8 @@ class MarkdownDocumentVersion:
             "id": id,
             "documentId": document_id,
             "customerId": customer_id,
+            "ecosystemId": ecosystem_id,
+            "ownerKind": owner_kind,
             "ownerId": owner_id,
             "version": version,
             "title": title,
@@ -162,6 +173,13 @@ class MarkdownDocumentVersion:
         document_id = d.pop("documentId")
 
         customer_id = d.pop("customerId")
+
+        ecosystem_id = d.pop("ecosystemId")
+
+        owner_kind = MarkdownDocumentVersionOwnerKind(d.pop("ownerKind"))
+
+
+
 
         owner_id = d.pop("ownerId")
 
@@ -243,6 +261,8 @@ class MarkdownDocumentVersion:
             id=id,
             document_id=document_id,
             customer_id=customer_id,
+            ecosystem_id=ecosystem_id,
+            owner_kind=owner_kind,
             owner_id=owner_id,
             version=version,
             title=title,

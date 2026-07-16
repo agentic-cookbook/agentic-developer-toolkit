@@ -22,11 +22,13 @@ T = TypeVar("T", bound="PostIntegrationsProvidersProviderIdRegisterInstanceBody"
 class PostIntegrationsProvidersProviderIdRegisterInstanceBody:
     """ 
         Attributes:
+            ecosystem_id (str): Target ecosystem id (the caller must manage it)
             instance_url (str):
             redirect_uri (str):
             service_type (Union[Unset, str]):
      """
 
+    ecosystem_id: str
     instance_url: str
     redirect_uri: str
     service_type: Union[Unset, str] = UNSET
@@ -37,6 +39,8 @@ class PostIntegrationsProvidersProviderIdRegisterInstanceBody:
 
 
     def to_dict(self) -> dict[str, Any]:
+        ecosystem_id = self.ecosystem_id
+
         instance_url = self.instance_url
 
         redirect_uri = self.redirect_uri
@@ -47,6 +51,7 @@ class PostIntegrationsProvidersProviderIdRegisterInstanceBody:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
+            "ecosystemId": ecosystem_id,
             "instanceUrl": instance_url,
             "redirectUri": redirect_uri,
         })
@@ -60,6 +65,8 @@ class PostIntegrationsProvidersProviderIdRegisterInstanceBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+        ecosystem_id = d.pop("ecosystemId")
+
         instance_url = d.pop("instanceUrl")
 
         redirect_uri = d.pop("redirectUri")
@@ -67,6 +74,7 @@ class PostIntegrationsProvidersProviderIdRegisterInstanceBody:
         service_type = d.pop("serviceType", UNSET)
 
         post_integrations_providers_provider_id_register_instance_body = cls(
+            ecosystem_id=ecosystem_id,
             instance_url=instance_url,
             redirect_uri=redirect_uri,
             service_type=service_type,

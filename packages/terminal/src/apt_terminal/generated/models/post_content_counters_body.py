@@ -25,13 +25,13 @@ class PostContentCountersBody:
         Attributes:
             name (str):
             value (int):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             deleted_at (Union[None, Unset, str]):
      """
 
     name: str
     value: int
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     deleted_at: Union[None, Unset, str] = UNSET
 
 
@@ -43,7 +43,7 @@ class PostContentCountersBody:
 
         value = self.value
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         deleted_at: Union[None, Unset, str]
         if isinstance(self.deleted_at, Unset):
@@ -58,8 +58,8 @@ class PostContentCountersBody:
             "name": name,
             "value": value,
         })
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
 
@@ -74,7 +74,7 @@ class PostContentCountersBody:
 
         value = d.pop("value")
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_deleted_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -89,7 +89,7 @@ class PostContentCountersBody:
         post_content_counters_body = cls(
             name=name,
             value=value,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             deleted_at=deleted_at,
         )
 

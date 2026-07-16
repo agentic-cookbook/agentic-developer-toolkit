@@ -32,7 +32,7 @@ class PostEcosystemEcosystemsBody:
             primary_domain (Union[Unset, str]):
             is_deleted (Union[Unset, bool]):
             is_default (Union[Unset, bool]):
-            type_ (Union[Unset, str]):
+            is_infrastructure (Union[Unset, bool]):
             namespace_id (Union[None, Unset, str]):
             id (Union[Unset, str]):
      """
@@ -46,7 +46,7 @@ class PostEcosystemEcosystemsBody:
     primary_domain: Union[Unset, str] = UNSET
     is_deleted: Union[Unset, bool] = UNSET
     is_default: Union[Unset, bool] = UNSET
-    type_: Union[Unset, str] = UNSET
+    is_infrastructure: Union[Unset, bool] = UNSET
     namespace_id: Union[None, Unset, str] = UNSET
     id: Union[Unset, str] = UNSET
 
@@ -77,7 +77,7 @@ class PostEcosystemEcosystemsBody:
 
         is_default = self.is_default
 
-        type_ = self.type_
+        is_infrastructure = self.is_infrastructure
 
         namespace_id: Union[None, Unset, str]
         if isinstance(self.namespace_id, Unset):
@@ -108,8 +108,8 @@ class PostEcosystemEcosystemsBody:
             field_dict["isDeleted"] = is_deleted
         if is_default is not UNSET:
             field_dict["isDefault"] = is_default
-        if type_ is not UNSET:
-            field_dict["type"] = type_
+        if is_infrastructure is not UNSET:
+            field_dict["isInfrastructure"] = is_infrastructure
         if namespace_id is not UNSET:
             field_dict["namespaceId"] = namespace_id
         if id is not UNSET:
@@ -148,7 +148,7 @@ class PostEcosystemEcosystemsBody:
 
         is_default = d.pop("isDefault", UNSET)
 
-        type_ = d.pop("type", UNSET)
+        is_infrastructure = d.pop("isInfrastructure", UNSET)
 
         def _parse_namespace_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -172,7 +172,7 @@ class PostEcosystemEcosystemsBody:
             primary_domain=primary_domain,
             is_deleted=is_deleted,
             is_default=is_default,
-            type_=type_,
+            is_infrastructure=is_infrastructure,
             namespace_id=namespace_id,
             id=id,
         )

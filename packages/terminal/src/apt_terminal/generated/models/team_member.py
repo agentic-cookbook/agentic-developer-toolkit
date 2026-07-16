@@ -6,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.team_member_member_kind import TeamMemberMemberKind
 from ..types import UNSET, Unset
 from typing import cast, Union
 from typing import Union
@@ -25,20 +26,29 @@ class TeamMember:
         Attributes:
             id (str):
             team_id (str):
-            user_id (str): the member customer id
+            member_kind (TeamMemberMemberKind): which principal userId names — 'customer' (customer.customers) or 'persona'
+                (persona.personas). Present on every response: GET list rows, the add-persona 201, and the by-email add 201
+                (always a customer).
+            user_id (str): the member principal id — a customer id, or a persona id when memberKind is 'persona'
             role (str):
             added_at (str):
-            email (Union[None, Unset, str]): the member's email (resolved)
+            email (Union[None, Unset, str]): the member's email (resolved; null for a persona member or a foreign customer)
             display_name (Union[None, Unset, str]):
+            persona_slug (Union[None, Unset, str]): the persona's slug when memberKind is 'persona' (null for a customer
+                member)
+            persona_name (Union[None, Unset, str]):
      """
 
     id: str
     team_id: str
+    member_kind: TeamMemberMemberKind
     user_id: str
     role: str
     added_at: str
     email: Union[None, Unset, str] = UNSET
     display_name: Union[None, Unset, str] = UNSET
+    persona_slug: Union[None, Unset, str] = UNSET
+    persona_name: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -49,6 +59,8 @@ class TeamMember:
         id = self.id
 
         team_id = self.team_id
+
+        member_kind = self.member_kind.value
 
         user_id = self.user_id
 
@@ -68,12 +80,25 @@ class TeamMember:
         else:
             display_name = self.display_name
 
+        persona_slug: Union[None, Unset, str]
+        if isinstance(self.persona_slug, Unset):
+            persona_slug = UNSET
+        else:
+            persona_slug = self.persona_slug
+
+        persona_name: Union[None, Unset, str]
+        if isinstance(self.persona_name, Unset):
+            persona_name = UNSET
+        else:
+            persona_name = self.persona_name
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
             "teamId": team_id,
+            "memberKind": member_kind,
             "userId": user_id,
             "role": role,
             "addedAt": added_at,
@@ -82,6 +107,10 @@ class TeamMember:
             field_dict["email"] = email
         if display_name is not UNSET:
             field_dict["displayName"] = display_name
+        if persona_slug is not UNSET:
+            field_dict["personaSlug"] = persona_slug
+        if persona_name is not UNSET:
+            field_dict["personaName"] = persona_name
 
         return field_dict
 
@@ -93,6 +122,11 @@ class TeamMember:
         id = d.pop("id")
 
         team_id = d.pop("teamId")
+
+        member_kind = TeamMemberMemberKind(d.pop("memberKind"))
+
+
+
 
         user_id = d.pop("userId")
 
@@ -120,14 +154,37 @@ class TeamMember:
         display_name = _parse_display_name(d.pop("displayName", UNSET))
 
 
+        def _parse_persona_slug(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        persona_slug = _parse_persona_slug(d.pop("personaSlug", UNSET))
+
+
+        def _parse_persona_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        persona_name = _parse_persona_name(d.pop("personaName", UNSET))
+
+
         team_member = cls(
             id=id,
             team_id=team_id,
+            member_kind=member_kind,
             user_id=user_id,
             role=role,
             added_at=added_at,
             email=email,
             display_name=display_name,
+            persona_slug=persona_slug,
+            persona_name=persona_name,
         )
 
 

@@ -22,9 +22,11 @@ T = TypeVar("T", bound="PostIntegrationsProvidersProviderIdLinkTokenBody")
 class PostIntegrationsProvidersProviderIdLinkTokenBody:
     """ 
         Attributes:
+            ecosystem_id (str): Target ecosystem id (the caller must manage it)
             service_type (Union[Unset, str]): Defaults to the provider primary service type
      """
 
+    ecosystem_id: str
     service_type: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -33,12 +35,15 @@ class PostIntegrationsProvidersProviderIdLinkTokenBody:
 
 
     def to_dict(self) -> dict[str, Any]:
+        ecosystem_id = self.ecosystem_id
+
         service_type = self.service_type
 
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
+            "ecosystemId": ecosystem_id,
         })
         if service_type is not UNSET:
             field_dict["serviceType"] = service_type
@@ -50,9 +55,12 @@ class PostIntegrationsProvidersProviderIdLinkTokenBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+        ecosystem_id = d.pop("ecosystemId")
+
         service_type = d.pop("serviceType", UNSET)
 
         post_integrations_providers_provider_id_link_token_body = cls(
+            ecosystem_id=ecosystem_id,
             service_type=service_type,
         )
 

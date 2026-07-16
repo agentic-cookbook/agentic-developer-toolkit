@@ -23,6 +23,9 @@ class PutMonitoringHealthChecksIdResponse200:
         Attributes:
             id (str):
             endpoint_id (str):
+            user_id (str):
+            owner_kind (str):
+            owner_id (str):
             status (str):
             response_time_ms (Union[None, int]):
             status_code (Union[None, int]):
@@ -32,6 +35,9 @@ class PutMonitoringHealthChecksIdResponse200:
 
     id: str
     endpoint_id: str
+    user_id: str
+    owner_kind: str
+    owner_id: str
     status: str
     response_time_ms: Union[None, int]
     status_code: Union[None, int]
@@ -46,6 +52,12 @@ class PutMonitoringHealthChecksIdResponse200:
         id = self.id
 
         endpoint_id = self.endpoint_id
+
+        user_id = self.user_id
+
+        owner_kind = self.owner_kind
+
+        owner_id = self.owner_id
 
         status = self.status
 
@@ -66,6 +78,9 @@ class PutMonitoringHealthChecksIdResponse200:
         field_dict.update({
             "id": id,
             "endpointId": endpoint_id,
+            "userId": user_id,
+            "ownerKind": owner_kind,
+            "ownerId": owner_id,
             "status": status,
             "responseTimeMs": response_time_ms,
             "statusCode": status_code,
@@ -83,6 +98,12 @@ class PutMonitoringHealthChecksIdResponse200:
         id = d.pop("id")
 
         endpoint_id = d.pop("endpointId")
+
+        user_id = d.pop("userId")
+
+        owner_kind = d.pop("ownerKind")
+
+        owner_id = d.pop("ownerId")
 
         status = d.pop("status")
 
@@ -115,6 +136,9 @@ class PutMonitoringHealthChecksIdResponse200:
         put_monitoring_health_checks_id_response_200 = cls(
             id=id,
             endpoint_id=endpoint_id,
+            user_id=user_id,
+            owner_kind=owner_kind,
+            owner_id=owner_id,
             status=status,
             response_time_ms=response_time_ms,
             status_code=status_code,

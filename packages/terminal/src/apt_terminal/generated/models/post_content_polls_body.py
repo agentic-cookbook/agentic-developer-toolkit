@@ -25,7 +25,7 @@ class PostContentPollsBody:
         Attributes:
             question (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             host_kind (Union[None, Unset, str]):
             host_id (Union[None, Unset, str]):
             allow_multiple (Union[Unset, bool]):
@@ -34,7 +34,7 @@ class PostContentPollsBody:
 
     question: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     host_kind: Union[None, Unset, str] = UNSET
     host_id: Union[None, Unset, str] = UNSET
     allow_multiple: Union[Unset, bool] = UNSET
@@ -53,7 +53,7 @@ class PostContentPollsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         host_kind: Union[None, Unset, str]
         if isinstance(self.host_kind, Unset):
@@ -83,8 +83,8 @@ class PostContentPollsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if host_kind is not UNSET:
             field_dict["hostKind"] = host_kind
         if host_id is not UNSET:
@@ -113,7 +113,7 @@ class PostContentPollsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         def _parse_host_kind(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -150,7 +150,7 @@ class PostContentPollsBody:
         post_content_polls_body = cls(
             question=question,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             host_kind=host_kind,
             host_id=host_id,
             allow_multiple=allow_multiple,

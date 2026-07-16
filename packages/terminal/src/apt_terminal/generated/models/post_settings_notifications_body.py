@@ -25,16 +25,18 @@ class PostSettingsNotificationsBody:
         Attributes:
             category (str):
             deleted_at (Union[None, Unset, str]):
-            owner_id (Union[Unset, str]):
+            ecosystem_id (Union[Unset, str]):
             email (Union[Unset, bool]):
             sms (Union[Unset, bool]):
+            in_app (Union[Unset, bool]):
      """
 
     category: str
     deleted_at: Union[None, Unset, str] = UNSET
-    owner_id: Union[Unset, str] = UNSET
+    ecosystem_id: Union[Unset, str] = UNSET
     email: Union[Unset, bool] = UNSET
     sms: Union[Unset, bool] = UNSET
+    in_app: Union[Unset, bool] = UNSET
 
 
 
@@ -49,11 +51,13 @@ class PostSettingsNotificationsBody:
         else:
             deleted_at = self.deleted_at
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         email = self.email
 
         sms = self.sms
+
+        in_app = self.in_app
 
 
         field_dict: dict[str, Any] = {}
@@ -63,12 +67,14 @@ class PostSettingsNotificationsBody:
         })
         if deleted_at is not UNSET:
             field_dict["deletedAt"] = deleted_at
-        if owner_id is not UNSET:
-            field_dict["ownerId"] = owner_id
+        if ecosystem_id is not UNSET:
+            field_dict["ecosystemId"] = ecosystem_id
         if email is not UNSET:
             field_dict["email"] = email
         if sms is not UNSET:
             field_dict["sms"] = sms
+        if in_app is not UNSET:
+            field_dict["inApp"] = in_app
 
         return field_dict
 
@@ -89,18 +95,21 @@ class PostSettingsNotificationsBody:
         deleted_at = _parse_deleted_at(d.pop("deletedAt", UNSET))
 
 
-        owner_id = d.pop("ownerId", UNSET)
+        ecosystem_id = d.pop("ecosystemId", UNSET)
 
         email = d.pop("email", UNSET)
 
         sms = d.pop("sms", UNSET)
 
+        in_app = d.pop("inApp", UNSET)
+
         post_settings_notifications_body = cls(
             category=category,
             deleted_at=deleted_at,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             email=email,
             sms=sms,
+            in_app=in_app,
         )
 
         return post_settings_notifications_body

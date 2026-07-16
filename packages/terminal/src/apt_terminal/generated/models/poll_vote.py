@@ -24,7 +24,7 @@ class PollVote:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             customer_id (str):
             option_id (str):
             created_at (str):
@@ -32,7 +32,7 @@ class PollVote:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     customer_id: str
     option_id: str
     created_at: str
@@ -46,7 +46,7 @@ class PollVote:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         customer_id = self.customer_id
 
@@ -65,7 +65,7 @@ class PollVote:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "customerId": customer_id,
             "optionId": option_id,
             "createdAt": created_at,
@@ -82,7 +82,7 @@ class PollVote:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         customer_id = d.pop("customerId")
 
@@ -102,7 +102,7 @@ class PollVote:
 
         poll_vote = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             customer_id=customer_id,
             option_id=option_id,
             created_at=created_at,

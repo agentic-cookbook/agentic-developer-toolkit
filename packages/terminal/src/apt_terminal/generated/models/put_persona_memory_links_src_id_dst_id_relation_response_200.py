@@ -20,14 +20,14 @@ T = TypeVar("T", bound="PutPersonaMemoryLinksSrcIdDstIdRelationResponse200")
 class PutPersonaMemoryLinksSrcIdDstIdRelationResponse200:
     """ 
         Attributes:
-            owner_id (str):
+            ecosystem_id (str):
             src_id (str):
             dst_id (str):
             relation (str):
             created_at (str):
      """
 
-    owner_id: str
+    ecosystem_id: str
     src_id: str
     dst_id: str
     relation: str
@@ -38,7 +38,7 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationResponse200:
 
 
     def to_dict(self) -> dict[str, Any]:
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         src_id = self.src_id
 
@@ -52,7 +52,7 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationResponse200:
         field_dict: dict[str, Any] = {}
 
         field_dict.update({
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "srcId": src_id,
             "dstId": dst_id,
             "relation": relation,
@@ -66,7 +66,7 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationResponse200:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         src_id = d.pop("srcId")
 
@@ -77,7 +77,7 @@ class PutPersonaMemoryLinksSrcIdDstIdRelationResponse200:
         created_at = d.pop("createdAt")
 
         put_persona_memory_links_src_id_dst_id_relation_response_200 = cls(
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             src_id=src_id,
             dst_id=dst_id,
             relation=relation,

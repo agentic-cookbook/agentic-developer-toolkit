@@ -25,7 +25,7 @@ class PostBucketBucketsResponse201:
     """ 
         Attributes:
             id (str):
-            owner_id (str):
+            ecosystem_id (str):
             parent_id (Union[None, str]):
             name (str):
             description (str):
@@ -36,7 +36,7 @@ class PostBucketBucketsResponse201:
      """
 
     id: str
-    owner_id: str
+    ecosystem_id: str
     parent_id: Union[None, str]
     name: str
     description: str
@@ -53,7 +53,7 @@ class PostBucketBucketsResponse201:
         from ..models.post_bucket_buckets_response_201_metadata_type_0_type_1 import PostBucketBucketsResponse201MetadataType0Type1
         id = self.id
 
-        owner_id = self.owner_id
+        ecosystem_id = self.ecosystem_id
 
         parent_id: Union[None, str]
         parent_id = self.parent_id
@@ -83,7 +83,7 @@ class PostBucketBucketsResponse201:
 
         field_dict.update({
             "id": id,
-            "ownerId": owner_id,
+            "ecosystemId": ecosystem_id,
             "parentId": parent_id,
             "name": name,
             "description": description,
@@ -103,7 +103,7 @@ class PostBucketBucketsResponse201:
         d = dict(src_dict)
         id = d.pop("id")
 
-        owner_id = d.pop("ownerId")
+        ecosystem_id = d.pop("ecosystemId")
 
         def _parse_parent_id(data: object) -> Union[None, str]:
             if data is None:
@@ -151,7 +151,7 @@ class PostBucketBucketsResponse201:
 
         post_bucket_buckets_response_201 = cls(
             id=id,
-            owner_id=owner_id,
+            ecosystem_id=ecosystem_id,
             parent_id=parent_id,
             name=name,
             description=description,
