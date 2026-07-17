@@ -72,6 +72,11 @@ final class StubURLProtocol: URLProtocol {
         var statusCode: Int = 200
         var headers: [String: String] = ["Content-Type": "application/json"]
         var body: Data = Data(#"{"status":"ok"}"#.utf8)
+        /// When set, `startLoading()` fails the request with this error instead of
+        /// returning a response — simulates a `URLSession` transport failure (e.g.
+        /// `URLError.notConnectedToInternet`) so callers can assert their mapping
+        /// from transport errors to a domain failure.
+        var error: (any Error)? = nil
     }
 
     private static let lock = NSLock()
@@ -104,6 +109,10 @@ final class StubURLProtocol: URLProtocol {
         let stub: Stub = Self.lock.withLock {
             Self.captured.append(request)
             return Self.handler?(request) ?? Stub()
+        }
+        if let error = stub.error {
+            client?.urlProtocol(self, didFailWithError: error)
+            return
         }
         let response = HTTPURLResponse(
             url: request.url!,

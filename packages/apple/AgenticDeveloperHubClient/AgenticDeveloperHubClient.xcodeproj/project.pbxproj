@@ -11,9 +11,13 @@
 		053600078FF2E16C078EB8E6 /* AuthWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0318E085AB7521A2E6EF33B /* AuthWrappersTests.swift */; };
 		0D2E62CD80FC6869E29C8ABB /* MockDaemonServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B92ECC0CD4043B00429DFB /* MockDaemonServer.swift */; };
 		16F1AF38B1352E8E65BB2C51 /* TransportResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A4C3D0EF7416A58FCCF96 /* TransportResolverTests.swift */; };
+		267E901F7C82C3B817964135 /* push-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 74F68CB079A5FF4CDD58344E /* push-response.json */; };
+		2A191C70E813386110F321C4 /* pull-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 64ABF066F038C0DA77BF676B /* pull-response.json */; };
+		2B5F5CB1D63274DE97548642 /* push-request.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DA8E2CE77483E50E39F6883 /* push-request.json */; };
 		30542471184054C63573984B /* TransportResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CCC04F149E32D7B2F1F059 /* TransportResolver.swift */; };
 		38D33C5F67FD3208DDEF4A87 /* LiveSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCE8C7E1C9F1C493EEE34F /* LiveSmokeTests.swift */; };
 		3BCBE8103AFB8BC02F788EAF /* CredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D06625443BC7FCF3F3DF95 /* CredentialStore.swift */; };
+		44CC828A5766639A64D358B5 /* ADHSyncAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FEAD9C30CF888C272B3527 /* ADHSyncAPI.swift */; };
 		4C1360E7F33095999165BF49 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 7B3358DC8E394C3B55DA9911 /* OpenAPIURLSession */; };
 		57D7C1A0528B3748CA6D8035 /* ADHClientWiringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A7E929CBBDE69CFFD42B49 /* ADHClientWiringTests.swift */; };
 		6909918C407C180EEACFEF2B /* DaemonContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3BA2A17F4A60B7C8FFFCE5 /* DaemonContract.swift */; };
@@ -24,6 +28,7 @@
 		8B2E94378C5B41EEDC002485 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4DB57D3EB7A87F9C66A64 /* KeychainHelper.swift */; };
 		8F067E76427A17E47CA952A1 /* DirectTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E9CC24CABD917AFB625B4F /* DirectTransportTests.swift */; };
 		A0012B5AF6EE6B23C07B2385 /* DaemonTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B49F9EAE13469AA4A5DAFC4 /* DaemonTransportTests.swift */; };
+		A93E0DE7B54158357C7FB1AB /* ADHSyncAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CA159FFF3A86B2812F7375 /* ADHSyncAPITests.swift */; };
 		AC808F93EB6C561A71350DE7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F00E40E373DA5C00F4F6E6 /* Client.swift */; };
 		ACF71FB62723173CF36A154A /* AgenticDeveloperHubClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FE29807BB376745D790A28 /* AgenticDeveloperHubClient.framework */; };
 		BDC248C30447A4AA1A76F39C /* ADHClient+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642DC7ACA98FFACA1D895C8C /* ADHClient+Auth.swift */; };
@@ -58,13 +63,18 @@
 
 /* Begin PBXFileReference section */
 		1287A16F9C54B735D869D014 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		14FEAD9C30CF888C272B3527 /* ADHSyncAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHSyncAPI.swift; sourceTree = "<group>"; };
 		1A3A66E7F3B7A73E902F8618 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		25CA159FFF3A86B2812F7375 /* ADHSyncAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHSyncAPITests.swift; sourceTree = "<group>"; };
 		261C64DF9D0E4180068E9B2C /* APITransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITransport.swift; sourceTree = "<group>"; };
 		3A3BA2A17F4A60B7C8FFFCE5 /* DaemonContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaemonContract.swift; sourceTree = "<group>"; };
 		55F00E40E373DA5C00F4F6E6 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		5DA8E2CE77483E50E39F6883 /* push-request.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "push-request.json"; sourceTree = "<group>"; };
 		642DC7ACA98FFACA1D895C8C /* ADHClient+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ADHClient+Auth.swift"; sourceTree = "<group>"; };
+		64ABF066F038C0DA77BF676B /* pull-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pull-response.json"; sourceTree = "<group>"; };
 		68FE29807BB376745D790A28 /* AgenticDeveloperHubClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AgenticDeveloperHubClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B49F9EAE13469AA4A5DAFC4 /* DaemonTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaemonTransportTests.swift; sourceTree = "<group>"; };
+		74F68CB079A5FF4CDD58344E /* push-response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "push-response.json"; sourceTree = "<group>"; };
 		7D5A4C3D0EF7416A58FCCF96 /* TransportResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportResolverTests.swift; sourceTree = "<group>"; };
 		8422A8FD599B5DEB81290D69 /* ADHClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHClient.swift; sourceTree = "<group>"; };
 		A7B92ECC0CD4043B00429DFB /* MockDaemonServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDaemonServer.swift; sourceTree = "<group>"; };
@@ -111,12 +121,23 @@
 			path = Transport;
 			sourceTree = "<group>";
 		};
+		20463DC387FC06066FD59E8E /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				64ABF066F038C0DA77BF676B /* pull-response.json */,
+				5DA8E2CE77483E50E39F6883 /* push-request.json */,
+				74F68CB079A5FF4CDD58344E /* push-response.json */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
 		29236305D00129B0B8DB77F2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				8422A8FD599B5DEB81290D69 /* ADHClient.swift */,
 				E85163CEF78C17E2CC1678B8 /* Auth */,
 				5026657CD24D3470388D189A /* Generated */,
+				FA8E250276AE12BC46A75D41 /* Sync */,
 				051C0173059AFF12B6625452 /* Transport */,
 			);
 			path = Sources;
@@ -144,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				E2A7E929CBBDE69CFFD42B49 /* ADHClientWiringTests.swift */,
+				25CA159FFF3A86B2812F7375 /* ADHSyncAPITests.swift */,
 				C0318E085AB7521A2E6EF33B /* AuthWrappersTests.swift */,
 				6B49F9EAE13469AA4A5DAFC4 /* DaemonTransportTests.swift */,
 				D0E9CC24CABD917AFB625B4F /* DirectTransportTests.swift */,
@@ -151,6 +173,7 @@
 				A7B92ECC0CD4043B00429DFB /* MockDaemonServer.swift */,
 				B6A250C8D68ACB736BD73725 /* TestSupport.swift */,
 				7D5A4C3D0EF7416A58FCCF96 /* TransportResolverTests.swift */,
+				20463DC387FC06066FD59E8E /* Fixtures */,
 			);
 			path = AgenticDeveloperHubClientTests;
 			sourceTree = "<group>";
@@ -184,6 +207,14 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		FA8E250276AE12BC46A75D41 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				14FEAD9C30CF888C272B3527 /* ADHSyncAPI.swift */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -192,6 +223,7 @@
 			buildConfigurationList = D9C3452D8BE48B6C8CA18193 /* Build configuration list for PBXNativeTarget "AgenticDeveloperHubClientTests" */;
 			buildPhases = (
 				C99E909C271ED0DE32E29F2F /* Sources */,
+				AE54904F160F653133925726 /* Resources */,
 				EC2E87E3E15C6FAC74FDBC1A /* Frameworks */,
 				047A99339238A395769074E1 /* Embed Frameworks */,
 			);
@@ -262,6 +294,19 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		AE54904F160F653133925726 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A191C70E813386110F321C4 /* pull-response.json in Resources */,
+				2B5F5CB1D63274DE97548642 /* push-request.json in Resources */,
+				267E901F7C82C3B817964135 /* push-response.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9341BB5A65901B099188CCA0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -269,6 +314,7 @@
 			files = (
 				BDC248C30447A4AA1A76F39C /* ADHClient+Auth.swift in Sources */,
 				F6F4496B405D5775CB4225C6 /* ADHClient.swift in Sources */,
+				44CC828A5766639A64D358B5 /* ADHSyncAPI.swift in Sources */,
 				FD1BE71850B827B6CD917781 /* APITransport.swift in Sources */,
 				722E654B1D0FCE33F2BEB1F5 /* AuthenticationMiddleware.swift in Sources */,
 				AC808F93EB6C561A71350DE7 /* Client.swift in Sources */,
@@ -286,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57D7C1A0528B3748CA6D8035 /* ADHClientWiringTests.swift in Sources */,
+				A93E0DE7B54158357C7FB1AB /* ADHSyncAPITests.swift in Sources */,
 				053600078FF2E16C078EB8E6 /* AuthWrappersTests.swift in Sources */,
 				A0012B5AF6EE6B23C07B2385 /* DaemonTransportTests.swift in Sources */,
 				8F067E76427A17E47CA952A1 /* DirectTransportTests.swift in Sources */,
