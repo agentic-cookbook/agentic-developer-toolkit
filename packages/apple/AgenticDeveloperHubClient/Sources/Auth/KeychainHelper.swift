@@ -19,17 +19,38 @@ public enum KeychainHelper {
     )
 
     /// Stores a value for the given account key, overwriting any existing value.
+    ///
+    /// On iOS the item is stored with an explicit accessibility class,
+    /// `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`: `AfterFirstUnlock`
+    /// (not `WhenUnlocked`, the implicit default) because background refresh
+    /// must be able to read the token while the device is locked after its
+    /// first unlock, and `ThisDeviceOnly` because a bearer token should never
+    /// ride device backups or keychain sync onto another device. Because this
+    /// method always deletes-then-adds, an existing item picks up the class
+    /// on its next save — no separate migration step.
+    ///
+    /// macOS is deliberately left on the implicit default: the file-based
+    /// legacy keychain ignores (and in some OS versions rejects with
+    /// `errSecParam`) `kSecAttrAccessible` unless the item also opts into the
+    /// data-protection keychain via `kSecUseDataProtectionKeychain` — and
+    /// flipping that would strand items existing callers already stored in
+    /// the legacy keychain (reads scoped to one keychain no longer see the
+    /// other). That migration is a separate decision, not a side effect to
+    /// take here.
     @discardableResult
     public static func set(_ value: String, forKey key: String) -> Bool {
         let data = Data(value.utf8)
         delete(forKey: key)
 
-        let query: [String: Any] = [
+        var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
             kSecAttrAccount as String: key,
             kSecValueData as String: data,
         ]
+        #if os(iOS)
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+        #endif
 
         let status = SecItemAdd(query as CFDictionary, nil)
         if status != errSecSuccess {
