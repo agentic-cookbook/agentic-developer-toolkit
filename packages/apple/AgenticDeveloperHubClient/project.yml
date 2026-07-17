@@ -36,32 +36,22 @@ packages:
     maxVersion: "2.0.0"
 
 targets:
+  # One multi-destination target (macOS + iOS) rather than a separate
+  # AgenticDeveloperHubClient-iOS twin: both approaches landed concurrently
+  # (sync branch vs main) and both emit AgenticDeveloperHubClient.framework
+  # for iOS, so they cannot coexist. The multi-destination form is the one
+  # iOS consumers (BitbagIOS) actually link. iOS floor 17.0 kept from main's
+  # target — the more permissive choice; nothing here needs newer API.
   AgenticDeveloperHubClient:
     type: framework
-    platform: macOS
+    supportedDestinations: [macOS, iOS]
     sources:
       - path: Sources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.AgenticDeveloperHubClient
-    dependencies:
-      - package: swift-openapi-runtime
-        product: OpenAPIRuntime
-      - package: swift-openapi-urlsession
-        product: OpenAPIURLSession
-
-  AgenticDeveloperHubClient-iOS:
-    type: framework
-    platform: iOS
-    sources:
-      - path: Sources
-    settings:
-      base:
-        SDKROOT: iphoneos
+        SDKROOT: auto
         IPHONEOS_DEPLOYMENT_TARGET: "17.0"
-        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.AgenticDeveloperHubClient.ios
-        PRODUCT_NAME: AgenticDeveloperHubClient
-        TARGETED_DEVICE_FAMILY: "1,2"
     dependencies:
       - package: swift-openapi-runtime
         product: OpenAPIRuntime
@@ -82,15 +72,6 @@ targets:
         codeSign: true
 
 schemes:
-  AgenticDeveloperHubClient-iOS:
-    build:
-      targets:
-        AgenticDeveloperHubClient-iOS: all
-    run:
-      config: Debug
-    archive:
-      config: Release
-
   AgenticDeveloperHubClient:
     build:
       targets:

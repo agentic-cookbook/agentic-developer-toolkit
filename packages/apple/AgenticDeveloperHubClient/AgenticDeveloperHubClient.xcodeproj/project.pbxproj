@@ -11,38 +11,25 @@
 		053600078FF2E16C078EB8E6 /* AuthWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0318E085AB7521A2E6EF33B /* AuthWrappersTests.swift */; };
 		0D2E62CD80FC6869E29C8ABB /* MockDaemonServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B92ECC0CD4043B00429DFB /* MockDaemonServer.swift */; };
 		16F1AF38B1352E8E65BB2C51 /* TransportResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A4C3D0EF7416A58FCCF96 /* TransportResolverTests.swift */; };
-		2108199FF7B4F5D328AD130B /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3A66E7F3B7A73E902F8618 /* Types.swift */; };
-		2CF730A36965E3F462E8749D /* ADHClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A8FD599B5DEB81290D69 /* ADHClient.swift */; };
 		30542471184054C63573984B /* TransportResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CCC04F149E32D7B2F1F059 /* TransportResolver.swift */; };
-		31F981899E4F9C2ACE3B27BC /* TransportResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CCC04F149E32D7B2F1F059 /* TransportResolver.swift */; };
 		38D33C5F67FD3208DDEF4A87 /* LiveSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCE8C7E1C9F1C493EEE34F /* LiveSmokeTests.swift */; };
 		3BCBE8103AFB8BC02F788EAF /* CredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D06625443BC7FCF3F3DF95 /* CredentialStore.swift */; };
-		3E31A1EA688159874D08562E /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4DB57D3EB7A87F9C66A64 /* KeychainHelper.swift */; };
-		4BDC18F7EDC90C71F2F10057 /* DaemonContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3BA2A17F4A60B7C8FFFCE5 /* DaemonContract.swift */; };
 		4C1360E7F33095999165BF49 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 7B3358DC8E394C3B55DA9911 /* OpenAPIURLSession */; };
-		4C67DCA2BE281418914D2F5A /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = F0E3FA803960E61138ED693C /* OpenAPIURLSession */; };
-		4E6FA5FC949DC05CAC872C57 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1287A16F9C54B735D869D014 /* Credentials.swift */; };
 		57D7C1A0528B3748CA6D8035 /* ADHClientWiringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A7E929CBBDE69CFFD42B49 /* ADHClientWiringTests.swift */; };
-		5C737247A81E3F611529F94A /* AuthenticationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = B195038FA11EEAE3CE2A943D /* AuthenticationMiddleware.swift */; };
 		6909918C407C180EEACFEF2B /* DaemonContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3BA2A17F4A60B7C8FFFCE5 /* DaemonContract.swift */; };
 		69990850A86ED83E37C6A826 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3A66E7F3B7A73E902F8618 /* Types.swift */; };
 		722E654B1D0FCE33F2BEB1F5 /* AuthenticationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = B195038FA11EEAE3CE2A943D /* AuthenticationMiddleware.swift */; };
 		78DD670E1FA4CF39EA99A1FB /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A250C8D68ACB736BD73725 /* TestSupport.swift */; };
-		8258F4E1DB746C35D45886E1 /* ADHClient+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642DC7ACA98FFACA1D895C8C /* ADHClient+Auth.swift */; };
 		8B0A23AB83E02F8454D5B9EB /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = BEFD4345DA24D78AC488F6D2 /* OpenAPIRuntime */; };
 		8B2E94378C5B41EEDC002485 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4DB57D3EB7A87F9C66A64 /* KeychainHelper.swift */; };
-		8E18354E4B8DA39C6E92BB72 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F00E40E373DA5C00F4F6E6 /* Client.swift */; };
 		8F067E76427A17E47CA952A1 /* DirectTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E9CC24CABD917AFB625B4F /* DirectTransportTests.swift */; };
-		91275D976E00100A32F5D140 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = C1100FBC0D447974E8EBF8D9 /* OpenAPIRuntime */; };
 		A0012B5AF6EE6B23C07B2385 /* DaemonTransportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B49F9EAE13469AA4A5DAFC4 /* DaemonTransportTests.swift */; };
 		AC808F93EB6C561A71350DE7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F00E40E373DA5C00F4F6E6 /* Client.swift */; };
 		ACF71FB62723173CF36A154A /* AgenticDeveloperHubClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FE29807BB376745D790A28 /* AgenticDeveloperHubClient.framework */; };
 		BDC248C30447A4AA1A76F39C /* ADHClient+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642DC7ACA98FFACA1D895C8C /* ADHClient+Auth.swift */; };
-		C5C5FE004ABF84DF16E0930C /* CredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D06625443BC7FCF3F3DF95 /* CredentialStore.swift */; };
 		E224A403F5281A056F122DB5 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1287A16F9C54B735D869D014 /* Credentials.swift */; };
 		F6F4496B405D5775CB4225C6 /* ADHClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A8FD599B5DEB81290D69 /* ADHClient.swift */; };
 		FD1BE71850B827B6CD917781 /* APITransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C64DF9D0E4180068E9B2C /* APITransport.swift */; };
-		FD23CB2C98DA46D256CF6D32 /* APITransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261C64DF9D0E4180068E9B2C /* APITransport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +64,6 @@
 		55F00E40E373DA5C00F4F6E6 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		642DC7ACA98FFACA1D895C8C /* ADHClient+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ADHClient+Auth.swift"; sourceTree = "<group>"; };
 		68FE29807BB376745D790A28 /* AgenticDeveloperHubClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AgenticDeveloperHubClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		69F15597E12675A0C1B771F5 /* AgenticDeveloperHubClient-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "AgenticDeveloperHubClient-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B49F9EAE13469AA4A5DAFC4 /* DaemonTransportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaemonTransportTests.swift; sourceTree = "<group>"; };
 		7D5A4C3D0EF7416A58FCCF96 /* TransportResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportResolverTests.swift; sourceTree = "<group>"; };
 		8422A8FD599B5DEB81290D69 /* ADHClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHClient.swift; sourceTree = "<group>"; };
@@ -95,15 +81,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0CAD500F8C9824E11B895C94 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				91275D976E00100A32F5D140 /* OpenAPIRuntime in Frameworks */,
-				4C67DCA2BE281418914D2F5A /* OpenAPIURLSession in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		590D8C08514A39A95A67EC08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,7 +166,6 @@
 		B2C184E14E20D029BD08AC4E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				69F15597E12675A0C1B771F5 /* AgenticDeveloperHubClient-iOS.framework */,
 				68FE29807BB376745D790A28 /* AgenticDeveloperHubClient.framework */,
 				C72E9122D9DC2E530B67A56A /* AgenticDeveloperHubClientTests.xctest */,
 			);
@@ -211,26 +187,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		46D7E31D38184FDB8F830096 /* AgenticDeveloperHubClient-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D75C47D54F73B438C53B71CF /* Build configuration list for PBXNativeTarget "AgenticDeveloperHubClient-iOS" */;
-			buildPhases = (
-				156908275FB963FC7BBAB723 /* Sources */,
-				0CAD500F8C9824E11B895C94 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "AgenticDeveloperHubClient-iOS";
-			packageProductDependencies = (
-				C1100FBC0D447974E8EBF8D9 /* OpenAPIRuntime */,
-				F0E3FA803960E61138ED693C /* OpenAPIURLSession */,
-			);
-			productName = "AgenticDeveloperHubClient-iOS";
-			productReference = 69F15597E12675A0C1B771F5 /* AgenticDeveloperHubClient-iOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		51F6EFB7E8DC6524FE47F698 /* AgenticDeveloperHubClientTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9C3452D8BE48B6C8CA18193 /* Build configuration list for PBXNativeTarget "AgenticDeveloperHubClientTests" */;
@@ -301,31 +257,12 @@
 			projectRoot = "";
 			targets = (
 				E96BF20E30DBAE73927064F5 /* AgenticDeveloperHubClient */,
-				46D7E31D38184FDB8F830096 /* AgenticDeveloperHubClient-iOS */,
 				51F6EFB7E8DC6524FE47F698 /* AgenticDeveloperHubClientTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		156908275FB963FC7BBAB723 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8258F4E1DB746C35D45886E1 /* ADHClient+Auth.swift in Sources */,
-				2CF730A36965E3F462E8749D /* ADHClient.swift in Sources */,
-				FD23CB2C98DA46D256CF6D32 /* APITransport.swift in Sources */,
-				5C737247A81E3F611529F94A /* AuthenticationMiddleware.swift in Sources */,
-				8E18354E4B8DA39C6E92BB72 /* Client.swift in Sources */,
-				C5C5FE004ABF84DF16E0930C /* CredentialStore.swift in Sources */,
-				4E6FA5FC949DC05CAC872C57 /* Credentials.swift in Sources */,
-				4BDC18F7EDC90C71F2F10057 /* DaemonContract.swift in Sources */,
-				3E31A1EA688159874D08562E /* KeychainHelper.swift in Sources */,
-				31F981899E4F9C2ACE3B27BC /* TransportResolver.swift in Sources */,
-				2108199FF7B4F5D328AD130B /* Types.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9341BB5A65901B099188CCA0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -389,71 +326,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.AgenticDeveloperHubClient;
-				SDKROOT = macosx;
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
-		6E333CFA1B86DA3F7C8A4178 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.AgenticDeveloperHubClient.ios;
-				PRODUCT_NAME = AgenticDeveloperHubClient;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
-		};
-		75628D7774EB84B5EF0C0105 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.AgenticDeveloperHubClient.ios;
-				PRODUCT_NAME = AgenticDeveloperHubClient;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
 		};
 		863BC8F2410D0D025C390B61 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -527,20 +421,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikefullerton.AgenticDeveloperHubClient;
-				SDKROOT = macosx;
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -646,15 +545,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		D75C47D54F73B438C53B71CF /* Build configuration list for PBXNativeTarget "AgenticDeveloperHubClient-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6E333CFA1B86DA3F7C8A4178 /* Debug */,
-				75628D7774EB84B5EF0C0105 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		D9C3452D8BE48B6C8CA18193 /* Build configuration list for PBXNativeTarget "AgenticDeveloperHubClientTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -706,16 +596,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 93743CAEFC755CE614137340 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */;
 			productName = OpenAPIRuntime;
-		};
-		C1100FBC0D447974E8EBF8D9 /* OpenAPIRuntime */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93743CAEFC755CE614137340 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */;
-			productName = OpenAPIRuntime;
-		};
-		F0E3FA803960E61138ED693C /* OpenAPIURLSession */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57979F1161FDC2C9F43E1CF6 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
-			productName = OpenAPIURLSession;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
