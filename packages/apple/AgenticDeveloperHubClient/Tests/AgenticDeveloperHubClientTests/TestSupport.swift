@@ -1,5 +1,6 @@
 import HTTPTypes
 import OpenAPIRuntime
+import Testing
 
 #if canImport(FoundationEssentials)
 import FoundationEssentials
@@ -127,3 +128,14 @@ final class StubURLProtocol: URLProtocol {
 
     override func stopLoading() {}
 }
+
+/// Shared parent for the suites that drive ``StubURLProtocol``.
+///
+/// Its handler and captured-request list are `static var`s, so two suites
+/// installing/resetting concurrently can stomp each other's in-flight stub
+/// or read back the wrong suite's captured request. `.serialized` alone
+/// doesn't reach across suites with no common ancestor — it only serializes
+/// a suite's own children — but it applies recursively to sub-suites, so
+/// nesting both suites under this one serialized parent closes the gap.
+@Suite(.serialized)
+enum StubURLProtocolSuites {}
