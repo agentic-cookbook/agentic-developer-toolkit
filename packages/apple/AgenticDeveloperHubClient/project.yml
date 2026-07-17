@@ -5,6 +5,7 @@ options:
   createIntermediateGroups: true
   deploymentTarget:
     macOS: "14.0"
+    iOS: "17.0"
 
 settings:
   base:
@@ -49,6 +50,24 @@ targets:
       - package: swift-openapi-urlsession
         product: OpenAPIURLSession
 
+  AgenticDeveloperHubClient-iOS:
+    type: framework
+    platform: iOS
+    sources:
+      - path: Sources
+    settings:
+      base:
+        SDKROOT: iphoneos
+        IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+        PRODUCT_BUNDLE_IDENTIFIER: com.mikefullerton.AgenticDeveloperHubClient.ios
+        PRODUCT_NAME: AgenticDeveloperHubClient
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: swift-openapi-runtime
+        product: OpenAPIRuntime
+      - package: swift-openapi-urlsession
+        product: OpenAPIURLSession
+
   AgenticDeveloperHubClientTests:
     type: bundle.unit-test
     platform: macOS
@@ -63,6 +82,15 @@ targets:
         codeSign: true
 
 schemes:
+  AgenticDeveloperHubClient-iOS:
+    build:
+      targets:
+        AgenticDeveloperHubClient-iOS: all
+    run:
+      config: Debug
+    archive:
+      config: Release
+
   AgenticDeveloperHubClient:
     build:
       targets:
