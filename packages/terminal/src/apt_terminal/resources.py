@@ -17,7 +17,7 @@ from apt_terminal.generated.api.persona import (
     get_persona_models,
     get_persona_personas,
     get_persona_personas_id,
-    get_persona_service_templates,
+    get_persona_provider_templates,
     get_persona_services,
     get_persona_services_id,
     get_persona_services_id_models,
@@ -106,10 +106,13 @@ PERSONA: tuple[Resource, ...] = (
         name="models",
         ops=Ops(list_=get_persona_models),
     ),
+    # `persona templates` now lists the redacting provider-templates catalog
+    # (`get_persona_provider_templates`) because the raw service-templates
+    # endpoint (`/persona/service-templates`) was removed from the backend.
     Resource(
         domain="persona",
         name="templates",
-        ops=Ops(list_=get_persona_service_templates),
+        ops=Ops(list_=get_persona_provider_templates),
     ),
 )
 

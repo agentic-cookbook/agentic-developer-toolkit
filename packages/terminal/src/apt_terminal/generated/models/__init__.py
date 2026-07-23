@@ -140,18 +140,6 @@ from .get_bucket_buckets_id_response_200 import GetBucketBucketsIdResponse200
 from .get_bucket_buckets_id_response_200_metadata_type_0_type_1 import GetBucketBucketsIdResponse200MetadataType0Type1
 from .get_bucket_buckets_response_200_item import GetBucketBucketsResponse200Item
 from .get_bucket_buckets_response_200_item_metadata_type_0_type_1 import GetBucketBucketsResponse200ItemMetadataType0Type1
-from .get_chat_chat_mentions_id_response_200 import GetChatChatMentionsIdResponse200
-from .get_chat_chat_mentions_response_200_item import GetChatChatMentionsResponse200Item
-from .get_chat_chat_messages_id_response_200 import GetChatChatMessagesIdResponse200
-from .get_chat_chat_messages_response_200_item import GetChatChatMessagesResponse200Item
-from .get_chat_chat_participants_id_response_200 import GetChatChatParticipantsIdResponse200
-from .get_chat_chat_participants_response_200_item import GetChatChatParticipantsResponse200Item
-from .get_chat_chat_plugins_id_response_200 import GetChatChatPluginsIdResponse200
-from .get_chat_chat_plugins_response_200_item import GetChatChatPluginsResponse200Item
-from .get_chat_chat_rich_content_id_response_200 import GetChatChatRichContentIdResponse200
-from .get_chat_chat_rich_content_response_200_item import GetChatChatRichContentResponse200Item
-from .get_chat_chats_id_response_200 import GetChatChatsIdResponse200
-from .get_chat_chats_response_200_item import GetChatChatsResponse200Item
 from .get_communities_id_categories_response_200 import GetCommunitiesIdCategoriesResponse200
 from .get_communities_id_directory_response_200 import GetCommunitiesIdDirectoryResponse200
 from .get_communities_id_members_me_response_200 import GetCommunitiesIdMembersMeResponse200
@@ -236,10 +224,6 @@ from .get_ecosystem_applications_app_id_schema_grants_response_200_grants_item i
 from .get_ecosystem_applications_app_id_schema_grants_response_200_grants_item_tables_item import GetEcosystemApplicationsAppIdSchemaGrantsResponse200GrantsItemTablesItem
 from .get_ecosystem_applications_id_response_200 import GetEcosystemApplicationsIdResponse200
 from .get_ecosystem_applications_response_200_item import GetEcosystemApplicationsResponse200Item
-from .get_ecosystem_ecosystem_capabilities_ecosystem_id_capability_response_200 import GetEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200
-from .get_ecosystem_ecosystem_capabilities_ecosystem_id_capability_response_200_config_type_0_type_1 import GetEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200ConfigType0Type1
-from .get_ecosystem_ecosystem_capabilities_response_200_item import GetEcosystemEcosystemCapabilitiesResponse200Item
-from .get_ecosystem_ecosystem_capabilities_response_200_item_config_type_0_type_1 import GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1
 from .get_ecosystem_ecosystem_regions_id_response_200 import GetEcosystemEcosystemRegionsIdResponse200
 from .get_ecosystem_ecosystem_regions_response_200_item import GetEcosystemEcosystemRegionsResponse200Item
 from .get_ecosystem_ecosystems_id_response_200 import GetEcosystemEcosystemsIdResponse200
@@ -311,8 +295,6 @@ from .get_persona_models_id_response_200 import GetPersonaModelsIdResponse200
 from .get_persona_models_response_200_item import GetPersonaModelsResponse200Item
 from .get_persona_personas_id_response_200 import GetPersonaPersonasIdResponse200
 from .get_persona_personas_response_200_item import GetPersonaPersonasResponse200Item
-from .get_persona_service_templates_id_response_200 import GetPersonaServiceTemplatesIdResponse200
-from .get_persona_service_templates_response_200_item import GetPersonaServiceTemplatesResponse200Item
 from .get_personal_education_id_response_200 import GetPersonalEducationIdResponse200
 from .get_personal_education_response_200_item import GetPersonalEducationResponse200Item
 from .get_personal_jobs_id_response_200 import GetPersonalJobsIdResponse200
@@ -549,18 +531,6 @@ from .post_bucket_buckets_body_metadata_type_0_type_1 import PostBucketBucketsBo
 from .post_bucket_buckets_bucket_id_access_groups_body import PostBucketBucketsBucketIdAccessGroupsBody
 from .post_bucket_buckets_response_201 import PostBucketBucketsResponse201
 from .post_bucket_buckets_response_201_metadata_type_0_type_1 import PostBucketBucketsResponse201MetadataType0Type1
-from .post_chat_chat_mentions_body import PostChatChatMentionsBody
-from .post_chat_chat_mentions_response_201 import PostChatChatMentionsResponse201
-from .post_chat_chat_messages_body import PostChatChatMessagesBody
-from .post_chat_chat_messages_response_201 import PostChatChatMessagesResponse201
-from .post_chat_chat_participants_body import PostChatChatParticipantsBody
-from .post_chat_chat_participants_response_201 import PostChatChatParticipantsResponse201
-from .post_chat_chat_plugins_body import PostChatChatPluginsBody
-from .post_chat_chat_plugins_response_201 import PostChatChatPluginsResponse201
-from .post_chat_chat_rich_content_body import PostChatChatRichContentBody
-from .post_chat_chat_rich_content_response_201 import PostChatChatRichContentResponse201
-from .post_chat_chats_body import PostChatChatsBody
-from .post_chat_chats_response_201 import PostChatChatsResponse201
 from .post_communities_id_categories_body import PostCommunitiesIdCategoriesBody
 from .post_communities_id_members_body import PostCommunitiesIdMembersBody
 from .post_communities_id_members_body_role import PostCommunitiesIdMembersBodyRole
@@ -649,10 +619,6 @@ from .post_document_versions_response_201 import PostDocumentVersionsResponse201
 from .post_ecosystem_applications_app_id_tokens_body import PostEcosystemApplicationsAppIdTokensBody
 from .post_ecosystem_applications_body import PostEcosystemApplicationsBody
 from .post_ecosystem_applications_response_201 import PostEcosystemApplicationsResponse201
-from .post_ecosystem_ecosystem_capabilities_body import PostEcosystemEcosystemCapabilitiesBody
-from .post_ecosystem_ecosystem_capabilities_body_config_type_0_type_1 import PostEcosystemEcosystemCapabilitiesBodyConfigType0Type1
-from .post_ecosystem_ecosystem_capabilities_response_201 import PostEcosystemEcosystemCapabilitiesResponse201
-from .post_ecosystem_ecosystem_capabilities_response_201_config_type_0_type_1 import PostEcosystemEcosystemCapabilitiesResponse201ConfigType0Type1
 from .post_ecosystem_ecosystem_regions_body import PostEcosystemEcosystemRegionsBody
 from .post_ecosystem_ecosystem_regions_response_201 import PostEcosystemEcosystemRegionsResponse201
 from .post_ecosystem_ecosystems_body import PostEcosystemEcosystemsBody
@@ -737,8 +703,6 @@ from .post_persona_personas_response_201 import PostPersonaPersonasResponse201
 from .post_persona_provider_templates_body import PostPersonaProviderTemplatesBody
 from .post_persona_provider_templates_body_provider_kind import PostPersonaProviderTemplatesBodyProviderKind
 from .post_persona_provider_templates_id_verify_body import PostPersonaProviderTemplatesIdVerifyBody
-from .post_persona_service_templates_body import PostPersonaServiceTemplatesBody
-from .post_persona_service_templates_response_201 import PostPersonaServiceTemplatesResponse201
 from .post_persona_services_body import PostPersonaServicesBody
 from .post_persona_services_body_provider_kind import PostPersonaServicesBodyProviderKind
 from .post_personal_education_body import PostPersonalEducationBody
@@ -869,18 +833,6 @@ from .put_bucket_buckets_id_body import PutBucketBucketsIdBody
 from .put_bucket_buckets_id_body_metadata_type_0_type_1 import PutBucketBucketsIdBodyMetadataType0Type1
 from .put_bucket_buckets_id_response_200 import PutBucketBucketsIdResponse200
 from .put_bucket_buckets_id_response_200_metadata_type_0_type_1 import PutBucketBucketsIdResponse200MetadataType0Type1
-from .put_chat_chat_mentions_id_body import PutChatChatMentionsIdBody
-from .put_chat_chat_mentions_id_response_200 import PutChatChatMentionsIdResponse200
-from .put_chat_chat_messages_id_body import PutChatChatMessagesIdBody
-from .put_chat_chat_messages_id_response_200 import PutChatChatMessagesIdResponse200
-from .put_chat_chat_participants_id_body import PutChatChatParticipantsIdBody
-from .put_chat_chat_participants_id_response_200 import PutChatChatParticipantsIdResponse200
-from .put_chat_chat_plugins_id_body import PutChatChatPluginsIdBody
-from .put_chat_chat_plugins_id_response_200 import PutChatChatPluginsIdResponse200
-from .put_chat_chat_rich_content_id_body import PutChatChatRichContentIdBody
-from .put_chat_chat_rich_content_id_response_200 import PutChatChatRichContentIdResponse200
-from .put_chat_chats_id_body import PutChatChatsIdBody
-from .put_chat_chats_id_response_200 import PutChatChatsIdResponse200
 from .put_communities_id_categories_cat_id_body import PutCommunitiesIdCategoriesCatIdBody
 from .put_communities_id_members_me_body import PutCommunitiesIdMembersMeBody
 from .put_content_addresses_id_body import PutContentAddressesIdBody
@@ -955,10 +907,6 @@ from .put_ecosystem_applications_app_id_schema_grants_body_grants_item import Pu
 from .put_ecosystem_applications_app_id_schema_grants_body_grants_item_tables_item import PutEcosystemApplicationsAppIdSchemaGrantsBodyGrantsItemTablesItem
 from .put_ecosystem_applications_id_body import PutEcosystemApplicationsIdBody
 from .put_ecosystem_applications_id_response_200 import PutEcosystemApplicationsIdResponse200
-from .put_ecosystem_ecosystem_capabilities_ecosystem_id_capability_body import PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBody
-from .put_ecosystem_ecosystem_capabilities_ecosystem_id_capability_body_config_type_0_type_1 import PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1
-from .put_ecosystem_ecosystem_capabilities_ecosystem_id_capability_response_200 import PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200
-from .put_ecosystem_ecosystem_capabilities_ecosystem_id_capability_response_200_config_type_0_type_1 import PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200ConfigType0Type1
 from .put_ecosystem_ecosystem_regions_id_body import PutEcosystemEcosystemRegionsIdBody
 from .put_ecosystem_ecosystem_regions_id_response_200 import PutEcosystemEcosystemRegionsIdResponse200
 from .put_ecosystem_ecosystems_id_body import PutEcosystemEcosystemsIdBody
@@ -1022,8 +970,6 @@ from .put_persona_personas_id_body import PutPersonaPersonasIdBody
 from .put_persona_personas_id_response_200 import PutPersonaPersonasIdResponse200
 from .put_persona_provider_templates_id_body import PutPersonaProviderTemplatesIdBody
 from .put_persona_provider_templates_id_body_provider_kind import PutPersonaProviderTemplatesIdBodyProviderKind
-from .put_persona_service_templates_id_body import PutPersonaServiceTemplatesIdBody
-from .put_persona_service_templates_id_response_200 import PutPersonaServiceTemplatesIdResponse200
 from .put_personal_education_id_body import PutPersonalEducationIdBody
 from .put_personal_education_id_response_200 import PutPersonalEducationIdResponse200
 from .put_personal_jobs_id_body import PutPersonalJobsIdBody
@@ -1259,18 +1205,6 @@ __all__ = (
     "GetBucketBucketTypesIdResponse200MetadataType0Type1",
     "GetBucketBucketTypesResponse200Item",
     "GetBucketBucketTypesResponse200ItemMetadataType0Type1",
-    "GetChatChatMentionsIdResponse200",
-    "GetChatChatMentionsResponse200Item",
-    "GetChatChatMessagesIdResponse200",
-    "GetChatChatMessagesResponse200Item",
-    "GetChatChatParticipantsIdResponse200",
-    "GetChatChatParticipantsResponse200Item",
-    "GetChatChatPluginsIdResponse200",
-    "GetChatChatPluginsResponse200Item",
-    "GetChatChatRichContentIdResponse200",
-    "GetChatChatRichContentResponse200Item",
-    "GetChatChatsIdResponse200",
-    "GetChatChatsResponse200Item",
     "GetCommunitiesIdCategoriesResponse200",
     "GetCommunitiesIdDirectoryResponse200",
     "GetCommunitiesIdMembersMeResponse200",
@@ -1355,10 +1289,6 @@ __all__ = (
     "GetEcosystemApplicationsAppIdSchemaGrantsResponse200GrantsItemTablesItem",
     "GetEcosystemApplicationsIdResponse200",
     "GetEcosystemApplicationsResponse200Item",
-    "GetEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200",
-    "GetEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200ConfigType0Type1",
-    "GetEcosystemEcosystemCapabilitiesResponse200Item",
-    "GetEcosystemEcosystemCapabilitiesResponse200ItemConfigType0Type1",
     "GetEcosystemEcosystemRegionsIdResponse200",
     "GetEcosystemEcosystemRegionsResponse200Item",
     "GetEcosystemEcosystemsIdResponse200",
@@ -1434,8 +1364,6 @@ __all__ = (
     "GetPersonaModelsResponse200Item",
     "GetPersonaPersonasIdResponse200",
     "GetPersonaPersonasResponse200Item",
-    "GetPersonaServiceTemplatesIdResponse200",
-    "GetPersonaServiceTemplatesResponse200Item",
     "GetProjectProjectsIdArtifactsDirection",
     "GetProjectProjectsIdArtifactsResponse200",
     "GetProjectTasksIdResponse200",
@@ -1668,18 +1596,6 @@ __all__ = (
     "PostBucketBucketTypesBodyMetadataType0Type1",
     "PostBucketBucketTypesResponse201",
     "PostBucketBucketTypesResponse201MetadataType0Type1",
-    "PostChatChatMentionsBody",
-    "PostChatChatMentionsResponse201",
-    "PostChatChatMessagesBody",
-    "PostChatChatMessagesResponse201",
-    "PostChatChatParticipantsBody",
-    "PostChatChatParticipantsResponse201",
-    "PostChatChatPluginsBody",
-    "PostChatChatPluginsResponse201",
-    "PostChatChatRichContentBody",
-    "PostChatChatRichContentResponse201",
-    "PostChatChatsBody",
-    "PostChatChatsResponse201",
     "PostCommunitiesIdCategoriesBody",
     "PostCommunitiesIdMembersBody",
     "PostCommunitiesIdMembersBodyRole",
@@ -1768,10 +1684,6 @@ __all__ = (
     "PostEcosystemApplicationsAppIdTokensBody",
     "PostEcosystemApplicationsBody",
     "PostEcosystemApplicationsResponse201",
-    "PostEcosystemEcosystemCapabilitiesBody",
-    "PostEcosystemEcosystemCapabilitiesBodyConfigType0Type1",
-    "PostEcosystemEcosystemCapabilitiesResponse201",
-    "PostEcosystemEcosystemCapabilitiesResponse201ConfigType0Type1",
     "PostEcosystemEcosystemRegionsBody",
     "PostEcosystemEcosystemRegionsResponse201",
     "PostEcosystemEcosystemsBody",
@@ -1862,8 +1774,6 @@ __all__ = (
     "PostPersonaProviderTemplatesIdVerifyBody",
     "PostPersonaServicesBody",
     "PostPersonaServicesBodyProviderKind",
-    "PostPersonaServiceTemplatesBody",
-    "PostPersonaServiceTemplatesResponse201",
     "PostProjectProjectsBody",
     "PostProjectProjectsIdArtifactsBody",
     "PostProjectProjectsIdArtifactsBodyDirection",
@@ -1988,18 +1898,6 @@ __all__ = (
     "PutBucketBucketTypesIdBodyMetadataType0Type1",
     "PutBucketBucketTypesIdResponse200",
     "PutBucketBucketTypesIdResponse200MetadataType0Type1",
-    "PutChatChatMentionsIdBody",
-    "PutChatChatMentionsIdResponse200",
-    "PutChatChatMessagesIdBody",
-    "PutChatChatMessagesIdResponse200",
-    "PutChatChatParticipantsIdBody",
-    "PutChatChatParticipantsIdResponse200",
-    "PutChatChatPluginsIdBody",
-    "PutChatChatPluginsIdResponse200",
-    "PutChatChatRichContentIdBody",
-    "PutChatChatRichContentIdResponse200",
-    "PutChatChatsIdBody",
-    "PutChatChatsIdResponse200",
     "PutCommunitiesIdCategoriesCatIdBody",
     "PutCommunitiesIdMembersMeBody",
     "PutContentAddressesIdBody",
@@ -2074,10 +1972,6 @@ __all__ = (
     "PutEcosystemApplicationsAppIdSchemaGrantsBodyGrantsItemTablesItem",
     "PutEcosystemApplicationsIdBody",
     "PutEcosystemApplicationsIdResponse200",
-    "PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBody",
-    "PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityBodyConfigType0Type1",
-    "PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200",
-    "PutEcosystemEcosystemCapabilitiesEcosystemIdCapabilityResponse200ConfigType0Type1",
     "PutEcosystemEcosystemRegionsIdBody",
     "PutEcosystemEcosystemRegionsIdResponse200",
     "PutEcosystemEcosystemsIdBody",
@@ -2145,8 +2039,6 @@ __all__ = (
     "PutPersonaPersonasIdResponse200",
     "PutPersonaProviderTemplatesIdBody",
     "PutPersonaProviderTemplatesIdBodyProviderKind",
-    "PutPersonaServiceTemplatesIdBody",
-    "PutPersonaServiceTemplatesIdResponse200",
     "PutProjectTasksIdBody",
     "PutProjectTasksIdResponse200",
     "PutProjectWorkItemsIdFieldsBody",
