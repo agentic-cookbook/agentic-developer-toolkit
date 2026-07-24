@@ -1,5 +1,5 @@
-import { describe, expect, it, beforeEach, vi } from 'vitest'
-import { renderHook } from '@testing-library/react'
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest'
+import { renderHook, act } from '@testing-library/react'
 import { createRef } from 'react'
 import { useInputFocusReclaim } from '../hooks/useInputFocusReclaim'
 
@@ -14,10 +14,24 @@ function mount(): { ref: { current: HTMLDivElement | null }; input: HTMLInputEle
   return { ref, input }
 }
 
+// Stubs window.getSelection() to report `text` as the current selection, so
+// the pointerup handler's drag-to-select guard sees a non-empty selection.
+function stubSelection(text: string): void {
+  vi.spyOn(window, 'getSelection').mockReturnValue({
+    toString: () => text,
+  } as Selection)
+}
+
 describe('useInputFocusReclaim', () => {
   beforeEach(() => {
     vi.spyOn(document, 'hasFocus').mockReturnValue(true)
   })
+
+  afterEach(() => {
+    vi.useRealTimers()
+    vi.restoreAllMocks()
+  })
+
   it('claims focus when enabled', () => {
     const { ref, input } = mount()
     renderHook(() => useInputFocusReclaim(ref, true))
@@ -35,5 +49,67 @@ describe('useInputFocusReclaim', () => {
     input.disabled = true
     renderHook(() => useInputFocusReclaim(ref, true))
     expect(document.activeElement).not.toBe(input)
+  })
+
+  it('reclaims focus on pointerup once the deferred timer fires', () => {
+    vi.useFakeTimers()
+    const { ref, input } = mount()
+    renderHook(() => useInputFocusReclaim(ref, true))
+    input.blur()
+    expect(document.activeElement).not.toBe(input)
+
+    act(() => {
+      document.dispatchEvent(new Event('pointerup'))
+    })
+    act(() => {
+      vi.advanceTimersByTime(0)
+    })
+    expect(document.activeElement).toBe(input)
+  })
+
+  it('does not reclaim focus synchronously at pointerup — only after the timer fires', () => {
+    vi.useFakeTimers()
+    const { ref, input } = mount()
+    renderHook(() => useInputFocusReclaim(ref, true))
+    input.blur()
+
+    act(() => {
+      document.dispatchEvent(new Event('pointerup'))
+    })
+    // setTimeout(refocus, 0) defers past the pointerup tick — not reclaimed yet
+    expect(document.activeElement).not.toBe(input)
+
+    act(() => {
+      vi.advanceTimersByTime(0)
+    })
+    expect(document.activeElement).toBe(input)
+  })
+
+  it('does not reclaim focus on pointerup while text is selected', () => {
+    const { ref, input } = mount()
+    renderHook(() => useInputFocusReclaim(ref, true))
+    input.blur()
+    stubSelection('selected text')
+
+    act(() => {
+      document.dispatchEvent(new Event('pointerup'))
+    })
+    expect(document.activeElement).not.toBe(input)
+  })
+
+  it('does not call focus() when document.hasFocus() is false', () => {
+    vi.useFakeTimers()
+    vi.spyOn(document, 'hasFocus').mockReturnValue(false)
+    const { ref, input } = mount()
+    const focusSpy = vi.spyOn(input, 'focus')
+    renderHook(() => useInputFocusReclaim(ref, true))
+
+    act(() => {
+      document.dispatchEvent(new Event('pointerup'))
+    })
+    act(() => {
+      vi.advanceTimersByTime(0)
+    })
+    expect(focusSpy).not.toHaveBeenCalled()
   })
 })
