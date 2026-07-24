@@ -51,22 +51,6 @@ describe('useInputFocusReclaim', () => {
     expect(document.activeElement).not.toBe(input)
   })
 
-  it('reclaims focus on pointerup once the deferred timer fires', () => {
-    vi.useFakeTimers()
-    const { ref, input } = mount()
-    renderHook(() => useInputFocusReclaim(ref, true))
-    input.blur()
-    expect(document.activeElement).not.toBe(input)
-
-    act(() => {
-      document.dispatchEvent(new Event('pointerup'))
-    })
-    act(() => {
-      vi.advanceTimersByTime(0)
-    })
-    expect(document.activeElement).toBe(input)
-  })
-
   it('does not reclaim focus synchronously at pointerup — only after the timer fires', () => {
     vi.useFakeTimers()
     const { ref, input } = mount()
@@ -86,6 +70,7 @@ describe('useInputFocusReclaim', () => {
   })
 
   it('does not reclaim focus on pointerup while text is selected', () => {
+    vi.useFakeTimers()
     const { ref, input } = mount()
     renderHook(() => useInputFocusReclaim(ref, true))
     input.blur()
@@ -93,6 +78,9 @@ describe('useInputFocusReclaim', () => {
 
     act(() => {
       document.dispatchEvent(new Event('pointerup'))
+    })
+    act(() => {
+      vi.advanceTimersByTime(0)
     })
     expect(document.activeElement).not.toBe(input)
   })
