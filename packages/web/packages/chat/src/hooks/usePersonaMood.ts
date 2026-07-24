@@ -15,16 +15,34 @@ export interface PersonaMoodConfig<E extends string> {
   cycleMs?: number
 }
 
+/** What {@link usePersonaMood} reports each render. */
+export interface PersonaMood<E extends string> {
+  /**
+   * The persona's deliberate expression hint, or `null` to hand control back to
+   * its own reflexes. Priority: the answer beat > the in-flight rotation > the
+   * composing rotation > none.
+   */
+  mood: E | null
+  /**
+   * True only while the transient post-answer beat is showing — a robust
+   * "the persona just finished replying" signal, distinct from a rotation frame
+   * that merely happens to share the beat's mood.
+   */
+  beat: boolean
+}
+
 /**
- * The persona's deliberate expression hint, or `null` to hand control back to
- * its own reflexes. Priority: the answer beat > the in-flight rotation > the
- * composing rotation > none.
+ * Drives a persona's expression from conversation state: it rotates through the
+ * flight/composing moods while engaged and fires a transient beat when a reply
+ * lands. Returns the current {@link PersonaMood} — the mood hint plus a `beat`
+ * flag so callers can react to the post-answer beat without re-deriving it from
+ * the mood value.
  *
  * "Responding" covers both awaiting the reply AND streaming it out, treated as
  * one engaged stretch so the rotation keeps going and the beat fires only when
  * the persona has actually finished talking.
  */
-export function usePersonaMood<E extends string>(cfg: PersonaMoodConfig<E>): E | null {
+export function usePersonaMood<E extends string>(cfg: PersonaMoodConfig<E>): PersonaMood<E> {
   const { responding, composing, flightMoods, typingMoods, answerBeat, cycleMs = 1500 } = cfg
   const [step, setStep] = useState(0)
   const [beat, setBeat] = useState<E | null>(null)
@@ -53,8 +71,12 @@ export function usePersonaMood<E extends string>(cfg: PersonaMoodConfig<E>): E |
   }, [responding, answerBeat])
   useEffect(() => () => clearTimeout(beatTimer.current), [])
 
-  if (beat) return beat
-  if (responding) return flightMoods[step % flightMoods.length] ?? null
-  if (composing) return typingMoods[step % typingMoods.length] ?? null
-  return null
+  const mood = beat
+    ? beat
+    : responding
+      ? flightMoods[step % flightMoods.length] ?? null
+      : composing
+        ? typingMoods[step % typingMoods.length] ?? null
+        : null
+  return { mood, beat: beat !== null }
 }
