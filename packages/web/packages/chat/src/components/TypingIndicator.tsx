@@ -15,9 +15,9 @@ export interface TypingIndicatorProps {
    * "zorping"]). When omitted, falls back to the classic three-dot indicator
    * and nothing persists — so existing consumers are unaffected.
    */
-  labels?: string[]
+  labels?: readonly string[]
   /** Frames for the rotating glyph. Defaults to a braille spinner. */
-  frames?: string[]
+  frames?: readonly string[]
   /** Settled glyph for the grey done line. Defaults to "✱". */
   doneGlyph?: string
   /** Flash random non-green colors while thinking (settles to grey when done). */
@@ -80,7 +80,7 @@ export function TypingIndicator({
   )
 }
 
-function randomLabel(labels: string[]): string {
+function randomLabel(labels: readonly string[]): string {
   return labels[Math.floor(Math.random() * labels.length)] ?? labels[0] ?? ''
 }
 
@@ -103,8 +103,8 @@ interface ThinkingStatusProps {
   active: boolean
   idlePhrase?: string
   utterance?: string | null
-  labels: string[]
-  frames: string[]
+  labels: readonly string[]
+  frames: readonly string[]
   doneGlyph: string
   colorful: boolean
   frameMs: number

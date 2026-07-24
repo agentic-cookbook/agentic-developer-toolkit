@@ -14,9 +14,9 @@ interface TranscriptProps {
   onDetailArrowClick?: (index: number) => void
   className?: string
   /** "Thinking" words for the in-flight indicator (falls back to dots). */
-  thinkingLabels?: string[]
+  thinkingLabels?: readonly string[]
   /** Frames for the in-flight rotating glyph. */
-  thinkingFrames?: string[]
+  thinkingFrames?: readonly string[]
   /** Settled glyph for the grey done line. */
   thinkingDoneGlyph?: string
   /** Flash random non-green colors while thinking. */
