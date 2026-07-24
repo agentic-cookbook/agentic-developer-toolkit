@@ -38,6 +38,26 @@ export type {
 export { useChatSession } from './hooks/useChatSession'
 export type { ChatSession } from './hooks/useChatSession'
 
+// Persona-chat mechanism — caret tracking, focus, mood, and the connect ritual.
+// Persona-agnostic: all vocabulary is caller-supplied.
+export {
+  caretMetrics,
+  useCaretTracker,
+  CHAT_INPUT_SELECTOR,
+} from './hooks/useCaretTracker'
+export type { CaretMetrics } from './hooks/useCaretTracker'
+export { useInputFocusReclaim } from './hooks/useInputFocusReclaim'
+export { useBlockCursor } from './hooks/useBlockCursor'
+export { useCaretGaze } from './hooks/useCaretGaze'
+export type { GazeVector, CaretGazeOptions } from './hooks/useCaretGaze'
+export { usePersonaMood } from './hooks/usePersonaMood'
+export type { PersonaMoodConfig } from './hooks/usePersonaMood'
+export { useConnectRitual } from './hooks/useConnectRitual'
+export type { ConnectRitualConfig, ConnectRitualState } from './hooks/useConnectRitual'
+export { useRotatingPhrase, useTransientEcho } from './hooks/useRotatingPhrase'
+export { ShuffleBag, streamTokens } from './backends/ShuffleBag'
+export type { StreamTokensOptions } from './backends/ShuffleBag'
+
 // Cross-platform chat contract (mirrors apple/PersonaToolkit/Sources/).
 export type * from './contract'
 
