@@ -2,24 +2,27 @@ import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { createRef } from 'react'
 import { useInputFocusReclaim } from '../hooks/useInputFocusReclaim'
+import { appendToBody } from './helpers/caretDom'
 
 function mount(): { ref: { current: HTMLDivElement | null }; input: HTMLInputElement } {
   const wrapper = document.createElement('div')
   const input = document.createElement('input')
   input.className = 'pc-input'
   wrapper.appendChild(input)
-  document.body.appendChild(wrapper)
+  appendToBody(wrapper)
   const ref = createRef<HTMLDivElement>()
   Object.assign(ref, { current: wrapper })
   return { ref, input }
 }
 
 // Stubs window.getSelection() to report `text` as the current selection, so
-// the pointerup handler's drag-to-select guard sees a non-empty selection.
+// the pointerup handler's drag-to-select guard sees a non-empty selection. The
+// stub only supplies toString(), so double-cast through unknown rather than
+// pretending the object is a full Selection.
 function stubSelection(text: string): void {
   vi.spyOn(window, 'getSelection').mockReturnValue({
     toString: () => text,
-  } as Selection)
+  } as unknown as Selection)
 }
 
 describe('useInputFocusReclaim', () => {
@@ -99,5 +102,35 @@ describe('useInputFocusReclaim', () => {
       vi.advanceTimersByTime(0)
     })
     expect(focusSpy).not.toHaveBeenCalled()
+  })
+
+  it('removes its pointerup listener on unmount', () => {
+    vi.useFakeTimers()
+    const { ref, input } = mount()
+    const { unmount } = renderHook(() => useInputFocusReclaim(ref, true))
+    input.blur()
+    unmount()
+
+    // With the listener removed, a settled click no longer reclaims focus.
+    act(() => {
+      document.dispatchEvent(new Event('pointerup'))
+    })
+    act(() => {
+      vi.advanceTimersByTime(0)
+    })
+    expect(document.activeElement).not.toBe(input)
+  })
+
+  it('removes its window focus listener on unmount', () => {
+    const { ref, input } = mount()
+    const { unmount } = renderHook(() => useInputFocusReclaim(ref, true))
+    input.blur()
+    unmount()
+
+    // The window-refocus reclaim is synchronous; after cleanup it must not fire.
+    act(() => {
+      window.dispatchEvent(new Event('focus'))
+    })
+    expect(document.activeElement).not.toBe(input)
   })
 })

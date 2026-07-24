@@ -76,4 +76,23 @@ describe('usePersonaMood', () => {
     expect(result.current.mood).toBeNull()
     expect(result.current.beat).toBe(false)
   })
+
+  it('fires no beat when answerBeat is not configured', () => {
+    // answerBeat is optional; omit it entirely. Responding ending must then be a
+    // no-op — no beat mood, no beat flag — rather than throwing on the undefined.
+    const { result, rerender } = renderHook(
+      ({ responding }: { responding: boolean }) =>
+        usePersonaMood<Mood>({
+          flightMoods: base.flightMoods,
+          typingMoods: base.typingMoods,
+          cycleMs: base.cycleMs,
+          responding,
+          composing: false,
+        }),
+      { initialProps: { responding: true } },
+    )
+    rerender({ responding: false })
+    expect(result.current.mood).toBeNull()
+    expect(result.current.beat).toBe(false)
+  })
 })

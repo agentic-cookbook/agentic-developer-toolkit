@@ -26,6 +26,12 @@ describe('ShuffleBag', () => {
     expect([bag.next(), bag.next()]).toEqual(['only', 'only'])
   })
 
+  it('rejects an empty bag at construction', () => {
+    // next() assumes at least one item (it falls back to items[0]); constructing
+    // empty must fail fast rather than hand back a bag that can't draw.
+    expect(() => new ShuffleBag([])).toThrow('ShuffleBag requires at least one item')
+  })
+
   it('draws in Fisher-Yates order for a stubbed Math.random', () => {
     // With Math.random pinned to 0, the correct backward Fisher-Yates walk
     // (i from length-1 down to 1, j = floor(random * (i+1)) = 0 every time)

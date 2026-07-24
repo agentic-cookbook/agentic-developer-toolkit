@@ -1,44 +1,14 @@
 // src/__tests__/useCaretTracker.test.ts
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { createRef } from 'react'
 import { caretMetrics, useCaretTracker } from '../hooks/useCaretTracker'
+import { appendToBody, installCaretRectStub } from './helpers/caretDom'
 
-// jsdom does no layout, so getBoundingClientRect returns zeros. Stub the
-// prototype so caretMetrics' clamp math is meaningful: elements registered via
-// setRect get their explicit rect; unregistered <span> mirrors (created fresh
-// inside caretMetrics itself, so the test can't reach them beforehand) get a
-// width that scales with their text length, standing in for glyph width.
-const ORIGINAL_GBCR = Element.prototype.getBoundingClientRect
-const rectsByElement = new WeakMap<Element, DOMRect>()
-
-function makeRect(rect: Partial<DOMRect>): DOMRect {
-  return {
-    x: 0, y: 0, width: 0, height: 0, top: 0, left: 0, right: 0, bottom: 0,
-    toJSON: () => ({}),
-    ...rect,
-  } as DOMRect
-}
-
-function setRect(el: Element, rect: Partial<DOMRect>) {
-  rectsByElement.set(el, makeRect(rect))
-}
-
-beforeEach(() => {
-  Element.prototype.getBoundingClientRect = function () {
-    const known = rectsByElement.get(this)
-    if (known) return known
-    if (this.tagName === 'SPAN') {
-      const width = (this.textContent?.length ?? 0) * 10
-      return makeRect({ width, right: width })
-    }
-    return makeRect({})
-  }
-})
-
-afterEach(() => {
-  Element.prototype.getBoundingClientRect = ORIGINAL_GBCR
-})
+// jsdom does no layout, so getBoundingClientRect returns zeros; installCaretRectStub
+// swaps in one whose math is meaningful. setRect registers an explicit rect for an
+// element; unregistered <span> mirrors get a width that scales with their text length.
+const { setRect } = installCaretRectStub()
 
 function mountInput(value = 'hello'): { wrapper: HTMLDivElement; input: HTMLInputElement } {
   const wrapper = document.createElement('div')
@@ -46,7 +16,7 @@ function mountInput(value = 'hello'): { wrapper: HTMLDivElement; input: HTMLInpu
   input.className = 'pc-input'
   input.value = value
   wrapper.appendChild(input)
-  document.body.appendChild(wrapper)
+  appendToBody(wrapper)
   return { wrapper, input }
 }
 
@@ -95,5 +65,36 @@ describe('useCaretTracker', () => {
     onMeasure.mockClear()
     unmount()
     expect(onMeasure).toHaveBeenCalledWith(null)
+  })
+
+  it('locates the input via a custom selector', () => {
+    // A field the default '.pc-input' selector would miss. Passing a matching
+    // custom selector makes the hook find it and wire up, so unmount tears down
+    // with the usual emit(null) — proof the selector arg routed the query.
+    const wrapper = document.createElement('div')
+    const input = document.createElement('input')
+    input.className = 'custom-field'
+    wrapper.appendChild(input)
+    appendToBody(wrapper)
+    const ref = createRef<HTMLDivElement>()
+    Object.assign(ref, { current: wrapper })
+    const onMeasure = vi.fn()
+    const { unmount } = renderHook(() => useCaretTracker(ref, true, onMeasure, '.custom-field'))
+    onMeasure.mockClear()
+    unmount()
+    expect(onMeasure).toHaveBeenCalledWith(null)
+  })
+
+  it('never wires up when the selector matches no element', () => {
+    // The wrapper has a '.pc-input', but a selector that matches nothing makes
+    // the hook bail before registering any teardown — so unmount emits nothing.
+    const { wrapper } = mountInput()
+    const ref = createRef<HTMLDivElement>()
+    Object.assign(ref, { current: wrapper })
+    const onMeasure = vi.fn()
+    const { unmount } = renderHook(() => useCaretTracker(ref, true, onMeasure, '.no-such-input'))
+    onMeasure.mockClear()
+    unmount()
+    expect(onMeasure).not.toHaveBeenCalled()
   })
 })

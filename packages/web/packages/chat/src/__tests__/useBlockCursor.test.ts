@@ -1,43 +1,16 @@
 // src/__tests__/useBlockCursor.test.ts
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { createRef } from 'react'
 import { useBlockCursor } from '../hooks/useBlockCursor'
+import { appendToBody, installCaretRectStub } from './helpers/caretDom'
 
-// jsdom does no layout, so getBoundingClientRect returns zeros. Stub the
-// prototype (same pattern as useCaretTracker.test.ts) so the geometry
-// caretMetrics computes under the hood is meaningful: elements registered via
-// setRect get their explicit rect; unregistered <span> mirrors (created fresh
-// inside caretMetrics itself) get a width that scales with their text length.
-const ORIGINAL_GBCR = Element.prototype.getBoundingClientRect
-const rectsByElement = new WeakMap<Element, DOMRect>()
-
-function makeRect(rect: Partial<DOMRect>): DOMRect {
-  return {
-    x: 0, y: 0, width: 0, height: 0, top: 0, left: 0, right: 0, bottom: 0,
-    toJSON: () => ({}),
-    ...rect,
-  } as DOMRect
-}
-
-function setRect(el: Element, rect: Partial<DOMRect>) {
-  rectsByElement.set(el, makeRect(rect))
-}
-
-beforeEach(() => {
-  Element.prototype.getBoundingClientRect = function () {
-    const known = rectsByElement.get(this)
-    if (known) return known
-    if (this.tagName === 'SPAN') {
-      const width = (this.textContent?.length ?? 0) * 10
-      return makeRect({ width, right: width })
-    }
-    return makeRect({})
-  }
-})
+// jsdom does no layout, so getBoundingClientRect returns zeros; installCaretRectStub
+// swaps in one whose math is meaningful (see helpers/caretDom). setRect registers an
+// element's explicit rect; unregistered <span> mirrors get a text-length-scaled width.
+const { setRect } = installCaretRectStub()
 
 afterEach(() => {
-  Element.prototype.getBoundingClientRect = ORIGINAL_GBCR
   vi.useRealTimers()
   vi.restoreAllMocks()
 })
@@ -47,7 +20,7 @@ function mount(): { ref: { current: HTMLDivElement | null }; input: HTMLInputEle
   const input = document.createElement('input')
   input.className = 'pc-input'
   wrapper.appendChild(input)
-  document.body.appendChild(wrapper)
+  appendToBody(wrapper)
   const ref = createRef<HTMLDivElement>()
   Object.assign(ref, { current: wrapper })
   return { ref, input }

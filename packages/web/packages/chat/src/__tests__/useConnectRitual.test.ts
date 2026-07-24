@@ -11,6 +11,10 @@ const cfg = {
   stallLines: ['stalling a...', 'stalling b...'],
   connectingLine: 'connecting...',
   connectedLine: 'connected!',
+  // Pinned explicitly (they equal the hook's defaults) so the timer advances
+  // below read against a stated value instead of an implicit one.
+  readyAfterMs: 2000,
+  giveUpAfterMs: 30000,
 }
 
 beforeEach(() => {

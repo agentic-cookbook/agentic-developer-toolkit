@@ -3,19 +3,30 @@ import { useEffect, useRef, useState } from 'react'
 /**
  * A phrase drawn at random from `pool`, re-rolled whenever `rerollKey` changes
  * (typically a sent-message count). The initial pick happens on mount rather
- * than during render, so server and client agree on the first frame.
+ * than during render, so server and client agree on the first frame; later key
+ * changes re-roll synchronously during render so the new phrase lands in the
+ * same paint as its trigger, with no one-frame lag from an effect.
  */
 export function useRotatingPhrase(pool: readonly string[], rerollKey: number): string {
   const [phrase, setPhrase] = useState<string>(pool[0] ?? '')
+  const [rolledKey, setRolledKey] = useState<number | null>(null)
+  // An empty pool falls through to '' via `?? ''`, so no length guard is needed.
+  const roll = (): string => pool[Math.floor(Math.random() * pool.length)] ?? ''
+
+  // After the mount roll, re-roll during render on a key change (React's
+  // "adjust state during render" pattern) — same paint, no effect-tick lag.
+  if (rolledKey !== null && rolledKey !== rerollKey) {
+    setRolledKey(rerollKey)
+    setPhrase(roll())
+  }
+
   useEffect(() => {
-    if (pool.length === 0) {
-      setPhrase('')
-      return
-    }
-    setPhrase(pool[Math.floor(Math.random() * pool.length)] ?? '')
-    // Re-roll only on the key, not on pool identity (callers pass literals).
+    setRolledKey(rerollKey)
+    setPhrase(roll())
+    // Roll once on mount; render-time adjustment handles later key changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rerollKey])
+  }, [])
+
   return phrase
 }
 
