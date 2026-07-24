@@ -49,8 +49,7 @@ export async function* streamTokens(
 ): AsyncIterable<ChatStreamEvent> {
   const { minMs = 45, jitterMs = 55 } = opts
   for (const token of text.split(/(\s+)/)) {
-    if (!token) continue
-    yield { type: 'token', text: token }
+    if (token) yield { type: 'token', text: token }
     await delay(minMs + Math.random() * jitterMs)
   }
   yield { type: 'done' }

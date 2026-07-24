@@ -1,4 +1,4 @@
-// src/__tests__/ShuffleBag.test.ts
+// packages/web/packages/chat/src/__tests__/ShuffleBag.test.ts
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ShuffleBag, streamTokens } from '../backends/ShuffleBag'
 
@@ -65,6 +65,33 @@ describe('streamTokens', () => {
       events.push(e)
     }
     expect(events).toEqual([{ type: 'done' }])
+  })
+
+  it('still delays on the empty split entry even though nothing is yielded for it', async () => {
+    // ''.split(/(\s+)/) === [''] — a single falsy token. The delay must run
+    // unconditionally on every loop iteration (only the yield is guarded by
+    // the truthiness check), so the lone `{ type: 'done' }` event must not
+    // resolve until that delay has elapsed. A `continue`-on-falsy version
+    // skips the delay entirely and resolves on the next microtask instead,
+    // with no timer advance needed at all.
+    vi.useFakeTimers()
+    vi.spyOn(Math, 'random').mockReturnValue(0) // delay = minMs + 0 * jitterMs = 50ms
+
+    const iter = streamTokens('', { minMs: 50, jitterMs: 10 })[Symbol.asyncIterator]()
+
+    let resolved = false
+    const p = iter.next().then((r) => {
+      resolved = true
+      return r
+    })
+
+    await vi.advanceTimersByTimeAsync(49)
+    expect(resolved).toBe(false)
+
+    await vi.advanceTimersByTimeAsync(1)
+    const r = await p
+    expect(resolved).toBe(true)
+    expect(r.value).toEqual({ type: 'done' })
   })
 
   it('waits the full minMs + jitter before the next token resolves', async () => {
